@@ -1,0 +1,18 @@
+$base-font-size: 14px;
+$base-line-height: 24px;
+
+$font_path: 'fontawesome-webfont';
+
+$text: lighten(black, 30%);
+
+$link1: hsl(0, 50%, 50%);
+$link2: darken($link1, 5%);
+
+$serif: Georgia, serif;
+$sans: 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+@mixin unstyled-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
