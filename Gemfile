@@ -2,7 +2,6 @@ source :rubygems
 
 gem "thin"
 gem "rails"
-gem "rails-api"
 gem "pg"
 
 group :assets do

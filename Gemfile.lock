@@ -123,10 +123,6 @@ GEM
       activesupport (= 3.2.6)
       bundler (~> 1.0)
       railties (= 3.2.6)
-    rails-api (0.0.2)
-      actionpack (>= 3.2.0)
-      railties (>= 3.2.0)
-      tzinfo (~> 0.3.31)
     railties (3.2.6)
       actionpack (= 3.2.6)
       activesupport (= 3.2.6)
@@ -195,7 +191,6 @@ DEPENDENCIES
   haml_coffee_assets
   pg
   rails
-  rails-api
   rspec-rails
   sass-rails
   susy
