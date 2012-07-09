@@ -1,0 +1,15 @@
+!!!
+%html{lang: 'hr'}
+  %head
+    %title Lektire
+    %meta{charset: 'utf-8'}
+    %meta{name: 'robots', content: 'noindex'}
+    = favicon_link_tag
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+  %body
+    %header{role: 'banner'}
+      %h1 Lektire
+
+    %article{role: 'main'}
+      = yield
