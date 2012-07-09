@@ -17,7 +17,13 @@ group :assets do
   gem "uglifier"
 end
 
+gem "haml-rails"
+
 group :development do
   gem "guard-rails"
   gem "guard-livereload"
+end
+
+group :development, :test do
+  gem 'rspec-rails'
 end
