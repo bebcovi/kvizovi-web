@@ -22,12 +22,4 @@ class SchoolsController < ApplicationController
   def destroy
     School.destroy(params[:id])
   end
-
-  private
-
-  def respond_with_json
-    respond_to do |format|
-      format.json { yield }
-    end
-  end
 end
