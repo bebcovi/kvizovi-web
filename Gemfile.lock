@@ -193,7 +193,6 @@ DEPENDENCIES
   guard-rails
   haml-rails
   haml_coffee_assets
-  jquery-rails
   pg
   rails
   rails-api

@@ -10,7 +10,6 @@ group :assets do
   gem "compass-rails"
   gem "susy"
   gem "font-awesome-sass-rails"
-  gem "jquery-rails"
   gem "coffee-rails"
   gem "backbone-on-rails"
   gem "haml_coffee_assets"
