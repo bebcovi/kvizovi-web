@@ -2,6 +2,7 @@ defaults: &defaults
   adapter: postgresql
   encoding: unicode
   pool: 5
+  min_messages: warning
 
 development:
   <<: *defaults

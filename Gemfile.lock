@@ -160,6 +160,7 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    silent-postgres (0.1.1)
     sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -199,6 +200,7 @@ DEPENDENCIES
   rails-api
   rspec-rails
   sass-rails
+  silent-postgres
   susy
   thin
   uglifier
