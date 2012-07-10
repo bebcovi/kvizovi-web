@@ -21,7 +21,7 @@ class SchoolsController < ApplicationController
 
   def create
     school = School.create(params[:school])
-    head :ok, :location => school_path(school)
+    head :created, location: school_path(school)
   end
 
   def update
