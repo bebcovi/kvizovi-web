@@ -24,6 +24,7 @@ end
 
 group :development, :test do
   gem "rspec-rails"
+  gem "debugger", require: "debugger"
 end
 
 group :test do
