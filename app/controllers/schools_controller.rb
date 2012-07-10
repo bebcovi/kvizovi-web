@@ -20,14 +20,17 @@ class SchoolsController < ApplicationController
   end
 
   def create
-    School.create(params[:school])
+    school = School.create(params[:school])
+    head :ok, :location => school_path(school)
   end
 
   def update
     School.find(params[:id]).update_attributes(params[:school])
+    head :ok
   end
 
   def destroy
     School.destroy(params[:id])
+    head :ok
   end
 end
