@@ -1,14 +1,22 @@
 class SchoolsController < ApplicationController
-  around_filter :respond_with_json, only: [:index, :show]
-
   def index
-    @schools = School.all
-    render json: @schools
+    respond_to do |format|
+      format.html
+      format.json {
+        @schools = School.all
+        render json: @schools
+      }
+    end
   end
 
   def show
-    @school = School.find(params[:id])
-    render json: @school
+    respond_to do |format|
+      format.html
+      format.json {
+        @school = School.find(params[:id])
+        render json: @school
+      }
+    end
   end
 
   def create
