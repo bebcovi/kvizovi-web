@@ -65,6 +65,11 @@ GEM
     eventmachine (0.12.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (3.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (3.5.0)
+      factory_girl (~> 3.5.0)
+      railties (>= 3.0.0)
     ffi (1.0.11)
     font-awesome-sass-rails (2.0.0.0)
       railties (>= 3.1.1)
@@ -184,6 +189,7 @@ DEPENDENCIES
   backbone-on-rails
   coffee-rails
   compass-rails
+  factory_girl_rails
   font-awesome-sass-rails
   guard-livereload
   guard-rails
