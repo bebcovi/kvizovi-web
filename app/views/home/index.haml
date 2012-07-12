@@ -1,28 +1,3 @@
-= simple_form_for :question do |f|
-  = f.input :type do
-    = f.collection_radio_buttons :type,
-     [[1, 'Točno/netočno'],
-      [2, '4 ponuđena odgovora'],
-      [3, 'Asocijacija'],
-      [4, 'Pogodi tko/što je na slici'],
-      [5, 'Upiši točan odgovor']],
-      :first, :last,
-      :collection_wrapper_tag => :ol,
-      :item_wrapper_tag => :li
-  = f.input :content
-  .choice
-    - 4.times do |i|
-      = f.input :option, :label => "Opcija #{i + 1}"
-  .association
-    .column
-      - 4.times do |i|
-        = f.input :option, :label => "Opcija #{i + 1}"
-    .column
-      - 4.times do |i|
-        = f.input :option, :label => "Opcija #{i + 1}"
-  .photo
-    = f.input :file, :as => :file
-    = f.input :answer
-  .text
-    = f.input :answer
-  = f.button :submit
+%ul
+  %li= link_to 'New school', new_school_path
+  %li= link_to 'New question', new_question_path
