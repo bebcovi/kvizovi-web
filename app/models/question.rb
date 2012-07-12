@@ -3,5 +3,5 @@ class Question < ActiveRecord::Base
 
   belongs_to :quiz
   belongs_to :book
-  has_many :asnwers
+  has_many :answers
 end
