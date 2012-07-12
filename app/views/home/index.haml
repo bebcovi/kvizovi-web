@@ -1,1 +1,25 @@
-%h1 Hello world!
+= simple_form_for :question, :defaults => { :label => false } do |f|
+  = f.collection_radio_buttons :type,
+   [[1, 'Točno/netočno'],
+    [2, '4 ponuđena odgovora'],
+    [3, 'Asocijacija'],
+    [4, 'Pogodi tko/što je na slici'],
+    [5, 'Upiši točan odgovor']],
+    :first, :last,
+    :collection_wrapper_tag => :ol,
+    :item_wrapper_tag => :li
+  = f.input :text
+  .choice
+    = f.input :option
+    = f.input :option
+    = f.input :option
+    = f.input :option
+  .association
+    -# = f.association :left
+    -# = f.association :right
+  .photo
+    %img{src: 'http://placekitten.com/300/200'}
+    = f.input :answer
+  .text
+    = f.input :answer
+  = f.button :submit
