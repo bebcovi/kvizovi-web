@@ -1,8 +1,11 @@
-guard :rails, :server => :thin do
+guard :rails, :server => :thin, :timeout => 0 do
   watch('Gemfile.lock')
-  watch(%r{^(config/lib)./*})
+  watch(%r{lib/.*})
+  watch(%r{config/application.rb})
+  watch(%r{config/initializers/.*})
+  watch(%r{app/inputs/.*})
 end
 
 guard :livereload do
-  watch(%r{app/.+\.(scss|coffee|hamlc)})
+  watch(%r{app/.+\.(haml|scss)})
 end
