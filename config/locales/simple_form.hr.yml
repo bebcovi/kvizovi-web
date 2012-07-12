@@ -1,8 +1,8 @@
 hr:
   simple_form:
-    placeholders:
+    labels:
       question:
         type: "Tip pitanja"
-        text: "Pitanje"
+        content: "Pitanje"
         option: "Opcija"
         answer: "Odgovor"

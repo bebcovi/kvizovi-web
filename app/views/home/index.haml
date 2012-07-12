@@ -1,24 +1,27 @@
-= simple_form_for :question, :defaults => { :label => false } do |f|
-  = f.collection_radio_buttons :type,
-   [[1, 'Točno/netočno'],
-    [2, '4 ponuđena odgovora'],
-    [3, 'Asocijacija'],
-    [4, 'Pogodi tko/što je na slici'],
-    [5, 'Upiši točan odgovor']],
-    :first, :last,
-    :collection_wrapper_tag => :ol,
-    :item_wrapper_tag => :li
-  = f.input :text
+= simple_form_for :question do |f|
+  = f.input :type do
+    = f.collection_radio_buttons :type,
+     [[1, 'Točno/netočno'],
+      [2, '4 ponuđena odgovora'],
+      [3, 'Asocijacija'],
+      [4, 'Pogodi tko/što je na slici'],
+      [5, 'Upiši točan odgovor']],
+      :first, :last,
+      :collection_wrapper_tag => :ol,
+      :item_wrapper_tag => :li
+  = f.input :content
   .choice
-    = f.input :option
-    = f.input :option
-    = f.input :option
-    = f.input :option
+    - 4.times do |i|
+      = f.input :option, :label => "Opcija #{i + 1}"
   .association
-    -# = f.association :left
-    -# = f.association :right
+    .column
+      - 4.times do |i|
+        = f.input :option, :label => "Opcija #{i + 1}"
+    .column
+      - 4.times do |i|
+        = f.input :option, :label => "Opcija #{i + 1}"
   .photo
-    %img{src: 'http://placekitten.com/300/200'}
+    = f.input :file, :as => :file
     = f.input :answer
   .text
     = f.input :answer
