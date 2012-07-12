@@ -4,4 +4,12 @@ class Question < ActiveRecord::Base
   belongs_to :quiz
   belongs_to :book
   has_many :answers
+
+  TYPES = {
+    1 => :boolean,
+    2 => :choice,
+    3 => :association,
+    4 => :photo,
+    5 => :text
+  }
 end
