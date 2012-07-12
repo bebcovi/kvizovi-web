@@ -6,3 +6,8 @@ hr:
         content: "Pitanje"
         option: "Opcija"
         answer: "Odgovor"
+      school:
+        username: "Korisničko ime"
+        full_name: "Puno ime škole"
+        password: "Lozinka"
+        level: "Tip škole"

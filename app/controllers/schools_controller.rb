@@ -19,6 +19,10 @@ class SchoolsController < ApplicationController
     end
   end
 
+  def new
+    @school = School.new
+  end
+
   def create
     school = School.create(params[:school])
     head :created, location: school_path(school)
