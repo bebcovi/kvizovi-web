@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120712220440) do
+ActiveRecord::Schema.define(:version => 20120712225425) do
 
   create_table "answers", :force => true do |t|
     t.string   "content"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20120712220440) do
   create_table "questions", :force => true do |t|
     t.string   "content"
     t.integer  "type"
-    t.integer  "correct_answer"
+    t.text     "correct_answer"
     t.integer  "points"
     t.integer  "book_id"
     t.datetime "created_at",     :null => false

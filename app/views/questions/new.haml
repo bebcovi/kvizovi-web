@@ -11,15 +11,12 @@
       :item_wrapper_tag => :li
   = f.input :content
   .choice
-    - 4.times do |i|
-      = f.input :option, :label => "Opcija #{i + 1}"
+    = f.input_collection :answer, :times => 4, :label => "Opcija"
   .association
     .column
-      - 4.times do |i|
-        = f.input :option, :label => "Opcija #{i + 1}"
+      = f.input_collection :answer, :times => 4, :label => "Opcija"
     .column
-      - 4.times do |i|
-        = f.input :option, :label => "Opcija #{i + 1}"
+      = f.input_collection :answer, :times => 4, :label => "Opcija"
   .photo
     = f.input :file, :as => :file
     = f.input :answer

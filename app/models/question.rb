@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   attr_accessible :content, :correct_answer, :points, :type
+  attr_accessor :answer
 
   belongs_to :quiz
   belongs_to :book
