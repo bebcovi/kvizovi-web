@@ -1,10 +1,10 @@
 class Question < ActiveRecord::Base
   attr_accessible :content, :correct_answer, :points, :type
   attr_accessor :answer
+  serialize :answers
 
   belongs_to :quiz
   belongs_to :book
-  has_many :answers
 
   TYPES = {
     1 => :boolean,
