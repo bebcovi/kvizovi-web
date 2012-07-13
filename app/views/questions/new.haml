@@ -1,6 +1,7 @@
-= simple_form_for :question do |f|
-  = f.input :type do
-    = f.collection_radio_buttons :type,
+= simple_form_for @question do |f|
+
+  = f.input :kind do
+    = f.collection_radio_buttons :kind,
      [[1, 'Točno/netočno'],
       [2, '4 ponuđena odgovora'],
       [3, 'Asocijacija'],

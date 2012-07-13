@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessible :content, :correct_answer, :points, :type
+  attr_accessible :content, :correct_answer, :points, :kind
 
   # Virtual attributes
   attr_accessor :boolean, :choice, :association, :photo, :text

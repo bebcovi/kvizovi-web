@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20120713095142) do
 
   create_table "questions", :force => true do |t|
     t.string   "content"
-    t.integer  "type"
+    t.integer  "kind"
     t.text     "correct_answer"
     t.integer  "points"
     t.integer  "book_id"
