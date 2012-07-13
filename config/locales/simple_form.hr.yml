@@ -2,8 +2,7 @@ hr:
   simple_form:
     labels:
       question:
-        type: "Tip pitanja"
-        content: "Pitanje"
+        kind: "Tip pitanja"
         option: "Opcija"
         answer: "Odgovor"
       school:
@@ -11,3 +10,9 @@ hr:
         full_name: "Puno ime škole"
         password: "Lozinka"
         level: "Tip škole"
+    options:
+      question:
+        boolean:
+          answers:
+            t: "Točno"
+            f: "Netočno"

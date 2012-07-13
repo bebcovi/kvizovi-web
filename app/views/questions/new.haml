@@ -9,17 +9,28 @@
       :first, :last,
       :collection_wrapper_tag => :ol,
       :item_wrapper_tag => :li
+
   = f.input :content
+
+  .boolean
+    = f.input :boolean, :collection => [:t, :f], :as => :radio_buttons, :label => false
+
   .choice
-    = f.input_collection :answer, :times => 4, :label => "Opcija"
+    = f.input_collection :choice, :times => 4, :label => "Opcija"
+
   .association
-    .column
-      = f.input_collection :answer, :times => 4, :label => "Opcija"
-    .column
-      = f.input_collection :answer, :times => 4, :label => "Opcija"
+    = f.simple_fields_for :association do |a|
+      .column
+        = a.input_collection :left_column, :times => 4, :label => "Opcija"
+      .column
+        = a.input_collection :right_column, :times => 4, :label => "Opcija"
+
   .photo
-    = f.input :file, :as => :file
-    = f.input :answer
+    = f.simple_fields_for :photo do |p|
+      = p.input :file, :as => :file
+      = p.input :answer
+
   .text
-    = f.input :answer
+    = f.input :text
+
   = f.button :submit
