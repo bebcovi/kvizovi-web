@@ -1,0 +1,47 @@
+form {
+  ol, ul {
+    @include unstyled-list;
+  }
+}
+
+.input {
+  @include trailer(.5);
+}
+
+[type=text], [type=password], textarea {
+  @extend .inline-block;
+  @include adjust-font-size-to($base-font-size, 1, $base-font-size);
+  @include rhythm-borders(1px, .25);
+  @include border-radius;
+  @include box-sizing(border-box);
+  display: block;
+  border-color: rgba(black, .25);
+  margin: 0;
+}
+
+[type=file] {
+  margin-left: rhythm(.25)
+}
+
+[type=radio] {
+  position: relative;
+  top: 2px;
+  margin: rhythm(.5) rhythm(.5) 0 0;
+}
+
+label {
+  @extend .inline-block;
+  div > & {
+    &:after { content: ':'; }
+  }
+}
+
+#question_content, .column [type=text] {
+  width: 100%;
+}
+
+$cols: $total-columns / 2;
+.column {
+  @include span-columns($cols);
+  &:last-child { @include omega; }
+}
