@@ -1,11 +1,10 @@
 class Question < ActiveRecord::Base
-  attr_accessible :content, :correct_answer, :points, :kind
+  attr_accessible :content, :kind, :answer, :points, :data
+  attr_accessor :data
 
-  # Virtual attributes
-  attr_accessor :boolean, :choice, :association, :photo, :text
-  attr_accessible :boolean, :choice, :association, :photo, :text
-  serialize :correct_answer
-  serialize :answers
+  serialize :content
+  serialize :answer
+  has_attached_file :photo, :styles => {:medium => "300x300"}
 
   belongs_to :quiz
   belongs_to :book
@@ -16,18 +15,32 @@ class Question < ActiveRecord::Base
     TYPES[read_attribute(:kind)]
   end
 
+  def column(side)
+    if side == :left
+      content[:data].first
+    else
+      content[:data].last
+    end
+  end
+
   private
 
   def write_answers
     case kind
     when :boolean
-      self.correct_answer = boolean
+      self.answer = data[:boolean]
     when :choice
-      self.correct_answer = choice.first
-      self.answers = choice
+      self.content[:data] = data[:choice]
+      self.answer = data[:choice].first
     when :association
-      self.correct_answer = Hash[association[:left_column].zip(association[:right_column])]
-      self.answers = [association[:left_column], association[:right_column]]
+      left_column, right_column = data[:association].first(4), data[:association].last(4)
+      self.content[:data] = [left_column, right_column]
+      self.answer = Hash[left_column.zip(right_column)]
+    when :photo
+      self.photo = data[:photo][:photo]
+      self.answer = data[:photo][:answer]
+    when :text
+      self.answer = data[:text]
     end
   end
 

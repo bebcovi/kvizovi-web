@@ -1,21 +1,19 @@
 class QuestionsController < ApplicationController
   def index
+    @questions = Question.all
+
     respond_to do |format|
       format.html
-      format.json {
-        @questions = Question.all
-        render json: @questions
-      }
+      format.json { render json: @questions }
     end
   end
 
   def show
+    @question = Question.find(params[:id])
+
     respond_to do |format|
       format.html
-      format.json {
-        @questions = Question.find(params[:id])
-        render json: @questions
-      }
+      format.json { render json: @question }
     end
   end
 

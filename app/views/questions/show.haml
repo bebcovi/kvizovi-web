@@ -1,0 +1,22 @@
+- @title = @question.content[:text]
+
+= simple_form_for :game do |f|
+  %p #{@question.content[:text]}
+
+  - case @question.kind
+  - when :boolean
+    = f.collection_radio_buttons :boolean, [[:true, "Točno"], [:false, "Netočno"]], :first, :last
+  - when :choice
+    = f.collection_radio_buttons :choice, (1..4).zip(@question.content[:data]), :first, :last
+  - when :association
+    %ol#left_column
+      = list_of @question.column(:left) do |string|
+        = string
+    %ol#right_column
+      = list_of @question.column(:right) do |string|
+        = string
+  - when :photo
+    = image_tag @question.photo.url(:medium)
+    = f.input :photo
+  - when :text
+    = f.input :text
