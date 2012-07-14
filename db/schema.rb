@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713095142) do
+ActiveRecord::Schema.define(:version => 20120714130445) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20120713095142) do
   end
 
   create_table "questions", :force => true do |t|
-    t.string   "content"
+    t.text     "content"
     t.integer  "kind"
     t.text     "correct_answer"
     t.integer  "points"
