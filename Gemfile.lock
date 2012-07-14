@@ -94,7 +94,8 @@ GEM
       multi_json (~> 1.0)
     guard-rails (0.1.0)
       guard (>= 0.2.2)
-    haml (3.1.6)
+    haml (3.2.0.beta.1)
+      tilt
     haml-rails (0.3.4)
       actionpack (~> 3.0)
       activesupport (~> 3.0)
@@ -221,6 +222,7 @@ DEPENDENCIES
   font-awesome-sass-rails
   guard-livereload
   guard-rails
+  haml (= 3.2.0.beta.1)
   haml-rails
   haml_coffee_assets
   paperclip
