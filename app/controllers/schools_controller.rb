@@ -16,13 +16,23 @@ class SchoolsController < ApplicationController
   end
 
   def create
-    school = School.create(params[:school])
-    head :created, location: school_path(school)
+    @school = School.create(params[:school])
+
+    if @school.valid?
+      head :created, location: school_path(@school)
+    else
+      render json: @school.errors, status: :bad_request
+    end
   end
 
   def update
-    School.find(params[:id]).update_attributes(params[:school])
-    head :ok
+    @school = School.find(params[:id])
+
+    if @school.update_attributes(params[:school])
+      head :ok
+    else
+      render json: @school.errors, status: :bad_request
+    end
   end
 
   def destroy

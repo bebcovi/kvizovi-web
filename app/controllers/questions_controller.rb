@@ -16,13 +16,23 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = Question.create(params[:question])
-    head :created, location: question_path(question)
+    @question = Question.create(params[:question])
+
+    if @question.valid?
+      head :created, location: question_path(@question)
+    else
+      render json: @question.errors, status: :bad_request
+    end
   end
 
   def update
-    Question.find(params[:id]).update_attributes(params[:question])
-    head :ok
+    @question = Question.find(params[:id])
+
+    if @question.update_attributes(params[:question])
+      head :ok
+    else
+      render json: @question.errors, status: :bad_request
+    end
   end
 
   def destroy

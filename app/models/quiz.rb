@@ -3,4 +3,6 @@ class Quiz < ActiveRecord::Base
 
   belongs_to :school
   has_many :questions
+
+  validates_presence_of :name, :password
 end

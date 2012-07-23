@@ -34,3 +34,4 @@ group :test do
 end
 
 gem "paperclip"
+gem "rails-i18n"
