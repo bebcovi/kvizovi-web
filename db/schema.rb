@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120714132602) do
+ActiveRecord::Schema.define(:version => 20120720064404) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -42,7 +42,10 @@ ActiveRecord::Schema.define(:version => 20120714132602) do
     t.string   "password"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "school_id"
   end
+
+  add_index "quizzes", ["school_id"], :name => "index_quizzes_on_school_id"
 
   create_table "schools", :force => true do |t|
     t.string   "username"
