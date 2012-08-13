@@ -1,18 +1,26 @@
 class SchoolsController < ApplicationController
   def index
-    @schools = School.all
-
     respond_to do |format|
-      format.json { render json: @schools }
+      format.html
+      format.json {
+        @schools = School.all
+        render json: @schools
+      }
     end
   end
 
   def show
-    @school = School.find(params[:id])
-
     respond_to do |format|
-      format.json { render json: @school }
+      format.html
+      format.json {
+        @school = School.find(params[:id])
+        render json: @school
+      }
     end
+  end
+
+  def new
+    @school = School.new
   end
 
   def create

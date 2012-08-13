@@ -17,6 +17,7 @@ end
 
 gem "haml-rails"
 gem "haml", "3.2.0.beta.1"
+gem "simple_form"
 
 group :development do
   gem "guard-rails"

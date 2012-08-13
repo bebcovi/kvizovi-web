@@ -1,0 +1,6 @@
+= simple_form_for @school do |f|
+  = f.input :username
+  = f.input :full_name
+  = f.input :password
+  = f.input :level do
+    = f.collection_radio_buttons :level, [["Osnovna škola", "osnovna"], ["Srednja škola", "srednja"]], :first, :last, :collection_wrapper_tag => :ol, :item_wrapper_tag => :li

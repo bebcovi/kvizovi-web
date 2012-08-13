@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
     @questions = Question.all
 
     respond_to do |format|
+      format.html
       format.json { render json: @questions }
     end
   end
@@ -11,8 +12,13 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
 
     respond_to do |format|
+      format.html
       format.json { render json: @question }
     end
+  end
+
+  def new
+    @question = Question.new
   end
 
   def create
