@@ -8,11 +8,11 @@
       [4, 'Pogodi tko/što je na slici'],
       [5, 'Upiši točan odgovor']],
       :first, :last,
-      :collection_wrapper_tag => :ol,
-      :item_wrapper_tag => :li
+      collection_wrapper_tag: :ol,
+      item_wrapper_tag: :li
 
   = f.simple_fields_for :content do |c|
-    = c.input :text, :as => :text
+    = c.input :text, as: :text
 
   = f.simple_fields_for :data do |d|
 
@@ -20,17 +20,17 @@
       = d.collection_radio_buttons :boolean, [[:true, "Točno"], [:false, "Netočno"]], :first, :last
 
     .choice
-      = d.input_collection :choice, :times => 4, :label => "Opcija"
+      = d.input_collection :choice, times: 4, label: "Opcija"
 
     .association
       .column
-        = d.input_collection :association, :times => 4, :label => "Opcija"
+        = d.input_collection :association, times: 4, label: "Opcija"
       .column
-        = d.input_collection :association, :times => 4, :label => "Opcija"
+        = d.input_collection :association, times: 4, label: "Opcija"
 
     .photo
       = d.simple_fields_for :photo do |p|
-        = p.input :photo, :as => :file
+        = p.input :photo, as: :file
         = p.input :answer
 
     .text

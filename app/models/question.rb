@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
 
   serialize :content
   serialize :answer
-  has_attached_file :photo, :styles => {:medium => "300x300"}
+  has_attached_file :photo, styles: {medium: "300x300"}
 
   belongs_to :quiz
   belongs_to :book
