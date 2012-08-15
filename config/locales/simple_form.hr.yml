@@ -2,11 +2,27 @@ hr:
   simple_form:
     labels:
       question:
-        kind: "Tip pitanja"
+        category: "Tip pitanja"
         option: "Opcija"
-        answer: "Odgovor"
+        data:
+          choice: "Odgovor"
+          association: "Opcija"
+        content: "Pitanje"
+        attachment: "Slika"
+        points: "Bodovi"
       school:
         username: "Korisničko ime"
         full_name: "Puno ime škole"
         password: "Lozinka"
         level: "Tip škole"
+      student:
+        first_name: "Ime"
+        last_name: "Prezime"
+        username: "Korisničko ime"
+        password: "Lozinka"
+        grade: "Razred"
+      quiz:
+        name: "Naziv"
+        password: "Lozinka"
+      game:
+        answer: "Odgovor"

@@ -1,42 +1,46 @@
+# encoding: utf-8
+
 class QuizzesController < ApplicationController
   def index
-    @quizzes = Quiz.all
+    @quizzes = current_school.quizzes
+  end
 
-    respond_to do |format|
-      format.json { render json: @quizzes }
+  def new
+    @quiz = current_school.quizzes.new
+  end
+
+  def create
+    @quiz = current_school.quizzes.create(params[:quiz])
+
+    if @quiz.valid?
+      redirect_to quizzes_path, notice: "Kviz je uspješno stvoren."
+    else
+      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
+      render :new
     end
   end
 
   def show
-    @quiz = Quiz.find(params[:id])
-
-    respond_to do |format|
-      format.json { render json: @quiz }
-    end
+    @quiz = current_school.quizzes.find(params[:id])
   end
 
-  def create
-    @quiz = Quiz.create(params[:quiz])
-
-    if @quiz.valid?
-      head :created, location: quiz_path(@quiz)
-    else
-      render json: @quiz.errors, status: :bad_request
-    end
+  def edit
+    @quiz = current_school.quizzes.find(params[:id])
   end
 
   def update
-    @quiz = Quiz.find(params[:id])
+    @quiz = current_school.quizzes.find(params[:id])
 
     if @quiz.update_attributes(params[:quiz])
-      head :ok
+      redirect_to @quiz, notice: "Kviz je uspješno izmjenjen."
     else
-      render json: @quiz.errors, status: :bad_request
+      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
+      render :new
     end
   end
 
   def destroy
-    Quiz.destroy(params[:id])
-    head :ok
+    quiz = current_school.quizzes.destroy(params[:id])
+    redirect_to quizzes_path, "Kviz \"#{quiz.name}\" je uspješno izbrisan."
   end
 end

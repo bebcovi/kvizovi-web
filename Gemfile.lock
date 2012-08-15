@@ -14,6 +14,9 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.1.3)
+    active_attr (0.6.0)
+      activemodel (>= 3.0.2, < 4.1)
+      activesupport (>= 3.0.2, < 4.1)
     activemodel (3.2.8)
       activesupport (= 3.2.8)
       builder (~> 3.0.0)
@@ -35,6 +38,7 @@ GEM
       ejs (~> 1.0.0)
       jquery-rails
       railties (>= 3.1)
+    bcrypt-ruby (3.0.1)
     builder (3.0.0)
     chunky_png (1.2.6)
     cocaine (0.2.1)
@@ -217,7 +221,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_attr
   backbone-on-rails
+  bcrypt-ruby (~> 3.0)
   coffee-rails
   compass-rails
   debugger
@@ -228,6 +234,7 @@ DEPENDENCIES
   haml (= 3.2.0.beta.1)
   haml-rails
   haml_coffee_assets
+  jquery-rails
   paperclip
   pg
   pry-rails

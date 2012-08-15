@@ -1,0 +1,22 @@
+%h1 Dobrodošli!
+
+%p Ovo je kviz znanja iz lektire! Pravila su jednostavna: postavit ćemo vam pitanja iz gradiva kojeg ste učili i vi na njih trebate odgovoriti najbolje što možete. Ako pogrešno odgovorite, na isto će pitanje pokušati odgovoriti slijedeći tim.
+%p Spremni? Prije nego što počnemo, odgovorite nam na par pitanja.
+
+= simple_form_for @game, url: game_path, defaults: {required: false} do |f|
+
+  - @game.errors[:base].each do |validation_error|
+    %p.validation_error= validation_error
+
+  %p U koliko timova želite igrati?
+  = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last
+  = f.simple_fields_for :players, index: nil do |p|
+    = p.input :username, input_html: {value: (params[:game][:players].first[:username] rescue nil)}
+    = p.input :password
+    = p.input :username, input_html: {value: (params[:game][:players].last[:username] rescue nil)}
+    = p.input :password
+
+  %p Koja je lozinka za početak igre?
+  = f.input :password, label: false
+
+  = f.button :submit, "Počni!"

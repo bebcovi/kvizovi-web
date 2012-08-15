@@ -1,0 +1,12 @@
+- @title = "Novi učenik"
+
+= simple_form_for @student, defaults: {required: false} do |f|
+
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :username
+  = f.input :password
+  = f.input :grade, as: :select, collection: (current_school.primary? ? (1..8) : (1..4)), include_blank: false
+
+  = f.button :submit, "Spremi"
+  = link_to "Odustani", students_path

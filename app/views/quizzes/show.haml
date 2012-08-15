@@ -1,0 +1,24 @@
+- @title = "Uređivanje kviza"
+
+%p= link_to "Natrag", quizzes_path
+
+%dl
+  %dt Naziv
+  %dd #{@quiz.name}
+  %dt Lozinka
+  %dd #{@quiz.password}
+
+.controls
+  = edit_button "Izmjeni", edit_quiz_path(@quiz)
+
+%h1 Pitanja:
+
+%ol
+  = list_of @quiz.questions do |question|
+    #{link_to question, quiz_question_path(@quiz, question)}
+    .controls
+      #{edit_button "Izmjeni", edit_quiz_question_path(@quiz, question)}
+      |
+      #{delete_button "Izbriši", quiz_question_path(@quiz, question)}
+
+%p= add_button "Novo pitanje", new_quiz_question_path(@quiz)

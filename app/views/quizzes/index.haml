@@ -1,0 +1,18 @@
+- @title = "Uređivanje kvizova"
+
+%p= link_to "Natrag", admin_path
+
+%ul
+  = list_of @quizzes do |quiz|
+    %dl
+      %dt Naziv
+      %dd #{quiz.name}
+      %dt Lozinka
+      %dd #{quiz.password}
+
+    .controls
+      = edit_button "Uredi", quiz_path(quiz)
+      |
+      = delete_button "Izbriši", quiz_path(quiz)
+
+%p= add_button "Novi kviz", new_quiz_path

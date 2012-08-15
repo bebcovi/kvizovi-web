@@ -1,48 +1,46 @@
+# encoding: utf-8
+
 class QuestionsController < ApplicationController
   def index
-    @questions = Question.all
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @questions }
-    end
+    @questions = current_school.quizzes.find(params[:quiz_id]).questions
   end
 
   def show
-    @question = Question.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @question }
-    end
+    @question = current_school.quizzes.find(params[:quiz_id]).questions.find(params[:id])
   end
 
   def new
-    @question = Question.new
+    @question = current_school.quizzes.find(params[:quiz_id]).questions.new
   end
 
   def create
-    @question = Question.create(params[:question])
+    @question = current_school.quizzes.find(params[:quiz_id]).questions.create(params[:question])
 
     if @question.valid?
-      head :created, location: question_path(@question)
+      redirect_to quiz_path(@question.quiz)
     else
-      render json: @question.errors, status: :bad_request
+      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
+      render :new
     end
   end
 
+  def edit
+    @question = current_school.quizzes.find(params[:quiz_id]).questions.find(params[:id])
+  end
+
   def update
-    @question = Question.find(params[:id])
+    @question = current_school.quizzes.find(params[:quiz_id]).questions.find(params[:id])
 
     if @question.update_attributes(params[:question])
-      head :ok
+      redirect_to quiz_path(@question.quiz)
     else
-      render json: @question.errors, status: :bad_request
+      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
+      render :edit
     end
   end
 
   def destroy
-    Question.destroy(params[:id])
-    head :ok
+    question = current_school.quizzes.find(params[:quiz_id]).questions.destroy(params[:id])
+    redirect_to quiz_path(question.quiz), notice: "Pitanje je uspješno izbrisano."
   end
 end

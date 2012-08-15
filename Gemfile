@@ -13,6 +13,7 @@ group :assets do
   gem "backbone-on-rails"
   gem "haml_coffee_assets"
   gem "uglifier"
+  gem "jquery-rails"
 end
 
 gem "haml-rails"
@@ -36,4 +37,6 @@ group :test do
 end
 
 gem "paperclip"
+gem "bcrypt-ruby", "~> 3.0"
 gem "rails-i18n"
+gem "active_attr"

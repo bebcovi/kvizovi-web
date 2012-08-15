@@ -1,0 +1,43 @@
+- @title = "#{quiz.name} · #{params[:question]}. pitanje"
+
+%p Trenutno na redu: #{current_player.username}.
+
+= simple_form_for :game, method: :put, url: play_game_path(params[:question]) do |f|
+
+  %p= current_question.content
+
+  - case
+  - when current_question.boolean?
+
+    = f.collection_radio_buttons :answer, [[:true, "Točno"], [:false, "Netočno"]], :first, :last
+
+  - when current_question.choice?
+
+    = f.input :answer, collection: current_question.provided_answers, as: :radio_buttons
+
+  - when current_question.association?
+
+    .column
+      %ol
+        = list_of current_question.provided_answers.first do |answer|
+          = f.input :answer, input_html: {name: "game[answer][]", value: answer}, label: false
+    .column
+      %ol
+        = list_of current_question.provided_answers.last do |answer|
+          = f.input :answer, input_html: {name: "game[answer][]"}, label: false
+    %div
+      %ol
+        = list_of current_question.provided_answers.last do |answer|
+          = answer
+
+  - when current_question.photo?
+
+    = image_tag current_question.attachment.url
+    = f.input :answer
+
+  - when current_question.text?
+
+    = f.input :answer
+
+  = f.button :submit, "Odgovori!"
+  = link_to "Odustani", new_game_path

@@ -1,7 +1,11 @@
-= simple_form_for @question do |f|
+- @title = "Novo pitanje"
 
-  = f.input :kind do
-    = f.collection_radio_buttons :kind,
+%p= link_to "Natrag", quiz_path(@question.quiz)
+
+= simple_form_for @question, url: quiz_questions_path(@question.quiz) do |f|
+
+  = f.input :category do
+    = f.collection_radio_buttons :category,
      [[1, 'Točno/netočno'],
       [2, '4 ponuđena odgovora'],
       [3, 'Asocijacija'],
@@ -11,8 +15,7 @@
       collection_wrapper_tag: :ol,
       item_wrapper_tag: :li
 
-  = f.simple_fields_for :content do |c|
-    = c.input :text, as: :text
+  = f.input :content
 
   = f.simple_fields_for :data do |d|
 
@@ -20,20 +23,21 @@
       = d.collection_radio_buttons :boolean, [[:true, "Točno"], [:false, "Netočno"]], :first, :last
 
     .choice
-      = d.input_collection :choice, times: 4, label: "Opcija"
+      = d.input_collection :choice, times: 4
 
     .association
       .column
-        = d.input_collection :association, times: 4, label: "Opcija"
+        = d.input_collection :association, times: 4
       .column
-        = d.input_collection :association, times: 4, label: "Opcija"
+        = d.input_collection :association, times: 4
 
     .photo
-      = d.simple_fields_for :photo do |p|
-        = p.input :photo, as: :file
-        = p.input :answer
+      = f.input :attachment, as: :file
+      = d.input :photo
 
     .text
       = d.input :text
 
-  = f.button :submit
+  = f.input :points
+
+  = f.button :submit, "Spremi"

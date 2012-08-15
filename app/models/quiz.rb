@@ -5,4 +5,5 @@ class Quiz < ActiveRecord::Base
   has_many :questions
 
   validates_presence_of :name, :password
+  validates_uniqueness_of :password
 end

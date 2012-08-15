@@ -1,0 +1,10 @@
+- @title = "#{quiz.name} · Kraj"
+
+%h1 Rezultati:
+
+%dl
+  - players.each do |player|
+    %dt #{player.username}
+    %dd #{player.score} bodova.
+
+%p= link_to "Završi", new_game_path

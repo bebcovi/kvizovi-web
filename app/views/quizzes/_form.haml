@@ -1,0 +1,7 @@
+= simple_form_for @quiz, defaults: {required: false} do |f|
+
+  = f.input :name
+  = f.input :password, as: :string
+
+  = f.button :submit, "Spremi"
+  = link_to "Odustani", @quiz

@@ -1,42 +1,48 @@
-class StudentsController < ApplicationController
-  def index
-    @students = Student.all
+# encoding: utf-8
 
-    respond_to do |format|
-      format.json { render json: @students }
+class StudentsController < ApplicationController
+  before_filter :authenticate!
+
+  def index
+    @students = current_school.students
+  end
+
+  def new
+    @student = current_school.students.new
+  end
+
+  def create
+    @student = current_school.students.create(params[:student])
+
+    if @student.valid?
+      redirect_to students_path, notice: "Učenik \"#{@student.name}\" je uspješno dodan."
+    else
+      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
+      render :new
     end
   end
 
   def show
-    @student = Student.find(params[:id])
-
-    respond_to do |format|
-      format.json { render json: @student }
-    end
+    @student = current_school.students.find(params[:id])
   end
 
-  def create
-    @student = Student.create(params[:student])
-
-    if @student.valid?
-      head :created, location: student_path(@student)
-    else
-      render json: @student.errors, status: :bad_request
-    end
+  def edit
+    @student = current_school.students.find(params[:id])
   end
 
   def update
-    @student = Student.find(params[:id])
+    @student = current_school.students.find(params[:id])
 
     if @student.update_attributes(params[:student])
-      head :ok
+      redirect_to students_path, notice: "Učenik \"#{@student.name}\" je uspješno izmijenjen."
     else
-      render json: @student.errors, status: :bad_request
+      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
+      render :edit
     end
   end
 
   def destroy
-    Student.destroy(params[:id])
-    head :ok
+    current_school.students.destroy(params[:id])
+    redirect_to students_path
   end
 end

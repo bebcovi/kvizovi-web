@@ -1,0 +1,9 @@
+- @title = quiz.name
+
+- if single_player?
+  %p Izabrali ste igrati kviz "#{quiz.name}" u 1 igrač (#{players.map(&:username).to_sentence}). Pritisnite gumb za početak kada ste spremni.
+- else
+  %p Izabrali ste igrati kviz "#{quiz.name}" u 2 igrača (#{players.map(&:username).to_sentence}). Pritisnite gumb za početak kada ste spremni.
+
+%p= link_to "Počni!", play_game_path(1)
+%p= link_to "Odustani", new_game_path

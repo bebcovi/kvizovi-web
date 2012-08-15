@@ -1,22 +1,40 @@
-- @title = @question.content[:text]
+- @title = @question.content
+
+%p= link_to "Natrag", quiz_path(@question.quiz)
 
 = simple_form_for :game do |f|
-  %p #{@question.content[:text]}
 
-  - case @question.kind
-  - when :boolean
-    = f.collection_radio_buttons :boolean, [[:true, "Točno"], [:false, "Netočno"]], :first, :last
-  - when :choice
-    = f.collection_radio_buttons :choice, (1..4).zip(@question.content[:data]), :first, :last
-  - when :association
-    %ol#left_column
-      = list_of @question.column(:left) do |string|
-        = string
-    %ol#right_column
-      = list_of @question.column(:right) do |string|
-        = string
-  - when :photo
-    = image_tag @question.photo.url(:medium)
-    = f.input :photo
-  - when :text
-    = f.input :text
+  %p= @question.content
+
+  - case
+  - when @question.boolean?
+
+    = f.collection_radio_buttons :answer, [[:true, "Točno"], [:false, "Netočno"]], :first, :last
+
+  - when @question.choice?
+
+    = f.input :answer, collection: @question.provided_answers, as: :radio_buttons
+
+  - when @question.association?
+
+    .column
+      %ol
+        = list_of @question.provided_answers.first do |answer|
+          = f.input :answer, input_html: {name: "game[answer][]", value: answer}, label: false
+    .column
+      %ol
+        = list_of @question.provided_answers.last.count do |n|
+          = f.input :answer, input_html: {name: "game[answer][]"}, label: false
+    %div
+      %ol
+        = list_of @question.provided_answers.last do |answer|
+          = answer
+
+  - when @question.photo?
+
+    = image_tag @question.attachment.url
+    = f.input :answer
+
+  - when @question.text?
+
+    = f.input :answer
