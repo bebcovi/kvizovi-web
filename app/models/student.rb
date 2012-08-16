@@ -1,6 +1,5 @@
 class Student < ActiveRecord::Base
   attr_accessible :grade, :first_name, :last_name, :username, :password
-  attr_accessor :score
   has_secure_password
 
   belongs_to :school

@@ -11,8 +11,13 @@ class GamesController < ApplicationController
     @game = Game.new(params[:game])
 
     if @game.valid?
-      prepare_game!(@game)
-      redirect_to game_path
+      create_game! @game,
+        urls: {
+          start:  {action: "show"},
+          play:   {action: "play"},
+          finish: {action: "overview"}
+        }
+      start_game!
     else
       render :new
     end
@@ -25,13 +30,13 @@ class GamesController < ApplicationController
   end
 
   def update
-    increase_score!
-    toggle_player!
+    update_score!(current_question)
 
-    unless last_question?
-      redirect_to play_game_path(params[:question].to_i + 1)
+    if questions_left > 0
+      switch_player!
+      next_question!
     else
-      redirect_to overview_game_path
+      finish_game!
     end
   end
 

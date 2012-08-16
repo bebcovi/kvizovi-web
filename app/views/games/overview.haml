@@ -3,8 +3,8 @@
 %h1 Rezultati:
 
 %dl
-  - players.each do |player|
+  - players.zip(scores).each do |player, score|
     %dt #{player.username}
-    %dd #{player.score} bodova.
+    %dd #{score} bodova.
 
 %p= link_to "Završi", new_game_path
