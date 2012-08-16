@@ -5,8 +5,9 @@ hr:
         category: "Tip pitanja"
         option: "Opcija"
         data:
-          choice: "Odgovor"
+          choice: "Ponuđeni odgovor"
           association: "Opcija"
+          photo: "Odgovor"
         content: "Pitanje"
         attachment: "Slika"
         points: "Bodovi"

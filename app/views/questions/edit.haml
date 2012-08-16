@@ -1,3 +1,45 @@
-- @title = @question.content
+- @title = "Izmjena pitanja"
 
-%p= link_to "Natrag", quiz_path(@question.quiz, @question)
+= simple_form_for @question, url: quiz_question_path(@question.quiz, @question) do |f|
+
+  = f.association :book
+
+  = f.input :content
+
+  = f.simple_fields_for :data do |d|
+
+    - case
+    - when @question.boolean?
+
+      .boolean
+        = d.collection_radio_buttons :boolean, [[true, "Točno"], [false, "Netočno"]], :first, :last, checked: @question.answer
+
+    - when @question.choice?
+
+      .choice
+        = d.input_collection :choice, times: @question.provided_answers.count, values: @question.provided_answers
+
+    - when @question.association?
+
+      .association
+        .column
+          = d.input_collection :association, times: @question.provided_answers.count, values: @question.provided_answers.keys
+        .column
+          = d.input_collection :association, times: @question.provided_answers.count, values: @question.provided_answers.values
+
+    - when @question.photo?
+
+      .photo
+        = image_tag @question.attachment.url(:medium)
+        = f.input :attachment, as: :file
+        = d.input :photo, input_html: {value: @question.answer}
+
+    - when @question.text?
+
+      .text
+        = d.input :text, input_html: {value: @question.answer}
+
+  = f.input :points
+
+  = f.button :submit, "Spremi"
+  = link_to "Odustani", quiz_path(@question.quiz, @question)

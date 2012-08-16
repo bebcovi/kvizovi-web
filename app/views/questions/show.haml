@@ -9,7 +9,7 @@
   - case
   - when @question.boolean?
 
-    = f.collection_radio_buttons :answer, [[:true, "Točno"], [:false, "Netočno"]], :first, :last
+    = f.collection_radio_buttons :answer, [[true, "Točno"], [false, "Netočno"]], :first, :last
 
   - when @question.choice?
 
@@ -19,20 +19,20 @@
 
     .column
       %ol
-        = list_of @question.provided_answers.first do |answer|
+        = list_of @question.provided_answers.keys do |answer|
           = f.input :answer, input_html: {name: "game[answer][]", value: answer}, label: false
     .column
       %ol
-        = list_of @question.provided_answers.last.count do |n|
+        = list_of @question.provided_answers.values do |answer|
           = f.input :answer, input_html: {name: "game[answer][]"}, label: false
     %div
       %ol
-        = list_of @question.provided_answers.last do |answer|
+        = list_of @question.provided_answers.values do |answer|
           = answer
 
   - when @question.photo?
 
-    = image_tag @question.attachment.url
+    = image_tag @question.attachment.url(:medium)
     = f.input :answer
 
   - when @question.text?

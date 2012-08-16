@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessible :content, :category, :data, :points, :attachment
+  attr_accessible :content, :category, :data, :points, :attachment, :book_id
 
   serialize :data
   has_attached_file :attachment, styles: {medium: "300x300"}
@@ -7,9 +7,7 @@ class Question < ActiveRecord::Base
   belongs_to :quiz, dependent: :destroy
   belongs_to :book
 
-  validates_presence_of :quiz_id
-
-  before_create :transform_data
+  before_save :transform_data, if: proc { data.is_a?(Hash) }
 
   CATEGORIES = {
     1 => :boolean,
@@ -34,9 +32,9 @@ class Question < ActiveRecord::Base
     when boolean?
       # Nothing
     when choice?
-      data.shuffle
+      data
     when association?
-      [data.keys.shuffle, data.values.shuffle]
+      data
     when photo?
       # Nothing
     when text?

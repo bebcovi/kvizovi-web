@@ -1,8 +1,8 @@
 - @title = "Novo pitanje"
 
-%p= link_to "Natrag", quiz_path(@question.quiz)
-
 = simple_form_for @question, url: quiz_questions_path(@question.quiz) do |f|
+
+  = f.association :book
 
   = f.input :category do
     = f.collection_radio_buttons :category,
@@ -20,7 +20,7 @@
   = f.simple_fields_for :data do |d|
 
     .boolean
-      = d.collection_radio_buttons :boolean, [[:true, "Točno"], [:false, "Netočno"]], :first, :last
+      = d.collection_radio_buttons :boolean, [[true, "Točno"], [false, "Netočno"]], :first, :last
 
     .choice
       = d.input_collection :choice, times: 4
@@ -41,3 +41,4 @@
   = f.input :points
 
   = f.button :submit, "Spremi"
+  = link_to "Odustani", quiz_path(@question.quiz)
