@@ -8,7 +8,7 @@
   - @game.errors[:base].each do |validation_error|
     %p.validation_error= validation_error
 
-  %p U koliko timova želite igrati?
+  %p U koliko igrača želite igrati?
   = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last
   = f.simple_fields_for :players, index: nil do |p|
     = p.input :username, input_html: {value: (params[:game][:players].first[:username] rescue nil)}
