@@ -2,5 +2,8 @@
 
 - if current_school == @school
 
-  %p= link_to "Uredi kvizove", quizzes_path
-  %p= link_to "Uredi učenike", students_path
+  %ul
+    %li= link_to "Uredi kvizove", quizzes_path
+    %li= link_to "Uredi učenike", students_path
+    %li= link_to "Uredi knjige", books_path
+    %li= link_to "Uredi književnja razdoblja", eras_path

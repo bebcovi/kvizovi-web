@@ -2,7 +2,7 @@
 
 = simple_form_for @question, url: quiz_questions_path(@question.quiz) do |f|
 
-  = f.association :book
+  = f.association :book, label_method: :to_s, prompt: "Izaberite..."
 
   = f.input :category do
     = f.collection_radio_buttons :category,

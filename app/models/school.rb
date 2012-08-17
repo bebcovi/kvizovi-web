@@ -1,9 +1,9 @@
 class School < ActiveRecord::Base
-  attr_accessible :name, :key, :level, :username, :password
-
   has_many :students
   has_many :quizzes
   has_many :questions, through: :quizzes
+  has_many :books
+  has_many :eras
 
   has_secure_password
   extend FriendlyId

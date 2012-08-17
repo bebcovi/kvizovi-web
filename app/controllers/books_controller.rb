@@ -1,42 +1,44 @@
-class BooksController < ApplicationController
-  def index
-    @books = Book.all
+# encoding: utf-8
 
-    respond_to do |format|
-      format.json { render json: @books }
-    end
+class BooksController < ApplicationController
+  before_filter :authenticate_school!
+
+  def index
+    @books = Book.scoped
   end
 
-  def show
-    @book = Book.find(params[:id])
-
-    respond_to do |format|
-      format.json { render json: @book }
-    end
+  def new
+    @book = current_school.books.new
   end
 
   def create
-    @book = Book.create(params[:book])
+    @book = current_school.books.create(params[:book])
 
     if @book.valid?
-      head :created, location: book_path(@book)
+      redirect_to books_path, notice: "Knjiga je uspješno stvorena."
     else
-      render json: @book.errors, status: :bad_request
+      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
+      render :new
     end
+  end
+
+  def edit
+    @book = Book.find(params[:id])
   end
 
   def update
     @book = Book.find(params[:id])
 
     if @book.update_attributes(params[:book])
-      head :ok
+      redirect_to books_path, notice: "Knjiga je uspješno izmijenjena."
     else
-      render json: @book.errors, status: :bad_request
+      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
+      render :edit
     end
   end
 
   def destroy
-    Book.destroy(params[:id])
-    head :ok
+    current_school.books.destroy(params[:id])
+    redirect_to books_path, notice: "Knjiga je uspješno izbrisana."
   end
 end

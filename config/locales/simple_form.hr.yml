@@ -24,6 +24,13 @@ hr:
         password: "Lozinka"
       quiz:
         name: "Naziv"
-        password: "Lozinka"
+        grade: "Razred"
       game:
         answer: "Odgovor"
+      book:
+        title: "Naslov"
+        author: "Autor"
+        era: "Književno razdoblje"
+      era:
+        name: "Naziv"
+        duration: "Trajanje"

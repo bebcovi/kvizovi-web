@@ -1,0 +1,24 @@
+- @title = "Uređivanje književnih razdoblja"
+
+%p= link_to "Natrag", current_school
+
+%table
+
+  %thead
+    %tr
+      %th Naziv
+      %th Trajanje
+      %th
+
+  %tbody
+    - @eras.find_each do |era|
+      %tr
+        %td #{era.name}
+        %td #{era.start_year}&ndash;#{era.end_year}
+        %td
+          = edit_button "Izmjeni", edit_era_path(era)
+          - if era.school == current_school
+            |
+            = delete_button "Izbriši", era_path(era)
+
+%p= add_button "Novo književno razdoblje", new_era_path

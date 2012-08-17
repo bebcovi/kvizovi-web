@@ -11,24 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120710073010) do
-
-  create_table "answers", :force => true do |t|
-    t.string   "content"
-    t.integer  "question_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+ActiveRecord::Schema.define(:version => 20120817160234) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
     t.string   "author"
-    t.integer  "year"
+    t.integer  "school_id"
+    t.integer  "era_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "books", ["era_id"], :name => "index_books_on_era_id"
+  add_index "books", ["school_id"], :name => "index_books_on_school_id"
+
+  create_table "eras", :force => true do |t|
+    t.string   "name"
+    t.integer  "start_year"
+    t.integer  "end_year"
+    t.integer  "school_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "eras", ["school_id"], :name => "index_eras_on_school_id"
 
   create_table "questions", :force => true do |t|
     t.text     "content"

@@ -2,17 +2,22 @@
 
 %p= link_to "Natrag", current_school
 
-%ul
-  = list_of @quizzes do |quiz|
-    %dl
-      %dt Naziv
-      %dd #{quiz.name}
-      %dt Razred
-      %dd #{quiz.grade}.
+%table
 
-    .controls
-      = edit_button "Uredi", quiz_path(quiz)
-      |
-      = delete_button "Izbriši", quiz_path(quiz)
+  %thead
+    %tr
+      %th Naziv
+      %th Razred
+      %th
+
+  %tbody
+    - @quizzes.find_each do |quiz|
+      %tr
+        %td #{quiz.name}
+        %td #{quiz.grade}.
+        %td
+          = edit_button "Uredi", quiz_path(quiz)
+          |
+          = delete_button "Izbriši", quiz_path(quiz)
 
 %p= add_button "Novi kviz", new_quiz_path

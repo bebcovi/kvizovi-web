@@ -1,8 +1,6 @@
 # encoding: utf-8
 
 class Student < ActiveRecord::Base
-  attr_accessible :grade, :first_name, :last_name, :username, :password
-
   belongs_to :school
 
   has_secure_password

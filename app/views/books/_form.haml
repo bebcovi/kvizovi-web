@@ -1,0 +1,8 @@
+= simple_form_for @book do |f|
+
+  = f.input :title
+  = f.input :author
+  = f.association :era, prompt: "Izaberite..."
+
+  = f.button :submit, "Spremi"
+  = link_to "Odustani", books_path

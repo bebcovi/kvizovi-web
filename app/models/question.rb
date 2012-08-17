@@ -1,6 +1,4 @@
 class Question < ActiveRecord::Base
-  attr_accessible :content, :category, :data, :points, :attachment, :book_id
-
   belongs_to :quiz, dependent: :destroy
   belongs_to :book
 

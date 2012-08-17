@@ -1,3 +1,8 @@
 class Book < ActiveRecord::Base
-  attr_accessible :author, :title, :year
+  belongs_to :school
+  belongs_to :era
+
+  def to_s
+    "#{author}: #{title}"
+  end
 end
