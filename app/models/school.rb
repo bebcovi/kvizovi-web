@@ -1,12 +1,19 @@
 class School < ActiveRecord::Base
-  attr_accessible :full_name, :key, :level, :username, :password
-  has_secure_password
+  attr_accessible :name, :key, :level, :username, :password
 
   has_many :students
   has_many :quizzes
   has_many :questions, through: :quizzes
 
-  validates_presence_of :full_name, :key, :level, :username, :password
+  has_secure_password
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
+  validates_uniqueness_of :name
+
+  def to_s
+    name
+  end
 
   def primary?
     level == 1
@@ -22,6 +29,6 @@ class School < ActiveRecord::Base
   }
 
   def self.authenticate(credentials)
-    find_by_username(credentials[:username]).try(:authenticate, credentials[:password]) || false
+    find_by_username(credentials[:username]).try(:authenticate, credentials[:password]) or false
   end
 end

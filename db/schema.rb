@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20120710073010) do
 
   create_table "quizzes", :force => true do |t|
     t.string   "name"
-    t.string   "password"
+    t.integer  "grade"
     t.integer  "school_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -59,8 +59,9 @@ ActiveRecord::Schema.define(:version => 20120710073010) do
   add_index "quizzes", ["school_id"], :name => "index_quizzes_on_school_id"
 
   create_table "schools", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
     t.string   "username"
-    t.string   "full_name"
     t.string   "password_digest"
     t.integer  "level",           :limit => 2
     t.string   "key"

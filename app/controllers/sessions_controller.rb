@@ -1,12 +1,16 @@
 # encoding: utf-8
 
 class SessionsController < ApplicationController
-  def new
-  end
-
   def create
-    if school = School.authenticate(params[:school])
-      log_in!(school)
+    user =
+      if params[:student]
+        Student.authenticate(params[:student])
+      else
+        School.authenticate(params[:school])
+      end
+
+    if user
+      log_in!(user)
       redirect_to root_path
     else
       flash.now[:alert] = "Pogrešno korisničko ime ili lozinka."
@@ -21,11 +25,15 @@ class SessionsController < ApplicationController
 
   private
 
-  def log_in!(school)
-    cookies[:school_id] = {value: school.id, expires: 1.day.from_now}
+  def log_in!(user)
+    cookies[:"#{user.class.name.underscore}_id"] = {
+      value: user.id,
+      expires: 1.day.from_now
+    }
   end
 
   def log_out!
     cookies.delete(:school_id)
+    cookies.delete(:student_id)
   end
 end

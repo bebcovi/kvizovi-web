@@ -1,9 +1,6 @@
 Lektire::Application.routes.draw do
-  root to: "admin#index"
-
-  controller :admin do
-    get "admin", to: :index, as: :admin
-  end
+  root to: "home#index"
+  get "home/index"
 
   controller :sessions do
     get "login", to: :new

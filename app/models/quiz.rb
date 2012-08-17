@@ -1,9 +1,6 @@
 class Quiz < ActiveRecord::Base
-  attr_accessible :name, :password
+  attr_accessible :name, :grade
 
   belongs_to :school
   has_many :questions
-
-  validates_presence_of :name, :password
-  validates_uniqueness_of :password
 end

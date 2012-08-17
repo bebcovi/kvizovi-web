@@ -1,11 +1,11 @@
 class Question < ActiveRecord::Base
   attr_accessible :content, :category, :data, :points, :attachment, :book_id
 
-  serialize :data
-  has_attached_file :attachment, styles: {medium: "300x300"}
-
   belongs_to :quiz, dependent: :destroy
   belongs_to :book
+
+  serialize :data
+  has_attached_file :attachment, styles: {medium: "300x300"}
 
   before_save :transform_data, if: proc { data.is_a?(Hash) }
 

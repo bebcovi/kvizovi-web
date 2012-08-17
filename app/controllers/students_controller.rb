@@ -1,21 +1,19 @@
 # encoding: utf-8
 
 class StudentsController < ApplicationController
-  before_filter :authenticate!
-
   def index
     @students = current_school.students
   end
 
   def new
-    @student = current_school.students.new
+    @student = Student.new
   end
 
   def create
-    @student = current_school.students.create(params[:student])
+    @student = Student.create_with_key(params[:student], params[:key])
 
     if @student.valid?
-      redirect_to students_path, notice: "Učenik \"#{@student.name}\" je uspješno dodan."
+      redirect_to new_game_path, notice: "Uspješno ste se registrirali."
     else
       flash.now[:alert] = "Neka polja nisu ispravno popunjena."
       render :new
@@ -23,26 +21,11 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @student = current_school.students.find(params[:id])
-  end
-
-  def edit
-    @student = current_school.students.find(params[:id])
-  end
-
-  def update
-    @student = current_school.students.find(params[:id])
-
-    if @student.update_attributes(params[:student])
-      redirect_to students_path, notice: "Učenik \"#{@student.name}\" je uspješno izmijenjen."
-    else
-      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
-      render :edit
-    end
+    @student = Student.find(params[:id])
   end
 
   def destroy
-    current_school.students.destroy(params[:id])
-    redirect_to students_path
+    student = current_school.students.destroy(params[:id])
+    redirect_to students_path, notice: "Učenik \"#{student.full_name}\" je uspješno izbrisan."
   end
 end

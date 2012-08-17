@@ -12,16 +12,16 @@ hr:
         attachment: "Slika"
         points: "Bodovi"
       school:
-        username: "Korisničko ime"
         full_name: "Puno ime škole"
-        password: "Lozinka"
         level: "Tip škole"
       student:
         first_name: "Ime"
         last_name: "Prezime"
+        grade: "Razred"
+        school: "Ključ od škole"
+      defaults:
         username: "Korisničko ime"
         password: "Lozinka"
-        grade: "Razred"
       quiz:
         name: "Naziv"
         password: "Lozinka"

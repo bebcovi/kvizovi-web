@@ -5,8 +5,8 @@
 %dl
   %dt Naziv
   %dd #{@quiz.name}
-  %dt Lozinka
-  %dd #{@quiz.password}
+  %dt Razred
+  %dd #{@quiz.grade}.
 
 .controls
   = edit_button "Izmjeni", edit_quiz_path(@quiz)

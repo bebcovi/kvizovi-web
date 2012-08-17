@@ -3,7 +3,7 @@
 
   %head
 
-    %title Lektire
+    %title Lektire · #{@title}
     %meta{charset: 'utf-8'}
     %meta{name: 'robots', content: 'noindex'}
     = favicon_link_tag
@@ -18,10 +18,8 @@
 
     %article{role: 'main'}
 
-      - if not school_logged_in?
-        %p= link_to "Prijava škole", login_path
-      - else
-        %p Prijavljeni ste kao #{link_to current_school.full_name, admin_path}. #{link_to "Odjava", logout_path, method: :delete}
+      - if user_logged_in?
+        %p Prijavljeni ste kao #{link_to current_user, current_user}. #{link_to "Odjava", logout_path, method: :delete}
 
       - flash.each do |name, message|
         %p{class: "flash_#{name}"}= message

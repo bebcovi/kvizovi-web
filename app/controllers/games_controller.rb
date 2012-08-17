@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class GamesController < ApplicationController
+  before_filter :authenticate_user!
   include Playable
 
   def new

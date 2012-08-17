@@ -3,7 +3,7 @@
 School.delete_all
 school = School.create! \
   username: "mioc",
-  full_name: "XV. Gimnazija",
+  name: "XV. Gimnazija",
   password: "mioc",
   level: "srednja",
   key: "mioc"
@@ -23,7 +23,7 @@ school.students.create! \
   grade: "3"
 
 Quiz.delete_all
-quiz = school.quizzes.create!(name: "Antika", password: "antika")
+quiz = school.quizzes.create!(name: "Antika", grade: 1)
 
 Question.delete_all
 quiz.questions.create! [
