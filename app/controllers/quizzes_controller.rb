@@ -15,7 +15,6 @@ class QuizzesController < ApplicationController
     if @quiz.valid?
       redirect_to quizzes_path, notice: "Kviz je uspješno stvoren."
     else
-      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
       render :new
     end
   end
@@ -34,7 +33,6 @@ class QuizzesController < ApplicationController
     if @quiz.update_attributes(params[:quiz])
       redirect_to @quiz, notice: "Kviz je uspješno izmjenjen."
     else
-      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
       render :new
     end
   end

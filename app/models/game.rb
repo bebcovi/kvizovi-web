@@ -1,36 +1,19 @@
-# encoding: utf-8
+class Game < ActiveRecord::Base
+  belongs_to :quiz
 
-class Game
-  include ActiveAttr::Model
+  serialize :info
 
-  attribute :players_count, type: Integer
-  attribute :players
-  attribute :password
-
-  attr_accessor :quiz
-
-  validate :players_count_must_be_present
-  validate :quiz_with_that_password_must_exist
-  validate :all_players_must_authenticate
-
-  private
-
-  def players_count_must_be_present
-    if players_count.blank?
-      errors[:base] << "Broj igrača mora biti izabran."
-    end
+  def players
+    Student.find(info.keys)
   end
 
-  def quiz_with_that_password_must_exist
-    self.quiz = Quiz.find_by_password!(password)
-  rescue ActiveRecord::RecordNotFound
-    errors[:base] << "Ne postoji kviz s tom lozinkom."
-  end
-
-  def all_players_must_authenticate
-    self.players = players.map { |hash| Student.authenticate(hash) }.tap { |array| array.delete(false) }
-    if self.players.count != players_count
-      errors[:base] << "Jedan ili više igrača nije uspješno autenticirano."
+  def scores
+    info.map do |_, questions|
+      score = 0
+      questions.each do |id, answered|
+        score += quiz.questions.find(id).points if answered
+      end
+      score
     end
   end
 end

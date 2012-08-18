@@ -19,7 +19,6 @@ class QuestionsController < ApplicationController
     if @question.valid?
       redirect_to quiz_path(@question.quiz)
     else
-      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
       render :new
     end
   end
@@ -34,7 +33,6 @@ class QuestionsController < ApplicationController
     if @question.update_attributes(params[:question])
       redirect_to quiz_path(@question.quiz)
     else
-      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
       render :edit
     end
   end

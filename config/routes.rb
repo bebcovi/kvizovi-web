@@ -11,7 +11,6 @@ Lektire::Application.routes.draw do
   resource :game do
     get "play/:question", to: :play, as: :play
     put "play/:question", to: :update
-    get "overview"
   end
 
   resources :schools

@@ -17,7 +17,6 @@ class BooksController < ApplicationController
     if @book.valid?
       redirect_to books_path, notice: "Knjiga je uspješno stvorena."
     else
-      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
       render :new
     end
   end
@@ -32,7 +31,6 @@ class BooksController < ApplicationController
     if @book.update_attributes(params[:book])
       redirect_to books_path, notice: "Knjiga je uspješno izmijenjena."
     else
-      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
       render :edit
     end
   end

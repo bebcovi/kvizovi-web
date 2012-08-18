@@ -1,46 +1,51 @@
 # encoding: utf-8
 
 class GamesController < ApplicationController
-  before_filter :authenticate_user!
-  include Playable
+  before_filter :authenticate_student!
 
   def new
-    @game = Game.new
+    @game = SubmittedGame.new
+    @quizzes = current_student.school.quizzes
   end
 
   def create
-    @game = Game.new(params[:game])
+    @game = SubmittedGame.new(params[:submitted_game])
+    @game.players << current_student
 
     if @game.valid?
-      create_game! @game,
-        urls: {
-          start:  {action: "show"},
-          play:   {action: "play"},
-          finish: {action: "overview"}
-        }
-      start_game!
+      game.create!(@game)
+      game.start!
     else
+      @quizzes = current_student.school.quizzes
       render :new
     end
   end
 
-  def show
-  end
-
   def play
+    @quiz = game.quiz
+    @player = game.current_player
+    @question = game.current_question
   end
 
   def update
-    update_score!(current_question)
+    game.update!(params[:game].try(:[], :answer))
 
-    if questions_left > 0
-      switch_player!
-      next_question!
+    if game.questions_left > 0
+      game.next_question!
     else
-      finish_game!
+      game.create_record!
+      game.finish!
     end
   end
 
-  def overview
+  def show
+    @game = Game.find(session[:game_id])
   end
+
+  private
+
+  def game
+    BrowserGame.new(self)
+  end
+  helper_method :game
 end

@@ -17,7 +17,6 @@ class ErasController < ApplicationController
     if @era.valid?
       redirect_to eras_path, notice: "Književno razdoblje je uspješno stvoreno."
     else
-      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
       render :new
     end
   end
@@ -32,7 +31,6 @@ class ErasController < ApplicationController
     if @era.update_attributes(params[:quiz])
       redirect_to eras_path, notice: "Književno razdoblje je uspješno izmjenjeno."
     else
-      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
       render :new
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817160234) do
+ActiveRecord::Schema.define(:version => 20120818073000) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(:version => 20120817160234) do
   end
 
   add_index "eras", ["school_id"], :name => "index_eras_on_school_id"
+
+  create_table "games", :force => true do |t|
+    t.text     "info"
+    t.integer  "quiz_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "questions", :force => true do |t|
     t.text     "content"

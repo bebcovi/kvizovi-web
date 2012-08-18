@@ -7,7 +7,7 @@ class School < ActiveRecord::Base
 
   has_secure_password
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :username, use: :slugged
 
   validates_uniqueness_of :name
 

@@ -1,41 +1,41 @@
-- @title = "#{quiz.name} · #{params[:question]}. pitanje"
+- @title = "#{@quiz.name} · #{params[:question]}. pitanje"
 
-%p Trenutno na redu: #{current_player.username}.
+%p Trenutno na redu: #{@player.username}.
 
-= simple_form_for :game, method: :put, url: play_game_path(params[:question]) do |f|
+= simple_form_for :game, method: :put do |f|
 
-  %p= current_question.content
+  %p= @question.content
 
   - case
-  - when current_question.boolean?
+  - when @question.boolean?
 
     = f.collection_radio_buttons :answer, [[true, "Točno"], [false, "Netočno"]], :first, :last
 
-  - when current_question.choice?
+  - when @question.choice?
 
-    = f.input :answer, collection: current_question.provided_answers, as: :radio_buttons
+    = f.input :answer, collection: @question.provided_answers, as: :radio_buttons
 
-  - when current_question.association?
+  - when @question.association?
 
     .column
       %ol
-        = list_of current_question.provided_answers.keys do |answer|
+        = list_of @question.provided_answers.keys do |answer|
           = f.input :answer, input_html: {name: "game[answer][]", value: answer}, label: false
     .column
       %ol
-        = list_of current_question.provided_answers.values do |answer|
+        = list_of @question.provided_answers.values do |answer|
           = f.input :answer, input_html: {name: "game[answer][]"}, label: false
     %div
       %ol
-        = list_of current_question.provided_answers.values do |answer|
+        = list_of @question.provided_answers.values do |answer|
           = answer
 
-  - when current_question.photo?
+  - when @question.photo?
 
-    = image_tag current_question.attachment.url(:medium)
+    = image_tag @question.attachment.url(:medium)
     = f.input :answer
 
-  - when current_question.text?
+  - when @question.text?
 
     = f.input :answer
 

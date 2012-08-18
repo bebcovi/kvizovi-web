@@ -15,7 +15,6 @@ class StudentsController < ApplicationController
     if @student.valid?
       redirect_to new_game_path, notice: "Uspješno ste se registrirali."
     else
-      flash.now[:alert] = "Neka polja nisu ispravno popunjena."
       render :new
     end
   end
