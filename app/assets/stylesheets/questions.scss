@@ -1,0 +1,9 @@
+body.questions {
+  &.edit {
+    textarea {
+      height: rhythm(1.5, $form-font-size);
+      width: rhythm(20, $form-font-size);
+      max-width: 100%;
+    }
+  }
+}

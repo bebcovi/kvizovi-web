@@ -1,0 +1,38 @@
+h1, h2, h3, p, ol, ul, dl {
+  @include rhythm(0, 0, 0, 1);
+}
+
+h1, h2, h3 {
+  font-weight: normal;
+}
+
+h1 {
+  $font-size: 58px;
+  @include adjust-font-size-to($font-size);
+  @include trailer(1, $font-size);
+}
+
+h2 {
+  $font-size: 42px;
+  @include adjust-font-size-to($font-size);
+  @include trailer(1, $font-size);
+}
+
+a {
+  @include hover-link;
+  @include link-colors($link1, $link2, $link2, $link1, $link2);
+}
+
+dt, dd {
+  display: inline;
+}
+
+dt {
+  font-weight: bold;
+  &:after { content: ': '; }
+}
+
+dd {
+  @extend %append-newline;
+  margin: 0;
+}

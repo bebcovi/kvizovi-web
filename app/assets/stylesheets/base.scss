@@ -1,7 +1,9 @@
-$base-font-size: 14px;
-$base-line-height: 24px;
+$base-font-size: 16px;
+$base-line-height: 28px;
 
-$font_path: 'fontawesome-webfont';
+$form-font-size: 14px;
+
+$default-rhythm-border-style: dashed;
 
 $default-border-radius: 3px;
 
@@ -10,11 +12,8 @@ $text: lighten(black, 30%);
 $link1: hsl(0, 50%, 50%);
 $link2: darken($link1, 5%);
 
-$serif: Georgia, serif;
-$sans: 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$body: 'McLaren', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-@mixin unstyled-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+@mixin color-link($color1, $color2) {
+  @include link-colors($color1, $color2, $color2, $color1, $color2);
 }

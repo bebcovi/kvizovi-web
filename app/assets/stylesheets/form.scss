@@ -1,22 +1,22 @@
 form {
-  ol, ul {
-    @include unstyled-list;
+  & > div {
+    @include trailer(.5);
   }
 }
 
-.input {
-  @include trailer(.5);
+input, select, textarea {
+  @include adjust-font-size-to($form-font-size, 1, $base-font-size);
+  margin: 0;
+  font-family: $body;
+  color: rgba(black, .6);
 }
 
-[type=text], [type=password], textarea {
-  @extend .inline-block;
-  @include adjust-font-size-to($base-font-size, 1, $base-font-size);
-  @include rhythm-borders(1px, .25);
-  @include border-radius;
-  @include box-sizing(border-box);
+$tmp: $base-font-size;
+$base-font-size: $form-font-size;
+
+[type=text], [type=password], [type=number], textarea {
+  @extend %text-input;
   display: block;
-  border-color: rgba(black, .25);
-  margin: 0;
 }
 
 [type=file] {
@@ -29,19 +29,18 @@ form {
   margin: rhythm(.5) rhythm(.5) 0 0;
 }
 
+label + select {
+  margin-left: rhythm(.5);
+}
+
 label {
-  @extend .inline-block;
-  div > & {
-    &:after { content: ':'; }
-  }
+  &:hover { cursor: pointer; }
+  &:after { content: ':'; }
+  &[class^=collection] { @extend %append-newline; }
 }
 
-#question_content, .column [type=text] {
-  width: 100%;
+.controls {
+  @include trailer;
 }
 
-$cols: $total-columns / 2;
-.column {
-  @include span-columns($cols);
-  &:last-child { @include omega; }
-}
+$base-font-size: $tmp;

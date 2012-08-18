@@ -1,38 +1,9 @@
 @include establish-baseline;
+@include border-box-sizing;
 
 body {
   @include container;
   @include rhythm(1, 0, 0, 1);
-  font-family: $sans;
+  font-family: $body;
   color: $text;
-}
-
-h1, h2, h3, p, ol, ul {
-  @include rhythm(0, 0, 0, 1);
-}
-
-h1, h2, h3 {
-  font-weight: normal;
-}
-
-a {
-  @include hover-link;
-  @include link-colors($link1, $link2, $link2, $link1, $link2);
-}
-
-header {
-  h1 {
-    $font-size: 62px;
-    @include adjust-font-size-to($font-size);
-    @include trailer(1, $font-size);
-    font-weight: bold;
-  }
-}
-
-[role=main] {
-  h1 {
-    $font-size: 32px;
-    @include adjust-font-size-to($font-size);
-    @include trailer(1, $font-size);
-  }
 }

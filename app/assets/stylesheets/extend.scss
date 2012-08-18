@@ -1,3 +1,68 @@
-.inline-block {
+%unstyled-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+%inline-block {
   @include inline-block;
+}
+
+%append-newline {
+  &:after {
+    content: '\a';
+    white-space: pre;
+  }
+}
+
+%text-input {
+  @include rhythm-borders(1px, .25, $form-font-size, solid);
+  @include border-radius;
+  border-color: rgba(black, .25);
+}
+
+%small-controls {
+  $c1: rgba(black, .4);
+  $c2: $link2;
+  @extend %inline-block;
+  @include color-link($c1, $c2);
+  &:hover { text-decoration: none; }
+  &:nth-child(2) { margin-left: rhythm(.25); }
+}
+
+%button {
+  $c1: rgba(black, .4);
+  $c2: rgba(black, .75);
+  @extend %inline-block;
+  @include adjust-font-size-to($base-font-size, 1, $form-font-size);
+  @include apply-side-rhythm-border(top, 1px, .25);
+  @include apply-side-rhythm-border(bottom, 1px, .25);
+  @include apply-side-rhythm-border(left, 1px, .5);
+  @include apply-side-rhythm-border(right, 1px, .5);
+  @include color-link($c1, $c2);
+  @include border-radius;
+  color: $c1;
+  border-color: rgba(black, .25);
+  background: rgba(black, .025);
+  &:hover {
+    cursor: pointer;
+    color: $c2;
+    border-color: rgba(black, .5);
+    background: rgba(black, .05);
+  }
+}
+
+%primary-button {
+  @extend %button;
+  $c1: $link1;
+  $c2: $link2;
+  @include color-link($c1, $c2);
+  color: $c1;
+  border-color: rgba($link1, .5);
+  background: rgba($link1, .05);
+  &:hover {
+    color: $c2;
+    border-color: rgba($link1, .75);
+    background: rgba($link1, .1);
+  }
 }

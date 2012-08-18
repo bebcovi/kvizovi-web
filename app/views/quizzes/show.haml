@@ -1,24 +1,27 @@
 - @title = "Uređivanje kviza"
 
-%p= link_to "Natrag", quizzes_path
+%p= back_button "Natrag", quizzes_path
 
-%dl
-  %dt Naziv
-  %dd #{@quiz.name}
-  %dt Razred
-  %dd #{@quiz.grade}.
+%section
+  %h1 Info
 
-.controls
-  = edit_button "Izmjeni", edit_quiz_path(@quiz)
+  %dl#info
+    %dt Naziv
+    %dd #{@quiz.name}
+    %dt Razred
+    %dd #{@quiz.grade}.
 
-%h1 Pitanja:
+  .controls
+    = edit_button "Izmjeni", edit_quiz_path(@quiz)
 
-%ol
-  = list_of @quiz.questions do |question|
-    #{link_to question, quiz_question_path(@quiz, question)}
-    .controls
-      #{edit_button "Izmjeni", edit_quiz_question_path(@quiz, question)}
-      |
-      #{delete_button "Izbriši", quiz_question_path(@quiz, question)}
+%section
+  %h1 Pitanja
 
-%p= add_button "Novo pitanje", new_quiz_question_path(@quiz)
+  %ol#questions
+    = list_of @quiz.questions do |question|
+      #{link_to question, quiz_question_path(@quiz, question)}
+      .controls
+        #{edit_button "", edit_quiz_question_path(@quiz, question)}
+        #{delete_button "", quiz_question_path(@quiz, question)}
+
+  %p= add_button "Novo pitanje", new_quiz_question_path(@quiz)

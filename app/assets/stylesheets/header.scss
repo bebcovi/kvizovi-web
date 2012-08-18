@@ -1,0 +1,8 @@
+[role=banner] {
+  #logo {
+    $font-size: 62px;
+    @include adjust-font-size-to($font-size);
+    @include trailer(1, $font-size);
+    font-weight: bold;
+  }
+}

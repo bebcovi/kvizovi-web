@@ -1,0 +1,8 @@
+body.eras {
+  &.edit {
+    input[type=number] { @extend %inline-block; }
+    [for=era_duration] {
+      @extend %append-newline;
+    }
+  }
+}

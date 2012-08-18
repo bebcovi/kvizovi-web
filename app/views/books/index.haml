@@ -1,6 +1,6 @@
 - @title = "Uređivanje knjiga"
 
-%p= link_to "Natrag", current_school
+%p= back_button "Natrag", current_school
 
 %table
 
@@ -8,7 +8,7 @@
     %tr
       %th Naslov
       %th Autor
-      %th Era
+      %th Književno razdoblje
       %th
 
   %tbody
@@ -18,9 +18,8 @@
         %td #{book.author}
         %td #{book.era}
         %td
-          = edit_button "Izmjeni", edit_book_path(book)
+          = edit_button "", edit_book_path(book)
           - if book.school == current_school
-            |
-            = delete_button "Izbriši", book_path(book)
+            = delete_button "", book_path(book)
 
 %p= add_button "Nova knjiga", new_book_path

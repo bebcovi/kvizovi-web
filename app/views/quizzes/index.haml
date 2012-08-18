@@ -1,6 +1,6 @@
 - @title = "Uređivanje kvizova"
 
-%p= link_to "Natrag", current_school
+%p= back_button "Natrag", current_school
 
 %table
 
@@ -16,8 +16,7 @@
         %td #{quiz.name}
         %td #{quiz.grade}.
         %td
-          = edit_button "Uredi", quiz_path(quiz)
-          |
-          = delete_button "Izbriši", quiz_path(quiz)
+          = edit_button "", quiz_path(quiz)
+          = delete_button "", quiz_path(quiz)
 
 %p= add_button "Novi kviz", new_quiz_path

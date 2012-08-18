@@ -1,6 +1,6 @@
 - @title = "Uređivanje učenika"
 
-%p= link_to "Natrag", current_school
+%p= back_button "Natrag", current_school
 
 %table
 
@@ -19,4 +19,4 @@
         %td #{student.last_name}
         %td #{student.username}
         %td #{student.grade}.
-        %td #{delete_button "Izbriši", student_path(student)}
+        %td #{delete_button "", student_path(student)}

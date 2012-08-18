@@ -2,8 +2,8 @@
 
 - if current_school == @school
 
-  %ul
-    %li= link_to "Uredi kvizove", quizzes_path
-    %li= link_to "Uredi učenike", students_path
-    %li= link_to "Uredi knjige", books_path
-    %li= link_to "Uredi književnja razdoblja", eras_path
+  %ul#edit
+    %li= link_to "Uredi kvizove".prepend_icon("paper"), quizzes_path
+    %li= link_to "Uredi učenike".prepend_icon("user"), students_path
+    %li= link_to "Uredi knjige".prepend_icon("book"), books_path
+    %li= link_to "Uredi književnja razdoblja".prepend_icon("busy"), eras_path

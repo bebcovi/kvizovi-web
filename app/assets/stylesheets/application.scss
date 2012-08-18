@@ -2,8 +2,20 @@
 
 @import 'compass';
 @import 'susy';
-@import 'font-awesome';
+@import 'icons';
 
 @import 'extend';
 @import 'layout';
+
+@import 'header';
+@import 'main';
+@import 'footer';
+
+@import 'typography';
 @import 'form';
+@import 'table';
+
+@import 'schools';
+@import 'quizzes';
+@import 'questions';
+@import 'eras';

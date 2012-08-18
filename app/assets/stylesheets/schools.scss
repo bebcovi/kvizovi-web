@@ -1,0 +1,31 @@
+body.schools {
+  &.show {
+    #edit {
+      @extend %unstyled-list;
+      max-width: rhythm(12);
+      overflow-y: hidden;
+      li { margin-bottom: 1px; }
+      a {
+        $c1: rgba(black, .75);
+        $c2: $link2;
+        @include color-link($c1, $c2);
+        @include border-radius;
+        overflow: hidden;
+        display: block;
+        background: rgba(black, .05);
+        &:hover {
+          text-decoration: none;
+          background: rgba($link2, .05);
+          i { background: $link2; }
+        }
+      }
+      i {
+        @extend %inline-block;
+        margin-right: rhythm(.25);
+        padding: rhythm(.5);
+        color: white;
+        background: rgba(black, .5);
+      }
+    }
+  }
+}

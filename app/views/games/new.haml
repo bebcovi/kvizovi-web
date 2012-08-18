@@ -9,7 +9,7 @@
     %p.validation_error= validation_error
 
   %p U koliko igrača želite igrati?
-  = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last
+  = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last, collection_wrapper_tag: :div
   = f.simple_fields_for :players, index: nil do |p|
     = p.input :username, input_html: {value: (params[:game][:players].first[:username] rescue nil)}
     = p.input :password

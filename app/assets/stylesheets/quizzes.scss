@@ -1,0 +1,12 @@
+body.quizzes {
+  &.show {
+    #questions {
+      padding-left: rhythm();
+      li { @include pie-clearfix; }
+      .controls {
+        float: right;
+        a { @extend %small-controls; }
+      }
+    }
+  }
+}

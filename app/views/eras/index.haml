@@ -1,6 +1,6 @@
 - @title = "Uređivanje književnih razdoblja"
 
-%p= link_to "Natrag", current_school
+%p= back_button "Natrag", current_school
 
 %table
 
@@ -16,9 +16,8 @@
         %td #{era.name}
         %td #{era.start_year}&ndash;#{era.end_year}
         %td
-          = edit_button "Izmjeni", edit_era_path(era)
+          = edit_button "", edit_era_path(era)
           - if era.school == current_school
-            |
-            = delete_button "Izbriši", era_path(era)
+            = delete_button "", era_path(era)
 
 %p= add_button "Novo književno razdoblje", new_era_path
