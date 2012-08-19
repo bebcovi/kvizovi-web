@@ -11,7 +11,7 @@ class School < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: :slugged
 
-  validates_uniqueness_of :name
+  validate :username_must_me_unique
 
   def to_s
     name
@@ -33,5 +33,12 @@ class School < ActiveRecord::Base
   def self.authenticate(credentials)
     find_by_username(credentials[:username]).try(:authenticate, credentials[:password])
   end
+
+  private
+
+  def username_must_me_unique
+    if [self.class, Student].any? { |model| model.find_by_username(username) }
+      errors.add(:username, "je već zauzeto.")
+    end
   end
 end

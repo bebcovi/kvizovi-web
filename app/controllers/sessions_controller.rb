@@ -1,13 +1,16 @@
 # encoding: utf-8
 
 class SessionsController < ApplicationController
+  def new
+    if student_logged_in?
+      redirect_to new_game_path
+    elsif school_logged_in?
+      redirect_to current_school
+    end
+  end
+
   def create
-    user =
-      if params[:student]
-        Student.authenticate(params[:student])
-      else
-        School.authenticate(params[:school])
-      end
+    user = User.authenticate(params[:user])
 
     if user
       log_in!(user)

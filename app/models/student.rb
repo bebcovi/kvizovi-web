@@ -5,6 +5,8 @@ class Student < ActiveRecord::Base
 
   has_secure_password
 
+  validate :username_must_me_unique
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -24,6 +26,14 @@ class Student < ActiveRecord::Base
       Student.new(params).tap do |student|
         student.errors[:base] << "Ne postoji škola s tim ključem."
       end
+    end
+  end
+
+  private
+
+  def username_must_me_unique
+    if [self.class, School].any? { |model| model.find_by_username(username) }
+      errors.add(:username, "je već zauzeto.")
     end
   end
 end
