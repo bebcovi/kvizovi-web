@@ -1,6 +1,6 @@
 - @title = @question.content
 
-%p= link_to "Natrag", quiz_path(@question.quiz)
+%p= back_button "Natrag", quiz_path(@question.quiz)
 
 = simple_form_for :game do |f|
 
