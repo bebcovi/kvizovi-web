@@ -13,13 +13,14 @@
 
   %tbody
     - @quizzes.find_each do |quiz|
-      %tr
-        %td #{quiz.name}
-        %td #{quiz.grade}.
-        %td #{quiz.activated? ? "Da" : "Ne"}
-        %td
-          .controls
-            = edit_button "", quiz_path(quiz)
-            = delete_button "", quiz_path(quiz)
+      - present quiz do |quiz_presenter|
+        %tr
+          %td= quiz_presenter.name
+          %td= quiz_presenter.grade
+          %td= quiz_presenter.activated?
+          %td
+            .controls
+              = edit_button "", quiz_path(quiz)
+              = delete_button "", quiz_path(quiz)
 
 %p= add_button "Novi kviz", new_quiz_path

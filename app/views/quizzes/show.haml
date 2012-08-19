@@ -5,13 +5,14 @@
 %section
   %h1 Info
 
-  %dl#info
-    %dt Naziv
-    %dd #{@quiz.name}
-    %dt Razred
-    %dd #{@quiz.grade}.
-    %dt Vidljiv?
-    %dd #{@quiz.activated? ? "Da" : "Ne"}
+  - present @quiz do |quiz_presenter|
+    %dl#info
+      %dt Naziv
+      %dd= quiz_presenter.name
+      %dt Razred
+      %dd= quiz_presenter.grade
+      %dt Vidljiv?
+      %dd= quiz_presenter.activated?
 
   .controls
     = edit_button "Izmjeni", edit_quiz_path(@quiz)
