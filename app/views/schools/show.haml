@@ -1,9 +1,16 @@
 - @title = @school.name
 
-- if current_school == @school
+%dl
+  %dt Ime škole
+  %dd #{@school.name}
+  %dt Županija
+  %dd #{@school.region}
 
-  %ul#edit
-    %li= link_to "Uredi kvizove".prepend_icon("paper"), quizzes_path
-    %li= link_to "Uredi učenike".prepend_icon("user"), students_path
-    %li= link_to "Uredi knjige".prepend_icon("book"), books_path
-    %li= link_to "Uredi književna razdoblja".prepend_icon("busy"), eras_path
+.controls
+  = edit_button "Izmjeni profil", edit_school_path(@school)
+
+%ul#edit
+  %li= link_to "Uredi kvizove".prepend_icon("paper"), quizzes_path
+  %li= link_to "Uredi učenike".prepend_icon("user"), students_path
+  %li= link_to "Uredi knjige".prepend_icon("book"), books_path
+  %li= link_to "Uredi književna razdoblja".prepend_icon("busy"), eras_path

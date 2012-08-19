@@ -18,4 +18,18 @@ class SchoolsController < ApplicationController
   def show
     @school = current_school
   end
+
+  def edit
+    @school = current_school
+  end
+
+  def update
+    @school = current_school
+
+    if @school.update_attributes(params[:school])
+      redirect_to @school
+    else
+      render :edit
+    end
+  end
 end
