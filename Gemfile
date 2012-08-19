@@ -11,7 +11,6 @@ group :assets do
   gem "jquery-rails"
   gem "coffee-rails"
   gem "backbone-on-rails"
-  gem "haml_coffee_assets"
   gem "uglifier"
 end
 
