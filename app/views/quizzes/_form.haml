@@ -1,7 +1,6 @@
 = simple_form_for @quiz do |f|
 
   = f.input :name
-  = f.input :grade, as: :select, collection: ordinalize(current_school.classes).zip(current_school.classes), include_blank: false
   = f.input :activated
 
   = f.button :submit, "Spremi"

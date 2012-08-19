@@ -5,10 +5,6 @@ class QuizPresenter < BasePresenter
     quiz.name
   end
 
-  def grade
-    ordinalize(quiz.grade)
-  end
-
   def activated?
     quiz.activated? ? "Da" : "Ne"
   end

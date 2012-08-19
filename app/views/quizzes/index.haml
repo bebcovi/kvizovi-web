@@ -7,7 +7,6 @@
   %thead
     %tr
       %th Naziv
-      %th Razred
       %th Vidljiv?
       %th
 
@@ -16,7 +15,6 @@
       - present quiz do |quiz_presenter|
         %tr
           %td= quiz_presenter.name
-          %td= quiz_presenter.grade
           %td= quiz_presenter.activated?
           %td
             .controls

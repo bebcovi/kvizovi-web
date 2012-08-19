@@ -2,8 +2,5 @@
 
 school = School.find_by_username("mioc")
 school.quizzes.create! [
-  {
-    name: "Antika",
-    grade: 1
-  }
+  {name: "Antika"}
 ]
