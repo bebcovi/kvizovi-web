@@ -9,8 +9,6 @@ class School < ActiveRecord::Base
   has_many :eras
 
   has_secure_password
-  extend FriendlyId
-  friendly_id :username, use: :slugged
 
   validates_uniqueness_of :username
 
