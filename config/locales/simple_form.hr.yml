@@ -30,6 +30,7 @@ hr:
       quiz:
         name: "Naziv"
         grade: "Razred"
+        activated: "Vidljiv?"
       game:
         answer: "Odgovor"
       book:

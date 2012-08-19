@@ -3,6 +3,7 @@ class CreateQuizzes < ActiveRecord::Migration
     create_table :quizzes do |t|
       t.string :name
       t.integer :grade
+      t.boolean :activated, default: true
       t.references :school
 
       t.timestamps

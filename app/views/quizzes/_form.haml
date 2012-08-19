@@ -2,6 +2,7 @@
 
   = f.input :name
   = f.input :grade, as: :select, collection: (current_school.primary? ? (1..8) : (1..4)), include_blank: false
+  = f.input :activated
 
   = f.button :submit, "Spremi"
   = link_to "Odustani", @quiz

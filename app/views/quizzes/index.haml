@@ -8,6 +8,7 @@
     %tr
       %th Naziv
       %th Razred
+      %th Vidljiv?
       %th
 
   %tbody
@@ -15,6 +16,7 @@
       %tr
         %td #{quiz.name}
         %td #{quiz.grade}.
+        %td #{quiz.activated? ? "Da" : "Ne"}
         %td
           .controls
             = edit_button "", quiz_path(quiz)

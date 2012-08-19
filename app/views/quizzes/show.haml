@@ -10,6 +10,8 @@
     %dd #{@quiz.name}
     %dt Razred
     %dd #{@quiz.grade}.
+    %dt Vidljiv?
+    %dd #{@quiz.activated? ? "Da" : "Ne"}
 
   .controls
     = edit_button "Izmjeni", edit_quiz_path(@quiz)

@@ -5,7 +5,7 @@ class GamesController < ApplicationController
 
   def new
     @game = SubmittedGame.new
-    @quizzes = current_student.school.quizzes
+    @quizzes = current_student.school.quizzes.activated
   end
 
   def create
