@@ -16,8 +16,6 @@ Lektire::Application.routes.draw do
 
   resources :schools
   resources :students
-  resources :eras
-  resources :books
   resources :quizzes do
     resources :questions
   end

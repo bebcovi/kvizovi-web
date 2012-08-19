@@ -10,6 +10,5 @@ class CreateStudents < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :students, :school_id
   end
 end

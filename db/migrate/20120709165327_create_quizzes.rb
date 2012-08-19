@@ -7,6 +7,5 @@ class CreateQuizzes < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :quizzes, :school_id
   end
 end

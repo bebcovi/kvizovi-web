@@ -72,10 +72,10 @@ SimpleForm.setup do |config|
   # config.error_notification_id = nil
 
   # Series of attempts to detect a default label method for collection.
-  # config.collection_label_methods = [:last, :name, :title, :to_s]
+  config.collection_label_methods = [:to_s, :title, :name]
 
   # Series of attempts to detect a default value method for collection.
-  # config.collection_value_methods = [:id, :first, :to_s]
+  config.collection_value_methods = [:id]
 
   # You can wrap a collection of radio/check boxes in a pre-defined tag, defaulting to none.
   # config.collection_wrapper_tag = nil

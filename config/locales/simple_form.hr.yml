@@ -33,10 +33,3 @@ hr:
         activated: "Vidljiv?"
       game:
         answer: "Odgovor"
-      book:
-        title: "Naslov"
-        author: "Autor"
-        era: "Književno razdoblje"
-      era:
-        name: "Naziv"
-        duration: "Trajanje"

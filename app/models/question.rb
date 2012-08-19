@@ -1,6 +1,5 @@
 class Question < ActiveRecord::Base
   belongs_to :quiz, dependent: :destroy
-  belongs_to :book
 
   serialize :data
   has_attached_file :attachment, styles: {medium: "300x300"}

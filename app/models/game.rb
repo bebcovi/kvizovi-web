@@ -17,4 +17,10 @@ class Game < ActiveRecord::Base
       score
     end
   end
+
+  def questions
+    arrays = info.values
+    question_ids = arrays.shift.zip(*arrays)
+    Question.find(question_ids)
+  end
 end

@@ -1,8 +1,0 @@
-= simple_form_for @era do |f|
-
-  = f.input :name
-  = f.input :duration do
-    #{f.input(:start_year, label: false, wrapper: false)} &ndash; #{f.input(:end_year, label: false, wrapper: false)}
-
-  = f.button :submit, "Spremi"
-  = link_to "Odustani", eras_path

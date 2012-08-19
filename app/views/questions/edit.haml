@@ -2,8 +2,6 @@
 
 = simple_form_for @question, url: quiz_question_path(@question.quiz, @question) do |f|
 
-  = f.association :book
-
   = f.input :content
 
   = f.simple_fields_for :data do |d|

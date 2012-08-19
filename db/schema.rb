@@ -13,29 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20120819164549) do
 
-  create_table "books", :force => true do |t|
-    t.string   "title"
-    t.string   "author"
-    t.integer  "school_id"
-    t.integer  "era_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "books", ["era_id"], :name => "index_books_on_era_id"
-  add_index "books", ["school_id"], :name => "index_books_on_school_id"
-
-  create_table "eras", :force => true do |t|
-    t.string   "name"
-    t.integer  "start_year"
-    t.integer  "end_year"
-    t.integer  "school_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "eras", ["school_id"], :name => "index_eras_on_school_id"
-
   create_table "games", :force => true do |t|
     t.text     "info"
     t.integer  "quiz_id"
@@ -49,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20120819164549) do
     t.text     "data"
     t.integer  "points"
     t.integer  "quiz_id"
-    t.integer  "book_id"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
     t.string   "attachment_file_name"
@@ -58,9 +34,6 @@ ActiveRecord::Schema.define(:version => 20120819164549) do
     t.datetime "attachment_updated_at"
   end
 
-  add_index "questions", ["book_id"], :name => "index_questions_on_book_id"
-  add_index "questions", ["quiz_id"], :name => "index_questions_on_quiz_id"
-
   create_table "quizzes", :force => true do |t|
     t.string   "name"
     t.boolean  "activated",  :default => true
@@ -68,8 +41,6 @@ ActiveRecord::Schema.define(:version => 20120819164549) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
-
-  add_index "quizzes", ["school_id"], :name => "index_quizzes_on_school_id"
 
   create_table "regions", :force => true do |t|
     t.string   "name"
@@ -98,7 +69,5 @@ ActiveRecord::Schema.define(:version => 20120819164549) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
-
-  add_index "students", ["school_id"], :name => "index_students_on_school_id"
 
 end
