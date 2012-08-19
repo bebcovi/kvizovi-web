@@ -3,6 +3,10 @@ hr:
     error_notification:
       default_message: "Neka polja nisu ispravno popunjena."
     labels:
+      defaults:
+        username: "Korisničko ime"
+        password: "Lozinka"
+        password_confirmation: "Potvrda lozinke"
       question:
         category: "Tip pitanja"
         option: "Opcija"
@@ -14,16 +18,15 @@ hr:
         attachment: "Slika"
         points: "Bodovi"
       school:
-        full_name: "Puno ime škole"
+        name: "Ime škole"
         level: "Tip škole"
+        region: "Županija"
+        key: "Tajni ključ"
       student:
         first_name: "Ime"
         last_name: "Prezime"
         grade: "Razred"
         school: "Škola"
-      defaults:
-        username: "Korisničko ime"
-        password: "Lozinka"
       quiz:
         name: "Naziv"
         grade: "Razred"

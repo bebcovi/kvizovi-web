@@ -13,6 +13,7 @@ class StudentsController < ApplicationController
     @student = Student.create_with_school_key(params[:student])
 
     if @student.valid?
+      log_in!(@student)
       redirect_to new_game_path, notice: "Uspješno ste se registrirali."
     else
       render :new

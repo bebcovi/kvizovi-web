@@ -2,11 +2,15 @@
 
 = simple_form_for @school do |f|
 
+  = f.error_notification
+
   = f.input :name
   = f.input :level, collection: School::LEVELS.to_a, value_method: :first, label_method: :last, prompt: "Izaberite..."
   = f.input :username
   = f.input :password
+  = f.input :password_confirmation
   = f.association :region, prompt: "Izaberite..."
+  = f.input :key, as: :password
 
   = f.button :submit, "Spremi"
   = link_to "Odustani", school_login_path

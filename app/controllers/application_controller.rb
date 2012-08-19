@@ -33,4 +33,18 @@ class ApplicationController < ActionController::Base
   authentication_methods :school, :student, as: :user
   authentication_methods :school
   authentication_methods :student
+
+  protected
+
+  def log_in!(user)
+    cookies[:"#{user.class.name.underscore}_id"] = {
+      value: user.id,
+      expires: 1.day.from_now
+    }
+  end
+
+  def log_out!
+    cookies.delete(:school_id)
+    cookies.delete(:student_id)
+  end
 end
