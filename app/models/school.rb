@@ -13,7 +13,7 @@ class School < ActiveRecord::Base
     name
   end
 
-  def classes
+  def grades
     primary? ? (1..8) : (1..4)
   end
 

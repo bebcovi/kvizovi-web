@@ -28,7 +28,7 @@ hr:
         school: "Škola"
       quiz:
         name: "Naziv"
-        grade: "Razred"
+        grades: "Razredi"
         activated: "Vidljiv?"
       game:
         answer: "Odgovor"

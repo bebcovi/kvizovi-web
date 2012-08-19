@@ -3,5 +3,7 @@ class Quiz < ActiveRecord::Base
   has_many :questions
   has_many :games
 
+  serialize :grades, Array
+
   scope :activated, where(activated: true)
 end

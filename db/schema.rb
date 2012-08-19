@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20120818073000) do
 
   create_table "quizzes", :force => true do |t|
     t.string   "name"
+    t.string   "grades"
     t.boolean  "activated",  :default => true
     t.integer  "school_id"
     t.datetime "created_at",                   :null => false
