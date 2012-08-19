@@ -58,7 +58,8 @@ class Question < ActiveRecord::Base
   def correct_answer?(answer)
     case
     when association?
-      answer = Hash[data.keys.zip(data.values)]
+      n = answer.count / 2
+      answer = Hash[answer.first(n).zip(answer.last(n))]
     end
 
     answer == self.answer

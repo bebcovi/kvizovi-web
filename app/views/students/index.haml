@@ -19,4 +19,6 @@
         %td #{student.last_name}
         %td #{student.username}
         %td #{student.grade}.
-        %td #{delete_button "", student_path(student)}
+        %td
+          .controls
+            #{delete_button "", student_path(student)}

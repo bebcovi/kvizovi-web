@@ -14,7 +14,7 @@ class Student < ActiveRecord::Base
   end
 
   def self.authenticate(credentials)
-    find_by_username(credentials[:username]).try(:authenticate, credentials[:password]) or false
+    find_by_username(credentials[:username]).try(:authenticate, credentials[:password])
   end
 
   def self.create_with_key(params, key)

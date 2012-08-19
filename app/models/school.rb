@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class School < ActiveRecord::Base
   has_many :students
   has_many :quizzes
@@ -29,6 +31,7 @@ class School < ActiveRecord::Base
   }
 
   def self.authenticate(credentials)
-    find_by_username(credentials[:username]).try(:authenticate, credentials[:password]) or false
+    find_by_username(credentials[:username]).try(:authenticate, credentials[:password])
+  end
   end
 end

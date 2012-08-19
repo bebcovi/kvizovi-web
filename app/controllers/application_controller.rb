@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     helper_method :"#{the_name}_logged_in?", :"#{the_name}_not_logged_in?"
 
     define_method("authenticate_#{the_name}!") do
-      redirect_to root_path if not send("#{the_name}_logged_in?")
+      redirect_to login_path if send("#{the_name}_not_logged_in?")
     end
   end
 

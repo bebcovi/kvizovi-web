@@ -4,7 +4,8 @@ class Game < ActiveRecord::Base
   serialize :info
 
   def players
-    Student.find(info.keys)
+    player_ids = info.keys
+    Student.find(player_ids)
   end
 
   def scores

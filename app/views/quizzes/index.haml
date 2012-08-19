@@ -16,7 +16,8 @@
         %td #{quiz.name}
         %td #{quiz.grade}.
         %td
-          = edit_button "", quiz_path(quiz)
-          = delete_button "", quiz_path(quiz)
+          .controls
+            = edit_button "", quiz_path(quiz)
+            = delete_button "", quiz_path(quiz)
 
 %p= add_button "Novi kviz", new_quiz_path

@@ -18,8 +18,8 @@
         %td #{book.author}
         %td #{book.era}
         %td
-          = edit_button "", edit_book_path(book)
-          - if book.school == current_school
-            = delete_button "", book_path(book)
+          .controls
+            = edit_button "", edit_book_path(book)
+            = delete_button "", book_path(book) if book.school == current_school
 
 %p= add_button "Nova knjiga", new_book_path

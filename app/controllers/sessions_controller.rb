@@ -13,7 +13,6 @@ class SessionsController < ApplicationController
       log_in!(user)
       redirect_to root_path
     else
-      flash.now[:alert] = "Pogrešno korisničko ime ili lozinka."
       render :new
     end
   end

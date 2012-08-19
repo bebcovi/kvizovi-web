@@ -16,8 +16,8 @@
         %td #{era.name}
         %td #{era.start_year}&ndash;#{era.end_year}
         %td
-          = edit_button "", edit_era_path(era)
-          - if era.school == current_school
-            = delete_button "", era_path(era)
+          .controls
+            = edit_button "", edit_era_path(era)
+            = delete_button "", era_path(era) if era.school == current_school
 
 %p= add_button "Novo književno razdoblje", new_era_path
