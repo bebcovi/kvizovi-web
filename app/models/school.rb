@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class School < ActiveRecord::Base
-  belongs_to :region
   has_many :students
   has_many :quizzes
   has_many :questions, through: :quizzes

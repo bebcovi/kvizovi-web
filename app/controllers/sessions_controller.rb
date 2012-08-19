@@ -2,7 +2,6 @@
 
 class SessionsController < ApplicationController
   def new_student
-    @regions = Region.all
   end
 
   def new_school
@@ -10,26 +9,14 @@ class SessionsController < ApplicationController
 
   def create
     if params[:student]
-      if params[:school_id].present?
-        student = School.find(params[:school_id]).students.authenticate(params[:student])
-
-        if student
-          log_in!(student)
-          redirect_to new_game_path
-        else
-          flash.now[:alert] = "Pogrešno korisničko ime ili lozinka."
-          @regions = Region.all
-          render :new_student
-        end
+      if student = Student.authenticate(params[:school])
+        log_in!(student)
+        redirect_to new_game_path
       else
-        flash.now[:alert] = "Niste izabrali školu."
-        @regions = Region.all
         render :new_student
       end
     elsif params[:school]
-      school = School.authenticate(params[:school])
-
-      if school
+      if school = School.authenticate(params[:school])
         log_in!(school)
         redirect_to school
       else

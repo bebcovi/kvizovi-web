@@ -5,7 +5,7 @@ class Student < ActiveRecord::Base
 
   has_secure_password
 
-  validates_uniqueness_of :username, scope: :school_id
+  validates_uniqueness_of :username
 
   def full_name
     "#{first_name} #{last_name}"
