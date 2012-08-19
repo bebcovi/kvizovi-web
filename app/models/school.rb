@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class School < ActiveRecord::Base
+  belongs_to :region
   has_many :students
   has_many :quizzes
   has_many :questions, through: :quizzes
@@ -11,7 +12,7 @@ class School < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: :slugged
 
-  validate :username_must_me_unique
+  validates_uniqueness_of :username
 
   def to_s
     name
@@ -32,13 +33,5 @@ class School < ActiveRecord::Base
 
   def self.authenticate(credentials)
     find_by_username(credentials[:username]).try(:authenticate, credentials[:password])
-  end
-
-  private
-
-  def username_must_me_unique
-    if [self.class, Student].any? { |model| model.find_by_username(username) }
-      errors.add(:username, "je već zauzeto.")
-    end
   end
 end

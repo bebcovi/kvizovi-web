@@ -20,7 +20,7 @@ hr:
         first_name: "Ime"
         last_name: "Prezime"
         grade: "Razred"
-        school: "Ključ od škole"
+        school: "Škola"
       defaults:
         username: "Korisničko ime"
         password: "Lozinka"

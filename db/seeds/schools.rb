@@ -1,6 +1,7 @@
 # encoding: utf-8
 
-School.create! [
+region = Region.find_by_name("Grad Zagreb")
+region.schools.create! [
   {
     username: "mioc",
     name: "XV. Gimnazija",

@@ -16,6 +16,6 @@ end
 
 include SeedHelpers
 
-%w[schools students eras books quizzes questions].each do |table|
+%w[regions schools students eras books quizzes questions].each do |table|
   load("#{Rails.root}/db/seeds/#{table}.rb")
 end

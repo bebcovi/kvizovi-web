@@ -1,7 +1,9 @@
 class SchoolsController < ApplicationController
-  before_filter :authenticate_user!
+  def new
+    @school = School.new
+  end
 
   def show
-    @school = School.find(params[:id])
+    @school = current_school
   end
 end

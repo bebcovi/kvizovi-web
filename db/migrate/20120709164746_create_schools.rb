@@ -7,6 +7,7 @@ class CreateSchools < ActiveRecord::Migration
       t.string :password_digest
       t.integer :level, limit: 1
       t.string :key
+      t.references :region
 
       t.timestamps
     end

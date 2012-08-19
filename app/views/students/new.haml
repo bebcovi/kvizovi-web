@@ -7,9 +7,10 @@
   = f.input :username
   = f.input :password
 
-  = f.input :school do
-    = password_field_tag :key
+  = f.simple_fields_for :school do |s|
+    = s.input :level, collection: School::LEVELS.to_a, value_method: :first, label_method: :last, prompt: "Izaberite..."
+    = s.input :key
   = f.input :grade, as: :select, collection: (1..8), include_blank: false
 
   = f.button :submit, "Spremi"
-  = link_to "Odustani", students_path
+  = link_to "Odustani", student_login_path

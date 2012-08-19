@@ -5,7 +5,7 @@ class Student < ActiveRecord::Base
 
   has_secure_password
 
-  validate :username_must_me_unique
+  validates_uniqueness_of :username, scope: :school_id
 
   def full_name
     "#{first_name} #{last_name}"
@@ -19,21 +19,13 @@ class Student < ActiveRecord::Base
     find_by_username(credentials[:username]).try(:authenticate, credentials[:password])
   end
 
-  def self.create_with_key(params, key)
-    if school = School.find_by_key(key)
+  def self.create_with_school_key(params)
+    if school = School.find_by_key(params[:school][:key])
       school.students.create(params)
     else
-      Student.new(params).tap do |student|
+      Student.new(params) do |student|
         student.errors[:base] << "Ne postoji škola s tim ključem."
       end
-    end
-  end
-
-  private
-
-  def username_must_me_unique
-    if [self.class, School].any? { |model| model.find_by_username(username) }
-      errors.add(:username, "je već zauzeto.")
     end
   end
 end

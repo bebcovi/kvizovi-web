@@ -1,0 +1,9 @@
+- @title = "Prijava"
+
+= simple_form_for :school, url: login_path do |f|
+
+  = f.input :username, input_html: {value: params[:school].try(:[], :username)}
+  = f.input :password
+
+  = f.button :submit, "Prijava"
+  = link_to "Odustani", root_path

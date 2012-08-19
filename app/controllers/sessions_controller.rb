@@ -1,28 +1,39 @@
 # encoding: utf-8
 
 class SessionsController < ApplicationController
-  def new
-    if student_logged_in?
-      redirect_to new_game_path
-    elsif school_logged_in?
-      redirect_to current_school
-    end
+  def new_student
+    @regions = Region.all
+  end
+
+  def new_school
   end
 
   def create
-    user = User.authenticate(params[:user])
+    if params[:student]
+      student = School.find(params[:school_id]).students.authenticate(params[:student])
 
-    if user
-      log_in!(user)
-      redirect_to root_path
+      if student
+        log_in!(student)
+        redirect_to new_game_path
+      else
+        flash.now[:alert] = "Pogrešno korisničko ime ili lozinka."
+        render :new_student
+      end
     else
-      render :new
+      school = School.authenticate(params[:school])
+
+      if school
+        log_in!(school)
+        redirect_to school
+      else
+        render :new_school
+      end
     end
   end
 
   def destroy
     log_out!
-    redirect_to :back
+    redirect_to root_path
   end
 
   private

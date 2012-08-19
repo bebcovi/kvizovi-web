@@ -1,8 +1,10 @@
 Lektire::Application.routes.draw do
-  root to: "sessions#new"
+  root to: "home#index"
+  get "home/index"
 
   controller :sessions do
-    get "login", to: :new
+    get "student_login", to: :new_student
+    get "school_login", to: :new_school
     post "login", to: :create
     delete "logout", to: :destroy
   end

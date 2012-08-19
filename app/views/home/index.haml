@@ -1,16 +1,4 @@
-- @title = "Prijava"
+- @title = "Početna"
 
-= simple_form_for :student, url: login_path do |f|
-
-  = f.input :username, input_html: {value: params[:student].try(:[], :username)}
-  = f.input :password
-
-  = f.button :submit, "Prijava učenika"
-
-= simple_form_for :school, url: login_path do |f|
-
-  = f.input :username, input_html: {value: params[:school].try(:[], :username)}
-  = f.input :password
-
-  = f.button :submit, "Prijava škole"
-
+%p= link_to "Ja sam učenik", student_login_path
+%p= link_to "Ja sam škola", school_login_path
