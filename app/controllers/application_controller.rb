@@ -37,10 +37,12 @@ class ApplicationController < ActionController::Base
   protected
 
   def log_in!(user)
-    cookies[:"#{user.class.name.underscore}_id"] = {
-      value: user.id,
-      expires: 1.day.from_now
-    }
+    name = user.class.name.underscore
+    if params[:remember_me]
+      cookies.permanent[:"#{name}_id"] = user.id
+    else
+      cookies[:"#{name}_id"] = user.id
+    end
   end
 
   def log_out!

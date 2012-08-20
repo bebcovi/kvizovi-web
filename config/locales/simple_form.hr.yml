@@ -7,6 +7,7 @@ hr:
         username: "Korisničko ime"
         password: "Lozinka"
         password_confirmation: "Potvrda lozinke"
+        remember_me: "Zapamti me"
       question:
         category: "Tip pitanja"
         option: "Opcija"
