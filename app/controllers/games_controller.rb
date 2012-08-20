@@ -14,14 +14,14 @@ class GamesController < ApplicationController
 
     if @game.valid?
       game.create!(@game)
-      redirect_to action: :play
+      redirect_to action: :edit
     else
       @quizzes = current_student.school.quizzes.activated
       render :new
     end
   end
 
-  def play
+  def edit
     @quiz = game.quiz
     @player = game.current_player
     @question = game.current_question
@@ -33,7 +33,7 @@ class GamesController < ApplicationController
     if game.questions_left > 0
       game.switch_player!
       game.next_question!
-      redirect_to action: :play
+      redirect_to action: :edit
     else
       game.create_record!
       game.clear!
