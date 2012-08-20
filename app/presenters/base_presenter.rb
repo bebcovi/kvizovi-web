@@ -10,7 +10,7 @@ class BasePresenter
     end
   end
 
-  def method_missing(*args)
-    @template.send(*args)
+  def method_missing(*args, &block)
+    @template.send(*args, &block)
   end
 end

@@ -6,7 +6,7 @@ Lektire::Application.routes.draw do
     get "student_login", to: :new_student
     get "school_login", to: :new_school
     post "login", to: :create
-    delete "logout", to: :destroy
+    match "logout", to: :destroy
   end
 
   resource :game do

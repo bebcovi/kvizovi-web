@@ -38,7 +38,7 @@ class QuizzesController < ApplicationController
   end
 
   def destroy
-    quiz = current_school.quizzes.destroy(params[:id])
-    redirect_to quizzes_path, "Kviz \"#{quiz.name}\" je uspješno izbrisan."
+    quiz = current_school.quizzes.destroy(params[:id]).first
+    redirect_to quizzes_path, notice: "Kviz \"#{quiz.name}\" je uspješno izbrisan."
   end
 end

@@ -15,15 +15,15 @@
     - when @question.choice?
 
       .choice
-        = d.input_collection :choice, times: @question.provided_answers.count, values: @question.provided_answers
+        = d.input_collection :choice, indices: (1..@question.provided_answers.count), values: @question.provided_answers
 
     - when @question.association?
 
       .association
         .column
-          = d.input_collection :association, times: @question.provided_answers.count, values: @question.provided_answers.keys
+          = d.input_collection :association, indices: (1..@question.provided_answers.count), values: @question.provided_answers.keys
         .column
-          = d.input_collection :association, times: @question.provided_answers.count, values: @question.provided_answers.values
+          = d.input_collection :association, indices: ((@question.provided_answers.count + 1)..(@question.provided_answers.count * 2)), values: @question.provided_answers.values
 
     - when @question.photo?
 

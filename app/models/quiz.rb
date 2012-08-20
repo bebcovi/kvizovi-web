@@ -6,4 +6,8 @@ class Quiz < ActiveRecord::Base
   serialize :grades, Array
 
   scope :activated, where(activated: true)
+
+  def grades=(array)
+    write_attribute(:grades, array.reject(&:blank?).map(&:to_i))
+  end
 end

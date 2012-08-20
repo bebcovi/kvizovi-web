@@ -21,13 +21,13 @@
       = d.collection_radio_buttons :boolean, [[true, "Točno"], [false, "Netočno"]], :first, :last
 
     .choice
-      = d.input_collection :choice, times: 4
+      = d.input_collection :choice, indices: (1..4)
 
     .association
       .column
-        = d.input_collection :association, times: 4
+        = d.input_collection :association, indices: (1..4)
       .column
-        = d.input_collection :association, times: 4
+        = d.input_collection :association, indices: (5..8)
 
     .photo
       = f.input :attachment, as: :file
