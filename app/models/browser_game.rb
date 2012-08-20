@@ -5,25 +5,29 @@ class BrowserGame
 
   module ActionMethods
     def create!(game)
+      # Storing info
       session[:game] = {
         quiz_id: game.quiz.id,
         questions: Hash[game.quiz.question_ids.shuffle.zip([])],
         player_ids: game.players.map(&:id)
       }
-    end
 
-    def start!
-      first_player!
-      redirect_to play_game_path(1)
+      # Initialization
+      session[:game].update \
+        current_player: 0,
+        current_question: 0
     end
 
     def update!(answer)
       session[:game][:questions][current_question.id] = current_question.correct_answer?(answer)
     end
 
+    def switch_player!
+      session[:game][:current_player] = (session[:game][:current_player] + 1) % session[:game][:player_ids].count
+    end
+
     def next_question!
-      switch_player!
-      redirect_to play_game_path(params[:question].to_i + 1)
+      session[:game][:current_question] += 1
     end
 
     def create_record!
@@ -35,37 +39,30 @@ class BrowserGame
       session[:game_id] = game.id
     end
 
-    def finish!
+    def clear!
       session.delete(:game)
-      redirect_to game_path
-    end
-
-    private
-
-    def first_player!
-      session[:game][:current_player] = 0
-    end
-
-    def switch_player!
-      session[:game][:current_player] = (session[:game][:current_player] + 1) % session[:game][:player_ids].count
     end
   end
 
   module HelperMethods
     def questions_left
-      session[:game][:questions].count - params[:question].to_i
+      session[:game][:questions].count - (session[:game][:current_question] + 1)
     end
 
     def current_question
-      Question.find(session[:game][:questions].keys[params[:question].to_i - 1]).tap do |question|
-        case
-        when question.choice?
+      Question.find(session[:game][:questions].keys[session[:game][:current_question]]).tap do |question|
+        # Shuffle answers
+        if question.choice?
           question.data.shuffle!
-        when question.association?
+        elsif question.association?
           keys, shuffled_values = question.data.keys, question.data.values.shuffle
           question.data = Hash[keys.zip(shuffled_values)]
         end
       end
+    end
+
+    def finished?
+      questions_left == 0
     end
 
     def current_player

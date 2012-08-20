@@ -2,20 +2,23 @@
 
 %p Trenutno na redu: #{@player.username}.
 
-= simple_form_for :game, method: :put do |f|
+= simple_form_for :game, url: game_path, method: :put do |f|
 
   %p= @question.content
 
-  - case
-  - when @question.boolean?
+  - # This is so that params[:game] is always present,
+  - # even if the user doesn't choose an answer
+  = f.hidden_field :bla
+
+  - if @question.boolean?
 
     = f.collection_radio_buttons :answer, [[true, "Točno"], [false, "Netočno"]], :first, :last
 
-  - when @question.choice?
+  - elsif @question.choice?
 
     = f.input :answer, collection: @question.provided_answers, as: :radio_buttons
 
-  - when @question.association?
+  - elsif @question.association?
 
     .column
       %ol
@@ -30,14 +33,14 @@
         = list_of @question.provided_answers.values do |answer|
           = answer
 
-  - when @question.photo?
+  - elsif @question.photo?
 
     = image_tag @question.attachment.url(:medium)
     = f.input :answer
 
-  - when @question.text?
+  - elsif @question.text?
 
     = f.input :answer
 
   = f.button :submit, "Odgovori!"
-  = link_to "Odustani", new_game_path
+  = link_to "Odustani", game_path, method: :delete

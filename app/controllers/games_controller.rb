@@ -14,9 +14,9 @@ class GamesController < ApplicationController
 
     if @game.valid?
       game.create!(@game)
-      game.start!
+      redirect_to action: :play
     else
-      @quizzes = current_student.school.quizzes
+      @quizzes = current_student.school.quizzes.activated
       render :new
     end
   end
@@ -28,13 +28,16 @@ class GamesController < ApplicationController
   end
 
   def update
-    game.update!(params[:game].try(:[], :answer))
+    game.update!(params[:game][:answer])
 
     if game.questions_left > 0
+      game.switch_player!
       game.next_question!
+      redirect_to action: :play
     else
       game.create_record!
-      game.finish!
+      game.clear!
+      redirect_to action: :show
     end
   end
 
@@ -42,10 +45,14 @@ class GamesController < ApplicationController
     @game = Game.find(session[:game_id])
   end
 
+  def destroy
+    game.clear!
+    redirect_to action: :new
+  end
+
   private
 
   def game
     BrowserGame.new(self)
   end
-  helper_method :game
 end

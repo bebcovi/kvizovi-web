@@ -7,6 +7,7 @@
 = simple_form_for @game, url: game_path do |f|
 
   = f.error_notification
+  = f.error :base
 
   %p Izaberite kviz:
   = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
@@ -16,7 +17,5 @@
   = f.simple_fields_for :players_credentials, index: nil do |p|
     = p.input :username, input_html: {value: (params[:submitted_game][:players_credentials].first[:username] rescue nil)}
     = p.input :password
-
-  = f.error :base
 
   = f.button :submit, "Počni!"

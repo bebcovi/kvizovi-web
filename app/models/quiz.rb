@@ -10,4 +10,8 @@ class Quiz < ActiveRecord::Base
   def grades=(array)
     write_attribute(:grades, array.reject(&:blank?).map(&:to_i))
   end
+
+  def to_s
+    name
+  end
 end

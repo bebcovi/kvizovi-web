@@ -31,7 +31,11 @@ class QuizzesController < ApplicationController
     @quiz = current_school.quizzes.find(params[:id])
 
     if @quiz.update_attributes(params[:quiz])
-      redirect_to @quiz, notice: "Kviz je uspješno izmjenjen."
+      if params[:commit]
+        redirect_to @quiz, notice: "Kviz je uspješno izmjenjen."
+      else
+        redirect_to quizzes_path
+      end
     else
       render :new
     end
