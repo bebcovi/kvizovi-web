@@ -27,6 +27,10 @@ module ApplicationHelper
     link_to string.prepend_icon("plus"), path, options
   end
 
+  def icon(name)
+    content_tag :i, "", class: "icon-#{name}"
+  end
+
   def ordinalize(argument)
     if argument.is_a?(Integer)
       ORDINALS[argument]

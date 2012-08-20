@@ -2,7 +2,6 @@
 
   = f.input :name
   = f.input :grades, collection: ordinalize(@quiz.school.grades).zip(@quiz.school.grades), as: :check_boxes
-  = f.input :activated
 
   = f.button :submit, "Spremi"
   = link_to "Odustani", @quiz

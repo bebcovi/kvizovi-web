@@ -9,10 +9,10 @@
     %dl#info
       %dt Naziv
       %dd= quiz_presenter.name
-      %dt Vidljiv?
-      %dd= quiz_presenter.activated?
       %dt Razredi
       %dd= quiz_presenter.grades
+      %dt Vidljivost
+      %dd= quiz_presenter.visibility
 
   .controls
     = edit_button "Izmjeni", edit_quiz_path(@quiz)

@@ -8,7 +8,7 @@
     %tr
       %th Naziv
       %th Razredi
-      %th Vidljiv?
+      %th Vidljivost
       %th
 
   %tbody
@@ -17,7 +17,7 @@
         %tr
           %td= quiz_presenter.name
           %td= quiz_presenter.grades
-          %td= quiz_presenter.activated?
+          %td= quiz_presenter.visibility
           %td
             .controls
               = edit_button "", quiz_path(quiz)
