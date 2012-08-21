@@ -10,7 +10,9 @@ Lektire::Application.routes.draw do
     match "logout", to: :destroy
   end
 
-  resource :game
+  resource :game do
+    post "answer"
+  end
 
   resources :schools
   resources :students

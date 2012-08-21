@@ -27,6 +27,14 @@ class GamesController < ApplicationController
     @question = game.current_question
   end
 
+  def answer
+    if game.current_question.correct_answer?(params[:game][:answer])
+      headers["Answer"] = "right"
+    else
+      headers["Answer"] = "wrong"
+    end
+  end
+
   def update
     game.update!(params[:game][:answer])
 
