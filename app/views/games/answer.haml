@@ -1,0 +1,8 @@
+- @title = (@correct_answer ? "Točan odgovor" : "Netočan odgovor")
+
+%p= @correct_answer ? "Točan odgovor" : "Netočan odgovor"
+
+- if @questions_left > 0
+  %p= link_to "Sljedeće pitanje", edit_game_path
+- else
+  %p= link_to "Pregled", game_path, method: :delete
