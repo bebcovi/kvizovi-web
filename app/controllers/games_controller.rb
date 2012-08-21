@@ -25,6 +25,8 @@ class GamesController < ApplicationController
     @quiz = game.quiz
     @player = game.current_player
     @question = game.current_question
+    @question_number = game.current_question_number
+    @questions_count = game.questions_count
   end
 
   def answer

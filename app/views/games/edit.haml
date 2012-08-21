@@ -1,6 +1,8 @@
-- @title = "#{@quiz.name} · #{params[:question]}. pitanje"
+- @title = "#{@quiz.name} · #{@question_number}. pitanje"
 
 %p Trenutno na redu: #{@player.username}.
+
+%p #{@question_number}/#{@questions_count}
 
 = simple_form_for :game, url: game_path, method: :put do |f|
 
@@ -43,7 +45,7 @@
     = f.input :answer
 
   = f.button :submit, "Odgovori!"
-  = link_to "Odustani", game_path, method: :delete
+  = link_to "Prekini", game_path, method: :delete
 
 %div
   = render "right_answer"

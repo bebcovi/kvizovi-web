@@ -61,6 +61,14 @@ class BrowserGame
       end
     end
 
+    def current_question_number
+      session[:game][:current_question] + 1
+    end
+
+    def questions_count
+      session[:game][:questions].count
+    end
+
     def finished?
       questions_left == 0
     end
