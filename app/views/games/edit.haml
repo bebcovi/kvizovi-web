@@ -44,5 +44,6 @@
 
     = f.input :answer
 
-  = f.button :submit, "Odgovori!"
-  = link_to "Prekini", game_path, method: :delete
+  .controls
+    = link_to "Prekini", game_path, method: :delete
+    = f.button :submit, "Odgovori!"

@@ -39,5 +39,6 @@
 
   = f.input :points
 
-  = f.button :submit, "Spremi"
-  = link_to "Odustani", quiz_path(@question.quiz, @question)
+  .controls
+    = link_to "Odustani", quiz_path(@question.quiz, @question)
+    = f.button :submit, "Spremi"

@@ -18,4 +18,5 @@
     = p.input :username, input_html: {value: (params[:submitted_game][:players_credentials].first[:username] rescue nil)}
     = p.input :password
 
-  = f.button :submit, "Počni!"
+  .controls
+    = f.button :submit, "Počni!"

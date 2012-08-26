@@ -11,5 +11,6 @@
   = f.input :password_confirmation
   = f.input :key, as: :password
 
-  = f.button :submit, "Spremi"
-  = link_to "Odustani", school_login_path
+  .controls
+    = link_to "Odustani", school_login_path
+    = f.button :submit, "Spremi"

@@ -13,5 +13,6 @@
     = s.input :level, collection: School::LEVELS.to_a, value_method: :first, label_method: :last, prompt: "Izaberite..."
   = f.input :grade, as: :select, collection: ordinalize((1..8)).zip((1..8)), include_blank: false
 
-  = f.button :submit, "Spremi"
-  = link_to "Odustani", student_login_path
+  .controls
+    = link_to "Odustani", student_login_path
+    = f.button :submit, "Spremi"
