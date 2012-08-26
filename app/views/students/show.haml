@@ -1,9 +1,19 @@
 - @title = @student.full_name
 
-%dl
-  %dt Ime i prezime
-  %dd #{@student.full_name}
-  %dt Škola
-  %dd #{@student.school.name}
-  %dt Razred
-  %dd #{@student.grade}.
+- present @student do |student_presenter|
+
+  %dl
+    %dt Ime
+    %dd= student_presenter.first_name
+    %dt Prezime
+    %dd= student_presenter.last_name
+    %dt Škola
+    %dd= student_presenter.school_name
+    %dt Razred
+    %dd= student_presenter.grade
+    %dt Korisničko ime
+    %dd= student_presenter.username
+
+  .controls
+    = student_presenter.edit_button "Izmjeni profil"
+    %p= link_to "Izmjeni lozinku", edit_password_path

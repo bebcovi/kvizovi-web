@@ -1,0 +1,14 @@
+- @title = "Izmjena profila"
+
+= simple_form_for @student do |f|
+
+  = f.error_notification
+  = f.error :base
+
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :username
+
+  .controls
+    = link_to "Odustani", @student
+    = f.button :submit, "Spremi"

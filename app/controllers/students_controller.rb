@@ -21,7 +21,21 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @student = Student.find(params[:id])
+    @student = current_student
+  end
+
+  def edit
+    @student = current_student
+  end
+
+  def update
+    @student = current_student
+
+    if @student.update_attributes(params[:student])
+      redirect_to @student, notice: "Profil je uspješno izmijenjen."
+    else
+      render :edit
+    end
   end
 
   def destroy
