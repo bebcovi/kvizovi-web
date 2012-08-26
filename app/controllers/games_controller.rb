@@ -30,15 +30,15 @@ class GamesController < ApplicationController
   def update
     game.update!(params[:game][:answer])
 
-    @correct_answer = game.current_question.correct_answer?(params[:game][:answer])
-    @questions_left = game.questions_left
-
     if game.questions_left > 0
       game.switch_player!
       game.next_question!
+      redirect_to action: :edit
+    else
+      game.create_record!
+      game.clear!
+      redirect_to action: :show
     end
-
-    render :answer
   end
 
   def show
@@ -46,14 +46,8 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    if game.finished?
-      game.create_record!
-      game.clear!
-      redirect_to action: :show
-    else
-      game.clear!
-      redirect_to action: :new
-    end
+    game.clear!
+    redirect_to action: :new
   end
 
   private
