@@ -9,14 +9,18 @@
   = f.error_notification
   = f.error :base
 
-  %p Izaberite kviz:
-  = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
+  .quizzes
+    %p Izaberite kviz:
+    = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
 
-  %p U koliko igrača želite igrati?
-  = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last, checked: 1, collection_wrapper_tag: :div
-  = f.simple_fields_for :players_credentials, index: nil do |p|
-    = p.input :username, input_html: {value: (params[:submitted_game][:players_credentials].first[:username] rescue nil)}
-    = p.input :password
+  .players
+    %p U koliko igrača želite igrati?
+    = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last, checked: 1, collection_wrapper_tag: :div
+
+  .login
+    = f.simple_fields_for :players_credentials, index: nil do |p|
+      = p.input :username, input_html: {value: (params[:submitted_game][:players_credentials].first[:username] rescue nil)}
+      = p.input :password
 
   .controls
     = f.button :submit, "Počni!"
