@@ -5,7 +5,7 @@
   = f.input :username, input_html: {value: params[:school].try(:[], :username)}
   = f.input :password
   = f.input :remember_me do
-    = check_box_tag :remember_me, 1, params[:remember_me]
+    = check_box_tag :remember_me, 1, params[:remember_me], id: "school_remember_me"
 
   .controls
     = link_to "Odustani", root_path
