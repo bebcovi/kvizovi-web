@@ -1,4 +1,4 @@
-- @title = "Uređivanje kviza"
+- @title = @quiz.name
 
 %p= back_button "Natrag", quizzes_path
 
@@ -6,25 +6,29 @@
   %h1 Info
 
   - present @quiz do |quiz_presenter|
+
     %dl#info
       %dt Naziv
       %dd= quiz_presenter.name
       %dt Razredi
       %dd= quiz_presenter.grades
-      %dt Vidljivost
-      %dd= quiz_presenter.visibility
+      %dt Vidljiv?
+      %dd= quiz_presenter.visible?
 
-  .controls
-    = edit_button "Izmjeni", edit_quiz_path(@quiz)
+    .controls
+      = quiz_presenter.edit_button "Izmjeni"
 
 %section
   %h1 Pitanja
 
   %ol#questions
+
     = list_of @quiz.questions do |question|
-      #{link_to question, quiz_question_path(@quiz, question)}
-      .controls
-        #{edit_button "", edit_quiz_question_path(@quiz, question)}
-        #{delete_button "", quiz_question_path(@quiz, question)}
+
+      - present question do |question_presenter|
+        = question_presenter.content(@quiz)
+        .controls
+          = question_presenter.edit_button("", @quiz)
+          = question_presenter.delete_button("", @quiz)
 
   %p= add_button "Novo pitanje", new_quiz_question_path(@quiz)

@@ -9,13 +9,15 @@ class QuizPresenter < BasePresenter
     ordinalize(quiz.grades).to_sentence
   end
 
-  def visibility
-    form_for quiz do |f|
-      if quiz.activated?
-        f.hidden_field(:activated, value: false) + f.button(icon("eye-open"))
-      else
-        f.hidden_field(:activated, value: true) + f.button(icon("eye-close"))
-      end
-    end.html_safe
+  def visibility_icon
+    quiz.activated? ? icon("eye-open") : icon("eye-close")
+  end
+
+  def visible?
+    quiz.activated? ? "Da" : "Ne"
+  end
+
+  def edit_button(text)
+    @template.edit_button text, edit_quiz_path(quiz)
   end
 end

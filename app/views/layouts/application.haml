@@ -19,7 +19,7 @@
 
     %article{role: 'main'}
 
-      - if user_logged_in?
+      - if logged_in?
         %p Prijavljeni ste kao #{link_to current_user, current_user} | #{logout_button "Odjava", logout_path}
 
       - flash.each do |name, message|

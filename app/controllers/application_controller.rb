@@ -1,38 +1,31 @@
 class ApplicationController < ActionController::Base
-  def self.authentication_methods(*args)
-    options = args.last.is_a?(Hash) ? args.pop : {}
-    names = args.map(&:to_s)
-    the_name = options[:as] || names.first
+  def current_student() @current_student ||= Student.find(cookies[:student_id]) end
+  def student_logged_in?() cookies[:student_id].present? end
+  def authenticate_student!() redirect_to root_path if not student_logged_in? end
+  helper_method :current_student, :student_logged_in?
 
-    define_method("current_#{the_name}") do
-      return instance_variable_get("@current_#{the_name}") if instance_variable_get("@current_#{the_name}")
+  def current_school() @current_school ||= School.find(cookies[:school_id]) end
+  def school_logged_in?() cookies[:school_id].present? end
+  def authenticate_school!() redirect_to root_path if not school_logged_in? end
+  helper_method :current_school, :school_logged_in?
 
-      record = names.map do |name|
-        if cookies[:"#{name}_id"]
-          break name.camelize.constantize.find(cookies[:"#{name}_id"])
-        end
-      end
-      record = nil if record.is_a?(Array)
-      instance_variable_set("@current_#{the_name}", record)
-    end
-    helper_method :"current_#{the_name}"
-
-    define_method("#{the_name}_logged_in?") do
-      names.any? { |name| cookies[:"#{name}_id"].present? }
-    end
-    define_method("#{the_name}_not_logged_in?") do
-      not send("#{the_name}_logged_in?")
-    end
-    helper_method :"#{the_name}_logged_in?", :"#{the_name}_not_logged_in?"
-
-    define_method("authenticate_#{the_name}!") do
-      redirect_to root_path if send("#{the_name}_not_logged_in?")
+  def current_user
+    if student_logged_in?
+      @current_user ||= current_student
+    elsif school_logged_in?
+      @current_user ||= current_school
     end
   end
+  helper_method :current_user
 
-  authentication_methods :school, :student, as: :user
-  authentication_methods :school
-  authentication_methods :student
+  def logged_in?
+    cookies[:student_id].present? or cookies[:school_id].present?
+  end
+  helper_method :logged_in?
+
+  def authenticate!
+    redirect_to root_path if not logged_in?
+  end
 
   protected
 
