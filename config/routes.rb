@@ -12,8 +12,9 @@ Lektire::Application.routes.draw do
 
   resource :game
 
-  resources :schools
-  resources :students
+  resources :schools, :students
+  resource :password, only: [:edit, :update]
+
   resources :quizzes do
     resources :questions
   end
