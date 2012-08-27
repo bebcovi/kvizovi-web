@@ -1,8 +1,6 @@
 !!!
 %html{lang: 'hr'}
-
   %head
-
     %title Lektire · #{@title}
     %meta{charset: 'utf-8'}
     %meta{name: 'robots', content: 'noindex'}
@@ -12,16 +10,12 @@
     = javascript_include_tag 'application'
 
   %body{class: "#{params[:controller]} #{params[:action]}"}
-
-    %header{role: 'banner'}
-
-      %h1#logo Lektire
+    %header
+      %h1#logo= link_to "Lektire".prepend_icon("book"), root_path
+      - if logged_in?
+        %p#log Prijavljen si kao #{link_to current_user, current_user} | #{logout_button "Odjava", logout_path}
 
     %article{role: 'main'}
-
-      - if logged_in?
-        %p Prijavljen si kao #{link_to current_user, current_user} | #{logout_button "Odjava", logout_path}
-
       - flash.each do |name, message|
         %p{class: "flash_#{name}"}= message
 

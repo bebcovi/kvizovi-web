@@ -15,6 +15,10 @@ module ApplicationHelper
     link_to string, path, {method: :delete}.merge(options)
   end
 
+  def change_password_button(string, path, options = {})
+    link_to string.prepend_icon("lock"), path, options
+  end
+
   def edit_button(string, path, options = {})
     link_to string.prepend_icon("edit"), path, options
   end

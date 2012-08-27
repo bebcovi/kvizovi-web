@@ -1,8 +1,29 @@
-[role=banner] {
-  #logo {
-    $font-size: 62px;
-    @include adjust-font-size-to($font-size);
-    @include trailer(1, $font-size);
-    font-weight: bold;
+header {
+  $offset: rhythm();
+  @include clearfix;
+  @include rhythm(0, .5, 0, 1);
+  @include trailing-border(1px, .5, $border-style: solid);
+  padding-left: $offset;
+  padding-right: $offset;
+  margin-left: - $offset;
+  margin-right: - $offset;
+  border-color: rgba(black, .5);
+}
+
+#logo {
+  @include with-font-size(38px) {
+    @include trailer(0);
+    float: left;
+    a {
+      $c1: rgba(black, .25);
+      $c2: $link2;
+      @include color-link($c1, $c2);
+      &:hover { text-decoration: none; }
+    }
   }
+}
+
+#log {
+  @include rhythm(.75, 0, 0, 0);
+  float: right;
 }

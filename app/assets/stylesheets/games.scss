@@ -11,4 +11,9 @@ body.games {
       }
     }
   }
+  &.show {
+    .controls a {
+      @extend %button;
+    }
+  }
 }

@@ -1,10 +1,11 @@
 - @title = "#{@game.quiz.name} · Kraj"
 
-%h1 Rezultati:
+%h1 Rezultati
 
 %dl
   - @game.players.zip(@game.scores).each do |player, score|
     %dt #{player.username}
     %dd #{score} bodova.
 
-%p= link_to "Završi", new_game_path
+.controls
+  = link_to "Završi", new_game_path

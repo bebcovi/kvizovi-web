@@ -3,17 +3,18 @@ body.home {
     .student, .school {
       @include with-font-size(20px) {
         @extend %button;
+        @include h-borders(1px, .5);
         width: rhythm(7);
+        i {
+          @include with-font-size(48px) {
+            display: block;
+          }
+        }
       }
     }
 
     .student { @include border-right-radius(0); }
     .school { @include border-left-radius(0); }
 
-    i {
-      $font-size: 40px;
-      @include adjust-font-size-to($font-size);
-      display: block;
-    }
   }
 }
