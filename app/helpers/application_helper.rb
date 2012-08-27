@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def delete_button(string, path, options = {})
-    link_to string.prepend_icon("trash"), path, {method: :delete, confirm: "Jeste li sigurni?"}.merge(options)
+    link_to string.prepend_icon("trash"), path, {method: :delete, confirm: "Jesi li siguran?"}.merge(options)
   end
 
   def add_button(string, path, options = {})
