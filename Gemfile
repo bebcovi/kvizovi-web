@@ -20,8 +20,6 @@ gem "haml-rails"
 gem "simple_form"
 
 group :development do
-  gem "guard-rails"
-  gem "guard-livereload"
   gem "pry-rails"
 end
 
