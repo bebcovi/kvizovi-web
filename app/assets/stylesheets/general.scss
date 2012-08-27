@@ -7,20 +7,28 @@ h1, h2, h3 {
 }
 
 h1 {
-  $font-size: 58px;
-  @include adjust-font-size-to($font-size);
-  @include trailer(1, $font-size);
+  @include with-font-size(58px) {
+    @include trailer;
+  }
 }
 
 h2 {
-  $font-size: 42px;
-  @include adjust-font-size-to($font-size);
-  @include trailer(1, $font-size);
+  @include with-font-size(42px) {
+    @include trailer(.5);
+  }
 }
 
 a {
   @include hover-link;
   @include link-colors($link1, $link2, $link2, $link1, $link2);
+}
+
+.img {
+  @extend %inline-block;
+  @extend %border-radius;
+  line-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(black, .75);
 }
 
 dt, dd {

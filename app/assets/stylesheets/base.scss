@@ -1,7 +1,5 @@
-$base-font-size: 16px;
+$base-font-size: 18px;
 $base-line-height: 28px;
-
-$form-font-size: 14px;
 
 $default-rhythm-border-style: dashed;
 
@@ -16,4 +14,17 @@ $body: 'McLaren', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif
 
 @mixin color-link($color1, $color2) {
   @include link-colors($color1, $color2, $color2, $color1, $color2);
+}
+
+@mixin v-borders($width: 1px, $lines: 1, $font-size: $base-font-size, $border-style: $default-rhythm-border-style) {
+  @include apply-side-rhythm-border(left, $width, $lines, $font-size, $border-style);
+  @include apply-side-rhythm-border(right, $width, $lines, $font-size, $border-style);
+}
+
+@mixin with-font-size($to-size, $lines: lines-for-font-size($to-size), $from-size: $base-font-size) {
+  @include adjust-font-size-to($to-size, $lines, $from-size);
+  $tmp: $base-font-size;
+  $base-font-size: $to-size;
+  @content;
+  $base-font-size: $tmp;
 }

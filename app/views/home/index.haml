@@ -1,4 +1,4 @@
 - @title = "Početna"
 
-%p= link_to "Ja sam učenik", student_login_path
-%p= link_to "Ja sam škola", school_login_path
+= link_to "Ja sam učenik".prepend_icon("user"), student_login_path, class: "student"
+= link_to "Ja sam škola".prepend_icon("home"), school_login_path, class: "school"

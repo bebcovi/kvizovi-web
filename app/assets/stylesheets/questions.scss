@@ -1,9 +1,20 @@
 body.questions {
-  &.edit {
-    textarea {
-      height: rhythm(1.5, $form-font-size);
-      width: rhythm(20, $form-font-size);
-      max-width: 100%;
+  #question_content {
+    height: rhythm(1.5);
+    width: rhythm(20);
+    max-width: 100%;
+  }
+  &.new {
+    .association {
+      $cols: $total-columns / 2;
+      @include clearfix;
+      .column {
+        @include span-columns($cols);
+        @include nth-omega(last)
+      }
+    }
+    .photo {
+      .input.file { @include trailer(.5); }
     }
   }
 }

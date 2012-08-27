@@ -8,6 +8,17 @@
   @include inline-block;
 }
 
+%border-radius {
+  @include border-radius;
+}
+
+%prepend-newline {
+  &:before {
+    content: '\a';
+    white-space: pre;
+  }
+}
+
 %append-newline {
   &:after {
     content: '\a';
@@ -16,36 +27,52 @@
 }
 
 %text-input {
-  @include rhythm-borders(1px, .25, $form-font-size, solid);
-  @include border-radius;
+  @extend %border-radius;
+  @include rhythm-borders(1px, .25, $border-style: solid);
   border-color: rgba(black, .25);
 }
 
-%small-controls {
+%subtle {
+  $font-size: 22px;
   $c1: rgba(black, .4);
   $c2: $link2;
-  @extend %inline-block;
+  @include adjust-font-size-to($font-size);
   @include color-link($c1, $c2);
-  &:hover { text-decoration: none; }
-  &:nth-child(2) { margin-left: rhythm(.25); }
+  margin: 0;
+  padding: 0;
+  color: $c1;
+  border: none;
+  background: none;
+  cursor: pointer;
+  &:hover {
+    text-decoration: none;
+    color: $c2;
+  }
+}
+
+%small-controls {
+  a {
+    @extend %inline-block;
+    @extend %subtle;
+    &:nth-child(2) { margin-left: rhythm(.25); }
+  }
 }
 
 %button {
-  $c1: rgba(black, .4);
+  $c1: rgba(black, .5);
   $c2: rgba(black, .75);
   @extend %inline-block;
-  @include adjust-font-size-to($base-font-size, 1, $form-font-size);
-  @include apply-side-rhythm-border(top, 1px, .25);
-  @include apply-side-rhythm-border(bottom, 1px, .25);
-  @include apply-side-rhythm-border(left, 1px, .5);
-  @include apply-side-rhythm-border(right, 1px, .5);
+  @extend %border-radius;
+  @include h-borders(1px, .25);
+  @include v-borders(1px, .5);
   @include color-link($c1, $c2);
-  @include border-radius;
+  text-align: center;
   color: $c1;
   border-color: rgba(black, .25);
   background: rgba(black, .025);
   &:hover {
     cursor: pointer;
+    text-decoration: none;
     color: $c2;
     border-color: rgba(black, .5);
     background: rgba(black, .05);

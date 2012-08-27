@@ -1,32 +1,33 @@
-table {
+$outer-border: 1px dashed rgba(black, .4);
+$inner-border: 1px dashed rgba(black, .1);
+
+.table {
+  @extend %inline-block;
+  @extend %border-radius;
   @include trailer;
-  @include border-radius;
+  overflow: hidden;
+  border: $outer-border;
+}
+
+table {
   width: rhythm(20);
   border-collapse: collapse;
 
-  th, td {
-    padding: rhythm(.25);
-  }
+  th, td { padding: rhythm(.25); }
 
   thead {
-    $bg: lighten(black, 25%);
     text-align: left;
-    color: white;
-    background: $bg;
-    tr {
-      border: 1px solid $bg;
-    }
+    background-color: rgba(black, .025);
   }
 
   tbody {
+    border-top: $outer-border;
     tr {
-      border-bottom: 1px dashed rgba(black, .15);
-      border-right: 1px solid rgba(black, .25);
-      border-left: 1px solid rgba(black, .25);
-      &:last-child { border-bottom: 1px solid rgba(black, .25); }
+      border-bottom: $inner-border;
+      &:last-child { border-bottom: none; }
       &:nth-child(2n) { background: rgba(black, .025); }
     }
   }
 
-  a { @extend %small-controls; }
+  .controls { @extend %small-controls; }
 }

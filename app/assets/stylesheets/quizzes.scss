@@ -1,11 +1,16 @@
 body.quizzes {
+  &.index {
+    th, td {
+      &:nth-child(3) { text-align: center; }
+    }
+  }
   &.show {
     #questions {
       padding-left: rhythm();
       li { @include pie-clearfix; }
       .controls {
+        @extend %small-controls;
         float: right;
-        a { @extend %small-controls; }
       }
     }
   }

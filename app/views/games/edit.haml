@@ -1,12 +1,14 @@
 - @title = "#{@quiz.name} · #{@question_number}. pitanje"
 
+%h1= @quiz.name
+
 %p #{@player.username}
 
 %p #{@question_number}/#{@questions_count}
 
 = simple_form_for :game, url: game_path, method: :put do |f|
 
-  %p= @question.content
+  %h2.question= @question.content
 
   - # This is so that params[:game] is always present,
   - # even if the user doesn't choose an answer
@@ -37,7 +39,7 @@
 
   - elsif @question.photo?
 
-    = image_tag @question.attachment.url(:medium)
+    %p= image_tag @question.attachment.url(:medium)
     = f.input :answer
 
   - elsif @question.text?

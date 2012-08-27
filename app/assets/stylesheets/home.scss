@@ -1,0 +1,19 @@
+body.home {
+  &.index {
+    .student, .school {
+      @include with-font-size(20px) {
+        @extend %button;
+        width: rhythm(7);
+      }
+    }
+
+    .student { @include border-right-radius(0); }
+    .school { @include border-left-radius(0); }
+
+    i {
+      $font-size: 40px;
+      @include adjust-font-size-to($font-size);
+      display: block;
+    }
+  }
+}

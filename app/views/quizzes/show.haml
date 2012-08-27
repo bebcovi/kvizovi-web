@@ -3,7 +3,7 @@
 %p= back_button "Natrag", quizzes_path
 
 %section
-  %h1 Info
+  %h2 Info
 
   - present @quiz do |quiz_presenter|
 
@@ -15,11 +15,10 @@
       %dt Vidljiv?
       %dd= quiz_presenter.visible?
 
-    .controls
-      = quiz_presenter.edit_button "Izmjeni"
+    %p= quiz_presenter.edit_button "Izmjeni"
 
 %section
-  %h1 Pitanja
+  %h2 Pitanja
 
   %ol#questions
 

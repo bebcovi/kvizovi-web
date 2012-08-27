@@ -1,18 +1,22 @@
 form {
-  & > div {
-    @include trailer(.5);
+  & > div { @include trailer(.5); }
+  ol, ul { @extend %unstyled-list; }
+  .controls {
+    @include rhythm(1, 0, 0, 1);
+    [type=submit] { @extend %primary-button; }
+    a { @extend %button; }
   }
 }
 
-input, select, textarea {
-  @include adjust-font-size-to($form-font-size, 1, $base-font-size);
+input, button, select, textarea {
   margin: 0;
-  font-family: $body;
+  font: {
+    size: inherit;
+    family: inherit;
+  }
+  line-height: inherit;
   color: rgba(black, .6);
 }
-
-$tmp: $base-font-size;
-$base-font-size: $form-font-size;
 
 [type=text], [type=password], [type=number], textarea {
   @extend %text-input;
@@ -23,10 +27,11 @@ $base-font-size: $form-font-size;
   margin-left: rhythm(.25)
 }
 
-[type=radio] {
+[type=radio], [type=checkbox] {
   position: relative;
-  top: 2px;
-  margin: rhythm(.5) rhythm(.5) 0 0;
+  top: 1px;
+  margin-right: rhythm(.25);
+  &:first-of-type { margin-left: rhythm(.25); }
 }
 
 label + select {
@@ -37,10 +42,7 @@ label {
   &:hover { cursor: pointer; }
   &:after { content: ':'; }
   &[class^=collection] { @extend %append-newline; }
+  &.checkbox:after { content: ''; }
 }
 
-.controls {
-  @include trailer;
-}
-
-$base-font-size: $tmp;
+.icon { @extend %subtle; }

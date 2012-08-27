@@ -1,0 +1,14 @@
+body.games {
+  &.new {
+    form {
+      p { @include trailer(.5); }
+    }
+  }
+  &.edit {
+    h2.question {
+      @include with-font-size(24px) {
+        @include trailer;
+      }
+    }
+  }
+}
