@@ -3,6 +3,7 @@ form {
   ol, ul { @extend %unstyled-list; }
   .controls {
     @include rhythm(1, 0, 0, 1);
+    clear: both;
     [type=submit] { @extend %primary-button; }
     a { @extend %button; }
   }

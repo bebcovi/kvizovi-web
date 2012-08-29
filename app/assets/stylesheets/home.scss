@@ -1,3 +1,4 @@
+
 body.home {
   &.index {
     .student, .school {
@@ -15,6 +16,5 @@ body.home {
 
     .student { @include border-right-radius(0); }
     .school { @include border-left-radius(0); }
-
   }
 }

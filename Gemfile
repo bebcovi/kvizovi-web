@@ -10,6 +10,7 @@ group :assets do
   gem "font-awesome-sass-rails"
   gem "susy"
   gem "jquery-rails"
+  gem "jquery-ui-rails"
   gem "coffee-rails"
   gem "backbone-on-rails"
   gem "uglifier"

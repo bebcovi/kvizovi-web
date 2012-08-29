@@ -22,18 +22,13 @@
 
   - elsif @question.association?
 
-    .column
-      %ol
-        = list_of @question.provided_answers.keys do |answer|
-          = f.input :answer, input_html: {name: "game[answer][]", value: answer}, label: false
-    .column
-      %ol
-        = list_of @question.provided_answers.values do |answer|
-          = f.input :answer, input_html: {name: "game[answer][]"}, label: false
-    %div
-      %ol
-        = list_of @question.provided_answers.values do |answer|
-          = answer
+    %ol.column.static
+      = list_of @question.provided_answers.keys do |answer|
+        = f.input(:answer, input_html: {name: "game[answer][]", value: answer}, label: false).prepend_icon("arrow-right")
+
+    %ol.column.interactive
+      = list_of @question.provided_answers.values do |answer|
+        = f.input :answer, input_html: {name: "game[answer][]", value: answer}, label: false
 
   - elsif @question.photo?
 
