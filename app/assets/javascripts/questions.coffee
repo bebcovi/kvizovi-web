@@ -6,5 +6,6 @@ Lektire.Initializers.questions = ->
   $('ol').on 'click', '[type=radio]', (e) ->
     i = parseInt($(@).val()) - 1
     $sections.hide()
+    $sections.find('[type=text]').val('')
     $sections.eq(i).show()
     console.log $sections.eq(i)

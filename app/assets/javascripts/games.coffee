@@ -18,7 +18,9 @@ Lektire.Initializers.games = ->
 
   $players.on 'click', ':radio', ->
     switch $(@).val()
-      when '1' then $login.hide()
+      when '1'
+        $login.hide()
+        $login.find('input').val('')
       when '2' then $login.show()
 
   # edit
