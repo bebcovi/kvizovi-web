@@ -80,9 +80,8 @@ GEM
     factory_girl_rails (4.0.0)
       factory_girl (~> 4.0.0)
       railties (>= 3.0.0)
-    font-awesome-sass-rails (2.0.0.0)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
+    font-awesome-rails (0.4.0)
+      railties (~> 3.1)
     fssm (0.2.9)
     haml (3.2.0.beta.1)
       tilt
@@ -204,7 +203,7 @@ DEPENDENCIES
   compass-rails
   debugger
   factory_girl_rails
-  font-awesome-sass-rails
+  font-awesome-rails
   haml (= 3.2.0.beta.1)
   haml-rails
   jquery-rails
