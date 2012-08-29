@@ -4,7 +4,7 @@
 
 %p #{@player.username} | #{@question_number}/#{@questions_count}
 
-= simple_form_for :game, url: game_path, method: :put do |f|
+= simple_form_for :game, url: game_path, method: :put, html: {class: Question::CATEGORIES[@question.category]} do |f|
 
   %h2.question= @question.content
 
