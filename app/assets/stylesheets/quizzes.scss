@@ -11,6 +11,8 @@ body.quizzes {
       .controls {
         @extend %small-controls;
         float: right;
+        margin-left: rhythm();
+        i { width: auto; }
       }
     }
   }

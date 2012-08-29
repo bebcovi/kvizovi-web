@@ -17,7 +17,7 @@ body.games {
     }
 
     #progress {
-      @include trailer(1.5);
+      @include trailer;
       clear: both;
       .bar {
         @extend %border-radius;

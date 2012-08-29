@@ -25,9 +25,9 @@
     = list_of @quiz.questions do |question|
 
       - present question do |question_presenter|
-        = question_presenter.content(@quiz)
         .controls
           = question_presenter.edit_button("", @quiz)
           = question_presenter.delete_button("", @quiz)
+        = question_presenter.content(@quiz)
 
   %p= add_button "Novo pitanje", new_quiz_question_path(@quiz)
