@@ -43,7 +43,9 @@ label {
   &:hover { cursor: pointer; }
   &:after { content: ':'; }
   &[class^=collection] { @extend %append-newline; }
-  &.checkbox:after { content: ''; }
+  &.checkbox, &.radio {
+    &:after { content: ''; }
+  }
 }
 
 .icon { @extend %subtle; }
