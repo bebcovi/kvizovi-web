@@ -2,7 +2,9 @@
 
 %h1= @quiz.name
 
-%p #{@player.username} | #{@question_number}/#{@questions_count}
+%p#username= @player.username.prepend_icon("user")
+
+%p#progress #{@question_number}/#{@questions_count}
 
 = simple_form_for :game, url: game_path, method: :put, html: {class: Question::CATEGORIES[@question.category]} do |f|
 

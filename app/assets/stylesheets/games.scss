@@ -6,13 +6,35 @@ body.games {
   }
 
   &.edit {
-    h2.question {
+    h1, #username { float: left; }
+
+    #username {
       @include with-font-size(24px) {
-        @include trailer;
+        @include rhythm(1.25, 0, 0, 0);
+        margin-left: rhythm();
+        color: rgba(black, .25);
       }
     }
 
+    #progress {
+      @include trailer(1.5);
+      clear: both;
+      .bar {
+        @extend %border-radius;
+        overflow: hidden;
+        border: 1px solid rgba(black, .25);
+        div {
+          height: rhythm(.25);
+          outline: 1px solid rgba(black, .25);
+          background: rgba(black, .1);
+        }
+      }
+    }
 
+    h2.question {
+      @include with-font-size(28px) {
+        @include trailer;
+      }
     }
 
     form.association {
