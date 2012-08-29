@@ -4,8 +4,9 @@ body.questions {
     width: rhythm(20);
     max-width: 100%;
   }
+
   &.new {
-    .association {
+    #association {
       $cols: $total-columns / 2;
       @include clearfix;
       .column {
@@ -13,7 +14,7 @@ body.questions {
         @include nth-omega(last)
       }
     }
-    .photo {
+    #photo {
       .input.file { @include trailer(.5); }
     }
   }

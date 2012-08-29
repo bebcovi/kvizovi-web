@@ -4,6 +4,7 @@ body.games {
       p { @include trailer(.5); }
     }
   }
+
   &.edit {
     h2.question {
       @include with-font-size(24px) {
@@ -11,45 +12,60 @@ body.games {
       }
     }
 
-    $cols: 4;
-    .column {
-      @extend %unstyled-list;
-      @include span-columns($cols);
-      @include rhythm(0, 0, 0, 1);
 
-      li { @include trailer(.25); }
     }
 
-    .static {
-      li {
-        @include clearfix;
-        cursor: default;
-        padding: rhythm(.25);
+    form.association {
+      $cols: 4;
+      .column {
+        @extend %unstyled-list;
+        @include span-columns($cols);
+        @include rhythm(0, 0, 0, 1);
+
+        li { @include trailer(.25); }
       }
 
-      i {
-        float: right;
-        margin-right: rhythm(.5);
-        color: rgba(black, .25);
+      .static {
+        li {
+          @include clearfix;
+          cursor: default;
+          padding: rhythm(.25);
+        }
+
+        i {
+          float: right;
+          margin-right: rhythm(.5);
+          color: rgba(black, .25);
+        }
       }
+
+      .interactive {
+        li {
+          @extend %border-radius;
+          @include rhythm-borders(1px, .25);
+          @include box-sizing(content-box);
+          @include user-select(none);
+          cursor: move;
+          border-color: darken(white, 25%);
+          background: darken(white, 2%);
+        }
+        .placeholder {
+          border-color: darken(white, 10%);
+          background: darken(white, 1%);
+        }
+      }
+
+      .controls { clear: both; }
     }
 
-    .interactive {
-      li {
-        @extend %border-radius;
-        @include rhythm-borders(1px, .25);
-        @include box-sizing(content-box);
-        @include user-select(none);
-        cursor: move;
-        border-color: darken(white, 25%);
-        background: darken(white, 2%);
-      }
-      .placeholder {
-        border-color: darken(white, 10%);
-        background: darken(white, 1%);
+    form.photo {
+      .img {
+        float: left;
+        margin-right: rhythm();
       }
     }
   }
+
   &.show {
     .controls a {
       @extend %button;

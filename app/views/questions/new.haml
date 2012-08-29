@@ -17,23 +17,23 @@
 
   = f.simple_fields_for :data do |d|
 
-    .boolean
+    #boolean
       = d.collection_radio_buttons :boolean, [[true, "Točno"], [false, "Netočno"]], :first, :last
 
-    .choice
+    #choice
       = d.input_collection :choice, indices: (1..4)
 
-    .association
+    #association
       .column
         = d.input_collection :association, indices: (1..4)
       .column
         = d.input_collection :association, indices: (5..8)
 
-    .photo
+    #photo
       = f.input :attachment, as: :file
       = d.input :photo
 
-    .text
+    #text
       = d.input :text
 
   = f.input :points

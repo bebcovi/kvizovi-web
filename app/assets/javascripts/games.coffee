@@ -1,54 +1,58 @@
 Lektire.Initializers.games = ->
 
-  # new
+  switch $('body').attr('class').split(' ')[1]
 
-  $form     = $('form.new_submitted_game')
-  $quizzes  = $form.find '.quizzes'
-  $players  = $form.find '.players'
-  $login    = $form.find '.login'
-  $controls = $form.find '.controls'
+    when 'new'
 
-  $players.hide()
-  $login.hide()
-  $controls.hide()
+      $form     = $('form')
+      $quizzes  = $form.find '.quizzes'
+      $players  = $form.find '.players'
+      $login    = $form.find '.login'
+      $controls = $form.find '.controls'
 
-  $quizzes.one 'click', ':radio', ->
-    $players.show()
-    $controls.show()
+      $players.hide()
+      $login.hide()
+      $controls.hide()
 
-  $players.on 'click', ':radio', ->
-    switch $(@).val()
-      when '1'
-        $login.hide()
-        $login.find('input').val('')
-      when '2' then $login.show()
+      $quizzes.one 'click', ':radio', ->
+        $players.show()
+        $controls.show()
 
-  # edit
+      $players.on 'click', ':radio', ->
+        switch $(@).val()
+          when '1'
+            $login.hide()
+            $login.find('input').val('')
+          when '2' then $login.show()
 
-  conversion = (el) ->
-    result = el.clone()
-    result.find('input').each -> $(@).replaceWith($(@).val())
-    el.after(result)
-    el.hide()
-    result
+    when 'edit'
 
-  $form             = $('form.game')
+      # association
 
-  $static           = {}
-  $interactive      = {}
+      conversion = (el) ->
+        result = el.clone()
+        result.find('input').each -> $(@).replaceWith($(@).val())
+        el.after(result)
+        el.hide()
+        result
 
-  $static.old       = $form.find('.static')
-  $static.new       = conversion($static.old)
+      $form             = $('form.association')
 
-  $interactive.old  = $form.find('.interactive')
-  $interactive.new  = conversion($interactive.old)
+      $static           = {}
+      $interactive      = {}
 
-  $interactive.new.sortable
-    placeholder: 'placeholder'
-    forcePlaceholderSize: true
-    tolerance: 'pointer'
-    update: ->
-      $old = $interactive.old.find 'input'
-      $new = $interactive.new.find 'li'
+      $static.old       = $form.find('.static')
+      $static.new       = conversion($static.old)
 
-      $old.each (i) -> $(@).val $new.eq(i).text()
+      $interactive.old  = $form.find('.interactive')
+      $interactive.new  = conversion($interactive.old)
+
+      $interactive.new.sortable
+        placeholder: 'placeholder'
+        forcePlaceholderSize: true
+        tolerance: 'pointer'
+        update: ->
+          $old = $interactive.old.find 'input'
+          $new = $interactive.new.find 'li'
+
+          $old.each (i) -> $(@).val $new.eq(i).text()
