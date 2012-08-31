@@ -24,6 +24,7 @@ class GamesController < ApplicationController
     @player = game.current_player
     @question = game.current_question
     @question_number = game.current_question_number
+    @player_number = game.current_player_number
     @questions_count = game.questions_count
   end
 

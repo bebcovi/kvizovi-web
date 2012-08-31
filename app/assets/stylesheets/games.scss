@@ -86,6 +86,13 @@ body.games {
         margin-right: rhythm();
       }
     }
+
+    @each $context in one $player-one, two $player-two {
+      &.#{nth($context, 1)} {
+        $color: nth($context, 2);
+        #username { color: $color; }
+      }
+    }
   }
 
   &.show {

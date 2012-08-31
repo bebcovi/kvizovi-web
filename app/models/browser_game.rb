@@ -77,6 +77,10 @@ class BrowserGame
       Student.find(session[:game][:player_ids][session[:game][:current_player]])
     end
 
+    def current_player_number
+      session[:game][:current_player] + 1
+    end
+
     def quiz
       Quiz.find(session[:game][:quiz_id])
     end
