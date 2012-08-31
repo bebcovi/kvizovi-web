@@ -13,7 +13,7 @@
 
   .players
     %p U koliko igrača želiš igrati?
-    = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last, checked: 1, collection_wrapper_tag: :div
+    = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last, checked: (@game.players_count || 1), collection_wrapper_tag: :div
 
   .login
     %p Daj drugom igraču da se prijavi:

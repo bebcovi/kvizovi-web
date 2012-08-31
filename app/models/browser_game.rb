@@ -50,15 +50,7 @@ class BrowserGame
     end
 
     def current_question
-      Question.find(session[:game][:questions].keys[session[:game][:current_question]]).tap do |question|
-        # Shuffle answers
-        if question.choice?
-          question.data.shuffle!
-        elsif question.association?
-          keys, shuffled_values = question.data.keys, question.data.values.shuffle
-          question.data = Hash[keys.zip(shuffled_values)]
-        end
-      end
+      Question.find(session[:game][:questions].keys[session[:game][:current_question]])
     end
 
     def current_question_number

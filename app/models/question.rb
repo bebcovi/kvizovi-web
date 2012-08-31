@@ -20,6 +20,10 @@ class Question < ActiveRecord::Base
     end
   end
 
+  def category_text
+    CATEGORIES[category]
+  end
+
   def to_s
     content
   end

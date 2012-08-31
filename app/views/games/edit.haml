@@ -6,13 +6,13 @@
 
 %p#progress #{@question_number}/#{@questions_count}
 
-= simple_form_for :game, url: game_path, method: :put, html: {class: Question::CATEGORIES[@question.category]} do |f|
+= simple_form_for :game, url: game_path, method: :put, html: {class: @question.category_text} do |f|
 
   %h2.question= @question.content
 
   - # This is so that params[:game] is always present,
   - # even if the user doesn't choose an answer
-  = f.hidden_field :bla
+  = f.hidden_field :foo
 
   - if @question.boolean?
 
@@ -20,7 +20,7 @@
 
   - elsif @question.choice?
 
-    = f.input :answer, collection: @question.provided_answers, as: :radio_buttons
+    = f.collection_radio_buttons :answer, (1..@question.provided_answers.count).zip(@question.provided_answers).shuffle, :first, :last, collection_wrapper_tag: :ul, item_wrapper_tag: :li
 
   - elsif @question.association?
 
