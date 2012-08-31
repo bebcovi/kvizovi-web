@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def back_button(string, path, options = {})
-    link_to "&larr; #{string}".html_safe, path, options
+    link_to string.prepend_icon("hand-left"), path, options
   end
 
   def logout_button(string, path, options = {})

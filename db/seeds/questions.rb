@@ -4,7 +4,7 @@ quiz = Quiz.find_by_name("Antika")
 quiz.questions.create! [
   {
     category: category(:boolean),
-    content: "Je li Eshil napisao knjigu \"Okovani Prometej\"?",
+    content: "Eshil je napisao knjigu \"Okovani Prometej\".",
     data: {boolean: "true"},
     points: 2
   },
