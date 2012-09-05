@@ -28,8 +28,6 @@ input, button, select, textarea {
 }
 
 [type=radio], [type=checkbox] {
-  position: relative;
-  top: 1px;
   margin-right: rhythm(.25);
   &:first-of-type { margin-left: rhythm(.25); }
 }
