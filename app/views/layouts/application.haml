@@ -17,6 +17,7 @@
 
     %article{role: 'main'}
       - flash.each do |name, message|
-        %p{class: "flash_#{name}"}= message
+        = close_button
+        %p{class: "flash #{name}"}= message
 
       = yield

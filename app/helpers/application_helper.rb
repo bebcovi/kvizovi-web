@@ -31,6 +31,10 @@ module ApplicationHelper
     link_to string.prepend_icon("plus"), path, options
   end
 
+  def close_button(options = {})
+    content_tag :button, "".prepend_icon("remove"), options
+  end
+
   def settings_button(string, path, options = {})
     link_to string.prepend_icon("cog"), path, options
   end

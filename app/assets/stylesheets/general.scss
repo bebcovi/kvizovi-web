@@ -50,3 +50,30 @@ dd {
     color: nth($context, 2);
   }
 }
+
+.flash {
+  @extend %border-radius;
+  @include rhythm-borders(1px, .5);
+  @include trailer;
+  @include clearfix;
+
+  @each $context in notice 120, alert 0 {
+    &.#{nth($context, 1)} {
+      $color: hsl(nth($context, 2), 80%, 35%);
+      color: $color;
+      border-color: $color;
+      background: rgba($color, .1);
+      button {
+        color: rgba(black, .25);
+        &:hover { color: $color; }
+      }
+    }
+  }
+
+  button {
+    @extend %subtle;
+    float: right;
+  }
+
+  p { @include trailer(0); }
+}

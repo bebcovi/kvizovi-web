@@ -5,6 +5,7 @@ window.Lektire =
   Routers: {}
   Initializers: {}
   init: ->
+    Lektire.Initializers.general()
     Lektire.Initializers.helper()
     switch $('body').attr('class').split(' ')[0]
       when 'students'   then Lektire.Initializers.students()
