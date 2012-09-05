@@ -24,6 +24,10 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def total_points
+    questions.sum(:points)
+  end
+
   def correct_answer?(question)
     questions = info.values.inject(:merge)
     question_id = question.respond_to?(:id) ? question.id : question

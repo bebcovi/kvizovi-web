@@ -1,12 +1,12 @@
-- @title = "#{@quiz.name} · Kraj"
+- @title = "#{@game.quiz.name} · Kraj"
 
 %h1 Rezultati
 
 #players
-  - @players.zip(@scores).each do |player, score|
+  - @game.players.zip(@game.scores).each do |player, score|
     .player
       %p.username= player.username.prepend_icon("user")
-      %p.score= score
+      %p.score #{score}/#{@game.total_points}
 
 .controls
   = link_to "Završi", new_game_path

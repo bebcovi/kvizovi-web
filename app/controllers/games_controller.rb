@@ -48,6 +48,7 @@ class GamesController < ApplicationController
     @scores = @game.scores
     @quiz = @game.quiz
     @questions = @game.questions
+    @total_score = @game.total_score
   end
 
   def destroy
