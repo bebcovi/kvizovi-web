@@ -27,7 +27,7 @@ hr:
         first_name: "Ime"
         last_name: "Prezime"
         grade: "Razred"
-        school: "Škola"
+        school_key: "Tajni ključ škole"
       quiz:
         name: "Naziv"
         grades: "Razredi"

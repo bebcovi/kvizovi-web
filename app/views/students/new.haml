@@ -11,10 +11,8 @@
   = f.input :password
   = f.input :password_confirmation
 
-  = f.simple_fields_for :school do |s|
-    = s.input :key
-    = s.input :level, collection: School::LEVELS.to_a, value_method: :first, label_method: :last, prompt: "Izaberite..."
-  = f.input :grade, as: :select, collection: ordinalize((1..8)).zip((1..8)), include_blank: false
+  = f.input :grade, collection: classes, as: :grouped_select, group_label_method: :first, group_method: :last, prompt: "Izaberi..."
+  = f.input :school_key
 
   .controls
     = link_to "Odustani", student_login_path

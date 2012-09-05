@@ -16,9 +16,17 @@ group :assets do
   gem "uglifier"
 end
 
+# Views
 gem "haml", "3.2.0.beta.1"
 gem "haml-rails"
 gem "simple_form"
+gem "rails-i18n"
+
+# Other
+gem "paperclip"
+gem "paperclip-dropbox", "~> 1.0"
+gem "bcrypt-ruby", "~> 3.0"
+gem "active_attr"
 
 group :development do
   gem "pry-rails"
@@ -33,9 +41,3 @@ group :test do
   gem "factory_girl_rails"
   gem "yajl-ruby", require: "yajl"
 end
-
-gem "paperclip"
-gem "paperclip-dropbox", "~> 1.0"
-gem "bcrypt-ruby", "~> 3.0"
-gem "rails-i18n"
-gem "active_attr"

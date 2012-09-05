@@ -10,7 +10,7 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @student = Student.create_with_school_key(params[:student])
+    @student = Student.new(params[:student])
 
     if @student.save
       log_in!(@student)

@@ -1,5 +1,7 @@
 - @title = "Prijava"
 
+%p= back_button "Ups, ipak nisam škola", root_path
+
 = simple_form_for :school, url: school_login_path do |f|
 
   = f.input :username, input_html: {value: params[:school].try(:[], :username)}
