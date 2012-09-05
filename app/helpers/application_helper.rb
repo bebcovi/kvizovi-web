@@ -70,4 +70,21 @@ module ApplicationHelper
     when 2 then "two"
     end
   end
+
+  def input_collection(form_builder)
+    f = form_builder.dup.tap do |f|
+      def f.input(attribute_name, options = {})
+        @n = @n.to_i + 1
+        name = "#{object_name}[#{attribute_name}][]"
+        id = name.gsub(/\[([^\]]+)\]/, '_\1').sub(/\[\]$/, @n.to_s)
+        label_text = "#{Nokogiri::HTML(label(attribute_name)).at(:label).inner_text} #{@n}"
+        super(attribute_name, {input_html: {id: id, name: name}, label: label_text, label_html: {for: id}}.deep_merge(options))
+      end
+    end
+    yield f
+  end
+
+  def smarty_pants(text)
+    Redcarpet::Render::SmartyPants.render(text.to_s).html_safe
+  end
 end

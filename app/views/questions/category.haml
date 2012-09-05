@@ -1,0 +1,9 @@
+- @title = "Novo pitanje"
+
+%p= back_button "Natrag", quiz_path(@quiz)
+
+%p Izaberite kategoriju:
+
+%ol
+  = list_of categories do |value, label|
+    = link_to label, new_quiz_question_path(@quiz, category: value)

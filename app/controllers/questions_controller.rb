@@ -1,44 +1,52 @@
 # encoding: utf-8
 
 class QuestionsController < ApplicationController
+  before_filter do
+    @quiz = current_school.quizzes.find(params[:quiz_id])
+  end
+
   def index
-    @questions = current_school.quizzes.find(params[:quiz_id]).questions
+    @questions = @quiz.questions
   end
 
   def show
-    @question = current_school.quizzes.find(params[:quiz_id]).questions.find(params[:id])
+    @question = @quiz.questions.find(params[:id])
   end
 
   def new
-    @question = current_school.quizzes.find(params[:quiz_id]).questions.new
+    if params[:category]
+      @question = @quiz.questions.new(category: params[:category])
+    else
+      render :category
+    end
   end
 
   def create
-    @question = current_school.quizzes.find(params[:quiz_id]).questions.create(params[:question])
+    @question = @quiz.questions.create(params[:question])
 
     if @question.valid?
-      redirect_to quiz_path(@question.quiz)
+      redirect_to quiz_path(@quiz)
     else
       render :new
     end
   end
 
   def edit
-    @question = current_school.quizzes.find(params[:quiz_id]).questions.find(params[:id])
+    @question = @quiz.questions.find(params[:id])
   end
 
   def update
-    @question = current_school.quizzes.find(params[:quiz_id]).questions.find(params[:id])
+    @question = @quiz.questions.find(params[:id])
 
     if @question.update_attributes(params[:question])
-      redirect_to quiz_path(@question.quiz)
+      redirect_to quiz_path(@quiz)
     else
       render :edit
     end
   end
 
   def destroy
-    question = current_school.quizzes.find(params[:quiz_id]).questions.destroy(params[:id])
-    redirect_to quiz_path(question.quiz), notice: "Pitanje je uspješno izbrisano."
+    @quiz.questions.destroy(params[:id])
+    redirect_to quiz_path(@quiz), notice: "Pitanje je uspješno izbrisano."
   end
 end

@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20120818073000) do
 
   create_table "questions", :force => true do |t|
     t.text     "content"
-    t.integer  "category"
+    t.string   "category"
     t.text     "data"
     t.integer  "points"
     t.integer  "quiz_id"

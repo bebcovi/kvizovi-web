@@ -10,13 +10,6 @@ hr:
         remember_me: "Zapamti me"
       question:
         category: "Tip pitanja"
-        option: "Opcija"
-        data:
-          choice: "Opcija"
-          association: "Opcija"
-          photo: "Odgovor"
-          text: "Odgovor"
-        content: "Pitanje"
         attachment: "Slika"
         points: "Bodovi"
       school:
@@ -34,3 +27,9 @@ hr:
         activated: "Vidljiv?"
       game:
         answer: "Odgovor"
+
+  helpers:
+    submit:
+      create: "Stvori"
+      update: "Spremi"
+      submit: "Spremi"

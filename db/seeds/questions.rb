@@ -3,34 +3,34 @@
 quiz = Quiz.find_by_name("Antika")
 quiz.questions.create! [
   {
-    category: category(:boolean),
+    category: "boolean",
     content: "Eshil je napisao knjigu \"Okovani Prometej\".",
-    data: {boolean: "true"},
+    data: true,
     points: 2
   },
   {
-    category: category(:choice),
+    category: "choice",
     content: "Izbacite uljeza:",
-    data: {choice: ["Hipolit", "Pribjeglice", "Sedmorica protiv Tebe", "Okovani Prometej"]},
+    data: ["Hipolit", "Pribjeglice", "Sedmorica protiv Tebe", "Okovani Prometej"],
     points: 1
   },
   {
-    category: category(:association),
+    category: "association",
     content: "Povežite autore s njihovim djelima:",
-    data: {association: ["Okovani Prometej", "Antigona", "Hipolit", "Eshil", "Sofoklo", "Euripid"]},
+    data: ["Okovani Prometej", "Antigona", "Hipolit", "Eshil", "Sofoklo", "Euripid"],
     points: 2
   },
   {
-    category: category(:photo),
+    category: "photo",
     content: "Koji grčki tragičar je na slici?",
     attachment: uploaded_file("Eshil.jpg", "image/jpeg"),
-    data: {photo: "Eshil"},
+    data: "Eshil",
     points: 1
   },
   {
-    category: category(:text),
+    category: "text",
     content: "Koji grčki tragičar je napisao knjigu \"Hipolit\"?",
-    data: {text: "Euripid"},
+    data: "Euripid",
     points: 1
   }
 ]
