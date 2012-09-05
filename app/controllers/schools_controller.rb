@@ -6,8 +6,7 @@ class SchoolsController < ApplicationController
   def create
     @school = School.new(params[:school])
 
-    if @school.valid?
-      @school.create
+    if @school.save
       log_in!(@school)
       redirect_to @school
     else
