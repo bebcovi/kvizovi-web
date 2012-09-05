@@ -10,6 +10,11 @@ Lektire::Application.routes.draw do
     match "logout", to: :destroy
   end
 
+  controller :authorize do
+    get "authorize", to: :show
+    post "authorize", to: :authorize
+  end
+
   resource :game
 
   resources :schools, :students

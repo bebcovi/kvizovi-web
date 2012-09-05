@@ -1,6 +1,11 @@
 class SchoolsController < ApplicationController
   def new
-    @school = School.new
+    if flash[:authorized]
+      flash.delete(:authorized)
+      @school = School.new
+    else
+      redirect_to authorize_path
+    end
   end
 
   def create

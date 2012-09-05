@@ -1,0 +1,10 @@
+- @title = "Autorizacija"
+
+= form_tag authorize_path do
+  %div
+    = label_tag :secret_key, "Tajni ključ aplikacije"
+    = password_field_tag :secret_key, nil, size: 50
+
+  .controls
+    = link_to "Odustani", school_login_path
+    = submit_tag "Potvrdi"
