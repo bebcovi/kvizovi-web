@@ -104,4 +104,42 @@ body.games {
     [data-done] { background: rgba(black, .1); }
   }
 
+  #score {
+    $height: 2;
+    @extend %unstyled-list;
+    @include trailer;
+
+    li {
+      @extend %border-radius;
+      @include trailer(.25);
+      position: relative;
+      height: rhythm($height);
+      overflow: hidden;
+
+    }
+
+    .username {
+      @include with-font-size(24px, $height) {
+        position: absolute;
+        z-index: 10;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .bar { height: 100%; }
+
+    @each $context in one $player-one, two $player-two {
+      .#{nth($context, 1)} {
+        $color: nth($context, 2);
+        border: 1px solid $color;
+        .username { color: rgba($color, .5); }
+        .bar {
+          background: rgba($color, .5);
+          outline: 1px solid rgba($color, .75);
+        }
+      }
+    }
+  }
+
 }

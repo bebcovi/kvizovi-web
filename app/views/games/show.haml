@@ -6,11 +6,11 @@
   - @questions_count.times do |i|
     %div{style: "width: #{100/@questions_count.to_f}%", data: {done: true}}
 
-#players
-  - @game.players.zip(@game.scores).each do |player, score|
-    .player
-      %p.username= player.username.prepend_icon("user")
-      %p.score #{score}/#{@game.total_points}
+%ol#score
+  - @game.players.zip(@game.scores).each_with_index do |(player, score), player_number|
+    %li{class: number(player_number + 1)}
+      .username= player.username.prepend_icon("user")
+      .bar{style: "width: #{score/@game.total_points.to_f * 100}%"}
 
 .controls
   = link_to "Završi", new_game_path

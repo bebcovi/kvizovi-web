@@ -44,3 +44,9 @@ dd {
   @extend %append-newline;
   margin: 0;
 }
+
+@each $context in one $player-one, two $player-two {
+  .#{nth($context, 1)}:not(body) {
+    color: nth($context, 2);
+  }
+}
