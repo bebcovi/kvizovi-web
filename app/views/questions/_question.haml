@@ -6,7 +6,7 @@
 
 - elsif question.choice?
 
-  = f.collection_radio_buttons :answer, (1..question.provided_answers.count).zip(question.provided_answers).shuffle, :first, :last, collection_wrapper_tag: :ul, item_wrapper_tag: :li
+  = f.collection_radio_buttons :answer, (1..question.provided_answers.count).zip(question.provided_answers).shuffle, :first, :last
 
 - elsif question.association?
 

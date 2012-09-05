@@ -13,7 +13,10 @@
     %header
       %h1#logo= link_to "Lektire".prepend_icon("book"), root_path
       - if logged_in?
-        %p#log Prijavljen si kao #{link_to current_user, current_user} | #{logout_button "Odjava", logout_path}
+        - if current_user.is_a?(Student)
+          %p#log Prijavljen si kao #{link_to current_user, current_user} | #{logout_button "Odjava", logout_path}
+        - else
+          %p#log Prijavljeni ste kao #{link_to current_user, current_user} | #{logout_button "Odjava", logout_path}
 
     %article{role: 'main'}
       - flash.each do |name, message|

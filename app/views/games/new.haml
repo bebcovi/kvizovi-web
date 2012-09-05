@@ -8,17 +8,17 @@
   = f.error :base
 
   %section.quizzes
-    %h2 Odaberi kviz:
-    = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
+    %p Odaberi kviz:
+    = f.collection_radio_buttons :quiz_id, @quizzes, :id, :name
 
   %section.players
-    %h2 U koliko igrača želiš igrati?
-    = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last, checked: (@game.players_count || 1), collection_wrapper_tag: :div
+    %p U koliko igrača želiš igrati?
+    = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last, checked: @game.players_count
 
   %section.login
     %p Daj drugom igraču da se prijavi:
     = f.simple_fields_for :players_credentials, index: nil do |p|
-      = p.input :username, input_html: {value: (params[:submitted_game][:players_credentials].first[:username] rescue nil)}
+      = p.input :username, input_html: {value: @game.players.last.try(:username)}
       = p.input :password
 
   .controls

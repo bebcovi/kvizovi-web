@@ -25,8 +25,8 @@ class SubmittedGame
 
   def all_players_should_be_authenticated
     self.players += players_credentials
-      .map { |hash| Student.authenticate(hash) }
-      .select { |record| record }
+      .map { |attributes| Student.authenticate(attributes) }
+      .reject(&:blank?)
 
     if players.count != players_count
       errors[:base] << "Drugi igrač nije uspješno autenticiran."

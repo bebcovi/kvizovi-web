@@ -7,11 +7,11 @@ class Student < ActiveRecord::Base
   has_secure_password
 
   before_validation on: :create do
-    self.school = School.find_by_key(school_key)
+    self.school_id ||= School.find_by_key(school_key).try(:id)
   end
 
   validates_uniqueness_of :username
-  validates_presence_of :school, on: :create
+  validates_presence_of :school_id, on: :create
 
   def increase_score!(points)
     update_attribute(:score, score + points)

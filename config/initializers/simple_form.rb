@@ -1,3 +1,17 @@
+# Workaround for defaults wrappers not working in SimpleForm configuration
+module SimpleForm
+  class FormBuilder
+    include Module.new {
+      ["collection_radio_buttons", "collection_check_boxes"].each do |method|
+        define_method(method) do |*args|
+          options = args.last.is_a?(Hash) ? args.pop : {}
+          super(*args, {collection_wrapper_tag: :ol, item_wrapper_tag: :li}.merge(options))
+        end
+      end
+    }
+  end
+end
+
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   # Wrappers are used by the form builder to generate a
@@ -92,7 +106,7 @@ SimpleForm.setup do |config|
   # config.item_wrapper_class = nil
 
   # How the label text should be generated altogether with the required text.
-  # config.label_text = lambda { |label, required| "#{required} #{label}" }
+  config.label_text = lambda { |label, required| label }
 
   # You can define the class to use on all labels. Default is nil.
   config.label_class = 'control-label'
