@@ -8,38 +8,7 @@
 
 = simple_form_for :game, url: game_path, method: :put, html: {class: @question.category_text} do |f|
 
-  %h2.question= @question.content
-
-  - # This is so that params[:game] is always present,
-  - # even if the user doesn't choose an answer
-  = f.hidden_field :foo
-
-  - if @question.boolean?
-
-    = f.collection_radio_buttons :answer, [[true, "Točno"], [false, "Netočno"]], :first, :last
-
-  - elsif @question.choice?
-
-    = f.collection_radio_buttons :answer, (1..@question.provided_answers.count).zip(@question.provided_answers).shuffle, :first, :last, collection_wrapper_tag: :ul, item_wrapper_tag: :li
-
-  - elsif @question.association?
-
-    %ol.column.static
-      = list_of @question.provided_answers.keys do |answer|
-        = f.input(:answer, input_html: {name: "game[answer][]", value: answer}, label: false).prepend_icon("arrow-right")
-
-    %ol.column.interactive
-      = list_of @question.provided_answers.values do |answer|
-        = f.input :answer, input_html: {name: "game[answer][]", value: answer}, label: false
-
-  - elsif @question.photo?
-
-    %p= image_tag @question.attachment.url(:medium)
-    = f.input :answer
-
-  - elsif @question.text?
-
-    = f.input :answer
+  = render partial: "questions/question", object: @question, locals: {f: f}
 
   .controls
     = link_to "Prekini", game_path, method: :delete

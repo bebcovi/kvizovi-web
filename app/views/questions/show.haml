@@ -4,37 +4,4 @@
 
 = simple_form_for :game do |f|
 
-  %p= @question.content
-
-  - case
-  - when @question.boolean?
-
-    = f.collection_radio_buttons :answer, [[true, "Točno"], [false, "Netočno"]], :first, :last
-
-  - when @question.choice?
-
-    = f.input :answer, collection: @question.provided_answers, as: :radio_buttons
-
-  - when @question.association?
-
-    .column
-      %ol
-        = list_of @question.provided_answers.keys do |answer|
-          = f.input :answer, input_html: {name: "game[answer][]", value: answer}, label: false
-    .column
-      %ol
-        = list_of @question.provided_answers.values do |answer|
-          = f.input :answer, input_html: {name: "game[answer][]"}, label: false
-    %div
-      %ol
-        = list_of @question.provided_answers.values do |answer|
-          = answer
-
-  - when @question.photo?
-
-    = image_tag @question.attachment.url(:medium)
-    = f.input :answer
-
-  - when @question.text?
-
-    = f.input :answer
+  = render partial: "question", object: @question, locals: {f: f}

@@ -18,9 +18,13 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def correct_answer?(question)
+    questions = info.values.inject(:merge)
+    question_id = question.respond_to?(:id) ? question.id : question
+    questions[question_id]
+  end
+
   def questions
-    arrays = info.values
-    question_ids = arrays.shift.zip(*arrays)
-    Question.find(question_ids)
+    quiz.questions
   end
 end

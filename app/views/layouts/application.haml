@@ -9,7 +9,7 @@
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
 
-  %body{class: "#{params[:controller]} #{params[:action]} #{@player_number == 1 ? "one" : "two"}"}
+  %body{class: "#{params[:controller]} #{params[:action]} #{number(@player_number)}"}
     %header
       %h1#logo= link_to "Lektire".prepend_icon("book"), root_path
       - if logged_in?

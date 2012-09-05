@@ -29,7 +29,7 @@ class GamesController < ApplicationController
   end
 
   def update
-    game.update!(params[:game][:answer])
+    game.update!(params[:game].try(:[], :answer))
 
     if game.questions_left > 0
       game.switch_player!

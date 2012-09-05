@@ -53,4 +53,11 @@ module ApplicationHelper
     7 => "Sedmi",
     8 => "Osmi"
   }
+
+  def number(n)
+    case n
+    when 1 then "one"
+    when 2 then "two"
+    end
+  end
 end
