@@ -35,6 +35,7 @@ group :test do
 end
 
 gem "paperclip"
+gem "paperclip-dropbox", "~> 1.0"
 gem "bcrypt-ruby", "~> 3.0"
 gem "rails-i18n"
 gem "active_attr"
