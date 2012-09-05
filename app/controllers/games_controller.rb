@@ -44,11 +44,6 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(session[:game_id])
-    @players = @game.players
-    @scores = @game.scores
-    @quiz = @game.quiz
-    @questions = @game.questions
-    @total_score = @game.total_score
   end
 
   def destroy
