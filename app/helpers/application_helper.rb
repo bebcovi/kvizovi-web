@@ -31,6 +31,10 @@ module ApplicationHelper
     link_to string.prepend_icon("plus"), path, options
   end
 
+  def settings_button(string, path, options = {})
+    link_to string.prepend_icon("cog"), path, options
+  end
+
   def icon(name, options = {})
     klass = "icon-#{name}"
     klass += " #{options[:class]}" if options[:class]
