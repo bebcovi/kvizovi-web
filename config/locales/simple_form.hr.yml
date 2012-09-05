@@ -12,9 +12,10 @@ hr:
         category: "Tip pitanja"
         option: "Opcija"
         data:
-          choice: "Ponuđeni odgovor"
+          choice: "Opcija"
           association: "Opcija"
           photo: "Odgovor"
+          text: "Odgovor"
         content: "Pitanje"
         attachment: "Slika"
         points: "Bodovi"

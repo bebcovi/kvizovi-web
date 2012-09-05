@@ -5,7 +5,7 @@
   = f.input :category do
     = f.collection_radio_buttons :category,
      [[1, 'Točno/netočno'],
-      [2, '4 ponuđena odgovora'],
+      [2, 'Ponuđeni odgovori'],
       [3, 'Asocijacija'],
       [4, 'Pogodi tko/što je na slici'],
       [5, 'Upiši točan odgovor']],
@@ -27,7 +27,7 @@
       .column
         = d.input_collection :association, indices: (1..4)
       .column
-        = d.input_collection :association, indices: (5..8)
+        = d.input_collection :association, indices: (1..4)
 
     #photo
       = f.input :attachment, as: :file
