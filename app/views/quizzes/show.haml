@@ -17,6 +17,8 @@
         .controls
           = question_presenter.edit_button("", @quiz)
           = question_presenter.delete_button("", @quiz)
-        = question_presenter.content(@quiz)
+
+      = simple_form_for :game, url: nil do |f|
+        = render partial: "questions/question", object: question, locals: {f: f}
 
   %p= add_button "Novo pitanje", new_quiz_question_path(@quiz)

@@ -2,22 +2,28 @@
 
 %p= back_button "Natrag", current_school
 
-%table
+- if @students.any?
 
-  %thead
-    %tr
-      %th Ime i prezime
-      %th Korisničko ime
-      %th Razred
-      %th
+  %table
 
-  %tbody
-    - @students.find_each do |student|
-      - present student do |student_presenter|
-        %tr
-          %td= student_presenter.full_name
-          %td= student_presenter.username
-          %td= student_presenter.grade
-          %td
-            .controls
-              #{delete_button "", student_path(student)}
+    %thead
+      %tr
+        %th Ime i prezime
+        %th Korisničko ime
+        %th Razred
+        %th
+
+    %tbody
+      - @students.find_each do |student|
+        - present student do |student_presenter|
+          %tr
+            %td= student_presenter.full_name
+            %td= student_presenter.username
+            %td= student_presenter.grade
+            %td
+              .controls
+                #{delete_button "", student_path(student)}
+
+- else
+
+  %p Nijedan vaš učenik još nije registriran.

@@ -38,7 +38,7 @@
 
     = f.input :data, as: :string, label: "Odgovor"
 
-  = f.input :points
+  = f.input :points, collection: (1..5), as: :radio_buttons
 
   .controls
     - back_link = (@question.new_record? ? new_quiz_question_path(@quiz) : quiz_path(@quiz))

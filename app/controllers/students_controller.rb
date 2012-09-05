@@ -39,7 +39,7 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    student = current_school.students.destroy(params[:id])
-    redirect_to students_path, notice: "Učenik \"#{student.full_name}\" je uspješno izbrisan."
+    current_school.students.destroy(params[:id])
+    redirect_to students_path, notice: "Učenik je uspješno izbrisan."
   end
 end
