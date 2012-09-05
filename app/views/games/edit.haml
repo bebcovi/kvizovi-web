@@ -2,7 +2,7 @@
 
 %h1= @quiz.name
 
-%p#username= @player.username.prepend_icon("user")
+#username= @player.username.prepend_icon("user")
 
 #progress
   - @questions_count.times do |i|

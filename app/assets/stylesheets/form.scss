@@ -1,5 +1,5 @@
 form {
-  & > div { @include trailer(.5); }
+  > div, > section { @include trailer(.5); }
   ol, ul { @extend %unstyled-list; }
   .controls {
     @include rhythm(1, 0, 0, 1);
