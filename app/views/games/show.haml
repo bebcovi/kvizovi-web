@@ -2,6 +2,10 @@
 
 %h1 Rezultati
 
+#progress
+  - @questions_count.times do |i|
+    %div{style: "width: #{100/@questions_count.to_f}%", data: {done: true}}
+
 #players
   - @game.players.zip(@game.scores).each do |player, score|
     .player

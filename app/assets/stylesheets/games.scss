@@ -16,21 +16,6 @@ body.games {
       }
     }
 
-    #progress {
-      @include trailer;
-      clear: both;
-      .bar {
-        @extend %border-radius;
-        overflow: hidden;
-        border: 1px solid rgba(black, .25);
-        div {
-          height: rhythm(.25);
-          outline: 1px solid rgba(black, .25);
-          background: rgba(black, .1);
-        }
-      }
-    }
-
     h2.question {
       @include with-font-size(28px) {
         @include trailer(.5);
@@ -100,4 +85,23 @@ body.games {
       @extend %button;
     }
   }
+
+  // general stuff
+
+  #progress {
+    @extend %border-radius;
+    @include trailer;
+    height: rhythm(.25);
+    clear: both;
+    overflow: hidden;
+    border: 1px solid rgba(black, .25);
+    div {
+      float: left;
+      height: 100%;
+      border-right: 1px solid rgba(black, .25);
+      &:last-child { border: none; }
+    }
+    [data-done] { background: rgba(black, .1); }
+  }
+
 }

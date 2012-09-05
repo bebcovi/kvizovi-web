@@ -22,20 +22,10 @@ Lektire.Initializers.games = ->
         switch $(@).val()
           when '1'
             $login.hide()
-            $login.find('input').val('')
+            $login.find('input').val ''
           when '2' then $login.show()
 
     when 'edit'
-
-      $progress = $('#progress')
-      $bar = $('<div class="bar">')
-      $div = $('<div>').appendTo $bar
-      status = (parseInt(i) for i in $progress.text().split('/'))
-
-      $div.css 'width', "#{status[0]/status[1] * 100}%"
-
-      $progress.text('')
-      $progress.append $bar
 
       # association
 
