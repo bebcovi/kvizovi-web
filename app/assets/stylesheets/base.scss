@@ -1,11 +1,11 @@
+$grid-padding: 2em;
+
 $base-font-size: 18px;
 $base-line-height: 28px;
 
-$default-rhythm-border-style: dashed;
-
 $default-border-radius: 3px;
 
-$text: lighten(black, 30%);
+$text: rgba(black, .75);
 
 $link1: hsl(0, 50%, 50%);
 $link2: darken($link1, 5%);

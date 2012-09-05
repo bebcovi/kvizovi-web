@@ -1,13 +1,18 @@
 header {
-  $offset: rhythm();
+  $offset: $grid-padding + rhythm(.5);
   @include clearfix;
-  @include rhythm(0, .5, 0, 1);
-  @include trailing-border(1px, .5, $border-style: solid);
+  @include rhythm(0, .5, .5, 1);
+  @include box-shadow(rgba(black, .25) 0 0 .75em);
+  @include trailing-border(1px, .5);
+  @include v-borders;
+  @include border-bottom-radius;
+  border-color: rgba(black, .3);
   padding-left: $offset;
   padding-right: $offset;
   margin-left: - $offset;
   margin-right: - $offset;
-  border-color: rgba(black, .5);
+  color: rgba(black, .6);
+  background: darken(white, 3%);
 }
 
 #logo {
@@ -15,15 +20,18 @@ header {
     @include trailer(0);
     float: left;
     a {
-      $c1: rgba(black, .25);
+      $c1: rgba(black, .5);
       $c2: $link2;
       @include color-link($c1, $c2);
       &:hover { text-decoration: none; }
     }
+    i { height: rhythm(lines-for-font-size(38px)); }
   }
 }
 
 #log {
-  @include rhythm(.75, 0, 0, 0);
-  float: right;
+  @include with-font-size(14px) {
+    @include rhythm(.75, 0, 0, 0);
+    float: right;
+  }
 }

@@ -1,5 +1,5 @@
 h1, h2, h3, p, ol, ul, dl {
-  @include rhythm(0, 0, 0, 1);
+  @include rhythm(0, 0, 0, .5);
 }
 
 h1, h2, h3 {

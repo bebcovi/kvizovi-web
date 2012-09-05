@@ -33,7 +33,7 @@ body.games {
 
     h2.question {
       @include with-font-size(28px) {
-        @include trailer;
+        @include trailer(.5);
       }
     }
 
@@ -72,7 +72,7 @@ body.games {
           background: darken(white, 2%);
         }
         .placeholder {
-          border-color: darken(white, 10%);
+          border: 1px dashed darken(white, 20%);
           background: darken(white, 1%);
         }
       }

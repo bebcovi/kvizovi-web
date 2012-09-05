@@ -26,6 +26,13 @@
   }
 }
 
+%full-width {
+  padding-left: $grid-padding;
+  padding-right: $grid-padding;
+  margin-left: - $grid-padding;
+  margin-right: - $grid-padding;
+}
+
 %text-input {
   @extend %border-radius;
   @include rhythm-borders(1px, .25, $border-style: solid);
