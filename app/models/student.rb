@@ -7,6 +7,11 @@ class Student < ActiveRecord::Base
 
   validates_uniqueness_of :username
 
+  def increase_score!(points)
+    update_attribute(:score, score + points)
+    self
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

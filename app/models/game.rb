@@ -3,6 +3,12 @@ class Game < ActiveRecord::Base
 
   serialize :info
 
+  before_create do
+    players.zip(scores).each do |player, score|
+      player.increase_score!(score)
+    end
+  end
+
   def players
     player_ids = info.keys
     Student.find(player_ids)

@@ -7,6 +7,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string :password_digest
       t.references :school
       t.integer :grade
+      t.integer :score, default: 0
 
       t.timestamps
     end

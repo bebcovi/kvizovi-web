@@ -31,8 +31,10 @@ module ApplicationHelper
     link_to string.prepend_icon("plus"), path, options
   end
 
-  def icon(name)
-    content_tag :i, "", class: "icon-#{name}"
+  def icon(name, options = {})
+    klass = "icon-#{name}"
+    klass += " #{options[:class]}" if options[:class]
+    content_tag :i, "", {class: klass}.merge(options.except(:class))
   end
 
   def ordinalize(argument)
