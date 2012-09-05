@@ -12,7 +12,7 @@ class StudentsController < ApplicationController
   def create
     @student = Student.create_with_school_key(params[:student])
 
-    if @student.valid?
+    if @student.save
       log_in!(@student)
       redirect_to new_game_path, notice: "Uspješno ste se registrirali."
     else

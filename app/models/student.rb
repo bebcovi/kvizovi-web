@@ -26,7 +26,7 @@ class Student < ActiveRecord::Base
 
   def self.create_with_school_key(params)
     if school = School.find_by_key(params[:school][:key])
-      school.students.create(params)
+      school.students.create(params.except(:school))
     else
       Student.new(params) do |student|
         student.errors[:base] << "Ne postoji škola s tim ključem."
