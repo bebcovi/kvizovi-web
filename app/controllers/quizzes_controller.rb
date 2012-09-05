@@ -31,18 +31,14 @@ class QuizzesController < ApplicationController
     @quiz = current_school.quizzes.find(params[:id])
 
     if @quiz.update_attributes(params[:quiz])
-      if params[:commit]
-        redirect_to @quiz, notice: "Kviz je uspješno izmjenjen."
-      else
-        redirect_to quizzes_path
-      end
+      redirect_to @quiz, notice: "Kviz je uspješno izmjenjen."
     else
-      render :new
+      render :show
     end
   end
 
   def destroy
-    quiz = current_school.quizzes.destroy(params[:id]).first
-    redirect_to quizzes_path, notice: "Kviz \"#{quiz.name}\" je uspješno izbrisan."
+    current_school.quizzes.destroy(params[:id]).first
+    redirect_to quizzes_path, notice: "Kviz je uspješno izbrisan."
   end
 end

@@ -3,9 +3,8 @@
   = f.error_notification
 
   = f.input :name
-  = f.input :grades, collection: ordinalize(@quiz.school.grades).zip(@quiz.school.grades), as: :check_boxes
+  = f.input :grades, collection: grades, as: :check_boxes
   = f.input :activated
 
   .controls
-    = link_to "Odustani", @quiz
-    = f.button :submit, "Spremi"
+    = f.button :submit

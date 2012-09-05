@@ -4,18 +4,7 @@
 
 %section
   %h2 Info
-
-  - present @quiz do |quiz_presenter|
-
-    %dl#info
-      %dt Naziv
-      %dd= quiz_presenter.name
-      %dt Razredi
-      %dd= quiz_presenter.grades
-      %dt Vidljiv
-      %dd= quiz_presenter.visible?
-
-    %p= quiz_presenter.edit_button "Izmjeni"
+  = render "form"
 
 %section
   %h2 Pitanja
