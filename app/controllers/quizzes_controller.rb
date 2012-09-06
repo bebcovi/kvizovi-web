@@ -13,7 +13,7 @@ class QuizzesController < ApplicationController
     @quiz = current_school.quizzes.new(params[:quiz])
 
     if @quiz.save
-      redirect_to quizzes_path
+      redirect_to quiz_questions_path(@quiz)
     else
       render :new
     end
@@ -21,6 +21,7 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = current_school.quizzes.find(params[:id])
+    redirect_to quiz_questions_path(@quiz)
   end
 
   def edit
@@ -31,9 +32,9 @@ class QuizzesController < ApplicationController
     @quiz = current_school.quizzes.find(params[:id])
 
     if @quiz.update_attributes(params[:quiz])
-      redirect_to @quiz
+      redirect_to quizzes_path, notice: "Podaci su izmijenjeni."
     else
-      render :show
+      render :edit
     end
   end
 

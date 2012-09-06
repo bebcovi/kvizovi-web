@@ -18,7 +18,7 @@ class QuizPresenter < BasePresenter
   end
 
   def edit_button(text)
-    @template.edit_button text, quiz_path(quiz)
+    @template.edit_button text, edit_quiz_path(quiz)
   end
 
   def delete_button(text)
