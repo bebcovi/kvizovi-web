@@ -10,20 +10,27 @@ Lektire.Initializers.games = ->
       $login    = $form.find '.login'
       $controls = $form.find '.controls'
 
+      $plural   = $controls.find '.plural'
+      $name     = $controls.find '.name'
+
       $players.hide()
       $login.hide()
       $controls.hide()
 
-      $quizzes.one 'click', ':radio', ->
+      $quizzes.on 'click', ':radio', ->
         $players.show()
         $controls.show()
+        $name.text $(@).next().text()
 
       $players.on 'click', ':radio', ->
         switch $(@).val()
           when '1'
             $login.hide()
             $login.find('input').val ''
-          when '2' then $login.show()
+            $plural.text ''
+          when '2'
+            $login.show()
+            $plural.text 'te'
 
     when 'edit'
 
