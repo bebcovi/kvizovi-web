@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  belongs_to :quiz, dependent: :destroy
+  belongs_to :quiz
 
   serialize :data
   has_attached_file :attachment, styles: {medium: "300x300"}
@@ -20,14 +20,13 @@ class Question < ActiveRecord::Base
     if choice?
       data
     elsif association?
-      n = data.count / 2
-      Hash[data.first(n).zip(data.last(n))]
+      half = data.count / 2
+      Hash[data.first(half).zip(data.last(half))]
     end
   end
 
   def answer
-    case
-    when choice?
+    if choice?
       data.first
     else
       data
@@ -35,6 +34,6 @@ class Question < ActiveRecord::Base
   end
 
   def correct_answer?(answer)
-    answer == self.answer
+    answer.to_s == self.answer.to_s
   end
 end

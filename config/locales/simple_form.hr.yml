@@ -1,7 +1,7 @@
 hr:
   simple_form:
     error_notification:
-      default_message: "Neka polja nisu ispravno popunjena."
+      default_message: "Neka polja nisu ispravno popunjena:"
     labels:
       defaults:
         username: "Korisničko ime"
@@ -23,8 +23,8 @@ hr:
         school_key: "Tajni ključ škole"
       quiz:
         name: "Naziv"
-        grades: "Razredi"
-        activated: "Vidljiv?"
+        grades: "Predviđeni razredi"
+        activated: "Vidljiv"
       game:
         answer: "Odgovor"
 

@@ -22,9 +22,9 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = @quiz.questions.create(params[:question])
+    @question = @quiz.questions.new(params[:question])
 
-    if @question.valid?
+    if @question.save
       redirect_to quiz_path(@quiz)
     else
       render :new
@@ -47,6 +47,6 @@ class QuestionsController < ApplicationController
 
   def destroy
     @quiz.questions.destroy(params[:id])
-    redirect_to quiz_path(@quiz), notice: "Pitanje je uspješno izbrisano."
+    redirect_to quiz_path(@quiz), notice: "Pitanje je izbrisano."
   end
 end

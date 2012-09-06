@@ -2,11 +2,11 @@
 
 - if question.boolean?
 
-  = f.collection_radio_buttons :answer, [[true, "Točno"], [false, "Netočno"]], :first, :last
+  = f.collection_radio_buttons :answer, [["true", "Točno"], ["false", "Netočno"]], :first, :last
 
 - elsif question.choice?
 
-  = f.collection_radio_buttons :answer, (1..question.provided_answers.count).zip(question.provided_answers).shuffle, :first, :last
+  = f.collection_radio_buttons :answer, question.provided_answers.shuffle.zip([]), :first, :first
 
 - elsif question.association?
 

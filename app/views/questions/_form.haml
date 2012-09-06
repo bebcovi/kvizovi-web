@@ -2,13 +2,16 @@
 
 = simple_form_for @question, url: url, html: {class: @question.category} do |f|
 
+  = f.error_notification
+  = f.error :base
+
   = f.hidden_field :category, value: @question.category
 
   = f.input :content, label: (@question.boolean? ? "Tvrdnja" : "Pitanje")
 
   - if @question.boolean?
 
-    = f.collection_radio_buttons :data, [[true, "Točno"], [false, "Netočno"]], :first, :last, checked: @question.answer
+    = f.collection_radio_buttons :data, [["true", "Točno"], ["false", "Netočno"]], :first, :last, checked: @question.answer
 
   - elsif @question.choice?
 

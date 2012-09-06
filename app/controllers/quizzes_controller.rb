@@ -10,10 +10,10 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    @quiz = current_school.quizzes.create(params[:quiz])
+    @quiz = current_school.quizzes.new(params[:quiz])
 
-    if @quiz.valid?
-      redirect_to quizzes_path, notice: "Kviz je uspješno stvoren."
+    if @quiz.save
+      redirect_to quizzes_path
     else
       render :new
     end
@@ -31,7 +31,7 @@ class QuizzesController < ApplicationController
     @quiz = current_school.quizzes.find(params[:id])
 
     if @quiz.update_attributes(params[:quiz])
-      redirect_to @quiz, notice: "Kviz je uspješno izmjenjen."
+      redirect_to @quiz
     else
       render :show
     end
@@ -39,6 +39,6 @@ class QuizzesController < ApplicationController
 
   def destroy
     current_school.quizzes.destroy(params[:id]).first
-    redirect_to quizzes_path, notice: "Kviz je uspješno izbrisan."
+    redirect_to quizzes_path, notice: "Kviz je izbrisan."
   end
 end
