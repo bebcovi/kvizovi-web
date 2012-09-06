@@ -46,3 +46,11 @@ label {
 }
 
 .icon { @extend %subtle; }
+
+.hint {
+  @include with-font-size(14px) {
+    color: rgba(black, .25);
+  }
+}
+
+.field_with_hint { @include trailer(0); }
