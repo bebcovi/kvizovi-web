@@ -3,7 +3,7 @@
 = form_tag authorize_path do
   %div
     = label_tag :secret_key, "Tajni ključ aplikacije"
-    = password_field_tag :secret_key, nil, size: 50
+    = password_field_tag :secret_key, nil, size: 50, value: (Rails.env.development? ? ENV["LEKTIRE_KEY"] : nil)
 
   .controls
     = link_to "Odustani", school_login_path

@@ -14,7 +14,7 @@ class StudentsController < ApplicationController
 
     if @student.save
       log_in!(@student)
-      redirect_to new_game_path, notice: "Uspješno ste se registrirali."
+      redirect_to new_game_path, notice: "Uspješno si se registrirao."
     else
       render :new
     end

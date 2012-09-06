@@ -6,12 +6,14 @@ class Student < ActiveRecord::Base
 
   has_secure_password
 
-  before_validation on: :create do
-    self.school_id ||= School.find_by_key(school_key).try(:id)
-  end
-
+  validate :validate_school_key, on: :create
+  validates_presence_of :password
   validates_uniqueness_of :username
-  validates_presence_of :school_id, on: :create
+  validates_presence_of :username, :first_name, :last_name, :grade
+
+  before_create do
+    self.school = School.find_by_key(school_key)
+  end
 
   def increase_score!(points)
     update_attribute(:score, score + points)
@@ -30,13 +32,11 @@ class Student < ActiveRecord::Base
     find_by_username(credentials[:username]).try(:authenticate, credentials[:password])
   end
 
-  def self.create_with_school_key(params)
-    if school = School.find_by_key(params[:school][:key])
-      school.students.create(params.except(:school))
-    else
-      Student.new(params) do |student|
-        student.errors[:base] << "Ne postoji škola s tim ključem."
-      end
+  private
+
+  def validate_school_key
+    unless School.find_by_key(school_key)
+      errors[:school_key] << "Ne postoji škola s tim ključem."
     end
   end
 end

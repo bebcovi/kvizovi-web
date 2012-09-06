@@ -9,8 +9,8 @@
   = f.input :username
   = f.input :password
   = f.input :password_confirmation
-  = f.input :key, as: :password
+  = f.input :key, as: :password, hint: "Ovo će vaši učenici morati napisati pri registraciji"
 
   .controls
     = link_to "Odustani", school_login_path
-    = f.button :submit, "Spremi"
+    = f.button :submit, "Registriraj se"

@@ -1,0 +1,25 @@
+hr:
+  activerecord:
+    errors:
+      messages:
+        blank: "Ne smije biti prazno"
+        confirmation: "Ne slaže se sa svojom potvrdom"
+      models:
+        student:
+          attributes:
+            password:
+              blank: "Ne smije biti prazna"
+            grade:
+              blank: "Nisi odabrao/la razred"
+            username:
+              taken: "Već postoji škola s tim korisničkim imenom"
+        school:
+          attributes:
+            level:
+              blank: "Niste odabrali tip škole"
+            key:
+              blank: "Ne smije biti prazan"
+            username:
+              taken: "Već postoji škola s tim korisničkim imenom"
+            password:
+              blank: "Ne smije biti prazna"
