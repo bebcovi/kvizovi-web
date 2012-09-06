@@ -26,7 +26,7 @@ class Quiz < ActiveRecord::Base
     if name.blank?
       errors[:base] << "Ime kviza ne smije biti prazno."
     # Uniqueness
-    elsif quiz = self.find_by_name(name)
+    elsif quiz = self.class.find_by_name(name)
       errors[:base] << "Već postoji kviz s tim imenom." unless quiz.id == id
     end
     # Presence
