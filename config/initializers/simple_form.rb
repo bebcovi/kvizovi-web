@@ -11,6 +11,26 @@ module ActionView::Helpers
   end
 end
 
+module SimpleForm
+  module Inputs
+    class Base
+      include Module.new {
+        def errors
+          @errors ||= (errors_on_id + super).compact
+        end
+
+        def errors_on_id
+          if id = @input_html_options[:id]
+            object.errors[id.to_sym]
+          else
+            []
+          end
+        end
+      }
+    end
+  end
+end
+
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   # Wrappers are used by the form builder to generate a

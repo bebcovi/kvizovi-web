@@ -53,13 +53,11 @@ class Question < ActiveRecord::Base
       if data.blank?
         errors.add(:base, "Morate specificirati da li je tvrdnja točna ili netočna.")
       end
-    when choice?
+    when (choice? or association?)
       if data.any?(&:blank?)
-        errors.add(:base, "Niste popunili sva polja kod ponuđenih odgovora.")
-      end
-    when association?
-      if data.any?(&:blank?)
-        errors.add(:base, "Niste popunili sva polja kod ponuđenih odgovora.")
+        data.each_with_index do |text, index|
+          errors.add(:"question_data_#{index + 1}", "Ne smije biti prazno.") if text.blank?
+        end
       end
     when photo?
       if send(:read_attribute_for_validation, "attachment_file_name").blank?
