@@ -29,6 +29,9 @@ input, button, select, textarea {
 
 [type=radio], [type=checkbox] {
   padding-right: rhythm(.25);
+  label + & {
+    margin-left: rhythm(.25);
+  }
 }
 
 span {
@@ -42,6 +45,10 @@ label + select {
 label {
   &:hover { cursor: pointer; }
   &:after { content: ':'; }
+  [type=radio], [type=checkbox] + & {
+    padding-left: rhythm(.25);
+    &:after { content: ''; }
+  }
   &.checkbox, &.radio, &[class^=collection] {
     padding-left: rhythm(.25);
     &:after { content: ''; }
