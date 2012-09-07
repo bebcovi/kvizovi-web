@@ -4,12 +4,4 @@ body.quizzes {
       &:nth-child(3) { text-align: center; }
     }
   }
-
-  &.new {
-    .notice {
-      @include trailer(0);
-      color: rgba(black, .4);
-      i { margin-right: rhythm(.1); }
-    }
-  }
 }

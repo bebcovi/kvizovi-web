@@ -6,6 +6,11 @@ form {
     [type=submit] { @extend %primary-button; }
     a { @extend %button; }
   }
+  p.notice {
+    @include trailer(0);
+    color: rgba(black, .4);
+    i { margin-right: rhythm(.1); }
+  }
 }
 
 input, button, select, textarea {
