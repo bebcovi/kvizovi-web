@@ -43,6 +43,10 @@ module ApplicationHelper
     link_to string.prepend_icon("cog"), path, options
   end
 
+  def notice(string, options = {})
+    content_tag :p, string.prepend_icon("info-sign"), {class: "notice"}.merge(options)
+  end
+
   def icon(name, options = {})
     klass = "icon-#{name}"
     klass += " #{options[:class]}" if options[:class]

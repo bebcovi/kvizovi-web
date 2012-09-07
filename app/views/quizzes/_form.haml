@@ -5,11 +5,11 @@
   = f.input :name
   = f.input :grades, collection: grades, as: :check_boxes
 
-  - if @quiz.new_record?
-    %p.notice Kviz neće biti vidljiv učenicima dok ga ne učinite vidljivim.
-  - else
-    = f.input :activated
-
   .controls
     = link_to "Odustani", quizzes_path
     = f.button :submit
+
+  - if @quiz.new_record?
+    = notice "Kviz neće biti vidljiv učenicima dok ga ne učinite vidljivim."
+  - else
+    = f.input :activated
