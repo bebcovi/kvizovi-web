@@ -24,11 +24,11 @@
 
     - input_collection(f) do |c|
 
-      .column
+      .column.static
         - 4.times do |idx|
-          = c.input :data, as: :string, label: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx]}
+          = c.input(:data, as: :string, label: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx]}).append_icon("arrow-right")
 
-      .column
+      .column.interactive
         - 4.times do |idx|
           = c.input :data, as: :string, label: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx + 4]}
 
@@ -41,7 +41,7 @@
 
     = f.input :data, as: :string, label: "Odgovor"
 
-  = f.input :points, collection: (1..5), as: :radio_buttons
+  = f.input :points, collection: (1..5), as: :radio_buttons, wrapper_html: {class: "points"}, collection_wrapper_tag: false, item_wrapper_tag: :span
 
   .controls
     - back_link = (@question.new_record? ? new_quiz_question_path(@quiz) : quiz_path(@quiz))

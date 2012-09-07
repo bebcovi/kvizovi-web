@@ -1,5 +1,5 @@
 form {
-  > div, > section { @include trailer(.5); }
+  > div, > ol, > ul, > section { @include trailer(.5); }
   ol, ul { @extend %unstyled-list; }
   .controls {
     @include rhythm(1, 0, 0, 1);
@@ -29,7 +29,10 @@ input, button, select, textarea {
 
 [type=radio], [type=checkbox] {
   margin-right: rhythm(.25);
-  &:first-of-type { margin-left: rhythm(.25); }
+}
+
+span {
+  &.radio, &.checkbox { margin-left: rhythm(.5); }
 }
 
 label + select {
@@ -39,8 +42,7 @@ label + select {
 label {
   &:hover { cursor: pointer; }
   &:after { content: ':'; }
-  &[class^=collection] { @extend %append-newline; }
-  &.checkbox, &.radio {
+  &.checkbox, &.radio, &[class^=collection] {
     &:after { content: ''; }
   }
 }

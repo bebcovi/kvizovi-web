@@ -8,12 +8,7 @@ body.quizzes {
     #questions {
       padding-left: rhythm();
       li { @include pie-clearfix; }
-      .controls {
-        @extend %small-controls;
-        float: right;
-        margin-left: rhythm();
-        i { width: auto; }
-      }
+      .controls { @extend %small-controls; }
     }
   }
 }

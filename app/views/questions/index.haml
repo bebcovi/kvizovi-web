@@ -8,10 +8,10 @@
 
     - present question do |question_presenter|
       .controls
-        = question_presenter.edit_button("", @quiz)
-        = question_presenter.delete_button("", @quiz)
+        = question_presenter.edit_button "", @quiz, title: "Izmjeni"
+        = question_presenter.preview_button "", @quiz, title: "Prikaži"
+        = question_presenter.delete_button "", @quiz, title: "Izbriši"
 
-    = simple_form_for :game, url: nil do |f|
-      = render partial: "questions/question", object: question, locals: {f: f}
+      %p= question_presenter.content
 
 %p= add_button "Novo pitanje", new_quiz_question_path(@quiz)

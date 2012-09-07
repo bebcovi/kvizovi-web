@@ -17,11 +17,15 @@ class QuizPresenter < BasePresenter
     quiz.activated? ? "Da" : "Ne"
   end
 
-  def edit_button(text)
-    @template.edit_button text, edit_quiz_path(quiz)
+  def edit_button(text, options = {})
+    @template.edit_button text, edit_quiz_path(quiz), options
   end
 
-  def delete_button(text)
-    @template.delete_button text, quiz_path(quiz)
+  def manage_questions_button(text, options = {})
+    link_to text.prepend_icon("tasks"), quiz_questions_path(quiz), options
+  end
+
+  def delete_button(text, options = {})
+    @template.delete_button text, quiz_path(quiz), options
   end
 end

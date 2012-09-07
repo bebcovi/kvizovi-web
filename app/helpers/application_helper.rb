@@ -23,6 +23,10 @@ module ApplicationHelper
     link_to string.prepend_icon("edit"), path, options
   end
 
+  def preview_button(string, path, options = {})
+    link_to string.prepend_icon("search"), path, options
+  end
+
   def delete_button(string, path, options = {})
     link_to string.prepend_icon("trash"), path, {method: :delete, confirm: "Jeste li sigurni?"}.merge(options)
   end

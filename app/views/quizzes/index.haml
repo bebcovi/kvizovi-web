@@ -22,8 +22,9 @@
             %td= quiz_presenter.visibility_icon
             %td
               .controls
-                = quiz_presenter.edit_button ""
-                = quiz_presenter.delete_button ""
+                = quiz_presenter.edit_button "", title: "Izmjeni opcije"
+                = quiz_presenter.manage_questions_button "", title: "Izmjeni pitanja"
+                = quiz_presenter.delete_button "", title: "Izbriši"
 
 - else
 

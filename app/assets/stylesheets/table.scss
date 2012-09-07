@@ -29,5 +29,9 @@ table {
     }
   }
 
-  .controls { @extend %small-controls; }
+  .controls {
+    @extend %small-controls;
+    float: none;
+    margin-left: 0;
+  }
 }
