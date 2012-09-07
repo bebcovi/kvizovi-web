@@ -37,20 +37,20 @@ ActiveRecord::Schema.define(:version => 20120818073000) do
   create_table "quizzes", :force => true do |t|
     t.string   "name"
     t.string   "grades"
-    t.boolean  "activated",  :default => true
+    t.boolean  "activated",  :default => false
     t.integer  "school_id"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "schools", :force => true do |t|
     t.string   "name"
     t.string   "username"
     t.string   "password_digest"
-    t.integer  "level",           :limit => 2
+    t.string   "level"
     t.string   "key"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "students", :force => true do |t|
