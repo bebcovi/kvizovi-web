@@ -62,6 +62,44 @@
   }
 }
 
+%flash {
+  @extend %border-radius;
+  @include rhythm-borders(1px, .5);
+  @include trailer;
+  @include clearfix;
+
+  button {
+    @extend %subtle;
+    float: right;
+  }
+
+  p { @include trailer(0); }
+}
+
+%flash-notice {
+  @extend %flash;
+  $color: hsl(120, 80%, 35%);
+  color: $color;
+  border-color: $color;
+  background: rgba($color, .1);
+  button {
+    color: rgba($color, .25);
+    &:hover { color: $color; }
+  }
+}
+
+%flash-alert {
+  @extend %flash;
+  $color: hsl(0, 100%, 50%);
+  color: $color;
+  border-color: $color;
+  background: rgba($color, .1);
+  button {
+    color: rgba($color, .25);
+    &:hover { color: $color; }
+  }
+}
+
 %small-controls {
   float: right;
   margin-left: rhythm();

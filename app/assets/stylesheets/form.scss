@@ -56,3 +56,27 @@ label {
 }
 
 .field_with_hint { @include trailer(0); }
+
+.alert-error {
+  @extend %flash-alert;
+}
+
+span.error {
+  @include with-font-size(14px) {
+    color: red;
+    select + &, [type=file] + &, .hint + & {
+      margin-left: rhythm(.25);
+    }
+  }
+}
+
+.field_with_errors {
+  [type=text], [type=password], [type=number], textarea {
+    border-color: rgba(red, .5);
+    &:focus {
+      @include box-shadow(rgba(red, .25) 0 0 3px);
+      outline: none;
+      border-color: rgba(red, .75);
+    }
+  }
+}

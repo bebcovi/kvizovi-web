@@ -2,7 +2,6 @@
 
 = simple_form_for @user, url: password_path, method: :put do |f|
 
-  = f.error_notification
   = f.error :base
 
   = label_tag :old_password, "Stara lozinka"

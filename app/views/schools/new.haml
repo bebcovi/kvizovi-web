@@ -2,8 +2,6 @@
 
 = simple_form_for @school do |f|
 
-  = f.error_notification
-
   = f.input :name
   = f.input :level, collection: School::LEVELS.to_a, value_method: :first, label_method: :last, prompt: "Izaberite..."
   = f.input :username
