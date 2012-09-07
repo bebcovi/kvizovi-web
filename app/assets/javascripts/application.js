@@ -4,7 +4,7 @@
 //= require underscore
 //= require backbone
 //
-//= require jquery.ui.sortable
+//= require jquery.ui.droppable
 //= require jquery.effects.core
 //
 //= require lektire

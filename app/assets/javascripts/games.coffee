@@ -54,15 +54,31 @@ Lektire.Initializers.games = ->
       $interactive.old  = $form.find('.interactive')
       $interactive.new  = conversion($interactive.old)
 
-      $interactive.new.sortable
-        placeholder           : 'placeholder'
-        forcePlaceholderSize  : true
-        tolerance             : 'pointer'
-        update                : ->
-          $old = $interactive.old.find 'input'
-          $new = $interactive.new.find 'li'
+      # this function only works for these type
+      # of situations, don't use it elsewhere :)
 
-          $old.each (i) -> $(@).val $new.eq(i).text()
+      jQuery.fn.swapWith = (to) ->
+        @.each ->
+          $from = $(@).parent()
+          $to = $(to).parent()
+
+          $(@).appendTo $to
+          $(to).appendTo $from
+
+      $interactive.new.find('div')
+        .draggable
+          addClasses: false
+          revert: 'invalid'
+          revertDuration: 250
+          helper: 'clone'
+          zIndex: 10
+          start: -> $(@).addClass 'original'
+          stop:  -> $(@).removeClass 'original'
+
+        .droppable
+          addClasses: false
+          hoverClass: 'hover'
+          drop: (e, ui) -> $(@).swapWith ui.draggable
 
   # score
 

@@ -54,7 +54,7 @@ body.games {
         li { @include trailer(.25); }
       }
 
-      $cols: 4;
+      $cols: 5;
       .static {
         @include span-columns($cols);
         li {
@@ -74,18 +74,24 @@ body.games {
       $cols: $total-columns - $cols;
       .interactive {
         @include span-columns($cols omega);
-        li {
+        @include clearfix;
+        div {
+          @extend %inline-block;
           @extend %border-radius;
-          @include rhythm-borders(1px, .25);
+          @include h-borders(1px, .25);
+          @include v-borders(1px, .5);
           @include box-sizing(content-box);
           @include user-select(none);
           cursor: move;
           border-color: darken(white, 25%);
           background: darken(white, 2%);
         }
-        .placeholder {
-          border: 1px dashed darken(white, 20%);
-          background: darken(white, 1%);
+        .original {
+          @include opacity(.25);
+        }
+        .hover {
+          border-color: darken(white, 50%);
+          background: darken(white, 3%);
         }
       }
 
