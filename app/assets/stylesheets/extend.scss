@@ -90,7 +90,7 @@
 
 %flash-alert {
   @extend %flash;
-  $color: hsl(0, 100%, 50%);
+  $color: hsl(0, 90%, 60%);
   color: $color;
   border-color: $color;
   background: rgba($color, .1);
