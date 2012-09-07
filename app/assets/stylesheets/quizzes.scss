@@ -12,11 +12,4 @@ body.quizzes {
       i { margin-right: rhythm(.1); }
     }
   }
-  &.show {
-    #questions {
-      padding-left: rhythm();
-      li { @include pie-clearfix; }
-      .controls { @extend %small-controls; }
-    }
-  }
 }
