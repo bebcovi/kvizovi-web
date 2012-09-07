@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
   belongs_to :quiz
 
   serialize :data
-  has_attached_file :attachment, styles: {medium: "300x300"}
+  has_attached_file :attachment, styles: {medium: "x250"}
 
   validate :validate
 

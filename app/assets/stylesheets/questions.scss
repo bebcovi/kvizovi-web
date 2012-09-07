@@ -91,4 +91,12 @@ body.questions {
       }
     }
   }
+
+  // canvas
+
+  canvas {
+    @extend %border-radius;
+    border: 1px dashed rgba(black, .25);
+    &.filled { border: 1px solid rgba(black, .75); }
+  }
 }

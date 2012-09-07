@@ -34,6 +34,12 @@
   - elsif @question.photo?
 
     = f.input :attachment
+
+    - if @question.attachment.exists?
+      %p.img= image_tag @question.attachment.url(:medium)
+    - else
+      %canvas{width: 300, height: 250}
+
     = f.input :data, as: :string, label: "Odgovor"
 
   - elsif @question.text?
