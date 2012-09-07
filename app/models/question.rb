@@ -39,7 +39,7 @@ class Question < ActiveRecord::Base
 
   def correct_answer?(answer)
     if photo? or text?
-      answer.casemp(self.answer) == 0
+      answer.casecmp(self.answer) == 0
     else
       answer == self.answer
     end
