@@ -55,11 +55,52 @@ Lektire.Initializers.games = ->
       $interactive.new  = conversion($interactive.old)
 
       $interactive.new.sortable
-        placeholder: 'placeholder'
-        forcePlaceholderSize: true
-        tolerance: 'pointer'
-        update: ->
+        placeholder           : 'placeholder'
+        forcePlaceholderSize  : true
+        tolerance             : 'pointer'
+        update                : ->
           $old = $interactive.old.find 'input'
           $new = $interactive.new.find 'li'
 
           $old.each (i) -> $(@).val $new.eq(i).text()
+
+  # score
+
+  delay = 500
+
+  $('#score li').each ->
+
+    $rank     = $(@).find '.rank'
+    $label    = $(@).find '.label'
+    $fill     = $(@).find '.fill'
+
+    width     = $fill.css 'width'
+
+    update    = ->
+
+      currentWidth = parseFloat $fill.width()
+      percentage = currentWidth / $label.width() * 100
+
+      if currentWidth
+        $label.text "#{Math.round(percentage)}%"
+      else
+        $label.text "0%"
+
+    $rank.hide()
+    $fill.hide()
+
+    $fill.css 'width', '0%'
+
+    update()
+
+    window.setTimeout ->
+      $fill.show().animate
+        width     : width
+      ,
+        duration  : 2000
+        easing    : 'easeOutCubic'
+        step      : update
+        complete  : -> $rank.fadeIn 'fast'
+    , delay
+
+    delay += 2000

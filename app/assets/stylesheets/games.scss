@@ -110,7 +110,7 @@ body.games {
     }
   }
 
-  // general stuff
+  // progress
 
   #progress {
     @extend %border-radius;
@@ -128,22 +128,27 @@ body.games {
     [data-done] { background: rgba(black, .1); }
   }
 
+  // score
+
   #score {
-    $height: 2;
     @extend %unstyled-list;
     @include trailer;
 
-    li {
+    li { @include trailer(.5); }
+
+    dl { @include trailer(.25); }
+
+    $height: 2;
+    .bar {
       @extend %border-radius;
       @include trailer(.25);
       position: relative;
       height: rhythm($height);
       overflow: hidden;
-
     }
 
-    .username {
-      @include with-font-size(24px, $height) {
+    .label {
+      @include with-font-size(28px, $height) {
         position: absolute;
         z-index: 10;
         width: 100%;
@@ -151,14 +156,17 @@ body.games {
       }
     }
 
-    .bar { height: 100%; }
+    .fill { height: 100%; }
 
     @each $context in one $player-one, two $player-two {
       .#{nth($context, 1)} {
         $color: nth($context, 2);
-        border: 1px solid $color;
-        .username { color: rgba($color, .5); }
         .bar {
+          border: 1px solid $color;
+          background: rgba($color, .05);
+        }
+        .label { color: rgba($color, .5); }
+        .fill {
           background: rgba($color, .5);
           outline: 1px solid rgba($color, .75);
         }

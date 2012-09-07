@@ -9,8 +9,14 @@
 %ol#score
   - @game.players.zip(@game.scores).each_with_index do |(player, score), player_number|
     %li{class: number(player_number + 1)}
-      .username= player.username.prepend_icon("user")
-      .bar{style: "width: #{score/@game.total_points.to_f * 100}%"}
+      %dl
+        %dt.username= player.username.prepend_icon("user")
+        %dd.rank Znala-malac
+      - percentage = "#{(score/@game.total_points.to_f * 100).round}%"
+      .bar
+        .label= percentage
+        - if score != 0
+          .fill{style: "width: #{percentage}"}
 
 .controls
   = link_to "Završi", new_game_path
