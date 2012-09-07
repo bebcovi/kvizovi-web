@@ -5,7 +5,7 @@ School.create! [
     username: "mioc",
     name: "XV. Gimnazija",
     password: "mioc",
-    level: "srednja",
+    level: "Srednja",
     key: "mioc"
   }
 ]

@@ -4,7 +4,7 @@
 
   = f.input :name
   = f.input :grades, collection: grades, as: :check_boxes
-  = f.input :activated
+  = f.input :activated unless @quiz.new_record?
 
   .controls
     = link_to "Odustani", quizzes_path

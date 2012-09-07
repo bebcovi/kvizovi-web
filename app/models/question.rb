@@ -62,7 +62,7 @@ class Question < ActiveRecord::Base
         errors.add(:base, "Niste popunili sva polja kod ponuđenih odgovora.")
       end
     when photo?
-      if attachment.blank?
+      if send(:read_attribute_for_validation, "attachment_file_name").blank?
         errors.add(:base, "Niste odabrali sliku.")
       end
       if data.blank?

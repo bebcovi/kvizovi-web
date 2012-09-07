@@ -2,7 +2,7 @@
 
 class School < ActiveRecord::Base
   has_many :students
-  has_many :quizzes
+  has_many :quizzes, dependent: :destroy
   has_many :questions, through: :quizzes
 
   has_secure_password
@@ -19,17 +19,12 @@ class School < ActiveRecord::Base
   end
 
   def primary?
-    level == 1
+    level == "Osnovna"
   end
 
   def secondary?
-    level == 2
+    level == "Srednja"
   end
-
-  LEVELS = {
-    1 => "Osnovna",
-    2 => "Srednja"
-  }
 
   def self.authenticate(credentials)
     find_by_username(credentials[:username]).try(:authenticate, credentials[:password])

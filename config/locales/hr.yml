@@ -1,6 +1,7 @@
 hr:
   activerecord:
     errors:
+      format: ! "%{message}"
       messages:
         blank: "Ne smije biti prazno."
         confirmation: "Ne slaže se sa svojom potvrdom."

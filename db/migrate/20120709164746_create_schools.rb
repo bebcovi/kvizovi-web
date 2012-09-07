@@ -4,7 +4,7 @@ class CreateSchools < ActiveRecord::Migration
       t.string :name
       t.string :username
       t.string :password_digest
-      t.integer :level, limit: 1
+      t.string :level
       t.string :key
 
       t.timestamps
