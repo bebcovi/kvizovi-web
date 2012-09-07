@@ -39,7 +39,7 @@ body.questions {
     }
   }
 
-  // general stuff
+  // associations
 
   $cols: $total-columns / 2;
   .column {
@@ -59,5 +59,36 @@ body.questions {
     }
   }
 
-  .points { clear: both; }
+  // points
+
+  .points {
+    clear: both;
+
+    input { display: none; }
+
+    span {
+      margin-left: rhythm(.25);
+      label {
+        @extend %inline-block;
+        @include border-radius(50%);
+        width: rhythm();
+        height: rhythm();
+        padding: 0 1px 0 0;
+        color: rgba(black, .5);
+        background: rgba(black, .05);
+        text-align: center;
+        &:hover {
+          background: rgba(black, .1);
+          color: $text;
+        }
+      }
+    }
+
+    :checked + label {
+      &, &:hover {
+        color: white;
+        background: rgba(black, .5);
+      }
+    }
+  }
 }
