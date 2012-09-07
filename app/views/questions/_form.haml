@@ -25,7 +25,7 @@
 
       .column.static
         - 4.times do |idx|
-          = c.input(:data, as: :string, label: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx]}).append_icon("arrow-right")
+          = c.input(:data, as: :string, label: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx]}).prepend_icon("arrow-right")
 
       .column.interactive
         - 4.times do |idx|

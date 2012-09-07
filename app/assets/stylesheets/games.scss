@@ -47,16 +47,16 @@ body.games {
     }
 
     form.association {
-      $cols: 4;
       .column {
         @extend %unstyled-list;
-        @include span-columns($cols);
         @include rhythm(0, 0, 0, 1);
 
         li { @include trailer(.25); }
       }
 
+      $cols: 4;
       .static {
+        @include span-columns($cols);
         li {
           @include clearfix;
           cursor: default;
@@ -65,12 +65,15 @@ body.games {
 
         i {
           float: right;
+          height: rhythm();
           margin-right: rhythm(.5);
           color: rgba(black, .25);
         }
       }
 
+      $cols: $total-columns - $cols;
       .interactive {
+        @include span-columns($cols omega);
         li {
           @extend %border-radius;
           @include rhythm-borders(1px, .25);
