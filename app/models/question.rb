@@ -38,7 +38,11 @@ class Question < ActiveRecord::Base
   end
 
   def correct_answer?(answer)
-    answer.to_s == self.answer.to_s
+    if photo? or text?
+      answer.casemp(self.answer) == 0
+    else
+      answer == self.answer
+    end
   end
 
   private
