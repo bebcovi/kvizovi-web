@@ -17,7 +17,7 @@
     - input_collection(f) do |c|
 
       - 4.times do |idx|
-        = c.input :data, as: :string, label: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx]}, hint: ("Ovo će biti točan odgovor".append_icon("arrow-up") if idx == 0)
+        = c.input :data, as: :string, label: false, placeholder: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx]}, hint: ("Ovo će biti točan odgovor".append_icon("arrow-up") if idx == 0)
 
   - elsif @question.association?
 
@@ -25,11 +25,11 @@
 
       .column.static
         - 4.times do |idx|
-          = c.input(:data, as: :string, label: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx]}).prepend_icon("arrow-right")
+          = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx]}).prepend_icon("arrow-right")
 
       .column.interactive
         - 4.times do |idx|
-          = c.input :data, as: :string, label: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx + 4]}
+          = c.input :data, as: :string, label: false, placeholder: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx + 4]}
 
   - elsif @question.photo?
 
