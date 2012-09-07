@@ -66,11 +66,11 @@ class Question < ActiveRecord::Base
         errors.add(:base, "Niste odabrali sliku.")
       end
       if data.blank?
-        errors.add(:base, "Niste ponudili točan odgovor.")
+        errors.add(:base, "Niste napisali točan odgovor.")
       end
     when text?
       if data.blank?
-        errors.add(:base, "Niste ponudili točan odgovor.")
+        errors.add(:base, "Niste napisali točan odgovor.")
       end
     end
 

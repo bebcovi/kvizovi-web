@@ -2,27 +2,27 @@ hr:
   activerecord:
     errors:
       messages:
-        blank: "Ne smije biti prazno"
-        confirmation: "Ne slaže se sa svojom potvrdom"
+        blank: "Ne smije biti prazno."
+        confirmation: "Ne slaže se sa svojom potvrdom."
       models:
         student:
           attributes:
             password:
-              blank: "Ne smije biti prazna"
+              blank: "Ne smije biti prazna."
             grade:
-              blank: "Nisi odabrao/la razred"
+              blank: "Nisi odabrao/la razred."
             username:
-              taken: "Već postoji škola s tim korisničkim imenom"
+              taken: "Već postoji škola s tim korisničkim imenom."
         school:
           attributes:
             level:
-              blank: "Niste odabrali tip škole"
+              blank: "Niste odabrali tip škole."
             key:
-              blank: "Ne smije biti prazan"
+              blank: "Ne smije biti prazan."
             username:
-              taken: "Već postoji škola s tim korisničkim imenom"
+              taken: "Već postoji škola s tim korisničkim imenom."
             password:
-              blank: "Ne smije biti prazna"
+              blank: "Ne smije biti prazna."
   support:
     array:
       last_word_connector: " i "

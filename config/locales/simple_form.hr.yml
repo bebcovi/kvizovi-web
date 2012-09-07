@@ -1,7 +1,7 @@
 hr:
   simple_form:
     error_notification:
-      default_message: "Neka polja nisu ispravno popunjena:"
+      default_message: "Neka polja nisu ispravno popunjena."
     labels:
       defaults:
         username: "Korisničko ime"
