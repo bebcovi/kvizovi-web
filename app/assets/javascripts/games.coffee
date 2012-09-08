@@ -19,14 +19,13 @@ Lektire.Initializers.games = ->
 
       $quizzes.on 'click', ':radio', ->
         $players.show()
-        $buttons.show()
         $name.text $(@).next().text()
 
       $players.on 'click', ':radio', ->
+        $buttons.show()
         switch $(@).val()
           when '1'
             $login.hide()
-            $login.find('input').val ''
             $plural.text ''
           when '2'
             $login.show()
