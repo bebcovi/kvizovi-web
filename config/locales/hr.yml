@@ -28,6 +28,11 @@ hr:
           attributes:
             attachment:
               blank: "Niste priložili sliku."
+        quiz:
+          attributes:
+            grades:
+              blank: "Ovaj kviz mora biti namijenjen barem jednom razredu."
+
   support:
     array:
       last_word_connector: " i "
