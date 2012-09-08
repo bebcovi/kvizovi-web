@@ -6,48 +6,10 @@
 
   = f.input :content, label: (@question.boolean? ? "Tvrdnja" : "Pitanje")
 
-  - if @question.boolean?
-
-    = f.error :data
-    = f.collection_radio_buttons :data, [["true", "Točno"], ["false", "Netočno"]], :first, :last, checked: @question.answer
-
-  - elsif @question.choice?
-
-    - input_collection(f) do |c|
-
-      - 4.times do |idx|
-        = c.input :data, as: :string, label: false, placeholder: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx]}, hint: ("Ovo će biti točan odgovor".append_icon("arrow-up") if idx == 0)
-
-  - elsif @question.association?
-
-    - input_collection(f) do |c|
-
-      .column.static
-        - 4.times do |idx|
-          = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx]}).prepend_icon("arrow-right")
-
-      .column.interactive
-        - 4.times do |idx|
-          = c.input :data, as: :string, label: false, placeholder: "Opcija #{idx + 1}", input_html: {value: @question.provided_answers[idx + 4]}
-
-  - elsif @question.photo?
-
-    = f.input :attachment
-
-    - if @question.attachment.exists?
-      %canvas{width: 300, height: 250, data: {src: @question.attachment.url(:medium)}}
-    - else
-      %canvas{width: 300, height: 250}
-
-    = f.input :data, as: :string, label: "Odgovor"
-
-  - elsif @question.text?
-
-    = f.input :data, as: :string, label: "Odgovor"
+  = render partial: "question_#{@question.category}", object: @question, as: :question, locals: {f: f}
 
   = f.input :points, collection: (1..5), as: :radio_buttons, wrapper_html: {class: "points"}, collection_wrapper_tag: false, item_wrapper_tag: :span
 
   .buttons
-    - back_link = (@question.new_record? ? new_quiz_question_path(@quiz) : quiz_path(@quiz))
-    = link_to "Odustani", back_link
+    = link_to "Odustani", (@question.new_record? ? new_quiz_question_path(@quiz) : quiz_path(@quiz))
     = f.button :submit
