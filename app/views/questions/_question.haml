@@ -18,7 +18,7 @@
 
 - elsif question.photo?
 
-  %p= image_tag question.attachment.url(:medium)
+  %p= image_tag question.attachment.url(:medium), height: '250'
   = f.input :answer
 
 - elsif question.text?
