@@ -5,7 +5,7 @@ quiz.questions.create! [
   {
     category: "boolean",
     content: "Eshil je napisao knjigu \"Okovani Prometej\".",
-    data: true,
+    data: "true",
     points: 2
   },
   {

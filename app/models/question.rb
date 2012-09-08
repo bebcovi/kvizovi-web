@@ -23,13 +23,17 @@ class Question < ActiveRecord::Base
   end
 
   def provided_answers
-    return [] if data.nil?
-
-    if choice?
+    if association?
+      unless data.nil?
+        half = data.count / 2
+        Hash[data.first(half).zip(data.last(half))]
+      else
+        {}
+      end
+    elsif choice?
+      data || []
+    else
       data
-    elsif association?
-      half = data.count / 2
-      Hash[data.first(half).zip(data.last(half))]
     end
   end
 
