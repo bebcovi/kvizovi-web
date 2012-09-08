@@ -18,12 +18,19 @@ body.games {
         color: rgba(black, .5);
         border-color: rgba(black, .1);
         background: rgba(black, .025);
+        &:hover {
+          color: $text;
+          border-color: rgba(black, .25);
+          background: rgba(black, .05);
+        }
       }
 
       :checked + label {
-        color: $text;
-        border-color: rgba(black, .5);
-        background: rgba(black, .05);
+        &, &:hover {
+          color: white;
+          border-color: rgba(black, .25);
+          background: rgba(black, .75);
+        }
       }
     }
 
