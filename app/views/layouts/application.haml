@@ -20,8 +20,9 @@
 
     %article{role: 'main'}
       - flash.each do |name, message|
-        %div{class: "flash #{name}"}
-          = close_button
-          %p= message
+        - if name.in?([:notice, :alert])
+          %div{class: "flash #{name}"}
+            = close_button
+            %p= message
 
       = yield

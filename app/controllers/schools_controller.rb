@@ -1,7 +1,6 @@
 class SchoolsController < ApplicationController
   def new
     if flash[:authorized]
-      flash.delete(:authorized)
       @school = School.new
     else
       redirect_to authorize_path
