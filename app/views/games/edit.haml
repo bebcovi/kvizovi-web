@@ -7,9 +7,9 @@
 #progress
   - @questions_count.times do |i|
     - if i < @question_number - 1
-      %div{style: "width: #{100/@questions_count}%", data: {done: true}}
+      %div{style: "width: #{100/@questions_count.to_f}%", data: {done: true}}
     - else
-      %div{style: "width: #{100/@questions_count}%"}
+      %div{style: "width: #{100/@questions_count.to_f}%"}
 
 = simple_form_for :game, url: game_path, method: :put, html: {class: @question.category} do |f|
 

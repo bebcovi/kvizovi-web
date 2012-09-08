@@ -2,7 +2,7 @@
 
 %h1 Rezultati
 
-#progress
+#progress{data: {done: true}}
   - @questions_count.times do |i|
     %div{style: "width: #{100/@questions_count.to_f}%", data: {done: true}}
 

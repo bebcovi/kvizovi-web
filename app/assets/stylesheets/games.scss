@@ -99,7 +99,8 @@ body.games {
       border-right: 1px solid rgba(black, .25);
       &:last-child { border: none; }
     }
-    [data-done] { background: rgba(black, .1); }
   }
+
+  [data-done] { background: rgba(black, .1); }
 
 }
