@@ -8,18 +8,18 @@ Lektire.Initializers.games = ->
       $quizzes  = $form.find '.quizzes'
       $players  = $form.find '.players'
       $login    = $form.find '.login'
-      $controls = $form.find '.controls'
+      $buttons  = $form.find '.buttons'
 
-      $plural   = $controls.find '.plural'
-      $name     = $controls.find '.name'
+      $plural   = $buttons.find '.plural'
+      $name     = $buttons.find '.name'
 
       $players.hide()
       $login.hide()
-      $controls.hide()
+      $buttons.hide()
 
       $quizzes.on 'click', ':radio', ->
         $players.show()
-        $controls.show()
+        $buttons.show()
         $name.text $(@).next().text()
 
       $players.on 'click', ':radio', ->
@@ -32,91 +32,45 @@ Lektire.Initializers.games = ->
             $login.show()
             $plural.text 'te'
 
-    when 'edit'
+    when 'show'
 
-      # association
+      # score
 
-      conversion = (el) ->
-        result = el.clone()
-        result.find('input').each -> $(@).replaceWith($(@).val())
-        el.after(result)
-        el.hide()
-        result
+      delay = 500
 
-      $form             = $('form.association')
+      $('.score li').each ->
 
-      $static           = {}
-      $interactive      = {}
+        $rank     = $(@).find '.rank'
+        $label    = $(@).find '.label'
+        $fill     = $(@).find '.fill'
 
-      $static.old       = $form.find('.static')
-      $static.new       = conversion($static.old)
+        width     = $fill.css 'width'
 
-      $interactive.old  = $form.find('.interactive')
-      $interactive.new  = conversion($interactive.old)
+        update    = ->
 
-      # this function only works for these type
-      # of situations, don't use it elsewhere :)
+          currentWidth = parseFloat $fill.width()
+          percentage = currentWidth / $label.width() * 100
 
-      jQuery.fn.swapWith = (to) ->
-        @.each ->
-          $from = $(@).parent()
-          $to = $(to).parent()
+          if currentWidth
+            $label.text "#{Math.round(percentage)}%"
+          else
+            $label.text "0%"
 
-          $(@).appendTo $to
-          $(to).appendTo $from
+        $rank.hide()
+        $fill.hide()
 
-      $interactive.new.find('div')
-        .draggable
-          addClasses: false
-          revert: 'invalid'
-          revertDuration: 250
-          helper: 'clone'
-          zIndex: 10
-          start: -> $(@).addClass 'original'
-          stop:  -> $(@).removeClass 'original'
+        $fill.css 'width', '0%'
 
-        .droppable
-          addClasses: false
-          hoverClass: 'hover'
-          drop: (e, ui) -> $(@).swapWith ui.draggable
+        update()
 
-  # score
+        window.setTimeout ->
+          $fill.show().animate
+            width     : width
+          ,
+            duration  : 2000
+            easing    : 'easeOutCubic'
+            step      : update
+            complete  : -> $rank.fadeIn 'fast'
+        , delay
 
-  delay = 500
-
-  $('#score li').each ->
-
-    $rank     = $(@).find '.rank'
-    $label    = $(@).find '.label'
-    $fill     = $(@).find '.fill'
-
-    width     = $fill.css 'width'
-
-    update    = ->
-
-      currentWidth = parseFloat $fill.width()
-      percentage = currentWidth / $label.width() * 100
-
-      if currentWidth
-        $label.text "#{Math.round(percentage)}%"
-      else
-        $label.text "0%"
-
-    $rank.hide()
-    $fill.hide()
-
-    $fill.css 'width', '0%'
-
-    update()
-
-    window.setTimeout ->
-      $fill.show().animate
-        width     : width
-      ,
-        duration  : 2000
-        easing    : 'easeOutCubic'
-        step      : update
-        complete  : -> $rank.fadeIn 'fast'
-    , delay
-
-    delay += 2000
+        delay += 2000

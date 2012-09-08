@@ -1,8 +1,29 @@
-h1, h2, h3, p, ol, ul, dl {
-  @include rhythm(0, 0, 0, .5);
+@include establish-baseline;
+@include border-box-sizing;
+
+html {
+  height: 100%;
+  background: rgba(black, .1) image-url('header.png') repeat;
 }
 
-h1, h2, h3 {
+body {
+  @include container;
+  @include rhythm(0, 0, 0, 0);
+  @include box-shadow(
+    rgba(black, .25) 0 0 1em,
+    rgba(black, .25) 0 0 0 1px
+  );
+  min-height: 100%;
+  overflow-y: scroll;
+  font-family: $body;
+  color: $text;
+  background: white;
+}
+
+h1,
+h2,
+h3 {
+  @include leader(0);
   font-weight: normal;
 }
 
@@ -18,20 +39,20 @@ h2 {
   }
 }
 
+p,
+ol,
+ul,
+dl {
+  @include rhythm(0, 0, 0, .5);
+}
+
 a {
   @include hover-link;
   @include link-colors($link1, $link2, $link2, $link1, $link2);
 }
 
-.img {
-  @extend %inline-block;
-  @extend %border-radius;
-  line-height: 0;
-  overflow: hidden;
-  border: 1px solid rgba(black, .75);
-}
-
-dt, dd {
+dt,
+dd {
   display: inline;
 }
 
@@ -45,13 +66,11 @@ dd {
   margin: 0;
 }
 
-@each $context in one $player-one, two $player-two {
-  .#{nth($context, 1)}:not(body) {
-    color: nth($context, 2);
-  }
+.img {
+  @extend %inline-block;
+  @extend %border-radius;
+  line-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(black, .75);
 }
 
-.flash {
-  &.notice { @extend %flash-notice; }
-  &.alert { @extend %flash-alert; }
-}

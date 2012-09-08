@@ -14,26 +14,25 @@ table {
   width: 100%;
   border-collapse: collapse;
 
-  th, td { padding: rhythm(.25); }
-
-  thead {
-    text-align: left;
-    background-color: rgba(black, .025);
-  }
-
-  tbody {
-    border-top: $outer-border;
-    tr {
-      border-bottom: $inner-border;
-      &:last-child { border-bottom: none; }
-      &:nth-child(2n) { background: rgba(black, .025); }
-    }
-  }
-
   .controls {
-    @extend %small-controls;
     float: none;
     margin: 0 rhythm(.25) 0 0;
     text-align: right;
   }
 }
+
+thead {
+  text-align: left;
+  background-color: rgba(black, .025);
+}
+
+tbody {
+  border-top: $outer-border;
+  tr {
+    border-bottom: $inner-border;
+    &:last-child { border-bottom: none; }
+    &:nth-child(2n) { background: rgba(black, .025); }
+  }
+}
+
+th, td { padding: rhythm(.25); }

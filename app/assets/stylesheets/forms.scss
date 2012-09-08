@@ -1,20 +1,60 @@
+// general
+
 form {
-  > div, > ol, > ul, > section { @include trailer(.5); }
-  ol, ul { @extend %unstyled-list; }
-  .controls {
-    @include rhythm(1, 0, 0, 1);
-    [type=submit] { @extend %primary-button; }
-    a { @extend %button; }
+  > * { @include trailer(.5); }
+  ol, ul {
+    @extend %unstyled-list;
+    @include trailer(.5);
+  }
+  h2 {
+    @include with-font-size(28px) {
+      @include trailer(.5);
+    }
   }
   p.notice {
-    @include trailer(0);
     color: rgba(black, .4);
     i { margin-right: rhythm(.1); }
   }
 }
 
-input, button, select, textarea {
-  margin: 0;
+// controls
+
+.controls {
+  float: right;
+  margin-left: rhythm();
+  a {
+    @extend %inline-block;
+    @extend %subtle;
+    &:nth-child(n+1) { margin-left: rhythm(.25); }
+  }
+  i { width: auto; }
+}
+
+// flash messages
+
+.flash {
+  &.notice { @extend %flash-notice; }
+  &.alert { @extend %flash-alert; }
+}
+
+// labels
+
+label {
+  &:hover { cursor: pointer; }
+  &:after { content: ':'; }
+  [type=radio], [type=checkbox] + & {
+    padding-left: rhythm(.25);
+    &:after { content: ''; }
+  }
+  &.checkbox, &.radio, &[class^=collection] {
+    padding-left: rhythm(.25);
+    &:after { content: ''; }
+  }
+}
+
+// interactive elements
+
+input, button, textarea { margin: 0;
   font: {
     size: inherit;
     family: inherit;
@@ -47,20 +87,7 @@ label + select {
   margin-left: rhythm(.5);
 }
 
-label {
-  &:hover { cursor: pointer; }
-  &:after { content: ':'; }
-  [type=radio], [type=checkbox] + & {
-    padding-left: rhythm(.25);
-    &:after { content: ''; }
-  }
-  &.checkbox, &.radio, &[class^=collection] {
-    padding-left: rhythm(.25);
-    &:after { content: ''; }
-  }
-}
-
-.icon { @extend %subtle; }
+// hints
 
 .hint {
   @include with-font-size(14px) {
@@ -69,6 +96,8 @@ label {
 }
 
 .field_with_hint { @include trailer(0); }
+
+// validation errors
 
 .alert-error {
   @extend %flash-alert;
@@ -93,3 +122,16 @@ span.error {
     }
   }
 }
+
+// buttons
+
+.buttons {
+  @include rhythm(1, 0, 0, 1);
+  clear: both;
+  input, button { @extend %primary-button; }
+  a { @extend %button; }
+}
+
+// other
+
+.icon { @extend %subtle; }

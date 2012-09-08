@@ -1,7 +1,10 @@
 body.schools {
+
   &.show {
-    .controls { @include trailer; }
-    #edit {
+
+    // edit
+
+    .edit {
       @extend %unstyled-list;
 
       li {
@@ -23,5 +26,7 @@ body.schools {
         width: auto;
       }
     }
+
   }
+
 }

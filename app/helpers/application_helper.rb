@@ -1,6 +1,10 @@
 # encoding: utf-8
 
 module ApplicationHelper
+  def body_class
+    [params[:controller], params[:action]].join(" ")
+  end
+
   def present(object, klass = nil)
     klass ||= "#{object.class}Presenter".constantize
     presenter = klass.new(object, self)

@@ -2,17 +2,18 @@ header {
   $offset: $grid-padding + rhythm(.5);
   @include clearfix;
   @include rhythm(0, .5, .5, 1);
-  @include box-shadow(rgba(black, .25) 0 0 .75em);
   @include trailing-border(1px, .5);
   @include v-borders;
   @include border-bottom-radius;
+  @include box-shadow(rgba(black, .1) 0 0 .75em);
+  @include text-shadow(white 0 1px 1px);
   border-color: rgba(black, .3);
   padding-left: $offset;
   padding-right: $offset;
   margin-left: - $offset;
   margin-right: - $offset;
   color: rgba(black, .6);
-  background: darken(white, 3%);
+  background: darken(white, 8%);
 }
 
 #logo {

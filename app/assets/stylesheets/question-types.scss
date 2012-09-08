@@ -1,0 +1,147 @@
+// show
+
+body.games, body.questions.show {
+
+  // association
+
+  form.association {
+    .column {
+      @extend %unstyled-list;
+      @include rhythm(0, 0, 0, 1);
+
+      li { @include trailer(.25); }
+    }
+
+    $cols: 5;
+    .static {
+      @include span-columns($cols);
+      li {
+        @include clearfix;
+        cursor: default;
+        padding: rhythm(.25);
+      }
+
+      i {
+        float: right;
+        height: rhythm();
+        margin-right: rhythm(.5);
+        color: rgba(black, .25);
+      }
+    }
+
+    $cols: $total-columns - $cols;
+    .interactive {
+      @include span-columns($cols omega);
+      @include clearfix;
+      div {
+        @extend %inline-block;
+        @extend %border-radius;
+        @extend %unselectable;
+        @include h-borders(1px, .25);
+        @include v-borders(1px, .5);
+        @include box-sizing(content-box);
+        cursor: move;
+        border-color: darken(white, 25%);
+        background: darken(white, 2%);
+      }
+      .original { @include opacity(.25); }
+      .hover {
+        border-color: darken(white, 50%);
+        background: darken(white, 3%);
+      }
+    }
+  }
+
+  // photo
+
+  form.photo {
+    .img {
+      float: left;
+      margin-right: rhythm();
+    }
+  }
+
+}
+
+// edit/new
+
+body.questions {
+
+  &.edit, &.new, &.create {
+
+    // question content
+
+    #question_content {
+      height: rhythm(1.5);
+      width: rhythm(26);
+      max-width: 100%;
+    }
+
+    // associations
+
+    form.association {
+      $cols: $total-columns / 2;
+      .column {
+        @include span-columns($cols);
+        @include trailer(0);
+        div { @include trailer(.5); }
+      }
+
+      .interactive { @include omega; }
+      .static { @include clearfix; }
+
+      i {
+        @include adjust-leading-to(1.5);
+        float: right;
+        color: rgba(black, .25);
+      }
+    }
+
+    // photo
+
+    form.photo {
+      canvas {
+        @extend %border-radius;
+        border: 1px dashed rgba(black, .25);
+        &.filled { border: 1px solid rgba(black, .75); }
+      }
+    }
+
+    // points
+
+    .points {
+      clear: both;
+
+      input { display: none; }
+
+      span {
+        margin-left: rhythm(.25);
+        label {
+          @extend %inline-block;
+          @extend %unselectable;
+          @include border-radius(50%);
+          width: rhythm();
+          height: rhythm();
+          padding: 0 2px 0 0;
+          color: rgba(black, .5);
+          background: rgba(black, .05);
+          text-align: center;
+          &:hover {
+            background: rgba(black, .1);
+            color: $text;
+          }
+        }
+      }
+
+      :checked + label {
+        &, &:hover {
+          font-weight: bold;
+          color: white;
+          background: rgba(black, .5);
+        }
+      }
+    }
+
+  }
+
+}

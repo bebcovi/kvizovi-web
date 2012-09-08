@@ -20,5 +20,5 @@
       = p.input :username, input_html: {value: @game.players.last.try(:username)}
       = p.input :password
 
-  .controls
-    = f.button :button, "Započni#{content_tag(:span, "", class: "plural")} kviz #{content_tag(:span, "", class: "name")}!".html_safe
+  .buttons
+    = f.button :button, "Započni#{content_tag(:span, "", class: "plural")} kviz #{content_tag(:strong, "", class: "name")}!".html_safe

@@ -1,7 +1,14 @@
 body.quizzes {
+
   &.index {
-    th, td {
+
+    // table
+
+    th,
+    td {
       &:nth-child(3) { text-align: center; }
     }
+
   }
+
 }

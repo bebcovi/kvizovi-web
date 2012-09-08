@@ -2,6 +2,6 @@
 
 %p= back_button "Natrag", quiz_path(@question.quiz)
 
-= simple_form_for :game do |f|
+= simple_form_for :game, html: {class: @question.category} do |f|
 
   = render partial: "question", object: @question, locals: {f: f}

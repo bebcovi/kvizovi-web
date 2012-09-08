@@ -1,20 +1,21 @@
 @import 'compass';
 @import "compass/css3/user-interface";
 
-@import 'base';
-@import 'extend';
+@import 'variables';
+@import 'mixins';
+@import 'extends';
 
 @import 'susy';
 @import 'font-awesome';
 
-@import 'layout';
+@import 'general';
+@import 'forms';
+@import 'tables';
+
+@import 'question-types';
+@import 'players';
 
 @import 'header';
-@import 'main';
-
-@import 'general';
-@import 'form';
-@import 'table';
 
 @import 'home';
 @import 'schools';

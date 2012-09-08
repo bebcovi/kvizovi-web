@@ -6,7 +6,7 @@
   = f.input :grades, collection: grades, as: :check_boxes
   = f.input :activated unless @quiz.new_record?
 
-  .controls
+  .buttons
     = link_to "Odustani", quizzes_path
     = f.button :submit
 

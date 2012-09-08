@@ -1,14 +1,10 @@
 body.questions {
-  #question_content {
-    height: rhythm(1.5);
-    width: rhythm(20);
-    max-width: 100%;
-  }
 
   &.index {
-    .controls { @extend %small-controls; }
 
-    #questions {
+    // questions
+
+    .questions {
       @extend %unstyled-list;
       @include rhythm(1, 0, 0, 1);
 
@@ -25,78 +21,4 @@ body.questions {
 
   }
 
-  &.new {
-    #association {
-      $cols: $total-columns / 2;
-      @include clearfix;
-      .column {
-        @include span-columns($cols);
-        @include nth-omega(last)
-      }
-    }
-    #photo {
-      .input.file { @include trailer(.5); }
-    }
-  }
-
-  // associations
-
-  $cols: $total-columns / 2;
-  .column {
-    @include span-columns($cols);
-    @include trailer(0);
-    div { @include trailer(.5); }
-  }
-
-  .interactive { @include omega; }
-
-  .static {
-    @include clearfix;
-    i {
-      @include adjust-leading-to(1.5);
-      float: right;
-      color: rgba(black, .25);
-    }
-  }
-
-  // points
-
-  .points {
-    clear: both;
-
-    input { display: none; }
-
-    span {
-      margin-left: rhythm(.25);
-      label {
-        @extend %inline-block;
-        @include border-radius(50%);
-        width: rhythm();
-        height: rhythm();
-        padding: 0 1px 0 0;
-        color: rgba(black, .5);
-        background: rgba(black, .05);
-        text-align: center;
-        &:hover {
-          background: rgba(black, .1);
-          color: $text;
-        }
-      }
-    }
-
-    :checked + label {
-      &, &:hover {
-        color: white;
-        background: rgba(black, .5);
-      }
-    }
-  }
-
-  // canvas
-
-  canvas {
-    @extend %border-radius;
-    border: 1px dashed rgba(black, .25);
-    &.filled { border: 1px solid rgba(black, .75); }
-  }
 }

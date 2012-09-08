@@ -1,0 +1,27 @@
+// susy
+
+$grid-padding: 2em;
+
+// vertical rhythm
+
+$base-font-size: 18px;
+$base-line-height: 28px;
+
+// css3
+
+$default-border-radius: 3px;
+
+// colors
+
+$text: rgba(black, .75);
+
+$link1: hsl(0, 50%, 50%);
+$link2: darken($link1, 5%);
+
+$players:
+  one hsl(270, 50%, 50%),
+  two hsl(100, 75%, 25%);
+
+// fonts
+
+$body: 'McLaren', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;

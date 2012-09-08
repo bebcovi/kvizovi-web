@@ -7,10 +7,9 @@ window.Lektire =
   init: ->
     Lektire.Initializers.general()
     Lektire.Initializers.helper()
-    switch $('body').attr('class').split(' ')[0]
-      when 'students'   then Lektire.Initializers.students()
-      when 'games'      then Lektire.Initializers.games()
-      when 'questions'  then Lektire.Initializers.questions()
+    Lektire.Initializers.questionTypes()
 
-$(document).ready ->
-  Lektire.init()
+    switch $('body').attr('class').split(' ')[0]
+      when 'games'      then Lektire.Initializers.games()
+
+jQuery -> Lektire.init()

@@ -48,7 +48,7 @@
 
   = f.input :points, collection: (1..5), as: :radio_buttons, wrapper_html: {class: "points"}, collection_wrapper_tag: false, item_wrapper_tag: :span
 
-  .controls
+  .buttons
     - back_link = (@question.new_record? ? new_quiz_question_path(@quiz) : quiz_path(@quiz))
     = link_to "Odustani", back_link
     = f.button :submit
