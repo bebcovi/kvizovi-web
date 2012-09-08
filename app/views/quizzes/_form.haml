@@ -10,4 +10,5 @@
     = link_to "Odustani", quizzes_path
     = f.button :submit
 
-  = notice "Kviz neće biti vidljiv učenicima dok ga ne učinite vidljivim." if @quiz.new_record?
+  - if @quiz.new_record?
+    = notice "Kviz zasad neće biti vidljiv učenicima. Kasnije ga možete učiniti vidljivim kada bude spreman."
