@@ -7,7 +7,8 @@ class School < ActiveRecord::Base
 
   has_secure_password
 
-  validates_presence_of :name, :level, :username, :password, :key
+  validates_presence_of :name, :level, :username, :key
+  validates_presence_of :password, on: :create
   validates_uniqueness_of :username
 
   def to_s
