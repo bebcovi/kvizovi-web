@@ -119,7 +119,7 @@ body.questions {
         label {
           @extend %inline-block;
           @extend %unselectable;
-          @include border-radius(50%);
+          @extend %circle;
           width: rhythm();
           height: rhythm();
           padding: 0 2px 0 0;

@@ -16,6 +16,10 @@
   @include border-radius;
 }
 
+%circle {
+  @include border-radius(50%);
+}
+
 %prepend-newline {
   &:before {
     content: '\a';

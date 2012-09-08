@@ -85,8 +85,6 @@ body.games {
     @extend %border-radius;
     @include trailer;
     height: rhythm(.25);
-    clear: both;
-    overflow: hidden;
     border: 1px solid rgba(black, .25);
     div {
       float: left;
