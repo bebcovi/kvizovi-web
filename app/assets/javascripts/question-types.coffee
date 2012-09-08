@@ -60,31 +60,35 @@ Lektire.Initializers.questionTypes = ->
     # Scaling drawn images proportionally:
     # http://stackoverflow.com/a/10842366/1247274
 
-    $form = $('form.photo')
+    $form     = $('form.photo')
 
-    $file = $form.find '[type=file]'
+    $file     = $form.find '[type=file]'
 
-    $file.on 'change', (e) ->
-      $canvas   = $('canvas')
-      canvas    = $canvas[0]
+    $canvas   = $form.find 'canvas'
+    canvas    = $canvas[0]
+    src       = $canvas.attr 'data-src'
+    height    = $canvas.attr('height') - 0
+    ctx       = canvas.getContext '2d'
+
+    drawImage = (event) ->
+      img = new Image
+      img.src = event.target.result
+
+      img.onload = ->
+        ctx.clearRect 0, 0, canvas.width, canvas.height
+
+        newWidth = height * img.width / img.height
+        canvas.width = newWidth
+
+        ctx.drawImage img, 0, 0, newWidth, height
+        $canvas.addClass 'filled'
+
+    drawImage({target: {result: src}}) if src
+
+    $file.on 'change', (event) ->
 
       width     = $canvas.attr('width') - 0
-      height    = $canvas.attr('height') - 0
-
-      ctx       = canvas.getContext '2d'
       reader    = new FileReader
 
-      ctx.clearRect 0, 0, canvas.width, canvas.height
-
-      reader.onload = (event) ->
-        img = new Image
-        img.src = event.target.result
-        img.onload = ->
-
-          newWidth = height * img.width / img.height
-          canvas.width = newWidth
-
-          ctx.drawImage img, 0, 0, newWidth, height
-          $canvas.addClass 'filled'
-
-      reader.readAsDataURL e.target.files[0]
+      reader.onload = drawImage
+      reader.readAsDataURL event.target.files[0]
