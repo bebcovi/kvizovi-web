@@ -1,16 +1,39 @@
 # encoding: utf-8
 
+# ActionController::TestUploadedFile
+
 FactoryGirl.define do
   factory :school do
     username  "mioc"
+    password  "secret"
     name      "XV. Gimnazija"
-    password  "mioc"
     level     "Srednja"
     key       "mioc"
+
+    after(:stub) do |school|
+      school.quizzes = []
+    end
+  end
+
+  factory :student do
+    before(:create) do
+      create(:school) unless School.any?
+    end
+
+    username   "john"
+    password   "secret"
+    first_name "John"
+    last_name  "Doe"
+    grade      3
+    school_key "mioc"
+
+    after(:stub) do |student|
+      student.school = build_stubbed(:school)
+    end
   end
 
   factory :quiz do
-    school
+    school_id 1
     name      "Name"
     grades    [1]
     activated true

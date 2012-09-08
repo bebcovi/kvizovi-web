@@ -40,5 +40,5 @@ end
 
 group :test do
   gem "factory_girl_rails"
-  gem "yajl-ruby", require: "yajl"
+  gem "capybara"
 end
