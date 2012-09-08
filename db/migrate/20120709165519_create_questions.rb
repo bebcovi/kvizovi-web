@@ -4,7 +4,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.text :content
       t.string :category
       t.text :data
-      t.integer :points
+      t.integer :points, default: 1
       t.references :quiz
 
       t.timestamps

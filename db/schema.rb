@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(:version => 20120818073000) do
     t.text     "content"
     t.string   "category"
     t.text     "data"
-    t.integer  "points"
+    t.integer  "points",                  :default => 1
     t.integer  "quiz_id"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"

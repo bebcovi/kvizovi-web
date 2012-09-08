@@ -24,6 +24,10 @@ hr:
               taken: "Već postoji škola s tim korisničkim imenom."
             password:
               blank: "Ne smije biti prazna."
+        question:
+          attributes:
+            attachment:
+              blank: "Niste priložili sliku."
   support:
     array:
       last_word_connector: " i "

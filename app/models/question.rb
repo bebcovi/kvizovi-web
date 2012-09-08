@@ -6,7 +6,11 @@ class Question < ActiveRecord::Base
   serialize :data
   has_attached_file :attachment, styles: {medium: "x250"}
 
-  validate :validate
+  validates_presence_of :content, :points
+  validates :attachment, attachment_presence: true, if: proc { photo? }
+  validate :validate_provided_answers, if: proc { choice? or association? }
+  validates_presence_of :data, message: "Niste odabrali točan odgovor.", if: proc { boolean? }
+  validates_presence_of :data, message: "Niste napisali točan odgovor.", unless: proc { boolean? }
 
   %w[boolean choice association photo text].each do |category|
     define_method("#{category}?") do
@@ -47,37 +51,11 @@ class Question < ActiveRecord::Base
 
   private
 
-  def validate
-    if content.blank?
-      errors.add(:base, "Niste napisali tekst pitanja.")
-    end
-
-    case
-    when boolean?
-      if data.blank?
-        errors.add(:base, "Morate specificirati da li je tvrdnja točna ili netočna.")
+  def validate_provided_answers
+    if data.any?(&:blank?)
+      data.each_with_index do |text, index|
+        errors.add(:"question_data_#{index + 1}", "Ne smije biti prazno.") if text.blank?
       end
-    when (choice? or association?)
-      if data.any?(&:blank?)
-        data.each_with_index do |text, index|
-          errors.add(:"question_data_#{index + 1}", "Ne smije biti prazno.") if text.blank?
-        end
-      end
-    when photo?
-      if send(:read_attribute_for_validation, "attachment_file_name").blank?
-        errors.add(:base, "Niste odabrali sliku.")
-      end
-      if data.blank?
-        errors.add(:base, "Niste napisali točan odgovor.")
-      end
-    when text?
-      if data.blank?
-        errors.add(:base, "Niste napisali točan odgovor.")
-      end
-    end
-
-    if points.blank?
-      errors.add(:base, "Niste odredili koliko pitanje nosi bodova.")
     end
   end
 end

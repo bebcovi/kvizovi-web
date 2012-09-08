@@ -1,8 +1,6 @@
 - @title = "Novi učenik"
 
-= simple_form_for @student, defaults: {required: false} do |f|
-
-  = f.error :base
+= simple_form_for @student do |f|
 
   = f.input :first_name
   = f.input :last_name

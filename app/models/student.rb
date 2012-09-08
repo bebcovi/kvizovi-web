@@ -9,6 +9,7 @@ class Student < ActiveRecord::Base
   validate :validate_school_key, on: :create
   validates_presence_of :password
   validates_uniqueness_of :username
+  validates_format_of :username, with: /^[a-zA-Z0-9_]{3,}$/, message: "Može sadržavati samo (engleska) slova, brojeve i '_'"
   validates_presence_of :username, :first_name, :last_name, :grade
 
   before_create do

@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-# ActionController::TestUploadedFile
-
 FactoryGirl.define do
   factory :school do
     username  "mioc"
