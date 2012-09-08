@@ -60,15 +60,15 @@ Lektire.Initializers.questionTypes = ->
     # Scaling drawn images proportionally:
     # http://stackoverflow.com/a/10842366/1247274
 
-    $form     = $('form.photo')
+    $form    = $('form.photo')
 
-    $file     = $form.find '[type=file]'
+    $file    = $form.find '[type=file]'
 
-    $canvas   = $form.find 'canvas'
-    canvas    = $canvas[0]
-    src       = $canvas.attr 'data-src'
-    height    = $canvas.attr('height') - 0
-    ctx       = canvas.getContext '2d'
+    $canvas  = $form.find 'canvas'
+    canvas   = $canvas[0]
+    src      = $canvas.attr 'data-src'
+    height   = $canvas.attr('height') - 0
+    ctx      = canvas.getContext '2d'
 
     drawImage = (event) ->
       img = new Image
@@ -81,9 +81,12 @@ Lektire.Initializers.questionTypes = ->
         canvas.width = newWidth
 
         ctx.drawImage img, 0, 0, newWidth, height
+
         $canvas.addClass 'filled'
 
-    drawImage({target: {result: src}}) if src
+    if src
+      drawImage({target: {result: src}})
+      $('.pladeholder').hide()
 
     $file.on 'change', (event) ->
 

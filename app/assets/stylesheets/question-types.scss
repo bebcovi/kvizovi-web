@@ -102,8 +102,21 @@ body.questions {
     form.photo {
       canvas {
         @extend %border-radius;
-        border: 1px dashed rgba(black, .25);
+        height: 250px;
+        border: 2px dashed rgba(black, .1);
         &.filled { border: 1px solid rgba(black, .75); }
+      }
+
+      .placeholder {
+        @include with-font-size(80px, 2) {
+          @extend %inline-block;
+          @extend %unselectable;
+          @include rhythm(-10, 0, 0, 0);
+          width: 300px;
+          margin-left: -306px;
+          color: rgba(black, .025);
+          text-align: center;
+        }
       }
     }
 
