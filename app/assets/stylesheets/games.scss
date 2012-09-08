@@ -46,7 +46,6 @@ body.games {
       @include with-font-size(24px) {
         @include leader(-0.25);
         margin-left: rhythm();
-        color: rgba(black, .25);
       }
     }
 
