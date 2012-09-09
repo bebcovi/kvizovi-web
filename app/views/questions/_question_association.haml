@@ -1,9 +1,6 @@
 - input_collection(f) do |c|
 
-  .column.static
-    - 4.times do |idx|
+  - 4.times do |idx|
+    .pair
       = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 1}", input_html: {value: question.provided_answers.keys[idx]}).prepend_icon("arrow-right")
-
-  .column.interactive
-    - 4.times do |idx|
-      = c.input :data, as: :string, label: false, placeholder: "Opcija #{idx + 1}", input_html: {value: question.provided_answers.values[idx]}
+      = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 5}", input_html: {value: question.provided_answers.values[idx]})
