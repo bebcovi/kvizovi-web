@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class QuizPresenter < BasePresenter
   presents :quiz
 
@@ -13,10 +15,10 @@ class QuizPresenter < BasePresenter
     simple_form_for quiz do |f|
       if quiz.activated?
         f.hidden_field(:activated, value: false) +
-        f.button(:button, icon("eye-open"))
+        f.button(:button, icon("eye-open"), title: "Učini nevidljivim")
       else
         f.hidden_field(:activated, value: true) +
-        f.button(:button, icon("eye-close"))
+        f.button(:button, icon("eye-close"), title: "Učini vidljivim")
       end
     end
   end
