@@ -16,6 +16,17 @@ module Helpers
     end
   end
 
+  def login(user)
+    login_path = send("#{user.class.name.underscore}_login_path")
+    visit login_path
+
+    fill_in "Korisničko ime", with: user.username
+    fill_in "Lozinka", with: user.password
+    click_on "Prijava"
+
+    user
+  end
+
   def logout
     visit logout_path
   end

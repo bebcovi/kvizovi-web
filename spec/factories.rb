@@ -7,40 +7,26 @@ FactoryGirl.define do
     name      "XV. Gimnazija"
     level     "Srednja"
     key       "mioc"
-
-    after(:stub) do |school|
-      school.quizzes = []
-    end
   end
 
   factory :student do
-    before(:create) do
-      create(:school) unless School.any?
-    end
-
     username   "john"
     password   "secret"
     first_name "John"
     last_name  "Doe"
     grade      3
     school_key "mioc"
-
-    after(:stub) do |student|
-      student.school = build_stubbed(:school)
-    end
   end
 
   factory :quiz do
-    school_id 1
-    name      "Name"
+    name      "Antika"
     grades    [1]
-    activated true
   end
 
   factory :question do
     quiz_id  1
     category "boolean"
-    content  "Question?"
+    content  "content"
     data     "true"
     points   3
 

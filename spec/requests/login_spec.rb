@@ -7,14 +7,14 @@ shared_examples_for "login" do
     fill_in "Korisničko ime", with: @user.username
     fill_in "Lozinka", with: "wrong"
     click_on "Prijava"
-    page.current_path.should eq(login_path)
+    current_path.should eq(login_path)
     page.should have_content("Pogrešno korisničko ime ili lozinka.")
 
     find_field("Korisničko ime").value.should eq(@user.username)
     find_field("Lozinka").value.should be_nil
     fill_in "Lozinka", with: @user.password
     click_on "Prijava"
-    page.current_path.should eq(home_path)
+    current_path.should eq(home_path)
     find("#log").should have_link(name)
   end
 
@@ -24,7 +24,7 @@ shared_examples_for "login" do
     fill_in "Lozinka", with: @user.password
     click_on "Prijava"
 
-    page.current_path.should eq(home_path)
+    current_path.should eq(home_path)
     cookie.expires.should be_nil
     logout
 
@@ -34,7 +34,7 @@ shared_examples_for "login" do
     check("Zapamti me")
     click_on "Prijava"
 
-    page.current_path.should eq(home_path)
+    current_path.should eq(home_path)
     cookie.expires.should be > 10.years.from_now
   end
 end
@@ -44,6 +44,7 @@ describe "Login" do
     it_behaves_like "login" do
       before(:each) do
         @user = build_stubbed(:student)
+        @user.stub(:school) { build_stubbed(:school, quizzes: []) }
         Student.stub(:find_by_username) { @user }
         Student.stub(:find) { @user }
       end
@@ -57,10 +58,7 @@ describe "Login" do
       let(:home_path)  { new_game_path }
 
       let(:name) { "John Doe" }
-
-      def cookie
-        cookies[:student_id]
-      end
+      def cookie; cookies[:student_id] end
     end
   end
 
@@ -81,10 +79,7 @@ describe "Login" do
       let(:home_path)  { school_path(@user) }
 
       let(:name) { "XV. Gimnazija" }
-
-      def cookie
-        cookies[:school_id]
-      end
+      def cookie; cookies[:school_id] end
     end
   end
 end
