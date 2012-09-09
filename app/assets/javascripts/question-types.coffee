@@ -8,32 +8,30 @@ Lektire.Initializers.questionTypes = ->
 
     # association
 
-    conversion = (el) ->
-      result = el.clone()
-      result.find('input').each -> $(@).replaceWith($(@).val())
-      el.after(result)
-      el.hide()
-      result
+    $form     = $('form.association')
 
-    $form             = $('form.association')
+    $pairs    = $form.find '.pair'
 
-    $static           = {}
-    $interactive      = {}
+    $dynamic  = $form.find '.dynamic'
 
-    $static.old       = $form.find('.static')
-    $static.new       = conversion($static.old)
-
-    $interactive.old  = $form.find('.interactive')
-    $interactive.new  = conversion($interactive.old)
-
-    swap = ($one, $two) ->
+    swap      = ($one, $two) ->
       $oneParent = $one.parent()
       $twoParent = $two.parent()
 
-      $one.appendTo $twoParent
-      $two.appendTo $oneParent
+      $one.prependTo $twoParent
+      $two.prependTo $oneParent
 
-    $interactive.new.find('div')
+      console.log $one.next()
+
+      $one.next().attr 'value', $one.text()
+      $two.next().attr 'value', $two.text()
+
+    $pairs.find('input').each ->
+      $el = $('<span>').text $(@).val()
+      $(@).before $el
+      $(@).hide()
+
+    $dynamic.find('span')
       .draggable
         addClasses: false
         revert: 'invalid'
@@ -93,7 +91,7 @@ Lektire.Initializers.questionTypes = ->
 
       $template = $options.first().clone()
 
-      $template.find('input').val ''
+      $template.find('input').attr 'value', ''
       $template.removeClass 'field_with_hint field_with_errors'
       $template.find('.hint, .error').remove()
 

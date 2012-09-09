@@ -5,46 +5,40 @@ body.games, body.questions.show {
   // association
 
   form.association {
-    .column {
-      @extend %unstyled-list;
-      @include rhythm(0, 0, 0, 1);
+    $height: 1.5;
+    .pair {
+      @extend %pie-clearfix;
 
-      li { @include trailer(.25); }
-    }
-
-    $cols: 5;
-    .static {
-      @include span-columns($cols);
-      li {
-        @include clearfix;
-        cursor: default;
-        padding: rhythm(.25);
+      div, i {
+        @include adjust-leading-to($height);
       }
+
+      div { @extend %inline-block; }
 
       i {
-        float: right;
-        height: rhythm();
-        margin-right: rhythm(.5);
         color: rgba(black, .25);
+        margin-right: gutter();
       }
     }
 
-    $cols: $total-columns - $cols;
-    .interactive {
-      @include span-columns($cols omega);
-      @include clearfix;
-      div {
+    $cols: 4;
+    .static { @include span-columns($cols); }
+
+    .dynamic {
+      span {
         @extend %inline-block;
         @extend %border-radius;
         @extend %unselectable;
+        @include adjust-leading-to(1);
         @include h-borders(1px, .25);
         @include v-borders(1px, .5);
-        @include box-sizing(content-box);
         cursor: move;
         border-color: darken(white, 25%);
         background: darken(white, 2%);
       }
+
       .original { @include opacity(.25); }
+
       .hover {
         border-color: darken(white, 50%);
         background: darken(white, 3%);
@@ -121,19 +115,22 @@ body.questions {
     // associations
 
     form.association {
-      $cols: $total-columns / 2;
-      .column {
-        @include span-columns($cols);
-        @include trailer(0);
-        div { @include trailer(.5); }
+      $cols: $total-columns/2 - 1;
+      .pair {
+        @extend %pie-clearfix;
+        div {
+          @include span-columns($cols);
+          @include nth-omega;
+          &:last-child { @include post(1); }
+        }
+        input { width: 100%; }
       }
 
-      .interactive { @include omega; }
-      .static { @include clearfix; }
-
+      $cols: 1;
       i {
+        @include span-columns($cols);
         @include adjust-leading-to(1.5);
-        float: right;
+        text-align: center;
         color: rgba(black, .25);
       }
     }
