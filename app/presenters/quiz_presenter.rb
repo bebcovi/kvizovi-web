@@ -10,7 +10,15 @@ class QuizPresenter < BasePresenter
   end
 
   def visibility_icon
-    quiz.activated? ? icon("eye-open") : icon("eye-close")
+    simple_form_for quiz do |f|
+      if quiz.activated?
+        f.hidden_field(:activated, value: false) +
+        f.button(:button, icon("eye-open"))
+      else
+        f.hidden_field(:activated, value: true) +
+        f.button(:button, icon("eye-close"))
+      end
+    end
   end
 
   def visible?
