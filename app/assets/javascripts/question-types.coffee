@@ -52,6 +52,63 @@ Lektire.Initializers.questionTypes = ->
 
   else if route.search(/questions (edit|new|create)/) != -1
 
+    # choice
+
+    $form = $('form.choice')
+
+    if $form.length > 0
+
+      # variables
+
+      $options      = $('.field_with_hint').nextAll '.string'
+      $template     = []
+
+      $removeButton = $('<button>') .attr('type', 'button')
+                                    .addClass('remove')
+                                    .prependIcon('remove')
+
+      $addButton    = $('<button>') .attr('type', 'button')
+                                    .addClass('add')
+                                    .text('Dodaj opciju')
+                                    .prependIcon('plus')
+
+      updateAttrs   = ($el, i) ->
+
+        $input = $el.find 'input'
+
+        i += 2
+
+        id = $input.attr('id')
+        placeholder = $input.attr('placeholder')
+
+        $input.attr 'id',           id.replace(/\d+/, i)
+        $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
+
+      addOption     = ($el) -> $options = $options.add $el.insertBefore($addButton)
+      removeOption  = ($el) -> $options = $options.not $el.remove()
+
+      # action
+
+      $options.each -> $(@).find('input').after $removeButton.clone()
+
+      $template = $options.first().clone()
+
+      $template.find('input').val ''
+      $template.removeClass 'field_with_hint field_with_errors'
+      $template.find('.hint, .error').remove()
+
+      $addButton
+        .insertAfter($options.last())
+        .on 'click', ->
+          $new = $template.clone()
+          updateAttrs $new, $options.length
+          addOption $new
+
+      $form.on 'click', '.remove', ->
+        $el = $(@).parent()
+        removeOption $el
+        $options.each (i) -> updateAttrs $(@), i
+
     # photo
 
     # Drawing images from File API to canvas:
@@ -60,38 +117,40 @@ Lektire.Initializers.questionTypes = ->
     # Scaling drawn images proportionally:
     # http://stackoverflow.com/a/10842366/1247274
 
-    $form    = $('form.photo')
+    $form = $('form.photo')
 
-    $file    = $form.find '[type=file]'
+    if $form.length > 0
 
-    $canvas  = $form.find 'canvas'
-    canvas   = $canvas[0]
-    src      = $canvas.attr 'data-src'
-    height   = $canvas.attr('height') - 0
-    ctx      = canvas.getContext '2d'
+      $file    = $form.find '[type=file]'
 
-    drawImage = (event) ->
-      img = new Image
-      img.src = event.target.result
+      $canvas  = $form.find 'canvas'
+      canvas   = $canvas[0]
+      src      = $canvas.attr 'data-src'
+      height   = $canvas.attr('height') - 0
+      ctx      = canvas.getContext '2d'
 
-      img.onload = ->
-        ctx.clearRect 0, 0, canvas.width, canvas.height
+      drawImage = (event) ->
+        img = new Image
+        img.src = event.target.result
 
-        newWidth = height * img.width / img.height
-        canvas.width = newWidth
+        img.onload = ->
+          ctx.clearRect 0, 0, canvas.width, canvas.height
 
-        ctx.drawImage img, 0, 0, newWidth, height
+          newWidth = height * img.width / img.height
+          canvas.width = newWidth
 
-        $canvas.addClass 'filled'
+          ctx.drawImage img, 0, 0, newWidth, height
 
-    if src
-      drawImage({target: {result: src}})
-      $('.pladeholder').hide()
+          $canvas.addClass 'filled'
 
-    $file.on 'change', (event) ->
+      if src
+        drawImage({target: {result: src}})
+        $('.pladeholder').hide()
 
-      width     = $canvas.attr('width') - 0
-      reader    = new FileReader
+      $file.on 'change', (event) ->
 
-      reader.onload = drawImage
-      reader.readAsDataURL event.target.files[0]
+        width     = $canvas.attr('width') - 0
+        reader    = new FileReader
+
+        reader.onload = drawImage
+        reader.readAsDataURL event.target.files[0]

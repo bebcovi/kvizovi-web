@@ -20,14 +20,16 @@ form {
 // controls
 
 .controls {
-  float: right;
-  margin-left: rhythm();
-  a {
-    @extend %inline-block;
-    @extend %subtle;
-    &:nth-child(n+1) { margin-left: rhythm(.25); }
+  @include with-font-size(22px) {
+    float: right;
+    margin-left: rhythm();
+    a {
+      @extend %inline-block;
+      @extend %subtle;
+      &:nth-child(n+1) { margin-left: rhythm(.25); }
+    }
+    i { width: auto; }
   }
-  i { width: auto; }
 }
 
 // flash messages

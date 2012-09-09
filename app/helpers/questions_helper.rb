@@ -3,11 +3,11 @@
 module QuestionsHelper
   def categories
    [
-     ["boolean", 'Točno/netočno'],
-     ["choice", '4 ponuđena odgovora'],
+     ["boolean",     'Točno/netočno'],
+     ["choice",      'Ponuđeni odgovori'],
      ["association", 'Asocijacija'],
-     ["photo", 'Pogodi tko/što je na slici'],
-     ["text", 'Upiši točan odgovor']
+     ["photo",       'Pogodi tko/što je na slici'],
+     ["text",        'Upiši točan odgovor']
    ]
   end
 end

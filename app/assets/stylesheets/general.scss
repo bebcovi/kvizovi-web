@@ -42,9 +42,7 @@ h2 {
 p,
 ol,
 ul,
-dl {
-  @include rhythm(0, 0, 0, .5);
-}
+dl { @include rhythm(0, 0, 0, .5); }
 
 a {
   @include hover-link;
@@ -52,9 +50,7 @@ a {
 }
 
 dt,
-dd {
-  display: inline;
-}
+dd { display: inline; }
 
 dt {
   font-weight: bold;

@@ -1,3 +1,9 @@
+jQuery.fn.prependIcon = (name) ->
+  @.each -> $(@).prepend "<i class=\"icon-#{name}\"> "
+
+jQuery.fn.appendIcon = (name) ->
+  @.each -> $(@).append " <i class=\"icon-#{name}\">"
+
 window.Lektire =
   Models: {}
   Collections: {}

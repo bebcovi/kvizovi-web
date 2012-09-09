@@ -8,6 +8,10 @@
   @include inline-block;
 }
 
+%pie-clearfix {
+  @include pie-clearfix;
+}
+
 %unselectable {
   @include user-select(none);
 }
@@ -53,10 +57,8 @@
 }
 
 %subtle {
-  $font-size: 22px;
   $c1: rgba(black, .4);
   $c2: $link2;
-  @include adjust-font-size-to($font-size);
   @include color-link($c1, $c2);
   margin: 0;
   padding: 0;
