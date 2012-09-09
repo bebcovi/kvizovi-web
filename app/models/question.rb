@@ -25,8 +25,9 @@ class Question < ActiveRecord::Base
   def provided_answers
     if association?
       unless data.nil?
-        half = data.count / 2
-        Hash[data.first(half).zip(data.last(half))]
+        left_column = data.values_at(*data.each_index.select(&:even?))
+        right_column = data.values_at(*data.each_index.select(&:odd?))
+        Hash[left_column.zip(right_column)]
       else
         {}
       end
