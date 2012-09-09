@@ -19,11 +19,6 @@ class QuizzesController < ApplicationController
     end
   end
 
-  def show
-    @quiz = current_school.quizzes.find(params[:id])
-    redirect_to quiz_questions_path(@quiz)
-  end
-
   def edit
     @quiz = current_school.quizzes.find(params[:id])
   end

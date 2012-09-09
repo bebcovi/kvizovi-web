@@ -14,7 +14,7 @@
         %th
 
     %tbody
-      - @quizzes.find_each do |quiz|
+      - @quizzes.each do |quiz|
         - present quiz do |quiz_presenter|
           %tr
             %td= quiz_presenter.name
