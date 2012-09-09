@@ -10,13 +10,11 @@
 
 - elsif question.association?
 
-  %ol.column.static
-    = list_of question.provided_answers.keys do |answer|
-      = f.input(:answer, input_html: {name: "game[answer][]", value: answer}, label: false).prepend_icon("arrow-right")
-
-  %ol.column.interactive
-    = list_of question.provided_answers.values.shuffle do |answer|
-      = f.input :answer, input_html: {name: "game[answer][]", value: answer}, label: false
+  - input_collection(f) do |c|
+    - question.provided_answers.each do |left, right|
+      .pair
+        = c.input(:answer, input_html: {value: left}, label: false).prepend_icon("arrow-right")
+        = c.input(:answer, input_html: {value: right}, label: false)
 
 - elsif question.photo?
 
