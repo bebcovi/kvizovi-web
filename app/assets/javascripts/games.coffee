@@ -62,14 +62,21 @@ Lektire.Initializers.games = ->
 
         update()
 
-        window.setTimeout ->
-          $fill.show().animate
-            width     : width
-          ,
-            duration  : 2000
-            easing    : 'easeOutCubic'
-            step      : update
-            complete  : -> $rank.fadeIn 'fast'
-        , delay
+        $(window).on 'load', ->
 
-        delay += 2000
+          if width?
+            window.setTimeout ->
+              $fill.show().animate
+                width     : width
+              ,
+                duration  : 2000
+                easing    : 'easeOutCubic'
+                step      : update
+                complete  : -> $rank.fadeIn 'fast'
+            , delay
+
+            delay += 2000
+          else
+            window.setTimeout ->
+              $rank.fadeIn 'fast'
+            , delay

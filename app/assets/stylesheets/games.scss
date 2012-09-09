@@ -66,6 +66,7 @@ body.games {
     $height: 2;
     .bar {
       @extend %border-radius;
+      @extend %unselectable;
       @include trailer(.25);
       position: relative;
       height: rhythm($height);
