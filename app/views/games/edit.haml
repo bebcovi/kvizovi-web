@@ -7,7 +7,7 @@
 #progress
   - @questions_count.times do |i|
     - if i < @question_number - 1
-      %div{style: "width: #{100/@questions_count.to_f}%", data: {done: true}}
+      %div.done{style: "width: #{100/@questions_count.to_f}%"}
     - else
       %div{style: "width: #{100/@questions_count.to_f}%"}
 

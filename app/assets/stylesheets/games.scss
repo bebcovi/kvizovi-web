@@ -101,6 +101,6 @@ body.games {
     }
   }
 
-  [data-done] { background: rgba(black, .1); }
+  .done { background: darken(white, 10%); }
 
 }

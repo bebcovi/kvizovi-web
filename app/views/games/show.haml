@@ -2,9 +2,9 @@
 
 %h1 Rezultati
 
-#progress{data: {done: true}}
+#progress.done
   - @questions_count.times do |i|
-    %div{style: "width: #{100/@questions_count.to_f}%", data: {done: true}}
+    %div.done{style: "width: #{100/@questions_count.to_f}%"}
 
 %ol.score
   - @game.players.zip(@game.scores).each_with_index do |(player, score), player_number|
