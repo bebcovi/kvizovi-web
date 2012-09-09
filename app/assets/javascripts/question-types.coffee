@@ -58,16 +58,17 @@ Lektire.Initializers.questionTypes = ->
 
       # variables
 
-      $options      = $('.field_with_hint').nextAll '.string'
+      $options      = $form.find('.field_with_hint').nextAll '.string'
       $template     = []
 
       $removeButton = $('<button>') .attr('type', 'button')
+                                    .attr('tabindex', '-1')
                                     .addClass('remove')
                                     .prependIcon('remove')
 
       $addButton    = $('<button>') .attr('type', 'button')
                                     .addClass('add')
-                                    .text('Dodaj opciju')
+                                    .text('Dodaj')
                                     .prependIcon('plus')
 
       updateAttrs   = ($el, i) ->
@@ -87,7 +88,7 @@ Lektire.Initializers.questionTypes = ->
 
       # action
 
-      $options.each -> $(@).find('input').after $removeButton.clone()
+      $options.find('input').after $removeButton.clone()
 
       $template = $options.first().clone()
 
@@ -106,6 +107,67 @@ Lektire.Initializers.questionTypes = ->
         $el = $(@).parent()
         removeOption $el
         $options.each (i) -> updateAttrs $(@), i
+
+    # association
+
+    $form = $('form.association')
+
+    if $form.length > 0
+
+      # variables
+
+      $pairs        = $form.find('.pair').not ':first'
+      $template     = []
+
+      $removeButton = $('<button>') .attr('type', 'button')
+                                    .attr('tabindex', '-1')
+                                    .addClass('remove')
+                                    .prependIcon('remove')
+
+      $addButton    = $('<button>') .attr('type', 'button')
+                                    .addClass('add')
+                                    .text('Dodaj')
+                                    .prependIcon('plus')
+
+      updateAttrs   = ($el, i) ->
+
+        i += 2
+        j = i * 2
+
+        $el.find('.static, .dynamic').each (index) ->
+
+          $input = $(@).find('input')
+
+          id = $input.attr('id')
+          placeholder = $input.attr('placeholder')
+
+          $input.attr 'id',           id.replace(/\d+/, if index == 1 then j else j - 1)
+          $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
+
+      addPair       = ($el) -> $pairs = $pairs.add $el.insertBefore($addButton)
+      removePair    = ($el) -> $pairs = $pairs.not $el.remove()
+
+      # action
+
+      $pairs.find('.dynamic').after $removeButton.clone()
+
+      $template = $pairs.first().clone()
+
+      $template.find('input').attr 'value', ''
+      $template.removeClass 'field_with_errors'
+      $template.find('.error').remove()
+
+      $addButton
+        .insertAfter($pairs.last())
+        .on 'click', ->
+          $new = $template.clone()
+          updateAttrs $new, $pairs.length
+          addPair $new
+
+      $form.on 'click', '.remove', ->
+        $el = $(@).parent()
+        removePair $el
+        $pairs.each (i) -> updateAttrs $(@), i
 
     # photo
 

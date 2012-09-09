@@ -2,6 +2,6 @@
 
   - 4.times do |idx|
     .pair
-      = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 1}", input_html: {value: question.provided_answers.keys[idx]})
+      = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 1}a", input_html: {value: question.provided_answers.keys[idx]}, wrapper_html: {class: 'static'})
       = icon("arrow-right")
-      = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 5}", input_html: {value: question.provided_answers.values[idx]})
+      = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 1}b", input_html: {value: question.provided_answers.values[idx]}, wrapper_html: {class: 'dynamic'})

@@ -85,7 +85,6 @@ body.questions {
         button {
           @include with-font-size(14px) {
             @extend %subtle;
-            @extend %append-newline;
             @include leader(.25);
             margin-left: rhythm(.5);
             text-align: center;
@@ -115,23 +114,40 @@ body.questions {
     // associations
 
     form.association {
-      $cols: $total-columns/2 - 1;
       .pair {
         @extend %pie-clearfix;
-        div {
-          @include span-columns($cols);
-          @include nth-omega;
-          &:last-child { @include post(1); }
+
+        $cols: $total-columns/2 - 1;
+        div { @include span-columns($cols); }
+
+        button {
+          @include with-font-size(14px) {
+            @extend %subtle;
+            @include leader(.25);
+            margin-left: rhythm(.75);
+            text-align: center;
+            color: rgba(black, .25);
+            &:hover { color: rgba(black, .5); }
+            &:active { color: $text; }
+          }
         }
+
+        i {
+          @include adjust-leading-to(1.5);
+          float: left;
+          margin-right: gutter();
+          text-align: center;
+          color: rgba(black, .25);
+        }
+
         input { width: 100%; }
+
+        .dynamic { margin-right: 0; }
       }
 
-      $cols: 1;
-      i {
-        @include span-columns($cols);
-        @include adjust-leading-to(1.5);
-        text-align: center;
-        color: rgba(black, .25);
+      .add {
+        @extend %subtle;
+        @include trailer(.5);
       }
     }
 
