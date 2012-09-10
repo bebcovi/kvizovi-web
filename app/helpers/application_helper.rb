@@ -16,15 +16,15 @@ module ApplicationHelper
   end
 
   def logout_button(string, path, options = {})
-    link_to string, path, {method: :delete}.merge(options)
+    link_to string.prepend_icon("exit"), path, {method: :delete}.merge(options)
   end
 
   def change_password_button(string, path, options = {})
-    link_to string.prepend_icon("lock"), path, options
+    link_to string.prepend_icon("locked"), path, options
   end
 
   def edit_button(string, path, options = {})
-    link_to string.prepend_icon("edit"), path, options
+    link_to string.prepend_icon("pencil"), path, options
   end
 
   def preview_button(string, path, options = {})
@@ -32,7 +32,7 @@ module ApplicationHelper
   end
 
   def delete_button(string, path, options = {})
-    link_to string.prepend_icon("trash"), path, {method: :delete, confirm: "Jeste li sigurni?"}.merge(options)
+    link_to string.prepend_icon("remove"), path, {method: :delete, confirm: "Jeste li sigurni?"}.merge(options)
   end
 
   def add_button(string, path, options = {})
@@ -40,7 +40,7 @@ module ApplicationHelper
   end
 
   def close_button(options = {})
-    content_tag :button, "".prepend_icon("remove"), options
+    content_tag :button, "".prepend_icon("cancel"), options
   end
 
   def settings_button(string, path, options = {})
@@ -48,7 +48,7 @@ module ApplicationHelper
   end
 
   def notice(string, options = {})
-    content_tag :p, string.prepend_icon("info-sign"), {class: "notice"}.merge(options)
+    content_tag :p, string.prepend_icon("info"), {class: "notice"}.merge(options)
   end
 
   def icon(name, options = {})

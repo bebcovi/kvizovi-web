@@ -15,10 +15,10 @@ class QuizPresenter < BasePresenter
     simple_form_for quiz do |f|
       if quiz.activated?
         f.hidden_field(:activated, value: false) +
-        f.button(:button, icon("eye-open"), title: "Učini nevidljivim")
+        f.button(:button, icon("eye"), title: "Učini nevidljivim", class: "enabled")
       else
         f.hidden_field(:activated, value: true) +
-        f.button(:button, icon("eye-close"), title: "Učini vidljivim")
+        f.button(:button, icon("eye"), title: "Učini vidljivim", class: "disabled")
       end
     end
   end
@@ -32,7 +32,7 @@ class QuizPresenter < BasePresenter
   end
 
   def manage_questions_button(text, options = {})
-    link_to text.prepend_icon("tasks"), quiz_questions_path(quiz), options
+    link_to text.prepend_icon("list-view"), quiz_questions_path(quiz), options
   end
 
   def delete_button(text, options = {})

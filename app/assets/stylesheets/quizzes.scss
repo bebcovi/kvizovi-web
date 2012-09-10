@@ -7,11 +7,17 @@ body.quizzes {
     th,
     td {
       &:nth-child(3) { text-align: center; }
-      button {
-        @include with-font-size(22px) {
-          @extend %subtle;
-        }
+    }
+
+    button {
+      @include with-font-size(24px, 1) {
+        @extend %subtle;
       }
+    }
+
+    .disabled {
+      color: rgba(black, .15);
+      &:hover { color: rgba(black, .5); }
     }
 
   }

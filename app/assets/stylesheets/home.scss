@@ -8,6 +8,7 @@ body.home {
       i {
         @include with-font-size(48px) {
           display: block;
+          width: auto;
         }
       }
     }

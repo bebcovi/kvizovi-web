@@ -64,7 +64,7 @@ Lektire.Initializers.questionTypes = ->
       $removeButton = $('<button>') .attr('type', 'button')
                                     .attr('tabindex', '-1')
                                     .addClass('remove')
-                                    .prependIcon('remove')
+                                    .prependIcon('cancel')
 
       $addButton    = $('<button>') .attr('type', 'button')
                                     .addClass('add')
@@ -122,7 +122,7 @@ Lektire.Initializers.questionTypes = ->
       $removeButton = $('<button>') .attr('type', 'button')
                                     .attr('tabindex', '-1')
                                     .addClass('remove')
-                                    .prependIcon('remove')
+                                    .prependIcon('cancel')
 
       $addButton    = $('<button>') .attr('type', 'button')
                                     .addClass('add')

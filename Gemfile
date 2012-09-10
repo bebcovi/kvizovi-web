@@ -7,7 +7,6 @@ gem "pg"
 group :assets do
   gem "sass-rails"
   gem "compass-rails"
-  gem "font-awesome-rails"
   gem "susy"
   gem "jquery-rails"
   gem "jquery-ui-rails"

@@ -11,7 +11,7 @@
 
   %body{class: body_class}
     %header
-      %h1#logo= link_to "Lektire".prepend_icon("book"), root_path
+      %h1#logo= link_to "Lektire".prepend_icon("books"), root_path
       = render "log" if logged_in?
 
     %article{role: 'main'}

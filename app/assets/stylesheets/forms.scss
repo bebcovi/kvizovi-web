@@ -12,23 +12,22 @@ form {
     }
   }
   p.notice {
-    color: rgba(black, .4);
-    i { margin-right: rhythm(.1); }
+    @include with-font-size(16px) {
+      color: rgba(black, .3);
+      i { margin-right: rhythm(.1); }
+    }
   }
 }
 
 // controls
 
 .controls {
-  @include with-font-size(22px) {
-    float: right;
-    margin-left: rhythm();
-    a {
-      @extend %inline-block;
-      @extend %subtle;
-      &:nth-child(n+1) { margin-left: rhythm(.25); }
-    }
-    i { width: auto; }
+  float: right;
+  margin-left: rhythm();
+  a {
+    @extend %inline-block;
+    @extend %subtle;
+    &:nth-child(n+1) { margin-left: rhythm(.25); }
   }
 }
 
