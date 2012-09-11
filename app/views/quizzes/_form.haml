@@ -3,8 +3,9 @@
   = f.error :base
 
   = f.input :name
-  = f.input :grades, collection: grades, as: :check_boxes
-  = f.input :activated unless @quiz.new_record?
+
+  %p Predviđeni razredi:
+  = f.input :grades, collection: grades, as: :check_boxes, label: false
 
   .buttons
     = link_to "Odustani", quizzes_path

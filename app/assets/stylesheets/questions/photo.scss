@@ -1,0 +1,33 @@
+form.photo {
+
+  &.show {
+    .img {
+      float: left;
+      margin-right: rhythm();
+    }
+
+    .buttons { clear: none; }
+  }
+
+  &.edit, &.new {
+    canvas {
+      @extend %border-radius;
+      height: 250px;
+      border: 2px dashed rgba(black, .1);
+      &.filled { border: 1px solid rgba(black, .75); }
+    }
+
+    .placeholder {
+      @include with-font-size(100px, 2) {
+        @extend %inline-block;
+        @extend %unselectable;
+        @include rhythm(-10, 0, 0, 0);
+        width: 300px;
+        margin-left: -304px;
+        color: rgba(black, .05);
+        text-align: center;
+      }
+    }
+  }
+
+}

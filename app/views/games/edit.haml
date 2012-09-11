@@ -11,7 +11,7 @@
     - else
       %div{style: "width: #{100/@questions_count.to_f}%"}
 
-= simple_form_for :game, url: game_path, method: :put, html: {class: @question.category} do |f|
+= simple_form_for :game, url: game_path, method: :put, html: {class: "show #{@question.category}"} do |f|
 
   = render partial: "questions/question", object: @question, locals: {f: f}
 

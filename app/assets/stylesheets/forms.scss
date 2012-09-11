@@ -55,12 +55,8 @@ label {
 
 // interactive elements
 
-input, button, textarea { margin: 0;
-  font: {
-    size: inherit;
-    family: inherit;
-  }
-  line-height: inherit;
+input, button, textarea {
+  margin: 0;
   color: rgba(black, .6);
 }
 

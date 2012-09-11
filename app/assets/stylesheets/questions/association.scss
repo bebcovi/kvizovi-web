@@ -1,0 +1,83 @@
+form.association {
+
+  &.show {
+    $height: 1.5;
+    .pair {
+      @extend %pie-clearfix;
+
+      div, i {
+        @include adjust-leading-to($height);
+      }
+
+      div { @extend %inline-block; }
+
+      i {
+        color: rgba(black, .25);
+        margin-right: gutter();
+      }
+    }
+
+    $cols: 4;
+    .static { @include span-columns($cols); }
+
+    .dynamic {
+      span {
+        @extend %inline-block;
+        @extend %border-radius;
+        @extend %unselectable;
+        @include adjust-leading-to(1);
+        @include h-borders(1px, .25);
+        @include v-borders(1px, .5);
+        cursor: move;
+        border-color: darken(white, 25%);
+        background: darken(white, 2%);
+      }
+
+      .original { @include opacity(.25); }
+
+      .hover {
+        border-color: darken(white, 50%);
+        background: darken(white, 3%);
+      }
+    }
+  }
+
+  &.edit, &.new {
+    .pair {
+      @extend %pie-clearfix;
+
+      $cols: $total-columns/2 - 1;
+      div { @include span-columns($cols); }
+
+      button {
+        @include with-font-size(14px) {
+          @extend %subtle;
+          @include leader(.25);
+          margin-left: rhythm(.75);
+          text-align: center;
+          color: rgba(black, .25);
+          &:hover { color: rgba(black, .5); }
+          &:active { color: $text; }
+        }
+      }
+
+      i {
+        @include adjust-leading-to(1.5);
+        float: left;
+        margin-right: gutter();
+        text-align: center;
+        color: rgba(black, .25);
+      }
+
+      input { width: 100%; }
+
+      .dynamic { margin-right: 0; }
+    }
+
+    .add {
+      @extend %subtle;
+      @include trailer(.5);
+    }
+  }
+
+}

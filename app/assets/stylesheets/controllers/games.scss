@@ -44,7 +44,7 @@ body.games {
 
     .username {
       @include with-font-size(24px) {
-        @include leader(-0.25);
+        @include leader(-0.5);
         margin-left: rhythm();
       }
     }

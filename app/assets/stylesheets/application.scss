@@ -1,6 +1,8 @@
 @import 'compass';
 @import "compass/css3/user-interface";
 
+@import 'normalize';
+
 @import 'variables';
 @import 'mixins';
 @import 'extends';
@@ -12,13 +14,9 @@
 @import 'forms';
 @import 'tables';
 
-@import 'question-types';
-@import 'players';
-
 @import 'header';
 
-@import 'home';
-@import 'schools';
-@import 'quizzes';
-@import 'questions';
-@import 'games';
+@import 'questions/*';
+@import 'controllers/*';
+
+@import 'players';

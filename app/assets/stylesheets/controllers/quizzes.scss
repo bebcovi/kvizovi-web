@@ -2,15 +2,13 @@ body.quizzes {
 
   &.index {
 
-    // table
-
     th,
     td {
       &:nth-child(3) { text-align: center; }
     }
 
     button {
-      @include with-font-size(24px, 1) {
+      @include with-font-size(22px, 1) {
         @extend %subtle;
       }
     }

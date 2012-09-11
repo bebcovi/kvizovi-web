@@ -1,0 +1,39 @@
+form.choice {
+
+  &.edit, &.new {
+    .string {
+      @extend %pie-clearfix;
+
+      input,
+      button { float: left; }
+
+      button {
+        @include with-font-size(14px) {
+          @extend %subtle;
+          @include leader(.25);
+          margin-left: rhythm(.5);
+          text-align: center;
+          color: rgba(black, .25);
+          &:hover { color: rgba(black, .5); }
+          &:active { color: $text; }
+        }
+      }
+    }
+
+    .field_with_hint {
+      input { float: none; }
+      .error { display: inline; }
+    }
+
+    .add {
+      @extend %subtle;
+      @include trailer(.5);
+    }
+
+    span.error {
+      display: block;
+      clear: both;
+    }
+  }
+
+}

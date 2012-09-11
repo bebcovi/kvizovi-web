@@ -1,6 +1,7 @@
 - url = @question.new_record? ? quiz_questions_path(@quiz) : quiz_question_path(@quiz, @question)
+- klass = @question.new_record? ? "new" : "edit"
 
-= simple_form_for @question, url: url, html: {class: @question.category} do |f|
+= simple_form_for @question, url: url, html: {class: "#{klass} #{@question.category}"} do |f|
 
   = f.hidden_field :category, value: @question.category
 
