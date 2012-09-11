@@ -9,7 +9,7 @@ class PasswordsController < ApplicationController
     @user = current_user
 
     if @user.authenticate(params[:old_password])
-      if @user.update_attributes(user_params)
+      if @user.update_attributes(params[:user])
         redirect_to @user, notice: "Lozinka je uspješno izmjenjena."
       else
         render :edit
@@ -18,11 +18,5 @@ class PasswordsController < ApplicationController
       flash.now[:alert] = "Stara lozinka nije ispravna."
       render :edit
     end
-  end
-
-  private
-
-  def user_params
-    params[:student] or params[:school]
   end
 end
