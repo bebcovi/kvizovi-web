@@ -7,15 +7,46 @@ body.quizzes {
       &:nth-child(3) { text-align: center; }
     }
 
+    form { @include padding-leader(.1); }
+
     button {
-      @include with-font-size(22px, 1) {
-        @extend %subtle;
+      @include border-radius(rhythm(.25));
+      position: relative;
+      overflow: visible;
+      cursor: pointer;
+      width: rhythm(2);
+      height: rhythm(.5);
+      margin: 0;
+      padding: 0;
+      border: 1px solid rgba(black, .30);
+      &:before {
+        @extend %circle;
+        content: '';
+        position: absolute;
+        top: - rhythm(.1);
+        display: block;
+        width: rhythm(.5);
+        height: rhythm(.5);
+        border: 1px solid rgba(black, .55);
+        background: white;
+      }
+    }
+
+    .enabled {
+      border-color: rgba(black, .5);
+      background: rgba($link2, .75);
+      text-align: right;
+      &:before {
+        right: - rhythm(.1);
+        border-color: rgba(black, .75);
       }
     }
 
     .disabled {
-      color: rgba(black, .15);
-      &:hover { color: rgba(black, .5); }
+      background: rgba(black, .05);
+      &:before {
+        left: - rhythm(.1);
+      }
     }
 
   }
