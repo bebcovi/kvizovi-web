@@ -17,7 +17,7 @@ quiz.questions.create! [
   {
     category: "association",
     content: "Povežite autore s njihovim djelima:",
-    data: ["Okovani Prometej", "Antigona", "Hipolit", "Eshil", "Sofoklo", "Euripid"],
+    data: ["Okovani Prometej", "Eshil", "Antigona", "Sofoklo", "Hipolit", "Euripid"],
     points: 2
   },
   {

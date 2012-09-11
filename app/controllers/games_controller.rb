@@ -7,7 +7,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = SubmittedGame.new(params[:submitted_game])
+    @game = SubmittedGame.new(params[:game])
     @game.players << current_student
 
     if @game.valid?
@@ -32,12 +32,11 @@ class GamesController < ApplicationController
     game.update!(params[:game].try(:[], :answer))
 
     if game.questions_left > 0
-      game.switch_player!
       game.next_question!
       redirect_to action: :edit
     else
-      game.create_record!
-      game.clear!
+      session[:game_id] = game.create_record!
+      session.delete(:game)
       redirect_to action: :show
     end
   end
@@ -49,13 +48,14 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    game.clear!
+    game.clear_store!
     redirect_to action: :new
   end
 
   private
 
   def game
-    BrowserGame.new(self)
+    session[:game] ||= {}
+    BrowserGame.new(session[:game])
   end
 end

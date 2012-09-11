@@ -3,24 +3,28 @@ class Game < ActiveRecord::Base
 
   serialize :info
 
-  before_create do
-    players.zip(scores).each do |player, score|
-      player.increase_score!(score)
-    end
-  end
-
   def players
     player_ids = info.keys
     Student.find(player_ids)
   end
 
   def scores
-    info.map do |_, questions|
+    info.values.map do |questions|
       score = 0
       questions.each do |id, answered|
         score += quiz.questions.find(id).points if answered
       end
       score
+    end
+  end
+
+  def questions_answered
+    info.values.map do |questions|
+      count = questions.inject(0) do |count, (_, answered)|
+        count += 1 if answered
+        count
+      end
+      [count, questions.count]
     end
   end
 

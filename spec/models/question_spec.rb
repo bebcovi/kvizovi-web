@@ -60,4 +60,13 @@ describe Question do
       end
     end
   end
+
+  describe "methods" do
+    it "is not case sensitive when accepting answers" do
+      question = build(:photo_question, data: "Answer")
+      question.correct_answer?("answer").should be_true
+      question = build(:text_question, data: "Answer")
+      question.correct_answer?("answer").should be_true
+    end
+  end
 end

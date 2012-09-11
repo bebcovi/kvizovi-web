@@ -13,7 +13,7 @@ hr:
             grade:
               blank: "Nisi odabrao/la razred."
             username:
-              taken: "Već postoji škola s tim korisničkim imenom."
+              taken: "Već postoji učenik s tim korisničkim imenom."
         school:
           attributes:
             level:

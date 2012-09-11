@@ -2,7 +2,7 @@
 
 %h1 Dobrodošao!
 
-= simple_form_for @game, url: game_path do |f|
+= simple_form_for @game, as: :game, url: game_path do |f|
 
   %section.quizzes
     %p Odaberi kviz:
@@ -15,7 +15,7 @@
   %section.login
     %p Daj drugom igraču da se prijavi:
     = f.simple_fields_for :players_credentials, index: nil do |p|
-      = p.input :username, input_html: {value: @game.players.last.try(:username)}
+      = p.input :username, input_html: {value: (params[:game][:players_credentials].first[:username] rescue nil)}
       = p.input :password
     %p= f.error :base
 

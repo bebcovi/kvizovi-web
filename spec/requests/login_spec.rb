@@ -39,7 +39,7 @@ shared_examples_for "login" do
   end
 end
 
-describe "Login" do
+describe SessionsController do
   context "of students" do
     it_behaves_like "login" do
       before(:each) do

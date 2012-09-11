@@ -11,10 +11,6 @@ class SubmittedGame
   validate :quiz_id_must_be_present
   validate :all_players_should_be_authenticated
 
-  def quiz
-    @quiz ||= Quiz.find(quiz_id)
-  end
-
   private
 
   def quiz_id_must_be_present
