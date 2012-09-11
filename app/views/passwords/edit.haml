@@ -1,12 +1,10 @@
 - @title = "Izmjena lozinke"
 
-= simple_form_for @user, as: :user, url: password_path, method: :put do |f|
+= simple_form_for @password, url: password_path, method: :put do |f|
 
-  = f.error :base
-
-  = f.input :password, label: "Stara lozinka", input_html: {name: "old_password"}
-  = f.input :password, label: "Nova lozinka"
-  = f.input :password_confirmation, label: "Potvrda nove lozinke"
+  = f.input :old_password
+  = f.input :new_password
+  = f.input :new_password_confirmation
 
   .buttons
     = link_to "Odustani", current_user

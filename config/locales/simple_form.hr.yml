@@ -27,6 +27,10 @@ hr:
         activated: "Vidljiv"
       game:
         answer: "Odgovor"
+      password:
+        old_password: "Stara lozinka"
+        new_password: "Nova lozinka"
+        new_password_confirmation: "Potvrda nove lozinke"
 
   helpers:
     submit:

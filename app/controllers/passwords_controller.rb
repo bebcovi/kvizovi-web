@@ -2,20 +2,15 @@
 
 class PasswordsController < ApplicationController
   def edit
-    @user = current_user
+    @password = Password.new
   end
 
   def update
-    @user = current_user
+    @password = Password.new(params[:password], current_user)
 
-    if @user.authenticate(params[:old_password])
-      if @user.update_attributes(params[:user])
-        redirect_to @user, notice: "Lozinka je uspješno izmjenjena."
-      else
-        render :edit
-      end
+    if @password.save
+      redirect_to current_user, notice: "Lozinka je uspješno izmjenjena."
     else
-      flash.now[:alert] = "Stara lozinka nije ispravna."
       render :edit
     end
   end
