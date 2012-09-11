@@ -4,6 +4,19 @@
 
 %p Izaberite kategoriju:
 
-%ol
+%ol.categories
   = list_of categories do |value, label|
-    = link_to label, new_quiz_question_path(@quiz, category: value)
+    %a{href: new_quiz_question_path(@quiz, category: value)}
+      .icon{class: value}
+        - case value
+          - when "boolean"
+            = icon("checkbox")
+          - when "choice"
+            = icon("list-view")
+          - when "association"
+            = icon("shuffle")
+          - when "photo"
+            = icon("picture")
+          - when "text"
+            %span Abc
+      .label= label

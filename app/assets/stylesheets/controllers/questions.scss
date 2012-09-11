@@ -1,3 +1,47 @@
+ol.categories {
+  @extend %unstyled-list;
+
+  li { @include trailer(.25); }
+
+  a, .icon, .label { @extend %inline-block; }
+
+  a {
+    @include color-link(rgba(black, .35), $link2);
+    &:hover {
+      text-decoration: none;
+      .icon {
+        color: $link2;
+        border-color: $link2;
+        background: rgba($link2, .025);
+      }
+    }
+  }
+
+  i { @include adjust-font-size-to(32px); }
+
+  .label {
+    @include with-font-size(20px, 2) {}
+  }
+
+  .icon {
+    @extend %inline-block;
+    @extend %border-radius;
+    width: rhythm(2);
+    height: rhythm(2);
+    margin-right: rhythm(.5);
+    text-align: center;
+    color: rgba(black, .25);
+    border: 1px solid rgba(black, .2);
+    background: rgba(black, .025);
+  }
+
+  .text span {
+    @include with-font-size(20px, 2) {
+      font-weight: bold;
+    }
+  }
+}
+
 ol.questions {
   @extend %unstyled-list;
   @include rhythm(1, 0, 0, 1);

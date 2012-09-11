@@ -128,7 +128,3 @@ span.error {
   input, button { @extend %primary-button; }
   a { @extend %button; }
 }
-
-// other
-
-.icon { @extend %subtle; }
