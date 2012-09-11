@@ -49,27 +49,18 @@ form.association {
       $cols: $total-columns/2 - 1;
       div { @include span-columns($cols); }
 
-      button {
-        @include with-font-size(14px) {
-          @extend %subtle;
-          @include leader(.25);
-          margin-left: rhythm(.75);
-          text-align: center;
-          color: rgba(black, .25);
-          &:hover { color: rgba(black, .5); }
-          &:active { color: $text; }
-        }
-      }
+      i, button { float: left; }
 
       i {
         @include adjust-leading-to(1.5);
-        float: left;
         margin-right: gutter();
         text-align: center;
         color: rgba(black, .25);
       }
 
       input { width: 100%; }
+
+      button { @include leader(.35); }
 
       .dynamic { margin-right: 0; }
     }

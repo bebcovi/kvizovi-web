@@ -39,8 +39,8 @@ module ApplicationHelper
     link_to string.prepend_icon("plus"), path, options
   end
 
-  def close_button(options = {})
-    content_tag :button, "".prepend_icon("cancel"), options
+  def remove_button(options = {})
+    content_tag :button, "".prepend_icon("cancel"), {class: "remove"}.merge(options)
   end
 
   def settings_button(string, path, options = {})

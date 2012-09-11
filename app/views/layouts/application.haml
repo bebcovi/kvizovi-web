@@ -18,7 +18,7 @@
       - flash.each do |name, message|
         - if name.in?([:notice, :alert])
           %div{class: "flash #{name}"}
-            = close_button
+            = remove_button
             %p= message
 
       = yield

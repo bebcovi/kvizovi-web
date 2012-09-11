@@ -78,11 +78,6 @@
   @include trailer;
   @include clearfix;
 
-  button {
-    @extend %subtle;
-    float: right;
-  }
-
   p { @include trailer(0); }
 }
 
