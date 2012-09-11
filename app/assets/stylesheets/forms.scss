@@ -22,12 +22,14 @@ form {
 // controls
 
 .controls {
+  @include clearfix;
   float: right;
   margin-left: rhythm();
   a {
-    @extend %inline-block;
     @extend %subtle;
-    &:nth-child(n+1) { margin-left: rhythm(.25); }
+    display: block;
+    float: left;
+    padding: 0 rhythm(.25);
   }
 }
 

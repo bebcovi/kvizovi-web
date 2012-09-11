@@ -20,7 +20,7 @@ ol.categories {
   i { @include adjust-font-size-to(32px); }
 
   .label {
-    @include with-font-size(20px, 2) {}
+    @include adjust-font-size-to(20px, 2);
   }
 
   .icon {
