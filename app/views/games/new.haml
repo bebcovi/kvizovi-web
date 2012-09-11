@@ -4,8 +4,6 @@
 
 = simple_form_for @game, url: game_path do |f|
 
-  = f.error :base
-
   %section.quizzes
     %p Odaberi kviz:
     = f.collection_radio_buttons :quiz_id, @quizzes, :id, :name
@@ -19,6 +17,7 @@
     = f.simple_fields_for :players_credentials, index: nil do |p|
       = p.input :username, input_html: {value: @game.players.last.try(:username)}
       = p.input :password
+    %p= f.error :base
 
   .buttons
     = f.button :button, "Započni#{content_tag(:span, "", class: "plural")} kviz #{content_tag(:strong, "", class: "name")}!".html_safe

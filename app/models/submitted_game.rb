@@ -29,7 +29,7 @@ class SubmittedGame
       .reject(&:blank?)
 
     if players.count != players_count
-      errors[:base] << "Drugi igrač nije uspješno autenticiran."
+      errors[:base] << "Igrač nije uspješno autenticiran."
     end
   end
 end

@@ -2,7 +2,7 @@ Lektire.Initializers.games = ->
 
   switch $('body').attr('class').split(' ')[1]
 
-    when 'new'
+    when 'new', 'create'
 
       $form     = $('form')
       $quizzes  = $form.find '.quizzes'
@@ -13,9 +13,13 @@ Lektire.Initializers.games = ->
       $plural   = $buttons.find '.plural'
       $name     = $buttons.find '.name'
 
-      $players.hide()
-      $login.hide()
-      $buttons.hide()
+      if $quizzes.find(':checked').length == 0
+        $players.hide()
+        $login.hide()
+        $buttons.hide()
+
+      $name.text $quizzes.find(':checked').next().text()
+      $plural.text 'te' if $players.find(':checked').val() == '2'
 
       $quizzes.on 'click', ':radio', ->
         $players.show()

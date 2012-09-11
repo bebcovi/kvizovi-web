@@ -1,6 +1,6 @@
 body.games {
 
-  &.new {
+  &.new, &.create {
 
     // quizzes
 
@@ -29,7 +29,7 @@ body.games {
         &, &:hover {
           color: white;
           border-color: rgba(black, .25);
-          background: rgba(black, .75);
+          background: rgba(black, .5);
         }
       }
     }
