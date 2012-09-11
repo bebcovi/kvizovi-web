@@ -11,7 +11,7 @@
     %li{class: number(player_number + 1)}
       %dl
         %dt.username= player.username.prepend_icon("user")
-        %dd.rank Točno si odgovorio na #{questions_answered.first} od #{questions_answered.last} pitanja, ti si znalac-malac!
+        %dd.rank Točno si odgovorio na #{questions_answered.first} od #{questions_answered.last} pitanja.
       - percentage = "#{(score/@game.total_points.to_f * 100).round}%"
       .bar
         .label= percentage

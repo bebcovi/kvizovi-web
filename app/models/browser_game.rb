@@ -24,6 +24,7 @@ class BrowserGame
     end
 
     def next_question!
+      switch_player!
       @store[:current_question] += 1
     end
 
@@ -47,7 +48,7 @@ class BrowserGame
         def question.provided_answers
           if choice?
             result = super.shuffle
-            result.shuffle! while result == super
+            result.shuffle! while result.first == super.first
             result
           elsif association?
             result = super.values.shuffle

@@ -48,7 +48,7 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    game.clear_store!
+    session.delete(:game)
     redirect_to action: :new
   end
 

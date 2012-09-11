@@ -1,36 +1,48 @@
 # encoding: utf-8
 
-quiz = Quiz.find_by_name("Antika")
+quiz = Quiz.find_by_name("Opća kultura")
 quiz.questions.create! [
   {
     category: "boolean",
-    content: "Eshil je napisao knjigu \"Okovani Prometej\".",
-    data: "true",
-    points: 2
+    content: "Eiffelov toranj se nalazi u Berlinu.",
+    data: "false",
+    points: 1
   },
   {
     category: "choice",
-    content: "Izbacite uljeza:",
-    data: ["Hipolit", "Pribjeglice", "Sedmorica protiv Tebe", "Okovani Prometej"],
+    content: "Kako se u grčkoj mitologiji zove div sa samo jednim okom?",
+    data: ["Kiklop", "Hezoid", "Titan", "Kim"],
     points: 1
   },
   {
     category: "association",
     content: "Povežite autore s njihovim djelima:",
-    data: ["Okovani Prometej", "Eshil", "Antigona", "Sofoklo", "Hipolit", "Euripid"],
+    data: [
+      "Fjodor Dostojevski", "Zločin i kazna",
+      "Lav Nikolajevič Tolstoj", "Rat i mir",
+      "Franz Kafka", "Proces",
+      "Miguel de Cervantes", "Don Quijote"
+    ],
     points: 2
   },
   {
     category: "photo",
-    content: "Koji grčki tragičar je na slici?",
-    attachment: uploaded_file("Eshil.jpg", "image/jpeg"),
-    data: "Eshil",
-    points: 1
+    content: "Kojeg opakog junaka vesterna vidimo na slici?",
+    attachment: uploaded_file("clint_eastwood.jpg", "image/jpeg"),
+    data: "Clint Eastwood",
+    points: 2
+  },
+  {
+    category: "photo",
+    content: "U kojem se filmu proslavio glumac na slici (desno)?",
+    attachment: uploaded_file("back_to_the_future.jpg", "image/jpeg"),
+    data: "Povratak u budućnost",
+    points: 2
   },
   {
     category: "text",
-    content: "Koji grčki tragičar je napisao knjigu \"Hipolit\"?",
-    data: "Euripid",
-    points: 1
+    content: "Koji je najveći planet Sunčevog sustava?",
+    data: "Jupiter",
+    points: 3
   }
 ]

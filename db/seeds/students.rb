@@ -5,8 +5,8 @@ Student.create! [
   {
     first_name: "Janko",
     last_name: "Marohnić",
-    username: "junky",
-    password: "junky",
+    username: "janko",
+    password: "janko",
     grade: "4",
     school_key: school_key
   },
