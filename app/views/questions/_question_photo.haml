@@ -1,6 +1,6 @@
 = f.input :attachment
 
-- if question.attachment.exists?
+- if question.attachment.present?
   %canvas{width: 300, height: 250, data: {src: question.attachment.url(:medium)}}
 - else
   %canvas{width: 300, height: 250}
