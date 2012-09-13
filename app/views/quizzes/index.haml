@@ -4,27 +4,19 @@
 
 - if @quizzes.any?
 
-  %table
+  %ol.quizzes
+    = list_of @quizzes do |quiz|
+      - present quiz do |quiz_presenter|
+        .name
+          = quiz_presenter.name
+          %span.count= quiz_presenter.questions_count
 
-    %thead
-      %tr
-        %th Naziv
-        %th Predviđeni razredi
-        %th Vidljivost
-        %th
+        = quiz_presenter.visibility_icon
 
-    %tbody
-      - @quizzes.each do |quiz|
-        - present quiz do |quiz_presenter|
-          %tr
-            %td= quiz_presenter.name
-            %td= quiz_presenter.grades
-            %td= quiz_presenter.visibility_icon
-            %td
-              .controls
-                = quiz_presenter.edit_button "", title: "Izmjeni opcije"
-                = quiz_presenter.manage_questions_button "", title: "Izmjeni pitanja"
-                = quiz_presenter.delete_button "", title: "Izbriši"
+        .controls
+          = quiz_presenter.edit_button "", title: "Izmjeni opcije"
+          = quiz_presenter.manage_questions_button "", title: "Izmjeni pitanja"
+          = quiz_presenter.delete_button "", title: "Izbriši"
 
 - else
 

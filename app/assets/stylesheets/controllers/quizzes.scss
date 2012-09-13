@@ -2,9 +2,21 @@ body.quizzes {
 
   &.index {
 
-    th,
-    td {
-      &:nth-child(3) { text-align: center; }
+    ol.quizzes { @extend %nice-list; }
+
+    $cols: 5;
+    .name { @include span-columns($cols); }
+
+    form { float: left; }
+
+    .count {
+      color: rgba(black, .35);
+      &:before {
+        content: '(';
+      }
+      &:after {
+        content: ')';
+      }
     }
 
     form { @include padding-leader(.1); }
@@ -21,9 +33,9 @@ body.quizzes {
       border: 1px solid rgba(black, .30);
       &:before {
         @extend %circle;
+        @include leader(-0.3);
         content: '';
         position: absolute;
-        top: - rhythm(.1);
         display: block;
         width: rhythm(.5);
         height: rhythm(.5);

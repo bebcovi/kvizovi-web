@@ -1,0 +1,15 @@
+body.students {
+
+  &.index {
+
+    ol.students { @extend %nice-list; }
+
+    .username {
+      color: rgba(black, .5);
+      &:before { content: '('; }
+      &:after { content: ')'; }
+    }
+
+  }
+
+}

@@ -7,6 +7,10 @@ class QuizPresenter < BasePresenter
     quiz.name
   end
 
+  def questions_count
+    quiz.questions.count
+  end
+
   def grades
     ordinalize(quiz.grades).to_sentence
   end
@@ -15,10 +19,10 @@ class QuizPresenter < BasePresenter
     simple_form_for quiz do |f|
       if quiz.activated?
         f.hidden_field(:activated, value: false) +
-        f.button(:button, "", title: "Sakrij", class: "enabled")
+        f.button(:button, "", title: "Deaktiviraj", class: "enabled")
       else
         f.hidden_field(:activated, value: true) +
-        f.button(:button, "", title: "Učini vidljivim", class: "disabled")
+        f.button(:button, "", title: "Aktiviraj", class: "disabled")
       end
     end
   end

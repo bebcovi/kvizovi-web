@@ -4,25 +4,15 @@
 
 - if @students.any?
 
-  %table
+  %ol.students
+    = list_of @students do |student|
+      - present student do |student_presenter|
+        .controls
+          = delete_button "", student_path(student), title: "Izbriši"
 
-    %thead
-      %tr
-        %th Ime i prezime
-        %th Korisničko ime
-        %th Razred
-        %th
-
-    %tbody
-      - @students.find_each do |student|
-        - present student do |student_presenter|
-          %tr
-            %td= student_presenter.full_name
-            %td= student_presenter.username
-            %td= student_presenter.grade
-            %td
-              .controls
-                #{delete_button "", student_path(student), title: "Izbriši"}
+        .name
+          = student_presenter.full_name
+          %span.username= student_presenter.username
 
 - else
 

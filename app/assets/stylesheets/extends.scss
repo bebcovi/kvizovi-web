@@ -4,6 +4,20 @@
   list-style: none;
 }
 
+%nice-list {
+  @extend %unstyled-list;
+  @include rhythm(1, 0, 0, 1);
+
+  li {
+    @include padding-leader(.5);
+    @include trailing-border(1px, .5);
+    @include clearfix;
+    border-color: rgba(black, .25);
+    &:first-child { @include padding-leader(0); }
+    &:last-child { @include trailing-border(0px, 0); }
+  }
+}
+
 %inline-block {
   @include inline-block;
 }
