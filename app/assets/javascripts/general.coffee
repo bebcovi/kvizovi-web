@@ -1,4 +1,4 @@
 Lektire.general = ->
 
-  $('.flash button').on 'click', -> $(@).parent().fadeOut(250)
+  $('.flash button').on 'click', -> $(@).parent().fadeOut('fast')
   $('.controls a, table button').tooltip()

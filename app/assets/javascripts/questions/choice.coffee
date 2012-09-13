@@ -20,8 +20,11 @@ Lektire.Questions.choice = ($form, formClass) ->
       $input.attr 'id',           id.replace(/\d+/, i)
       $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
 
-    addOption     = ($el) -> $options = $options.add $el.insertBefore($addButton)
-    removeOption  = ($el) -> $options = $options.not $el.remove()
+    addOption = ($el) ->
+      $options = $options.add $el.insertBefore($addButton)
+
+    removeOption = ($el) ->
+      $options = $options.not $el.fadeOut('fast', -> $(@).remove())
 
     $options.find('input').after $removeButton.clone()
 

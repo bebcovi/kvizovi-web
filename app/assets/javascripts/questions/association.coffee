@@ -62,8 +62,11 @@ Lektire.Questions.association = ($form, formClass) ->
         $input.attr 'id',           id.replace(/\d+/, if index is 1 then j else j - 1)
         $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
 
-    addPair       = ($el) -> $pairs = $pairs.add $el.insertBefore($addButton)
-    removePair    = ($el) -> $pairs = $pairs.not $el.remove()
+    addPair = ($el) ->
+      $pairs = $pairs.add $el.insertBefore($addButton)
+
+    removePair = ($el) ->
+      $pairs = $pairs.not $el.fadeOut('fast', -> $(@).remove())
 
     $pairs.find('.dynamic').after $removeButton.clone()
 
