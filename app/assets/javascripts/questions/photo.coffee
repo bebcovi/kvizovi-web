@@ -23,10 +23,15 @@ Lektire.Questions.photo = ($form, formClass) ->
       img.onload = ->
         ctx.clearRect 0, 0, canvas.width, canvas.height
 
-        newWidth = height * img.width / img.height
-        canvas.width = newWidth
-
-        ctx.drawImage img, 0, 0, newWidth, height
+        if img.height > height
+          newWidth = height * img.width / img.height
+          canvas.width = newWidth
+          canvas.height = 250
+          ctx.drawImage img, 0, 0, newWidth, height
+        else
+          canvas.width = img.width
+          canvas.height = img.height
+          ctx.drawImage img, 0, 0, img.width, img.height
 
         $canvas.addClass 'filled'
 

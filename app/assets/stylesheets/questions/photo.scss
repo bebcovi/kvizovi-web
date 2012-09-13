@@ -3,6 +3,7 @@ form.photo {
   &.show {
     .img {
       float: left;
+      height: 250px;
       margin-right: rhythm();
     }
 
@@ -12,7 +13,7 @@ form.photo {
   &.edit, &.new {
     canvas {
       @extend %border-radius;
-      height: 250px;
+      max-height: 250px;
       border: 2px dashed rgba(black, .1);
       &.filled { border: 1px solid rgba(black, .75); }
     }

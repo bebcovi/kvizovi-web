@@ -63,10 +63,11 @@ dd {
 
 .img {
   @extend %inline-block;
-  @extend %border-radius;
   line-height: 0;
-  overflow: hidden;
-  border: 1px solid rgba(black, .75);
+  img {
+    @extend %border-radius;
+    border: 1px solid rgba(black, .75);
+  }
 }
 
 .remove {

@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
   belongs_to :quiz
 
   serialize :data
-  has_attached_file :attachment, styles: {medium: "x250"}
+  has_attached_file :attachment, styles: {medium: "x250>"}
 
   validates_presence_of :content
   validates :attachment, attachment_presence: true, if: proc { photo? }
