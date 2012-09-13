@@ -1,99 +1,86 @@
-Lektire.Initializers.questions.push ->
+Lektire.Questions.association = ($form, formClass) ->
 
-  $form = $('form.association')
+  if formClass.search(/show/) isnt -1
 
-  if $form.length > 0
+    $pairs    = $form.find '.pair'
 
-    if $form.attr('class').search(/show/) != -1
+    $dynamic  = $form.find '.dynamic'
 
-      $pairs    = $form.find '.pair'
+    swap      = ($one, $two) ->
 
-      $dynamic  = $form.find '.dynamic'
+      $oneParent = $one.parent()
+      $twoParent = $two.parent()
 
-      swap      = ($one, $two) ->
-        $oneParent = $one.parent()
-        $twoParent = $two.parent()
+      $one.prependTo $twoParent
+      $two.prependTo $oneParent
 
-        $one.prependTo $twoParent
-        $two.prependTo $oneParent
+      $one.next().attr 'value', $one.text()
+      $two.next().attr 'value', $two.text()
 
-        console.log $one.next()
+    $pairs.find('input').each ->
+      $el = $('<span>').text $(@).val()
+      $(@).before $el
+      $(@).hide()
 
-        $one.next().attr 'value', $one.text()
-        $two.next().attr 'value', $two.text()
+    $dynamic.find('span')
 
-      $pairs.find('input').each ->
-        $el = $('<span>').text $(@).val()
-        $(@).before $el
-        $(@).hide()
+      .draggable
+        addClasses: false
+        revert: 'invalid'
+        revertDuration: 250
+        helper: 'clone'
+        zIndex: 10
+        start: -> $(@).addClass 'original'
+        stop:  -> $(@).removeClass 'original'
 
-      $dynamic.find('span')
-        .draggable
-          addClasses: false
-          revert: 'invalid'
-          revertDuration: 250
-          helper: 'clone'
-          zIndex: 10
-          start: -> $(@).addClass 'original'
-          stop:  -> $(@).removeClass 'original'
-
-        .droppable
-          addClasses: false
-          hoverClass: 'hover'
-          drop: (e, ui) -> swap($(@), ui.draggable)
+      .droppable
+        addClasses: false
+        hoverClass: 'hover'
+        drop: (e, ui) -> swap($(@), ui.draggable)
 
 
-    if $form.attr('class').search(/edit|new/) != -1
+  if formClass.search(/edit|new/) isnt -1
 
-      $pairs        = $form.find('.pair').not ':first'
-      $template     = []
+    $pairs        = $form.find('.pair').not ':first'
+    $template     = []
 
-      $removeButton = $('<button>') .attr('type', 'button')
-                                    .attr('tabindex', '-1')
-                                    .addClass('remove')
-                                    .prependIcon('cancel')
+    $addButton    = $.addButton.clone()
+    $removeButton = $.removeButton.clone()
 
-      $addButton    = $('<button>') .attr('type', 'button')
-                                    .addClass('add')
-                                    .text(' Dodaj')
-                                    .prependIcon('plus')
+    updateAttrs   = ($el, i) ->
 
-      updateAttrs   = ($el, i) ->
+      i += 2
+      j = i * 2
 
-        i += 2
-        j = i * 2
+      $el.find('.static, .dynamic').each (index) ->
 
-        $el.find('.static, .dynamic').each (index) ->
+        $input = $(@).find('input')
 
-          $input = $(@).find('input')
+        id = $input.attr('id')
+        placeholder = $input.attr('placeholder')
 
-          id = $input.attr('id')
-          placeholder = $input.attr('placeholder')
+        $input.attr 'id',           id.replace(/\d+/, if index is 1 then j else j - 1)
+        $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
 
-          $input.attr 'id',           id.replace(/\d+/, if index == 1 then j else j - 1)
-          $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
+    addPair       = ($el) -> $pairs = $pairs.add $el.insertBefore($addButton)
+    removePair    = ($el) -> $pairs = $pairs.not $el.remove()
 
-      addPair       = ($el) -> $pairs = $pairs.add $el.insertBefore($addButton)
-      removePair    = ($el) -> $pairs = $pairs.not $el.remove()
+    $pairs.find('.dynamic').after $removeButton.clone()
 
-      # action
+    $template = $pairs.first().clone()
 
-      $pairs.find('.dynamic').after $removeButton.clone()
+    $template.find('input').attr 'value', ''
+    $template.removeClass 'field_with_errors'
+    $template.find('.error').remove()
 
-      $template = $pairs.first().clone()
+    $addButton
+      .insertAfter($pairs.last())
+      .on 'click', ->
+        $new = $template.clone()
+        updateAttrs $new, $pairs.length
+        addPair $new
 
-      $template.find('input').attr 'value', ''
-      $template.removeClass 'field_with_errors'
-      $template.find('.error').remove()
-
-      $addButton
-        .insertAfter($pairs.last())
-        .on 'click', ->
-          $new = $template.clone()
-          updateAttrs $new, $pairs.length
-          addPair $new
-
-      $form.on 'click', '.remove', ->
-        $el = $(@).parent()
-        removePair $el
-        $pairs.each (i) -> updateAttrs $(@), i
+    $form.on 'click', '.remove', ->
+      $el = $(@).parent()
+      removePair $el
+      $pairs.each (i) -> updateAttrs $(@), i

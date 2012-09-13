@@ -1,51 +1,43 @@
-Lektire.Initializers.questions.push ->
+Lektire.Questions.photo = ($form, formClass) ->
 
-  $form = $('form.photo')
+  if formClass.search(/edit|new/) isnt -1
 
-  if $form.length > 0
+    # Drawing images from File API to canvas:
+    # http://stackoverflow.com/a/6776055/1247274
 
-    if $form.attr('class').search(/edit|new/) != -1
+    # Scaling drawn images proportionally:
+    # http://stackoverflow.com/a/10842366/1247274
 
-      # Drawing images from File API to canvas:
-      # http://stackoverflow.com/a/6776055/1247274
+    $file    = $form.find '[type=file]'
 
-      # Scaling drawn images proportionally:
-      # http://stackoverflow.com/a/10842366/1247274
+    $canvas  = $form.find 'canvas'
+    canvas   = $canvas[0]
+    src      = $canvas.attr 'data-src'
+    height   = $canvas.attr('height') - 0
+    ctx      = canvas.getContext '2d'
 
-      $form = $('form.photo')
+    drawImage = (event) ->
+      img = new Image
+      img.src = event.target.result
 
-      if $form.length > 0
+      img.onload = ->
+        ctx.clearRect 0, 0, canvas.width, canvas.height
 
-        $file    = $form.find '[type=file]'
+        newWidth = height * img.width / img.height
+        canvas.width = newWidth
 
-        $canvas  = $form.find 'canvas'
-        canvas   = $canvas[0]
-        src      = $canvas.attr 'data-src'
-        height   = $canvas.attr('height') - 0
-        ctx      = canvas.getContext '2d'
+        ctx.drawImage img, 0, 0, newWidth, height
 
-        drawImage = (event) ->
-          img = new Image
-          img.src = event.target.result
+        $canvas.addClass 'filled'
 
-          img.onload = ->
-            ctx.clearRect 0, 0, canvas.width, canvas.height
+    if src
+      drawImage({target: {result: src}})
+      $('.pladeholder').hide()
 
-            newWidth = height * img.width / img.height
-            canvas.width = newWidth
+    $file.on 'change', (event) ->
 
-            ctx.drawImage img, 0, 0, newWidth, height
+      width     = $canvas.attr('width') - 0
+      reader    = new FileReader
 
-            $canvas.addClass 'filled'
-
-        if src
-          drawImage({target: {result: src}})
-          $('.pladeholder').hide()
-
-        $file.on 'change', (event) ->
-
-          width     = $canvas.attr('width') - 0
-          reader    = new FileReader
-
-          reader.onload = drawImage
-          reader.readAsDataURL event.target.files[0]
+      reader.onload = drawImage
+      reader.readAsDataURL event.target.files[0]

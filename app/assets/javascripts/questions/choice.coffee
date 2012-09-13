@@ -1,59 +1,44 @@
-Lektire.Initializers.questions.push ->
+Lektire.Questions.choice = ($form, formClass) ->
 
-  $form = $('form.choice')
+  if formClass.search(/edit|new/) isnt -1
 
-  if $form.length > 0
+    $options      = $form.find('.field_with_hint').nextAll '.string'
+    $template     = []
 
-    if $form.attr('class').search(/edit|new/) != -1
+    $addButton    = $.addButton.clone()
+    $removeButton = $.removeButton.clone()
 
-      # variables
+    updateAttrs   = ($el, i) ->
 
-      $options      = $form.find('.field_with_hint').nextAll '.string'
-      $template     = []
+      $input = $el.find 'input'
 
-      $removeButton = $('<button>') .attr('type', 'button')
-                                    .attr('tabindex', '-1')
-                                    .addClass('remove')
-                                    .prependIcon('cancel')
+      i += 2
 
-      $addButton    = $('<button>') .attr('type', 'button')
-                                    .addClass('add')
-                                    .text(' Dodaj')
-                                    .prependIcon('plus')
+      id = $input.attr('id')
+      placeholder = $input.attr('placeholder')
 
-      updateAttrs   = ($el, i) ->
+      $input.attr 'id',           id.replace(/\d+/, i)
+      $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
 
-        $input = $el.find 'input'
+    addOption     = ($el) -> $options = $options.add $el.insertBefore($addButton)
+    removeOption  = ($el) -> $options = $options.not $el.remove()
 
-        i += 2
+    $options.find('input').after $removeButton.clone()
 
-        id = $input.attr('id')
-        placeholder = $input.attr('placeholder')
+    $template = $options.first().clone()
 
-        $input.attr 'id',           id.replace(/\d+/, i)
-        $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
+    $template.find('input').attr 'value', ''
+    $template.removeClass 'field_with_hint field_with_errors'
+    $template.find('.hint, .error').remove()
 
-      addOption     = ($el) -> $options = $options.add $el.insertBefore($addButton)
-      removeOption  = ($el) -> $options = $options.not $el.remove()
+    $addButton
+      .insertAfter($options.last())
+      .on 'click', ->
+        $new = $template.clone()
+        updateAttrs $new, $options.length
+        addOption $new
 
-      # action
-
-      $options.find('input').after $removeButton.clone()
-
-      $template = $options.first().clone()
-
-      $template.find('input').attr 'value', ''
-      $template.removeClass 'field_with_hint field_with_errors'
-      $template.find('.hint, .error').remove()
-
-      $addButton
-        .insertAfter($options.last())
-        .on 'click', ->
-          $new = $template.clone()
-          updateAttrs $new, $options.length
-          addOption $new
-
-      $form.on 'click', '.remove', ->
-        $el = $(@).parent()
-        removeOption $el
-        $options.each (i) -> updateAttrs $(@), i
+    $form.on 'click', '.remove', ->
+      $el = $(@).parent()
+      removeOption $el
+      $options.each (i) -> updateAttrs $(@), i

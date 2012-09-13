@@ -1,22 +1,26 @@
-jQuery.fn.prependIcon = (name) ->
-  @.each -> $(@).prepend "<i class=\"icon-#{name}\">"
+$ ->
 
-jQuery.fn.appendIcon = (name) ->
-  @.each -> $(@).append "<i class=\"icon-#{name}\">"
+  # initializers
 
-window.Lektire =
-  Models: {}
-  Collections: {}
-  Views: {}
-  Routers: {}
-  Initializers: {questions: []}
-  init: ->
-    Lektire.Initializers.general()
-    Lektire.Initializers.helper()
+  $body       = $('body')
+  $form       = $('form')
 
-    question() for question in Lektire.Initializers.questions
+  bodyClass   = $body.attr('class') || ''
+  formClass   = $form.attr('class') || ''
 
-    switch $('body').attr('class').split(' ')[0]
-      when 'games' then Lektire.Initializers.games()
+  list              = (controller for controller of Lektire.Controllers)
+  regex             = RegExp list.join('|')
+  controllerResult  = bodyClass.match(regex) || []
 
-jQuery -> Lektire.init()
+  list              = (question for question of Lektire.Questions)
+  regex             = RegExp list.join('|')
+  questionResult    = formClass.match(regex) || []
+
+  Lektire.general()
+  Lektire.helper()
+
+  if controllerResult
+    Lektire.Controllers[item](bodyClass) for item in controllerResult
+
+  if questionResult
+    Lektire.Questions[item]($form, formClass) for item in questionResult

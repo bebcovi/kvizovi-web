@@ -1,86 +1,89 @@
-Lektire.Initializers.games = ->
+Lektire.Controllers.games = (bodyClass) ->
 
-  switch $('body').attr('class').split(' ')[1]
+  if bodyClass.search(/new|create/) isnt -1
 
-    when 'new', 'create'
+    $form           = $('form')
 
-      $form     = $('form')
-      $quizzes  = $form.find '.quizzes'
-      $players  = $form.find '.players'
-      $login    = $form.find '.login'
-      $buttons  = $form.find '.buttons'
+    $sections       = $form.find('section')
 
-      $plural   = $buttons.find '.plural'
-      $name     = $buttons.find '.name'
+    $quizzes        = $sections.filter '.quizzes'
+    $players        = $sections.filter '.players'
+    $login          = $sections.filter '.login'
 
-      if $quizzes.find(':checked').length == 0
-        $players.hide()
-        $login.hide()
-        $buttons.hide()
+    $buttons        = $form.find '.buttons'
+    $button         = $buttons.find 'button'
 
-      $name.text $quizzes.find(':checked').next().text()
-      $plural.text 'te' if $players.find(':checked').val() == '2'
+    $quizzesChecked = $quizzes.find ':checked'
+    $playersChecked = $players.find ':checked'
 
-      $quizzes.on 'click', ':radio', ->
-        $players.show()
-        $name.text $(@).next().text()
+    setQuizName     = (name) -> $button.text $button.text().replace(/kviz/, "kviz \"#{name}\"")
+    setPlural       = -> $button.text $button.text().replace(/Započni\b/, 'Započnite')
+    setSingular     = -> $button.text $button.text().replace(/Započnite/, 'Započni')
 
-      $players.on 'click', ':radio', ->
-        $buttons.show()
-        switch $(@).val()
-          when '1'
-            $login.hide()
-            $plural.text ''
-          when '2'
-            $login.show()
-            $plural.text 'te'
+    if $quizzesChecked.length is 0
+      $players.hide()
+      $login.hide()
+      $buttons.hide()
+    else
+      setQuizName $quizzesChecked.next().text()
+      setPlural() if $playersChecked.val() is '2'
 
-    when 'show'
+    $quizzes.on 'click', ':radio', ->
+      $players.show()
+      setQuizName $(@).next().text()
 
-      # score
+    $players.on 'click', ':radio', ->
+      $buttons.show()
+      switch $(@).val()
+        when '1'
+          $login.hide()
+          setSingular()
+        when '2'
+          $login.show()
+          setPlural()
 
-      delay = 500
+  if bodyClass.search(/show/) isnt -1
 
-      $('.score li').each ->
+    delay = 500
 
-        $rank     = $(@).find '.rank'
-        $label    = $(@).find '.label'
-        $fill     = $(@).find '.fill'
+    $('.score li').each ->
 
-        width     = $fill.css 'width'
+      $rank     = $(@).find '.rank'
+      $label    = $(@).find '.label'
+      $fill     = $(@).find '.fill'
 
-        update    = ->
+      width     = $fill.css 'width'
 
-          currentWidth = parseFloat $fill.width()
-          percentage = currentWidth / $label.width() * 100
+      update    = ->
 
-          if currentWidth
-            $label.text "#{Math.round(percentage)}%"
-          else
-            $label.text "0%"
+        currentWidth = parseFloat $fill.width()
+        percentage = currentWidth / $label.width() * 100
 
-        $rank.hide()
-        $fill.hide()
+        if currentWidth
+          $label.text "#{Math.round(percentage)}%"
+        else
+          $label.text "0%"
 
-        $fill.css 'width', '0%'
+      $rank.hide()
+      $fill.hide()
 
-        update()
+      $fill.css 'width', '0%'
 
-        $(window).on 'load', ->
+      update()
 
-          if width?
-            window.setTimeout ->
-              $fill.show().animate
-                width     : width
-              ,
-                duration  : 2000
-                easing    : 'easeOutCubic'
-                step      : update
-                complete  : -> $rank.fadeIn 'fast'
-            , delay
+      if width?
+        window.setTimeout ->
+          $fill.show().animate
+            width     : width
+          ,
+            duration  : 2000
+            easing    : 'easeOutCubic'
+            step      : update
+            complete  : -> $rank.fadeIn 'fast'
+        , delay
 
-            delay += 2000
-          else
-            window.setTimeout ->
-              $rank.fadeIn 'fast'
-            , delay
+        delay += 2000
+      else
+        window.setTimeout ->
+          $rank.fadeIn 'fast'
+        , delay

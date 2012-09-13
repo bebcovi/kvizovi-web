@@ -6,5 +6,6 @@
 //
 //= require bootstrap
 //
+//= require extensions
 //= require lektire
 //= require_tree .
