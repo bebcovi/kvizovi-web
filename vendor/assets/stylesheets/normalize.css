@@ -279,7 +279,7 @@ textarea {
 
 button,
 input {
-    line-height: normal;
+    line-height: inherit;
 }
 
 /*

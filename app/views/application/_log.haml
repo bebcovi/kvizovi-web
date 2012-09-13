@@ -1,4 +1,5 @@
-- if current_user.is_a?(Student)
-  %p#log Bok, #{link_to current_student.first_name, current_student} | #{logout_button "Odjava", logout_path}
-- else
-  %p#log Prijavljeni ste kao #{link_to current_school, current_school} | #{logout_button "Odjava", logout_path}
+%p#log
+  - if current_user.is_a?(Student)
+    Bok, #{link_to current_student.first_name, current_student} | #{logout_button "Odjava", logout_path}
+  - else
+    Prijavljeni ste kao #{link_to current_school, current_school} | #{logout_button "Odjava", logout_path}
