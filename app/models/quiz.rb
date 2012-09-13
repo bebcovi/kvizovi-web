@@ -7,6 +7,7 @@ class Quiz < ActiveRecord::Base
 
   serialize :grades, Array
 
+  default_scope order("#{table_name}.created_at DESC")
   scope :activated, where(activated: true)
 
   validates_presence_of :name, :grades
