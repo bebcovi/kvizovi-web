@@ -31,8 +31,9 @@ header {
 }
 
 #log {
-  @include with-font-size(14px) {
+  @include with-font-size($small-font-size) {
     @include rhythm(.75, 0, 0, 0);
     float: right;
+    font-family: $small-font-family;
   }
 }
