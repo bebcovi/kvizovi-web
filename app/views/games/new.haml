@@ -2,22 +2,28 @@
 
 %h1 Dobrodošao!
 
-= simple_form_for @game, as: :game, url: game_path do |f|
+- if @quizzes.any?
 
-  %section.quizzes
-    %p Odaberi kviz:
-    = f.collection_radio_buttons :quiz_id, @quizzes, :id, :name
+  = simple_form_for @game, as: :game, url: game_path do |f|
 
-  %section.players
-    %p U koliko igrača želiš igrati?
-    = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last, checked: @game.players_count
+    %section.quizzes
+      %p Odaberi kviz:
+      = f.collection_radio_buttons :quiz_id, @quizzes, :id, :name
 
-  %section.login
-    %p Daj drugom igraču da se prijavi:
-    = f.simple_fields_for :players_credentials, index: nil do |p|
-      = p.input :username, input_html: {value: (params[:game][:players_credentials].first[:username] rescue nil)}
-      = p.input :password
-    %p= f.error :base
+    %section.players
+      %p U koliko igrača želiš igrati?
+      = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last, checked: @game.players_count
 
-  .buttons
-    = f.button :button, "Započni#{content_tag(:span, "", class: "plural")} kviz #{content_tag(:strong, "", class: "name")}!".html_safe
+    %section.login
+      %p Daj drugom igraču da se prijavi:
+      = f.simple_fields_for :players_credentials, index: nil do |p|
+        = p.input :username, input_html: {value: (params[:game][:players_credentials].first[:username] rescue nil)}
+        = p.input :password
+      %p= f.error :base
+
+    .buttons
+      = f.button :button, "Započni#{content_tag(:span, "", class: "plural")} kviz #{content_tag(:strong, "", class: "name")}!".html_safe
+
+- else
+
+  %p Nema još kvizova za igrati.
