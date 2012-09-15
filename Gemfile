@@ -8,6 +8,7 @@ group :assets do
   gem "sass-rails"
   gem "compass-rails"
   gem "susy"
+  gem "animation"
   gem "jquery-rails"
   gem "jquery-ui-rails"
   gem "coffee-rails"

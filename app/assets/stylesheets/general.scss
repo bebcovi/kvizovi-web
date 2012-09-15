@@ -103,3 +103,23 @@ dd {
     &:active { color: $text; }
   }
 }
+
+@include keyframes(spin) {
+  0% { @include rotateZ(0deg); }
+  100% { @include rotateZ(360deg); }
+}
+
+.loader {
+  @include with-font-size(24px) {
+    $width: 24px;
+    $height: 27px;
+    &, i {
+      width: $width;
+      height: $height;
+    }
+    i {
+      color: rgba(black, .25);
+      @include animation(spin 1.25s infinite linear);
+    }
+  }
+}

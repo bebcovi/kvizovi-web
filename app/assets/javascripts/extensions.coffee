@@ -10,6 +10,10 @@ $.fn.appendIcon = (name) ->
 
 # properties
 
+$.loader = $('<div>')
+.addClass('loader')
+.prependIcon('loading')
+
 $.removeButton = $ '<button>',
   type: 'button'
   tabindex: -1
