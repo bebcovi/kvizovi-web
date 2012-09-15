@@ -1,3 +1,5 @@
+$ = jQuery
+
 Lektire.Questions.choice = ($form, formClass) ->
 
   if formClass.search(/edit|new/) isnt -1

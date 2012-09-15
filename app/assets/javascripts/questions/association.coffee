@@ -1,3 +1,5 @@
+$ = jQuery
+
 Lektire.Questions.association = ($form, formClass) ->
 
   if formClass.search(/show/) isnt -1

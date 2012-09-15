@@ -1,3 +1,5 @@
+$ = jQuery
+
 Lektire.helper = ->
 
   $('p:has(img)').addClass 'img'

@@ -1,3 +1,5 @@
+$ = jQuery
+
 Lektire.Controllers.games = (bodyClass) ->
 
   if bodyClass.search(/new|create/) isnt -1

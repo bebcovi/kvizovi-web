@@ -1,9 +1,11 @@
+$ = jQuery
+
 # methods
 
-jQuery.fn.prependIcon = (name) ->
+$.fn.prependIcon = (name) ->
   @.each -> $(@).prepend "<i class=\"icon-#{name}\">"
 
-jQuery.fn.appendIcon = (name) ->
+$.fn.appendIcon = (name) ->
   @.each -> $(@).append "<i class=\"icon-#{name}\">"
 
 # properties
