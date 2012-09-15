@@ -1,6 +1,6 @@
 - @title = "Nova igra"
 
-%h1 Dobrodošao!
+%h1 Zdravo :)
 
 - if @quizzes.any?
 
@@ -22,7 +22,7 @@
       %p= f.error :base
 
     .buttons
-      = f.button :button, "Započni kviz!"
+      = f.button :button, raw("Započni kviz#{content_tag :span, "", class: "name"}!")
 
 - else
 

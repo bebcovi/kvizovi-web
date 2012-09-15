@@ -60,13 +60,16 @@
 }
 
 %text-input {
-  @extend %border-radius;
-  @include rhythm-borders(1px, .25, $border-style: solid);
-  border-color: rgba(black, .25);
-  &:focus {
-    @include box-shadow(rgba(black, .2) 0 0 3px);
-    outline: none;
-    border-color: rgba(black, .5);
+  @include with-font-size($base-font-size - 2px) {
+    @extend %border-radius;
+    @include rhythm-borders(1px, .25);
+    font-weight: 300;
+    border-color: rgba(black, .25);
+    &:focus {
+      @include box-shadow(rgba(black, .2) 0 0 3px);
+      outline: none;
+      border-color: rgba(black, .5);
+    }
   }
 }
 

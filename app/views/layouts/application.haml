@@ -5,9 +5,11 @@
     %meta{charset: 'utf-8'}
     %meta{name: 'robots', content: 'noindex'}
     = favicon_link_tag
-    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=McLaren&subset=latin,latin-ext'
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
+    = javascript_include_tag '//use.typekit.net/nfo7hcu.js'
+    :javascript
+      try{Typekit.load();}catch(e){}
 
   %body{class: body_class}
     %header

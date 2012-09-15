@@ -12,15 +12,16 @@ Lektire.Controllers.games = (bodyClass) ->
 
     $buttons        = $form.find '.buttons'
     $button         = $buttons.find 'button'
+    $quizName       = $buttons.find '.name'
 
     $quizzesChecked = $quizzes.find ':checked'
     $playersChecked = $players.find ':checked'
 
-    setQuizName     = (name) -> $button.text $button.text().replace(/kviz/, "kviz \"#{name}\"")
-    setPlural       = -> $button.text $button.text().replace(/Započni\b/, 'Započnite')
-    setSingular     = -> $button.text $button.text().replace(/Započnite/, 'Započni')
+    setQuizName     = (name) -> $quizName.text(" #{name}")
+    setPlural       = -> $button.html $button.html().replace(/Započni\b/, 'Započnite')
+    setSingular     = -> $button.html $button.html().replace(/Započnite/, 'Započni')
 
-    if $quizzesChecked.length is 0
+    if not $quizzesChecked.length
       $players.hide()
       $login.hide()
       $buttons.hide()
@@ -59,10 +60,7 @@ Lektire.Controllers.games = (bodyClass) ->
         currentWidth = parseFloat $fill.width()
         percentage = currentWidth / $label.width() * 100
 
-        if currentWidth
-          $label.text "#{Math.round(percentage)}%"
-        else
-          $label.text "0%"
+        if currentWidth then $label.text "#{Math.round(percentage)}%" else $label.text "0%"
 
       $rank.hide()
       $fill.hide()

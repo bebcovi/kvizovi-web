@@ -1,12 +1,24 @@
 body.home {
 
+  $main: $total-columns - 4;
+  [role=main] {
+    @include squish(2, 2);
+    @include padding-leader(2);
+    @include clearfix;
+    text-align: center;
+  }
+
+  $cols: $main / 2;
   .as {
-    @include with-font-size(20px) {
+    @include with-font-size(28px) {
+      @include span-columns($cols, $main);
+      @include nth-omega;
       @extend %button;
-      @include h-borders(1px, .5);
-      width: rhythm(7);
+      @include h-borders(1px, 1);
+      @include v-borders(1px, .5);
+      font-weight: 300;
       i {
-        @include with-font-size(48px) {
+        @include with-font-size(100px) {
           display: block;
           width: auto;
         }

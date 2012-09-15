@@ -12,6 +12,8 @@ $inner-border: 1px solid darken(white, 20%);
 
 table {
   width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
 
   .controls {
     margin: 0 rhythm(.25) 0 0;

@@ -54,3 +54,37 @@ ol.questions { @extend %nice-list; }
   height: rhythm(1.5);
   max-width: 100%;
 }
+
+.points {
+  clear: both;
+
+  input { display: none; }
+
+  span {
+    margin-left: rhythm(.25);
+    label {
+      @extend %inline-block;
+      @extend %unselectable;
+      @extend %circle;
+      width: rhythm();
+      height: rhythm();
+      padding: 0 2px 0 0;
+      color: rgba(black, .5);
+      background: rgba(black, .05);
+      text-align: center;
+      &:hover {
+        background: rgba(black, .1);
+        color: $text;
+      }
+    }
+  }
+
+  :checked + label {
+    &, &:hover {
+      padding-top: 1px;
+      font-weight: 900;
+      color: white;
+      background: rgba(black, .5);
+    }
+  }
+}

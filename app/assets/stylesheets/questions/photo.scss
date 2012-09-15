@@ -22,7 +22,7 @@ form.photo {
       @include with-font-size(100px, 2) {
         @extend %inline-block;
         @extend %unselectable;
-        @include rhythm(-10, 0, 0, 0);
+        @include rhythm(-8.5, 0, 0, 0);
         width: 300px;
         margin-left: -304px;
         color: rgba(black, .05);

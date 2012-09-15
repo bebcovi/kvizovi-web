@@ -5,6 +5,7 @@ body.students {
     ol.students { @extend %nice-list; }
 
     .username {
+      font-weight: 300;
       color: rgba(black, .5);
       &:before { content: '('; }
       &:after { content: ')'; }

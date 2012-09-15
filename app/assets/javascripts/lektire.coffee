@@ -19,8 +19,8 @@ $ ->
   Lektire.general()
   Lektire.helper()
 
-  if controllerResult
+  if controllerResult?
     Lektire.Controllers[item](bodyClass) for item in controllerResult
 
-  if questionResult
+  if questionResult?
     Lektire.Questions[item]($form, formClass) for item in questionResult

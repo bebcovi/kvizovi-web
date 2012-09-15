@@ -11,36 +11,35 @@ body.quizzes {
 
     .count {
       color: rgba(black, .35);
-      &:before {
-        content: '(';
-      }
-      &:after {
-        content: ')';
-      }
+      font-weight: 300;
+      &:before { content: '('; }
+      &:after { content: ')'; }
     }
 
-    form { @include padding-leader(.1); }
+    form {
+      @include padding-leader(.1);
 
-    button {
-      @include border-radius(rhythm(.25));
-      position: relative;
-      overflow: visible;
-      cursor: pointer;
-      width: rhythm(2);
-      height: rhythm(.5);
-      margin: 0;
-      padding: 0;
-      border: 1px solid rgba(black, .30);
-      &:before {
-        @extend %circle;
-        @include leader(-0.3);
-        content: '';
-        position: absolute;
-        display: block;
-        width: rhythm(.5);
+      button {
+        @include border-radius(rhythm(.25));
+        position: relative;
+        overflow: visible;
+        cursor: pointer;
+        width: rhythm(2);
         height: rhythm(.5);
-        border: 1px solid rgba(black, .55);
-        background: white;
+        margin: 0;
+        padding: 0;
+        border: 1px solid rgba(black, .30);
+        &:before {
+          @extend %circle;
+          @include leader(-0.3);
+          content: '';
+          position: absolute;
+          display: block;
+          width: rhythm(.5);
+          height: rhythm(.5);
+          border: 1px solid rgba(black, .55);
+          background: white;
+        }
       }
     }
 

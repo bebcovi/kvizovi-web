@@ -13,7 +13,7 @@ $default-border-radius: 3px;
 
 // colors
 
-$text: rgba(black, .75);
+$text: lighten(black, 30%);
 
 $link1: hsl(0, 50%, 50%);
 $link2: darken($link1, 5%);
@@ -24,7 +24,9 @@ $players:
 
 // fonts
 
-$base-font-family: 'McLaren', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$sans: 'museo-sans', Verdana, 'Trebuchet MS', sans-serif;
 
-$small-font-family: Verdana, 'Trebuchet MS', Arial, sans-serif;
-$small-font-size: 12px;
+$base-font-family: $sans;
+
+$small-font-family: $sans;
+$small-font-size: 14px;

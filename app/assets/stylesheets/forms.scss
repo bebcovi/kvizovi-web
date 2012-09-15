@@ -1,15 +1,10 @@
 // general
 
 form {
-  > * { @include trailer(.5); }
+  > div, > section { @include trailer(.5); }
   ol, ul {
     @extend %unstyled-list;
     @include trailer(.5);
-  }
-  h2 {
-    @include with-font-size(28px) {
-      @include trailer(.5);
-    }
   }
   p.notice {
     @include with-font-size($small-font-size) {
@@ -18,6 +13,10 @@ form {
       i { margin-right: rhythm(.1); }
     }
   }
+}
+
+[hidden] {
+  display: none;
 }
 
 // controls
@@ -60,6 +59,11 @@ label {
 
 input, button, textarea {
   margin: 0;
+  font: {
+    family: inherit;
+    size: inherit;
+  }
+  line-height: inherit;
   color: rgba(black, .6);
 }
 
