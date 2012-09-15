@@ -99,4 +99,8 @@ module ApplicationHelper
   def smarty_pants(text)
     Redcarpet::Render::SmartyPants.render(text.to_s).html_safe
   end
+
+  def precentage(part, total)
+    (part/total.to_f * 100).round
+  end
 end

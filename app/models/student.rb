@@ -16,11 +16,6 @@ class Student < ActiveRecord::Base
     self.school = School.find_by_key(school_key)
   end
 
-  def increase_score!(points)
-    update_attribute(:score, score + points)
-    self
-  end
-
   def full_name
     "#{first_name} #{last_name}"
   end

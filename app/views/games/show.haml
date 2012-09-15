@@ -6,17 +6,18 @@
   - @questions_count.times do |i|
     %div.done{style: "width: #{100/@questions_count.to_f}%"}
 
-%ol.score
-  - @game.players.zip(@game.scores, @game.questions_answered).each_with_index do |(player, score, questions_answered), player_number|
-    %li{class: number(player_number + 1)}
-      %dl
-        %dt.username= player.username.prepend_icon("user")
-        %dd.rank Točno si odgovorio na #{questions_answered.first} od #{questions_answered.last} pitanja.
-      - percentage = "#{(score/@game.total_points.to_f * 100).round}%"
-      .bar
-        .label= percentage
-        - if score != 0
-          .fill{style: "width: #{percentage}"}
+- present @game do |game_presenter|
+
+  %ol.score
+    - game_presenter.results.each do |player, score, player_number|
+      %li{class: number(player_number)}
+        %dl
+          %dt.username= player.username.prepend_icon("user")
+          %dd.rank Točno si odgovorio na #{score} od #{game_presenter.total_score} pitanja.
+        .bar
+          .label #{percentage(score, game_presenter.total_score)}%
+          - if score != 0
+            .fill{style: "width: #{percentage(score, game_presenter.total_score)}%"}
 
 .buttons
   = link_to "Završi", new_game_path

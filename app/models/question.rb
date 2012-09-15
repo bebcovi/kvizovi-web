@@ -6,7 +6,7 @@ class Question < ActiveRecord::Base
   serialize :data
   has_attached_file :attachment, styles: {medium: "x250"}
 
-  validates_presence_of :content, :points
+  validates_presence_of :content
   validates :attachment, attachment_presence: true, if: proc { photo? }
   validate :validate_provided_answers, if: proc { choice? or association? }
   validates_presence_of :data, message: "Niste odabrali točan odgovor.", if: proc { boolean? }

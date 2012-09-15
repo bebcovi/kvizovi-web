@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818073000) do
+ActiveRecord::Schema.define(:version => 20120915154622) do
 
   create_table "games", :force => true do |t|
     t.text     "info"
@@ -24,10 +24,9 @@ ActiveRecord::Schema.define(:version => 20120818073000) do
     t.text     "content"
     t.string   "category"
     t.text     "data"
-    t.integer  "points",                  :default => 1
     t.integer  "quiz_id"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"

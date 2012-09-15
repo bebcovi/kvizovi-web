@@ -10,26 +10,11 @@ class Game < ActiveRecord::Base
 
   def scores
     info.values.map do |questions|
-      score = 0
-      questions.each do |id, answered|
-        score += quiz.questions.find(id).points if answered
+      questions.inject(0) do |score, (_, answered)|
+        points = (answered ? 1 : 0)
+        score += points
       end
-      score
     end
-  end
-
-  def questions_answered
-    info.values.map do |questions|
-      count = questions.inject(0) do |count, (_, answered)|
-        count += 1 if answered
-        count
-      end
-      [count, questions.count]
-    end
-  end
-
-  def total_points
-    questions.sum(:points)
   end
 
   def correct_answer?(question)
