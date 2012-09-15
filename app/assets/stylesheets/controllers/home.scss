@@ -1,11 +1,25 @@
 body.home {
 
+  header { display: none; }
+
   $main: $total-columns - 4;
   [role=main] {
     @include squish(2, 2);
-    @include padding-leader(2);
     @include clearfix;
     text-align: center;
+  }
+
+  #intro {
+    @include rhythm(2, 0, 0, 1);
+    h1 {
+      @include with-font-size(78px) {
+        @include trailer(.5);
+      }
+      i {
+        position: relative;
+        top: 5px;
+      }
+    }
   }
 
   $cols: $main / 2;
