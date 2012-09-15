@@ -10,7 +10,7 @@ class Quiz < ActiveRecord::Base
   default_scope order("#{table_name}.created_at DESC")
   scope :activated, where(activated: true)
 
-  validates_presence_of :name, :grades
+  validates_presence_of :name
 
   def grades=(array)
     write_attribute(:grades, array.reject(&:blank?).map(&:to_i))
