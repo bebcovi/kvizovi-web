@@ -2,8 +2,9 @@ Lektire.Questions.choice = ($form, formClass) ->
 
   if formClass.search(/edit|new/) isnt -1
 
-    $options      = $form.find('.field_with_hint').nextAll '.string'
-    $template     = []
+    $firstOption  = $form.find('.field_with_hint')
+    $otherOptions = $firstOption.nextAll '.string'
+    $template     = $firstOption.clone()
 
     $addButton    = $.addButton.clone()
     $removeButton = $.removeButton.clone()
@@ -21,27 +22,30 @@ Lektire.Questions.choice = ($form, formClass) ->
       $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
 
     addOption = ($el) ->
-      $options = $options.add $el.insertBefore($addButton)
+      $otherOptions = $otherOptions.add $el.insertBefore($addButton)
 
     removeOption = ($el) ->
-      $options = $options.not $el.fadeOut('fast', -> $(@).remove())
+      $otherOptions = $otherOptions.not $el.fadeOut('fast', -> $(@).remove())
 
-    $options.find('input').after $removeButton.clone()
+    filled = ($el) ->
+      result = true
+      $el.find('input').each -> result = result and !!$(@).val()
+      result
 
-    $template = $options.first().clone()
+    $otherOptions.add($template).find('input').after $removeButton.clone()
 
-    $template.find('input').attr 'value', ''
+    $template.find('input').val ''
     $template.removeClass 'field_with_hint field_with_errors'
     $template.find('.hint, .error').remove()
 
     $addButton
-      .insertAfter($options.last())
+      .insertAfter($otherOptions.last())
       .on 'click', ->
         $new = $template.clone()
-        updateAttrs $new, $options.length
+        updateAttrs $new, $otherOptions.length
         addOption $new
 
     $form.on 'click', '.remove', ->
       $el = $(@).parent()
       removeOption $el
-      $options.each (i) -> updateAttrs $(@), i
+      $otherOptions.each (i) -> updateAttrs $(@), i

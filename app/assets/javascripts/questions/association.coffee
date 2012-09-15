@@ -41,8 +41,9 @@ Lektire.Questions.association = ($form, formClass) ->
 
   if formClass.search(/edit|new/) isnt -1
 
-    $pairs        = $form.find('.pair').not ':first'
-    $template     = []
+    $firstPair    = $form.find('.pair').first()
+    $otherPairs   = $firstPair.nextAll '.pair'
+    $template     = $firstPair.clone()
 
     $addButton    = $.addButton.clone()
     $removeButton = $.removeButton.clone()
@@ -63,27 +64,30 @@ Lektire.Questions.association = ($form, formClass) ->
         $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
 
     addPair = ($el) ->
-      $pairs = $pairs.add $el.insertBefore($addButton)
+      $otherPairs = $otherPairs.add $el.insertBefore($addButton)
 
     removePair = ($el) ->
-      $pairs = $pairs.not $el.fadeOut('fast', -> $(@).remove())
+      $otherPairs = $otherPairs.not $el.fadeOut('fast', -> $(@).remove())
 
-    $pairs.find('.dynamic').after $removeButton.clone()
+    filled = ($el) ->
+      result = true
+      $el.find('input').each -> result = result and !!$(@).val()
+      result
 
-    $template = $pairs.first().clone()
+    $otherPairs.add($template).find('.dynamic').after $removeButton.clone()
 
-    $template.find('input').attr 'value', ''
-    $template.removeClass 'field_with_errors'
+    $template.find('input').val ''
+    $template.find('div').removeClass 'field_with_errors'
     $template.find('.error').remove()
 
     $addButton
-      .insertAfter($pairs.last())
+      .insertAfter($otherPairs.last())
       .on 'click', ->
         $new = $template.clone()
-        updateAttrs $new, $pairs.length
+        updateAttrs $new, $otherPairs.length
         addPair $new
 
     $form.on 'click', '.remove', ->
       $el = $(@).parent()
       removePair $el
-      $pairs.each (i) -> updateAttrs $(@), i
+      $otherPairs.each (i) -> updateAttrs $(@), i
