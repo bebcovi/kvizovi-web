@@ -2,6 +2,8 @@
 
 %p= back_button "Natrag", quizzes_path
 
+%h1= @quiz.name
+
 - if @quiz.questions.any?
 
   %ol.questions
