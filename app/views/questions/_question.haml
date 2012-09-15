@@ -25,3 +25,6 @@
 - elsif question.text?
 
   = f.input :answer
+
+- if question.hint
+  %p.hint Uputa: #{question.hint}

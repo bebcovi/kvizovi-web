@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120915154622) do
+ActiveRecord::Schema.define(:version => 20120915174634) do
 
   create_table "games", :force => true do |t|
     t.text     "info"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20120915154622) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.text     "hint"
   end
 
   create_table "quizzes", :force => true do |t|

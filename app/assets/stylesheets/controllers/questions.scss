@@ -58,7 +58,12 @@ ol.questions {
 }
 
 #question_content {
-  height: rhythm(1.5);
   width: rhythm(26);
+  height: rhythm(1.5);
+  max-width: 100%;
+}
+
+#question_hint {
+  height: rhythm(1.5);
   max-width: 100%;
 }

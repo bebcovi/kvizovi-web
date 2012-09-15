@@ -12,6 +12,7 @@ hr:
         category: "Tip pitanja"
         attachment: "Slika"
         points: "Bodovi"
+        hint: "Uputa (neobavezno)"
       school:
         name: "Ime škole"
         level: "Tip škole"
