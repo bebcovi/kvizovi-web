@@ -1,7 +1,17 @@
 - @title = @school.name
 
-%p= settings_button "Izmjeni profil", edit_school_path(@school)
+- present @school do |school_presenter|
 
-%ul.edit
-  %li= link_to "Kvizovi".prepend_icon("comments"), quizzes_path
-  %li= link_to "Učenici".prepend_icon("users"), students_path
+  %dl
+    %dt Ime škole
+    %dd= school_presenter.name
+    %dt Tip škole
+    %dd= school_presenter.level
+    %dt Korisničko ime
+    %dd= school_presenter.username
+    %dt Tajni ključ
+    %dd= school_presenter.key
+    %dt Broj kvizova
+    %dd= school_presenter.quizzes.count
+
+  %p= school_presenter.edit_button "Izmjeni profil"

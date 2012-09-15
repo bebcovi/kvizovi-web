@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
   def create_school
     if school = School.authenticate(params[:school])
       log_in!(school)
-      redirect_to school
+      redirect_to quizzes_path
     else
       flash.now[:alert] = "Pogrešno korisničko ime ili lozinka."
       render :new_school
