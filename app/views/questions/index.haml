@@ -2,16 +2,20 @@
 
 %p= back_button "Natrag", quizzes_path
 
-%ol.questions
+- if @quiz.questions.any?
 
-  = list_of @quiz.questions do |question|
+  %ol.questions
+    = list_of @quiz.questions do |question|
+      - present question do |question_presenter|
+        .controls
+          = question_presenter.edit_button "", @quiz, title: "Izmjeni"
+          = question_presenter.preview_button "", @quiz, title: "Prikaži"
+          = question_presenter.delete_button "", @quiz, title: "Izbriši"
 
-    - present question do |question_presenter|
-      .controls
-        = question_presenter.edit_button "", @quiz, title: "Izmjeni"
-        = question_presenter.preview_button "", @quiz, title: "Prikaži"
-        = question_presenter.delete_button "", @quiz, title: "Izbriši"
+        %p= question_presenter.content
 
-      %p= question_presenter.content
+- else
+
+  %p Ovaj kviz trenutno nema pitanja.
 
 %p= add_button "Novo pitanje", new_quiz_question_path(@quiz)
