@@ -13,6 +13,8 @@ class BrowserGame
       # Initialization
       @store[:current_player] = 0
       @store[:current_question] = 0
+
+      self
     end
 
     def update!(answer)
@@ -25,7 +27,11 @@ class BrowserGame
 
     def next_question!
       switch_player!
-      @store[:current_question] += 1
+      unless finished?
+        @store[:current_question] += 1
+      else
+        raise RuntimeError, "game has already finished"
+      end
     end
 
     def create_record!
