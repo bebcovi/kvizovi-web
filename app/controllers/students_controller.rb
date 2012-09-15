@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class StudentsController < ApplicationController
+  before_filter :authenticate!
+
   def index
     @students = current_school.students
   end
@@ -39,7 +41,13 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    current_school.students.destroy(params[:id])
+    if school_logged_in?
+      current_school.students.destroy(params[:id])
+    else
+      current_student.destroy
+      log_out!
+    end
+
     redirect_to students_path, notice: "Učenik je uspješno izbrisan."
   end
 end
