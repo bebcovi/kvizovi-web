@@ -1,7 +1,0 @@
-- @title = @question.content
-
-%p= back_button "Natrag", quiz_questions_path(@question.quiz)
-
-= simple_form_for :game, html: {class: "show #{@question.category}"} do |f|
-
-  = render partial: "question", object: @question, locals: {f: f}

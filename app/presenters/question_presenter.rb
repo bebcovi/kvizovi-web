@@ -9,10 +9,6 @@ class QuestionPresenter < BasePresenter
     @template.edit_button text, edit_quiz_question_path(quiz, question), options
   end
 
-  def preview_button(text, quiz, options = {})
-    @template.preview_button text, quiz_question_path(quiz, question), options
-  end
-
   def delete_button(text, quiz, options = {})
     @template.delete_button text, quiz_question_path(quiz, question), options
   end

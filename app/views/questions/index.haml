@@ -9,7 +9,6 @@
       - present question do |question_presenter|
         .controls
           = question_presenter.edit_button "", @quiz, title: "Izmjeni"
-          = question_presenter.preview_button "", @quiz, title: "Prikaži"
           = question_presenter.delete_button "", @quiz, title: "Izbriši"
 
         %p= question_presenter.content

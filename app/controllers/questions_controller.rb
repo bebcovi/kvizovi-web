@@ -9,10 +9,6 @@ class QuestionsController < ApplicationController
     @questions = @quiz.questions
   end
 
-  def show
-    @question = @quiz.questions.find(params[:id])
-  end
-
   def new
     if params[:category]
       @question = @quiz.questions.new(category: params[:category])
