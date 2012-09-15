@@ -57,7 +57,7 @@ describe SessionsController do
       let(:login_path) { student_login_path }
       let(:home_path)  { new_game_path }
 
-      let(:name) { "John Doe" }
+      let(:name) { @user.first_name }
       def cookie; cookies[:student_id] end
     end
   end
@@ -76,7 +76,7 @@ describe SessionsController do
       end
 
       let(:login_path) { school_login_path }
-      let(:home_path)  { school_path(@user) }
+      let(:home_path)  { quizzes_path }
 
       let(:name) { "XV. Gimnazija" }
       def cookie; cookies[:school_id] end

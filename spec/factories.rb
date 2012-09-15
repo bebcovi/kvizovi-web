@@ -28,7 +28,6 @@ FactoryGirl.define do
     category "boolean"
     content  "content"
     data     "true"
-    points   3
 
     factory :photo_question do
       category   "photo"

@@ -2,10 +2,8 @@ require 'spec_helper'
 
 describe Question do
   describe "validations" do
-    it "needs #content and #points" do
+    it "needs #content" do
       question = build(:question, content: nil)
-      question.should_not be_valid
-      question = build(:question, points: nil)
       question.should_not be_valid
       question = build(:question)
       question.should be_valid

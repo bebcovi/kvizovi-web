@@ -27,11 +27,6 @@ describe "Questions" do
       all("form").should be_empty
     end
 
-    it "already has the points selected" do
-      visit new_quiz_question_path(@quiz, category: "boolean")
-      find_field("1").should be_checked
-    end
-
     describe "boolean" do
       let(:question) { build_stubbed(:boolean_question) }
 
@@ -80,7 +75,7 @@ describe "Questions" do
 
       it "keeps the fields filled in on validation errors" do
         visit new_quiz_question_path(@quiz)
-        click_on "4 ponuđena odgovora"
+        click_on "Ponuđeni odgovori"
 
         fill_in_the_form
         fill_in "Pitanje", with: ""
@@ -170,11 +165,15 @@ describe "Questions" do
       it "is expected to be valid" do
         visit new_quiz_question_path(@quiz, category: "photo")
         fill_in_the_form
-        expect { click_on "Stvori" }.to change{Question.count}.from(0).to(1)
+        VCR.use_cassette "dropbox_create" do
+          expect { click_on "Stvori" }.to change{Question.count}.from(0).to(1)
+        end
       end
 
       after(:all) do
-        Question.destroy_all
+        VCR.use_cassette "dropbox_delete" do
+          Question.destroy_all
+        end
       end
     end
 

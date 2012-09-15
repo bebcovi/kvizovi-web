@@ -10,10 +10,6 @@ describe "Managing quizzes" do
     login(@school)
   end
 
-  it "has a link on the home page" do
-    find_link("Kvizovi")[:href].should eq(quizzes_path)
-  end
-
   describe "create" do
     before(:all) do
       @quiz = build_stubbed(:quiz)

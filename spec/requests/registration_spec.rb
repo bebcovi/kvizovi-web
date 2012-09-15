@@ -127,7 +127,7 @@ describe "Registration" do
       expect { click_on "Registriraj se" }.to change{Student.count}.from(0).to(1)
 
       current_path.should eq(new_game_path)
-      find("#log").should have_link(student.full_name)
+      find("#log").should have_link(student.first_name)
     end
 
     after(:all) do
