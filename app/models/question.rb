@@ -27,7 +27,7 @@ class Question < ActiveRecord::Base
       unless data.nil?
         left_column = data.values_at(*data.each_index.select(&:even?))
         right_column = data.values_at(*data.each_index.select(&:odd?))
-        Hash[left_column.zip(right_column)]
+        left_column.zip(right_column)
       else
         {}
       end

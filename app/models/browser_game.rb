@@ -57,9 +57,9 @@ class BrowserGame
             result.shuffle! while result.first == super.first
             result
           elsif association?
-            result = super.values.shuffle
-            result.shuffle! while result == super.values
-            Hash[super.keys.zip(result)]
+            result = super.map(&:last).shuffle
+            result.shuffle! while result == super.map(&:last)
+            Hash[super.map(&:first).zip(result)]
           else
             super
           end

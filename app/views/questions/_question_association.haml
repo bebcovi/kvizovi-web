@@ -1,7 +1,8 @@
 - input_collection(f) do |c|
 
-  - 4.times do |idx|
+  - count = current_page?(action: "new") ? 4 : question.provided_answers.count
+  - count.times do |idx|
     .pair
-      = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 1}a", input_html: {value: question.provided_answers.keys[idx]}, wrapper_html: {class: 'static'})
+      = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 1}a", input_html: {value: question.provided_answers.map(&:first)[idx]}, wrapper_html: {class: 'static'})
       = icon("arrow-right")
-      = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 1}b", input_html: {value: question.provided_answers.values[idx]}, wrapper_html: {class: 'dynamic'})
+      = c.input(:data, as: :string, label: false, placeholder: "Opcija #{idx + 1}b", input_html: {value: question.provided_answers.map(&:last)[idx]}, wrapper_html: {class: 'dynamic'})
