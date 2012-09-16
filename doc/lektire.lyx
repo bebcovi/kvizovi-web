@@ -96,8 +96,8 @@ Tehnologija
 \end_layout
 
 \begin_layout Standard
-Za razvijanje svoje aplikacije koristio sam Git, Ruby, SQL, HTML5, CSS3
- i Javascript.
+Za razvijanje svoje aplikacije koristio sam Git, Ruby, PostgreSQL, HTML5,
+ CSS3 i Javascript.
 \end_layout
 
 \begin_layout Section
@@ -105,8 +105,9 @@ Git & Github
 \end_layout
 
 \begin_layout Quote
-Git je besplatan, open-source distribuiran sistem za verzioniranje, dizajniran
- da barata sa svime od malih do vrlo velikih projekata sa brzinom i efikasnosti.
+Git is a free and open source distributed version control system designed
+ to handle everything from small to very large projects with speed and efficienc
+y.
 \end_layout
 
 \begin_layout Standard
@@ -119,20 +120,98 @@ Dakako, htio sam imati svoj projekt spremljen na još jednom mjestu.
 \end_layout
 
 \begin_layout Section
-Ruby
+Ruby & Rails
 \end_layout
 
 \begin_layout Quote
-Ruby je dinamički, open-source programski jezik s fokusom na jednostavnost
- i produktivnost.
- Ima elegantnu sintaksu koja je prirodna za čitati i lagana za pisati.
+Ruby is a dynamic, open source programming language with a focus on simplicity
+ and productivity.
+ It has an elegant syntax that is natural to read and easy to write.
+\end_layout
+
+\begin_layout Standard
+Ruby mi je pomogao da izgradim svoju aplikaciju s elegancijom i lakoćom.
+\end_layout
+
+\begin_layout Standard
+Vrlo je velika količina open-source Ruby biblioteka (eng.
+ 
+\shape italic
+gem
+\shape default
+) koje su dostupne za korištenje.
+ Od bibilioteka koje sam koristio, navest ću najbitnije
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Rails
+\series default
+ – Moćno sučelje za izradu web aplikacija.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Pg
+\series default
+ – Služi za komunikaciju s bazom podataka (PostgreSQL).
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Haml
+\series default
+ – Služi lakšem pisanju HTMLa.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Paperclip
+\series default
+ – Olakšava spremanje datoteka na server koje su se učitale preko forme.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+BCrypt
+\series default
+ - Omogućuje kriptiranje osjetljivih podataka, kao što je lozinka.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+RSpec 
+\series default
+– Sučelje za testiranje aplikacije.
 \end_layout
 
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-label "Ruby"
 key "key-1"
+
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+target "http://git-scm.com"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-2"
 
 \end_inset
 
