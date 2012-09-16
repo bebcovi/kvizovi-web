@@ -164,6 +164,10 @@ Za razvijanje svoje aplikacije koristio sam Git, Ruby, PostgreSQL, HTML5,
  CSS3 i Javascript.
 \end_layout
 
+\begin_layout Standard
+Od eksternalnih usluga sam koristio Dropbox i Heroku.
+\end_layout
+
 \begin_layout Section
 Git i GitHub
 \end_layout
@@ -184,7 +188,7 @@ Dakako, htio sam imati svoj projekt spremljen na još jednom mjestu.
 \end_layout
 
 \begin_layout Section
-Ruby & Rails
+Ruby (on Rails)
 \end_layout
 
 \begin_layout Quote
@@ -236,7 +240,7 @@ Haml
 \series bold
 Paperclip
 \series default
- – Olakšava spremanje datoteka na server koje su se učitale preko forme.
+ – Olakšava spremanje datoteka koje su se učitale preko web forme na server.
 \end_layout
 
 \begin_layout Itemize
@@ -253,6 +257,156 @@ BCrypt
 RSpec 
 \series default
 – Sučelje za testiranje aplikacije.
+\end_layout
+
+\begin_layout Standard
+Rails je alat koji je imao daleko najveću važnost u izradi mojeg projekta,
+ pa zaslužuje posebno poglavlje.
+\end_layout
+
+\begin_layout Subsection
+Rails
+\end_layout
+
+\begin_layout Quote
+Ruby on Rails
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+®
+\end_layout
+
+\end_inset
+
+ is an open-source web framework that's optimized for programmer's happiness
+ and sustainable productivity.
+ It lets you write beautiful code by favoring convention over configuration.
+\end_layout
+
+\begin_layout Standard
+Rails je 2003.
+ godine napravio David Heinemeier Hansson (poznat po inicijalima DHH).
+ Rails je open-source projekt, pa je do današnjeg dana izgrađen uz pomoć
+ puno (više od 2,100) programera diljem svijeta.
+\end_layout
+
+\begin_layout Standard
+Rails je 
+\begin_inset Quotes gld
+\end_inset
+
+samouvjeren
+\begin_inset Quotes grd
+\end_inset
+
+ alat.
+ On radi pretpostavku da postoji 
+\begin_inset Quotes gld
+\end_inset
+
+najbolji
+\begin_inset Quotes grd
+\end_inset
+
+ način za napraviti stvari, i dizajniran je da potiče takav način — a u
+ nekim slučajevima i da obeshrabruje alternative.
+ Filozofija Railsa uključuje sljedeće točke:
+\end_layout
+
+\begin_layout Itemize
+DRY (eng.
+ 
+\shape italic
+Don't Repeat Yourself
+\shape default
+) - sugestira da je pisanje istog kôda na više mjesta u projektu loša stvar.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes gld
+\end_inset
+
+
+\shape italic
+Convention Over Configuration
+\shape default
+
+\begin_inset Quotes grd
+\end_inset
+
+ – znači da Rails pretpostavlja što i kako korisnik želi nešto napraviti,
+ a ne da zahtjeva da korisnik specificira svaki sitni detalj u konfiguraciji.
+\end_layout
+
+\begin_layout Itemize
+REST (eng.
+ 
+\shape italic
+Representational State Transfer
+\shape default
+) je najbolji model za web aplikacije - organiziranje aplikacije oko resursa
+ i standardnih HTTP 
+\begin_inset Quotes gld
+\end_inset
+
+glagola
+\begin_inset Quotes grd
+\end_inset
+
+ (GET, POST, PUT, PATCH, DELETE) je najbrži način za razvitak stabilne aplikacij
+e.
+\end_layout
+
+\begin_layout Standard
+Rails koristi tzv MVC arhitekturu (eng.
+ 
+\shape italic
+Models-Views-Controllers
+\shape default
+).
+ To znači da postoji jedan sloj za čuvanje i manipuliranje podacima (baza
+ podataka), drugi sloj za dobavljanje tih podataka, i treći sloj za prezentiranj
+e tih podataka, najčešće u obliku HTML stranice.
+\end_layout
+
+\begin_layout Standard
+Velike web aplikacije su napravljene u Railsu, primjerice 
+\begin_inset CommandInset href
+LatexCommand href
+name "Twitter"
+target "http://twitter.com"
+
+\end_inset
+
+ i 
+\begin_inset CommandInset href
+LatexCommand href
+name "GitHub"
+target "https://github.com"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Dropbox
+\end_layout
+
+\begin_layout Standard
+Dropbox je web aplikacija koja omogućuje spremanje, učitavanje, i dijeljenje
+ datoteka preko Interneta.
+\end_layout
+
+\begin_layout Section
+Heroku
+\end_layout
+
+\begin_layout Standard
+Heroku je servis za hosting web aplikacija.
+ Razlikuje se od drugih servisa po tome što on već ima konfigurirano sve
+ što je korisniku potrebno, time čineći sam proces stavljanja aplikacije
+ na njihov server potptuno bezbolnim.
 \end_layout
 
 \begin_layout Section
@@ -273,41 +427,6 @@ CSS3
 
 \begin_layout Standard
 Manje slika i prezentacijskih klasa.
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring References
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-1"
-
-\end_inset
-
-
-\begin_inset CommandInset href
-LatexCommand href
-target "http://git-scm.com"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-2"
-
-\end_inset
-
-
-\begin_inset CommandInset href
-LatexCommand href
-target "http://www.ruby-lang.org/en/"
-
-\end_inset
-
-
 \end_layout
 
 \end_body
