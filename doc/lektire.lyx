@@ -211,7 +211,7 @@ Vrlo je velika količina open-source Ruby biblioteka (eng.
 gem
 \shape default
 ) koje su dostupne za korištenje.
- Od bibilioteka koje sam koristio, navest ću najbitnije
+ Od bibilioteka koje sam koristio, navest ću najbitnije:
 \end_layout
 
 \begin_layout Itemize
@@ -219,7 +219,7 @@ gem
 \series bold
 Rails
 \series default
- – Moćno sučelje za izradu web aplikacija.
+ -- Moćno sučelje za izradu web aplikacija.
 \end_layout
 
 \begin_layout Itemize
@@ -227,7 +227,7 @@ Rails
 \series bold
 Pg
 \series default
- – Služi za komunikaciju s bazom podataka (PostgreSQL).
+ -- Omogućava komunikacija s bazom podataka (PostgreSQL).
 \end_layout
 
 \begin_layout Itemize
@@ -235,7 +235,25 @@ Pg
 \series bold
 Haml
 \series default
- – Služi lakšem pisanju HTMLa.
+ -- Omogućava pisanje HTML-a u apstrahiranom obliku.
+ Takav je kod je puno lakši za čitati i pisati.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Sass
+\series default
+ -- Opskrbljuje CSS s dodatnim funkcionalnostima, kao što su funkcije, varijable
+ i sl.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+CoffeeScript
+\series default
+ -- Olakšava pisanje JavaScript-a i čini njegovu sintaksu više nalik Ruby-u.
 \end_layout
 
 \begin_layout Itemize
@@ -243,7 +261,7 @@ Haml
 \series bold
 Paperclip
 \series default
- – Olakšava spremanje datoteka koje su se učitale preko web forme na server.
+ -- Olakšava spremanje datoteka koje su se učitale preko web forme na server.
 \end_layout
 
 \begin_layout Itemize
@@ -251,7 +269,7 @@ Paperclip
 \series bold
 BCrypt
 \series default
- - Omogućuje kriptiranje osjetljivih podataka.
+ -- Omogućuje kriptiranje osjetljivih podataka.
  Posebnost kriptiranja koje ova biblioteka nudi u odnosu na poznate (npr.
  MD5) je ta što je ovaj algoritam za kriptiranje napisan da bude spor.
  Na primjer, u usporedbi s MD5, 
@@ -270,7 +288,7 @@ bcrypt
 \series bold
 RSpec 
 \series default
-– Sučelje za testiranje aplikacije.
+-- Sučelje za testiranje aplikacije.
 \end_layout
 
 \begin_layout Standard
@@ -408,8 +426,8 @@ Dropbox
 \end_layout
 
 \begin_layout Standard
-Dropbox je web aplikacija koja omogućuje spremanje, učitavanje, i dijeljenje
- datoteka preko Interneta.
+Dropbox je web aplikacija koja omogućuje spremanje, učitavanje, sinkronizaciju
+ i dijeljenje datoteka preko Interneta.
 \end_layout
 
 \begin_layout Section
