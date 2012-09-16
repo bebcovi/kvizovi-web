@@ -2,8 +2,10 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass extarticle
+\textclass scrbook
 \begin_preamble
+\usepackage[numbib,nottoc]{tocbibind}
+
 \def\arctan{\mathop{\rm arctg}\nolimits}
 \def\tan{\mathop{\rm tg}\nolimits}
 \def\cot{\mathop{\rm ctg}\nolimits}
@@ -49,7 +51,16 @@ figs-within-sections
 \index_command default
 \paperfontsize default
 \spacing single
-\use_hyperref false
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry true
 \use_amsmath 1
@@ -87,11 +98,64 @@ figs-within-sections
 
 \begin_body
 
+\begin_layout Titlehead
+Sveučilište u Zagrebu
+\begin_inset Newline newline
+\end_inset
+
+Filozofski fakultet
+\begin_inset Newline newline
+\end_inset
+
+Odsjek za informacijske i komunikacijske znanosti
+\begin_inset Newline newline
+\end_inset
+
+Ak.
+ god.
+ 2011/2012.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Mentor: dr.
+ sc.
+ Željko Agić
+\end_layout
+
 \begin_layout Title
 Lektire
 \end_layout
 
-\begin_layout Part
+\begin_layout Subtitle
+Završni rad
+\end_layout
+
+\begin_layout Author
+Matija Marohnić
+\end_layout
+
+\begin_layout Publishers
+Zagreb, Rujan, 2012.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
 Tehnologija
 \end_layout
 
@@ -191,7 +255,24 @@ RSpec
 – Sučelje za testiranje aplikacije.
 \end_layout
 
+\begin_layout Section
+HTML5
+\end_layout
+
+\begin_layout Standard
+U HTML-u je neko vrijeme bila popularna ideja XHTML-a, koji 
+\end_layout
+
+\begin_layout Section
+CSS3
+\end_layout
+
+\begin_layout Standard
+Manje slika i prezentacijskih klasa.
+\end_layout
+
 \begin_layout Bibliography
+\labelwidthstring References
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-1"
@@ -223,22 +304,6 @@ target "http://www.ruby-lang.org/en/"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Section
-HTML5
-\end_layout
-
-\begin_layout Standard
-XHTML je propala ideja, rodio se HTML5.
-\end_layout
-
-\begin_layout Section
-CSS3
-\end_layout
-
-\begin_layout Standard
-Manje slika i prezentacijskih klasa.
 \end_layout
 
 \end_body
