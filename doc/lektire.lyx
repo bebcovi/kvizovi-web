@@ -162,6 +162,36 @@ LatexCommand tableofcontents
 Uvod
 \end_layout
 
+\begin_layout Standard
+Suočimo se s istinom: lektire su tamna strana škole većini učenika.
+ Ova aplikacija je tu da to promijeni.
+\end_layout
+
+\begin_layout Standard
+Ne znam za druge učenike, ali meni nikad nije išlo čitanje lektira.
+ Pročitao sam možda 2 polovice dvaju različitih knjiga, što znači da nisam
+ nijednu pročitao do kraja.
+ Ova aplikacija je nešto što sam htio tada imati, u nadi da bi me potaknula
+ da više čitam.
+\end_layout
+
+\begin_layout Standard
+Postoje već slične aplikacije koje omogućavaju igranje kvizova, ali su velike,
+ teške za implementirati, a često i skupe.
+ To je s razlogom, kviz je prilično kompleksan koncept za realizirati na
+ jednostavan i fleksibilan način.
+ Ova aplikacija ne pokušava donijeti univerzalno rješenje, već specijalizirano,
+ jer je po mom mišljenju korištenje više specijaliziranih alata bolje nego
+ korištenje jednog velikog alata.
+\end_layout
+
+\begin_layout Standard
+Cilj moje aplikacije je napraviti usvajanje znanja iz lektira zabavnim,
+ uzbudljivim i interaktivnim procesom.
+ Nadam se da će mi, uz pomoć škola koja će testiraju moju aplikaciju, to
+ i uspjeti.
+\end_layout
+
 \begin_layout Chapter
 Terminologija
 \end_layout
@@ -203,13 +233,13 @@ Web stranica i web aplikacija
 \series bold
 Korisničko iskustvo
 \series default
-.
  (eng.
  
 \emph on
 user experience
 \emph default
-) Apstraktan termin koji opisuje kako se korisnik 
+).
+ Apstraktan termin koji opisuje kako se korisnik 
 \emph on
 osjeća
 \emph default
@@ -261,15 +291,15 @@ Font
 \begin_layout Standard
 
 \series bold
-Biblioteka.
-
+Biblioteka
 \series default
  (eng.
  
 \emph on
 library
 \emph default
-) Skup varijabla i funkcija koji pomaže u korištenju određenog (programskog)
+).
+ Skup varijabla i funkcija koji pomaže u korištenju određenog (programskog)
  jezika.
 \end_layout
 
