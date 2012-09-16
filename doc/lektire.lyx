@@ -225,5 +225,21 @@ target "http://www.ruby-lang.org/en/"
 
 \end_layout
 
+\begin_layout Section
+HTML5
+\end_layout
+
+\begin_layout Standard
+XHTML je propala ideja, rodio se HTML5.
+\end_layout
+
+\begin_layout Section
+CSS3
+\end_layout
+
+\begin_layout Standard
+Manje slika i prezentacijskih klasa.
+\end_layout
+
 \end_body
 \end_document
