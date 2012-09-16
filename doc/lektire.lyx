@@ -165,7 +165,7 @@ Za razvijanje svoje aplikacije koristio sam Git, Ruby, PostgreSQL, HTML5,
 \end_layout
 
 \begin_layout Section
-Git & Github
+Git i GitHub
 \end_layout
 
 \begin_layout Quote
@@ -260,7 +260,11 @@ HTML5
 \end_layout
 
 \begin_layout Standard
-U HTML-u je neko vrijeme bila popularna ideja XHTML-a, koji 
+U HTML-u je neko vrijeme bila popularna ideja XHTML-a.
+ XHTML je verzija HTML-a inspirirana XML-om, glavne značajke su stroga sintaksa
+ i mogućnost definiranja novih elemenata.
+ Međutim, budući da Internet Explorer nije podržavao XHTML, on je bio samo
+ ograničavajuć, nismo mogli koristiti njegove prednosti.
 \end_layout
 
 \begin_layout Section
