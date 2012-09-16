@@ -1098,7 +1098,118 @@ Nakon što učenik izabere kviz i broj igrača, uzimu se pitanja iz tog kviza
 \end_layout
 
 \begin_layout Standard
-Bla
+Aplikacija je zamišljena tako da škola ne mora registrirati svakog pojedinog
+ učenika, nego samo napiše 
+\emph on
+ključ
+\emph default
+ (niz znakova), koji će kasnije podijeliti učenicima.
+ Učenici se ne mogu registrirati bez ključa.
+ Također, postoji i globalni ključ aplikacije koji škole moraju imati kako
+ bi se uopće mogle registrirati, a njega dobijaju od mene.
+ Taj mehanizam spriječava da se bilo tko registrira kao škola.
+\end_layout
+
+\begin_layout Standard
+Nakon što se škola registrira, dolazi do sučelja za administraciju.
+ Cilj administrativnog sučelja je da bude što moćnije, a istovremeno što
+ jednostavnije.
+ Postoje 2 objekta na koje škola trenutno može utjecati: 
+\series bold
+učenici
+\series default
+ i 
+\series bold
+kvizovi
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+Učenici se trenutno mogu samo brisati, dok se sa kvizovima može puno više.
+ Kvizovi se mogu stvarati, izmjenjivati, mogu im se dodavati pitanja, može
+ ih se aktivirati, deaktivirati itd.
+ Škola određuje koji kvizovi će biti vidljivi i kojim razredima.
+\end_layout
+
+\begin_layout Standard
+Što se tiče dodavanja pitanja, postoji 5 vrsta pitanja:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Točno/netočno
+\series default
+ -- Učenik odgovara je li tvrdnja točna ili netočna.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Ponuđeni odgovori
+\series default
+ -- Postavljeno je pitanje i učenik bira odgovor iz ponuđenih.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Asocijacija
+\series default
+ -- Učenik pridružuje pojmove iz jednog stupca s pojmovima iz drugog stupca.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Pogodi tko/što je na slici
+\series default
+ -- Prikazana je slika i učenik odgovara tko ili što se nalazi na njoj.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Upiši točan odgovor
+\series default
+ -- Postavljeno je pitanje i učenik upisuje odgovor.
+\end_layout
+
+\begin_layout Standard
+Dvije su vrste pitanja na koje bih htio obratiti pozornost, a to su 3.
+ i 4.
+\end_layout
+
+\begin_layout Standard
+Asocijacije su izvedene tako da korisnik razmješta pojmove u desnom stupcu
+ tako da pripadaju pojmovima iz lijevog stupca.
+ Pojmovi se razmještaju pomoću 
+\emph on
+drag & drop
+\emph default
+ tehnike, čija HTML5 implementacija nema još zadovoljavajuću podršku, stoga
+ kako bih to emulirao koristim jQuery priključak 
+\series bold
+jQuery UI
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+Pogodi tko/što je na slici u administracijskom sučelju koristi HTML5 Canvas
+ i FileSystem API kako bi prikazao kako će izgledati slika prije uploada.
+ Prvo se pomoću FileSystem API-a učita slika, a 
+\begin_inset Quotes gld
+\end_inset
+
+nacrta
+\begin_inset Quotes grd
+\end_inset
+
+ se pomoću <canvas> elementa.
+ Ta metoda radi iznimno brzo jer se slika ne mora učitati na poslužitelj
+ prije nego što bi se prikazala, nego se čita direktno s računala.
 \end_layout
 
 \end_body
