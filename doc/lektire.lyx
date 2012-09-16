@@ -23,7 +23,8 @@
 \theoremstyle{plain}
 \newtheorem*{thm}{Teorem}
 
- \setlength{\intextsep}{0cm plus1cm minus1cm}
+\setlength{\intextsep}{0cm plus1cm minus1cm}
+\renewcommand{\arraystretch}{2}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -250,7 +251,18 @@ Paperclip
 \series bold
 BCrypt
 \series default
- - Omogućuje kriptiranje osjetljivih podataka, kao što je lozinka.
+ - Omogućuje kriptiranje osjetljivih podataka.
+ Posebnost kriptiranja koje ova biblioteka nudi u odnosu na poznate (npr.
+ MD5) je ta što je ovaj algoritam za kriptiranje napisan da bude spor.
+ Na primjer, u usporedbi s MD5, 
+\series bold
+bcrypt
+\series default
+ je 300 puta sporiji.
+ To je korisno zato što tada hakerima treba puno više vremena da pogode
+ lozinku korisnika, jer trebaju kriptirati velik broj potencijalnih lozinki.
+ S druge strane, vrijeme potrebno da se kriptira jedna lozinka (npr.
+ kod registracije) je zanemarivo sporije, tako da ga korisnik neće ni osjetiti.
 \end_layout
 
 \begin_layout Itemize
@@ -522,7 +534,23 @@ plugin
 \end_layout
 
 \begin_layout Chapter
-Uloge
+Implementacija
+\end_layout
+
+\begin_layout Standard
+Kada korisnik na početku dođe na stranicu, dočeka ga odabir želi li se prijaviti
+ kao učenik ili škola.
+ Taj odabir ga vodi na web formu za prijavu.
+ Tamo korisnik može izabrati želi li se prijaviti ili registrirati.
+ Nakon što napravi jedno od tog dvoje, korisnik je prijavljen, te se sučelja
+ razdvajaju; korisnika dočeka sučelje gdje može izabrati koji da kviz igra,
+ a školu dočeka administracijsko sučelje gdje može izrađivati kvizove.
+\end_layout
+
+\begin_layout Standard
+Kada se korisnik registrira, njegovi podaci se spremaju u bazu, s lozinka
+ se još prethodno kriptira.
+ Većinu tih podataka korisnik može kasnije izmijeniti.
 \end_layout
 
 \begin_layout Section
@@ -530,7 +558,339 @@ Učenik
 \end_layout
 
 \begin_layout Standard
-Bla
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row>
+<cell mroffset="1cm" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Naziv polja
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+SQL tip
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Opis
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+id
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+integer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Jedinstvena identifikacija
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+first_name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+varchar(255)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ime
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+last_name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+varchar(255)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Prezime
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+username
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+varchar(255)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Korisničko ime
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+password_digest
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+varchar(255)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lozinka
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+school_id
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+integer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Jedinstvena identifikacija škole
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+grade
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+integer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Razred
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+created_at
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+datetime
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Vrijeme registracije
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+updated_at
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+datetime
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Vrijeme zadnje izmjene profila
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Pri registraciji korisnik treba ispuniti svoje osnovne podatke, i treba
+ napisati tajni ključ svoje škole.
+ To je zato da se ne bi mogao svatko registrirati.
+ 
+\end_layout
+
+\begin_layout Standard
+Nakon prijave korisnik je odveden na stranicu gdje može izabrati koji da
+ kviz igra (ponuđeni su mu samo kvizovi koje je njegova škola stvorila).
+ Nakon toga može izabrati želi li igrati u jedan ili dva igrača (u drugom
+ slučaju drugi igrač treba unijeti svoje korisničko ime i lozinku).
+ Nakon toga igra može započeti.
+\end_layout
+
+\begin_layout Subsection
+Igra
+\end_layout
+
+\begin_layout Standard
+Nakon što učenik izabere kviz i broj igrača, uzimu se pitanja iz tog kviza
+ i ispremiješa im se redoslijed.
 \end_layout
 
 \begin_layout Section
