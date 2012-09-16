@@ -403,6 +403,14 @@ coffee-script
 \begin_layout Itemize
 
 \series bold
+jquery
+\series default
+ -- Biblioteka za JavaScript.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
 paperclip
 \series default
  -- Olakšava spremanje datoteka koje su se učitale preko web forme na server.
