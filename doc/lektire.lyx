@@ -365,7 +365,7 @@ sass
 \begin_layout Itemize
 
 \series bold
-coffee
+coffee-script
 \series default
  -- Olakšava pisanje JavaScript-a i čini njegovu sintaksu više nalik Ruby-u.
 \end_layout
@@ -541,7 +541,7 @@ Dropbox
 
 \begin_layout Standard
 Dropbox je web aplikacija koja omogućuje spremanje, učitavanje, sinkronizaciju
- i dijeljenje datoteka preko Interneta.
+ i dijeljenje datoteka preko interneta.
 \end_layout
 
 \begin_layout Section
