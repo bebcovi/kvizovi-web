@@ -417,18 +417,44 @@ HTML5
 
 \begin_layout Standard
 U HTML-u je neko vrijeme bila popularna ideja XHTML-a.
- XHTML je verzija HTML-a inspirirana XML-om, glavne značajke su stroga sintaksa
- i mogućnost definiranja novih elemenata.
+ XHTML 1.0 je verzija HTML-a inspirirana XML-om, glavne značajke su stroga
+ sintaksa i mogućnost definiranja novih elemenata.
  Međutim, budući da Internet Explorer nije podržavao XHTML, on je bio samo
  ograničavajuć, nismo mogli koristiti njegove prednosti.
-\end_layout
-
-\begin_layout Section
-CSS3
+ Ogranak koji je razvijao XHTML imao je planove za XHTML 2.0, ali njihov
+ razvitak je polako utihnuo i počeo se razvijati HTML5.
 \end_layout
 
 \begin_layout Standard
-Manje slika i prezentacijskih klasa.
+HTML5 je po mnogočemu suprotan XHTML-u, uglavnom s obzirom na sintaksu.
+ HTML5 je iznimno liberalan, što je osvježavajuće nakon vrlo stroge sintakse
+ XHTML-a.
+ HTML5 ima listu elemenata koji se mogu izostaviti, u koju u određenim okolnosti
+ma spadaju čak i neki osnovni elementi, kao <html>, <head> i <body>!
+\end_layout
+
+\begin_layout Standard
+Ovaj novi jezik donosi specifikacije za mnoge funkcionalnosti koje su web
+ developeri oduvijek htjeli, ali nisu imali odgovarajuću podršku te su ih
+ emulirali drugim tehnologijama, kao Flash i Java.
+ Jedan od primjera je podrška za video i audio, za koju se prije koristio
+ Flash, a sada se može koristiti u svim modernim web preglednicima.
+\end_layout
+
+\begin_layout Standard
+Ipak, rađa se jedno pitanje: što sa starijim preglednicima koji ne podržavaju
+ nove funkcionalnosti? Postoji jedna JavaScript biblioteka pod nazivom Modernizr
+, koja se bavi detekcijom što preglednik podržava, a što ne.
+ Pomoću njega može se npr.
+ za preglednike koji ne podržavaju zaobljene rubove koristiti slika.
+ (Za takve svrhe prije se koristila jedna nepouzdana metoda koja je pokušavala
+ saznati u kojem je pregledniku stranica učitana, pa prema tome developer
+ zaključuje što taj preglednik podržava.)
+\end_layout
+
+
+\begin_layout Standard
+
 \end_layout
 
 \end_body
