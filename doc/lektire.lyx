@@ -159,6 +159,121 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Chapter
+Uvod
+\end_layout
+
+\begin_layout Chapter
+Terminologija
+\end_layout
+
+\begin_layout Standard
+Prije nego što počnem s detaljima, potrebno je uvesti čitatelja kroz višeznačnu
+ terminologiju razvijana web stranica.
+ S obzirom da polje jako brzo napreduje, ovi pojmovi nemaju čvrstih definicija,
+ ali ovo je jedna od interpretacija koja se koristi u ovom radu.
+ Osim definicija spomenut ću i skraćenice.
+\end_layout
+
+\begin_layout Standard
+Web stranicu ponekad kraće zovem 
+\emph on
+stranicom
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Web stranica i web aplikacija
+\series default
+.
+ Web stranicom se smatra sadržaj na internetu koji je statičan u smislu
+ da uglavnom ne možemo utjecati na njezin sadržaj.
+ Takve stranice služe za prezentacijske svrhe.
+ Web aplikacija je, s druge strane, popularan termin koji opisuje web stranicu
+ koja se ponaša kao što bi se ponašala aplikacija na našem računalu, samo
+ ima više mogućnosti jer je automatski povezana na internet.
+ Možemo utjecati na njen sadržaj i djelovati na ostale korisnike te aplikacije
+ (ukoliko postoje).
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Korisničko iskustvo
+\series default
+.
+ (eng.
+ 
+\emph on
+user experience
+\emph default
+) Apstraktan termin koji opisuje kako se korisnik 
+\emph on
+osjeća
+\emph default
+ dok koristi web stranicu.
+ Je li stranica intuitivna za korištenje, ponašaju li se njeni elementi
+ na očekivan način i sl.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Web dizajner i web developer
+\series default
+.
+ Iako točan opseg njihovog polja nije definiran, web dizajnerom se obično
+ smatra osoba koja je specijalizirana za izgled stranice i korisničko iskustvo,
+ a web developer je osoba koja se bavi programerskim dijelom web stranice,
+ obično vezanim za poslužitelje.
+ Web dizajneri razvijaju 
+\emph on
+front-end
+\emph default
+, dok web developeri razvijaju 
+\emph on
+back-end
+\emph default
+.
+ Web dizajnere i web developer ponekad kraće zovem 
+\emph on
+dizajnerima
+\emph default
+ i 
+\emph on
+developerima
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Font
+\series default
+.
+ Skup znakova dizajniranih u istom stilu koji se mogu koristiti za elektroničko
+ pisanje.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Biblioteka.
+
+\series default
+ (eng.
+ 
+\emph on
+library
+\emph default
+) Skup varijabla i funkcija koji pomaže u korištenju određenog (programskog)
+ jezika.
+\end_layout
+
+\begin_layout Chapter
 Tehnologija
 \end_layout
 
@@ -524,12 +639,7 @@ JavaScript i jQuery
 
 \begin_layout Standard
 JavaScript je skriptni jezik za dodavanje dinamičnosti stranicama i poboljšavanj
-e korisničkog iskustva (eng.
- 
-\emph on
-user experience
-\emph default
-).
+e korisničkog iskustva.
  U zadnje vrijeme je vrlo popularan jer je dovoljno sazrio za ozbiljnu upotrebu.
 \end_layout
 
