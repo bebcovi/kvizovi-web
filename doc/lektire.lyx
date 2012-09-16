@@ -100,27 +100,6 @@ Git & Github
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement i
-overhang 0in
-width "12col%"
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/Git.png
-	lyxscale 15
-	scale 20
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Za razvijanje aplikacije koristio sam Git.
  Git je sustav za verzioniranje datoteka u projektu.
  Git mi je omogućio da uz minimalan trud kroz razvitak aplikacije imam različite
@@ -128,27 +107,6 @@ Za razvijanje aplikacije koristio sam Git.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement r
-overhang 0in
-width "12col%"
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/Octocat.png
-	lyxscale 15
-	scale 8
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Dakako, htio sam imati svoj projekt spremljen na još jednom mjestu.
  Za to sam korstio GitHub.
  GitHub je web aplikacija koja omogućuje spremanje vaših projekata na Internet,
@@ -167,23 +125,18 @@ Ruby je dinamički, open-source programski jezik s fokusom na jednostavnost
  Ima elegantnu sintaksu koja je prirodna za čitati i lagana za pisati.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename images/Ruby.jpg
-	scale 30
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Ruby"
+key "key-1"
 
 \end_inset
 
 
-\end_layout
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.ruby-lang.org/en/"
 
 \end_inset
 
