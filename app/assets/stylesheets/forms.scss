@@ -8,7 +8,10 @@ form {
   }
   p.notice {
     @include with-font-size($small-font-size) {
-      font-family: $small-font-family;
+      font: {
+        family: $small-font-family;
+        weight: 300;
+      }
       color: rgba(black, .4);
       i { margin-right: rhythm(.1); }
     }
@@ -95,7 +98,8 @@ label + select {
 
 .hint {
   @include with-font-size(14px) {
-    color: rgba(black, .25);
+    font-weight: 300;
+    color: rgba(black, .4);
   }
 }
 

@@ -4,10 +4,13 @@ body.quizzes {
 
     ol.quizzes { @extend %nice-list; }
 
-    $cols: 5;
+    $cols: 4;
     .name { @include span-columns($cols); }
 
-    form { float: left; }
+    form {
+      float: left;
+      margin-left: gutter() * 2;
+    }
 
     .count {
       color: rgba(black, .35);

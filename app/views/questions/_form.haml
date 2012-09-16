@@ -10,7 +10,7 @@
   = render partial: "question_#{@question.category}", object: @question, as: :question, locals: {f: f}
 
   = f.input :hint, input_html: {cols: 50},
-    hint: "Ovdje možete, po potrebi, staviti dodatnu napomenu vezanu uz ovo pitanje, koju će učenici vidjeti kada budu odgovarali na njega."
+    hint: "Npr. \"Odgovor piši u nominativu.\""
 
   .buttons
     = link_to "Odustani", (@question.new_record? ? new_quiz_question_path(@quiz) : quiz_questions_path(@quiz))

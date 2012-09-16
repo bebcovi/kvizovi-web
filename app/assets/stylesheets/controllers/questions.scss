@@ -1,11 +1,10 @@
 ol.categories {
   @extend %unstyled-list;
 
-  li { @include trailer(.25); }
-
   a, .icon, .label { @extend %inline-block; }
 
   a {
+    @include rhythm(0, .25, .25, 0);
     @include color-link(rgba(black, .35), $link2);
     &:hover {
       text-decoration: none;
