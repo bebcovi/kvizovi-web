@@ -95,15 +95,18 @@ Lektire
 Tehnologija
 \end_layout
 
+\begin_layout Standard
+Za razvijanje svoje aplikacije koristio sam Git, Ruby, SQL, HTML5, CSS3
+ i Javascript.
+\end_layout
+
 \begin_layout Section
 Git & Github
 \end_layout
 
-\begin_layout Standard
-Za razvijanje aplikacije koristio sam Git.
- Git je sustav za verzioniranje datoteka u projektu.
- Git mi je omogućio da uz minimalan trud kroz razvitak aplikacije imam različite
- verzije svog projekta spremljene na računalu.
+\begin_layout Quote
+Git je besplatan, open-source distribuiran sistem za verzioniranje, dizajniran
+ da barata sa svime od malih do vrlo velikih projekata sa brzinom i efikasnosti.
 \end_layout
 
 \begin_layout Standard
