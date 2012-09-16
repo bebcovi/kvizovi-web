@@ -416,6 +416,14 @@ HTML5
 \end_layout
 
 \begin_layout Standard
+HTML je jezik koji opisuje strukturu stranice.
+ Svaki web preglednik ima ugrađene stilove koji opisuju kako će određeni
+ HTML elementi izgledati, ali sâm HTML ne određuje prikaz svojih elemenata.
+ To je vrlo bitan koncept koji omogućava razdvajanje strukture web stranice
+ od njezinog izgleda.
+\end_layout
+
+\begin_layout Standard
 U HTML-u je neko vrijeme bila popularna ideja XHTML-a.
  XHTML 1.0 je verzija HTML-a inspirirana XML-om, glavne značajke su stroga
  sintaksa i mogućnost definiranja novih elemenata.
@@ -442,10 +450,12 @@ Ovaj novi jezik donosi specifikacije za mnoge funkcionalnosti koje su web
 \end_layout
 
 \begin_layout Standard
-Ipak, rađa se jedno pitanje: kako omogućiti određene funkcionalnosti za
- preglednike koji ih ne podržavaju? Postoji jedna JavaScript biblioteka
- pod nazivom Modernizr, koja se bavi detekcijom što preglednik podržava,
- a što ne.
+Ipak, rađa se jedno pitanje: 
+\emph on
+kako omogućiti određene funkcionalnosti za preglednike koji ih ne podržavaju?
+\emph default
+ Postoji jedna JavaScript biblioteka pod nazivom Modernizr, koja se bavi
+ detekcijom što preglednik podržava, a što ne.
  Pomoću njega može se npr.
  za preglednike koji ne podržavaju video koristiti Flash.
  (Za takve svrhe prije se koristila jedna nepouzdana metoda koja je pokušavala
@@ -458,6 +468,17 @@ CSS3
 \end_layout
 
 \begin_layout Standard
+Za razliku od HTML-a, koji opisuje strukturu stranice, CSS opisuje 
+\series bold
+izgled
+\series default
+ stranice.
+ Nastao je kao rješenje koje razdvaja prezentaciju od strukture stranice,
+ jer se izgled web stranice prije definirao prezentacijskim HTML elementima,
+ što je brzo postalo teško za održavati.
+\end_layout
+
+\begin_layout Standard
 Paralelno s HTML-om počeo se razvijati i CSS3, koji podržava mnoge vizualne
  efekte kao što su sjene, zaobljeni rubovi, animacije, gradijenti i sl.
  Za takve efekte su web dizajneri prije trebali koristiti slike.
@@ -466,6 +487,38 @@ Paralelno s HTML-om počeo se razvijati i CSS3, koji podržava mnoge vizualne
 \begin_layout Standard
 Podrška varira od svojstva do svojstva, međutim, u vrijeme pisanja ovog
  rada većina preglednika podržava velik broj novih efekata.
+\end_layout
+
+\begin_layout Section
+JavaScript i jQuery
+\end_layout
+
+\begin_layout Standard
+JavaScript je skriptni jezik za dodavanje dinamičnosti stranicama i poboljšavanj
+e korisničkog iskustva (eng.
+ 
+\emph on
+user experience
+\emph default
+).
+ U zadnje vrijeme je vrlo popularan jer je dovoljno sazrio za ozbiljnu upotrebu.
+\end_layout
+
+\begin_layout Standard
+Ipak, s obzirom na njegov nespretan uspon, JavaScript je prilično nekonzistentno
+ implementiran u preglednicima, zbog čega su se počele razvijati razne bibliotek
+e koje olakšavaju pristup elemenatima na stranici.
+ Najpoznatije takve biblioteke su Prototype, YUI i jQuery, a za ovu aplikaciju
+ izabrao sam 
+\series bold
+jQuery
+\series default
+ zbog njegove rasprostranjenosti i priključaka (eng.
+ 
+\emph on
+plugin
+\emph default
+) koji su mi trebali.
 \end_layout
 
 \end_body
