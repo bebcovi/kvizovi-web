@@ -28,7 +28,7 @@ eqs-within-sections
 figs-within-sections
 \end_modules
 \maintain_unincluded_children false
-\language english
+\language croatian
 \language_package default
 \inputencoding utf8
 \fontencoding global
@@ -74,7 +74,7 @@ figs-within-sections
 \tocdepth 3
 \paragraph_separation skip
 \defskip medskip
-\quotes_language english
+\quotes_language german
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
