@@ -660,6 +660,41 @@ plugin
 ) koji su mi trebali.
 \end_layout
 
+\begin_layout Section
+Typekit
+\end_layout
+
+\begin_layout Standard
+Jedna od bitnijih novosti u web dizajnu je mogućnost korištenja novih fontova.
+ Prije su dizajneri bili ograničeni samo na fontove za koje se smatra da
+ svi više-manje imaju.
+\end_layout
+
+\begin_layout Standard
+Typekit je profesionalni servis koji pruža upravo takvu uslugu.
+ Ima veliki izbor kvalitetnih fontova na korištenje, koji se učitavaju putem
+ JavaScript-a.
+\end_layout
+
+\begin_layout Section
+IcoMoon
+\end_layout
+
+\begin_layout Standard
+Zbog navedene dobre podrške za fontove počeli su se razvijati i fontovi
+ koji kao znakove koriste ikone.
+ Takvi fontovi idealni su za upotrebu na web stranicama jer su onda ikone
+ vektorske, dakle izgledaju oštro na bilo kojoj rezoluciji.
+\end_layout
+
+\begin_layout Standard
+IcoMoon je servis koji, između ostaloga, omogućava slaganje vlastitih fontova.
+ Moguće je izmjenjivati već postojeći font ili napraviti novi od vektorskih
+ slika.
+ Glavna prednost korištenja IcoMoon servisa je mala veličina datoteka, jer
+ se u njima nalaze samo ikonice koje su potrebne, a ne cijeli set.
+\end_layout
+
 \begin_layout Chapter
 Implementacija
 \end_layout
