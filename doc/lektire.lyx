@@ -442,19 +442,30 @@ Ovaj novi jezik donosi specifikacije za mnoge funkcionalnosti koje su web
 \end_layout
 
 \begin_layout Standard
-Ipak, rađa se jedno pitanje: što sa starijim preglednicima koji ne podržavaju
- nove funkcionalnosti? Postoji jedna JavaScript biblioteka pod nazivom Modernizr
-, koja se bavi detekcijom što preglednik podržava, a što ne.
+Ipak, rađa se jedno pitanje: kako omogućiti određene funkcionalnosti za
+ preglednike koji ih ne podržavaju? Postoji jedna JavaScript biblioteka
+ pod nazivom Modernizr, koja se bavi detekcijom što preglednik podržava,
+ a što ne.
  Pomoću njega može se npr.
- za preglednike koji ne podržavaju zaobljene rubove koristiti slika.
+ za preglednike koji ne podržavaju video koristiti Flash.
  (Za takve svrhe prije se koristila jedna nepouzdana metoda koja je pokušavala
  saznati u kojem je pregledniku stranica učitana, pa prema tome developer
  zaključuje što taj preglednik podržava.)
 \end_layout
 
+\begin_layout Section
+CSS3
+\end_layout
 
 \begin_layout Standard
+Paralelno s HTML-om počeo se razvijati i CSS3, koji podržava mnoge vizualne
+ efekte kao što su sjene, zaobljeni rubovi, animacije, gradijenti i sl.
+ Za takve efekte su web dizajneri prije trebali koristiti slike.
+\end_layout
 
+\begin_layout Standard
+Podrška varira od svojstva do svojstva, međutim, u vrijeme pisanja ovog
+ rada većina preglednika podržava velik broj novih efekata.
 \end_layout
 
 \end_body
