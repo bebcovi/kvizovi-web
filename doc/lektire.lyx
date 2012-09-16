@@ -6,6 +6,8 @@
 \begin_preamble
 \usepackage[numbib,nottoc]{tocbibind}
 
+\hypersetup{linkcolor=black,urlcolor=black}
+
 \def\arctan{\mathop{\rm arctg}\nolimits}
 \def\tan{\mathop{\rm tg}\nolimits}
 \def\cot{\mathop{\rm ctg}\nolimits}
@@ -58,7 +60,7 @@ figs-within-sections
 \pdf_bookmarksopenlevel 1
 \pdf_breaklinks false
 \pdf_pdfborder true
-\pdf_colorlinks false
+\pdf_colorlinks true
 \pdf_backref false
 \pdf_pdfusetitle true
 \papersize default
