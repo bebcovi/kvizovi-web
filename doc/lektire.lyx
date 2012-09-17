@@ -1033,6 +1033,76 @@ IcoMoon je servis koji, između ostaloga, omogućava slaganje vlastitih fontova.
 \end_layout
 
 \begin_layout Chapter
+Internet Explorer
+\end_layout
+
+\begin_layout Standard
+Moja aplikacija još neko vrijeme neće podržavati Internet Explorer.
+ S obzirom da je to web preglednik koji još uvijek zauzima velik postotak
+ tržišta, želim obrazložiti svoju odluku.
+\end_layout
+
+\begin_layout Standard
+Microsoft Internet Explorer je najgori od svih web preglednika, to je poznata
+ činjenica.
+ Ali zašto? Postoji mnogo razloga.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Ažurnost
+\series default
+.
+ Vjerojatno najgore svojstvo Internet Explorer-a je ažurnost.
+ On kaska za gotovo svakim standardom koje je njegova konkurencija odavno
+ implementirala.
+ To nije problem samo njegovim korisnicima, nego i developerima i dizajnerima,
+ jer su ga u većini slučajeva prisiljeni podržavati.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+IE6
+\series default
+.
+ U vrijeme pisanja ovog rada 6% svijeta još uvijek koristi Internet Explorer
+ 6 (većinom je zastupljen u Kini), a to se dogodilo jer je njegovo razvijanje
+ stagniralo kada nije bilo konkurencije.
+ To je zastarjela verzija s kojom je gotovo nemoguće raditi.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Popravljanje grešaka
+\series default
+.
+ Iznimno je teško otkriti zašto jedan dio web stranice ne radi u Internet
+ Exploreru, zbog vrlo lošeg mehanizma detektiranja pogrešaka.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Sigurnost
+\series default
+.
+ Internet Explorer ima veći broj sigurnosnih propusta od svih preglednika.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+JavaScript
+\series default
+.
+ Podržanost JavaScript-a na Internet Explorer-u vrlo je loša, zbog čega
+ je jQuery otprilike duplo veći od veličine koju je trebao zauzimati.
+\end_layout
+
+\begin_layout Chapter
 Implementacija
 \end_layout
 
