@@ -477,9 +477,13 @@ Git i GitHub
 \end_layout
 
 \begin_layout Quote
+
+\emph on
 Git is a free and open source distributed version control system designed
  to handle everything from small to very large projects with speed and efficienc
-y.
+y
+\emph default
+.
  ---
 \begin_inset CommandInset href
 LatexCommand href
@@ -525,13 +529,17 @@ Jednostavan proces surađivanja s Git-om izgleda otprilike ovako -- ja napravim
 \end_layout
 
 \begin_layout Section
-Ruby (on Rails)
+Ruby
 \end_layout
 
 \begin_layout Quote
+
+\emph on
 Ruby is a dynamic, open source programming language with a focus on simplicity
  and productivity.
- It has an elegant syntax that is natural to read and easy to write.
+ It has an elegant syntax that is natural to read and easy to write
+\emph default
+.
  ---
 \begin_inset CommandInset href
 LatexCommand href
@@ -655,6 +663,8 @@ Rails
 \end_layout
 
 \begin_layout Quote
+
+\emph on
 Ruby on Rails
 \begin_inset script superscript
 
@@ -666,7 +676,9 @@ Ruby on Rails
 
  is an open-source web framework that's optimized for programmer's happiness
  and sustainable productivity.
- It lets you write beautiful code by favoring convention over configuration.
+ It lets you write beautiful code by favoring convention over configuration
+\emph default
+.
  ---
 \begin_inset CommandInset href
 LatexCommand href
