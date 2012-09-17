@@ -324,6 +324,16 @@ originala
 \begin_layout Standard
 
 \series bold
+Open-source program
+\series default
+.
+ Besplatan program otvorenog kôda, što znači da svatko može vidjeti kôd
+ i po potrebi ga izmjenjivati i popravljati.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
 Font
 \series default
 .
@@ -482,12 +492,36 @@ target "git-scm.com"
 \end_layout
 
 \begin_layout Standard
-Dakako, htio sam imati svoj projekt spremljen na još jednom mjestu.
- Za to sam korstio GitHub.
- GitHub je web aplikacija koja omogućuje spremanje vaših projekata na Internet,
- putem Gita.
- Dakle, ako bi mi se nešto dogodilo računalu, pa ne bih imao više pristup
- svom projektu, na GitHubu sam uvijek imao identičnu kopiju svog projekta.
+Git je sustav za rukovanje promjenama, po mom mišljenju najbolji.
+ Elegantan je, zauzima malo prostora, lagan je za naučiti, siguran je i
+ iznimno moćan.
+\end_layout
+
+\begin_layout Standard
+GitHub je najpoznatija stranica koja podržava Git repozitorije i sinonim
+ je za 
+\emph on
+open-source
+\emph default
+.
+ Svi se najvažniji 
+\emph on
+open-source
+\emph default
+ projekti nalaze na GitHub-u, a oni koji se ne nalaze, trebali bi.
+ GitHub je savršeno mjesto za surađivanje s drugim programerima, upravo
+ zbog jednostavnosti Git-a.
+ Pozitivna nuspojava surađivanja preko GitHub-a je to što postoji kopija
+ repozitorija na internetu, dakle to je automatski backup.
+\end_layout
+
+\begin_layout Standard
+Jednostavan proces surađivanja s Git-om izgleda otprilike ovako -- ja napravim
+ neke promjene u nekoliko datoteka, pronađem ih s Git-om, grupiram ih i
+ objasnim što sam promijenio, stavim svoje promjene na GitHub, zatim osoba
+ s kojom surađujem učita moje promjene u svoju verziju tog repozitorija,
+ pa on isto napravi promjenu, zabilježi ju i pošalje meni.
+ I tako ukrug.
 \end_layout
 
 \begin_layout Section
@@ -513,14 +547,18 @@ target "http://www.ruby-lang.org/en/"
 Ruby mi je pomogao da izgradim svoju aplikaciju s elegancijom i lakoćom.
 \end_layout
 
+\begin_layout Subsection
+Gemovi
+\end_layout
+
 \begin_layout Standard
-Vrlo je velika količina open-source Ruby biblioteka (eng.
+Postoji više od 40,000 besplatnih Ruby biblioteka (eng.
  
 \shape italic
 gem
 \shape default
 ) koje su dostupne za korištenje.
- Od bibilioteka koje sam koristio, navest ću najbitnije:
+ Od bibilioteka koje sam koristio u ovoj aplikaciji najvažniji su:
 \end_layout
 
 \begin_layout Itemize
@@ -608,8 +646,8 @@ rspec
 \end_layout
 
 \begin_layout Standard
-Rails je alat koji je imao daleko najveću važnost u izradi mojeg projekta,
- pa zaslužuje posebno poglavlje.
+Rails je više od biblioteke, to je sučelje u kojemu sam radio ovu aplikaciju,
+ stoga zaslužuje posebno poglavlje.
 \end_layout
 
 \begin_layout Subsection
@@ -621,7 +659,7 @@ Ruby on Rails
 \begin_inset script superscript
 
 \begin_layout Plain Layout
-®
+
 \end_layout
 
 \end_inset
@@ -642,9 +680,12 @@ target "http://rubyonrails.org/"
 
 \begin_layout Standard
 Rails je 2003.
- godine napravio David Heinemeier Hansson (poznat po inicijalima DHH).
- Rails je open-source projekt, pa je do današnjeg dana izgrađen uz pomoć
- puno (više od 2,100) programera diljem svijeta.
+ godine razvio David Heinemeier Hansson (poznat po inicijalima DHH).
+ To je veliki 
+\emph on
+open-source
+\emph default
+ projekt kojeg razvija više od 2,100 programera diljem svijeta.
 \end_layout
 
 \begin_layout Standard
@@ -657,25 +698,29 @@ samouvjeren
 \end_inset
 
  alat.
- On radi pretpostavku da postoji 
-\begin_inset Quotes gld
-\end_inset
-
-najbolji
-\begin_inset Quotes grd
-\end_inset
-
- način za napraviti stvari, i dizajniran je da potiče takav način — a u
- nekim slučajevima i da obeshrabruje alternative.
+ On radi pretpostavku da postoji najbolji način za napraviti stvari, i dizajnira
+n je da potiče takav način — a u nekim slučajevima i da obeshrabruje alternative.
  Filozofija Railsa uključuje sljedeće točke:
 \end_layout
 
 \begin_layout Itemize
-DRY (eng.
- 
+DRY (
+\series bold
 \shape italic
-Don't Repeat Yourself
+\emph on
+D
+\series default
+on't 
+\series bold
+R
+\series default
+epeat 
+\series bold
+Y
+\series default
+ourself
 \shape default
+\emph default
 ) - sugestira da je pisanje istog kôda na više mjesta u projektu loša stvar.
 \end_layout
 
@@ -696,11 +741,23 @@ Convention Over Configuration
 \end_layout
 
 \begin_layout Itemize
-REST (eng.
- 
+REST (
+\series bold
 \shape italic
-Representational State Transfer
+\emph on
+RE
+\series default
+presentational 
+\series bold
+S
+\series default
+tate 
+\series bold
+T
+\series default
+ransfer
 \shape default
+\emph default
 ) je najbolji model za web aplikacije - organiziranje aplikacije oko resursa
  i standardnih HTTP 
 \begin_inset Quotes gld
@@ -715,11 +772,23 @@ e.
 \end_layout
 
 \begin_layout Standard
-Rails koristi tzv MVC arhitekturu (eng.
- 
+Rails koristi tzv MVC arhitekturu (
+\series bold
 \shape italic
-Models-Views-Controllers
+\emph on
+M
+\series default
+odels-
+\series bold
+V
+\series default
+iews-
+\series bold
+C
+\series default
+ontrollers
 \shape default
+\emph default
 ).
  To znači da postoji jedan sloj za čuvanje i manipuliranje podacima (baza
  podataka), drugi sloj za dobavljanje tih podataka, i treći sloj za prezentiranj
