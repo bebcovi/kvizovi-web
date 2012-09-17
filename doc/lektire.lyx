@@ -470,6 +470,15 @@ Git i GitHub
 Git is a free and open source distributed version control system designed
  to handle everything from small to very large projects with speed and efficienc
 y.
+ ---
+\begin_inset CommandInset href
+LatexCommand href
+name "git-scm.com"
+target "git-scm.com"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -489,6 +498,15 @@ Ruby (on Rails)
 Ruby is a dynamic, open source programming language with a focus on simplicity
  and productivity.
  It has an elegant syntax that is natural to read and easy to write.
+ ---
+\begin_inset CommandInset href
+LatexCommand href
+name "ruby-lang.org"
+target "http://www.ruby-lang.org/en/"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -611,6 +629,15 @@ Ruby on Rails
  is an open-source web framework that's optimized for programmer's happiness
  and sustainable productivity.
  It lets you write beautiful code by favoring convention over configuration.
+ ---
+\begin_inset CommandInset href
+LatexCommand href
+name "rubyonrails.org"
+target "http://rubyonrails.org/"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
