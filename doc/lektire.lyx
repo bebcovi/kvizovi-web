@@ -1485,6 +1485,7 @@ na, velika je vjerojatnost da će ju pomagala koja slijepi učenici koriste
 
 \begin_layout Standard
 \begin_inset listings
+lstparams "basicstyle={\ttfamily},language=HTML,tabsize=2"
 inline false
 status open
 
