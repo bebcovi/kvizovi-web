@@ -164,26 +164,31 @@ Uvod
 \end_layout
 
 \begin_layout Standard
-Suočimo se s istinom: lektire su tamna strana škole većini učenika.
- Ova aplikacija je tu da to promijeni.
-\end_layout
-
-\begin_layout Standard
 Ne znam za druge učenike, ali meni nikad nije išlo čitanje lektira.
- Pročitao sam možda 2 polovice dvaju različitih knjiga, što znači da nisam
- nijednu pročitao do kraja.
- Ova aplikacija je nešto što sam htio tada imati, u nadi da bi me potaknula
+ Pročitao sam možda 2 polovice dvaju različitih knjiga kada sam bio u srednjoj
+ školi, što znači da nisam nijednu pročitao do kraja.
+ Ova aplikacija je nešto što sam htio tada imati, možda bi me potaknula
  da više čitam.
 \end_layout
 
 \begin_layout Standard
 Postoje već slične aplikacije koje omogućavaju igranje kvizova, ali su velike,
  teške za implementirati, a često i skupe.
- To je s razlogom, kviz je prilično kompleksan koncept za realizirati na
- jednostavan i fleksibilan način.
+ Ali to je s razlogom, kviz je prilično kompleksan koncept za realizirati
+ na jednostavan i fleksibilan način.
  Ova aplikacija ne pokušava donijeti univerzalno rješenje, već specijalizirano,
- jer je po mom mišljenju korištenje više specijaliziranih alata bolje nego
- korištenje jednog velikog alata.
+ jer je po mom mišljenju korištenje više manjih specijaliziranih alata budućnost.
+\end_layout
+
+\begin_layout Standard
+U aplikaciji ću ponekad spomenuti da neka funkcionalnost još nije implementirana
+, ali da će biti.
+ Takve rečenice će možda davati dojam da predajem nedovršeni radi, ali ustvari
+ se radi samo o prirodi web aplikacija -- one nikada nisu gotove, uvijek
+ se mogu nadograđivati i uvijek će biti grešaka, manjih ili većih.
+ Aplikaciju sam razvijao oko 2 mjeseca i trenutno je stabilna za testiranje
+ u smislu da svaka implementirana funkcionalnost radi, ali nije još spremna
+ za produkciju.
 \end_layout
 
 \begin_layout Standard
