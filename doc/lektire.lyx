@@ -203,19 +203,11 @@ Terminologija
 \end_layout
 
 \begin_layout Standard
-Prije nego što počnem s detaljima, potrebno je uvesti čitatelja kroz višeznačnu
- terminologiju razvijana web stranica.
- S obzirom da polje jako brzo napreduje, ovi pojmovi nemaju čvrstih definicija,
- ali ovo je jedna od interpretacija koja se koristi u ovom radu.
- Osim definicija spomenut ću i skraćenice.
-\end_layout
-
-\begin_layout Standard
-Web stranicu ponekad kraće zovem 
-\emph on
-stranicom
-\emph default
-.
+Prije nego što počnem s detaljima, potrebno je razjasniti višeznačnu terminologi
+ju web developmenta.
+ S obzirom da je to područje koje jako brzo napreduje, pojmovi koji slijede
+ nemaju čvrstih definicija, ali ovo je jedna od interpretacija koju ću koristiti
+ u ovom radu.
 \end_layout
 
 \begin_layout Standard
@@ -257,6 +249,25 @@ osjeća
 \begin_layout Standard
 
 \series bold
+Client-side i server-side
+\series default
+.
+ Prvi se termin odnosi na klijenta, odnosno web preglednika, dok se drugi
+ odnosi na poslužitelja.
+ Sinonimi za ova dva termina su 
+\emph on
+front-end
+\emph default
+ i 
+\emph on
+back-end
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
 Web dizajner i web developer
 \series default
 .
@@ -287,6 +298,32 @@ developerima
 \begin_layout Standard
 
 \series bold
+Hosting
+\series default
+.
+ Usluga koju web poslužitelj pruža.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Backup
+\series default
+.
+ Spremanje kopija datoteka na drugo mjesto, tako da u slučaju gubitka 
+\begin_inset Quotes gld
+\end_inset
+
+originala
+\begin_inset Quotes grd
+\end_inset
+
+ datoteke nisu izgubljene.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
 Font
 \series default
 .
@@ -309,17 +346,120 @@ library
  jezika.
 \end_layout
 
+\begin_layout Standard
+
+\series bold
+VCS
+\series default
+ (
+\series bold
+V
+\series default
+ersion 
+\series bold
+C
+\series default
+ontrol 
+\series bold
+S
+\series default
+ystem).
+ Sustav za organizirano spremanje promjena u aplikaciji.
+ Obično se odabere skup promjena koje su zajedno postigle određeni cilj,
+ spremi ih se i napiše se opis promjene.
+ Mape (eng.
+ 
+\emph on
+folder
+\emph default
+) koje se na taj način razvijaju zovu se 
+\emph on
+repozitoriji
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Web stranicu ponekad kraće zovem 
+\emph on
+stranicom
+\emph default
+, a web preglednik 
+\emph on
+preglednikom
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Još bih htio napomenuti da pojmove koje nisam ovdje spomenuo nemaju još
+ odgovarajući hrvatski prijevod, stoga ću ih jednostavno pisati u izvornom
+ obliku, u 
+\emph on
+kurzivu
+\emph default
+.
+\end_layout
+
 \begin_layout Chapter
 Tehnologija
 \end_layout
 
 \begin_layout Standard
-Za razvijanje svoje aplikacije koristio sam Git, Ruby, PostgreSQL, HTML5,
- CSS3 i Javascript.
+Kod razvijana web stranica izbor tehnologije je prilično ograničen.
+ Jezici koje klijent koristi su HTML, CSS i JavaScript, oni nemaju alternativa
+ i prisiljeni smo ih koristiti na jedan način ili na drugi.
+ Međutim, poslužitelj je računalo, dakle mogućnosti su puno veće.
+ Osim klijenta i poslužitelja treba obratiti pažnju na rukovanje promjenama
+ u aplikaciji, svaki ozbiljniji developer koristi VCS.
 \end_layout
 
 \begin_layout Standard
-Od eksternalnih usluga sam koristio Dropbox i Heroku.
+
+\series bold
+Klijent
+\series default
+.
+ Na klijentu sam koristio HTML5, CSS3 i JavaScript.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Poslužitelj
+\series default
+.
+ Na poslužitelju sam koristio programski jezik Ruby i PostgreSQL bazu podataka.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Vanjski servisi
+\series default
+.
+ Od vanjskih servisa koristio sam GitHub za 
+\emph on
+backup
+\emph default
+ svojeg repozitorija, Dropbox za 
+\emph on
+upload
+\emph default
+ datoteka, a Heroku za 
+\emph on
+hosting
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+VCS
+\series default
+.
+ Za sustavno rukovanje promjenama koristio sam Git.
 \end_layout
 
 \begin_layout Section
