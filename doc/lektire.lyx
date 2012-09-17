@@ -860,29 +860,73 @@ HTML je jezik koji opisuje strukturu stranice.
 \end_layout
 
 \begin_layout Standard
+HTML ima mnogo verzija, HTML 3.0, HTML 4.0, XHTML 1.0, HTML5 itd., a njegova
+ se verzija deklarira na samom vrhu HTML dokumenta.
+ Npr.
+ HTML5 dokument deklarira se ovako:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language=HTML,tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<DOCTYPE! html>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Deklaracija HTML dokumenta je jako bitna za web preglednike, bez nje oni
+ ne bi znali na koji način da pročitaju dokument.
+\end_layout
+
+\begin_layout Standard
 U HTML-u je neko vrijeme bila popularna ideja XHTML-a.
  XHTML 1.0 je verzija HTML-a inspirirana XML-om, glavne značajke su stroga
  sintaksa i mogućnost definiranja novih elemenata.
  Međutim, budući da Internet Explorer nije podržavao XHTML, on je bio samo
- ograničavajuć, nismo mogli koristiti njegove prednosti.
- Ogranak koji je razvijao XHTML imao je planove za XHTML 2.0, ali njihov
- razvitak je polako utihnuo i počeo se razvijati HTML5.
+ ograničavajuć, nisu se mogle koristiti njegove prednosti.
+ Ogranak W3C-a (World Wide Web Consortium) koji je razvijao XHTML imao je
+ planove za XHTML 2.0, ali njihov je rad polako utihnuo i počeo se razvijati
+ HTML5.
 \end_layout
 
 \begin_layout Standard
-HTML5 je po mnogočemu suprotan XHTML-u, uglavnom s obzirom na sintaksu.
- HTML5 je iznimno liberalan, što je osvježavajuće nakon vrlo stroge sintakse
+HTML5 je po mnogočemu suprotan XHTML-u, ponajviše s obzirom na sintaksu.
+ HTML5 je iznimno liberalan, što je osvježavajuće nakon stroge sintakse
  XHTML-a.
- HTML5 ima listu elemenata koji se mogu izostaviti, u koju u određenim okolnosti
-ma spadaju čak i neki osnovni elementi, kao <html>, <head> i <body>!
+ HTML5 ima i listu elemenata koji se mogu izostaviti, u koju u određenim
+ okolnostima spadaju čak i neki osnovni elementi, kao <html>, <head> i <body>!
 \end_layout
 
 \begin_layout Standard
 Ovaj novi jezik donosi specifikacije za mnoge funkcionalnosti koje su web
  developeri oduvijek htjeli, ali nisu imali odgovarajuću podršku te su ih
- emulirali drugim tehnologijama, kao Flash i Java.
+ emulirali drugim tehnologijama, kao što su Flash i Java.
  Jedan od primjera je podrška za video i audio, za koju se prije koristio
  Flash, a sada se može koristiti u svim modernim web preglednicima.
+\end_layout
+
+\begin_layout Standard
+Koje su prednosti toga da preglednici bez pomoći druge tehnologije podržavaju
+ nove funkcionalnosti? Jedna od prednosti je to što korisnik dobiva veću
+ kontrolu nad sadržajem.
+ Npr.
+ postoji HTML5 atribut koji se može pridružiti tekstualnom polju i učiniti
+ ga da se automatski označi kada se stranica učita (kao kod Google pretraživanja
+), a ako korisnik to ne želi, može tu funkcionalnost isključiti u svom pregledni
+ku.
+ Kada se ta funkcionalnost emulirala JavaScript-om, isključivanje te funkcionaln
+osti nije bilo moguće, što je iritiralo neke korisnike.
+ Naravno, neki korisnici išli su tako daleko da su jednostavno isključili
+ JavaScript u svom pregledniku, ali to je već druga priča.
 \end_layout
 
 \begin_layout Standard
@@ -890,8 +934,11 @@ Ipak, rađa se jedno pitanje:
 \emph on
 kako omogućiti određene funkcionalnosti za preglednike koji ih ne podržavaju?
 \emph default
- Postoji jedna JavaScript biblioteka pod nazivom Modernizr, koja se bavi
- detekcijom što preglednik podržava, a što ne.
+ Postoji jedna JavaScript biblioteka pod nazivom 
+\series bold
+Modernizr
+\series default
+, koja se bavi detekcijom što preglednik podržava, a što ne.
  Pomoću njega može se npr.
  za preglednike koji ne podržavaju video koristiti Flash.
  (Za takve svrhe prije se koristila jedna nepouzdana metoda koja je pokušavala
@@ -917,12 +964,12 @@ izgled
 \begin_layout Standard
 Paralelno s HTML-om počeo se razvijati i CSS3, koji podržava mnoge vizualne
  efekte kao što su sjene, zaobljeni rubovi, animacije, gradijenti i sl.
- Za takve efekte su web dizajneri prije trebali koristiti slike.
+ Za takve efekte su dizajneri prije trebali koristiti slike.
 \end_layout
 
 \begin_layout Standard
 Podrška varira od svojstva do svojstva, međutim, u vrijeme pisanja ovog
- rada većina preglednika podržava velik broj novih efekata.
+ rada svi moderni web preglednici podržavaju velik broj novih efekata.
 \end_layout
 
 \begin_layout Section
@@ -944,12 +991,7 @@ e koje olakšavaju pristup elemenatima na stranici.
 \series bold
 jQuery
 \series default
- zbog njegove rasprostranjenosti i priključaka (eng.
- 
-\emph on
-plugin
-\emph default
-) koji su mi trebali.
+ zbog njegove rasprostranjenosti i podrške.
 \end_layout
 
 \begin_layout Section
