@@ -1076,5 +1076,213 @@ Broj igrača
  Aplikacija još ne podržava više od 2 igrača.
 \end_layout
 
+\begin_layout Chapter
+Daljnji razvoj
+\end_layout
+
+\begin_layout Standard
+Ovo je moj najdraži dio rada.
+ Ova aplikacija ima velike planove koje namjeravam realizirati u bliskoj
+ budućnosti.
+ Slijedi nekoliko potencijalnih poboljšanja.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Rangiranje
+\series default
+.
+ Moglo bi se smisliti nekoliko rangova, odnosno titula, s obzirom na broj
+ točnih odgovora.
+ Djeci postotak malo znači.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Podrška za slijepe ljude
+\series default
+.
+ Trenutno aplikacija nije optimizirana za slijepe ljude.
+ Glavnu ulogu u dostupnosti igra HTML, jer ako stranica nije logično strukturira
+na, velika je vjerojatnost da će ju pomagala koja slijepi učenici koriste
+ pogrešno očitati.
+ HTML atributi koji se koriste za dostupnost slijepim ljudima zovu se ARIA
+ uloge, oni dodatno semantički opisuju stranicu.
+ Npr.
+ ovako se označava da je neki element glavni na trenutnoj stranici:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<div role="main">
+\end_layout
+
+\begin_layout Plain Layout
+
+  Ovo je glavni sadržaj.
+\end_layout
+
+\begin_layout Plain Layout
+
+</div>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Igranje na više računala
+\series default
+.
+ Trenutno aplikacija podržava igranje preko samo jednog računala.
+ HTML5 donosi način sinkronizacije uređaja, odnosno da svi povezani uređaj
+ vide isti sadržaj.
+ Ta tehnologija zove se WebSocket i trenutno nije dovoljno dobro podržana
+ za pouzdanu upotrebu.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Aktivnost učenika
+\series default
+.
+ Trenutno ne postoji način da škole dobiju pregled aktivnosti svojih učenika,
+ namjeravam im to uskoro omogućiti.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Modernizr
+\series default
+.
+ Ovu sam JavaScript biblioteku već spomenuo u HTML5 poglavlju.
+ Namjeravam ju implementirati u svoju aplikaciju kako bih spasio naprednije
+ dijelove stranice za preglednike koji ne podržavaju određenu tehnologiju.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Responsive
+\series default
+.
+ Zbog razvoja uređaja optimizacija web stranice samo za desktop računala
+ više nije zadovoljavajuća.
+ Korisnici sve češće posjećuju web stranice i preko smartphone-ova i tableta,
+ koje su često neprilagođene za te uređaje.
+ Ukratko, 
+\emph on
+responsive
+\emph default
+ dizajn je vrlo snažan trend u zadnje vrijeme i opisuje prilagođavanje web
+ stranice s obzirom na širinu i tip uređaja na kojemu se pregledava.
+ Ne radi se samo o razmještanju elemenata, nego na mijenjanju cijelog dizajna
+ stranice tako da bude prirodnija za korištenje.
+ Zastupljenost tableta i smartphone-ova u Hrvatskoj još nije velika, ali
+ tehnološki svijet se mijenja iznimno brzo, stoga je najbolje biti odmah
+ spreman.
+\end_layout
+
+\begin_layout Standard
+Postoji jedna biblioteka za Sass (naveden kao Ruby biblioteka) koja služi
+ upravo za 
+\emph on
+responsive
+\emph default
+ dizajn, zove se 
+\series bold
+Susy
+\series default
+.
+ S obzirom da se računanje može jako zakomplicirati (ovisno o kompleksnosti
+ stranice), Susy obavlja taj dio i dopušta dizajneru da se koncentrira na
+ logiku.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Zepto
+\series default
+.
+ Kao nadopuna 
+\emph on
+responsive
+\emph default
+ dizajnu, ovu minimalnu JavaScript biblioteku namjeravam implementirati
+ umjesto jQuery-a, jer je optimizirana za mobilne uređaje.
+ Uz pomoć nje moći ću napraviti da aplikacija na mobilnim uređajima djeluje
+ toliko prirodno da će se činiti kao da je prava aplikacija.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+AJAX
+\series default
+ (
+\series bold
+A
+\series default
+synchronous 
+\series bold
+J
+\series default
+avaScript 
+\series bold
+A
+\series default
+nd 
+\series bold
+X
+\series default
+ML).
+ Preglednik se koristeći aplikaciju često osvježava, gotovo za svaku radnju.
+ AJAX tehnologija omogućava da kada preglednik pošalje zahtjev za određenu
+ stranicu, ažurira se samo potrebna informacija, a ostali elementi stranice
+ (kao npr.
+ zaglavlje) ostaju isti i preglednik ne osvježava stranicu.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Internacionalizacija
+\series default
+.
+ Ova ideja nije primjenjiva samo na Hrvatsku.
+ Ako aplikacija dovoljno sazrije, može se pustiti na međunarodno tržište,
+ s odgovarajućim prijevodom na engleski jezik.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Ostala poboljšanja
+\series default
+.
+ Aplikacija se može nadograđivati u nedogled, mogao bih školama omogućiti
+ 
+\emph on
+odgođenu
+\emph default
+ aktivaciju kvizova (da se aktiviraju na određen dan u određeno vrijeme),
+ sortiranje kvizova i pitanja po raznim kriterijima, testiranje kvizova
+ itd.
+\end_layout
+
 \end_body
 \end_document
