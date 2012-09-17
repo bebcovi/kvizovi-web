@@ -738,359 +738,44 @@ Implementacija
 \end_layout
 
 \begin_layout Standard
+Htio bih najprije ukratko objasniti odnose između pojedinih objekata u aplikacij
+i.
+ Najprije imamo 
+\series bold
+škole
+\series default
+.
+ Škole mogu imati više 
+\series bold
+učenika
+\series default
+.
+ Škole također mogu imati više 
+\series bold
+kvizova
+\series default
+, i kvizovi pripadaju samo jednoj školi.
+ Kvizovi mogu imati više 
+\series bold
+pitanja
+\series default
+, a pojedino pitanje pripada samo jednom kvizu.
+\end_layout
+
+\begin_layout Standard
 Kada korisnik na početku dođe na stranicu, dočeka ga odabir želi li se prijaviti
  kao učenik ili škola.
  Taj odabir ga vodi na web formu za prijavu.
  Tamo korisnik može izabrati želi li se prijaviti ili registrirati.
  Nakon što napravi jedno od tog dvoje, korisnik je prijavljen, te se sučelja
- razdvajaju; korisnika dočeka sučelje gdje može izabrati koji da kviz igra,
+ razdvajaju; učenika dočeka sučelje gdje može izabrati koji da kviz igra,
  a školu dočeka administracijsko sučelje gdje može izrađivati kvizove.
 \end_layout
 
 \begin_layout Standard
-Kada se korisnik registrira, njegovi podaci se spremaju u bazu, s lozinka
- se još prethodno kriptira.
+Kada se korisnik registrira, njegovi podaci se spremaju u bazu, s tim da
+ se lozinka još prethodno kriptira.
  Većinu tih podataka korisnik može kasnije izmijeniti.
-\end_layout
-
-\begin_layout Section
-Učenik
-\end_layout
-
-\begin_layout Standard
-\noindent
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="10" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0pt">
-<column alignment="center" valignment="top" width="0pt">
-<column alignment="center" valignment="top" width="0pt">
-<row>
-<cell mroffset="1cm" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-Naziv polja
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-SQL tip
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-Opis
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-id
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-integer
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Jedinstvena identifikacija
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-first_name
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-varchar(255)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Ime
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-last_name
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-varchar(255)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Prezime
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-username
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-varchar(255)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Korisničko ime
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-password_digest
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-varchar(255)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Lozinka
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-school_id
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-integer
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Jedinstvena identifikacija škole
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-grade
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-integer
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Razred
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-created_at
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-datetime
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Vrijeme registracije
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-updated_at
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-datetime
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Vrijeme zadnje izmjene profila
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Pri registraciji korisnik treba ispuniti svoje osnovne podatke, i treba
- napisati tajni ključ svoje škole.
- To je zato da se ne bi mogao svatko registrirati.
- 
-\end_layout
-
-\begin_layout Standard
-Nakon prijave korisnik je odveden na stranicu gdje može izabrati koji da
- kviz igra (ponuđeni su mu samo kvizovi koje je njegova škola stvorila).
- Nakon toga može izabrati želi li igrati u jedan ili dva igrača (u drugom
- slučaju drugi igrač treba unijeti svoje korisničko ime i lozinku).
- Nakon toga igra može započeti.
-\end_layout
-
-\begin_layout Subsection
-Igra
-\end_layout
-
-\begin_layout Standard
-Nakon što učenik izabere kviz i broj igrača, uzmu se pitanja iz tog kviza
- i ispremiješa im se redoslijed.
 \end_layout
 
 \begin_layout Section
@@ -1177,13 +862,49 @@ Upiši točan odgovor
 \end_layout
 
 \begin_layout Standard
-Dvije su vrste pitanja na koje bih htio obratiti pozornost, a to su 3.
- i 4.
+Htio bih sada ukratko opisati elemente svakog tipa.
 \end_layout
 
 \begin_layout Standard
-Asocijacije su izvedene tako da korisnik razmješta pojmove u desnom stupcu
- tako da pripadaju pojmovima iz lijevog stupca.
+
+\series bold
+Točno/netočno
+\series default
+ se sastoji od tvrdnje i točnog odgovora (ili 
+\begin_inset Quotes gld
+\end_inset
+
+Točno
+\begin_inset Quotes grd
+\end_inset
+
+ ili 
+\begin_inset Quotes gld
+\end_inset
+
+Netočno
+\begin_inset Quotes grd
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Ponuđeni odgovori
+\series default
+ sadrži pitanje i ponuđene odgovore.
+ Ponuđenih odgovora može biti proizvoljno mnogo.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Asocijacije
+\series default
+ su izvedene tako da korisnik razmješta pojmove u desnom stupcu tako da
+ pripadaju pojmovima iz lijevog stupca.
  Pojmovi se razmještaju pomoću 
 \emph on
 drag & drop
@@ -1197,8 +918,13 @@ jQuery UI
 \end_layout
 
 \begin_layout Standard
-Pogodi tko/što je na slici u administracijskom sučelju koristi HTML5 Canvas
- i FileSystem API kako bi prikazao kako će izgledati slika prije uploada.
+
+\series bold
+Pogodi tko/što je na slici
+\series default
+ se sastoji od pitanja, slike, i točnog odgovora.
+ U administracijskom sučelju koristi HTML5 Canvas i FileSystem API kako
+ bi prikazao kako će izgledati slika prije uploada.
  Prvo se pomoću FileSystem API-a učita slika, a 
 \begin_inset Quotes gld
 \end_inset
@@ -1210,6 +936,89 @@ nacrta
  se pomoću <canvas> elementa.
  Ta metoda radi iznimno brzo jer se slika ne mora učitati na poslužitelj
  prije nego što bi se prikazala, nego se čita direktno s računala.
+\begin_inset Newline newline
+\end_inset
+
+Zatim, jer Heroku ne podržava učitavanje datoteka na računalo, datoteke
+ se učitavaju na Dropbox.
+ Kada učenik odgovara na ovakvo pitanje, pri provjeravanju je li odgovor
+ točan ne pravi se razlika između velikih i malih slova.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Upiši točan odgovor
+\series default
+ se sastoji od pitanja i točnog odgovora.
+ Kao i u prethodnom, pri provjeri točnog odgovora se ne pravi razlika između
+ malih i velikih slova.
+\end_layout
+
+\begin_layout Section
+Učenik
+\end_layout
+
+\begin_layout Standard
+Pri registraciji korisnik treba ispuniti svoje osnovne podatke, i treba
+ napisati tajni ključ svoje škole.
+ To je zato da se ne bi mogao svatko registrirati.
+\end_layout
+
+\begin_layout Standard
+Kada je prijavljen, učenik može otići na svoj profil, gdje su prikazane
+ njegove informacije.
+ Učenik je ponuđena opcija da izmjeni svoj profil, da promijeni lozinku
+ (pritom korisnik mora potvrditi da zna staru lozinku, radi sigurnosti)
+ ili da izbriše svoj korisnički račun.
+\end_layout
+
+\begin_layout Subsection
+Igra
+\end_layout
+
+\begin_layout Standard
+Nakon prijave korisnik je odveden na stranicu gdje može izabrati koji da
+ kviz igra (ponuđeni su mu samo kvizovi koje je njegova škola stvorila).
+ Nakon toga može izabrati želi li igrati u jedan ili dva igrača (u drugom
+ slučaju drugi igrač treba unijeti svoje korisničko ime i lozinku).
+ Nakon toga igra može započeti.
+\end_layout
+
+\begin_layout Standard
+Prije početka, uzmu se pitanja iz odabranog kviza i ispremiješa im se redoslijed.
+ Informacije o nadolazećoj igri zatim se spremaju u web preglednik (u tzv
+ 
+\shape italic
+cookie
+\shape default
+), i tijekom igre se te informacije ažuriraju sa trenutnim stanjem igre.
+\end_layout
+
+\begin_layout Standard
+Svako pitanje u bazi ima informaciju koji je točan odgovor na njega, pa
+ se tako provjerava tijekom igre je li učenik dobro odgovorio na pitanje.
+ Ukoliko je to pitanje vrste 
+\begin_inset Quotes gld
+\end_inset
+
+Asocijacija
+\begin_inset Quotes grd
+\end_inset
+
+ ili 
+\begin_inset Quotes gld
+\end_inset
+
+Ponuđeni odgovori
+\begin_inset Quotes grd
+\end_inset
+
+, ponuđeni odgovori se ispremiješaju.
+\end_layout
+
+\begin_layout Standard
+Kada igra završi, informacije se spremaju u bazu, i prikazuju se rezultati.
 \end_layout
 
 \end_body
