@@ -1006,8 +1006,11 @@ Jedna od bitnijih novosti u web dizajnu je mogućnost korištenja novih fontova.
 
 \begin_layout Standard
 Typekit je profesionalni servis koji pruža upravo takvu uslugu.
- Ima veliki izbor kvalitetnih fontova na korištenje, koji se učitavaju putem
- JavaScript-a.
+ Ima veliki izbor kvalitetnih fontova na korištenje, koji se učitavaju na
+ web stranicu putem JavaScript-a.
+ Galerija fontova omogućava traženje fontova po različitim kriterijima,
+ kao što su tip fonta (serif, sans-serif, monospace...), debljina, kontrast,
+ visina slova i sl.
 \end_layout
 
 \begin_layout Section
