@@ -1021,5 +1021,60 @@ Ponuđeni odgovori
 Kada igra završi, informacije se spremaju u bazu, i prikazuju se rezultati.
 \end_layout
 
+\begin_layout Chapter
+Nedostaci
+\end_layout
+
+\begin_layout Standard
+Aplikacija je dovoljno dobro postavljena za testiranje, ali nije još spremna
+ za produkciju.
+ Aplikacija ima mnogo nedostataka, jer web aplikacije uvijek i imaju, s
+ obzirom na njihovu kompleksnost.
+ Ovdje ću navesti samo nekoliko nedostataka, poredanih po važnosti.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Podržanost preko preglednika
+\series default
+.
+ Glavni nedostatak aplikacije je to što nije testirana na drugim preglednicima
+ (eng.
+ 
+\emph on
+cross-browser compatibility
+\emph default
+) i, još važnije, drugim operacijskim sustavima.
+ S obzirom da kôd pišem u Ubuntu-u (distribucija Linux-a) i testiram ga
+ u Google Chrome-u, moglo bi se reći da aplikacija zasad radi sigurno na
+ u tom pregledniku.
+ Na ostalima isto najvjerojatnije radi, uz par mana u dizajnu.
+ Preglednik u kojem aplikacija sigurno ne radi je Internet Explorer, za
+ koji mogu reći da je najgori web preglednik na tržištu te je za njega potreban
+ poseban trud.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Testovi
+\series default
+.
+ Nadalje, testovi još nisu napisani.
+ Testovi služe da se na brzi način testira obavlja li aplikacija osnovne
+ funkcije dobro, što je puno sofisticiranija metoda nego ju ručno testirati,
+ odnosno pokrenuti aplikaciju i isprobavati ju.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Broj igrača
+\series default
+.
+ Aplikacija još ne podržava više od 2 igrača.
+\end_layout
+
 \end_body
 \end_document
