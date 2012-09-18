@@ -473,7 +473,7 @@ VCS
 \end_layout
 
 \begin_layout Section
-Git i GitHub
+Git(Hub)
 \end_layout
 
 \begin_layout Quote
@@ -521,10 +521,10 @@ open-source
 
 \begin_layout Standard
 Jednostavan proces surađivanja s Git-om izgleda otprilike ovako -- ja napravim
- neke promjene u nekoliko datoteka, pronađem ih s Git-om, grupiram ih i
- objasnim što sam promijenio, stavim svoje promjene na GitHub, zatim osoba
- s kojom surađujem učita moje promjene u svoju verziju tog repozitorija,
- pa on isto napravi promjenu, zabilježi ju i pošalje meni.
+ promjene u nekoliko datoteka, pronađem ih s Git-om, grupiram ih i objasnim
+ što sam promijenio i stavim svoje promjene na GitHub.
+ Zatim osoba s kojom surađujem učita moje promjene u svoju verziju tog repozitor
+ija, također napravi promjenu, zabilježi ju i pošalje meni.
  I tako ukrug.
 \end_layout
 
