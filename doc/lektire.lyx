@@ -1844,7 +1844,8 @@ Daljnji razvoj
 \end_layout
 
 \begin_layout Standard
-Ovo je moj najdraži dio rada.
+Ovo poglavlje razlikuje se od prošlog po tome što ću ovdje navesti značajke
+ koje nisu iznimno važne same po sebi, već služe kao dodatak.
  Ova aplikacija ima velike planove koje namjeravam realizirati u bliskoj
  budućnosti.
  Slijedi nekoliko potencijalnih poboljšanja.
@@ -2030,6 +2031,29 @@ Internacionalizacija
  Ova ideja nije primjenjiva samo na Hrvatsku.
  Ako aplikacija dovoljno sazrije, može se pustiti na međunarodno tržište,
  s odgovarajućim prijevodom na engleski jezik.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Suradnja škola
+\series default
+.
+ Trenutno ne postoji automatiziran način da škole međusobno razmjenjuju
+ kvizove, što bi bila vrlo korisna značajka aplikacije i visoko je na listi
+ prioriteta.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Reguliranje nasumičnosti
+\series default
+.
+ U slučaju da škole žele da se njihovim učenicima prikazuju pitanja točno
+ u onom redoslijedu u kojem su ih oni sastavili, ne postoji ta mogućnost.
+ Namjeravam dati školama mogućnost da reguliraju nasumičnost na dvije razine
+ -- nasumičnost pitanja unutar kviza i nasumičnost opcija unutar pitanja.
 \end_layout
 
 \begin_layout Standard
