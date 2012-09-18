@@ -2072,7 +2072,45 @@ odgođenu
  itd.
 \end_layout
 
+\begin_layout Chapter
+Zaključak
+\end_layout
+
+\begin_layout Standard
+Ova aplikacija se može razviti u različitim smjerovima, možda će aplikacija
+ nakon nekog vremena izgledati potpuno drugačije nego sada.
+ Razvoj ovisi o korisnicima, njihovim zahtjevima i načinu na koji koriste
+ aplikaciju.
+ Jer, kao što sam već spomenuo, aplikacija se može beskrajno nadograđivati,
+ ali ću uz pomoć korisnika moći napraviti listu prioriteta.
+\end_layout
+
+\begin_layout Standard
+Aplikacija je open-source, njezin se kôd može 
+\begin_inset CommandInset href
+LatexCommand href
+name "vidjeti"
+target "https://github.com/jimick/lektire"
+
+\end_inset
+
+ na GitHub-u, što znači da je besplatna.
+ Možda ću kasnije razviti komercijalne planove ako će aplikacija postati
+ popularna, jer će mi trebati više prostora za 
+\emph on
+hosting
+\emph default
+, ali besplatan plan će uvijek postojati.
+\end_layout
+
+\begin_layout Standard
+Aplikacija još uvijek nije spremna za produkciju, ali ću (uz potencijalnu
+ pomoć drugih programera) moći uskoro dati ovu aplikaciju školama na testiranje
+ i uskoro će moći služiti svojoj primarnoj svrsi -- učenje kroz zabavu.
+\end_layout
+
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-1"
@@ -2091,6 +2129,7 @@ target "http://icomoon.io/#toDocs"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-2"
@@ -2109,6 +2148,7 @@ target "http://www.jqapi.com/"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-3"
@@ -2127,6 +2167,7 @@ target "http://jqueryui.com/demos/"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-4"
@@ -2145,6 +2186,7 @@ target "http://docs.jquery.com/Main_Page"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-5"
@@ -2163,6 +2205,7 @@ target "URL: https://typekit.com/help"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-6"
@@ -2181,6 +2224,7 @@ target "https://developer.mozilla.org/en-US/docs/JavaScript"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-7"
@@ -2199,6 +2243,7 @@ target "http://susy.oddbird.net/guides/reference/"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-8"
@@ -2217,6 +2262,7 @@ target "http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-9"
@@ -2235,6 +2281,7 @@ target "http://caniuse.com/"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-10"
@@ -2253,6 +2300,7 @@ target "http://www.html5rocks.com/en/"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-11"
@@ -2271,6 +2319,7 @@ target "http://modernizr.com/"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-12"
@@ -2289,6 +2338,7 @@ target "http://git-scm.com"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-13"
@@ -2307,6 +2357,7 @@ target "http://www.ruby-lang.org/en/"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-14"
@@ -2324,6 +2375,7 @@ target "http://rubyonrails.org"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-15"
@@ -2342,6 +2394,7 @@ target "http://www.heroku.com"
 \end_layout
 
 \begin_layout Bibliography
+\labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 key "key-16"
