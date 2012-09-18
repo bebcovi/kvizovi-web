@@ -582,7 +582,7 @@ rails
 \series bold
 pg
 \series default
- -- Omogućava komunikacija s bazom podataka (PostgreSQL).
+ -- Omogućava komunikaciju s bazom podataka (PostgreSQL).
 \end_layout
 
 \begin_layout Itemize
@@ -631,18 +631,14 @@ paperclip
 \series bold
 bcrypt-ruby
 \series default
- -- Omogućuje kriptiranje osjetljivih podataka.
- Posebnost kriptiranja koje ova biblioteka nudi u odnosu na poznate (npr.
- MD5) je ta što je ovaj algoritam za kriptiranje napisan da bude spor.
- Na primjer, u usporedbi s MD5, 
-\series bold
-bcrypt
-\series default
- je 300 puta sporiji.
- To je korisno zato što tada hakerima treba puno više vremena da pogode
- lozinku korisnika, jer trebaju kriptirati velik broj potencijalnih lozinki.
+ -- Omogućava kriptiranje osjetljivih podataka.
+ Razlog zašto je ova biblioteka bolja u odnosu na poznate (npr.
+ MD5) je taj što je algoritam za kriptiranje namjerno napisan da bude spor.
+ U usporedbi s MD5, bcrypt je 300 puta sporiji, što je korisno kada hakeri
+ pokušavaju probiti lozinku, jer trebaju kriptirati velik broj potencijalnih
+ lozinki.
  S druge strane, vrijeme potrebno da se kriptira jedna lozinka (npr.
- kod registracije) je zanemarivo sporije, tako da ga korisnik neće ni osjetiti.
+ kod registracije) je zanemarivo dulje, tako da ga korisnik neće ni osjetiti.
 \end_layout
 
 \begin_layout Itemize
@@ -710,13 +706,17 @@ samouvjeren
 \end_inset
 
  alat.
- On radi pretpostavku da postoji najbolji način za napraviti stvari, i dizajnira
-n je da potiče takav način — a u nekim slučajevima i da obeshrabruje alternative.
- Filozofija Railsa uključuje sljedeće točke:
+ On radi pretpostavku da postoji najbolji način za organizirati kôd, i dizajnira
+n je da potiče taj način — a u nekim slučajevima i da obeshrabruje alternative.
+ Filozofija Rails-a uključuje sljedeće komponente:
 \end_layout
 
 \begin_layout Itemize
-DRY (
+
+\series bold
+DRY
+\series default
+ (
 \series bold
 \shape italic
 \emph on
@@ -733,27 +733,35 @@ Y
 ourself
 \shape default
 \emph default
-) - sugestira da je pisanje istog kôda na više mjesta u projektu loša stvar.
+) -- Ukazuje na to da je loše pisati isti kôd na više različitih mjesta
+ u projektu.
 \end_layout
 
 \begin_layout Itemize
+
+\series bold
 \begin_inset Quotes gld
 \end_inset
 
 
 \shape italic
 Convention Over Configuration
+\series default
 \shape default
 
 \begin_inset Quotes grd
 \end_inset
 
- – znači da Rails pretpostavlja što i kako korisnik želi nešto napraviti,
- a ne da zahtjeva da korisnik specificira svaki sitni detalj u konfiguraciji.
+ -- Rails pretpostavlja što i kako korisnik želi postići određeni cilj,
+ ne zahtjeva da korisnik specificira svaki sitni detalj u konfiguraciji.
 \end_layout
 
 \begin_layout Itemize
-REST (
+
+\series bold
+REST
+\series default
+ (
 \series bold
 \shape italic
 \emph on
@@ -770,12 +778,12 @@ T
 ransfer
 \shape default
 \emph default
-) je najbolji model za web aplikacije - organiziranje aplikacije oko resursa
- i standardnih HTTP 
+) -- Najbolji model za web aplikacije.
+ Organizacija aplikacije s naglaskom na resurse i standardne HTTP 
 \begin_inset Quotes gld
 \end_inset
 
-glagola
+glagole
 \begin_inset Quotes grd
 \end_inset
 
@@ -784,7 +792,12 @@ e.
 \end_layout
 
 \begin_layout Standard
-Rails koristi tzv MVC arhitekturu (
+Rails koristi tzv.
+ 
+\series bold
+MVC
+\series default
+ arhitekturu (
 \series bold
 \shape italic
 \emph on
@@ -801,14 +814,14 @@ C
 ontrollers
 \shape default
 \emph default
-).
- To znači da postoji jedan sloj za čuvanje i manipuliranje podacima (baza
+), u kojoj postoji jedan sloj za čuvanje i manipuliranje podacima (baza
  podataka), drugi sloj za dobavljanje tih podataka, i treći sloj za prezentiranj
 e tih podataka, najčešće u obliku HTML stranice.
 \end_layout
 
 \begin_layout Standard
-Velike web aplikacije su napravljene u Railsu, primjerice 
+Mnoge poznate web aplikacije napravljene su u Rails-u, npr.
+ 
 \begin_inset CommandInset href
 LatexCommand href
 name "Twitter"
