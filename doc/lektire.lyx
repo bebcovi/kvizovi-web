@@ -448,15 +448,16 @@ Poslužitelj
 Vanjski servisi
 \series default
 .
- Od vanjskih servisa koristio sam GitHub za 
+ Od vanjskih servisa koristio sam Typekit za fontove, IcoMoon za ikone,
+ GitHub za 
 \emph on
 backup
 \emph default
- svojeg repozitorija, Dropbox za 
+ repozitorija, Dropbox za 
 \emph on
 upload
 \emph default
- datoteka, a Heroku za 
+ datoteka i Heroku za 
 \emph on
 hosting
 \emph default
@@ -473,22 +474,34 @@ VCS
 \end_layout
 
 \begin_layout Section
-Git(Hub)
+HTML5
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
+HTML je jezik koji opisuje strukturu stranice.
+ Svaki web preglednik ima ugrađene stilove koji opisuju kako će određeni
+ HTML elementi izgledati, ali sâm HTML ne određuje prikaz svojih elemenata.
+ To je vrlo bitan koncept koji omogućava razdvajanje strukture web stranice
+ od njezinog izgleda.
+\end_layout
 
-\emph on
-Git is a free and open source distributed version control system designed
- to handle everything from small to very large projects with speed and efficienc
-y
-\emph default
-.
- ---
-\begin_inset CommandInset href
-LatexCommand href
-name "git-scm.com"
-target "git-scm.com"
+\begin_layout Standard
+HTML ima mnogo verzija, HTML 3.0, HTML 4.0, XHTML 1.0, HTML5 itd., a njegova
+ se verzija deklarira na samom vrhu HTML dokumenta.
+ Npr.
+ HTML5 dokument deklarira se ovako:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language=HTML,tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<DOCTYPE! html>
+\end_layout
 
 \end_inset
 
@@ -496,36 +509,115 @@ target "git-scm.com"
 \end_layout
 
 \begin_layout Standard
-Git je sustav za rukovanje promjenama, po mom mišljenju najbolji.
- Elegantan je, zauzima malo prostora, lagan je za naučiti, siguran je i
- iznimno moćan.
+Deklaracija HTML dokumenta je jako bitna za web preglednike, bez nje oni
+ ne bi znali na koji način da pročitaju dokument.
 \end_layout
 
 \begin_layout Standard
-GitHub je najpoznatija stranica koja podržava Git repozitorije i sinonim
- je za 
-\emph on
-open-source
-\emph default
-.
- Svi se najvažniji 
-\emph on
-open-source
-\emph default
- projekti nalaze na GitHub-u, a oni koji se ne nalaze, trebali bi.
- GitHub je savršeno mjesto za surađivanje s drugim programerima, upravo
- zbog jednostavnosti Git-a.
- Pozitivna nuspojava surađivanja preko GitHub-a je to što postoji kopija
- repozitorija na internetu, dakle to je automatski backup.
+U HTML-u je neko vrijeme bila popularna ideja XHTML-a.
+ XHTML 1.0 je verzija HTML-a inspirirana XML-om, glavne značajke su stroga
+ sintaksa i mogućnost definiranja novih elemenata.
+ Međutim, budući da Internet Explorer nije podržavao XHTML, on je bio samo
+ ograničavajuć, nisu se mogle koristiti njegove prednosti.
+ Ogranak W3C-a (World Wide Web Consortium) koji je razvijao XHTML imao je
+ planove za XHTML 2.0, ali njihov je rad polako utihnuo i počeo se razvijati
+ HTML5.
 \end_layout
 
 \begin_layout Standard
-Jednostavan proces surađivanja s Git-om izgleda otprilike ovako -- ja napravim
- promjene u nekoliko datoteka, pronađem ih s Git-om, grupiram ih i objasnim
- što sam promijenio i stavim svoje promjene na GitHub.
- Zatim osoba s kojom surađujem učita moje promjene u svoju verziju tog repozitor
-ija, također napravi promjenu, zabilježi ju i pošalje meni.
- I tako ukrug.
+HTML5 je po mnogočemu suprotan XHTML-u, ponajviše s obzirom na sintaksu.
+ HTML5 je iznimno liberalan, što je osvježavajuće nakon stroge sintakse
+ XHTML-a.
+ HTML5 ima i listu elemenata koji se mogu izostaviti, u koju u određenim
+ okolnostima spadaju čak i neki osnovni elementi, kao <html>, <head> i <body>!
+\end_layout
+
+\begin_layout Standard
+Ovaj novi jezik donosi specifikacije za mnoge funkcionalnosti koje su web
+ developeri oduvijek htjeli, ali nisu imali odgovarajuću podršku te su ih
+ emulirali drugim tehnologijama, kao što su Flash i Java.
+ Jedan od primjera je podrška za video i audio, za koju se prije koristio
+ Flash, a sada se može koristiti u svim modernim web preglednicima.
+\end_layout
+
+\begin_layout Standard
+Koje su prednosti toga da preglednici bez pomoći druge tehnologije podržavaju
+ nove funkcionalnosti? Jedna od prednosti je to što korisnik dobiva veću
+ kontrolu nad sadržajem.
+ Npr.
+ postoji HTML5 atribut koji se može pridružiti tekstualnom polju i učiniti
+ ga da se automatski označi kada se stranica učita (kao kod Google pretraživanja
+), a ako korisnik to ne želi, može tu funkcionalnost isključiti u svom pregledni
+ku.
+ Kada se ta funkcionalnost emulirala JavaScript-om, isključivanje te funkcionaln
+osti nije bilo moguće, što je iritiralo neke korisnike.
+ Naravno, neki korisnici išli su tako daleko da su jednostavno isključili
+ JavaScript u svom pregledniku, ali to je već druga priča.
+\end_layout
+
+\begin_layout Standard
+Ipak, rađa se jedno pitanje: 
+\emph on
+kako omogućiti određene funkcionalnosti za preglednike koji ih ne podržavaju?
+\emph default
+ Postoji jedna JavaScript biblioteka pod nazivom 
+\series bold
+Modernizr
+\series default
+, koja se bavi detekcijom što preglednik podržava, a što ne.
+ Pomoću njega može se npr.
+ za preglednike koji ne podržavaju video koristiti Flash.
+ (Za takve svrhe prije se koristila jedna nepouzdana metoda koja je pokušavala
+ saznati u kojem je pregledniku stranica učitana, pa prema tome developer
+ zaključuje što taj preglednik podržava.)
+\end_layout
+
+\begin_layout Section
+CSS3
+\end_layout
+
+\begin_layout Standard
+Za razliku od HTML-a, koji opisuje strukturu stranice, CSS opisuje 
+\series bold
+izgled
+\series default
+ stranice.
+ Nastao je kao rješenje koje razdvaja prezentaciju od strukture stranice,
+ jer se izgled web stranice prije definirao prezentacijskim HTML elementima,
+ što je brzo postalo teško za održavati.
+\end_layout
+
+\begin_layout Standard
+Paralelno s HTML-om počeo se razvijati i CSS3, koji podržava mnoge vizualne
+ efekte kao što su sjene, zaobljeni rubovi, animacije, gradijenti i sl.
+ Za takve efekte su dizajneri prije trebali koristiti slike.
+\end_layout
+
+\begin_layout Standard
+Podrška varira od svojstva do svojstva, međutim, u vrijeme pisanja ovog
+ rada svi moderni web preglednici podržavaju velik broj novih efekata.
+\end_layout
+
+\begin_layout Section
+JavaScript i jQuery
+\end_layout
+
+\begin_layout Standard
+JavaScript je skriptni jezik za dodavanje dinamičnosti stranicama i poboljšavanj
+e korisničkog iskustva.
+ U zadnje vrijeme je vrlo popularan jer je dovoljno sazrio za ozbiljnu upotrebu.
+\end_layout
+
+\begin_layout Standard
+Ipak, s obzirom na njegov nespretan uspon, JavaScript je prilično nekonzistentno
+ implementiran u preglednicima, zbog čega su se počele razvijati razne bibliotek
+e koje olakšavaju pristup elemenatima na stranici.
+ Najpoznatije takve biblioteke su Prototype, YUI i jQuery, a za ovu aplikaciju
+ izabrao sam 
+\series bold
+jQuery
+\series default
+ zbog njegove rasprostranjenosti i podrške.
 \end_layout
 
 \begin_layout Section
@@ -841,170 +933,7 @@ target "https://github.com"
 \end_layout
 
 \begin_layout Section
-Dropbox
-\end_layout
-
-\begin_layout Standard
-Dropbox je web aplikacija koja omogućuje spremanje, učitavanje, sinkronizaciju
- i dijeljenje datoteka preko interneta.
-\end_layout
-
-\begin_layout Section
-Heroku
-\end_layout
-
-\begin_layout Standard
-Heroku je servis za hosting web aplikacija.
- Razlikuje se od drugih servisa po tome što on već ima konfigurirano sve
- što je korisniku potrebno, time čineći sam proces stavljanja aplikacije
- na njihov server potptuno bezbolnim.
-\end_layout
-
-\begin_layout Section
-HTML5
-\end_layout
-
-\begin_layout Standard
-HTML je jezik koji opisuje strukturu stranice.
- Svaki web preglednik ima ugrađene stilove koji opisuju kako će određeni
- HTML elementi izgledati, ali sâm HTML ne određuje prikaz svojih elemenata.
- To je vrlo bitan koncept koji omogućava razdvajanje strukture web stranice
- od njezinog izgleda.
-\end_layout
-
-\begin_layout Standard
-HTML ima mnogo verzija, HTML 3.0, HTML 4.0, XHTML 1.0, HTML5 itd., a njegova
- se verzija deklarira na samom vrhu HTML dokumenta.
- Npr.
- HTML5 dokument deklarira se ovako:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-lstparams "basicstyle={\ttfamily},language=HTML,tabsize=2"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-<DOCTYPE! html>
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Deklaracija HTML dokumenta je jako bitna za web preglednike, bez nje oni
- ne bi znali na koji način da pročitaju dokument.
-\end_layout
-
-\begin_layout Standard
-U HTML-u je neko vrijeme bila popularna ideja XHTML-a.
- XHTML 1.0 je verzija HTML-a inspirirana XML-om, glavne značajke su stroga
- sintaksa i mogućnost definiranja novih elemenata.
- Međutim, budući da Internet Explorer nije podržavao XHTML, on je bio samo
- ograničavajuć, nisu se mogle koristiti njegove prednosti.
- Ogranak W3C-a (World Wide Web Consortium) koji je razvijao XHTML imao je
- planove za XHTML 2.0, ali njihov je rad polako utihnuo i počeo se razvijati
- HTML5.
-\end_layout
-
-\begin_layout Standard
-HTML5 je po mnogočemu suprotan XHTML-u, ponajviše s obzirom na sintaksu.
- HTML5 je iznimno liberalan, što je osvježavajuće nakon stroge sintakse
- XHTML-a.
- HTML5 ima i listu elemenata koji se mogu izostaviti, u koju u određenim
- okolnostima spadaju čak i neki osnovni elementi, kao <html>, <head> i <body>!
-\end_layout
-
-\begin_layout Standard
-Ovaj novi jezik donosi specifikacije za mnoge funkcionalnosti koje su web
- developeri oduvijek htjeli, ali nisu imali odgovarajuću podršku te su ih
- emulirali drugim tehnologijama, kao što su Flash i Java.
- Jedan od primjera je podrška za video i audio, za koju se prije koristio
- Flash, a sada se može koristiti u svim modernim web preglednicima.
-\end_layout
-
-\begin_layout Standard
-Koje su prednosti toga da preglednici bez pomoći druge tehnologije podržavaju
- nove funkcionalnosti? Jedna od prednosti je to što korisnik dobiva veću
- kontrolu nad sadržajem.
- Npr.
- postoji HTML5 atribut koji se može pridružiti tekstualnom polju i učiniti
- ga da se automatski označi kada se stranica učita (kao kod Google pretraživanja
-), a ako korisnik to ne želi, može tu funkcionalnost isključiti u svom pregledni
-ku.
- Kada se ta funkcionalnost emulirala JavaScript-om, isključivanje te funkcionaln
-osti nije bilo moguće, što je iritiralo neke korisnike.
- Naravno, neki korisnici išli su tako daleko da su jednostavno isključili
- JavaScript u svom pregledniku, ali to je već druga priča.
-\end_layout
-
-\begin_layout Standard
-Ipak, rađa se jedno pitanje: 
-\emph on
-kako omogućiti određene funkcionalnosti za preglednike koji ih ne podržavaju?
-\emph default
- Postoji jedna JavaScript biblioteka pod nazivom 
-\series bold
-Modernizr
-\series default
-, koja se bavi detekcijom što preglednik podržava, a što ne.
- Pomoću njega može se npr.
- za preglednike koji ne podržavaju video koristiti Flash.
- (Za takve svrhe prije se koristila jedna nepouzdana metoda koja je pokušavala
- saznati u kojem je pregledniku stranica učitana, pa prema tome developer
- zaključuje što taj preglednik podržava.)
-\end_layout
-
-\begin_layout Section
-CSS3
-\end_layout
-
-\begin_layout Standard
-Za razliku od HTML-a, koji opisuje strukturu stranice, CSS opisuje 
-\series bold
-izgled
-\series default
- stranice.
- Nastao je kao rješenje koje razdvaja prezentaciju od strukture stranice,
- jer se izgled web stranice prije definirao prezentacijskim HTML elementima,
- što je brzo postalo teško za održavati.
-\end_layout
-
-\begin_layout Standard
-Paralelno s HTML-om počeo se razvijati i CSS3, koji podržava mnoge vizualne
- efekte kao što su sjene, zaobljeni rubovi, animacije, gradijenti i sl.
- Za takve efekte su dizajneri prije trebali koristiti slike.
-\end_layout
-
-\begin_layout Standard
-Podrška varira od svojstva do svojstva, međutim, u vrijeme pisanja ovog
- rada svi moderni web preglednici podržavaju velik broj novih efekata.
-\end_layout
-
-\begin_layout Section
-JavaScript i jQuery
-\end_layout
-
-\begin_layout Standard
-JavaScript je skriptni jezik za dodavanje dinamičnosti stranicama i poboljšavanj
-e korisničkog iskustva.
- U zadnje vrijeme je vrlo popularan jer je dovoljno sazrio za ozbiljnu upotrebu.
-\end_layout
-
-\begin_layout Standard
-Ipak, s obzirom na njegov nespretan uspon, JavaScript je prilično nekonzistentno
- implementiran u preglednicima, zbog čega su se počele razvijati razne bibliotek
-e koje olakšavaju pristup elemenatima na stranici.
- Najpoznatije takve biblioteke su Prototype, YUI i jQuery, a za ovu aplikaciju
- izabrao sam 
-\series bold
-jQuery
-\series default
- zbog njegove rasprostranjenosti i podrške.
+PostgreSQL
 \end_layout
 
 \begin_layout Section
@@ -1043,6 +972,82 @@ IcoMoon je servis koji, između ostaloga, omogućava slaganje vlastitih fontova.
  slika.
  Glavna prednost korištenja IcoMoon servisa je mala veličina datoteka, jer
  se u njima nalaze samo ikonice koje su potrebne, a ne cijeli set.
+\end_layout
+
+\begin_layout Section
+Dropbox
+\end_layout
+
+\begin_layout Standard
+Dropbox je web aplikacija koja omogućuje spremanje, učitavanje, sinkronizaciju
+ i dijeljenje datoteka preko interneta.
+\end_layout
+
+\begin_layout Section
+Heroku
+\end_layout
+
+\begin_layout Standard
+Heroku je servis za hosting web aplikacija.
+ Razlikuje se od drugih servisa po tome što on već ima konfigurirano sve
+ što je korisniku potrebno, time čineći sam proces stavljanja aplikacije
+ na njihov server potptuno bezbolnim.
+\end_layout
+
+\begin_layout Section
+Git(Hub)
+\end_layout
+
+\begin_layout Quote
+
+\emph on
+Git is a free and open source distributed version control system designed
+ to handle everything from small to very large projects with speed and efficienc
+y
+\emph default
+.
+ ---
+\begin_inset CommandInset href
+LatexCommand href
+name "git-scm.com"
+target "git-scm.com"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Git je sustav za rukovanje promjenama, po mom mišljenju najbolji.
+ Elegantan je, zauzima malo prostora, lagan je za naučiti, siguran je i
+ iznimno moćan.
+\end_layout
+
+\begin_layout Standard
+GitHub je najpoznatija stranica koja podržava Git repozitorije i sinonim
+ je za 
+\emph on
+open-source
+\emph default
+.
+ Svi se najvažniji 
+\emph on
+open-source
+\emph default
+ projekti nalaze na GitHub-u, a oni koji se ne nalaze, trebali bi.
+ GitHub je savršeno mjesto za surađivanje s drugim programerima, upravo
+ zbog jednostavnosti Git-a.
+ Pozitivna nuspojava surađivanja preko GitHub-a je to što postoji kopija
+ repozitorija na internetu, dakle to je automatski backup.
+\end_layout
+
+\begin_layout Standard
+Jednostavan proces surađivanja s Git-om izgleda otprilike ovako -- ja napravim
+ promjene u nekoliko datoteka, pronađem ih s Git-om, grupiram ih i objasnim
+ što sam promijenio i stavim svoje promjene na GitHub.
+ Zatim osoba s kojom surađujem učita moje promjene u svoju verziju tog repozitor
+ija, također napravi promjenu, zabilježi ju i pošalje meni.
+ I tako ukrug.
 \end_layout
 
 \begin_layout Chapter
