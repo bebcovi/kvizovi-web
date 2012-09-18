@@ -1402,14 +1402,15 @@ Internet Explorer
 \end_layout
 
 \begin_layout Standard
-Moja aplikacija još neko vrijeme neće podržavati Internet Explorer.
+Moja aplikacija još neko vrijeme neće podržavati Internet Explorer, uglavnom
+ u aspektu dizajna.
  S obzirom da je to web preglednik koji još uvijek zauzima velik postotak
  tržišta, želim obrazložiti svoju odluku.
 \end_layout
 
 \begin_layout Standard
-Microsoft Internet Explorer je najgori od svih web preglednika, to je poznata
- činjenica.
+Microsoft Internet Explorer je najlošiji od svih web preglednika, to je
+ poznata činjenica.
  Ali zašto? Postoji mnogo razloga, ovo je samo nekoliko:
 \end_layout
 
@@ -1418,9 +1419,8 @@ Microsoft Internet Explorer je najgori od svih web preglednika, to je poznata
 \series bold
 Ažurnost
 \series default
- -- Vjerojatno najgore svojstvo Internet Explorer-a je ažurnost.
- On kaska za gotovo svakim standardom koje je njegova konkurencija odavno
- implementirala.
+ -- Internet Explorer kaska za gotovo svakim standardom koje je njegova
+ konkurencija odavno implementirala.
  To nije problem samo njegovim korisnicima, nego i developerima i dizajnerima,
  jer su ga u većini slučajeva prisiljeni podržavati.
 \end_layout
@@ -1430,10 +1430,9 @@ Ažurnost
 \series bold
 IE6
 \series default
- -- U vrijeme pisanja ovog rada 6% svijeta još uvijek koristi Internet Explorer
- 6 (većinom je zastupljen u Kini), a to se dogodilo jer je njegovo razvijanje
- stagniralo kada nije bilo konkurencije.
- To je zastarjela verzija s kojom je gotovo nemoguće raditi.
+ -- U vrijeme pisanja ovog rada 6% svijeta još uvijek koristi zastarjeli
+ Internet Explorer 6 (koji je većinom zastupljen u Kini), a to se dogodilo
+ jer je njegov razvoj stagnirao na nekoliko godina kada nije bilo konkurencije.
 \end_layout
 
 \begin_layout Itemize
@@ -1441,8 +1440,8 @@ IE6
 \series bold
 Razvijanje web stranica
 \series default
- -- Iznimno je teško otkriti zašto jedan dio web stranice ne radi u Internet
- Exploreru, zbog vrlo lošeg mehanizma detektiranja pogrešaka.
+ -- Iznimno je teško otkriti zašto nešto ne radi u Internet Exploreru, a
+ to je zbog vrlo lošeg mehanizma detektiranja pogrešaka.
  Također, ima vrlo spor algoritam za učitavanje stranica, što znatno produljuje
  postupak testiranja.
 \end_layout
@@ -1469,7 +1468,14 @@ JavaScript
 \series bold
 Zatvoren
 \series default
- -- Internet Explorer je zatvorenog koda, za razliku od svoje konkurencije.
+ -- Internet Explorer je preglednik zatvorenog koda, za razliku od svoje
+ konkurencije.
+ Google Chrome i Safari su kao proizvodi također zatvoreni, ali Webkit,
+ njihova glavna komponenta, je 
+\emph on
+open-source
+\emph default
+.
 \end_layout
 
 \begin_layout Itemize
@@ -1479,6 +1485,9 @@ Podržanost
 \series default
  -- Internet Explorer je dostupan samo za Windows, dok je njegova konkurencija
  dostupna za gotovo svaki operacijski sustav.
+ To je glavni nedostatak koji mi otežava testiranje aplikacije, jer za razvijanj
+e koristim Ubuntu (jedna od distribucija Linux-a), a Internet Explorer nije
+ podržan na tom sustavu.
 \end_layout
 
 \begin_layout Chapter
@@ -1811,10 +1820,8 @@ cross-browser compatibility
  S obzirom da kôd pišem u Ubuntu-u (distribucija Linux-a) i testiram ga
  u Google Chrome-u, moglo bi se reći da aplikacija zasad radi sigurno na
  u tom pregledniku.
- Na ostalima isto najvjerojatnije radi, uz par mana u dizajnu.
- Preglednik u kojem aplikacija sigurno ne radi je Internet Explorer, za
- koji mogu reći da je najlošiji web preglednik na tržištu te je za njega
- potreban poseban trud.
+ Na ostalima isto najvjerojatnije radi, uz par mana u dizajnu, ili mnogo
+ više njih, ako je u pitanju Internet Explorer.
 \end_layout
 
 \begin_layout Standard
