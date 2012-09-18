@@ -334,6 +334,34 @@ Open-source program
 \begin_layout Standard
 
 \series bold
+Pseudo-nasumičnost
+\series default
+.
+ Programi nemaju sposobnost biranja potpuno nasumičnog broja, pa do njega
+ dolaze kompliciranim algoritmom, a broj koji je nastao pomoću nekog algoritma
+ ne može u potpunosti biti nasumičan, zato se kaže da je on pseudo-nasumičan.
+ U ovom radu 
+\begin_inset Quotes gld
+\end_inset
+
+pseudo-nasumičnost
+\begin_inset Quotes grd
+\end_inset
+
+ ću skratiti na 
+\begin_inset Quotes gld
+\end_inset
+
+nasumičnost
+\begin_inset Quotes grd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
 Font
 \series default
 .
@@ -1125,8 +1153,8 @@ Implementacija
 \end_layout
 
 \begin_layout Standard
-Htio bih najprije ukratko objasniti odnose između pojedinih objekata u aplikacij
-i.
+Aplikacija se sastoji od nekoliko osnovnih objekata koji su u određenim
+ međusobnim odnosima.
  Najprije imamo 
 \series bold
 škole
@@ -1141,28 +1169,29 @@ učenika
 \series bold
 kvizova
 \series default
-, i kvizovi pripadaju samo jednoj školi.
+, a pojedini kviz može pripadati samo jednoj školi.
  Kvizovi mogu imati više 
 \series bold
 pitanja
 \series default
-, a pojedino pitanje pripada samo jednom kvizu.
+, a pojedino pitanje može pripadati samo jednom kvizu.
 \end_layout
 
 \begin_layout Standard
-Kada korisnik na početku dođe na stranicu, dočeka ga odabir želi li se prijaviti
- kao učenik ili škola.
- Taj odabir ga vodi na web formu za prijavu.
+Kada (neregistrirani) korisnik dođe na početnu stranicu aplikacije, treba
+ izabrati želi li se prijaviti kao učenik ili škola.
+ Taj odabir ga i u jednom i u drugom slučaju vodi do web obrasca za prijavu.
  Tamo korisnik može izabrati želi li se prijaviti ili registrirati.
- Nakon što napravi jedno od tog dvoje, korisnik je prijavljen, te se sučelja
- razdvajaju; učenika dočeka sučelje gdje može izabrati koji da kviz igra,
- a školu dočeka administracijsko sučelje gdje može izrađivati kvizove.
+ Nakon što napravi nešto od tog dvoje, korisnik je prijavljen, te se sučelja
+ razdvajaju; učenika dočeka sučelje gdje može izabrati koji kviz želi igrati,
+ a školu dočeka administracijsko sučelje u kojemu može izrađivati kvizove
+ i pregledavati učenike.
 \end_layout
 
 \begin_layout Standard
-Kada se korisnik registrira, njegovi podaci se spremaju u bazu, s tim da
- se lozinka još prethodno kriptira.
- Većinu tih podataka korisnik može kasnije izmijeniti.
+Kada se korisnik registrira, njegovi podaci se spremaju u bazu, a lozinka
+ se prethodno kriptira.
+ Većinu spremljenih podataka korisnik može kasnije izmijeniti.
 \end_layout
 
 \begin_layout Section
@@ -1170,23 +1199,23 @@ Kada se korisnik registrira, njegovi podaci se spremaju u bazu, s tim da
 \end_layout
 
 \begin_layout Standard
-Aplikacija je zamišljena tako da škola ne mora registrirati svakog pojedinog
- učenika, nego samo napiše 
+Aplikacija je zamišljena tako da škola ne mora (i ne može) registrirati
+ svakog pojedinog učenika, nego samo napiše 
 \emph on
 ključ
 \emph default
  (niz znakova), koji će kasnije podijeliti učenicima.
- Učenici se ne mogu registrirati bez ključa.
+ Učenici se ne mogu registrirati bez ključa svoje škole.
  Također, postoji i globalni ključ aplikacije koji škole moraju imati kako
- bi se uopće mogle registrirati, a njega dobijaju od mene.
- Taj mehanizam spriječava da se bilo tko registrira kao škola.
+ bi se uopće mogle registrirati, a taj ključ dobijaju od mene.
+ Taj mehanizam spriječava da se neautoriziran korisnik registrira kao škola.
 \end_layout
 
 \begin_layout Standard
-Nakon što se škola registrira, dolazi do sučelja za administraciju.
+Nakon što se škola registrira, dočeka ju sučelja ze administraciju.
  Cilj administrativnog sučelja je da bude što moćnije, a istovremeno što
  jednostavnije.
- Postoje 2 objekta na koje škola trenutno može utjecati: 
+ Postoje dva objekta na koje škola trenutno može utjecati: 
 \series bold
 učenici
 \series default
@@ -1198,7 +1227,8 @@ kvizovi
 \end_layout
 
 \begin_layout Standard
-Učenici se trenutno mogu samo brisati, dok se sa kvizovima može puno više.
+Učenici se trenutno mogu samo pregledavati i brisati, dok se sa kvizovima
+ može puno više.
  Kvizovi se mogu stvarati, izmjenjivati, mogu im se dodavati pitanja, može
  ih se aktivirati, deaktivirati itd.
  Škola određuje koji kvizovi će biti vidljivi i kojim razredima.
@@ -1249,7 +1279,7 @@ Upiši točan odgovor
 \end_layout
 
 \begin_layout Standard
-Htio bih sada ukratko opisati elemente svakog tipa.
+Detaljnije, ta su pitanja prezentirana na slijedeći način.
 \end_layout
 
 \begin_layout Standard
@@ -1257,7 +1287,8 @@ Htio bih sada ukratko opisati elemente svakog tipa.
 \series bold
 Točno/netočno
 \series default
- se sastoji od tvrdnje i točnog odgovora (ili 
+.
+ Sastoji se od tvrdnje i dvije opcije (
 \begin_inset Quotes gld
 \end_inset
 
@@ -1265,7 +1296,7 @@ Točno
 \begin_inset Quotes grd
 \end_inset
 
- ili 
+ i 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1273,7 +1304,7 @@ Netočno
 \begin_inset Quotes grd
 \end_inset
 
-).
+) od kojih se samo jedna može označiti.
 \end_layout
 
 \begin_layout Standard
@@ -1281,8 +1312,9 @@ Netočno
 \series bold
 Ponuđeni odgovori
 \series default
- sadrži pitanje i ponuđene odgovore.
- Ponuđenih odgovora može biti proizvoljno mnogo.
+.
+ Sastoji se od pitanja i ponuđenih odgovora, kojih može biti proizvoljno
+ mnogo.
 \end_layout
 
 \begin_layout Standard
@@ -1291,12 +1323,12 @@ Ponuđeni odgovori
 Asocijacije
 \series default
  su izvedene tako da korisnik razmješta pojmove u desnom stupcu tako da
- pripadaju pojmovima iz lijevog stupca.
+ pripadaju, odnosno da su vizualno u ravnini s pojmovima iz lijevog stupca.
  Pojmovi se razmještaju pomoću 
 \emph on
 drag & drop
 \emph default
- tehnike, čija HTML5 implementacija nema još zadovoljavajuću podršku, stoga
+ tehnike, čija HTML5 implementacija još nema zadovoljavajuću podršku, stoga
  kako bih to emulirao koristim jQuery priključak 
 \series bold
 jQuery UI
@@ -1361,39 +1393,42 @@ Kada je prijavljen, učenik može otići na svoj profil, gdje su prikazane
 \end_layout
 
 \begin_layout Subsection
-Igra
+Kviz
 \end_layout
 
 \begin_layout Standard
-Nakon prijave korisnik je odveden na stranicu gdje može izabrati koji da
- kviz igra (ponuđeni su mu samo kvizovi koje je njegova škola stvorila).
- Nakon toga može izabrati želi li igrati u jedan ili dva igrača (u drugom
- slučaju drugi igrač treba unijeti svoje korisničko ime i lozinku).
- Nakon toga igra može započeti.
+Nakon prijave korisnik je odveden na stranicu gdje može izabrati koji kviz
+ želi započeti, a ponuđeni su mu oni kvizovi koje je njegova škola stvorila.
+ Zatim odabire želi li rješavati kviz u jedan ili dva igrača, a u drugom
+ slučaju pojavi se obrazac pomoću kojega se drugi igrač treba prijaviti.
+ Nakon toga kviz može započeti.
 \end_layout
 
 \begin_layout Standard
-Prije početka, uzmu se pitanja iz odabranog kviza i ispremiješa im se redoslijed.
- Informacije o nadolazećoj igri zatim se spremaju u web preglednik (u tzv
+Pitanja unutar kviza se uvijek prikazuju nasumičnim redoslijedom, što otežava
+ pamćenje kviza.
+ Na početku rješavanja kviza se informacije o cijelom kvizu spremaju u kolačić
+ (eng.
  
 \shape italic
 cookie
 \shape default
-), i tijekom igre se te informacije ažuriraju sa trenutnim stanjem igre.
+), i tijekom rješavanja kviza se te informacije ažuriraju s obzirom na trenutno
+ stanje igre.
 \end_layout
 
 \begin_layout Standard
-Svako pitanje u bazi ima informaciju koji je točan odgovor na njega, pa
- se tako provjerava tijekom igre je li učenik dobro odgovorio na pitanje.
- Ukoliko je to pitanje vrste 
+Osim pitanja, opcije unutar 2.
+ i 3.
+ vrste pitanja (
 \begin_inset Quotes gld
 \end_inset
 
-Asocijacija
+Asocijacije
 \begin_inset Quotes grd
 \end_inset
 
- ili 
+ i 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1401,7 +1436,14 @@ Ponuđeni odgovori
 \begin_inset Quotes grd
 \end_inset
 
-, ponuđeni odgovori se ispremiješaju.
+) se također prikazuju nasumičnim redoslijedom, inače bi učenik koji je
+ već rješavao takvo pitanje, ali se ne sjeća točno odgovora, mogao pogoditi
+ točan odgovor na temelju mjesta na kojemu se prošli put nalazio.
+\end_layout
+
+\begin_layout Standard
+Za svako pitanje u bazi postoji informacija koji je točan odgovor, tako
+ se tijekom kviza provjerava je li učenik točno odgovorio na pitanje.
 \end_layout
 
 \begin_layout Standard
