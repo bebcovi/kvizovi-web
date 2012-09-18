@@ -2125,9 +2125,13 @@ key "key-1"
 
 IcoMoon.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://icomoon.io/#toDocs"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://icomoon.io/#toDocs
+\end_layout
 
 \end_inset
 
@@ -2144,9 +2148,13 @@ key "key-2"
 
 jQAPI: alternative jQuery documentation.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://www.jqapi.com/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.jqapi.com/
+\end_layout
 
 \end_inset
 
@@ -2163,9 +2171,13 @@ key "key-3"
 
 jQuery UI: demos & documentation.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://jqueryui.com/demos/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://jqueryui.com/demos/
+\end_layout
 
 \end_inset
 
@@ -2182,9 +2194,13 @@ key "key-4"
 
 jQuery JavaScript Library.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://docs.jquery.com/Main_Page"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://docs.jquery.com/Main_Page
+\end_layout
 
 \end_inset
 
@@ -2201,9 +2217,13 @@ key "key-5"
 
 Typekit: help.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "URL: https://typekit.com/help"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://typekit.com/help
+\end_layout
 
 \end_inset
 
@@ -2220,9 +2240,13 @@ key "key-6"
 
 Mozilla Development Network: JavaScript.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "https://developer.mozilla.org/en-US/docs/JavaScript"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://developer.mozilla.org/en-US/docs/JavaScript
+\end_layout
 
 \end_inset
 
@@ -2239,9 +2263,13 @@ key "key-7"
 
 Susy: reference.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://susy.oddbird.net/guides/reference/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://susy.oddbird.net/guides/reference/
+\end_layout
 
 \end_inset
 
@@ -2258,9 +2286,14 @@ key "key-8"
 
 HTML Standard: the HTML syntax.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-tag-omission"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-tag-
+omission
+\end_layout
 
 \end_inset
 
@@ -2277,9 +2310,13 @@ key "key-9"
 
 When can I use: support tables for HTML5, CSS3, etc.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://caniuse.com/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://caniuse.com/
+\end_layout
 
 \end_inset
 
@@ -2296,9 +2333,13 @@ key "key-10"
 
 HTML5 Rocks: a resource for open web HTML5 developers.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://www.html5rocks.com/en/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.html5rocks.com/en/
+\end_layout
 
 \end_inset
 
@@ -2315,9 +2356,13 @@ key "key-11"
 
 Modernizr: the feature detection library for HTML5/CSS3.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://modernizr.com/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://modernizr.com/
+\end_layout
 
 \end_inset
 
@@ -2334,9 +2379,13 @@ key "key-12"
 
 Git.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://git-scm.com"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://git-scm.com
+\end_layout
 
 \end_inset
 
@@ -2353,9 +2402,13 @@ key "key-13"
 
 Ruby Programming Language.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://www.ruby-lang.org/en/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.ruby-lang.org/en/
+\end_layout
 
 \end_inset
 
@@ -2371,9 +2424,13 @@ key "key-14"
 \end_inset
 
 Ruby on Rails: URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://rubyonrails.org"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://rubyonrails.org
+\end_layout
 
 \end_inset
 
@@ -2390,9 +2447,13 @@ key "key-15"
 
 Heroku: cloud application platform.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://www.heroku.com"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.heroku.com
+\end_layout
 
 \end_inset
 
@@ -2410,9 +2471,13 @@ key "key-16"
 Internet Explorer // Wikipedia: The Free Encyclopedia.
  14.9.2012.
  URL: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://en.wikipedia.org/wiki/Internet_Explorer"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://en.wikipedia.org/wiki/Internet_Explorer
+\end_layout
 
 \end_inset
 
