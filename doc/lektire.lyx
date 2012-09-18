@@ -1091,61 +1091,75 @@ Moja aplikacija još neko vrijeme neće podržavati Internet Explorer.
 \begin_layout Standard
 Microsoft Internet Explorer je najgori od svih web preglednika, to je poznata
  činjenica.
- Ali zašto? Postoji mnogo razloga.
+ Ali zašto? Postoji mnogo razloga, ovo je samo nekoliko:
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 
 \series bold
 Ažurnost
 \series default
-.
- Vjerojatno najgore svojstvo Internet Explorer-a je ažurnost.
+ -- Vjerojatno najgore svojstvo Internet Explorer-a je ažurnost.
  On kaska za gotovo svakim standardom koje je njegova konkurencija odavno
  implementirala.
  To nije problem samo njegovim korisnicima, nego i developerima i dizajnerima,
  jer su ga u većini slučajeva prisiljeni podržavati.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 
 \series bold
 IE6
 \series default
-.
- U vrijeme pisanja ovog rada 6% svijeta još uvijek koristi Internet Explorer
+ -- U vrijeme pisanja ovog rada 6% svijeta još uvijek koristi Internet Explorer
  6 (većinom je zastupljen u Kini), a to se dogodilo jer je njegovo razvijanje
  stagniralo kada nije bilo konkurencije.
  To je zastarjela verzija s kojom je gotovo nemoguće raditi.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 
 \series bold
-Popravljanje grešaka
+Razvijanje web stranica
 \series default
-.
- Iznimno je teško otkriti zašto jedan dio web stranice ne radi u Internet
+ -- Iznimno je teško otkriti zašto jedan dio web stranice ne radi u Internet
  Exploreru, zbog vrlo lošeg mehanizma detektiranja pogrešaka.
+ Također, ima vrlo spor algoritam za učitavanje stranica, što znatno produljuje
+ postupak testiranja.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 
 \series bold
 Sigurnost
 \series default
-.
- Internet Explorer ima veći broj sigurnosnih propusta od svih preglednika.
+ -- Internet Explorer ima veći broj sigurnosnih propusta od svih preglednika.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 
 \series bold
 JavaScript
 \series default
-.
- Podržanost JavaScript-a na Internet Explorer-u vrlo je loša, zbog čega
- je jQuery otprilike duplo veći od veličine koju je trebao zauzimati.
+ -- Podržanost JavaScript-a na Internet Explorer-u vrlo je loša, zbog čega
+ je jQuery otprilike duplo veći od veličine koju je mogao zauzimati.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Zatvoren
+\series default
+ -- Internet Explorer je zatvorenog koda, za razliku od svoje konkurencije.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Podržanost
+\series default
+ -- Internet Explorer je dostupan samo za Windows, dok je njegova konkurencija
+ dostupna za gotovo svaki operacijski sustav.
 \end_layout
 
 \begin_layout Chapter
