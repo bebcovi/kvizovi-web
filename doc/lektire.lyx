@@ -7,7 +7,7 @@
 \usepackage[numbib,nottoc]{tocbibind}
 \usepackage{hyperref}
 
-\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue}
+\hypersetup{breaklinks=true,colorlinks=true,linkcolor=black,urlcolor=blue}
 
 \def\arctan{\mathop{\rm arctg}\nolimits}
 \def\tan{\mathop{\rm tg}\nolimits}
@@ -62,7 +62,7 @@ figs-within-sections
 \pdf_bookmarksnumbered false
 \pdf_bookmarksopen false
 \pdf_bookmarksopenlevel 1
-\pdf_breaklinks false
+\pdf_breaklinks true
 \pdf_pdfborder true
 \pdf_colorlinks true
 \pdf_backref false
@@ -1813,8 +1813,8 @@ cross-browser compatibility
  u tom pregledniku.
  Na ostalima isto najvjerojatnije radi, uz par mana u dizajnu.
  Preglednik u kojem aplikacija sigurno ne radi je Internet Explorer, za
- koji mogu reći da je najgori web preglednik na tržištu te je za njega potreban
- poseban trud.
+ koji mogu reći da je najlošiji web preglednik na tržištu te je za njega
+ potreban poseban trud.
 \end_layout
 
 \begin_layout Standard
@@ -1823,10 +1823,11 @@ cross-browser compatibility
 Testovi
 \series default
 .
- Nadalje, testovi još nisu napisani.
+ Nadalje, testovi još nisu do kraja napisani.
  Testovi služe da se na brzi način testira obavlja li aplikacija osnovne
  funkcije dobro, što je puno sofisticiranija metoda nego ju ručno testirati,
- odnosno pokrenuti aplikaciju i isprobavati ju.
+ odnosno pokrenuti aplikaciju i isprobavati svaki dio.
+ Stabilnu aplikaciju definiraju dobri i temeljiti testovi.
 \end_layout
 
 \begin_layout Standard
@@ -2045,6 +2046,294 @@ odgođenu
  aktivaciju kvizova (da se aktiviraju na određen dan u određeno vrijeme),
  sortiranje kvizova i pitanja po raznim kriterijima, testiranje kvizova
  itd.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-1"
+
+\end_inset
+
+IcoMoon.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://icomoon.io/#toDocs"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-2"
+
+\end_inset
+
+jQAPI: alternative jQuery documentation.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.jqapi.com/"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-3"
+
+\end_inset
+
+jQuery UI: demos & documentation.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://jqueryui.com/demos/"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-4"
+
+\end_inset
+
+jQuery JavaScript Library.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://docs.jquery.com/Main_Page"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-5"
+
+\end_inset
+
+Typekit: help.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "URL: https://typekit.com/help"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-6"
+
+\end_inset
+
+Mozilla Development Network: JavaScript.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "https://developer.mozilla.org/en-US/docs/JavaScript"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-7"
+
+\end_inset
+
+Susy: reference.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://susy.oddbird.net/guides/reference/"
+
+\end_inset
+
+ (18.9.2012.) 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-8"
+
+\end_inset
+
+HTML Standard: the HTML syntax.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-tag-omission"
+
+\end_inset
+
+ (18.9.2012.) 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-9"
+
+\end_inset
+
+When can I use: support tables for HTML5, CSS3, etc.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://caniuse.com/"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-10"
+
+\end_inset
+
+HTML5 Rocks: a resource for open web HTML5 developers.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.html5rocks.com/en/"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-11"
+
+\end_inset
+
+Modernizr: the feature detection library for HTML5/CSS3.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://modernizr.com/"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-12"
+
+\end_inset
+
+Git.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://git-scm.com"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-13"
+
+\end_inset
+
+Ruby Programming Language.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.ruby-lang.org/en/"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-14"
+
+\end_inset
+
+Ruby on Rails: URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://rubyonrails.org"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-15"
+
+\end_inset
+
+Heroku: cloud application platform.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.heroku.com"
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-16"
+
+\end_inset
+
+Internet Explorer // Wikipedia: The Free Encyclopedia.
+ 14.9.2012.
+ URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://en.wikipedia.org/wiki/Internet_Explorer"
+
+\end_inset
+
+ (18.9.2012.) 
 \end_layout
 
 \end_body
