@@ -26,6 +26,8 @@
 
 \setlength{\intextsep}{0cm plus1cm minus1cm}
 \renewcommand{\arraystretch}{2}
+
+\definecolor{gray}{RGB}{200,200,200}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -518,11 +520,8 @@ HTML ima mnogo verzija, HTML 3.0, HTML 4.0, XHTML 1.0, HTML5 itd., a njegova
  se verzija deklarira na samom vrhu HTML dokumenta.
  Npr.
  HTML5 dokument deklarira se ovako:
-\end_layout
-
-\begin_layout Standard
 \begin_inset listings
-lstparams "basicstyle={\ttfamily},language=HTML,tabsize=2"
+lstparams "basicstyle={\ttfamily}"
 inline false
 status open
 
@@ -672,7 +671,272 @@ target "http://www.ruby-lang.org/en/"
 \end_layout
 
 \begin_layout Standard
-Ruby mi je pomogao da izgradim svoju aplikaciju s elegancijom i lakoćom.
+Ruby je nastao 1995, it od tada je privlačio sve više ljudi, dok 2006.
+ nije postao svjetski prihvaćen.
+\end_layout
+
+\begin_layout Standard
+Ruby je objektno orjentiran programski jezik.
+ Njegova važna karakteristika, po kojoj se razlikuje od ostalih objektno
+ orjentiranih jezika, je ta što je u Ruby-u 
+\series bold
+sve
+\series default
+ objekt.
+ Dakle, ako mi zbrojimo dva broja, na primjer 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+1+1
+\end_layout
+
+\end_inset
+
+, ono što se zapravo događa je da, pošto su brojevi objekti, na broj 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+1
+\end_layout
+
+\end_inset
+
+ se poziva metoda 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
++
+\end_layout
+
+\end_inset
+
+ sa argumentom 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+1
+\end_layout
+
+\end_inset
+
+.
+ Dakle, zapravo se događa 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+1.+(1)
+\end_layout
+
+\end_inset
+
+.
+ Jedna lijepa primjena toga je sljedeći primjer:
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language=Ruby,showstringspaces=false,tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+5.times { print "I *love* Ruby" }
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ruby ima dobro riješen problem nasljeđivanja.
+ Većina drugih jezika ili dopuštaju nasljeđivanje od samo jedne klase, pa
+ imaju problem limitiranosti, ili dopuštaju nasljeđivanje od više klasa,
+ što je pak previše kompleksno.
+ Ruby, s druge strane, dopušta nasljeđivanje od samo jedne klase, ali nudi
+ mogućnost uključivanja skupova metoda u klasu.
+\end_layout
+
+\begin_layout Standard
+Ruby ima jako dobar i vrlo jednostavan vizualni prikaz vrsta varijabli.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+var
+\end_layout
+
+\end_inset
+
+ može biti lokalna varijabla
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+@var
+\end_layout
+
+\end_inset
+
+ je članska varijabla
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+@@var
+\end_layout
+
+\end_inset
+
+ je klasna varijabla
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+$var
+\end_layout
+
+\end_inset
+
+ je globalna varijabla
+\end_layout
+
+\begin_layout Standard
+Ovakav prikaz povećava čitljivost tako da čitatelj kada vidi varijablu može
+ odmah vidjeti koje je vrste.
+\end_layout
+
+\begin_layout Standard
+Ruby je vrlo dinamičan jezik.
+ On je toliko dinamičan da dopušta izmjenu, dodavanje, i brisanje elemenata
+ iz standardne biblioteke.
+ Recimo da za zbrajanje umjesto 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
++
+\end_layout
+
+\end_inset
+
+ želimo koristiti metodu 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+plus
+\end_layout
+
+\end_inset
+
+.
+ Potrebno ju je samo dodati u klasu brojeva:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language=Ruby,tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+class Numeric
+\end_layout
+
+\begin_layout Plain Layout
+
+  def plus(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+    self.+(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+  end
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+y = 5.plus 6
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ruby mi je pomogao da izgradim svoju aplikaciju s velikom elegancijom i
+ lakoćom.
 \end_layout
 
 \begin_layout Subsection
@@ -962,6 +1226,61 @@ target "https://github.com"
 
 \begin_layout Section
 PostgreSQL
+\end_layout
+
+\begin_layout Standard
+PostgreSQL je vrlo moćan open-source 
+\series bold
+DBMS
+\series default
+ (
+\series bold
+D
+\series default
+ata
+\series bold
+B
+\series default
+ase 
+\series bold
+M
+\series default
+anagement 
+\series bold
+S
+\series default
+ystem).
+ Nastao je prije 15 godina, i danas je još uvijek u aktivnom razvoju.
+ Ima puno više mogućnosti od standardnih DBMS-ova (poput MySQL-a); od raznih
+ tipova, kao što su npr.
+ 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+point
+\end_layout
+
+\end_inset
+
+ (točka) i 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+hstore
+\end_layout
+
+\end_inset
+
+ (ključ-vrijednost), pa sve do vrlo naprednih mogućnosti kao što je pretraživanj
+e tekstova uz korištenje raznih specijaliziranih indeksa i riječnika.
 \end_layout
 
 \begin_layout Section
