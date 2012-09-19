@@ -13,8 +13,10 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+*-backup*
 
 .DS_Store
 public/system/
 doc/*.lyx~
 doc/*.lyx#
+doc/*.pdf
