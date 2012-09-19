@@ -1,8 +1,6 @@
 # encoding: utf-8
 
 class StudentsController < ApplicationController
-  before_filter :authenticate!
-
   def index
     @students = current_school.students
   end
