@@ -2,6 +2,7 @@ form.association {
 
   &.show {
     $height: 1.5;
+
     .pair {
       @extend %pie-clearfix;
 
@@ -9,7 +10,10 @@ form.association {
         @include adjust-leading-to($height);
       }
 
-      div { @extend %inline-block; }
+      div {
+        @extend %inline-block;
+        &:last-child { margin-top: -4px; }
+      }
 
       i {
         color: rgba(black, .25);
