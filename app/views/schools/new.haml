@@ -4,6 +4,8 @@
 
   = f.input :name
   = f.input :level, collection: ["Osnovna", "Srednja"], prompt: "Izaberite..."
+  = f.input :place
+  = f.input :region, collection: Location.regions, prompt: "Izaberite..."
   = f.input :username
   = f.input :password
   = f.input :password_confirmation

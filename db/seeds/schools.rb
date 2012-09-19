@@ -6,6 +6,8 @@ School.create! [
     name: "XV. Gimnazija",
     password: "mioc",
     level: "Srednja",
+    place: "Zagreb",
+    region: "Grad Zagreb",
     key: "mioc"
   }
 ]

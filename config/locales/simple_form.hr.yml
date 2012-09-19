@@ -16,6 +16,8 @@ hr:
       school:
         name: "Ime škole"
         level: "Tip škole"
+        place: "Mjesto"
+        region: "Županija"
         key: "Tajni ključ"
       student:
         first_name: "Ime"

@@ -18,6 +18,8 @@ hr:
           attributes:
             level:
               blank: "Niste odabrali tip škole."
+            region:
+              blank: "Niste odabrali županiju."
             key:
               blank: "Ne smije biti prazan."
             username:
