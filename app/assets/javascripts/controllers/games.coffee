@@ -14,14 +14,14 @@ Lektire.Controllers.games = (bodyClass) ->
 
     $buttons        = $form.find '.buttons'
     $button         = $buttons.find 'button'
-    $quizName       = $buttons.find '.name'
 
     $quizzesChecked = $quizzes.find ':checked'
     $playersChecked = $players.find ':checked'
 
-    setQuizName     = (name) -> $quizName.text(" #{name}")
+    setQuizName     = (name) -> $buttons.find('.name').text(" #{name}")
+
     setPlural       = -> $button.html $button.html().replace(/(Započni)\b/, '$1te')
-    setSingular     = -> $button.html $button.html().replace(/(Započni)\w+/, 'Započni')
+    setSingular     = -> $button.html $button.html().replace(/(Započni)\w+/, '$1')
 
     if not $quizzesChecked.length
       $players.hide()
