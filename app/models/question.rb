@@ -48,7 +48,7 @@ class Question < ActiveRecord::Base
 
   def correct_answer?(answer)
     if photo? or text?
-      answer.casecmp(self.answer) == 0
+      answer.chomp(".").casecmp(self.answer) == 0
     else
       answer == self.answer
     end
