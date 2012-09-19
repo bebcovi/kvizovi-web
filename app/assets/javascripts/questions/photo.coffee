@@ -18,9 +18,9 @@ Lektire.Questions.photo = ($form, formClass) ->
     height   = $canvas.attr('height') - 0
     ctx      = canvas.getContext '2d'
 
-    drawImage = (event) ->
+    drawImage = (src) ->
       img = new Image
-      img.src = event.target.result
+      img.src = src
 
       img.onload = ->
         ctx.clearRect 0, 0, canvas.width, canvas.height
@@ -38,7 +38,7 @@ Lektire.Questions.photo = ($form, formClass) ->
         $canvas.addClass 'filled'
 
     if src
-      drawImage({target: {result: src}})
+      drawImage src
       $('.pladeholder').hide()
 
     $file.on 'change', (event) ->
@@ -46,5 +46,5 @@ Lektire.Questions.photo = ($form, formClass) ->
       width     = $canvas.attr('width') - 0
       reader    = new FileReader
 
-      reader.onload = drawImage
+      reader.onload = (e) -> drawImage(e.target.result)
       reader.readAsDataURL event.target.files[0]
