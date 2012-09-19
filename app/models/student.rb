@@ -10,7 +10,7 @@ class Student < ActiveRecord::Base
   validates_presence_of :password, on: :create
   validates :username, presence: true, uniqueness: true
   validates_format_of :username, with: /^[a-zA-Z0-9_]{3,}$/, message: "Može sadržavati samo (engleska) slova, brojeve i '_'"
-  validates_presence_of :first_name, :last_name, :grade
+  validates_presence_of :first_name, :last_name, :grade, :gender, :year_of_birth
 
   before_create do
     self.school = School.find_by_key(school_key)

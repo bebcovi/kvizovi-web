@@ -24,6 +24,8 @@ hr:
         last_name: "Prezime"
         grade: "Razred"
         school_key: "Tajni ključ škole"
+        gender: "Spol"
+        year_of_birth: "Godina rođenja"
       quiz:
         name: "Naziv"
         grades: "Predviđeni razredi"

@@ -8,6 +8,8 @@ Student.create! [
     username: "pero",
     password: "pero",
     grade: "3",
+    gender: "Muško",
+    year_of_birth: 1991,
     school_key: school_key
   }
 ]

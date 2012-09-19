@@ -14,6 +14,10 @@ hr:
               blank: "Nisi odabrao/la razred."
             username:
               taken: "Već postoji učenik s tim korisničkim imenom."
+            gender:
+              blank: "Niste izabrali spol."
+            year_of_birth:
+              blank: "Niste izabrali godinu rođenja."
         school:
           attributes:
             level:
