@@ -8,10 +8,7 @@ form {
   }
   p.notice {
     @include with-font-size($small-font-size) {
-      font: {
-        family: $small-font-family;
-        weight: 300;
-      }
+      font-weight: 300;
       color: rgba(black, .4);
       i { margin-right: rhythm(.1); }
     }
@@ -46,6 +43,7 @@ form {
 // labels
 
 label {
+  @include user-select(none);
   &:hover { cursor: pointer; }
   &:after { content: ':'; }
   [type=radio], [type=checkbox] + & {
@@ -62,17 +60,14 @@ label {
 
 input, button, textarea {
   margin: 0;
-  font: {
-    family: inherit;
-    size: inherit;
-  }
-  line-height: inherit;
+  font-family: inherit;
   color: rgba(black, .6);
 }
 
 [type=text], [type=password], [type=number], textarea {
   @extend %text-input;
   display: block;
+
 }
 
 [type=file] {
@@ -138,4 +133,9 @@ span.error {
   clear: both;
   input, button { @extend %primary-button; }
   a { @extend %button; }
+  button {
+    height: rhythm(1.5);
+    margin-left: rhythm(.1);
+  }
+  i { height: rhythm(); }
 }

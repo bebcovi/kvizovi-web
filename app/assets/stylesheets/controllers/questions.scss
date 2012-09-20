@@ -43,16 +43,12 @@ ol.categories {
 
 ol.questions { @extend %nice-list; }
 
-#question_content {
-  width: rhythm(26);
-  height: rhythm(1.5);
+#question_content, #question_hint {
   max-width: 100%;
+  height: rhythm(1.5, $form-font-size);
 }
 
-#question_hint {
-  height: rhythm(1.5);
-  max-width: 100%;
-}
+#question_content { width: rhythm(26, $form-font-size); }
 
 .points {
   clear: both;

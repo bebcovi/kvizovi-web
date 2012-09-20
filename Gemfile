@@ -8,9 +8,11 @@ gem "pg"
 
 group :assets do
   gem "sass-rails"
+  gem "compass", "~> 0.13.alpha.0"
   gem "compass-rails"
   gem "susy"
   gem "animation"
+  gem "modular-scale", "~> 1.0.2"
   gem "jquery-rails"
   gem "jquery-ui-rails"
   gem "coffee-rails"

@@ -1,11 +1,13 @@
 @import 'compass';
-@import "compass/css3/user-interface";
+@import 'compass/css3/user-interface';
+
+@import 'susy';
+@import 'modular-scale';
 
 @import 'variables';
 @import 'mixins';
 @import 'extends';
 
-@import 'susy';
 @import 'bootstrap';
 @import 'icons';
 @import 'animation';
@@ -16,6 +18,7 @@
 @import 'players';
 
 @import 'header';
+@import 'main';
 
 @import 'questions/*';
 @import 'controllers/*';

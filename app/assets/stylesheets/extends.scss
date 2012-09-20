@@ -60,9 +60,10 @@
 }
 
 %text-input {
-  @include with-font-size($base-font-size - 2px) {
+  @include with-font-size($form-font-size) {
     @extend %border-radius;
     @include rhythm-borders(1px, .25);
+    @include input-placeholder { font-weight: 300; }
     font-weight: 300;
     border-color: rgba(black, .25);
     &:focus {
@@ -130,6 +131,8 @@
   @include h-borders(1px, .25);
   @include v-borders(1px, .5);
   @include color-link($c1, $c2);
+  font-size: inherit;
+  line-height: inherit;
   text-align: center;
   color: $c1;
   border-color: rgba(black, .25);
@@ -145,15 +148,15 @@
 
 %primary-button {
   @extend %button;
-  $c1: $link1;
-  $c2: $link2;
+  $c1: white;
+  $c2: white;
   @include color-link($c1, $c2);
   color: $c1;
-  border-color: rgba($link1, .5);
-  background: rgba($link1, .05);
+  border: none;
+  padding: rhythm(.25) rhythm(.5);
+  background: $red;
   &:hover {
     color: $c2;
-    border-color: rgba($link1, .75);
-    background: rgba($link1, .1);
+    background: darken($red, 5%);
   }
 }

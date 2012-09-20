@@ -1,34 +1,25 @@
 header {
-  $offset: $grid-padding + rhythm(.5);
   @include clearfix;
-  @include rhythm(0, .5, .5, 1);
-  @include trailing-border(1px, .5);
-  @include v-borders;
-  @include border-bottom-radius;
-  @include box-shadow(rgba(black, .1) 0 0 .75em);
+  @include rhythm(0, .5, .5, 0);
   @include text-shadow(white 0 1px 1px);
-  border-color: rgba(black, .3);
-  padding-left: $offset;
-  padding-right: $offset;
-  margin-left: - $offset;
-  margin-right: - $offset;
   color: rgba(black, .6);
-  background: darken(white, 8%);
 }
 
 #logo {
-  @include with-font-size(32px) {
+  @include with-font-size($medium) {
     @include trailer(0);
     float: left;
-    font: {
-      weight: 900;
-    }
+    font-weight: 900;
+
     a {
-      $c1: rgba(black, .5);
-      $c2: $link2;
+      $c1: $red;
+      $c2: $red;
       @include color-link($c1, $c2);
+      display: block;
+      height: rhythm(lines-for-font-size(32px));
       &:hover { text-decoration: none; }
     }
+
     i {
       @include with-font-size(38px) {
         position: relative;
@@ -43,6 +34,5 @@ header {
   @include with-font-size($small-font-size) {
     @include rhythm(.75, 0, 0, 0);
     float: right;
-    font-family: $small-font-family;
   }
 }

@@ -16,7 +16,7 @@
       %h1#logo= link_to "Lektire".prepend_icon("books"), root_path
       = render "log" if logged_in?
 
-    %article{role: 'main'}
+    %article#main{role: 'main'}
       - flash.each do |name, message|
         - if name.in?([:notice, :alert])
           %div{class: "flash #{name}"}

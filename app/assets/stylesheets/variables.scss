@@ -1,14 +1,32 @@
 // susy
 
 $total-columns: 10;
+$gutter-width: 2em;
 $grid-padding: 2em;
 
+$container-width: 960px;
 $container-style: static;
+
+// modular scale
+
+$base-size: 14px 18px;
+$ratio: golden();
+
+$small:       ms(0);
+$normal:      ms(1);
+$medium:      ms(3);
+
+$large:       ms(4);
+$x-large:     ms(6);
+$xx-large:    ms(7);
+$xxx-large:   ms(8);
+
+@include ms-list;
 
 // vertical rhythm
 
-$base-font-size: 18px;
-$base-line-height: 28px;
+$base-font-size: $normal;
+$base-line-height: $medium;
 
 // css3
 
@@ -16,20 +34,22 @@ $default-border-radius: 3px;
 
 // colors
 
+$red: hsl(0, 60%, 40%);
+
 $text: lighten(black, 30%);
 
-$link1: hsl(0, 50%, 50%);
+$link1: $red;
 $link2: darken($link1, 5%);
 
 $players:
   one hsl(270, 50%, 50%),
   two hsl(100, 75%, 25%);
 
-// fonts
+// type
 
 $sans: 'museo-sans', Verdana, 'Trebuchet MS', sans-serif;
 
 $base-font-family: $sans;
 
-$small-font-family: $sans;
-$small-font-size: 14px;
+$form-font-size: $base-font-size - 2px;
+$small-font-size: $small;

@@ -2,6 +2,10 @@
   .#{nth($player, 1)} {
     $color: nth($player, 2);
     color: $color;
+    &.question-number {
+      color: white;
+      background: $color;
+    }
     .bar {
       border: 1px solid $color;
       background: rgba($color, .05);

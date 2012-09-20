@@ -3,16 +3,18 @@ body.home {
   header { display: none; }
 
   $main: $total-columns - 4;
-  [role=main] {
-    @include squish(2, 2);
+  #main {
+    @include pad(2, 2);
+    @include leader(3);
     @include clearfix;
+    min-height: auto;
     text-align: center;
   }
 
   #intro {
-    @include rhythm(2, 0, 0, 1);
+    @include rhythm(1, 0, 0, 1);
     h1 {
-      @include with-font-size(78px) {
+      @include with-font-size($xx-large) {
         @include trailer(.5);
       }
       i {
@@ -24,15 +26,21 @@ body.home {
 
   $cols: $main / 2;
   .as {
-    @include with-font-size(28px) {
+    @include with-font-size($medium) {
       @include span-columns($cols, $main);
       @include nth-omega;
       @extend %button;
       @include h-borders(1px, 1);
       @include v-borders(1px, .5);
       font-weight: 300;
+      &, &:hover { @include transition(background-color .2s); }
+      &:hover {
+        background: $red;
+        @include color-link(white, white);
+      }
+
       i {
-        @include with-font-size(100px) {
+        @include with-font-size($xxx-large) {
           display: block;
           width: auto;
         }

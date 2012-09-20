@@ -1,25 +1,13 @@
 @include establish-baseline;
 @include border-box-sizing;
 
-html {
-  height: 100%;
-  background: rgba(black, .1) image-url('header.png') repeat;
-}
-
 body {
   margin: 0;
   @include container;
-  @include box-shadow(
-    rgba(black, .25) 0 0 1em,
-    rgba(black, .25) 0 0 0 1px
-  );
-  min-height: 100%;
   overflow-y: scroll;
-  font: {
-    family: $base-font-family;
-  }
+  font-family: $base-font-family;
   color: $text;
-  background: white;
+  background: rgba(black, .1) image-url('bg.png') repeat;
 
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
@@ -44,15 +32,15 @@ h3 {
 }
 
 h1 {
-  @include with-font-size(58px) {
+  @include with-font-size($x-large) {
     @include trailer;
   }
 }
 
 h2 {
-  @include with-font-size(38px) {
-    @include trailer(.5);
-    font-weight: 500;
+  @include with-font-size($large, 1.75) {
+    @include trailer(.75);
+    font-weight: 300;
   }
 }
 
@@ -86,6 +74,7 @@ dd {
   line-height: 0;
   img {
     @extend %border-radius;
+    max-width: 100%;
     border: 1px solid rgba(black, .75);
   }
 }

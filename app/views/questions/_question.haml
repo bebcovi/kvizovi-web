@@ -1,4 +1,6 @@
-%h2= smarty_pants question.content
+%h2
+  %span.question-number{class: number(@player_number)}= @question_number
+  = smarty_pants question.content
 
 - if question.boolean?
 
