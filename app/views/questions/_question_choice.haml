@@ -1,4 +1,4 @@
 - input_collection(f) do |c|
-  - count = current_page?(action: "new") ? 4 : question.provided_answers
+  - count = current_page?(action: "new") ? 4 : question.provided_answers.count
   - count.times do |idx|
     = c.input :data, as: :string, label: false, placeholder: "Opcija #{idx + 1}", input_html: {value: question.provided_answers[idx]}, hint: ("Ovo će biti točan odgovor".append_icon("arrow-up") if idx == 0)
