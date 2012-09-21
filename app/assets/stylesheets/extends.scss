@@ -80,6 +80,7 @@
   @include color-link($c1, $c2);
   margin: 0;
   padding: 0;
+  font-size: inherit;
   color: $c1;
   border: none;
   background: none;

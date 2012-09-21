@@ -68,11 +68,6 @@ form.association {
 
       .dynamic { margin-right: 0; }
     }
-
-    .add {
-      @extend %subtle;
-      @include trailer(.5);
-    }
   }
 
 }

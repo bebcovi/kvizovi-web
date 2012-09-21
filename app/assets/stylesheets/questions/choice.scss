@@ -15,11 +15,6 @@ form.choice {
       .error { display: inline; }
     }
 
-    .add {
-      @extend %subtle;
-      @include trailer(.5);
-    }
-
     span.error {
       display: block;
       clear: both;
