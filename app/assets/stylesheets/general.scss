@@ -32,7 +32,7 @@ h3 {
 }
 
 h1 {
-  @include with-font-size($x-large) {
+  @include with-font-size($x-large, 2) {
     @include trailer;
   }
 }
@@ -67,6 +67,27 @@ dt {
 dd {
   @extend %append-newline;
   margin: 0;
+}
+
+.back {
+  @include with-font-size($small, .5) {
+    $c1: rgba(black, .3);
+    $c2: rgba(black, .5);
+    @extend %inline-block;
+    @include color-link($c1, $c2);
+    @include color-link(white, white);
+    @include border-top-left-radius;
+    @include border-bottom-right-radius;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    padding: rhythm(.25);
+    background: rgba(black, .25);
+    &:hover {
+      text-decoration: none;
+      background: $link1;
+    }
+  }
 }
 
 .img {

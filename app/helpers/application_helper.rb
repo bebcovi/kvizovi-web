@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def back_button(string, path, options = {})
-    link_to string.prepend_icon("arrow-left"), path, options
+    link_to string.prepend_icon("arrow-left"), path, {class: "back"}.merge(options)
   end
 
   def logout_button(string, path, options = {})
