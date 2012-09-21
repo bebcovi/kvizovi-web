@@ -1,0 +1,12 @@
+#main {
+  @extend %full-width;
+  @extend %border-radius;
+  @include rhythm(0, 1.5, 1, 0);
+  @include box-shadow(
+    rgba(black, .1) 0 0 0 .5em,
+    rgba(black, .25) 0 0 0 1px
+  );
+  position: relative;
+  min-height: rhythm(20);
+  background: white;
+}
