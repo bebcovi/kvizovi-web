@@ -48,7 +48,7 @@ body.quizzes {
 
     .enabled {
       border-color: rgba(black, .5);
-      background: rgba($link2, .75);
+      background: $red;
       text-align: right;
       &:before {
         right: - rhythm(.1);

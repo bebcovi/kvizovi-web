@@ -12,9 +12,6 @@ header {
     font-weight: 900;
 
     a {
-      $c1: $red;
-      $c2: $red;
-      @include color-link($c1, $c2);
       display: block;
       height: rhythm(lines-for-font-size(32px));
       &:hover { text-decoration: none; }
