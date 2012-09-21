@@ -71,18 +71,17 @@ dd {
 
 .back {
   @include with-font-size($small, .5) {
-    $c1: rgba(black, .3);
-    $c2: rgba(black, .5);
     @extend %inline-block;
+    $c1: rgba(black, .35);
+    $c2: white;
     @include color-link($c1, $c2);
-    @include color-link(white, white);
     @include border-top-left-radius;
     @include border-bottom-right-radius;
     position: absolute;
     top: 1px;
     left: 1px;
     padding: rhythm(.25);
-    background: rgba(black, .25);
+    background: rgba(black, .05);
     &:hover {
       text-decoration: none;
       background: $link1;

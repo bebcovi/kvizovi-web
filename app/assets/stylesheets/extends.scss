@@ -155,9 +155,9 @@
   color: $c1;
   border: none;
   padding: rhythm(.25) rhythm(.5);
-  background: $red;
+  background: $link1;
   &:hover {
     color: $c2;
-    background: darken($red, 5%);
+    background: $link2;
   }
 }
