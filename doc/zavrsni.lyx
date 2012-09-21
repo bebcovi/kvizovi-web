@@ -166,11 +166,8 @@ Uvod
 \end_layout
 
 \begin_layout Standard
-Ne znam za druge učenike, ali meni nikad nije išlo čitanje lektira.
- Pročitao sam možda 2 polovice dvaju različitih knjiga kada sam bio u srednjoj
- školi, što znači da nisam nijednu pročitao do kraja.
- Ova aplikacija je nešto što sam htio tada imati, možda bi me potaknula
- da više čitam.
+U vrijeme pisanja ovog rada već dva mjeseca razvijam aplikaciju za koju
+ se nadam da će potaknuti djecu da više čitaju lektiru.
 \end_layout
 
 \begin_layout Standard
@@ -183,19 +180,14 @@ Postoje već slične aplikacije koje omogućavaju igranje kvizova, ali su velike
 \end_layout
 
 \begin_layout Standard
-U aplikaciji ću ponekad spomenuti da neka funkcionalnost još nije implementirana
-, ali da će biti.
- Takve rečenice će možda davati dojam da predajem nedovršeni radi, ali ustvari
- se radi samo o prirodi web aplikacija -- one nikada nisu gotove, uvijek
- se mogu nadograđivati i uvijek će biti grešaka, manjih ili većih.
- Aplikaciju sam razvijao oko 2 mjeseca i trenutno je stabilna za testiranje
- u smislu da svaka implementirana funkcionalnost radi, ali nije još spremna
- za produkciju.
+U ovome ću se radu koncentrirati na tehnologiju koju sam koristio u razvijanju
+ aplikacije, zašto sam donio određene odluke, koje su alternative alatima
+ koje sam izabrao i sl.
 \end_layout
 
 \begin_layout Standard
-Cilj moje aplikacije je napraviti usvajanje znanja iz lektira zabavnim,
- uzbudljivim i interaktivnim procesom.
+Cilj ove aplikacije je napraviti usvajanje znanja iz lektira zabavnim, uzbudljiv
+im i interaktivnim procesom.
  Nadam se da će mi, uz pomoć škola koja će testiraju moju aplikaciju, to
  i uspjeti.
 \end_layout
@@ -256,15 +248,16 @@ Client-side i server-side
 .
  Prvi se termin odnosi na klijenta, odnosno web preglednika, dok se drugi
  odnosi na poslužitelja.
- Sinonimi za ova dva termina su 
-\emph on
-front-end
-\emph default
- i 
-\emph on
-back-end
-\emph default
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Front-end i back-end
+\series default
 .
+ Prvi se termin odnosi na ono što posjetitelj vidi kad posjeti web stranicu,
+ a drugi se termin uglavnom odnosi na administracijsko sučelje.
 \end_layout
 
 \begin_layout Standard
@@ -277,15 +270,6 @@ Web dizajner i web developer
  smatra osoba koja je specijalizirana za izgled stranice i korisničko iskustvo,
  a web developer je osoba koja se bavi programerskim dijelom web stranice,
  obično vezanim za poslužitelje.
- Web dizajneri razvijaju 
-\emph on
-front-end
-\emph default
-, dok web developeri razvijaju 
-\emph on
-back-end
-\emph default
-.
  Web dizajnere i web developer ponekad kraće zovem 
 \emph on
 dizajnerima
@@ -303,7 +287,7 @@ developerima
 Hosting
 \series default
 .
- Usluga koju web poslužitelj pruža.
+ Usluga koju pruža web poslužitelj.
 \end_layout
 
 \begin_layout Standard
@@ -359,6 +343,16 @@ nasumičnost
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Kompajliranje
+\series default
+.
+ Proces u kojem se kôd napisan u jeziku više razine prevađa u jezik niže
+ razine kako bi se mogao izvršavati.
 \end_layout
 
 \begin_layout Standard
@@ -432,13 +426,195 @@ preglednikom
 \end_layout
 
 \begin_layout Standard
-Još bih htio napomenuti da pojmove koje nisam ovdje spomenuo nemaju još
- odgovarajući hrvatski prijevod, stoga ću ih jednostavno pisati u izvornom
- obliku, u 
+Pojmove koje nisam naveo nemaju još odgovarajući hrvatski prijevod, stoga
+ ću ih jednostavno pisati u izvornom obliku, u 
 \emph on
 kurzivu
 \emph default
 .
+\end_layout
+
+\begin_layout Chapter
+Web preglednici
+\end_layout
+
+\begin_layout Standard
+Moja aplikacija je trenutno optimizirana za Google Chrome, a nije dobro
+ podržana na Internet Explorer-u.
+\end_layout
+
+\begin_layout Section
+Internet Explorer
+\end_layout
+
+\begin_layout Standard
+S obzirom da Internet Explorer web preglednik koji još uvijek zauzima velik
+ postotak tržišta, želim obrazložiti zašto ga trenutno ne podržavam -- Microsoft
+ Internet Explorer je najgori od svih web preglednika.
+ Postoji mnogo razloga, ovo je samo nekoliko:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Ažurnost
+\series default
+ -- Internet Explorer kaska za gotovo svakim standardom koje je njegova
+ konkurencija odavno implementirala.
+ To nije problem samo njegovim korisnicima, nego i developerima i dizajnerima,
+ jer su ga u većini slučajeva prisiljeni podržavati.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+IE6
+\series default
+ -- U vrijeme pisanja ovog rada 6% svijeta još uvijek koristi zastarjeli
+ Internet Explorer 6 (koji je većinom zastupljen u Kini), a to se dogodilo
+ jer je njegov razvoj stagnirao na nekoliko godina kada nije bilo konkurencije.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Razvijanje web stranica
+\series default
+ -- Iznimno je teško otkriti zašto nešto ne radi u Internet Exploreru, a
+ to je zbog vrlo lošeg mehanizma detektiranja pogrešaka.
+ Također, ima vrlo spor algoritam za učitavanje stranica, što znatno produljuje
+ postupak testiranja.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Sigurnost
+\series default
+ -- Internet Explorer ima veći broj sigurnosnih propusta od svih preglednika.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+JavaScript
+\series default
+ -- Podržanost JavaScript-a na Internet Explorer-u vrlo je loša, zbog čega
+ je jQuery otprilike duplo veći od veličine koju je mogao zauzimati.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Zatvoren
+\series default
+ -- Internet Explorer je preglednik zatvorenog koda, za razliku od većine
+ svoje konkurencije.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Podržanost
+\series default
+ -- Internet Explorer je dostupan samo za Windows, dok je njegova konkurencija
+ dostupna za gotovo svaki operacijski sustav.
+ To je glavni nedostatak koji mi otežava testiranje aplikacije, jer za razvijanj
+e koristim Ubuntu (jedna od distribucija Linux-a), a Internet Explorer nije
+ podržan na tom sustavu.
+\end_layout
+
+\begin_layout Section
+Google Chrome
+\end_layout
+
+\begin_layout Standard
+Aplikaciju sam razvijao u Google Chrome-u, stoga na njemu najbolje i radi.
+ Postoji mnogo razloga zašto sam odabrao baš taj preglednik:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+WebKit
+\series default
+ -- Google Chrome je, kao i Safari, temeljen na 
+\series bold
+WebKit
+\series default
+-u, moćnom 
+\emph on
+open-source
+\emph default
+ sustavu za prikazivanje stranica, kojeg razvijaju razni programeri iz poznatih
+ tvrtki kao što su Apple Inc., Nokia, RIM i Samsung.
+ WebKit trenutno obuhvaća većinu tržišta i, osim na Google Chrom-u i Safari-u,
+ koristi se i na mnogim mobilnim operacijskim sustavima, kao što su BlackBerry,
+ iOS, Tablet OS itd.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Ažurnost
+\series default
+ -- Google Chrome podržava velik dio novih HTML5 i CSS3 mogućnosti.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Brzina
+\series default
+ -- Google Chrome je najbrži preglednik od svih koje sam koristio.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Omnibar
+\series default
+ -- Google Chrome je povezao polje za URL i polje za Google Search u jedno
+ polje pod nazivom 
+\series bold
+Omnibar
+\series default
+, što ga čini iznimno jednostavnim i lakim za korištenje.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Otvorenost
+\series default
+ -- Google je izdvojio većinu koda kojeg Google Chrome koristi i otvorio
+ ga za javnost pod nazivom 
+\series bold
+Chromium
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Podržanost
+\series default
+ -- Google Chrome je dostupan na gotovo svim operacijskim sustavima, a za
+ one na kojima nije, dostupan je Chromium.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Web inspektor
+\series default
+ -- Google Chrome, kao i Safari, ima ugrađen alat koji pomaže u razvijanju
+ stranica.
+ Sastoji se od mnogo komponenata, ima konzolu koja javlja ako se dogodila
+ greška na stranici, prikaz koliko je vremena trebalo da se učita određena
+ datoteka na stranici, daje savjete kako optimizirati brzinu stranice, omogućava
+ jednostavno testiranje JavaScript-a itd.
 \end_layout
 
 \begin_layout Chapter
@@ -460,7 +636,11 @@ Kod razvijana web stranica izbor tehnologije je prilično ograničen.
 Klijent
 \series default
 .
- Na klijentu sam koristio HTML5, CSS3 i JavaScript.
+ Za 
+\emph on
+client-side
+\emph default
+ sam koristio HTML5, CSS3 i JavaScript.
 \end_layout
 
 \begin_layout Standard
@@ -469,7 +649,11 @@ Klijent
 Poslužitelj
 \series default
 .
- Na poslužitelju sam koristio programski jezik Ruby i PostgreSQL bazu podataka.
+ Za 
+\emph on
+server-side
+\emph default
+ sam koristio programski jezik Ruby i PostgreSQL bazu podataka.
 \end_layout
 
 \begin_layout Standard
@@ -508,20 +692,42 @@ HTML5
 \end_layout
 
 \begin_layout Standard
-HTML je jezik koji opisuje strukturu stranice.
+HTML (
+\series bold
+H
+\series default
+yper
+\series bold
+T
+\series default
+ext 
+\series bold
+M
+\series default
+arkup 
+\series bold
+L
+\series default
+anguage) je jezik koji opisuje strukturu stranice.
+ HTML specifikacije održava World Wide Web Konzorcij.
  Svaki web preglednik ima ugrađene stilove koji opisuju kako će određeni
  HTML elementi izgledati, ali sâm HTML ne određuje prikaz svojih elemenata.
- To je vrlo bitan koncept koji omogućava razdvajanje strukture web stranice
+ Vrlo je bitno usvojiti taj koncept jer razdvaja strukturu web stranice
  od njezinog izgleda.
 \end_layout
 
 \begin_layout Standard
-HTML ima mnogo verzija, HTML 3.0, HTML 4.0, XHTML 1.0, HTML5 itd., a njegova
- se verzija deklarira na samom vrhu HTML dokumenta.
+HTML ima mnogo verzija, HTML 3.0, HTML 4.0, HTML 4.01, XHTML 1.1, HTML5 itd.
+ Kako bi web preglednik znao po kojim da pravilima interpretira web stranicu,
+ HTML verzija se deklarira na samom vrhu HTML dokumenta.
  Npr.
  HTML5 dokument deklarira se ovako:
+\begin_inset VSpace bigskip
+\end_inset
+
+
 \begin_inset listings
-lstparams "basicstyle={\ttfamily}"
+lstparams "basicstyle={\ttfamily},tabsize=2"
 inline false
 status open
 
@@ -536,67 +742,71 @@ status open
 \end_layout
 
 \begin_layout Standard
-Deklaracija HTML dokumenta je jako bitna za web preglednike, bez nje oni
- ne bi znali na koji način da pročitaju dokument.
-\end_layout
-
-\begin_layout Standard
-U HTML-u je neko vrijeme bila popularna ideja XHTML-a.
- XHTML 1.0 je verzija HTML-a inspirirana XML-om, glavne značajke su stroga
- sintaksa i mogućnost definiranja novih elemenata.
- Međutim, budući da Internet Explorer nije podržavao XHTML, on je bio samo
+U HTML-u je neko vrijeme bila popularan XHTML (E
+\series bold
+X
+\series default
+tensible 
+\series bold
+H
+\series default
+yper
+\series bold
+T
+\series default
+ext 
+\series bold
+M
+\series default
+arkup 
+\series bold
+L
+\series default
+anguage).
+ To je ideja inspirirana XML-om, a glavne značajke su stroga sintaksa i
+ mogućnost definiranja novih elemenata.
+ Međutim, budući da ga Internet Explorer nije podržavao, XHTML je bio samo
  ograničavajuć, nisu se mogle koristiti njegove prednosti.
- Ogranak W3C-a (World Wide Web Consortium) koji je razvijao XHTML imao je
- planove za XHTML 2.0, ali njihov je rad polako utihnuo i počeo se razvijati
- HTML5.
+ Grupa koja je razvijala XHTML imala je planove za XHTML 2.0, ali njihov
+ je rad polako utihnuo i počeo se razvijati HTML5.
 \end_layout
 
 \begin_layout Standard
-HTML5 je po mnogočemu suprotan XHTML-u, ponajviše s obzirom na sintaksu.
+HTML5 je živući standard (eng.
+ 
+\emph on
+living standard
+\emph default
+), što znači da nikada neće biti gotov i da će HTML5 uvijek pokazivati na
+ najnoviju verziju HTML-a.
+ HTML5 je po mnogočemu suprotan XHTML-u, ponajviše s obzirom na sintaksu.
  HTML5 je iznimno liberalan, što je osvježavajuće nakon stroge sintakse
  XHTML-a.
- HTML5 ima i listu elemenata koji se mogu izostaviti, u koju u određenim
- okolnostima spadaju čak i neki osnovni elementi, kao <html>, <head> i <body>!
+ Toliko je liberalan da je svaki validan XHTML dokument ujedno i validan
+ HTML5 dokument.
 \end_layout
 
 \begin_layout Standard
-Ovaj novi jezik donosi specifikacije za mnoge funkcionalnosti koje su web
- developeri oduvijek htjeli, ali nisu imali odgovarajuću podršku te su ih
- emulirali drugim tehnologijama, kao što su Flash i Java.
- Jedan od primjera je podrška za video i audio, za koju se prije koristio
- Flash, a sada se može koristiti u svim modernim web preglednicima.
+HTML5 donosi specifikacije za mnoge funkcionalnosti koje su web developeri
+ oduvijek htjeli, ali nisu imali odgovarajuću podršku te su ih emulirali
+ drugim tehnologijama, kao što su Flash i Java.
+ Jedan od primjera je podrška za video i audio.
+ Za koju se prije uvijek koristio Flash, a sada se može koristiti u svim
+ modernim web preglednicima bez posrednika.
 \end_layout
 
 \begin_layout Standard
-Koje su prednosti toga da preglednici bez pomoći druge tehnologije podržavaju
- nove funkcionalnosti? Jedna od prednosti je to što korisnik dobiva veću
- kontrolu nad sadržajem.
+Koje su prednosti toga da preglednici podržavaju nove funkcionalnosti bez
+ pomoći druge tehnologije? Jedna od prednosti je to što korisnik dobiva
+ veću kontrolu nad sadržajem.
  Npr.
- postoji HTML5 atribut koji se može pridružiti tekstualnom polju i učiniti
- ga da se automatski označi kada se stranica učita (kao kod Google pretraživanja
-), a ako korisnik to ne želi, može tu funkcionalnost isključiti u svom pregledni
-ku.
- Kada se ta funkcionalnost emulirala JavaScript-om, isključivanje te funkcionaln
-osti nije bilo moguće, što je iritiralo neke korisnike.
- Naravno, neki korisnici išli su tako daleko da su jednostavno isključili
- JavaScript u svom pregledniku, ali to je već druga priča.
-\end_layout
-
-\begin_layout Standard
-Ipak, rađa se jedno pitanje: 
-\emph on
-kako omogućiti određene funkcionalnosti za preglednike koji ih ne podržavaju?
-\emph default
- Postoji jedna JavaScript biblioteka pod nazivom 
-\series bold
-Modernizr
-\series default
-, koja se bavi detekcijom što preglednik podržava, a što ne.
- Pomoću njega može se npr.
- za preglednike koji ne podržavaju video koristiti Flash.
- (Za takve svrhe prije se koristila jedna nepouzdana metoda koja je pokušavala
- saznati u kojem je pregledniku stranica učitana, pa prema tome developer
- zaključuje što taj preglednik podržava.)
+ postoji jedan HTML5 atribut koji se može pridružiti tekstualnom polju i
+ učiniti ga da se automatski fokusira kada se stranica učita (kao npr.
+ kod Google pretraživanja), a ako korisnik to ne želi, moći će tu funkcionalnost
+ isključiti u svom pregledniku (jednom kada preglednik to odluči omogućiti).
+ Kada se ta funkcionalnost emulirala JavaScript-om, nije bilo moguće to
+ isključiti, a da se ne isključi čitavi JavaScript, što je iritiralo mnoge
+ korisnike.
 \end_layout
 
 \begin_layout Section
@@ -604,7 +814,19 @@ CSS3
 \end_layout
 
 \begin_layout Standard
-Za razliku od HTML-a, koji opisuje strukturu stranice, CSS opisuje 
+Za razliku od HTML-a, koji opisuje strukturu stranice, CSS (
+\series bold
+C
+\series default
+ascading 
+\series bold
+S
+\series default
+tyle 
+\series bold
+S
+\series default
+heets) opisuje 
 \series bold
 izgled
 \series default
@@ -615,36 +837,121 @@ izgled
 \end_layout
 
 \begin_layout Standard
-Paralelno s HTML-om počeo se razvijati i CSS3, koji podržava mnoge vizualne
- efekte kao što su sjene, zaobljeni rubovi, animacije, gradijenti i sl.
- Za takve efekte su dizajneri prije trebali koristiti slike.
+CSS omogućava dizajneru da na drugačiji način prikazuje stranicu kada je
+ na ekranu, kada se ispisuje, kada ju čita pomoćni program za slijepe osobe
+ (eng.
+ 
+\emph on
+screen reader
+\emph default
+) itd.
+ Također, za razliku od prezentacijskog HTML-a, isti se CSS dokument može
+ učitati na više različitih stranica, što puno olakšava izmjenu.
 \end_layout
 
 \begin_layout Standard
-Podrška varira od svojstva do svojstva, međutim, u vrijeme pisanja ovog
- rada svi moderni web preglednici podržavaju velik broj novih efekata.
+Za razliku od prijašnjih verzija, CSS3 je koncipiran kao skup modula koji
+ donose određene funkcionalnosti kao što su zaobljeni rubovi, selektori
+ razine 3, animacije, gradijenti i sl.
+ Za takve efekte su dizajneri prije trebali koristiti JavaScript i slike.
+\end_layout
+
+\begin_layout Standard
+HTML5 je živući standard, ali CSS3 nije.
+ WWW Konzorcij je već počeo raditi na CSS4 standardu koji će podržavati
+ naprednije selektore i mnogo drugih mogućnosti.
 \end_layout
 
 \begin_layout Section
-JavaScript i jQuery
+JavaScript
 \end_layout
 
 \begin_layout Standard
-JavaScript je skriptni jezik za dodavanje dinamičnosti stranicama i poboljšavanj
-e korisničkog iskustva.
- U zadnje vrijeme je vrlo popularan jer je dovoljno sazrio za ozbiljnu upotrebu.
+JavaScript je skriptni jezik koji podržava objekto-orjentirani, imperativni
+ i funkcionalni stil programiranja.
+ U zadnjih nekoliko godina je vrlo popularan jer je dovoljno sazrio za ozbiljnu
+ upotrebu.
 \end_layout
 
 \begin_layout Standard
-Ipak, s obzirom na njegov nespretan uspon, JavaScript je prilično nekonzistentno
- implementiran u preglednicima, zbog čega su se počele razvijati razne bibliotek
-e koje olakšavaju pristup elemenatima na stranici.
- Najpoznatije takve biblioteke su Prototype, YUI i jQuery, a za ovu aplikaciju
- izabrao sam 
+JavaScript čini mnoge procese bržim jer se preglednik ne mora osvježavati,
+ a neke se funkcionalnosti niti ne mogu izvesti bez JavaScript-a, kao što
+ je npr.
+ 
+\emph on
+drag & drop
+\emph default
+ tehnika.
+ Međutim, korištenje JavaScript-a zahtijeva odgovornost -- većina stranice
+ se treba biti upotrebljiva i bez JavaScript-a.
+\end_layout
+
+\begin_layout Standard
+Mnogi ljudi povezuju, a ponekad i zamijenjuju JavaScript s 
+\series bold
+Javom
+\series default
+.
+ JavaScript je skriptni jezik za web okruženje, dok je Java programski jezik.
+ Osim sličnosti u pravilima imenovanja, ta dva jezika su potpuno nepovezana
+ i služe različitoj svrsi.
+\end_layout
+
+\begin_layout Subsection
+jQuery
+\end_layout
+
+\begin_layout Standard
+jQuery je JavaScript biblioteka koja toliko popravlja i nadopunjava JavaScript
+ da se gotovo može smatrati drugim jezikom.
+\end_layout
+
+\begin_layout Standard
+Pristupanje elementima na stranici pomoću čistog JavaScript-a je prilično
+ teško i neugodno iskustvo, zbog nekonzistentne implementacije u različitim
+ preglednicima.
+ Zato je jQuery specijaliziran upravo za tu svrhu.
+ Npr.
+ dobavljanje elemenata koji imaju određenu klasu je nešto što developeri
+ često rade, međutim, JavaScript to ne podržava (barem ne na svim preglednicima).
+ jQuery olakšava pristupanje elementima s kratkom i konzistentnom CSS-olikom
+ sintaksom:
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+$("#main");  // dobavlja element na stranici koji ima ID "main"
+\end_layout
+
+\begin_layout Plain Layout
+
+$(".post");  // dobavlja sve elemente koji imaju klasu "post"
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Postoje nekoliko sličnih JavaScript biblioteka kao što su Prototype, YUI
+ i Zepto, ali izabrao sam 
 \series bold
 jQuery
 \series default
  zbog njegove rasprostranjenosti i podrške.
+ Međutim, kasnije namjeravam koristiti Zepto umjesto jQuery-a jer je puno
+ elegantniji i zauzima manje prostora.
 \end_layout
 
 \begin_layout Section
@@ -671,19 +978,22 @@ target "http://www.ruby-lang.org/en/"
 \end_layout
 
 \begin_layout Standard
-Ruby je nastao 1995, it od tada je privlačio sve više ljudi, dok 2006.
+Ruby je programski jezik kojeg je 1995.
+ razvio Yukihiro Matsumoto, i od tada je privlačio sve više ljudi sve dok
+ 2006.
  nije postao svjetski prihvaćen.
 \end_layout
 
 \begin_layout Standard
-Ruby je objektno orjentiran programski jezik.
- Njegova važna karakteristika, po kojoj se razlikuje od ostalih objektno
- orjentiranih jezika, je ta što je u Ruby-u 
+Ruby je objektno-orijentiran programski jezik.
+ Njegova ključna karakteristika, po kojoj se razlikuje od ostalih objektno-orije
+ntiranih jezika, je što je u Ruby-u 
 \series bold
 sve
 \series default
  objekt.
- Dakle, ako mi zbrojimo dva broja, na primjer 
+ Dakle, čak i kod jednostavnih aritmetičkih radnji, kao npr.
+ 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily}"
 inline true
@@ -691,12 +1001,12 @@ status open
 
 \begin_layout Plain Layout
 
-1+1
+1 + 1
 \end_layout
 
 \end_inset
 
-, ono što se zapravo događa je da, pošto su brojevi objekti, na broj 
+, ono što se zapravo događa je da se broj 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily}"
 inline true
@@ -709,7 +1019,7 @@ status open
 
 \end_inset
 
- se poziva metoda 
+ poziva metodu 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily}"
 inline true
@@ -722,7 +1032,7 @@ status open
 
 \end_inset
 
- sa argumentom 
+ s argumentom 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily}"
 inline true
@@ -736,7 +1046,7 @@ status open
 \end_inset
 
 .
- Dakle, zapravo se događa 
+ Prethodna aritmetička radnja može se zapisati i ovako 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily}"
 inline true
@@ -750,40 +1060,19 @@ status open
 \end_inset
 
 .
- Jedna lijepa primjena toga je sljedeći primjer:
-\begin_inset VSpace medskip
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-\begin_inset listings
-lstparams "basicstyle={\ttfamily},language=Ruby,showstringspaces=false,tabsize=2"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-5.times { print "I *love* Ruby" }
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Ruby ima dobro riješen problem nasljeđivanja.
- Većina drugih jezika ili dopuštaju nasljeđivanje od samo jedne klase, pa
- imaju problem limitiranosti, ili dopuštaju nasljeđivanje od više klasa,
- što je pak previše kompleksno.
+Kod objektno-orijentiranih jezika jedan od glavnih problema je naslijeđivanje.
+ Većina jezika ili dopuštaju nasljeđivanje od samo jedne klase, pa imaju
+ problem limitiranosti, ili dopuštaju nasljeđivanje od više klasa, što je
+ pak previše kompleksno.
  Ruby, s druge strane, dopušta nasljeđivanje od samo jedne klase, ali nudi
  mogućnost uključivanja skupova metoda u klasu.
 \end_layout
 
 \begin_layout Standard
-Ruby ima jako dobar i vrlo jednostavan vizualni prikaz vrsta varijabli.
+Ruby ima vrlo jednostavnu vizualnu reprezentaciju raznih vrsta varijabli:
 \end_layout
 
 \begin_layout Itemize
@@ -851,15 +1140,10 @@ $var
 \end_layout
 
 \begin_layout Standard
-Ovakav prikaz povećava čitljivost tako da čitatelj kada vidi varijablu može
- odmah vidjeti koje je vrste.
-\end_layout
-
-\begin_layout Standard
 Ruby je vrlo dinamičan jezik.
- On je toliko dinamičan da dopušta izmjenu, dodavanje, i brisanje elemenata
+ Toliko je dinamičan da dopušta izmjenu, dodavanje, i brisanje elemenata
  iz standardne biblioteke.
- Recimo da za zbrajanje umjesto 
+ Recimo da za programer za zbrajanje umjesto simbola 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily}"
 inline true
@@ -872,7 +1156,7 @@ status open
 
 \end_inset
 
- želimo koristiti metodu 
+ želi koristiti riječ 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily}"
 inline true
@@ -886,12 +1170,16 @@ plus
 \end_inset
 
 .
- Potrebno ju je samo dodati u klasu brojeva:
+ Potrebno ju je samo dodati tu metodu u klasu brojeva:
+\begin_inset VSpace bigskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 \begin_inset listings
-lstparams "basicstyle={\ttfamily},language=Ruby,tabsize=2"
+lstparams "basicstyle={\ttfamily},tabsize=2"
 inline false
 status open
 
@@ -935,107 +1223,13 @@ y = 5.plus 6
 \end_layout
 
 \begin_layout Standard
-Ruby mi je pomogao da izgradim svoju aplikaciju s velikom elegancijom i
- lakoćom.
-\end_layout
-
-\begin_layout Subsection
-Gemovi
-\end_layout
-
-\begin_layout Standard
-Postoji više od 40,000 besplatnih Ruby biblioteka (eng.
+Postoji preko 40,000 besplatnih Ruby biblioteka (eng.
  
 \shape italic
 gem
 \shape default
-) koje su dostupne za korištenje.
- Od bibilioteka koje sam koristio u ovoj aplikaciji najvažnije su:
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-rails
-\series default
- -- Moćno sučelje za izradu web aplikacija.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-pg
-\series default
- -- Omogućava komunikaciju s bazom podataka (PostgreSQL).
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-haml
-\series default
- -- Omogućava pisanje HTML-a u jednotavnijem i moćnijem obliku.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-sass
-\series default
- -- Opskrbljuje CSS s dodatnim mogućnostima, kao što su funkcije, varijable
- i sl.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-coffee-script
-\series default
- -- Olakšava pisanje JavaScript-a i čini njegovu sintaksu više nalik Ruby-u.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-jquery
-\series default
- -- Biblioteka za JavaScript.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-paperclip
-\series default
- -- Olakšava spremanje datoteka koje su se učitale preko web forme na server.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-bcrypt-ruby
-\series default
- -- Omogućava kriptiranje osjetljivih podataka.
- Razlog zašto je ova biblioteka bolja u odnosu na poznate (npr.
- MD5) je taj što je algoritam za kriptiranje namjerno napisan da bude spor.
- U usporedbi s MD5, bcrypt je 300 puta sporiji, što je korisno kada hakeri
- pokušavaju probiti lozinku, jer trebaju kriptirati velik broj potencijalnih
- lozinki.
- S druge strane, vrijeme potrebno da se kriptira jedna lozinka (npr.
- kod registracije) je zanemarivo dulje, tako da ga korisnik neće ni osjetiti.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-rspec 
-\series default
--- Sučelje za testiranje aplikacije.
-\end_layout
-
-\begin_layout Standard
-Rails je više od biblioteke, to je sučelje u kojemu sam radio ovu aplikaciju,
- stoga zaslužuje posebno poglavlje.
+) dostupnih za korištenje.
+ Od bibilioteka koje sam koristio u ovoj aplikaciji navest ću najvažnije.
 \end_layout
 
 \begin_layout Subsection
@@ -1073,11 +1267,7 @@ target "http://rubyonrails.org/"
 \begin_layout Standard
 Rails je 2003.
  godine razvio David Heinemeier Hansson (poznat po inicijalima DHH).
- To je veliki 
-\emph on
-open-source
-\emph default
- projekt kojeg razvija više od 2,100 programera diljem svijeta.
+ To je veliki projekt kojeg razvija više od 2,100 programera diljem svijeta.
 \end_layout
 
 \begin_layout Standard
@@ -1091,8 +1281,8 @@ samouvjeren
 
  alat.
  On radi pretpostavku da postoji najbolji način za organizirati kôd, i dizajnira
-n je da potiče taj način — a u nekim slučajevima i da obeshrabruje alternative.
- Filozofija Rails-a uključuje sljedeće komponente:
+n je da ga potiče -- a u nekim slučajevima i da obeshrabruje alternative.
+ Filozofija Rails-a uključuje sljedeća načela:
 \end_layout
 
 \begin_layout Itemize
@@ -1117,8 +1307,7 @@ Y
 ourself
 \shape default
 \emph default
-) -- Ukazuje na to da je loše pisati isti kôd na više različitih mjesta
- u projektu.
+) -- Loše je pisati isti kôd na više različitih mjesta u projektu.
 \end_layout
 
 \begin_layout Itemize
@@ -1137,7 +1326,7 @@ Convention Over Configuration
 \end_inset
 
  -- Rails pretpostavlja što i kako korisnik želi postići određeni cilj,
- ne zahtjeva da korisnik specificira svaki sitni detalj u konfiguraciji.
+ a ne zahtjeva od korisnika da specificira svaki sitni detalj u konfiguraciji.
 \end_layout
 
 \begin_layout Itemize
@@ -1162,8 +1351,7 @@ T
 ransfer
 \shape default
 \emph default
-) -- Najbolji model za web aplikacije.
- Organizacija aplikacije s naglaskom na resurse i standardne HTTP 
+) -- Organizacija aplikacije s naglaskom na resurse i standardne HTTP 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1179,9 +1367,9 @@ e.
 Rails koristi tzv.
  
 \series bold
-MVC
+MVC 
 \series default
- arhitekturu (
+(
 \series bold
 \shape italic
 \emph on
@@ -1198,9 +1386,9 @@ C
 ontrollers
 \shape default
 \emph default
-), u kojoj postoji jedan sloj za čuvanje i manipuliranje podacima (baza
- podataka), drugi sloj za dobavljanje tih podataka, i treći sloj za prezentiranj
-e tih podataka, najčešće u obliku HTML stranice.
+) arhitekturu, koja se sastoji od sloja za čuvanje i manipuliranje podacima
+ (baza podataka), sloja za dobavljanje tih podataka, i sloja za prezentiranje
+ tih podataka, najčešće u obliku HTML stranice.
 \end_layout
 
 \begin_layout Standard
@@ -1222,6 +1410,670 @@ target "https://github.com"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsection
+bcrypt
+\end_layout
+
+\begin_layout Standard
+bcrypt je funkcija za kriptiranje osjetljivih podataka.
+ Bolja je u odnosu na poznate (npr.
+ MD5) jer je algoritam za kriptiranje namjerno napisan da bude spor.
+ U usporedbi s MD5, bcrypt je 300 puta sporiji, što je korisno kada hakeri
+ pokušavaju probiti lozinku jer trebaju kriptirati velik broj potencijalnih
+ lozinki.
+ S druge strane, vrijeme potrebno da se kriptira jedna lozinka (npr.
+ kod registracije) je zanemarivo dulje, tako da korisnik niti ne primjećuje
+ zadršku.
+\end_layout
+
+\begin_layout Subsection
+Paperclip
+\end_layout
+
+\begin_layout Standard
+Paperclip je biblioteka za jednostavno spremanje datoteka koje su se učitale
+ preko web forme na poslužitelj.
+ Nudi razne validacije, kao što su prisutnost i veličina.
+\end_layout
+
+\begin_layout Standard
+Paperclip također nudi i spremanje slike u različitim oblicima.
+ Npr.
+ često je potrebno da sve slike u nekom kontekstu budu istih dimenzija,
+ pa je moguće namjestiti da se pri učitavanju uz original uvijek sprema
+ i verzija te slike u potrebnim dimenzijama.
+ Pojam 
+\begin_inset Quotes gld
+\end_inset
+
+oblika
+\begin_inset Quotes grd
+\end_inset
+
+ slike nije ograničen samo na dimenzije, slika se može na razne načine obraditi,
+ npr.
+ crno-bijeli efektom.
+\end_layout
+
+\begin_layout Subsection
+RSpec
+\end_layout
+
+\begin_layout Standard
+RSpec je moćno sučelje za testiranje Ruby koda i služi kao alternativa standardn
+om sučelju za testiranje koje dolazi uz Ruby.
+ RSpec omogućava pisanje nevjerojatno čitljivih testova, poput:
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+post.title.should_not be_empty
+\end_layout
+
+\begin_layout Plain Layout
+
+post.views_count.should be_greater_than(10)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Haml
+\end_layout
+
+\begin_layout Standard
+Haml (X
+\series bold
+H
+\series default
+TML 
+\series bold
+a
+\series default
+bstraction 
+\series bold
+m
+\series default
+arkup 
+\series bold
+l
+\series default
+anguage) je jezik koji apstrahira HTML, daje mu funkcije i čini ga bržim
+ za pisanje i čitanje.
+\end_layout
+
+\begin_layout Standard
+Nastao je u vrijeme kada je XHTML bio popularan, jer tada nije bilo HTML5
+ semantičkih elemenata, pa se često koristio element 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language=HTML"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+<div>
+\end_layout
+
+\end_inset
+
+.
+ Ovako bi izgledao dio koda izvađen iz prosječnog XHTML dokumenta:
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<div id="wrapper">
+\end_layout
+
+\begin_layout Plain Layout
+
+	<div id="main">
+\end_layout
+
+\begin_layout Plain Layout
+
+		<div class="post">
+\end_layout
+
+\begin_layout Plain Layout
+
+			<div class="header">
+\end_layout
+
+\begin_layout Plain Layout
+
+				<h1 class="title">
+\end_layout
+
+\begin_layout Plain Layout
+
+					A post
+\end_layout
+
+\begin_layout Plain Layout
+
+				</h1>
+\end_layout
+
+\begin_layout Plain Layout
+
+				<div class="date">
+\end_layout
+
+\begin_layout Plain Layout
+
+					January 1st, 2012.
+\end_layout
+
+\begin_layout Plain Layout
+
+				</div>
+\end_layout
+
+\begin_layout Plain Layout
+
+			</div>
+\end_layout
+
+\begin_layout Plain Layout
+
+			<div class="footer">
+\end_layout
+
+\begin_layout Plain Layout
+
+				Author info.
+\end_layout
+
+\begin_layout Plain Layout
+
+			</div>
+\end_layout
+
+\begin_layout Plain Layout
+
+		</div>
+\end_layout
+
+\begin_layout Plain Layout
+
+	</div>
+\end_layout
+
+\begin_layout Plain Layout
+
+</div>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ovakav kôd brzo postaje kompliciran za čitati i izmjenjivati.
+ Haml ga može pojednostaviti jednostavnijom sintaksom, inspiriranom CSS-om:
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+#wrapper
+\end_layout
+
+\begin_layout Plain Layout
+
+	#main
+\end_layout
+
+\begin_layout Plain Layout
+
+		.post
+\end_layout
+
+\begin_layout Plain Layout
+
+			.header
+\end_layout
+
+\begin_layout Plain Layout
+
+				h1.title A post
+\end_layout
+
+\begin_layout Plain Layout
+
+				.date January 1st, 2012.
+\end_layout
+
+\begin_layout Plain Layout
+
+			.footer Author info.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Sass
+\end_layout
+
+\begin_layout Standard
+Sass (
+\series bold
+S
+\series default
+yntactically 
+\series bold
+a
+\series default
+wesome 
+\series bold
+s
+\series default
+tyle 
+\series bold
+s
+\series default
+heets) je CSS preprocesor koji opskrbljuje CSS dodatnim mogućnostima kao
+ što su funkcije, varijable i sl.
+ Podržava dvije sintakse, prva je nalik normalnom CSS-u, a druga je indentirana,
+ inspirirana Haml-om.
+ Prva sintaksa je popularnija jer je lakša za naučiti i fleksibilnija je.
+\end_layout
+
+\begin_layout Standard
+Što CSS kôd postaje kompliciraniji, to je teže održavati ga jer je vrlo
+ reduntantan, pogotovo kada se koriste CSS3 efekti.
+ Uzmimo za primjer ovaj CSS3 kôd:
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+#wrapper {
+\end_layout
+
+\begin_layout Plain Layout
+
+	-webkit-border-radius: 3px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	-moz-border-radius: 3px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	-ms-border-radius: 3px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	-o-border-radius: 3px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	border-radius: 3px;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+#wrapper .post {
+\end_layout
+
+\begin_layout Plain Layout
+
+	-webkit-border-radius: 6px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	-moz-border-radius: 6px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	-ms-border-radius: 6px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	-o-border-radius: 6px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	border-radius: 6px;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+#wrapper .post .time {
+\end_layout
+
+\begin_layout Plain Layout
+
+	-webkit-border-radius: 12px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	-moz-border-radius: 12px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	-ms-border-radius: 12px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	-o-border-radius: 12px;
+\end_layout
+
+\begin_layout Plain Layout
+
+	border-radius: 12px;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Osim očitog ponavljanja 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+border-radius
+\end_layout
+
+\end_inset
+
+ svojstva primjetite i ponavljanje selektora.
+ Ovaj se kôd može pojednostaviti u Sass-u:
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@mixin border-radius($radius) {
+\end_layout
+
+\begin_layout Plain Layout
+
+	@each $vendor-prefix in webkit, moz, ms, o {
+\end_layout
+
+\begin_layout Plain Layout
+
+		-#{$vendor-prefix}-border-radius: $radius;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	border-radius: $radius;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+#wrapper {
+\end_layout
+
+\begin_layout Plain Layout
+
+	@include border-radius(3px);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	.post {
+\end_layout
+
+\begin_layout Plain Layout
+
+		@include border-radius(6px);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		.date { @include border-radius(12px);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Coffee-Script
+\end_layout
+
+\begin_layout Standard
+CoffeeScript je jezik koji se kompajlira u JavaScript, a sintaksa mu je
+ jednostavnija i elegantnija od JavaScript-a, više je nalik Ruby-u.
+\end_layout
+
+\begin_layout Standard
+JavaScript ima mnogo specifičnih slučajeva u kojemu se naredbe ne izvršavaju
+ na očekivani način, pa su takve situacije prilično nezgodne za početnike.
+ Problem je u tome što te specifičnosti ne postaju logične nakon puno iskustva,
+ nego se jednostavno trebaju prihvatiti kao dio jezika.
+ Npr.
+ ako se varijabla u JavaScript-u deklarira bez ključne riječi 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+var
+\end_layout
+
+\end_inset
+
+, interpreter pretpostavi da je developer htio deklarirati globalnu varijablu
+ (a ne lokalnu), što je najgora moguća pretpotavka.
+ Takvi problemi mogu biti izrazito teški za otkriti nekome tko nije upoznat
+ s takvim specifičnim slučajevima.
+\end_layout
+
+\begin_layout Standard
+Cilj CoffeeScript-a je osloboditi developera tih obaveza i omogućiti mu
+ da se koncentrira na logiku koda, a ne na sintaksu.
+ Osim popravljanja JavaScript-ovih 
+\begin_inset Quotes gld
+\end_inset
+
+grešaka
+\begin_inset Quotes grd
+\end_inset
+
+, CoffeeScript raspolaže i raznim funkcionalnostima koje JavaScript nema.
+ Npr.
+ obratimo pozornost na ovaj JavaScript kôd:
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+names = ['Andy', 'Mike', 'Susy', 'Craig'];
+\end_layout
+
+\begin_layout Plain Layout
+
+for (var i=0; i<names.length; i++) {
+\end_layout
+
+\begin_layout Plain Layout
+
+	alert(names[0]);
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ovaj kôd prolazi kroz listu imena i ispisuje svaki element.
+ Za postizanje tog cilja trebali smo deklarirati varijablu koja će služiti
+ kao brojač, zatim nakon svake iteracije provjeravati je li taj brojač manji
+ od duljine liste i na kraju svake iteracije povećati brojač za 1.
+ U CoffeeScript-u bi se to moglo napisati na jednostavniji način:
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+alert(name) for name in ['Andy', 'Mike', 'Susy', 'Craig']
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1302,6 +2154,13 @@ Typekit je profesionalni servis koji pruža upravo takvu uslugu.
  visina slova i sl.
 \end_layout
 
+\begin_layout Standard
+Postoji više od 10 drugih servisa kao što su WebINK, Typotheque i Google
+ Fonts koji također nude sličnu uslugu, ali odabrao sam Typekit zato što
+ ima bolji financijski plan, više kvalitetnih fontova na izbor, jednostavniji
+ je i stabilniji i ima izvrsnu korisničku podršku.
+\end_layout
+
 \begin_layout Section
 IcoMoon
 \end_layout
@@ -1335,14 +2194,21 @@ Heroku
 \end_layout
 
 \begin_layout Standard
-Heroku je servis za hosting web aplikacija.
- Razlikuje se od drugih servisa po tome što on već ima konfigurirano sve
- što je korisniku potrebno, time čineći sam proces stavljanja aplikacije
- na njihov server potptuno bezbolnim.
+Heroku je servis za 
+\emph on
+hosting
+\emph default
+ web aplikacija.
+ Razlikuje se od drugih 
+\emph on
+hosting
+\emph default
+ servisa po tome što već ima sve potrebne konfiguracije, kao npr.
+ podrška za Git, čineći time cijeli proces potptuno bezbolnim.
 \end_layout
 
 \begin_layout Section
-Git(Hub)
+Git
 \end_layout
 
 \begin_layout Quote
@@ -1365,129 +2231,42 @@ target "git-scm.com"
 \end_layout
 
 \begin_layout Standard
-Git je sustav za rukovanje promjenama, po mom mišljenju najbolji.
+Git je sustav za rukovanje promjenama.
  Elegantan je, zauzima malo prostora, lagan je za naučiti, siguran je i
  iznimno moćan.
 \end_layout
 
 \begin_layout Standard
-GitHub je najpoznatija stranica koja podržava Git repozitorije i sinonim
- je za 
+Postoji više sličnih sustava koji su prije bili popularni, kao SVN, ali
+ izabrao sam Git jer ima mnogo prednosti, a nisam naišao niti na jedan nedostata
+k.
+ Također, trenutačni centar open-source svijeta, GitHub, je servis za Git
+ repozitorije, stoga svaki ozbiljniji programer koristi Git.
+\end_layout
+
+\begin_layout Subsection
+GitHub
+\end_layout
+
+\begin_layout Standard
+GitHub je najpoznatija aplikacija za Git repozitorije i sinonim je za 
 \emph on
 open-source
 \emph default
 .
- Svi se najvažniji 
+ Svi se važniji 
 \emph on
 open-source
 \emph default
- projekti nalaze na GitHub-u, a oni koji se ne nalaze, trebali bi.
+ projekti nalaze na GitHub-u (a oni koji se ne nalaze, trebali bi).
  GitHub je savršeno mjesto za surađivanje s drugim programerima, upravo
  zbog jednostavnosti Git-a.
- Pozitivna nuspojava surađivanja preko GitHub-a je to što postoji kopija
- repozitorija na internetu, dakle to je automatski backup.
-\end_layout
-
-\begin_layout Standard
-Jednostavan proces surađivanja s Git-om izgleda otprilike ovako -- ja napravim
- promjene u nekoliko datoteka, pronađem ih s Git-om, grupiram ih i objasnim
- što sam promijenio i stavim svoje promjene na GitHub.
- Zatim osoba s kojom surađujem učita moje promjene u svoju verziju tog repozitor
-ija, također napravi promjenu, zabilježi ju i pošalje meni.
- I tako ukrug.
-\end_layout
-
-\begin_layout Chapter
-Internet Explorer
-\end_layout
-
-\begin_layout Standard
-Moja aplikacija još neko vrijeme neće podržavati Internet Explorer, uglavnom
- u aspektu dizajna.
- S obzirom da je to web preglednik koji još uvijek zauzima velik postotak
- tržišta, želim obrazložiti svoju odluku.
-\end_layout
-
-\begin_layout Standard
-Microsoft Internet Explorer je najlošiji od svih web preglednika, to je
- poznata činjenica.
- Ali zašto? Postoji mnogo razloga, ovo je samo nekoliko:
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Ažurnost
-\series default
- -- Internet Explorer kaska za gotovo svakim standardom koje je njegova
- konkurencija odavno implementirala.
- To nije problem samo njegovim korisnicima, nego i developerima i dizajnerima,
- jer su ga u većini slučajeva prisiljeni podržavati.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-IE6
-\series default
- -- U vrijeme pisanja ovog rada 6% svijeta još uvijek koristi zastarjeli
- Internet Explorer 6 (koji je većinom zastupljen u Kini), a to se dogodilo
- jer je njegov razvoj stagnirao na nekoliko godina kada nije bilo konkurencije.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Razvijanje web stranica
-\series default
- -- Iznimno je teško otkriti zašto nešto ne radi u Internet Exploreru, a
- to je zbog vrlo lošeg mehanizma detektiranja pogrešaka.
- Također, ima vrlo spor algoritam za učitavanje stranica, što znatno produljuje
- postupak testiranja.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Sigurnost
-\series default
- -- Internet Explorer ima veći broj sigurnosnih propusta od svih preglednika.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-JavaScript
-\series default
- -- Podržanost JavaScript-a na Internet Explorer-u vrlo je loša, zbog čega
- je jQuery otprilike duplo veći od veličine koju je mogao zauzimati.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Zatvoren
-\series default
- -- Internet Explorer je preglednik zatvorenog koda, za razliku od svoje
- konkurencije.
- Google Chrome i Safari su kao proizvodi također zatvoreni, ali Webkit,
- njihova glavna komponenta, je 
+ Jedna pozitivna nuspojava surađivanja preko GitHub-a je ta što uvijek postoji
+ kopija repozitorija na internetu, dakle to je automatski 
 \emph on
-open-source
+backup
 \emph default
 .
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Podržanost
-\series default
- -- Internet Explorer je dostupan samo za Windows, dok je njegova konkurencija
- dostupna za gotovo svaki operacijski sustav.
- To je glavni nedostatak koji mi otežava testiranje aplikacije, jer za razvijanj
-e koristim Ubuntu (jedna od distribucija Linux-a), a Internet Explorer nije
- podržan na tom sustavu.
 \end_layout
 
 \begin_layout Chapter
@@ -1495,16 +2274,25 @@ Zaključak
 \end_layout
 
 \begin_layout Standard
-Ova aplikacija se može razviti u različitim smjerovima, možda će aplikacija
- nakon nekog vremena izgledati potpuno drugačije nego sada.
- Razvoj ovisi o korisnicima, njihovim zahtjevima i načinu na koji koriste
- aplikaciju.
- Jer, kao što sam već spomenuo, aplikacija se može beskrajno nadograđivati,
- ali ću uz pomoć korisnika moći napraviti listu prioriteta.
+Tehnološki gledano, ova aplikacija je vrlo stabilno postavljena i čeka ju
+ svjetla budućnost.
 \end_layout
 
 \begin_layout Standard
-Aplikacija je open-source, njezin se kôd može 
+Razvoj može krenuti u različitim smjerovima, možda će aplikacija nakon nekog
+ vremena izgledati potpuno drugačije nego sada.
+ Razvoj ovisi o korisnicima, njihovim zahtjevima i načinu na koji koriste
+ aplikaciju.
+ Aplikacija se može beskrajno nadograđivati, ali ću uz pomoć korisnika moći
+ bolje uspostaviti prioritete.
+\end_layout
+
+\begin_layout Standard
+Aplikacija je 
+\emph on
+open-source
+\emph default
+, njezin se kôd može 
 \begin_inset CommandInset href
 LatexCommand href
 name "vidjeti"
@@ -1512,13 +2300,7 @@ target "https://github.com/jimick/lektire"
 
 \end_inset
 
- na GitHub-u, što znači da je besplatna.
- Možda ću kasnije razviti komercijalne planove ako će aplikacija postati
- popularna, jer će mi trebati više prostora za 
-\emph on
-hosting
-\emph default
-, ali besplatan plan će uvijek postojati.
+ na GitHub-u i tamo se mogu vidjeti detalji implementacije.
 \end_layout
 
 \begin_layout Standard
@@ -1527,22 +2309,193 @@ Aplikacija još uvijek nije spremna za produkciju, ali ću (uz potencijalnu
  i uskoro će moći služiti svojoj primarnoj svrsi -- učenje kroz zabavu.
 \end_layout
 
+\begin_layout Standard
+\noindent
+\align right
+
+\emph on
+--- Matija Marohnić
+\begin_inset space \hspace{}
+\length 1cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{footnotesize}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Bibliography
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-1"
+key "key-16"
 
 \end_inset
 
-IcoMoon.
+Internet Explorer // Wikipedia: The Free Encyclopedia.
+ 14.9.2012.
  URL: 
 \begin_inset Flex URL
 status collapsed
 
 \begin_layout Plain Layout
 
-http://icomoon.io/#toDocs
+http://en.wikipedia.org/wiki/Internet_Explorer
+\end_layout
+
+\end_inset
+
+ (21.9.2012.) 
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-12"
+
+\end_inset
+
+Google Chrome // Wikipedia: The Free Encyclopedia.
+ 21.9.2012.
+ URL: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://en.wikipedia.org/wiki/Google_Chrome
+\end_layout
+
+\end_inset
+
+ (21.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-15"
+
+\end_inset
+
+WebKit // Wikipedia: The Free Encyclopedia.
+ 30.8.2012.
+ URL: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://en.wikipedia.org/wiki/WebKit
+\end_layout
+
+\end_inset
+
+ (21.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-14"
+
+\end_inset
+
+HTML // Wikipedia: The Free Encyclopedia.
+ 19.9.2012.
+ URL: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://en.wikipedia.org/wiki/HTML
+\end_layout
+
+\end_inset
+
+ (21.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-11"
+
+\end_inset
+
+Mozilla Development Network: HTML.
+ URL: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://developer.mozilla.org/en-US/docs/HTML
+\end_layout
+
+\end_inset
+
+ (21.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-19"
+
+\end_inset
+
+HTML Standard: the HTML syntax.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html
+\end_layout
+
+\end_inset
+
+ (18.9.2012.) 
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-13"
+
+\end_inset
+
+HTML5 Rocks : a resource for open web HTML5 developers.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.html5rocks.com/en/
 \end_layout
 
 \end_inset
@@ -1554,18 +2507,18 @@ http://icomoon.io/#toDocs
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-2"
+key "key-20"
 
 \end_inset
 
-jQAPI: alternative jQuery documentation.
+When can I use : support tables for HTML5, CSS3, etc.
  URL: 
 \begin_inset Flex URL
 status collapsed
 
 \begin_layout Plain Layout
 
-http://www.jqapi.com/
+http://caniuse.com/
 \end_layout
 
 \end_inset
@@ -1577,30 +2530,78 @@ http://www.jqapi.com/
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-3"
+key "key-6"
 
 \end_inset
 
-jQuery UI: demos & documentation.
+Cascading Style Sheets // Wikipedia: The Free Encyclopedia.
+ 20.9.2012.
  URL: 
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
-http://jqueryui.com/demos/
+http://en.wikipedia.org/wiki/Css
 \end_layout
 
 \end_inset
 
- (18.9.2012.)
+ (21.9.2012.)
 \end_layout
 
 \begin_layout Bibliography
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-4"
+key "key-7"
+
+\end_inset
+
+JavaScript // Wikipedia: The Free Encyclopedia.
+ 21.9.2012.
+ URL: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://en.wikipedia.org/wiki/Javascript
+\end_layout
+
+\end_inset
+
+ (21.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-5"
+
+\end_inset
+
+Mozilla Development Network: JavaScript.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://developer.mozilla.org/en-US/docs/JavaScript
+\end_layout
+
+\end_inset
+
+ (21.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-21"
 
 \end_inset
 
@@ -1612,6 +2613,191 @@ status collapsed
 \begin_layout Plain Layout
 
 http://docs.jquery.com/Main_Page
+\end_layout
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-17"
+
+\end_inset
+
+Ruby Programming Language.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.ruby-lang.org/en/
+\end_layout
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-18"
+
+\end_inset
+
+Ruby on Rails: URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://rubyonrails.org
+\end_layout
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-24"
+
+\end_inset
+
+Paperclip.
+ 11.9.2012.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://github.com/thoughtbot/paperclip/blob/master/README.md
+\end_layout
+
+\end_inset
+
+ (21.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-22"
+
+\end_inset
+
+RSpec Expectations.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://www.relishapp.com/rspec/rspec-expectations/v/2-11/docs/built-in-matchers/o
+perator-matchers
+\end_layout
+
+\end_inset
+
+ (21.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-25"
+
+\end_inset
+
+Haml : markup haiku.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://haml.info/
+\end_layout
+
+\end_inset
+
+ (20.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-26"
+
+\end_inset
+
+Sass : style with attitude.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://sass-lang.com/
+\end_layout
+
+\end_inset
+
+ (20.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-27"
+
+\end_inset
+
+CoffeeScript.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://coffeescript.org/
+\end_layout
+
+\end_inset
+
+ (20.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-4"
+
+\end_inset
+
+IcoMoon.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://icomoon.io/#toDocs
 \end_layout
 
 \end_inset
@@ -1646,134 +2832,43 @@ https://typekit.com/help
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-6"
+key "key-23"
 
 \end_inset
 
-Mozilla Development Network: JavaScript.
+Review of Popular Web Font Embedding Services.
+ 20.10.2010.
  URL: 
 \begin_inset Flex URL
 status collapsed
 
 \begin_layout Plain Layout
 
-https://developer.mozilla.org/en-US/docs/JavaScript
+http://www.smashingmagazine.com/2010/10/20/review-of-popular-web-font-embedding-se
+rvices/
 \end_layout
 
 \end_inset
 
- (18.9.2012.)
+ (20.9.2012.)
 \end_layout
 
 \begin_layout Bibliography
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-7"
+key "key-28"
 
 \end_inset
 
-Susy: reference.
+Heroku: cloud application platform.
  URL: 
 \begin_inset Flex URL
 status collapsed
 
 \begin_layout Plain Layout
 
-http://susy.oddbird.net/guides/reference/
-\end_layout
-
-\end_inset
-
- (18.9.2012.) 
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-8"
-
-\end_inset
-
-HTML Standard: the HTML syntax.
- URL: 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-tag-
-omission
-\end_layout
-
-\end_inset
-
- (18.9.2012.) 
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-9"
-
-\end_inset
-
-When can I use: support tables for HTML5, CSS3, etc.
- URL: 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://caniuse.com/
-\end_layout
-
-\end_inset
-
- (18.9.2012.)
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-10"
-
-\end_inset
-
-HTML5 Rocks: a resource for open web HTML5 developers.
- URL: 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://www.html5rocks.com/en/
-\end_layout
-
-\end_inset
-
- (18.9.2012.)
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-11"
-
-\end_inset
-
-Modernizr: the feature detection library for HTML5/CSS3.
- URL: 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://modernizr.com/
+http://www.heroku.com
 \end_layout
 
 \end_inset
@@ -1804,96 +2899,20 @@ http://git-scm.com
  (18.9.2012.)
 \end_layout
 
-\begin_layout Bibliography
-\labelwidthstring Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-13"
-
-\end_inset
-
-Ruby Programming Language.
- URL: 
-\begin_inset Flex URL
-status collapsed
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
-http://www.ruby-lang.org/en/
+
+\backslash
+end{footnotesize}
 \end_layout
 
 \end_inset
 
- (18.9.2012.)
-\end_layout
 
-\begin_layout Bibliography
-\labelwidthstring Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-14"
-
-\end_inset
-
-Ruby on Rails: URL: 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://rubyonrails.org
-\end_layout
-
-\end_inset
-
- (18.9.2012.)
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-15"
-
-\end_inset
-
-Heroku: cloud application platform.
- URL: 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://www.heroku.com
-\end_layout
-
-\end_inset
-
- (18.9.2012.)
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-16"
-
-\end_inset
-
-Internet Explorer // Wikipedia: The Free Encyclopedia.
- 14.9.2012.
- URL: 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://en.wikipedia.org/wiki/Internet_Explorer
-\end_layout
-
-\end_inset
-
- (18.9.2012.) 
 \end_layout
 
 \end_body
