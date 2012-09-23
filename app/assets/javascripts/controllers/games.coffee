@@ -1,89 +1,91 @@
 $ = jQuery
 
-Lektire.Controllers.games = (bodyClass) ->
+App.controllers.games =
 
-  if bodyClass.search(/new|create/) isnt -1
+  init: (bodyClass) ->
 
-    $form           = $('form')
+    if ~bodyClass.search /new|create/
 
-    $sections       = $form.find('section')
+      $form           = $('form')
 
-    $quizzes        = $sections.filter '.quizzes'
-    $players        = $sections.filter '.players'
-    $login          = $sections.filter '.login'
+      $sections       = $form.find('section')
 
-    $buttons        = $form.find '.buttons'
-    $button         = $buttons.find 'button'
+      $quizzes        = $sections.filter '.quizzes'
+      $players        = $sections.filter '.players'
+      $login          = $sections.filter '.login'
 
-    $quizzesChecked = $quizzes.find ':checked'
-    $playersChecked = $players.find ':checked'
+      $buttons        = $form.find '.buttons'
+      $button         = $buttons.find 'button'
 
-    setQuizName     = (name) -> $buttons.find('.name').text(" #{name}")
+      $quizzesChecked = $quizzes.find ':checked'
+      $playersChecked = $players.find ':checked'
 
-    setPlural       = -> $button.html $button.html().replace(/(Započni)\b/, '$1te')
-    setSingular     = -> $button.html $button.html().replace(/(Započni)\w+/, '$1')
+      setQuizName     = (name) -> $buttons.find('.name').text(" #{name}")
 
-    if not $quizzesChecked.length
-      $players.hide()
-      $login.hide()
-      $buttons.hide()
-    else
-      setQuizName $quizzesChecked.next().text()
-      setPlural() if $playersChecked.val() is '2'
+      setPlural       = -> $button.html $button.html().replace(/(Započni)\b/, '$1te')
+      setSingular     = -> $button.html $button.html().replace(/(Započni)\w+/, '$1')
 
-    $quizzes.on 'click', ':radio', ->
-      $players.show()
-      setQuizName $(@).next().text()
-
-    $players.on 'click', ':radio', ->
-      $buttons.show()
-      switch $(@).val()
-        when '1'
-          $login.hide()
-          setSingular()
-        when '2'
-          $login.show()
-          setPlural()
-
-  if bodyClass.search(/show/) isnt -1
-
-    delay = 500
-
-    $('.score li').each ->
-
-      $rank     = $(@).find '.rank'
-      $label    = $(@).find '.label'
-      $fill     = $(@).find '.fill'
-
-      width     = $fill.css 'width'
-
-      update    = ->
-
-        currentWidth = parseFloat $fill.width()
-        percentage = currentWidth / $label.width() * 100
-
-        if currentWidth then $label.text "#{Math.round(percentage)}%" else $label.text "0%"
-
-      $rank.hide()
-      $fill.hide()
-
-      $fill.css 'width', '0%'
-
-      update()
-
-      if width?
-        window.setTimeout ->
-          $fill.show().animate
-            width     : width
-          ,
-            duration  : 2000
-            easing    : 'easeOutCubic'
-            step      : update
-            complete  : -> $rank.fadeIn 'fast'
-        , delay
-
-        delay += 2000
+      if not $quizzesChecked.length
+        $players.hide()
+        $login.hide()
+        $buttons.hide()
       else
-        window.setTimeout ->
-          $rank.fadeIn 'fast'
-        , delay
+        setQuizName $quizzesChecked.next().text()
+        setPlural() if $playersChecked.val() is '2'
+
+      $quizzes.on 'click', ':radio', ->
+        $players.show()
+        setQuizName $(@).next().text()
+
+      $players.on 'click', ':radio', ->
+        $buttons.show()
+        switch $(@).val()
+          when '1'
+            $login.hide()
+            setSingular()
+          when '2'
+            $login.show()
+            setPlural()
+
+    if ~bodyClass.search /show/
+
+      delay = 500
+
+      $('.score li').each ->
+
+        $rank     = $(@).find '.rank'
+        $label    = $(@).find '.label'
+        $fill     = $(@).find '.fill'
+
+        width     = $fill.css 'width'
+
+        update    = ->
+
+          currentWidth = parseFloat $fill.width()
+          percentage = currentWidth / $label.width() * 100
+
+          if currentWidth then $label.text "#{Math.round(percentage)}%" else $label.text "0%"
+
+        $rank.hide()
+        $fill.hide()
+
+        $fill.css 'width', '0%'
+
+        update()
+
+        if width?
+          window.setTimeout ->
+            $fill.show().animate
+              width     : width
+            ,
+              duration  : 2000
+              easing    : 'easeOutCubic'
+              step      : update
+              complete  : -> $rank.fadeIn 'fast'
+          , delay
+
+          delay += 2000
+        else
+          window.setTimeout ->
+            $rank.fadeIn 'fast'
+          , delay

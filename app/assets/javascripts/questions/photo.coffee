@@ -1,50 +1,52 @@
 $ = jQuery
 
-Lektire.Questions.photo = ($form, formClass) ->
+App.questions.photo =
 
-  if formClass.search(/edit|new/) isnt -1
+  init: ($form, formClass) ->
 
-    # Drawing images from File API to canvas:
-    # http://stackoverflow.com/a/6776055/1247274
+    if ~formClass.search /edit|new/
 
-    # Scaling drawn images proportionally:
-    # http://stackoverflow.com/a/10842366/1247274
+      # Drawing images from File API to canvas:
+      # http://stackoverflow.com/a/6776055/1247274
 
-    $file    = $form.find '[type=file]'
+      # Scaling drawn images proportionally:
+      # http://stackoverflow.com/a/10842366/1247274
 
-    $canvas  = $form.find 'canvas'
-    canvas   = $canvas[0]
-    src      = $canvas.attr 'data-src'
-    height   = $canvas.attr('height') - 0
-    ctx      = canvas.getContext '2d'
+      $file    = $form.find '[type=file]'
 
-    drawImage = (src) ->
-      img = new Image
-      img.src = src
+      $canvas  = $form.find 'canvas'
+      canvas   = $canvas[0]
+      src      = $canvas.attr 'data-src'
+      height   = $canvas.attr('height') - 0
+      ctx      = canvas.getContext '2d'
 
-      img.onload = ->
-        ctx.clearRect 0, 0, canvas.width, canvas.height
+      drawImage = (src) ->
+        img = new Image
+        img.src = src
 
-        if img.height > height
-          newWidth = height * img.width / img.height
-          canvas.width = newWidth
-          canvas.height = 250
-          ctx.drawImage img, 0, 0, newWidth, height
-        else
-          canvas.width = img.width
-          canvas.height = img.height
-          ctx.drawImage img, 0, 0, img.width, img.height
+        img.onload = ->
+          ctx.clearRect 0, 0, canvas.width, canvas.height
 
-        $canvas.addClass 'filled'
+          if img.height > height
+            newWidth = height * img.width / img.height
+            canvas.width = newWidth
+            canvas.height = 250
+            ctx.drawImage img, 0, 0, newWidth, height
+          else
+            canvas.width = img.width
+            canvas.height = img.height
+            ctx.drawImage img, 0, 0, img.width, img.height
 
-    if src
-      drawImage src
-      $('.pladeholder').hide()
+          $canvas.addClass 'filled'
 
-    $file.on 'change', (event) ->
+      if src
+        drawImage src
+        $('.pladeholder').hide()
 
-      width     = $canvas.attr('width') - 0
-      reader    = new FileReader
+      $file.on 'change', (event) ->
 
-      reader.onload = (e) -> drawImage(e.target.result)
-      reader.readAsDataURL event.target.files[0]
+        width     = $canvas.attr('width') - 0
+        reader    = new FileReader
+
+        reader.onload = (e) -> drawImage(e.target.result)
+        reader.readAsDataURL event.target.files[0]

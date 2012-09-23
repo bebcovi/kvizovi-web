@@ -1,53 +1,55 @@
 $ = jQuery
 
-Lektire.Questions.choice = ($form, formClass) ->
+App.questions.choice =
 
-  if formClass.search(/edit|new/) isnt -1
+  init: ($form, formClass) ->
 
-    $firstOption  = $form.find('.field_with_hint')
-    $otherOptions = $firstOption.nextAll '.string'
-    $template     = $firstOption.clone()
+    if ~formClass.search /edit|new/
 
-    $addButton    = $.addButton.clone()
-    $removeButton = $.removeButton.clone()
+      $firstOption  = $form.find('.field_with_hint')
+      $otherOptions = $firstOption.nextAll '.string'
+      $template     = $firstOption.clone()
 
-    updateAttrs   = ($el, i) ->
+      $addButton    = $.addButton.clone()
+      $removeButton = $.removeButton.clone()
 
-      $input = $el.find 'input'
+      updateAttrs   = ($el, i) ->
 
-      i += 2
+        $input = $el.find 'input'
 
-      id = $input.attr('id')
-      placeholder = $input.attr('placeholder')
+        i += 2
 
-      $input.attr 'id',           id.replace(/\d+/, i)
-      $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
+        id = $input.attr('id')
+        placeholder = $input.attr('placeholder')
 
-    addOption = ($el) ->
-      $otherOptions = $otherOptions.add $el.insertBefore($addButton)
+        $input.attr 'id',           id.replace(/\d+/, i)
+        $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
 
-    removeOption = ($el) ->
-      $otherOptions = $otherOptions.not $el.fadeOut('fast', -> $(@).remove())
+      addOption = ($el) ->
+        $otherOptions = $otherOptions.add $el.insertBefore($addButton)
 
-    filled = ($el) ->
-      result = true
-      $el.find('input').each -> result = result and !!$(@).val()
-      result
+      removeOption = ($el) ->
+        $otherOptions = $otherOptions.not $el.fadeOut('fast', -> $(@).remove())
 
-    $otherOptions.add($template).find('input').after $removeButton.clone()
+      filled = ($el) ->
+        result = true
+        $el.find('input').each -> result = result and !!$(@).val()
+        result
 
-    $template.find('input').val ''
-    $template.removeClass 'field_with_hint field_with_errors'
-    $template.find('.hint, .error').remove()
+      $otherOptions.add($template).find('input').after $removeButton.clone()
 
-    $addButton
-      .insertAfter($otherOptions.last())
-      .on 'click', ->
-        $new = $template.clone()
-        updateAttrs $new, $otherOptions.length
-        addOption $new
+      $template.find('input').val ''
+      $template.removeClass 'field_with_hint field_with_errors'
+      $template.find('.hint, .error').remove()
 
-    $form.on 'click', '.remove', ->
-      $el = $(@).parent()
-      removeOption $el
-      $otherOptions.each (i) -> updateAttrs $(@), i
+      $addButton
+        .insertAfter($otherOptions.last())
+        .on 'click', ->
+          $new = $template.clone()
+          updateAttrs $new, $otherOptions.length
+          addOption $new
+
+      $form.on 'click', '.remove', ->
+        $el = $(@).parent()
+        removeOption $el
+        $otherOptions.each (i) -> updateAttrs $(@), i

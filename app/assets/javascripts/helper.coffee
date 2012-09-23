@@ -1,7 +1,9 @@
 $ = jQuery
 
-Lektire.helper = ->
+App.helper =
 
-  $('p:has(img)').addClass 'img'
-  $('table').wrap '<div class="table">'
-  $('[type=text]').attr 'autocomplete', 'off'
+  init: ->
+
+    $('p:has(img)').addClass 'img'
+    $('table').wrap '<div class="table">'
+    $('[type=text]').attr 'autocomplete', 'off'

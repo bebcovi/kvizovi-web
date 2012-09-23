@@ -1,13 +1,13 @@
 !!!
-%html{lang: 'hr'}
+%html{lang: "hr"}
   %head
     %title Lektire · #{@title}
-    %meta{charset: 'utf-8'}
-    %meta{name: 'robots', content: 'noindex'}
+    %meta{charset: "utf-8"}
+    %meta{name: "robots", content: "noindex"}
     = favicon_link_tag
-    = stylesheet_link_tag 'application'
-    = javascript_include_tag 'application'
-    = javascript_include_tag '//use.typekit.net/nfo7hcu.js'
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = javascript_include_tag "//use.typekit.net/nfo7hcu.js"
     :javascript
       try{Typekit.load();}catch(e){}
 
@@ -16,7 +16,7 @@
       %h1#logo= link_to "Lektire".prepend_icon("books"), root_path
       = render "log" if logged_in?
 
-    %article#main{role: 'main'}
+    %article#main{role: "main"}
       - flash.each do |name, message|
         - if name.in?([:notice, :alert])
           %div{class: "flash #{name}"}

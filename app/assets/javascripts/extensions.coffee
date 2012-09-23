@@ -26,6 +26,6 @@ $.addButton = $ '<button>',
 .text(' Dodaj')
 .prependIcon('plus')
 
-window.Lektire =
-  Controllers: {}
-  Questions: {}
+window.App =
+  controllers: {}
+  questions: {}
