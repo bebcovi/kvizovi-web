@@ -2,7 +2,7 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass scrbook
+\textclass scrreprt
 \begin_preamble
 \usepackage[numbib,nottoc]{tocbibind}
 \usepackage{hyperref}
@@ -104,7 +104,26 @@ figs-within-sections
 
 \begin_body
 
-\begin_layout Titlehead
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+titlehead{
+\backslash
+begin{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
 Sveučilište u Zagrebu
 \begin_inset Newline newline
 \end_inset
@@ -120,36 +139,70 @@ Odsjek za informacijske i komunikacijske znanosti
 Ak.
  god.
  2011/2012.
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}}
+\end_layout
+
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
-\begin_inset Newline newline
-\end_inset
-
-Mentor: dr.
- sc.
- Željko Agić
+\begin_layout Subject
+Matija Marohnić
 \end_layout
 
 \begin_layout Title
-Lektire
+
+\series medium
+Suvremene tehnologije
+\begin_inset Newline newline
+\end_inset
+
+za izradu web aplikacija
+\begin_inset VSpace bigskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subtitle
+
+\series medium
 Završni rad
 \end_layout
 
 \begin_layout Author
-Matija Marohnić
+
+\series bold
+Mentor
+\series default
+: dr.
+ sc.
+ Kristina Vučković
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Komentor
+\series default
+: dr.
+ sc.
+ Željko Agić
 \end_layout
 
 \begin_layout Publishers
-Zagreb, Rujan, 2012.
+Zagreb, 2012.
 \end_layout
 
 \begin_layout Standard
@@ -183,6 +236,8 @@ Postoje već slične aplikacije koje omogućavaju igranje kvizova, ali su velike
 U ovome ću se radu koncentrirati na tehnologiju koju sam koristio u razvijanju
  aplikacije, zašto sam donio određene odluke, koje su alternative alatima
  koje sam izabrao i sl.
+ Implementaciju ću opisati u slijedećem radu koji će se natjecati za rektorovu
+ nagradu.
 \end_layout
 
 \begin_layout Standard
@@ -2187,6 +2242,8 @@ Dropbox
 \begin_layout Standard
 Dropbox je web aplikacija koja omogućuje spremanje, učitavanje, sinkronizaciju
  i dijeljenje datoteka preko interneta.
+ Podržava udaljenu interakciju, pa je koristan za spremanje datoteka iz
+ aplikacije.
 \end_layout
 
 \begin_layout Section
@@ -2241,7 +2298,7 @@ Postoji više sličnih sustava koji su prije bili popularni, kao SVN, ali
  izabrao sam Git jer ima mnogo prednosti, a nisam naišao niti na jedan nedostata
 k.
  Također, trenutačni centar open-source svijeta, GitHub, je servis za Git
- repozitorije, stoga svaki ozbiljniji programer koristi Git.
+ repozitorije, stoga svaki ozbiljniji open-source programer koristi Git.
 \end_layout
 
 \begin_layout Subsection
