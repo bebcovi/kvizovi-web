@@ -7,7 +7,7 @@
 \usepackage[numbib,nottoc]{tocbibind}
 \usepackage{hyperref}
 
-\hypersetup{breaklinks=true,colorlinks=true,linkcolor=black,urlcolor=blue}
+\hypersetup{breaklinks=true,colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=blue}
 
 \def\arctan{\mathop{\rm arctg}\nolimits}
 \def\tan{\mathop{\rm tg}\nolimits}
@@ -226,18 +226,9 @@ U vrijeme pisanja ovog rada već dva mjeseca razvijam aplikaciju za koju
 \begin_layout Standard
 Postoje već slične aplikacije koje omogućavaju igranje kvizova, ali su velike,
  teške za implementirati, a često i skupe.
- Ali to je s razlogom, kviz je prilično kompleksan koncept za realizirati
+ Ali to je s razlogom! Kviz je prilično kompleksan koncept za realizirati
  na jednostavan i fleksibilan način.
- Ova aplikacija ne pokušava donijeti univerzalno rješenje, već specijalizirano,
- jer je po mom mišljenju korištenje više manjih specijaliziranih alata budućnost.
-\end_layout
-
-\begin_layout Standard
-U ovome ću se radu koncentrirati na tehnologiju koju sam koristio u razvijanju
- aplikacije, zašto sam donio određene odluke, koje su alternative alatima
- koje sam izabrao i sl.
- Implementaciju ću opisati u slijedećem radu koji će se natjecati za rektorovu
- nagradu.
+ Ova aplikacija ne pokušava donijeti univerzalno rješenje, već specijalizirano.
 \end_layout
 
 \begin_layout Standard
@@ -247,13 +238,32 @@ im i interaktivnim procesom.
  i uspjeti.
 \end_layout
 
+\begin_layout Standard
+U ovome ću se radu koncentrirati na tehnologiju koju sam koristio u razvijanju
+ aplikacije, ukratko ću obrazložiti zašto sam donio određene odluke, koje
+ su alternative alatima koje sam izabrao i sl.
+ Implementaciju ću opisati u slijedećem radu koji će se natjecati za rektorovu
+ nagradu.
+\end_layout
+
+\begin_layout Standard
+U drugom ću se poglavlju kratko osvrnuti na terminologiju koju koristim
+ u ovom radu.
+ U trećem ću poglavlju ukratko opisati dva web preglednika, Internet Explorer
+ i Google Chrome, te ću obrazložiti koji koristim i zašto.
+ U četvrtom poglavlju opisat ću niz tehnologija koje sam koristio u izradi
+ aplikacije.
+ Na kraju rada dati ću i kratak zaključak o trenutnom stanju tehnologija
+ za izradu web aplikacija.
+\end_layout
+
 \begin_layout Chapter
 Terminologija
 \end_layout
 
 \begin_layout Standard
 Prije nego što počnem s detaljima, potrebno je razjasniti višeznačnu terminologi
-ju web developmenta.
+ju razvoja mrežnih stranica.
  S obzirom da je to područje koje jako brzo napreduje, pojmovi koji slijede
  nemaju čvrstih definicija, ali ovo je jedna od interpretacija koju ću koristiti
  u ovom radu.
@@ -302,7 +312,24 @@ Client-side i server-side
 \series default
 .
  Prvi se termin odnosi na klijenta, odnosno web preglednika, dok se drugi
- odnosi na poslužitelja.
+ odnosi na poslužitelja
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Npr.
+ kada korisnik klikne na poveznicu (eng.
+ 
+\emph on
+link
+\emph default
+), njegov preglednik (klijent) zatraži stranicu od udaljenog računala (poslužite
+lja) na kojemu sa nalazi web stranica, koji ju zatim šalje natrag pregledniku.
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -325,7 +352,7 @@ Web dizajner i web developer
  smatra osoba koja je specijalizirana za izgled stranice i korisničko iskustvo,
  a web developer je osoba koja se bavi programerskim dijelom web stranice,
  obično vezanim za poslužitelje.
- Web dizajnere i web developer ponekad kraće zovem 
+ Web dizajnere i web developere ponekad kraće zovem 
 \emph on
 dizajnerima
 \emph default
@@ -342,7 +369,20 @@ developerima
 Hosting
 \series default
 .
- Usluga koju pruža web poslužitelj.
+ Usluga koju pruža web poslužitelj
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Osnovna usluga koju pruža svaki web poslužitelj je sposobnost dostavljanja
+ željene web stranice putem određene domene.
+ Poslužitelji mogu imati i napredne funkcionalnosti, kao što je postavljanje
+ e-mail adrese, podrška za druge jezike osim PHP-a, udaljeni pristup i sl.
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -496,6 +536,9 @@ Web preglednici
 \begin_layout Standard
 Moja aplikacija je trenutno optimizirana za Google Chrome, a nije dobro
  podržana na Internet Explorer-u.
+ Upravo je to razlog zašto ću na ovom mjestu ukratko opisati samo ta dva
+ preglednika iako ih na tržištu ima više, kao što su Mozilla Firefox, Apple
+ Safari i Opera.
 \end_layout
 
 \begin_layout Section
@@ -504,8 +547,9 @@ Internet Explorer
 
 \begin_layout Standard
 S obzirom da Internet Explorer web preglednik koji još uvijek zauzima velik
- postotak tržišta, želim obrazložiti zašto ga trenutno ne podržavam -- Microsoft
- Internet Explorer je najgori od svih web preglednika.
+ postotak tržišta, želim obrazložiti zašto ga trenutno ne podržavam.
+ Naime, prema mom mišljenju, Microsoft Internet Explorer je najgori od svih
+ web preglednika.
  Postoji mnogo razloga, ovo je samo nekoliko:
 \end_layout
 
@@ -563,8 +607,8 @@ JavaScript
 \series bold
 Zatvoren
 \series default
- -- Internet Explorer je preglednik zatvorenog koda, za razliku od većine
- svoje konkurencije.
+ -- Internet Explorer je preglednik zatvorenog koda, za razliku od drugih
+ preglednika kao što su Google Chrome i Mozilla Firefox.
 \end_layout
 
 \begin_layout Itemize
@@ -577,6 +621,21 @@ Podržanost
  To je glavni nedostatak koji mi otežava testiranje aplikacije, jer za razvijanj
 e koristim Ubuntu (jedna od distribucija Linux-a), a Internet Explorer nije
  podržan na tom sustavu.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ie"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -606,6 +665,21 @@ open-source
  WebKit trenutno obuhvaća većinu tržišta i, osim na Google Chrom-u i Safari-u,
  koristi se i na mnogim mobilnim operacijskim sustavima, kao što su BlackBerry,
  iOS, Tablet OS itd.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "webkit"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -670,6 +744,27 @@ Web inspektor
  greška na stranici, prikaz koliko je vremena trebalo da se učita određena
  datoteka na stranici, daje savjete kako optimizirati brzinu stranice, omogućava
  jednostavno testiranje JavaScript-a itd.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "chrome"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Preglednici imaju mnogo više karakteristika od ovih koje sam naveo, a istaknuo
+ sam iste jer su mi izrazito bitne pri izradi web stranica i zbog njih je
+ Google Chrome moj prvi izbor preglednika.
 \end_layout
 
 \begin_layout Chapter
@@ -677,12 +772,17 @@ Tehnologija
 \end_layout
 
 \begin_layout Standard
-Kod razvijana web stranica izbor tehnologije je prilično ograničen.
+Kod razvijanja web stranica izbor tehnologije je prilično ograničen.
  Jezici koje klijent koristi su HTML, CSS i JavaScript, oni nemaju alternativa
  i prisiljeni smo ih koristiti na jedan način ili na drugi.
  Međutim, poslužitelj je računalo, dakle mogućnosti su puno veće.
  Osim klijenta i poslužitelja treba obratiti pažnju na rukovanje promjenama
- u aplikaciji, svaki ozbiljniji developer koristi VCS.
+ u aplikaciji, pa bi prema mom mišljenju svaki ozbiljniji developer trebao
+ koristiti VCS kako bi si olakšao izradu aplikacije, jer ga VCS potiče da
+ razmišlja na modularan način, olakšava mu pregledavanje promjena, pomaže
+ mu u dokumentaciji itd.
+ U svom radu sam koristio slijedeće tehnologije: HTML5, CSS3, JavaScript,
+ Ruby, PostgreSQL, Typekit, IcoMoon, GitHub, Dropbox, Heroku i Git.
 \end_layout
 
 \begin_layout Standard
@@ -765,6 +865,20 @@ L
 \series default
 anguage) je jezik koji opisuje strukturu stranice.
  HTML specifikacije održava World Wide Web Konzorcij.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-html"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
  Svaki web preglednik ima ugrađene stilove koji opisuju kako će određeni
  HTML elementi izgledati, ali sâm HTML ne određuje prikaz svojih elemenata.
  Vrlo je bitno usvojiti taj koncept jer razdvaja strukturu web stranice
@@ -797,7 +911,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-U HTML-u je neko vrijeme bila popularan XHTML (E
+U HTML-u je neko vrijeme bio popularan XHTML (E
 \series bold
 X
 \series default
@@ -821,7 +935,7 @@ anguage).
  To je ideja inspirirana XML-om, a glavne značajke su stroga sintaksa i
  mogućnost definiranja novih elemenata.
  Međutim, budući da ga Internet Explorer nije podržavao, XHTML je bio samo
- ograničavajuć, nisu se mogle koristiti njegove prednosti.
+ ograničavajuć, jer se nisu mogle koristiti njegove prednosti.
  Grupa koja je razvijala XHTML imala je planove za XHTML 2.0, ali njihov
  je rad polako utihnuo i počeo se razvijati HTML5.
 \end_layout
@@ -834,6 +948,20 @@ living standard
 \emph default
 ), što znači da nikada neće biti gotov i da će HTML5 uvijek pokazivati na
  najnoviju verziju HTML-a.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "mdn-html"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
  HTML5 je po mnogočemu suprotan XHTML-u, ponajviše s obzirom na sintaksu.
  HTML5 je iznimno liberalan, što je osvježavajuće nakon stroge sintakse
  XHTML-a.
@@ -845,9 +973,24 @@ living standard
 HTML5 donosi specifikacije za mnoge funkcionalnosti koje su web developeri
  oduvijek htjeli, ali nisu imali odgovarajuću podršku te su ih emulirali
  drugim tehnologijama, kao što su Flash i Java.
- Jedan od primjera je podrška za video i audio.
- Za koju se prije uvijek koristio Flash, a sada se može koristiti u svim
- modernim web preglednicima bez posrednika.
+ Jedan od primjera je podrška za video i audio za koju se prije uvijek koristio
+ Flash, a sada se može koristiti u svim modernim web preglednicima bez posrednik
+a.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "html5-rocks"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -914,7 +1057,22 @@ Za razliku od prijašnjih verzija, CSS3 je koncipiran kao skup modula koji
 \begin_layout Standard
 HTML5 je živući standard, ali CSS3 nije.
  WWW Konzorcij je već počeo raditi na CSS4 standardu koji će podržavati
- naprednije selektore i mnogo drugih mogućnosti.
+ naprednije selektore i mnoge druge mogućnosti.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-css"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -938,7 +1096,7 @@ drag & drop
 \emph default
  tehnika.
  Međutim, korištenje JavaScript-a zahtijeva odgovornost -- većina stranice
- se treba biti upotrebljiva i bez JavaScript-a.
+ treba biti upotrebljiva i bez JavaScript-a.
 \end_layout
 
 \begin_layout Standard
@@ -950,27 +1108,64 @@ Javom
  JavaScript je skriptni jezik za web okruženje, dok je Java programski jezik.
  Osim sličnosti u pravilima imenovanja, ta dva jezika su potpuno nepovezana
  i služe različitoj svrsi.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-js"
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Subsection
-jQuery
-\end_layout
+\end_inset
 
-\begin_layout Standard
-jQuery je JavaScript biblioteka koja toliko popravlja i nadopunjava JavaScript
- da se gotovo može smatrati drugim jezikom.
+
 \end_layout
 
 \begin_layout Standard
 Pristupanje elementima na stranici pomoću čistog JavaScript-a je prilično
  teško i neugodno iskustvo, zbog nekonzistentne implementacije u različitim
  preglednicima.
- Zato je jQuery specijaliziran upravo za tu svrhu.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "mdn-js"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Zato koristim jQuery, JavaScript biblioteku koja popravlja i nadopunjava
+ JavaScript.
  Npr.
  dobavljanje elemenata koji imaju određenu klasu je nešto što developeri
- često rade, međutim, JavaScript to ne podržava (barem ne na svim preglednicima).
+ često rade.
+ Međutim, JavaScript to ne podržava (barem ne na svim preglednicima).
  jQuery olakšava pristupanje elementima s kratkom i konzistentnom CSS-olikom
  sintaksom:
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "jquery"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \begin_inset VSpace bigskip
 \end_inset
 
@@ -1030,6 +1225,21 @@ target "http://www.ruby-lang.org/en/"
 \end_inset
 
 
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ruby"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1061,7 +1271,7 @@ status open
 
 \end_inset
 
-, ono što se zapravo događa je da se broj 
+, ono što se zapravo događa je da broj 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily}"
 inline true
@@ -1119,9 +1329,9 @@ status open
 
 \begin_layout Standard
 Kod objektno-orijentiranih jezika jedan od glavnih problema je naslijeđivanje.
- Većina jezika ili dopuštaju nasljeđivanje od samo jedne klase, pa imaju
- problem limitiranosti, ili dopuštaju nasljeđivanje od više klasa, što je
- pak previše kompleksno.
+ Većina jezika ili dopušta nasljeđivanje od samo jedne klase, pa imaju problem
+ limitiranosti, ili dopušta nasljeđivanje od više klasa, što je pak previše
+ kompleksno.
  Ruby, s druge strane, dopušta nasljeđivanje od samo jedne klase, ali nudi
  mogućnost uključivanja skupova metoda u klasu.
 \end_layout
@@ -1191,14 +1401,14 @@ $var
 
 \end_inset
 
- je globalna varijabla
+ je globalna varijabla.
 \end_layout
 
 \begin_layout Standard
 Ruby je vrlo dinamičan jezik.
  Toliko je dinamičan da dopušta izmjenu, dodavanje, i brisanje elemenata
  iz standardne biblioteke.
- Recimo da za programer za zbrajanje umjesto simbola 
+ Recimo da programer za zbrajanje umjesto simbola 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily}"
 inline true
@@ -1225,7 +1435,7 @@ plus
 \end_inset
 
 .
- Potrebno ju je samo dodati tu metodu u klasu brojeva:
+ Potrebno je samo dodati tu metodu u klasu brojeva:
 \begin_inset VSpace bigskip
 \end_inset
 
@@ -1313,6 +1523,21 @@ Ruby on Rails
 LatexCommand href
 name "rubyonrails.org"
 target "http://rubyonrails.org/"
+
+\end_inset
+
+
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ror"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -1491,6 +1716,21 @@ Paperclip
 Paperclip je biblioteka za jednostavno spremanje datoteka koje su se učitale
  preko web forme na poslužitelj.
  Nudi razne validacije, kao što su prisutnost i veličina.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "paperclip"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1507,9 +1747,9 @@ oblika
 \begin_inset Quotes grd
 \end_inset
 
- slike nije ograničen samo na dimenzije, slika se može na razne načine obraditi,
- npr.
- crno-bijeli efektom.
+ slike nije ograničen samo na dimenzije, naime, slika se može na razne načine
+ obraditi, poput npr.
+ dodavanja crno-bijelog efekta.
 \end_layout
 
 \begin_layout Subsection
@@ -1520,6 +1760,21 @@ RSpec
 RSpec je moćno sučelje za testiranje Ruby koda i služi kao alternativa standardn
 om sučelju za testiranje koje dolazi uz Ruby.
  RSpec omogućava pisanje nevjerojatno čitljivih testova, poput:
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "rspec"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \begin_inset VSpace bigskip
 \end_inset
 
@@ -1570,6 +1825,21 @@ l
 \series default
 anguage) je jezik koji apstrahira HTML, daje mu funkcije i čini ga bržim
  za pisanje i čitanje.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "haml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1772,11 +2042,26 @@ heets) je CSS preprocesor koji opskrbljuje CSS dodatnim mogućnostima kao
  Podržava dvije sintakse, prva je nalik normalnom CSS-u, a druga je indentirana,
  inspirirana Haml-om.
  Prva sintaksa je popularnija jer je lakša za naučiti i fleksibilnija je.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sass"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Što CSS kôd postaje kompliciraniji, to je teže održavati ga jer je vrlo
- reduntantan, pogotovo kada se koriste CSS3 efekti.
+ redundantan, pogotovo kada se koriste CSS3 efekti.
  Uzmimo za primjer ovaj CSS3 kôd:
 \begin_inset VSpace bigskip
 \end_inset
@@ -2028,7 +2313,7 @@ CoffeeScript je jezik koji se kompajlira u JavaScript, a sintaksa mu je
 \end_layout
 
 \begin_layout Standard
-JavaScript ima mnogo specifičnih slučajeva u kojemu se naredbe ne izvršavaju
+JavaScript ima mnogo specifičnih slučajeva u kojima se naredbe ne izvršavaju
  na očekivani način, pa su takve situacije prilično nezgodne za početnike.
  Problem je u tome što te specifičnosti ne postaju logične nakon puno iskustva,
  nego se jednostavno trebaju prihvatiti kao dio jezika.
@@ -2064,6 +2349,20 @@ grešaka
 \end_inset
 
 , CoffeeScript raspolaže i raznim funkcionalnostima koje JavaScript nema.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "coffee"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
  Npr.
  obratimo pozornost na ovaj JavaScript kôd:
 \begin_inset VSpace bigskip
@@ -2207,6 +2506,21 @@ Typekit je profesionalni servis koji pruža upravo takvu uslugu.
  Galerija fontova omogućava traženje fontova po različitim kriterijima,
  kao što su tip fonta (serif, sans-serif, monospace...), debljina, kontrast,
  visina slova i sl.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "typekit"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2214,6 +2528,21 @@ Postoji više od 10 drugih servisa kao što su WebINK, Typotheque i Google
  Fonts koji također nude sličnu uslugu, ali odabrao sam Typekit zato što
  ima bolji financijski plan, više kvalitetnih fontova na izbor, jednostavniji
  je i stabilniji i ima izvrsnu korisničku podršku.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "webfont-services"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2233,6 +2562,21 @@ IcoMoon je servis koji, između ostaloga, omogućava slaganje vlastitih fontova.
  slika.
  Glavna prednost korištenja IcoMoon servisa je mala veličina datoteka, jer
  se u njima nalaze samo ikonice koje su potrebne, a ne cijeli set.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "icomoon"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2240,10 +2584,34 @@ Dropbox
 \end_layout
 
 \begin_layout Standard
-Dropbox je web aplikacija koja omogućuje spremanje, učitavanje, sinkronizaciju
+Dropbox je besplatna web aplikacija koja omogućuje spremanje, sinkronizaciju
  i dijeljenje datoteka preko interneta.
- Podržava udaljenu interakciju, pa je koristan za spremanje datoteka iz
- aplikacije.
+ Osnovali su ga je 2007.
+ Drew Houston i Arah Ferdowsi, dvojica MIT studenata kojima je dosadilo
+ koristiti e-mail za prijenos datoteka.
+ Danas više od 50 milijuna ljudi koristi Dropbox za dijeljenje slika, dokumenata
+ i video zapisa.
+ Talentirane se osobe mogu pridružiti daljnjem razvoju aplikacije.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "dropbox"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dropbox podržava udaljenu interakciju, pa je koristan za spremanje datoteka
+ iz aplikacije.
 \end_layout
 
 \begin_layout Section
@@ -2262,6 +2630,21 @@ hosting
 \emph default
  servisa po tome što već ima sve potrebne konfiguracije, kao npr.
  podrška za Git, čineći time cijeli proces potptuno bezbolnim.
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "heroku"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2285,6 +2668,21 @@ target "git-scm.com"
 \end_inset
 
 
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "git"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2297,16 +2695,17 @@ Git je sustav za rukovanje promjenama.
 Postoji više sličnih sustava koji su prije bili popularni, kao SVN, ali
  izabrao sam Git jer ima mnogo prednosti, a nisam naišao niti na jedan nedostata
 k.
- Također, trenutačni centar open-source svijeta, GitHub, je servis za Git
- repozitorije, stoga svaki ozbiljniji open-source programer koristi Git.
-\end_layout
-
-\begin_layout Subsection
-GitHub
+ Također, trenutni centar open-source svijeta, GitHub, je servis za Git
+ repozitorije, stoga smatram da svaki ozbiljniji 
+\emph on
+open-source
+\emph default
+ programer koristi Git.
 \end_layout
 
 \begin_layout Standard
-GitHub je najpoznatija aplikacija za Git repozitorije i sinonim je za 
+Najpoznatiji servis za Git repozitorije je GitHub, koji je praktički sinonim
+ je za 
 \emph on
 open-source
 \emph default
@@ -2315,9 +2714,8 @@ open-source
 \emph on
 open-source
 \emph default
- projekti nalaze na GitHub-u (a oni koji se ne nalaze, trebali bi).
- GitHub je savršeno mjesto za surađivanje s drugim programerima, upravo
- zbog jednostavnosti Git-a.
+ projekti nalaze na GitHub-u, to je savršeno mjesto za surađivanje s drugim
+ programerima, upravo zbog jednostavnosti Git-a.
  Jedna pozitivna nuspojava surađivanja preko GitHub-a je ta što uvijek postoji
  kopija repozitorija na internetu, dakle to je automatski 
 \emph on
@@ -2331,17 +2729,25 @@ Zaključak
 \end_layout
 
 \begin_layout Standard
-Tehnološki gledano, ova aplikacija je vrlo stabilno postavljena i čeka ju
- svjetla budućnost.
+Vjerojatno ste dosada primjetili koliko postavke za jednostavnu web aplikaciju
+ mogu biti kompleksne, ali ako pogledamo samo 10-ak godina unatrag, možemo
+ primjetiti da mnoge navedene tehnologije nisu niti postojale.
+ Svijet tehnologije se jako brzo mijenja, nakon višegodišnjeg iskustva u
+ razvoju web stranica, još uvijek se ponekad zateknem kako više učim o novim
+ tehnologijama nego što obavljam posla.
+ Za postizanje ravnoteže između učenja i rada potrebno je puno truda, jer
+ se može lako dogoditi da se baš nakon što ste usvojili jedan dio tehnologije
+ pojavi nova tehnologija za koju se ispostavi da je bolja od one koju ste
+ vi naučili.
 \end_layout
 
 \begin_layout Standard
-Razvoj može krenuti u različitim smjerovima, možda će aplikacija nakon nekog
- vremena izgledati potpuno drugačije nego sada.
- Razvoj ovisi o korisnicima, njihovim zahtjevima i načinu na koji koriste
- aplikaciju.
- Aplikacija se može beskrajno nadograđivati, ali ću uz pomoć korisnika moći
- bolje uspostaviti prioritete.
+Potrebe korisnika se eksponencijalno povećavaju i uloga dizajnera i developera
+ je dati im ono što traže.
+ Npr.
+ JavaScript se prije jako oprezno koristio jer je bio nezreo za upotrebu,
+ a danas je JavaScript nužna tehnologija za stvaranje ugodnog korisničkog
+ iskustva.
 \end_layout
 
 \begin_layout Standard
@@ -2357,49 +2763,14 @@ target "https://github.com/jimick/lektire"
 
 \end_inset
 
- na GitHub-u i tamo se mogu vidjeti detalji implementacije.
-\end_layout
-
-\begin_layout Standard
-Aplikacija još uvijek nije spremna za produkciju, ali ću (uz potencijalnu
- pomoć drugih programera) moći uskoro dati ovu aplikaciju školama na testiranje
- i uskoro će moći služiti svojoj primarnoj svrsi -- učenje kroz zabavu.
-\end_layout
-
-\begin_layout Standard
-\noindent
-\align right
-
-\emph on
---- Matija Marohnić
-\begin_inset space \hspace{}
-\length 1cm
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{footnotesize}
-\end_layout
-
-\end_inset
-
-
+ na GitHub-u i tamo se mogu vidjeti detalji implementacije navedenih tehnologija.
 \end_layout
 
 \begin_layout Bibliography
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-16"
+key "ie"
 
 \end_inset
 
@@ -2423,7 +2794,7 @@ http://en.wikipedia.org/wiki/Internet_Explorer
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-12"
+key "chrome"
 
 \end_inset
 
@@ -2447,7 +2818,7 @@ http://en.wikipedia.org/wiki/Google_Chrome
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-15"
+key "webkit"
 
 \end_inset
 
@@ -2471,7 +2842,7 @@ http://en.wikipedia.org/wiki/WebKit
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-14"
+key "wiki-html"
 
 \end_inset
 
@@ -2495,11 +2866,11 @@ http://en.wikipedia.org/wiki/HTML
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-11"
+key "mdn-html"
 
 \end_inset
 
-Mozilla Development Network: HTML.
+Mozilla Development Network : HTML.
  URL: 
 \begin_inset Flex URL
 status open
@@ -2518,30 +2889,7 @@ https://developer.mozilla.org/en-US/docs/HTML
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-19"
-
-\end_inset
-
-HTML Standard: the HTML syntax.
- URL: 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html
-\end_layout
-
-\end_inset
-
- (18.9.2012.) 
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-13"
+key "html5-rocks"
 
 \end_inset
 
@@ -2564,30 +2912,7 @@ http://www.html5rocks.com/en/
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-20"
-
-\end_inset
-
-When can I use : support tables for HTML5, CSS3, etc.
- URL: 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://caniuse.com/
-\end_layout
-
-\end_inset
-
- (18.9.2012.)
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-6"
+key "wiki-css"
 
 \end_inset
 
@@ -2611,7 +2936,7 @@ http://en.wikipedia.org/wiki/Css
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-7"
+key "wiki-js"
 
 \end_inset
 
@@ -2635,11 +2960,11 @@ http://en.wikipedia.org/wiki/Javascript
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-5"
+key "mdn-js"
 
 \end_inset
 
-Mozilla Development Network: JavaScript.
+Mozilla Development Network : JavaScript.
  URL: 
 \begin_inset Flex URL
 status collapsed
@@ -2658,7 +2983,7 @@ https://developer.mozilla.org/en-US/docs/JavaScript
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-21"
+key "jquery"
 
 \end_inset
 
@@ -2681,7 +3006,7 @@ http://docs.jquery.com/Main_Page
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-17"
+key "ruby"
 
 \end_inset
 
@@ -2704,11 +3029,12 @@ http://www.ruby-lang.org/en/
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-18"
+key "ror"
 
 \end_inset
 
-Ruby on Rails: URL: 
+Ruby on Rails.
+ URL: 
 \begin_inset Flex URL
 status collapsed
 
@@ -2726,7 +3052,7 @@ http://rubyonrails.org
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-24"
+key "paperclip"
 
 \end_inset
 
@@ -2750,7 +3076,7 @@ https://github.com/thoughtbot/paperclip/blob/master/README.md
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-22"
+key "rspec"
 
 \end_inset
 
@@ -2774,7 +3100,7 @@ perator-matchers
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-25"
+key "haml"
 
 \end_inset
 
@@ -2797,7 +3123,7 @@ http://haml.info/
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-26"
+key "sass"
 
 \end_inset
 
@@ -2820,7 +3146,7 @@ http://sass-lang.com/
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-27"
+key "coffee"
 
 \end_inset
 
@@ -2843,30 +3169,7 @@ http://coffeescript.org/
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-4"
-
-\end_inset
-
-IcoMoon.
- URL: 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://icomoon.io/#toDocs
-\end_layout
-
-\end_inset
-
- (18.9.2012.)
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-5"
+key "typekit"
 
 \end_inset
 
@@ -2889,7 +3192,30 @@ https://typekit.com/help
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-23"
+key "icomoon"
+
+\end_inset
+
+IcoMoon.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://icomoon.io/#toDocs
+\end_layout
+
+\end_inset
+
+ (18.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "webfont-services"
 
 \end_inset
 
@@ -2914,11 +3240,34 @@ rvices/
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-28"
+key "dropbox"
 
 \end_inset
 
-Heroku: cloud application platform.
+About Dropbox.
+ URL: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://www.dropbox.com/about
+\end_layout
+
+\end_inset
+
+ (20.9.2012.)
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "heroku"
+
+\end_inset
+
+Heroku : cloud application platform.
  URL: 
 \begin_inset Flex URL
 status collapsed
@@ -2937,7 +3286,7 @@ http://www.heroku.com
 \labelwidthstring Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-12"
+key "git"
 
 \end_inset
 
@@ -2954,22 +3303,6 @@ http://git-scm.com
 \end_inset
 
  (18.9.2012.)
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{footnotesize}
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_body
