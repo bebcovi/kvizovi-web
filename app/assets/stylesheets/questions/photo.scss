@@ -1,13 +1,21 @@
 form.photo {
 
   &.show {
-    .img {
-      float: left;
-      height: 250px;
-      margin-right: rhythm();
+    img {
+      max-width: 420px;
+      float: right;
+      margin-left: rhythm();
     }
 
-    .buttons { clear: none; }
+    .input,
+    .buttons {
+      float: left;
+    }
+
+    .buttons {
+      @include leader(.5);
+      clear: left;
+    }
   }
 
   &.edit, &.new {

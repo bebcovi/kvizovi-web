@@ -89,14 +89,10 @@ dd {
   }
 }
 
-.img {
-  @extend %inline-block;
-  line-height: 0;
-  img {
-    @extend %border-radius;
-    max-width: 100%;
-    border: 1px solid rgba(black, .75);
-  }
+form img {
+  @extend %border-radius;
+  max-width: 100%;
+  border: 1px solid rgba(black, .75);
 }
 
 @include keyframes(spin) {
@@ -108,10 +104,12 @@ dd {
   @include with-font-size(24px) {
     $width: 24px;
     $height: 27px;
+
     &, i {
       width: $width;
       height: $height;
     }
+
     i {
       color: rgba(black, .25);
       @include animation(spin 1.25s infinite linear);
