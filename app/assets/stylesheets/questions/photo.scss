@@ -11,22 +11,22 @@ form.photo {
   }
 
   &.edit, &.new {
-    canvas {
-      @extend %border-radius;
+    .preview {
+      display: none;
       max-height: 250px;
-      border: 2px dashed rgba(black, .1);
-      &.filled { border: 1px solid rgba(black, .75); }
     }
 
     .placeholder {
-      @include with-font-size(100px, 2) {
+      @include with-font-size(100px) {
         @extend %inline-block;
+        @extend %border-radius;
         @extend %unselectable;
-        @include rhythm(-8.5, 0, 0, 0);
+        @include rhythm(0, 2, 0, .5);
+        height: 250px;
         width: 300px;
-        margin-left: -304px;
         color: rgba(black, .05);
         text-align: center;
+        border: 2px dashed rgba(black, .1);
       }
     }
   }
