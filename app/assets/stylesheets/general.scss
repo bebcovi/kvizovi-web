@@ -1,9 +1,7 @@
 @include establish-baseline;
 @include border-box-sizing;
 
-body {
-  margin: 0;
-  @include container;
+html {
   overflow-y: scroll;
   font-family: $base-font-family;
   color: $text;
@@ -11,6 +9,14 @@ body {
 
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
+}
+
+body {
+  @include container;
+  margin: {
+    top: 0;
+    bottom: 0;
+  }
 }
 
 header,
