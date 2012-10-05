@@ -23,24 +23,22 @@ body.quizzes {
       @include padding-leader(.1);
 
       button {
+        @include size(rhythm(2), rhythm(.5));
         @include border-radius(rhythm(.25));
         position: relative;
         overflow: visible;
         cursor: pointer;
-        width: rhythm(2);
-        height: rhythm(.5);
         margin: 0;
         padding: 0;
         font-size: inherit;
         border: 1px solid rgba(black, .30);
         &:before {
           @extend %circle;
+          @include square(rhythm(.5));
           @include leader(-0.3);
           content: '';
           position: absolute;
           display: block;
-          width: rhythm(.5);
-          height: rhythm(.5);
           border: 1px solid rgba(black, .55);
           background: white;
         }

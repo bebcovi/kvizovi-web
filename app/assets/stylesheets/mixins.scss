@@ -2,9 +2,13 @@
   @include link-colors($color1, $color2, $color2, $color1, $color2);
 }
 
-@mixin v-borders($width: 1px, $lines: 1, $font-size: $base-font-size, $border-style: $default-rhythm-border-style) {
-  @include apply-side-rhythm-border(left, $width, $lines, $font-size, $border-style);
-  @include apply-side-rhythm-border(right, $width, $lines, $font-size, $border-style);
+@mixin size($height, $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin square($size) {
+  @include size($size, $size);
 }
 
 @mixin with-font-size($to-size, $lines: lines-for-font-size($to-size), $from-size: $base-font-size) {
@@ -13,6 +17,11 @@
   $base-font-size: $to-size;
   @content;
   $base-font-size: $tmp;
+}
+
+@mixin v-borders($width: 1px, $lines: 1, $font-size: $base-font-size, $border-style: $default-rhythm-border-style) {
+  @include apply-side-rhythm-border(left, $width, $lines, $font-size, $border-style);
+  @include apply-side-rhythm-border(right, $width, $lines, $font-size, $border-style);
 }
 
 @mixin text-input {

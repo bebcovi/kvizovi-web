@@ -32,9 +32,8 @@ form.photo {
         @extend %border-radius;
         @extend %unselectable;
         @include rhythm(0, 2, 0, .5);
+        @include size(250px, 300px);
         cursor: pointer;
-        height: 250px;
-        width: 300px;
         color: rgba(black, .05);
         text-align: center;
         border: 2px dashed rgba(black, .1);

@@ -108,13 +108,7 @@ form img {
 
 .loader {
   @include with-font-size(24px) {
-    $width: 24px;
-    $height: 27px;
-
-    &, i {
-      width: $width;
-      height: $height;
-    }
+    &, i { @include size(24px, 27px); }
 
     i {
       color: rgba(black, .25);

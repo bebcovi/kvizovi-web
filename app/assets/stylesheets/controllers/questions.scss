@@ -29,8 +29,7 @@ ol.categories {
   .icon {
     @extend %inline-block;
     @extend %border-radius;
-    width: rhythm(2);
-    height: rhythm(2);
+    @include square(rhythm(2));
     margin-right: rhythm(.5);
     text-align: center;
     color: rgba(black, .25);
@@ -62,8 +61,7 @@ ol.questions { @extend %nice-list; }
       @extend %unselectable;
       @extend %inline-block;
       @extend %circle;
-      width: rhythm();
-      height: rhythm();
+      @include square(rhythm());
       padding: 0 2px 0 0;
       color: rgba(black, .5);
       background: rgba(black, .05);

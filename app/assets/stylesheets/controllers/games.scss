@@ -37,15 +37,18 @@ body.games {
 
     .photo {
       $cols: $total-columns / 2;
+
       .img {
         max-width: columns($cols);
         margin-right: gutter();
       }
+
       .input, .buttons {
         float: left;
         width: columns($cols);
       }
-      [type=text] { width: 100%; }
+
+      input[type="text"] { width: 100%; }
     }
 
     .hint { color: rgba(black, .5); }
