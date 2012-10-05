@@ -11,7 +11,7 @@ form.association {
       }
 
       div {
-        display: inline-block;
+        @extend %inline-block;
         &:last-child { margin-top: -4px; }
       }
 
@@ -26,13 +26,13 @@ form.association {
 
     .dynamic {
       span {
+        @extend %inline-block;
         @extend %border-radius;
         @extend %unselectable;
         @include adjust-leading-to(1);
         @include h-borders(1px, .25);
         @include v-borders(1px, .5);
         cursor: move;
-        display: inline-block;
         border-color: darken(white, 25%);
         background: darken(white, 2%);
       }

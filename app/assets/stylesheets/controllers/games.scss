@@ -10,7 +10,10 @@ body.games {
 
     // general
 
-    h1, .username { @extend %inline-block; }
+    h1,
+    .username {
+      @extend %inline-block;
+    }
 
     .username {
       @include with-font-size(24px) {
@@ -20,10 +23,10 @@ body.games {
     }
 
     .question-number {
+      @extend %inline-block;
       @include border-right-radius;
       position: relative;
       top: -4px;
-      display: inline-block;
       height: rhythm(1.75, $large);
       margin-left: - 2 * $normal;
       padding: 0 rhythm(.5, $large);

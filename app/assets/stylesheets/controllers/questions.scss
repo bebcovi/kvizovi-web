@@ -4,7 +4,7 @@ ol.categories {
   a,
   .icon,
   .label {
-    display: inline-block;
+    @extend %inline-block;
   }
 
   a {
@@ -27,8 +27,8 @@ ol.categories {
   }
 
   .icon {
+    @extend %inline-block;
     @extend %border-radius;
-    display: inline-block;
     width: rhythm(2);
     height: rhythm(2);
     margin-right: rhythm(.5);
@@ -63,8 +63,8 @@ ol.questions { @extend %nice-list; }
     margin-left: rhythm(.25);
     label {
       @extend %unselectable;
+      @extend %inline-block;
       @extend %circle;
-      display: inline-block;
       width: rhythm();
       height: rhythm();
       padding: 0 2px 0 0;

@@ -1,3 +1,8 @@
+%inline-block {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 %unstyled-list {
   margin: 0;
   padding: 0;
@@ -121,13 +126,13 @@
 }
 
 %button {
+  @extend %inline-block;
+  @extend %border-radius;
   $c1: rgba(black, .5);
   $c2: rgba(black, .75);
-  @extend %border-radius;
   @include h-borders(1px, .25);
   @include v-borders(1px, .5);
   @include color-link($c1, $c2);
-  display: inline-block;
   font-size: inherit;
   line-height: inherit;
   text-align: center;
