@@ -9,11 +9,14 @@ App.questions.photo =
       # Previewing images using the FileSystem API:
       # http://stackoverflow.com/a/4459419/1247274
 
-      $file   = $form.find '[type=file]'
-      $img    = $form.find('.preview')
-      img     = $img[0]
+      $file         = $form.find '[type=file]'
+      $img          = $form.find '.preview'
+      img           = $img[0]
+      $placeholder  = $form.find '.placeholder'
 
       $img.show() if $img.attr 'src'
+
+      $placeholder.on 'click', -> $file.click()
 
       $file.on 'change', (event) ->
 
