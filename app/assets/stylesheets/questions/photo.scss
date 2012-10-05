@@ -1,19 +1,21 @@
 form.photo {
 
   &.show {
+    $cols: $total-columns / 2;
     img {
-      max-width: 420px;
       float: right;
-      margin-left: rhythm();
+      max-width: columns($cols);
     }
+
+    .input { @include trailer; }
 
     .input,
     .buttons {
-      float: left;
+      @include span-columns($cols);
     }
 
     .buttons {
-      @include leader(.5);
+      @include leader(0);
       clear: left;
     }
   }
@@ -30,6 +32,7 @@ form.photo {
         @extend %border-radius;
         @extend %unselectable;
         @include rhythm(0, 2, 0, .5);
+        cursor: pointer;
         height: 250px;
         width: 300px;
         color: rgba(black, .05);

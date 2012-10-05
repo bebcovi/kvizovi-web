@@ -1,15 +1,19 @@
 // general
 
 form {
-  > div, > section { @include trailer(.5); }
+  > div,
+  > section { @include trailer(.5); }
+
   ol, ul {
     @extend %unstyled-list;
     @include trailer(.5);
   }
+
   p.notice {
     @include with-font-size($small-font-size) {
       font-weight: 300;
       color: rgba(black, .4);
+
       i { margin-right: rhythm(.1); }
     }
   }
@@ -46,11 +50,16 @@ label {
   @include user-select(none);
   &:hover { cursor: pointer; }
   &:after { content: ':'; }
-  [type=radio], [type=checkbox] + & {
+
+  [type="radio"],
+  [type="checkbox"] + & {
     padding-left: rhythm(.25);
     &:after { content: ''; }
   }
-  &.checkbox, &.radio, &[class^=collection] {
+
+  &.checkbox,
+  &.radio,
+  &[class^="collection"] {
     padding-left: rhythm(.25);
     &:after { content: ''; }
   }
@@ -58,23 +67,51 @@ label {
 
 // interactive elements
 
-input, button, textarea {
+$cols: $total-columns / 2;
+input,
+button,
+textarea {
+  width: columns($cols);
   margin: 0;
   font-family: inherit;
   color: rgba(black, .6);
 }
 
-[type=text], [type=password], [type=number], textarea {
-  @extend %text-input;
-  display: block;
+input[type="submit"],
+input[type="radio"],
+input[type="checkbox"],
+input[type="file"],
+button {
+  width: auto;
+}
+
+@include text-input {
+  @include with-font-size($text-input-font-size) {
+    @extend %border-radius;
+    @include rhythm-borders(1px, .25);
+    @include input-placeholder { font-weight: 300; }
+    display: block;
+    font-weight: 300;
+    border-color: rgba(black, .25);
+    &:focus {
+      @include box-shadow(rgba(black, .2) 0 0 3px);
+      outline: none;
+      border-color: rgba(black, .5);
+    }
+  }
 
 }
 
-[type=file] {
+textarea {
+  max-width: 100%;
+}
+
+input[type="file"] {
   margin-left: rhythm(.25)
 }
 
-[type=radio], [type=checkbox] {
+input[type="radio"],
+input[type="checkbox"] {
   padding-right: rhythm(.25);
   label + & {
     margin-left: rhythm(.25);
@@ -82,7 +119,10 @@ input, button, textarea {
 }
 
 span {
-  &.radio, &.checkbox { margin-left: rhythm(.5); }
+  &.radio,
+  &.checkbox {
+    margin-left: rhythm(.5);
+  }
 }
 
 label + select {
@@ -119,7 +159,9 @@ label + select {
   }
 }
 
-.field_with_hint { @include trailer(0); }
+.field_with_hint {
+  @include trailer(0);
+}
 
 // validation errors
 
@@ -137,7 +179,7 @@ span.error {
 }
 
 .field_with_errors {
-  [type=text], [type=password], [type=number], textarea {
+  @include text-input {
     border-color: rgba(red, .5);
     &:focus {
       @include box-shadow(rgba(red, .25) 0 0 3px);
@@ -153,10 +195,13 @@ span.error {
   @include rhythm(1, 0, 0, 1);
   clear: both;
   input, button { @extend %primary-button; }
+
   a { @extend %button; }
+
   button {
     height: rhythm(1.5);
     margin-left: rhythm(.1);
   }
+
   i { height: rhythm(); }
 }

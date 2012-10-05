@@ -60,21 +60,6 @@
   margin-right: - $grid-padding;
 }
 
-%text-input {
-  @include with-font-size($form-font-size) {
-    @extend %border-radius;
-    @include rhythm-borders(1px, .25);
-    @include input-placeholder { font-weight: 300; }
-    font-weight: 300;
-    border-color: rgba(black, .25);
-    &:focus {
-      @include box-shadow(rgba(black, .2) 0 0 3px);
-      outline: none;
-      border-color: rgba(black, .5);
-    }
-  }
-}
-
 %subtle {
   $c1: rgba(black, .4);
   $c2: $link2;
@@ -119,6 +104,7 @@
   color: $color;
   border-color: $color;
   background: rgba($color, .1);
+
   button {
     color: rgba($color, .25);
     &:hover { color: $color; }

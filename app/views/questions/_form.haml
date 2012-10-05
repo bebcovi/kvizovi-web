@@ -5,11 +5,11 @@
 
   = f.hidden_field :category, value: @question.category
 
-  = f.input :content, label: (@question.boolean? ? "Tvrdnja" : "Pitanje")
+  = f.input :content, label: (@question.boolean? ? "Tvrdnja" : "Pitanje"), input_html: {rows: 1}
 
   = render partial: "question_#{@question.category}", object: @question, as: :question, locals: {f: f}
 
-  = f.input :hint, input_html: {cols: 50},
+  = f.input :hint, input_html: {cols: 50, rows: 1},
     placeholder: %(Npr. "Odgovor piši u nominativu.")
 
   .buttons
