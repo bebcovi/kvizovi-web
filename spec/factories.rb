@@ -1,4 +1,5 @@
 # encoding: utf-8
+require "rack/test/uploaded_file"
 
 FactoryGirl.define do
   factory :school do
@@ -19,8 +20,8 @@ FactoryGirl.define do
   end
 
   factory :quiz do
-    name      "Antika"
-    grades    [1]
+    name   "Antika"
+    grades [1]
   end
 
   factory :question do
@@ -32,7 +33,7 @@ FactoryGirl.define do
     factory :photo_question do
       category   "photo"
       data       "answer"
-      attachment Rack::Test::UploadedFile.new("#{Rails.root}/spec/fixtures/files/photo.jpg", "image/jpeg")
+      attachment Rack::Test::UploadedFile.new("#{SPEC_DIR}/fixtures/files/photo.jpg", "image/jpeg")
     end
 
     factory :boolean_question do

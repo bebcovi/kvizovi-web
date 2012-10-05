@@ -1,13 +1,6 @@
 # encoding: utf-8
 
-module Helpers
-  def benchmark(name, &block)
-    start = Time.now
-    result = yield
-    puts "#{name} (#{Time.now - start}s)"
-    result
-  end
-
+module IntegrationSpecHelpers
   def cookies
     page.driver.browser.current_session.instance_variable_get("@rack_mock_session").cookie_jar.dup.tap do |cookie_jar|
       def cookie_jar.[](name)
@@ -29,6 +22,15 @@ module Helpers
 
   def logout
     visit logout_path
+  end
+end
+
+module UnitSpecHelpers
+  def benchmark(name, &block)
+    start = Time.now
+    result = yield
+    puts "#{name} (#{Time.now - start}s)"
+    result
   end
 
   def ordinalize(argument)

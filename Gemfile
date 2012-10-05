@@ -39,7 +39,7 @@ end
 
 group :development, :test do
   gem "rspec-rails"
-  gem "debugger", require: "debugger"
+  gem "debugger"
 end
 
 group :test do
@@ -47,4 +47,5 @@ group :test do
   gem "capybara"
   gem "vcr"
   gem "fakeweb"
+  gem "activerecord-nulldb-adapter", github: "nulldb/nulldb"
 end
