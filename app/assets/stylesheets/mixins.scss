@@ -2,7 +2,7 @@
   @include link-colors($color1, $color2, $color2, $color1, $color2);
 }
 
-@mixin size($height, $width) {
+@mixin size($width, $height) {
   width: $width;
   height: $height;
 }
