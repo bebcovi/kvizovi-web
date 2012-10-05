@@ -8,7 +8,7 @@ body.schools {
       @extend %unstyled-list;
 
       li {
-        @extend %inline-block;
+        display: inline-block;
         &:first-child a { @include border-right-radius(0); }
         &:last-child a { @include border-left-radius(0); }
       }

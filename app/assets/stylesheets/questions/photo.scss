@@ -26,10 +26,10 @@ form.photo {
 
     .placeholder {
       @include with-font-size(100px) {
-        @extend %inline-block;
         @extend %border-radius;
         @extend %unselectable;
         @include rhythm(0, 2, 0, .5);
+        display: inline-block;
         height: 250px;
         width: 300px;
         color: rgba(black, .05);

@@ -77,7 +77,6 @@ dd {
 
 .back {
   @include with-font-size($small, .5) {
-    @extend %inline-block;
     $c1: rgba(black, .35);
     $c2: white;
     @include color-link($c1, $c2);
@@ -86,6 +85,7 @@ dd {
     position: absolute;
     top: 1px;
     left: 1px;
+    display: inline-block;
     padding: rhythm(.25);
     background: rgba(black, .05);
     &:hover {

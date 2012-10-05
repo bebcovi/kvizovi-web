@@ -1,7 +1,11 @@
 ol.categories {
   @extend %unstyled-list;
 
-  a, .icon, .label { @extend %inline-block; }
+  a,
+  .icon,
+  .label {
+    display: inline-block;
+  }
 
   a {
     @include rhythm(0, .25, .25, 0);
@@ -23,8 +27,8 @@ ol.categories {
   }
 
   .icon {
-    @extend %inline-block;
     @extend %border-radius;
+    display: inline-block;
     width: rhythm(2);
     height: rhythm(2);
     margin-right: rhythm(.5);
@@ -58,9 +62,9 @@ ol.questions { @extend %nice-list; }
   span {
     margin-left: rhythm(.25);
     label {
-      @extend %inline-block;
       @extend %unselectable;
       @extend %circle;
+      display: inline-block;
       width: rhythm();
       height: rhythm();
       padding: 0 2px 0 0;
