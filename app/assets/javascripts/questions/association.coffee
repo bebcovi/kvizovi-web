@@ -1,6 +1,6 @@
 $ = jQuery
 
-App.Questions.choice = module = {}
+App.Questions.association = module = {}
 
 module.show = ($form) ->
 
