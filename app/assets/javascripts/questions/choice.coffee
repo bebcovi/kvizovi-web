@@ -1,10 +1,10 @@
-$ = jQuery
+define ['jquery'], ($) ->
 
-App.questions.choice =
+  ->
 
-  init: ($form, formClass) ->
+    module = {}
 
-    if ~formClass.search /edit|new/
+    module.new = ($form) ->
 
       $firstOption  = $form.find('.field_with_hint')
       $otherOptions = $firstOption.nextAll '.string'
@@ -53,3 +53,9 @@ App.questions.choice =
         $el = $(@).parent()
         removeOption $el
         $otherOptions.each (i) -> updateAttrs $(@), i
+
+    module.edit = ($form) ->
+
+      module.new($form)
+
+    module

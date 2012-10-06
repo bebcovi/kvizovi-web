@@ -1,10 +1,10 @@
-$ = jQuery
+define ['jquery'], ($) ->
 
-App.questions.association =
+  ->
 
-  init: ($form, formClass) ->
+    module = {}
 
-    if ~formClass.search /show/
+    module.show = ($form) ->
 
       $pairs    = $form.find '.pair'
 
@@ -43,7 +43,7 @@ App.questions.association =
           drop: (e, ui) -> swap($(@), ui.draggable)
 
 
-    if ~formClass.search /edit|new/
+    module.new = ($form) ->
 
       $firstPair    = $form.find('.pair').first()
       $otherPairs   = $firstPair.nextAll '.pair'
@@ -95,3 +95,9 @@ App.questions.association =
         $el = $(@).parent()
         removePair $el
         $otherPairs.each (i) -> updateAttrs $(@), i
+
+    module.edit = ($form) ->
+
+      module.new($form)
+
+    module

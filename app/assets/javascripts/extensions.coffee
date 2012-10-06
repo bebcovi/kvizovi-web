@@ -1,31 +1,29 @@
-$ = jQuery
+define ['jquery'], ($) ->
 
-# methods
+  ->
 
-$.fn.prependIcon = (name) ->
-  @.each -> $(@).prepend "<i class=\"icon-#{name}\">"
+    # methods
 
-$.fn.appendIcon = (name) ->
-  @.each -> $(@).append "<i class=\"icon-#{name}\">"
+    $.fn.prependIcon = (name) ->
+      @.each -> $(@).prepend "<i class=\"icon-#{name}\">"
 
-# properties
+    $.fn.appendIcon = (name) ->
+      @.each -> $(@).append "<i class=\"icon-#{name}\">"
 
-$.loader = $('<div>')
-.addClass('loader')
-.prependIcon('loading')
+    # properties
 
-$.removeButton = $ '<button>',
-  type: 'button'
-  tabindex: -1
-.addClass('remove')
-.prependIcon('cancel')
+    $.loader = $('<div>')
+    .addClass('loader')
+    .prependIcon('loading')
 
-$.addButton = $ '<button>',
-  type: 'button'
-.addClass('add')
-.text(' Dodaj')
-.prependIcon('plus')
+    $.removeButton = $ '<button>',
+      type: 'button'
+      tabindex: -1
+    .addClass('remove')
+    .prependIcon('cancel')
 
-window.App =
-  controllers: {}
-  questions: {}
+    $.addButton = $ '<button>',
+      type: 'button'
+    .addClass('add')
+    .text(' Dodaj')
+    .prependIcon('plus')

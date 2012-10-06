@@ -1,10 +1,10 @@
-$ = jQuery
+define ['jquery'], ($) ->
 
-App.controllers.games =
+  ->
 
-  init: (bodyClass) ->
+    module = {}
 
-    if ~bodyClass.search /new|create/
+    module.new = ->
 
       $form           = $('form')
 
@@ -47,7 +47,11 @@ App.controllers.games =
             $login.show()
             setPlural()
 
-    if ~bodyClass.search /show/
+    module.create = ->
+
+      module.new()
+
+    module.show = ->
 
       delay = 500
 
@@ -89,3 +93,5 @@ App.controllers.games =
           window.setTimeout ->
             $rank.fadeIn 'fast'
           , delay
+
+    module

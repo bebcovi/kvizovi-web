@@ -1,10 +1,10 @@
-$ = jQuery
+define ['jquery'], ($) ->
 
-App.questions.photo =
+  ->
 
-  init: ($form, formClass) ->
+    module = {}
 
-    if ~formClass.search /edit|new/
+    module.new = ($form) ->
 
       # Previewing images using the FileSystem API:
       # http://stackoverflow.com/a/4459419/1247274
@@ -34,3 +34,9 @@ App.questions.photo =
           reader.readAsDataURL file
         else
           alert "Datoteka #{file.name} nije slika."
+
+    module.edit = ($form) ->
+
+      module.new($form)
+
+    module

@@ -1,0 +1,8 @@
+shim:
+  jquery-ujs: ["jquery"]
+  bootstrap: ["jquery"]
+map:
+  "*":
+    jquery: "jquery-adapter"
+  jquery-ujs:
+    jquery: "jquery"
