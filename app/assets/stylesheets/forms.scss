@@ -51,16 +51,12 @@ label {
   &:hover { cursor: pointer; }
   &:after { content: ':'; }
 
-  [type="radio"],
-  [type="checkbox"] + & {
-    padding-left: rhythm(.25);
-    &:after { content: ''; }
-  }
-
   &.checkbox,
   &.radio,
-  &[class^="collection"] {
+  [type="radio"] + &,
+  [type="checkbox"] + & {
     padding-left: rhythm(.25);
+    font-weight: 300;
     &:after { content: ''; }
   }
 }
