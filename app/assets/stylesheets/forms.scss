@@ -97,9 +97,9 @@ button {
     }
     border-color: rgba(black, .25);
     &:focus {
-      @include box-shadow(rgba(black, .2) 0 0 3px);
+      @include box-shadow(rgba(black, .05) 0 0 0 4px);
       outline: none;
-      border-color: rgba(black, .5);
+      border-color: rgba(black, .35);
     }
   }
 
@@ -185,7 +185,7 @@ span.error {
   @include text-input {
     border-color: rgba(red, .5);
     &:focus {
-      @include box-shadow(rgba(red, .25) 0 0 3px);
+      @include box-shadow(rgba(red, .1) 0 0 0 4px);
       outline: none;
       border-color: rgba(red, .75);
     }
