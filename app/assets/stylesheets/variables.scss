@@ -9,7 +9,7 @@ $container-style: static;
 
 // modular scale
 
-$base-size: 14px 18px;
+$base-size: 13px 18px;
 $ratio: golden();
 
 $small:       ms(0);
@@ -45,9 +45,10 @@ $players:
 
 // type
 
-$sans: 'museo-sans';
+$base-font-family: 'museo-sans';
 
-$base-font-family: $sans;
-
+$text-input-font-family: $base-font-family;
 $text-input-font-size: $base-font-size - 2px;
+
+$small-font-family: verdana, sans-serif;
 $small-font-size: $small;

@@ -11,6 +11,7 @@
     @include adjust-font-size-to($small-font-size);
     max-width: 200px;
     padding: 3px 8px;
+    font-family: $small-font-family;
     color: white;
     text: {
       align: center;

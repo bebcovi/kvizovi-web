@@ -31,5 +31,6 @@ header {
   @include with-font-size($small-font-size) {
     @include rhythm(.75, 0, 0, 0);
     float: right;
+    font-family: $small-font-family;
   }
 }
