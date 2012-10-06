@@ -1,6 +1,5 @@
-define ['jquery'], ($) ->
+$ = jQuery
 
-  ->
+App.helper = ->
 
-    $('table').wrap '<div class="table">'
-    $('[type=text]').attr 'autocomplete', 'off'
+  $('[type=text]').attr 'autocomplete', 'off'

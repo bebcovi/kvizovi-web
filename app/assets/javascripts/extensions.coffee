@@ -1,29 +1,31 @@
-define ['jquery'], ($) ->
+$ = jQuery
 
-  ->
+# methods
 
-    # methods
+$.fn.prependIcon = (name) ->
+  @.each -> $(@).prepend "<i class=\"icon-#{name}\">"
 
-    $.fn.prependIcon = (name) ->
-      @.each -> $(@).prepend "<i class=\"icon-#{name}\">"
+$.fn.appendIcon = (name) ->
+  @.each -> $(@).append "<i class=\"icon-#{name}\">"
 
-    $.fn.appendIcon = (name) ->
-      @.each -> $(@).append "<i class=\"icon-#{name}\">"
+# properties
 
-    # properties
+$.loader = $('<div>')
+.addClass('loader')
+.prependIcon('loading')
 
-    $.loader = $('<div>')
-    .addClass('loader')
-    .prependIcon('loading')
+$.removeButton = $ '<button>',
+  type: 'button'
+  tabindex: -1
+.addClass('remove')
+.prependIcon('cancel')
 
-    $.removeButton = $ '<button>',
-      type: 'button'
-      tabindex: -1
-    .addClass('remove')
-    .prependIcon('cancel')
+$.addButton = $ '<button>',
+  type: 'button'
+.addClass('add')
+.text(' Dodaj')
+.prependIcon('plus')
 
-    $.addButton = $ '<button>',
-      type: 'button'
-    .addClass('add')
-    .text(' Dodaj')
-    .prependIcon('plus')
+window.App =
+  Controllers: {}
+  Questions:   {}

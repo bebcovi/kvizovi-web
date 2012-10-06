@@ -1,1 +1,0 @@
-define ['jquery', 'jquery-ujs'], ($) -> $

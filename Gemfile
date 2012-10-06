@@ -13,7 +13,6 @@ group :assets do
   gem "susy"
   gem "animation"
   gem "modular-scale", "~> 1.0.2"
-  gem "requirejs-rails"
   gem "jquery-rails"
   gem "jquery-ui-rails"
   gem "coffee-rails"

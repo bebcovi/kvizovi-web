@@ -1,6 +1,6 @@
-define ['jquery', 'bootstrap'], ($) ->
+$ = jQuery
 
-  ->
+App.general = ->
 
-    $('.flash button').on 'click', -> $(@).parent().fadeOut('fast')
-    $('.controls a, button').tooltip()
+  $('.flash button').on 'click', -> $(@).parent().fadeOut('fast')
+  $('.controls a, button').tooltip()
