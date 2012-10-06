@@ -47,7 +47,7 @@ ol.categories {
 ol.questions { @extend %nice-list; }
 
 #question_content {
-  width: rhythm(26, $text-input-font-size);
+  width: 100%;
 }
 
 .points {
