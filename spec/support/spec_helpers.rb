@@ -1,6 +1,10 @@
 # encoding: utf-8
 
 module IntegrationSpecHelpers
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+
   def cookies
     page.driver.browser.current_session.instance_variable_get("@rack_mock_session").cookie_jar.dup.tap do |cookie_jar|
       def cookie_jar.[](name)
@@ -23,9 +27,16 @@ module IntegrationSpecHelpers
   def logout
     visit logout_path
   end
+
+  module ClassMethods
+  end
 end
 
 module UnitSpecHelpers
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+
   def benchmark(name, &block)
     start = Time.now
     result = yield
@@ -51,4 +62,32 @@ module UnitSpecHelpers
     7 => "Sedmi",
     8 => "Osmi"
   }
+
+  module ClassMethods
+  end
+end
+
+module NullDBSpecHelpers
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+
+  def setup_nulldb
+    require "nulldb"
+    NullDB.nullify(schema: "#{ROOT}/db/schema.rb")
+  end
+
+  def teardown_nulldb
+    begin
+      NullDB.restore
+    rescue ActiveRecord::ConnectionNotEstablished
+    end
+  end
+
+  module ClassMethods
+    def use_nulldb
+      before(:all) { setup_nulldb }
+      after(:all)  { teardown_nulldb }
+    end
+  end
 end

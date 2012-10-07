@@ -1,3 +1,5 @@
+require "active_attr"
+
 class Password
   include ActiveAttr::Model
 

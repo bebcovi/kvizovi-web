@@ -1,3 +1,5 @@
+require "active_record"
+
 class Game < ActiveRecord::Base
   belongs_to :quiz
 

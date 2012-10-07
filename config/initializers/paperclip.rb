@@ -2,7 +2,7 @@ class ActiveRecord::Base
   class << self
     alias normal_has_attached_file has_attached_file
     def has_attached_file(name, options = {})
-      if Rails.env.development?
+      if not defined?(Rails) or Rails.env.development?
         normal_has_attached_file(name, options)
       else
         dropbox_options = {
