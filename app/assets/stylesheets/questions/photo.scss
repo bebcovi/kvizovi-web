@@ -2,16 +2,25 @@ form.photo {
 
   &.show {
     $cols: $total-columns / 2;
-    img {
-      float: right;
-      max-width: columns($cols);
+
+    .img {
+      @include span-columns($cols omega);
+      text-align: left;
+    }
+
+    .input,
+    .hint,
+    .buttons {
+      @include span-columns($cols);
     }
 
     .input { @include trailer; }
 
-    .input,
-    .buttons {
-      @include span-columns($cols);
+    input[type="text"] { width: 100%; }
+
+    .hint {
+      @include rhythm(-0.5, 0, 0, 1);
+      color: rgba(black, .5);
     }
 
     .buttons {
@@ -32,7 +41,7 @@ form.photo {
         @extend %border-radius;
         @extend %unselectable;
         @include rhythm(0, 2, 0, .5);
-        @include size(250px, 300px);
+        @include size(300px, 250px);
         cursor: pointer;
         color: rgba(black, .05);
         text-align: center;

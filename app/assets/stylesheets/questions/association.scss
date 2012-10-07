@@ -5,6 +5,7 @@ form.association {
 
     .pair {
       @extend %pie-clearfix;
+      font-weight: 300;
 
       div, i {
         @include adjust-leading-to($height);

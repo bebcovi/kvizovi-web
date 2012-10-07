@@ -35,24 +35,6 @@ body.games {
       font-weight: 700;
     }
 
-    .photo {
-      $cols: $total-columns / 2;
-
-      .img {
-        max-width: columns($cols);
-        margin-right: gutter();
-      }
-
-      .input, .buttons {
-        float: left;
-        width: columns($cols);
-      }
-
-      input[type="text"] { width: 100%; }
-    }
-
-    .hint { color: rgba(black, .5); }
-
   }
 
   &.show {
