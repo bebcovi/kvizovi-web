@@ -11,7 +11,7 @@ form {
 
   p.notice {
     @include with-font-size($small-font-size) {
-      font-weight: 300;
+      font-family: $small-font-family;
       color: rgba(black, .4);
 
       i { margin-right: rhythm(.1); }
