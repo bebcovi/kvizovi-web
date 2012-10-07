@@ -1,6 +1,6 @@
 $ = jQuery
 
-App.Questions.games = module = {}
+App.Controllers.games = module = {}
 
 module.new = ->
 
