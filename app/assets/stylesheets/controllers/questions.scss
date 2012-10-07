@@ -10,7 +10,7 @@ ol.categories {
   a {
     @include rhythm(0, .25, .25, 0);
     @include color-link(rgba(black, .35), $link2);
-    &:hover {
+    &:hover, &:focus {
       text-decoration: none;
       .icon {
         color: $link2;
