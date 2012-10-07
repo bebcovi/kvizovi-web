@@ -1,6 +1,6 @@
 - @title = @school.name
 
-= back_button "Natrag", root_path
+= back_button "Kvizovi", root_path
 
 - present @school do |school_presenter|
 
@@ -17,5 +17,5 @@
     %dd= school_presenter.quizzes.count
 
   %p= school_presenter.edit_button "Izmjeni profil"
-
   %p= change_password_button "Izmjeni lozinku", edit_password_path
+  %p= link_to "Učenici".prepend_icon("user"), students_path
