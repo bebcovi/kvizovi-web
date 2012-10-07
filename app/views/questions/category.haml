@@ -2,6 +2,10 @@
 
 = back_button "Natrag", quiz_questions_path(@quiz)
 
+%h1
+  %span.name= @quiz.name
+  %span.section novo pitanje
+
 .info
   :markdown
     Vrste pitanja poredane su po težini, od najlakšeg prema najtežem.

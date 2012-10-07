@@ -2,7 +2,9 @@
 
 = back_button "Natrag", quizzes_path
 
-%h1= @quiz.name
+%h1
+  %span.name= @quiz.name
+  %span.section pitanja
 
 - if @quiz.questions.any?
 

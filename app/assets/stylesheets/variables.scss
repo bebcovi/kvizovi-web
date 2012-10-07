@@ -12,7 +12,11 @@ $container-style: static;
 $base-size: 13px 18px;
 $ratio: golden();
 
+$xxx-small:   ms(-3);
+$xx-small:    ms(-2);
+$x-small:     ms(-1);
 $small:       ms(0);
+
 $normal:      ms(1);
 $medium:      ms(3);
 

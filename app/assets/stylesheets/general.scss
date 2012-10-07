@@ -39,6 +39,21 @@ h3 {
 h1 {
   @include with-font-size($x-large, 2) {
     @include trailer;
+
+    .name:after {
+      @extend %inline-block;
+      @include square($xx-small);
+      @include box-sizing(border-box);
+      @include border-radius(2px);
+      content: '';
+      margin-left: rhythm(.5);
+      background: $text;
+    }
+
+    .section {
+      font-weight: 100;
+      color: rgba($text, .5);
+    }
   }
 }
 
