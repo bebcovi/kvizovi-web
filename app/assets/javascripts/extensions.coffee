@@ -28,4 +28,4 @@ $.addButton = $ '<button>',
 
 window.App =
   Controllers: {}
-  Questions:   {}
+  Questions: {}

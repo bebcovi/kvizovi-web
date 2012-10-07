@@ -2,6 +2,10 @@
 
 %h1 Zdravo :)
 
+.info
+  :markdown
+    Ovo je aplikacija za ispitivanje znanja iz lektire. Funkcionira vrlo jednostavno -- mi postavimo pitanje, ti odgovoriš najbolje što znaš :)
+
 - if @quizzes.any?
 
   = simple_form_for @game, as: :game, url: game_path do |f|
