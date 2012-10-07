@@ -1,7 +1,7 @@
 form.choice {
 
   &.edit, &.new {
-    .string {
+    div.string {
       @extend %pie-clearfix;
 
       input,
@@ -10,7 +10,7 @@ form.choice {
       button { @include leader(.35); }
     }
 
-    .field_with_hint {
+    div.field_with_hint {
       input { float: none; }
       .error { display: inline; }
     }
