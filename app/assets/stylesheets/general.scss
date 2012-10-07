@@ -47,7 +47,7 @@ h1 {
       @include border-radius(2px);
       content: '';
       margin-left: rhythm(.5);
-      background: $text;
+      background: rgba($text, .75);
     }
 
     .section {
