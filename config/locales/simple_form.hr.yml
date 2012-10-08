@@ -9,10 +9,9 @@ hr:
         password_confirmation: "Potvrda lozinke"
         remember_me: "Zapamti me"
       question:
-        category: "Tip pitanja"
-        attachment: "Slika"
-        points: "Bodovi"
+        image: "Slika"
         hint: "Uputa (neobavezno)"
+        answer: "Odgovor"
       school:
         name: "Ime škole"
         level: "Tip škole"

@@ -1,0 +1,5 @@
+.controls
+  = edit_button "", edit_quiz_question_path(@quiz, question), title: "Izmjeni"
+  = delete_button "", quiz_question_path(@quiz, question), title: "Izbriši"
+
+.name= question.content

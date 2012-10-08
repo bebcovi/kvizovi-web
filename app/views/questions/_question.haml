@@ -2,31 +2,7 @@
   %span.question-number{class: number(@player_number)}= @question_number
   = smarty_pants question.content
 
-- if question.boolean?
-
-  = f.collection_radio_buttons :answer, [["true", "Točno"], ["false", "Netočno"]], :first, :last
-
-- elsif question.choice?
-
-  = f.collection_radio_buttons :answer, question.provided_answers.zip([]), :first, :first
-
-- elsif question.association?
-
-  - input_collection(f) do |c|
-    - question.provided_answers.each do |left, right|
-      .pair
-        = c.input(:answer, input_html: {value: left}, label: false, wrapper_html: {class: 'static'})
-        = icon("arrow-right")
-        = c.input(:answer, input_html: {value: right}, label: false, wrapper_html: {class: 'dynamic'})
-
-- elsif question.photo?
-
-  = image_tag question.attachment.url(:medium)
-  = f.input :answer
-
-- elsif question.text?
-
-  = f.input :answer
+= render object: question, partial: question.to_partial_path, locals: {f: f}
 
 - if question.hint?
   %p.hint Uputa: #{question.hint}

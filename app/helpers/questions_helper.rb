@@ -10,4 +10,12 @@ module QuestionsHelper
      ["text",        'Upiši točan odgovor']
    ]
   end
+
+  def number_of_fields(question)
+    if question.choice? or question.association?
+      current_page?(action: "new") ? 4 : question.data.count
+    else
+      raise ArgumentError, "The question is not a choice or association"
+    end
+  end
 end

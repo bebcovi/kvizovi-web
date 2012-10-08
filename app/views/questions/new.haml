@@ -6,4 +6,4 @@
   %span.name= @quiz.name
   %span.section= @title.downcase
 
-= render "form"
+= render partial: "form", locals: {url: quiz_questions_path(@quiz), klass: "new"}

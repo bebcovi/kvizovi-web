@@ -7,18 +7,9 @@
   %span.section pitanja
 
 - if @quiz.questions.any?
-
   %ol.questions
-    = list_of @quiz.questions do |question|
-      - present question do |question_presenter|
-        .controls
-          = question_presenter.edit_button "", @quiz, title: "Izmjeni"
-          = question_presenter.delete_button "", @quiz, title: "Izbriši"
-
-        .name= question_presenter.content
-
+    = render collection: @quiz.questions, partial: "question_item", as: :question
 - else
-
   %p Ovaj kviz trenutno nema pitanja.
 
 %p= add_button "Novo pitanje", new_quiz_question_path(@quiz)

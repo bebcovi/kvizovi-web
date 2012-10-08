@@ -30,6 +30,14 @@ hr:
               taken: "Već postoji škola s tim korisničkim imenom."
             password:
               blank: "Ne smije biti prazna."
+        boolean_question:
+          attributes:
+            answer:
+              blank: "Niste odabrali točan odgovor."
+        text_question:
+          attributes:
+            answer:
+              blank: "Niste napisali koji je točan odgovor."
         question:
           attributes:
             attachment:

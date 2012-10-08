@@ -13,7 +13,7 @@
       %li{class: number(player_number)}
         %dl
           %dt.username= player.username.prepend_icon("user")
-          %dd.rank Točno si odgovorio na #{score} od #{game_presenter.total_score} pitanja. Ti si #{rank}.
+          %dd.rank Imaš #{score} od #{game_presenter.total_score} bodova. Ti si #{rank}.
         .bar
           .label #{percentage(score, game_presenter.total_score)}%
           - if score != 0

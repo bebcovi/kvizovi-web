@@ -1,9 +1,5 @@
-# encoding: utf-8
-
 class QuestionsController < ApplicationController
-  before_filter do
-    @quiz = current_school.quizzes.find(params[:quiz_id])
-  end
+  before_filter :assign_quiz
 
   def index
     @questions = @quiz.questions
@@ -11,14 +7,14 @@ class QuestionsController < ApplicationController
 
   def new
     if params[:category]
-      @question = @quiz.questions.new(category: params[:category])
+      @question = @quiz.questions(params[:category]).new
     else
       render :category
     end
   end
 
   def create
-    @question = @quiz.questions.new(params[:question])
+    @question = @quiz.questions(params[:category]).new(params[:question])
 
     if @question.save
       redirect_to quiz_questions_path(@quiz), notice: "Pitanje je stvoreno."
@@ -42,7 +38,13 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @quiz.questions.destroy(params[:id])
+    @quiz.questions.destroy(params[:id]) if @quiz.questions.exists?(params[:id])
     redirect_to quiz_questions_path(@quiz), notice: "Pitanje je izbrisano."
+  end
+
+  private
+
+  def assign_quiz
+    @quiz = current_school.quizzes.find(params[:quiz_id])
   end
 end

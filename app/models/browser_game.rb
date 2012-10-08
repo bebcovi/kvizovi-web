@@ -7,7 +7,7 @@ class BrowserGame
     def create!(game)
       # Storing info
       @store[:quiz_id] = game.quiz_id
-      @store[:questions] = Hash[Quiz.find(game.quiz_id).question_ids.shuffle.zip([])]
+      @store[:questions] = Hash[Quiz.find(game.quiz_id).questions.pluck(:id).shuffle.zip([])]
       @store[:player_ids] = game.players.map(&:id)
 
       # Initialization
@@ -50,21 +50,7 @@ class BrowserGame
     end
 
     def current_question
-      Question.find(@store[:questions].keys[@store[:current_question]]).tap do |question|
-        def question.provided_answers
-          if choice?
-            result = super.shuffle
-            result.shuffle! while result.first == super.first
-            result
-          elsif association?
-            result = super.map(&:last).shuffle
-            result.shuffle! while result == super.map(&:last)
-            Hash[super.map(&:first).zip(result)]
-          else
-            super
-          end
-        end
-      end
+      Question.find(@store[:questions].keys[@store[:current_question]]).randomize!
     end
 
     def current_question_number

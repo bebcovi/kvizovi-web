@@ -6,12 +6,11 @@ class GamePresenter < BasePresenter
   end
 
   def total_score
-    game.questions.count / game.players.count
+    game.questions.map(&:points).inject(:+) / game.players.count
   end
 
   def rank(score)
-    percent = percentage(score, game.questions.count)
-    case percent
+    case percentage(score, total_score)
     when 0...30
       "znalac-malac"
     when 30...70

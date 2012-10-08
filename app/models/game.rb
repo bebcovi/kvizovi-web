@@ -12,9 +12,9 @@ class Game < ActiveRecord::Base
 
   def scores
     info.values.map do |questions|
-      questions.inject(0) do |score, (_, answered)|
-        points = (answered ? 1 : 0)
-        score += points
+      points = self.questions.inject({}) { |hash, question| hash.update(question.id => question.points) }
+      questions.inject(0) do |score, (question_id, answered)|
+        score += (answered ? points[question_id] : 0)
       end
     end
   end

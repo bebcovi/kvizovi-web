@@ -1,17 +1,14 @@
-- url = @question.new_record? ? quiz_questions_path(@quiz) : quiz_question_path(@quiz, @question)
-- klass = @question.new_record? ? "new" : "edit"
+= simple_form_for @question, url: url, as: :question, html: {class: "#{klass} #{@question.category}"} do |f|
 
-= simple_form_for @question, url: url, html: {class: "#{klass} #{@question.category}"} do |f|
+  = hidden_field_tag :category, params[:category]
 
-  = f.hidden_field :category, value: @question.category
+  = f.input :content, label: "Tekst pitanja", input_html: {rows: 1}
 
-  = f.input :content, label: (@question.boolean? ? "Tvrdnja" : "Pitanje"), input_html: {rows: 1}
-
-  = render partial: "question_#{@question.category}", object: @question, as: :question, locals: {f: f}
+  = render partial: "#{@question.category}_question_fields", object: @question, as: "#{@question.category}_question", locals: {f: f}
 
   = f.input :hint, input_html: {cols: 50, rows: 1},
     placeholder: %(Npr. "Odgovor piši u nominativu.")
 
   .buttons
-    = link_to "Odustani", (@question.new_record? ? new_quiz_question_path(@quiz) : quiz_questions_path(@quiz))
+    = link_to "Odustani", quiz_questions_path(@quiz)
     = f.button :submit
