@@ -88,9 +88,6 @@ GEM
       multi_json (~> 1.0)
     factory_girl (4.0.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.0.0)
-      factory_girl (~> 4.0.0)
-      railties (>= 3.0.0)
     fakeweb (1.3.0)
     ffi (1.1.5)
     fssm (0.2.9)
@@ -236,7 +233,7 @@ DEPENDENCIES
   compass (~> 0.13.alpha.0)
   compass-rails
   debugger
-  factory_girl_rails
+  factory_girl
   fakeweb
   haml (= 3.2.0.beta.1)
   haml-rails

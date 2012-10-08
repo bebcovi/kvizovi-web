@@ -33,17 +33,14 @@ gem "bcrypt-ruby", "~> 3.0"
 gem "active_attr"
 gem "nokogiri"
 
-group :development do
-  gem "pry-rails"
-end
-
 group :development, :test do
+  gem "pry-rails"
   gem "rspec-rails"
   gem "debugger"
 end
 
 group :test do
-  gem "factory_girl_rails"
+  gem "factory_girl"
   gem "capybara"
   gem "vcr"
   gem "fakeweb"
