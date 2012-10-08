@@ -7,6 +7,8 @@ class Question < ActiveRecord::Base
 
   validates_presence_of :content
 
+  default_scope order("#{table_name}.created_at DESC")
+
   CATEGORIES = %w[boolean choice association image text]
 
   def self.categories
