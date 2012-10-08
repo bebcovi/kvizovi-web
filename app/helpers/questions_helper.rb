@@ -6,7 +6,7 @@ module QuestionsHelper
      ["boolean",     'Točno/netočno'],
      ["choice",      'Ponuđeni odgovori'],
      ["association", 'Asocijacija'],
-     ["photo",       'Pogodi tko/što je na slici'],
+     ["image",       'Pogodi tko/što je na slici'],
      ["text",        'Upiši točan odgovor']
    ]
   end
@@ -16,6 +16,16 @@ module QuestionsHelper
       current_page?(action: "new") ? 4 : question.data.count
     else
       raise ArgumentError, "The question is not a choice or association"
+    end
+  end
+
+  def category_icon(category)
+    case category
+    when "boolean" then icon("checkbox")
+    when "choice" then icon("list-view")
+    when "association" then icon("shuffle")
+    when "image" then icon("picture")
+    when "text" then content_tag(:span, "Abc")
     end
   end
 end

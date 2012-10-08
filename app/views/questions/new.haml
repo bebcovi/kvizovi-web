@@ -6,4 +6,26 @@
   %span.name= @quiz.name
   %span.section= @title.downcase
 
-= render partial: "form", locals: {url: quiz_questions_path(@quiz), klass: "new"}
+- if params[:category]
+
+  = render partial: "form", locals: {url: quiz_questions_path(@quiz), klass: "new"}
+
+- else
+
+  .info
+    :markdown
+      Vrste pitanja poredane su po težini, od najlakšeg prema najtežem.
+
+      * **Točno/netočno**: najjednostavniji tip pitanja, postavljena je tvrdnja i učenik treba odgovoriti je li točna ili netočna.
+      * **Ponuđeni odgovori**: tip pitanja u kojemu se učeniku postavlja pitanje, a on bira odgovor između više ponuđenih.
+      * **Asocijacije**: učenik treba povezivati pojmove iz jednog s pojmovima iz drugog stupca.
+      * **Pogodi tko/što je na slici**: učenik treba odgovoriti na pitanje vezano za priloženu sliku.
+      * **Upiši točan odgovor**: najteži tip pitanja, učeniku je postavljeno pitanje, a odgovor treba unijeti u tekstualno polje.
+
+  %p Izaberite kategoriju:
+
+  %ol.categories
+    = list_of categories do |value, label|
+      %a{href: new_quiz_question_path(@quiz, category: value)}
+        .icon{class: value}= category_icon(value)
+        .label= label

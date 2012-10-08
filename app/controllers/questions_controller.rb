@@ -6,11 +6,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    if params[:category]
-      @question = @quiz.questions(params[:category]).new
-    else
-      render :category
-    end
+    @question = @quiz.questions(params[:category]).new
   end
 
   def create
