@@ -26,6 +26,25 @@ $.addButton = $ '<button>',
 .text(' Dodaj')
 .prependIcon('plus')
 
+# functions
+
+$.flashMsg = (msg, name) ->
+  $flash = $('<div>').addClass("flash #{name}")
+
+  $button = $.removeButton
+    .clone()
+    .appendTo($flash)
+
+  $msg = $('<p>').append(msg)
+
+  $flash
+    .append($msg)
+    .prependTo('#main')
+
+  $button.on 'click', -> $flash.fadeOut('fast')
+
+# globals
+
 window.App =
   Controllers: {}
   Questions: {}
