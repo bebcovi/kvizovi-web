@@ -45,9 +45,7 @@ module.new = ->
         $login.show()
         setPlural()
 
-module.create = ->
-
-  module.new()
+module.create = module.new
 
 module.show = ->
 

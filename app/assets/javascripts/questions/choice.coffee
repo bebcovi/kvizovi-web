@@ -54,6 +54,4 @@ module.new = ($form) ->
     removeOption $el
     $otherOptions.each (i) -> updateAttrs $(@), i
 
-module.edit = ($form) ->
-
-  module.new($form)
+module.edit = module.new
