@@ -137,7 +137,7 @@
 %primary-button {
   @extend %button;
   $c1: white;
-  $c2: white;
+  $c2: $c1;
   @include color-link($c1, $c2);
   color: $c1;
   border: none;
@@ -146,5 +146,11 @@
   &:hover {
     color: $c2;
     background: $link2;
+  }
+  &[disabled] {
+    cursor: default;
+    &, &:hover {
+      background: scale-color($link1, $saturation: -30%, $lightness: 30%);
+    }
   }
 }
