@@ -1,5 +1,5 @@
 # encoding: utf-8
-require "spec_helper"
+require "spec_helper_full"
 
 describe "Registration" do
   context "of schools" do
@@ -12,6 +12,8 @@ describe "Registration" do
     def fill_in_the_form
       fill_in "Ime škole", with: school.name
       select school.level, from: "Tip škole"
+      fill_in "Mjesto", with: school.place
+      select school.region, from: "Županija"
       fill_in "Korisničko ime", with: school.username
       fill_in "Lozinka", with: school.password
       fill_in "Potvrda lozinke", with: school.password
@@ -52,6 +54,8 @@ describe "Registration" do
       current_path.should eq(schools_path)
       find_field("Ime škole").value.should_not be_nil
       find("option[value=#{school.level}]").should be_selected
+      find_field("Mjesto").value.should_not be_nil
+      find("option[value=\"#{school.region}\"]").should be_selected
       find_field("Korisničko ime").value.should_not be_nil
       find_field("Lozinka").value.should be_nil
       find_field("Potvrda lozinke").value.should be_nil
@@ -66,7 +70,6 @@ describe "Registration" do
 
       current_path.should eq(school_path(School.first))
       find("#log").should have_link(school.name)
-
     end
 
     after(:all) do
@@ -90,6 +93,8 @@ describe "Registration" do
     def fill_in_the_form
       fill_in "Ime", with: student.first_name
       fill_in "Prezime", with: student.last_name
+      choose student.gender
+      select student.year_of_birth.to_s, from: "Godina rođenja"
       fill_in "Korisničko ime", with: student.username
       fill_in "Lozinka", with: student.password
       fill_in "Potvrda lozinke", with: student.password
@@ -113,6 +118,8 @@ describe "Registration" do
       current_path.should eq(students_path)
       find_field("Ime").value.should_not be_nil
       find_field("Prezime").value.should_not be_nil
+      find_field(student.gender).should be_checked
+      find("option[value=\"#{student.year_of_birth}\"]").should be_selected
       find_field("Korisničko ime").value.should_not be_nil
       find_field("Lozinka").value.should be_nil
       find_field("Potvrda lozinke").value.should be_nil

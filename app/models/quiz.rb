@@ -3,7 +3,7 @@ require_relative "../../lib/has_many_questions"
 
 class Quiz < ActiveRecord::Base
   belongs_to :school
-  include HasManyQuestions
+  extend HasManyQuestions
   has_many_questions dependent: :destroy
   has_many :games
 

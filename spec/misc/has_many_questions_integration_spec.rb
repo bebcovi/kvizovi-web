@@ -13,7 +13,7 @@ module MyExtension
 end
 
 class Record < ActiveRecord::Base
-  include HasManyQuestions
+  extend HasManyQuestions
   has_many_questions extend: MyExtension, foreign_key: "quiz_id"
 end
 

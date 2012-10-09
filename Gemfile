@@ -42,7 +42,6 @@ end
 group :test do
   gem "factory_girl"
   gem "capybara"
-  gem "vcr"
-  gem "fakeweb"
   gem "activerecord-nulldb-adapter", github: "nulldb/nulldb"
+  gem "database_cleaner"
 end

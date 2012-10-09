@@ -1,3 +1,4 @@
+require "spec_helper_lite"
 require_relative "../../app/models/browser_game"
 
 describe BrowserGame do
@@ -12,7 +13,7 @@ describe BrowserGame do
     @browser_game = double(quiz_id: 1)
     Quiz.stub(:find)     {|id| double(id: id, question_ids: [1, 2, 3, 4]) }
     Student.stub(:find)  {|id| double(id: id) }
-    Question.stub(:find) {|id| double(id: id, correct_answer?: true) }
+    Question.stub(:find) {|id| double(id: id, correct_answer?: true).tap { |q| q.stub(:randomize!) { q } } }
     Game.stub(:create!)  {|hash| double(id: 1) }
   end
 

@@ -14,7 +14,7 @@ end
 
 namespace :spec do
   all_specs = FileList["spec/**/*_spec.rb"]
-  integration_specs = FileList["spec/**/*_integration_spec.rb"]
+  integration_specs = FileList["spec/**/*_integration_spec.rb"] + FileList["spec/requests/**/*_spec.rb"]
   unit_specs = all_specs - integration_specs
 
   desc "Run unit tests"
@@ -35,7 +35,3 @@ namespace :spec do
     t.verbose = true
   end
 end
-
-Rake::Task[:spec].clear
-desc "Run all tests"
-task :spec => ["spec:unit", "spec:integration"]

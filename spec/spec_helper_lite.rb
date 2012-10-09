@@ -7,17 +7,26 @@ Dir["#{ROOT}/spec/factories/**/*.rb"].each { |f| require f }
 require "paperclip"
 Paperclip.options[:log] = false
 
+require "debugger"
+
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include UnitSpecHelpers
   config.include NullDBSpecHelpers
 end
 
-require "vcr"
+def stub_class(full_name, &block)
+  klass = full_name.split("::").inject(Object) do |context, name|
+    begin
+      context.const_get(name)
+    rescue NameError
+      context.const_set(name, Class.new)
+    end
+  end
 
-VCR.configure do |config|
-  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
-  config.hook_into :fakeweb
+  if block_given?
+    klass.class_eval(&block)
+  end
+
+  klass
 end
-
-require "debugger"

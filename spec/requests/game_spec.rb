@@ -1,7 +1,7 @@
 # encoding: utf-8
-require "spec_helper"
+require "spec_helper_full"
 
-describe GamesController do
+describe "Game" do
   # before(:all) do
   #   School.destroy_all
   #   Student.destroy_all

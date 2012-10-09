@@ -32,6 +32,6 @@ FactoryGirl.define do
   factory :image_question do
     content "Content."
     answer "Answer"
-    image Rack::Test::UploadedFile.new("#{ROOT}/spec/fixtures/files/photo.jpg", "image/jpeg")
+    image Rack::Test::UploadedFile.new("#{ROOT}/spec/fixtures/files/image.jpg", "image/jpeg")
   end
 end

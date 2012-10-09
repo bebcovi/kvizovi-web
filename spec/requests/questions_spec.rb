@@ -1,5 +1,5 @@
 # encoding: utf-8
-require "spec_helper"
+require "spec_helper_full"
 
 describe "Questions" do
   before(:all) do
@@ -25,23 +25,38 @@ describe "Questions" do
     it "first asks for the category" do
       visit new_quiz_question_path(@quiz)
       all("form").should be_empty
+
+      category_labels = [
+        "Točno/netočno",
+        "Ponuđeni odgovori",
+        "Asocijacija",
+        "Pogodi tko/što je na slici",
+        "Upiši točan odgovor"
+      ]
+      category_labels.each do |label|
+        expect { click_on(label) }.to_not raise_error
+        visit new_quiz_question_path(@quiz)
+      end
+    end
+
+    def fill_in_the_form_incorrectly
+      fill_in_the_form
+      fill_in "Tekst pitanja", with: ""
     end
 
     describe "boolean" do
-      let(:question) { build_stubbed(:boolean_question) }
+      let(:question) { build(:boolean_question) }
 
       def fill_in_the_form
-        fill_in "Tvrdnja", with: question.content
+        fill_in "Tekst pitanja", with: question.content
         choose "Točno"
       end
 
       it "keeps the fields filled in on validation errors" do
-        visit new_quiz_question_path(@quiz)
-        click_on "Točno/netočno"
+        visit new_quiz_question_path(@quiz, category: "boolean")
 
-        fill_in_the_form
-        fill_in "Tvrdnja", with: ""
-        click_on "Stvori"
+        fill_in_the_form_incorrectly
+        expect { click_on "Stvori" }.to_not change{BooleanQuestion.count}
 
         current_path.should eq(quiz_questions_path(@quiz))
         find_field("Točno").should be_checked
@@ -51,165 +66,132 @@ describe "Questions" do
         visit new_quiz_question_path(@quiz, category: "boolean")
 
         fill_in_the_form
-        expect { click_on "Stvori" }.to change{Question.count}.from(0).to(1)
+        expect { click_on "Stvori" }.to change{BooleanQuestion.count}.by(1)
 
         current_path.should eq(quiz_questions_path(@quiz))
         page.should have_content("Pitanje je stvoreno.")
       end
-
-      after(:all) do
-        Question.destroy_all
-      end
     end
 
     describe "choice" do
-      let(:question) { build_stubbed(:choice_question) }
+      let(:question) { build(:choice_question) }
 
       def fill_in_the_form
-        fill_in "Pitanje", with: question.content
-        fill_in "question_data_1", with: "Foo"
-        fill_in "question_data_2", with: "Bar"
-        fill_in "question_data_3", with: "Baz"
-        fill_in "question_data_4", with: "Bla"
+        fill_in "Tekst pitanja", with: question.content
+        (1..3).each do |n|
+          fill_in "question_provided_answers_#{n}", with: question.provided_answers[n-1]
+        end
       end
 
       it "keeps the fields filled in on validation errors" do
-        visit new_quiz_question_path(@quiz)
-        click_on "Ponuđeni odgovori"
+        visit new_quiz_question_path(@quiz, category: "choice")
 
-        fill_in_the_form
-        fill_in "Pitanje", with: ""
+        fill_in_the_form_incorrectly
         click_on "Stvori"
 
-        find_field("question_data_1").value.should eq("Foo")
-        find_field("question_data_2").value.should eq("Bar")
-        find_field("question_data_3").value.should eq("Baz")
-        find_field("question_data_4").value.should eq("Bla")
+        (1..3).each do |n|
+          find_field("question_provided_answers_#{n}").value.should eq(question.provided_answers[n-1])
+        end
+
+        all("li input").count.should eq 3
       end
 
       it "is expected to be valid" do
         visit new_quiz_question_path(@quiz, category: "choice")
         fill_in_the_form
-        expect { click_on "Stvori" }.to change{Question.count}.from(0).to(1)
-      end
-
-      after(:all) do
-        Question.destroy_all
+        expect { click_on "Stvori" }.to change{ChoiceQuestion.count}.by(1)
       end
     end
 
     describe "association" do
-      let(:question) { build_stubbed(:association_question) }
+      let(:question) { build(:association_question) }
 
       def fill_in_the_form
-        fill_in "Pitanje", with: question.content
-        fill_in "question_data_1", with: "Foo"
-        fill_in "question_data_2", with: "Foo"
-        fill_in "question_data_3", with: "Bar"
-        fill_in "question_data_4", with: "Bar"
-        fill_in "question_data_5", with: "Baz"
-        fill_in "question_data_6", with: "Baz"
-        fill_in "question_data_7", with: "Bla"
-        fill_in "question_data_8", with: "Bla"
+        fill_in "Tekst pitanja", with: question.content
+        (1..3).each do |n|
+          field_n = (n-1)*2 + 1
+          fill_in "question_associations_#{field_n}", with: question.associations.keys[n-1]
+          fill_in "question_associations_#{field_n + 1}", with: question.associations.values[n-1]
+        end
       end
 
       it "keeps the fields filled in on validation errors" do
         visit new_quiz_question_path(@quiz)
         click_on "Asocijacija"
 
-        fill_in_the_form
-        fill_in "Pitanje", with: ""
+        fill_in_the_form_incorrectly
         click_on "Stvori"
 
-        find_field("question_data_1").value.should eq("Foo")
-        find_field("question_data_2").value.should eq("Foo")
-        find_field("question_data_3").value.should eq("Bar")
-        find_field("question_data_4").value.should eq("Bar")
-        find_field("question_data_5").value.should eq("Baz")
-        find_field("question_data_6").value.should eq("Baz")
-        find_field("question_data_7").value.should eq("Bla")
-        find_field("question_data_8").value.should eq("Bla")
+        (1..3).each do |n|
+          field_n = (n-1)*2 + 1
+          find_field("question_associations_#{field_n}").value.should eq question.associations.keys[n-1]
+          find_field("question_associations_#{field_n + 1}").value.should eq question.associations.values[n-1]
+        end
+
+        all("li input").count.should eq 6
       end
 
       it "is expected to be valid" do
         visit new_quiz_question_path(@quiz, category: "association")
         fill_in_the_form
-        expect { click_on "Stvori" }.to change{Question.count}.from(0).to(1)
-      end
-
-      after(:all) do
-        Question.destroy_all
+        expect { click_on "Stvori" }.to change{AssociationQuestion.count}.by(1)
       end
     end
 
-    describe "photo" do
-      let(:question) { build_stubbed(:photo_question) }
+    describe "image" do
+      let(:question) { build(:image_question) }
 
       def fill_in_the_form
-        fill_in "Pitanje", with: question.content
-        attach_file "Slika", "#{Rails.root}/spec/fixtures/files/photo.jpg"
-        fill_in "Odgovor", with: question.data
+        fill_in "Tekst pitanja", with: question.content
+        attach_file "Slika", "#{Rails.root}/spec/fixtures/files/image.jpg"
+        fill_in "Odgovor", with: question.answer
       end
 
       it "keeps the fields filled in on validation errors" do
-        visit new_quiz_question_path(@quiz)
-        click_on "Pogodi tko/što je na slici"
+        visit new_quiz_question_path(@quiz, category: "image")
 
-        fill_in_the_form
-        fill_in "Pitanje", with: ""
+        fill_in_the_form_incorrectly
         click_on "Stvori"
 
-        find_field("Odgovor").value.should eq(question.data)
+        find_field("Odgovor").value.should eq question.answer
       end
 
       it "is expected to be valid" do
-        visit new_quiz_question_path(@quiz, category: "photo")
+        visit new_quiz_question_path(@quiz, category: "image")
         fill_in_the_form
-        VCR.use_cassette "dropbox_create" do
-          expect { click_on "Stvori" }.to change{Question.count}.from(0).to(1)
-        end
-      end
-
-      after(:all) do
-        VCR.use_cassette "dropbox_delete" do
-          Question.destroy_all
-        end
+        expect { click_on "Stvori" }.to change{ImageQuestion.count}.by(1)
       end
     end
 
     describe "text" do
-      let(:question) { build_stubbed(:text_question) }
+      let(:question) { build(:text_question) }
 
       def fill_in_the_form
-        fill_in "Pitanje", with: question.content
-        fill_in "Odgovor", with: question.data
+        fill_in "Tekst pitanja", with: question.content
+        fill_in "Odgovor", with: question.answer
       end
 
       it "keeps the fields filled in on validation errors" do
-        visit new_quiz_question_path(@quiz)
-        click_on "Upiši točan odgovor"
+        visit new_quiz_question_path(@quiz, category: "text")
 
-        fill_in_the_form
-        fill_in "Pitanje", with: ""
+        fill_in_the_form_incorrectly
         click_on "Stvori"
 
-        find_field("Odgovor").value.should eq(question.data)
+        find_field("Odgovor").value.should eq question.answer
       end
 
       it "is expected to be valid" do
         visit new_quiz_question_path(@quiz, category: "text")
         fill_in_the_form
-        expect { click_on "Stvori" }.to change{Question.count}.from(0).to(1)
-      end
-
-      after(:all) do
-        Question.destroy_all
+        expect { click_on "Stvori" }.to change{TextQuestion.count}.by(1)
       end
     end
+
+    after(:all) { Question.destroy_all }
   end
 
   describe "update" do
-    before(:all) { @question = create(:question, quiz: @quiz) }
+    before(:all) { @question = create(:boolean_question, quiz: @quiz) }
 
     it "redirects back to questions" do
       visit quiz_questions_path(@quiz)
@@ -218,7 +200,7 @@ describe "Questions" do
       current_path.should eq(quiz_questions_path(@quiz))
     end
 
-    after(:all) { Question.destroy_all }
+    after(:all) { @question.destroy }
   end
 
   describe "delete" do
@@ -226,15 +208,11 @@ describe "Questions" do
 
     it "redirects back to questions" do
       visit quiz_questions_path(@quiz)
-      expect { within(".controls") { all("a").last.click } }.to change{Question.count}.from(1).to(0)
+      expect { within(".controls") { all("a").last.click } }.to change{Question.count}.by(-1)
       current_path.should eq(quiz_questions_path(@quiz))
       page.should have_content("Pitanje je izbrisano.")
     end
-
-    after(:all) { Question.destroy_all }
   end
 
-  after(:all) do
-    School.destroy_all
-  end
+  after(:all) { @school.destroy }
 end

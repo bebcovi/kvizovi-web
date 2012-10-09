@@ -1,5 +1,5 @@
 # encoding: utf-8
-require "spec_helper"
+require "spec_helper_full"
 
 shared_examples_for "login" do
   it "works as expected" do
@@ -78,7 +78,7 @@ describe SessionsController do
       let(:login_path) { school_login_path }
       let(:home_path)  { quizzes_path }
 
-      let(:name) { "XV. Gimnazija" }
+      let(:name) { @user.name }
       def cookie; cookies[:school_id] end
     end
   end

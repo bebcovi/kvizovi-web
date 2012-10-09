@@ -53,7 +53,7 @@ describe QuestionsController do
           flash[:notice].should_not be_nil
         end
 
-        after(:all) { Question.last.destroy }
+        after(:all) { @quiz.questions.find { |question| question.id != @question.id }.destroy }
       end
 
       context "invalid record" do

@@ -2,11 +2,14 @@
 
 class Student < ActiveRecord::Base
   attr_accessor :school_key
+  attr_accessible :first_name, :last_name, :grade, :gender, :year_of_birth,
+    :username, :password, :password_confirmation, :school_key
+
   belongs_to :school
 
   has_secure_password
 
-  validate :validate_school_key, on: :create
+  validate :validate_school_key, unless: :school_id?
   validates_presence_of :password, on: :create
   validates :username, presence: true, uniqueness: true
   validates_format_of :username, with: /^[a-zA-Z0-9_]{3,}$/, message: "Može sadržavati samo (engleska) slova, brojeve i '_'"

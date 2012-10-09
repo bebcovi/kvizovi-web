@@ -7,7 +7,7 @@ class BrowserGame
     def create!(game)
       # Storing info
       @store[:quiz_id] = game.quiz_id
-      @store[:questions] = Hash[Quiz.find(game.quiz_id).questions.pluck(:id).shuffle.zip([])]
+      @store[:questions] = Hash[Quiz.find(game.quiz_id).question_ids.shuffle.zip([])]
       @store[:player_ids] = game.players.map(&:id)
 
       # Initialization
