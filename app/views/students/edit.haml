@@ -10,6 +10,6 @@
   = f.input :year_of_birth, collection: (30.years.ago.year..Time.now.year).to_a.reverse, include_blank: false
   = f.input :username
 
-  .buttons
-    = link_to "Odustani", @student
-    = f.button :submit, "Spremi"
+  = buttons(f) do |b|
+    = b.cancel_button "Odustani", @student
+    = b.submit_button "Spremi"

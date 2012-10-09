@@ -13,6 +13,6 @@
   = f.input :grade, collection: classes, as: :grouped_select, group_label_method: :first, group_method: :last, prompt: "Izaberi..."
   = f.input :school_key
 
-  .buttons
-    = link_to "Odustani", student_login_path
-    = f.button :submit, "Registriraj se"
+  = buttons(f) do |b|
+    = b.cancel_button "Odustani", student_login_path
+    = b.submit_button "Registriraj se"

@@ -21,11 +21,11 @@ module QuestionsHelper
 
   def category_icon(category)
     case category
-    when "boolean" then icon("checkbox")
-    when "choice" then icon("list-view")
+    when "boolean"     then icon("checkbox")
+    when "choice"      then icon("list-view")
     when "association" then icon("shuffle")
-    when "image" then icon("picture")
-    when "text" then content_tag(:span, "Abc")
+    when "image"       then icon("picture")
+    when "text"        then content_tag(:span, "Abc")
     end
   end
 end

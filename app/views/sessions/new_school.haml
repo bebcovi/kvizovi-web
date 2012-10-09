@@ -9,8 +9,8 @@
   = f.input :remember_me do
     = check_box_tag :remember_me, 1, params[:remember_me], id: "school_remember_me"
 
-  .buttons
-    = link_to "Odustani", root_path
-    = f.button :submit, "Prijava"
+  = buttons(f) do |b|
+    = b.cancel_button "Odustani", root_path
+    = b.submit_button "Prijava"
 
 %p Ako nemate korisnički račun, možete se registrirati #{link_to "ovdje", new_school_path}.

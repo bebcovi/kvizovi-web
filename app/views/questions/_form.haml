@@ -9,6 +9,6 @@
   = f.input :hint, input_html: {cols: 50, rows: 1},
     placeholder: %(Npr. "Odgovor piši u nominativu.")
 
-  .buttons
-    = link_to "Odustani", quiz_questions_path(@quiz)
-    = f.button :submit
+  = buttons(f) do |b|
+    = b.cancel_button "Odustani", quiz_questions_path(@quiz)
+    = b.submit_button

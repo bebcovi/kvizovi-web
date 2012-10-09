@@ -19,5 +19,5 @@
           - if score != 0
             .fill{style: "width: #{percentage(score, game_presenter.total_score)}%"}
 
-.buttons
-  = link_to "Završi", new_game_path
+= buttons do |b|
+  = b.cancel_button "Završi", new_game_path

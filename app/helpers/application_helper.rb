@@ -103,4 +103,40 @@ module ApplicationHelper
   def percentage(part, total)
     (part/total.to_f * 100).round
   end
+
+  def buttons(form_builder = nil)
+    content_tag :div, class: "buttons" do
+      yield ButtonBuilder.new(form_builder, self)
+    end
+  end
+
+  class ButtonBuilder
+    def initialize(form_builder, template)
+      @form_builder = form_builder
+      @template = template
+    end
+
+    def cancel_button(text, path, options = {})
+      @template.link_to text, path, options
+    end
+
+    def submit_button(*args)
+      options = args.extract_options!.dup
+      options.deep_merge!(data: {"disable-with" => "Učitavanje..."})
+      args << options
+
+      if @form_builder
+        @form_builder.button :submit, *args
+      else
+        @template.submit_tag *args
+      end
+    end
+
+    def button_button(*args)
+      options = args.extract_options!.dup
+      options.deep_merge!(data: {"disable-with" => "Učitavanje..."})
+      args << options
+      @form_builder.button :button, *args
+    end
+  end
 end

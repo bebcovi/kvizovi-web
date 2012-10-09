@@ -7,9 +7,9 @@
   %p Predviđeni razredi:
   = f.input :grades, collection: grades, as: :check_boxes, label: false
 
-  .buttons
-    = link_to "Odustani", quizzes_path
-    = f.button :submit
+  = buttons(f) do |b|
+    = b.cancel_button "Odustani", quizzes_path
+    = b.submit_button
 
   - if @quiz.new_record?
     = notice "Kviz zasad neće biti vidljiv učenicima. Kasnije ga možete učiniti vidljivim kada bude spreman."

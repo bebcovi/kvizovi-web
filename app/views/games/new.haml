@@ -25,8 +25,8 @@
         = p.input :password
       %p= f.error :base
 
-    .buttons
-      = f.button :button, raw("Započni kviz#{content_tag :span, "", class: "name"}!")
+    = buttons(f) do |b|
+      = b.button_button raw("Započni kviz#{content_tag :span, "", class: "name"}!")
 
 - else
 

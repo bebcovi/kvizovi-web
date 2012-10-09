@@ -6,6 +6,6 @@
   = f.input :new_password
   = f.input :new_password_confirmation
 
-  .buttons
-    = link_to "Odustani", current_user
-    = f.button :submit, "Spremi"
+  = buttons(f) do |b|
+    = b.cancel_button "Odustani", current_user
+    = b.submit_button "Spremi"

@@ -15,6 +15,6 @@
 
   = render partial: "questions/question", object: @question, locals: {f: f}
 
-  .buttons
-    = link_to "Prekini", game_path, method: :delete, confirm: "Jeste li sigurni da želite prekinuti igru?"
-    = f.button :button, "Odgovori".append_icon("arrow-right")
+  = buttons(f) do |b|
+    = b.cancel_button "Prekini", game_path, method: :delete, confirm: "Jeste li sigurni da želite prekinuti igru?"
+    = b.button_button "Odgovori".append_icon("arrow-right")

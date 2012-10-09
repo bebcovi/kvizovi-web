@@ -5,6 +5,6 @@
     = label_tag :secret_key, "Tajni ključ aplikacije"
     = password_field_tag :secret_key, nil, size: 50, value: (Rails.env.development? ? ENV["LEKTIRE_KEY"] : nil)
 
-  .buttons
-    = link_to "Odustani", school_login_path
-    = submit_tag "Potvrdi"
+  = buttons do |b|
+    = b.cancel_button "Odustani", school_login_path
+    = b.submit_button "Potvrdi"
