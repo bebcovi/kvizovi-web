@@ -2,224 +2,169 @@
 require "spec_helper_full"
 
 describe "Game" do
-  # before(:all) do
-  #   School.destroy_all
-  #   Student.destroy_all
+  before(:all) do
+    @school = create(:school)
+    @janko = @school.students.create(attributes_for(:janko))
+    @matija = @school.students.create(attributes_for(:matija))
+    @quiz = create(:quiz, school: @school)
+    @boolean_question = create(:boolean_question, quiz: @quiz)
+    @choice_question = create(:choice_question, quiz: @quiz)
+    @association_question = create(:association_question, quiz: @quiz)
+    @image_question = create(:image_question, quiz: @quiz)
+    @text_question = create(:text_question, quiz: @quiz)
+  end
 
-  #   @school = create(:school)
-  #   @student = create(:student, username: "janko")
-  #   @student2 = create(:student, username: "matija")
-  #   @quiz = create(:quiz, activated: true, school: @school)
-  #   create(:boolean_question, quiz: @quiz)
-  #   create(:choice_question, quiz: @quiz)
-  #   create(:association_question, quiz: @quiz)
-  #   create(:photo_question, quiz: @quiz)
-  #   create(:text_question, quiz: @quiz)
-  # end
+  before(:each) do
+    login(:student, attributes_for(:janko))
+  end
 
-  # before(:each) do
-  #   login(@student)
-  #   @student2.stub(:password_plain) { attributes_for(:student)[:password] }
-  # end
+  describe "create" do
+    it "keeps the fields filled in on validation errors" do
+      visit new_game_path
 
-  # describe "create" do
-  #   context "1 player" do
-  #     it "works" do
-  #       visit new_game_path
-  #       choose @quiz.name
-  #       choose "1 igrač"
-  #       click_on "Započni"
+      choose @quiz.name
+      choose "2 igrača"
+      fill_in "Korisničko ime", with: @matija.username
+      click_on "Započni kviz"
 
-  #       current_path.should eq(edit_game_path)
-  #     end
-  #   end
+      find_field(@quiz.name).should be_checked
+      find_field("2 igrača").should be_checked
+      find_field("Korisničko ime").value.should_not be_nil
+    end
 
-  #   context "2 players" do
-  #     it "redirects back on unsuccessful authentication" do
-  #       visit new_game_path
-  #       choose @quiz.name
-  #       choose "2 igrača"
-  #       fill_in "Korisničko ime", with: @student2.username
-  #       fill_in "Lozinka", with: "wrong"
-  #       click_on "Započni"
+    context "1 player" do
+      def fill_in_the_form
+        choose @quiz.name
+        choose "1 igrač"
+      end
 
-  #       current_path.should eq(game_path)
-  #       find_field("Korisničko ime").value.should eq(@student2.username)
-  #       find_field("Lozinka").value.should be_nil
-  #     end
+      it "works" do
+        visit new_game_path
 
-  #     it "successfully authenticates the other player" do
-  #       visit new_game_path
-  #       choose @quiz.name
-  #       choose "2 igrača"
-  #       fill_in "Korisničko ime", with: @student2.username
-  #       fill_in "Lozinka", with: @student2.password_plain
-  #       click_on "Započni"
+        fill_in_the_form
+        click_on "Započni kviz"
 
-  #       current_path.should eq(edit_game_path)
-  #     end
-  #   end
-  # end
+        current_path.should eq edit_game_path
+      end
+    end
 
-  # describe "play" do
-  #   def start_game
-  #     visit new_game_path
-  #     choose @quiz.name
-  #     choose "1 igrač"
-  #     click_on "Započni"
-  #   end
+    context "2 players" do
+      def fill_in_the_form
+        choose @quiz.name
+        choose "2 igrača"
+        fill_in "Korisničko ime", with: attributes_for(:matija)[:username]
+        fill_in "Lozinka", with: attributes_for(:matija)[:password]
+      end
 
-  #   it "has a button to terminate the game" do
-  #     start_game
-  #     click_on "Prekini"
-  #     current_path.should eq(new_game_path)
-  #   end
+      it "doesn't let the same student to be authenticated again" do
+        visit new_game_path
 
-  #   it "doesn't raise errors when nothing is answered" do
-  #     start_game
+        choose @quiz.name
+        choose "2 igrača"
+        fill_in "Korisničko ime", with: attributes_for(:janko)[:username]
+        fill_in "Lozinka", with: attributes_for(:janko)[:password]
+        click_on "Započni kviz"
 
-  #     while current_path == edit_game_path
-  #       expect { click_on "Odgovori" }.to_not raise_error
-  #     end
+        current_path.should_not eq edit_game_path
+      end
 
-  #     Game.last.scores.first.should eq(0)
-  #   end
+      it "works" do
+        visit new_game_path
 
-  #   def answer_incorrectly(question)
-  #     if question.boolean?
-  #       choose ["true", "false"].find { |answer| question.answer != answer }
-  #       click_on "Odgovori"
-  #     elsif question.choice?
-  #       choose question.provided_answers.find { |answer| question.answer != answer }
-  #       click_on "Odgovori"
-  #     elsif question.association?
-  #       span = within("game_answer_2") { first("span") }
-  #       # Make sure the first answer is wrong
-  #       if span.text == question.answer.values.first
-  #         span.drag_to "#game_answer_4"
-  #       end
-  #       click_on "Odgovori"
-  #     elsif question.photo?
-  #       fill_in "Odgovor", with: "wrong"
-  #     elsif question.text?
-  #       fill_in "Odgovor", with: "wrong"
-  #     end
-  #   end
+        fill_in_the_form
+        click_on "Započni kviz"
 
-  #   def answer_correctly(question)
-  #     if question.boolean?
-  #       choose question.answer
-  #       click_on "Odgovori"
-  #     elsif question.choice?
-  #       choose question.answer
-  #       click_on "Odgovori"
-  #     elsif question.association?
-  #       n = 0
-  #       while field = find("#game_answer_#{(n + 1) * 2}")
-  #         if field.first("span").text != question.answer.values[n]
-  #           field.first("span").drag_to "#game_answer_#{(n + 2) * 2}"
-  #         end
-  #         n += 1
-  #       end
-  #       click_on "Odgovori"
-  #     elsif question.photo?
-  #       fill_in "Odgovor", with: question.answer
-  #     elsif question.text?
-  #       fill_in "Odgovor", with: question.answer
-  #     end
-  #   end
+        current_path.should eq edit_game_path
+      end
+    end
+  end
 
-  #   def current_question
-  #     Question.find(session[:game][:questions].keys[session[:game][:current_question]])
-  #   end
+  describe "playing" do
+    def start_game
+      visit new_game_path
+      choose @quiz.name
+      choose "1 igrač"
+      click_on "Započni kviz"
+    end
 
-  #   context "1 player" do
-  #     def start_game
-  #       visit new_game_path
-  #       choose @quiz.name
-  #       choose "1 igrač"
-  #       click_on "Započni"
-  #     end
+    it "doesn't raise errors when questions are not answered" do
+      start_game
 
-  #     context "wrong answers" do
-  #       it "correctly calculates the score" do
-  #         start_game
+      while current_path == edit_game_path
+        click_on "Odgovori"
+      end
 
-  #         while current_path == edit_game_path
-  #           answer_incorrectly(current_question)
-  #         end
+      first(".bar").text.strip.should eq "0%"
+    end
 
-  #         Game.last.scores.first.should eq(0)
-  #       end
-  #     end
+    it "can be given up" do
+      start_game
+      click_on "Prekini"
+      current_path.should eq new_game_path
+    end
 
-  #     context "right answers" do
-  #       it "correctly calculates the score" do
-  #         start_game
+    def answer_question(category)
+      case category
+      when "boolean"
+        answer = (@boolean_question.answer == "true" ? "Točno" : "Netočno")
+        choose answer
+      when "choice"
+        choose @choice_question.answer
+      when "association"
+        (1..@association_question.associations.count).each do |n|
+          fill_in "game_answer_#{n * 2}", with: @association_question.associations.right_side[n - 1]
+        end
+      when "image"
+        fill_in "Odgovor", with: @image_question.answer
+      when "text"
+        fill_in "Odgovor", with: @text_question.answer
+      end
+    end
 
-  #         while current_path == edit_game_path
-  #           answer_correctly(current_question)
-  #         end
+    context "1 player" do
+      def start_game
+        visit new_game_path
+        choose @quiz.name
+        choose "1 igrač"
+        click_on "Započni kviz"
+      end
 
-  #         game = Game.last
-  #         maximum_score = game.questions.count / game.players.count
-  #         game.scores.first.should eq(maximum_score)
-  #       end
-  #     end
-  #   end
+      it "correctly sums up the score" do
+        start_game
 
-  #   context "2 players" do
-  #     def start_game
-  #       visit new_game_path
-  #       choose @quiz.name
-  #       choose "2 igrača"
-  #       fill_in "Korisničko ime", with: @student2.username
-  #       fill_in "Lozinka", with: @student2.password_plain
-  #       click_on "Započni"
-  #     end
+        while current_path == edit_game_path
+          category = first("form")[:class].split(" ").last
+          answer_question(category)
+          click_on "Odgovori"
+        end
 
-  #     it "alternates players" do
-  #       start_game
+        first(".bar").text.strip.should eq "100%"
+      end
+    end
 
-  #       n = 0
-  #       usernames = [@student.username, @student2.username]
-  #       while current_path == edit_game_path
-  #         find(".username").should have_content usernames[n % 2]
-  #         n += 1
-  #       end
-  #     end
+    context "2 players" do
+      def start_game
+        visit new_game_path
+        choose @quiz.name
+        choose "2 igrača"
+        fill_in "Korisničko ime", with: attributes_for(:matija)[:username]
+        fill_in "Lozinka", with: attributes_for(:matija)[:password]
+        click_on "Započni kviz"
+      end
 
-  #     context "wrong answers" do
-  #       it "correctly calculates the score" do
-  #         start_game
+      it "correctly sums up the score" do
+        start_game
 
-  #         while current_path == edit_game_path
-  #           answer_incorrectly(current_question)
-  #         end
+        while current_path == edit_game_path
+          category = first("form")[:class].split(" ").last
+          answer_question(category)
+          click_on "Odgovori"
+        end
 
-  #         Game.last.scores.should eq([0, 0])
-  #       end
-  #     end
+        first(".bar").text.strip.should_not eq "0%"
+      end
+    end
+  end
 
-  #     context "right answers" do
-  #       it "correctly calculates the score" do
-  #         start_game
-
-  #         while current_path == edit_game_path
-  #           answer_correctly(current_question)
-  #         end
-
-  #         game = Game.last
-  #         maximum_score = game.questions.count / game.players.count
-  #         game.scores.should eq([maximum_score, maximum_score])
-  #       end
-  #     end
-  #   end
-  # end
-
-  # after(:all) do
-  #   School.destroy_all
-  #   Student.destroy_all
-  #   Game.destroy_all
-  # end
+  after(:all) { @school.destroy }
 end

@@ -131,7 +131,7 @@ describe "Registration" do
       visit new_student_path
 
       fill_in_the_form
-      expect { click_on "Registriraj se" }.to change{Student.count}.from(0).to(1)
+      expect { click_on "Registriraj se" }.to change{Student.count}.by(1)
 
       current_path.should eq(new_game_path)
       find("#log").should have_link(student.first_name)

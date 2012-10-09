@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class School < ActiveRecord::Base
-  has_many :students
+  has_many :students, dependent: :destroy
   has_many :quizzes, dependent: :destroy
   has_many :questions, through: :quizzes
 

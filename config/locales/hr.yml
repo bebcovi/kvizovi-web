@@ -38,10 +38,14 @@ hr:
           attributes:
             answer:
               blank: "Niste napisali koji je točan odgovor."
-        question:
+        image_question:
           attributes:
-            attachment:
+            image:
               blank: "Niste priložili sliku."
+        submitted_game:
+          attributes:
+            quiz_id:
+              blank: "Nisi izabrao/la kviz."
         quiz:
           attributes:
             grades:

@@ -9,7 +9,7 @@ class AssociationQuestion < Question
   validate :validate_associations
 
   def answer
-    associations
+    associations.original
   end
 
   def correct_answer?(value)
@@ -27,6 +27,8 @@ class AssociationQuestion < Question
   end
 
   class Associations < Hash
+    attr_reader :original
+
     alias left_side keys
     alias right_side values
 
@@ -36,7 +38,7 @@ class AssociationQuestion < Question
     end
 
     def shuffle!
-      replace(Hash[keys.zip(values.shuffle)]) until self.values != @original.values
+      replace(Hash[keys.zip(values.shuffle)]) until self.values != original.values
       self
     end
 

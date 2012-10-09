@@ -7,7 +7,7 @@ FactoryGirl.define do
 
   factory :boolean_question do
     content "Content."
-    answer true
+    answer "true"
   end
 
   factory :choice_question do

@@ -7,7 +7,7 @@ describe "Managing quizzes" do
   end
 
   before(:each) do
-    login(@school)
+    login(:school, attributes_for(:school))
   end
 
   describe "create" do
@@ -96,8 +96,8 @@ describe "Managing quizzes" do
 
       it "toggles the visibility" do
         visit quizzes_path
-        expect { first("button").click }.to change{@quiz.reload.activated}.from(false).to(true)
         expect { first("button").click }.to change{@quiz.reload.activated}.from(true).to(false)
+        expect { first("button").click }.to change{@quiz.reload.activated}.from(false).to(true)
         current_path.should eq(quizzes_path)
       end
     end

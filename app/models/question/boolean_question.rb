@@ -7,11 +7,11 @@ class BooleanQuestion < Question
   validates_presence_of :answer
 
   def true?
-    answer
+    answer.to_s == "true"
   end
 
   def false?
-    !answer
+    not true?
   end
 
   def correct_answer?(value)

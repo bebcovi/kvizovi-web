@@ -8,24 +8,25 @@ class SubmittedGame
   attribute :players, default: []
   attr_accessor :players_credentials
 
-  validate :quiz_id_must_be_present
+  validates_presence_of :quiz_id, message: "Nisi izabrao/la kviz."
+  validates_presence_of :players_count, message: "Nisi izabrao/la broj igrača."
   validate :all_players_should_be_authenticated
 
-  private
-
-  def quiz_id_must_be_present
-    if quiz_id.blank?
-      errors[:base] << "Niste izabrali kviz."
-    end
+  def quiz
+    Quiz.find(quiz_id)
   end
+
+  private
 
   def all_players_should_be_authenticated
     self.players += players_credentials
       .map { |attributes| Student.authenticate(attributes) }
       .reject(&:blank?)
 
-    if players.count != players_count
-      errors[:base] << "Igrač nije uspješno autenticiran."
+    self.players.uniq!
+
+    if players_count && players_count != players.count
+      errors[:players_credentials] << "Pogrešno korisničko ime ili lozinka."
     end
   end
 end

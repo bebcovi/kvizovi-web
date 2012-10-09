@@ -16,7 +16,7 @@ class Student < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :grade, :gender, :year_of_birth
 
   before_create do
-    self.school = School.find_by_key(school_key)
+    self.school = School.find_by_key(school_key) if school_key
   end
 
   def full_name

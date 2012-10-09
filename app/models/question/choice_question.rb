@@ -10,7 +10,7 @@ class ChoiceQuestion < Question
   validate :validate_provided_answers
 
   def answer
-    provided_answers.first
+    provided_answers.original.first
   end
 
   def correct_answer?(value)
@@ -28,13 +28,15 @@ class ChoiceQuestion < Question
   end
 
   class ProvidedAnswers < Array
+    attr_reader :original
+
     def initialize(array)
       @original = array
       super
     end
 
     def shuffle!
-      super until self.first != @original.first
+      super until self.first != original.first
       self
     end
 

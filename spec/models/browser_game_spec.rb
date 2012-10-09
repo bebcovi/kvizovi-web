@@ -10,7 +10,6 @@ describe BrowserGame do
   end
 
   before(:each) do
-    @browser_game = double(quiz_id: 1)
     Quiz.stub(:find)     {|id| double(id: id, question_ids: [1, 2, 3, 4]) }
     Student.stub(:find)  {|id| double(id: id) }
     Question.stub(:find) {|id| double(id: id, correct_answer?: true).tap { |q| q.stub(:randomize!) { q } } }
@@ -18,10 +17,7 @@ describe BrowserGame do
   end
 
   context "1 player" do
-    before(:each) do
-      @browser_game = double(quiz_id: 1, players: [double(id: 1)])
-      @it = BrowserGame.new({}).create!(@browser_game)
-    end
+    before(:each) { @it = BrowserGame.new({}).create!(double(quiz_id: 1, players: [double(id: 1)], quiz: Quiz.find(1))) }
     subject { @it }
 
     describe "action methods" do

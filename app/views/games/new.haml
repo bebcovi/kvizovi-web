@@ -20,10 +20,10 @@
 
     %section.login
       %p Daj drugom igraču da se prijavi:
+      %p= f.error :players_credentials
       = f.simple_fields_for :players_credentials, index: nil do |p|
         = p.input :username, input_html: {value: (params[:game][:players_credentials].first[:username] rescue nil)}
         = p.input :password
-      %p= f.error :base
 
     = buttons(f) do |b|
       = b.button_button raw("Započni kviz#{content_tag :span, "", class: "name"}!")

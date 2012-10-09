@@ -8,7 +8,7 @@ describe "Questions" do
   end
 
   before(:each) do
-    login(@school)
+    login(:school, attributes_for(:school))
   end
 
   it "has a link" do

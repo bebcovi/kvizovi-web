@@ -36,7 +36,7 @@ class GamesController < ApplicationController
       redirect_to action: :edit
     else
       session[:game_id] = game.create_record!
-      session.delete(:game)
+      game.clear!
       redirect_to action: :show
     end
   end
@@ -48,7 +48,7 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    session.delete(:game)
+    game.clear!
     redirect_to action: :new
   end
 
