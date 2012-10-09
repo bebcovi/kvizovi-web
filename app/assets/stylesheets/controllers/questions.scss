@@ -46,6 +46,11 @@ ol.categories {
 
 ol.questions { @extend %nice-list; }
 
+#question_content,
+#question_hint {
+  height: rhythm(1.5, $text-input-font-size);
+}
+
 #question_content {
   width: 100%;
 }

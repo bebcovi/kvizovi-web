@@ -2,12 +2,11 @@
 
   = hidden_field_tag :category, params[:category]
 
-  = f.input :content, label: "Tekst pitanja", input_html: {rows: 1}
+  = f.input :content, label: "Tekst pitanja"
 
   = render partial: "#{@question.category}_question_fields", object: @question, as: "#{@question.category}_question", locals: {f: f}
 
-  = f.input :hint, input_html: {cols: 50, rows: 1},
-    placeholder: %(Npr. "Odgovor piši u nominativu.")
+  = f.input :hint, placeholder: %(Npr. "Odgovor piši u nominativu.")
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", quiz_questions_path(@quiz)
