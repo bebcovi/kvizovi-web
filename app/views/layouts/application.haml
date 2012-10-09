@@ -8,8 +8,7 @@
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = javascript_include_tag "//use.typekit.net/nfo7hcu.js"
-    :javascript
-      try{Typekit.load();}catch(e){}
+    %script try{Typekit.load();}catch(e){}
 
   %body{class: body_class}
     %header

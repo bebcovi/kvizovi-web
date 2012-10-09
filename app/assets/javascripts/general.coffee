@@ -10,7 +10,7 @@ App.general = ->
 
   $('.controls a, button').tooltip()
 
-  # description expand/collapse
+  # info expand/collapse
 
   $info         = $('.info')
   $infoExpander = $ '<a>',
@@ -23,8 +23,8 @@ App.general = ->
 
   $('#main').prepend($infoExpander) if $info.length
 
+  $infoExpander.tooltip placement: 'left'
+
   $infoExpander.on 'click', (event) ->
     event.preventDefault()
     $info.toggleClass 'collapsed'
-
-  $infoExpander.tooltip placement: 'left'
