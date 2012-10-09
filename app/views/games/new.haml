@@ -12,11 +12,11 @@
 
     %section.quizzes
       %p Odaberi kviz:
-      = f.collection_radio_buttons :quiz_id, @quizzes, :id, :name
+      = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
 
     %section.players
       %p U koliko igrača želiš igrati?
-      = f.collection_radio_buttons :players_count, [[1, "1 igrač"], [2, "2 igrača"]], :first, :last, checked: @game.players_count
+      = f.input :players_count, collection: [["1 igrač", 1], ["2 igrača", 2]], as: :radio_buttons, label: false
 
     %section.login
       %p Daj drugom igraču da se prijavi:

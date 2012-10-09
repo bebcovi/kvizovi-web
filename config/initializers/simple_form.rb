@@ -1,16 +1,3 @@
-# Workaround for defaults wrappers not working in SimpleForm configuration
-module ActionView::Helpers
-  class FormBuilder
-    include Module.new {
-      ["collection_radio_buttons", "collection_check_boxes"].each do |method|
-        define_method(method) do |attribute_name, collection, value_method, label_method, options = {}, html_options = {}|
-          super(attribute_name, collection, value_method, label_method, {collection_wrapper_tag: :ol, item_wrapper_tag: :li}.merge(options), html_options)
-        end
-      end
-    }
-  end
-end
-
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   # Wrappers are used by the form builder to generate a
