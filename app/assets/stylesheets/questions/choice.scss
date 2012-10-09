@@ -18,7 +18,13 @@ form.choice {
     }
 
     div.field_with_hint {
-      input { float: none; }
+      input {
+        float: none;
+        color: $correct;
+        font-weight: 400;
+        border-color: rgba($green, .75);
+      }
+
       .error { display: inline; }
     }
 

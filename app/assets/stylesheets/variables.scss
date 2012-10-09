@@ -37,15 +37,19 @@ $default-border-radius: 3px;
 // colors
 
 $red: hsl(0, 50%, 50%);
+$purple: hsl(270, 50%, 50%);
+$green: hsl(100, 75%, 25%);
 
 $text: lighten(black, 30%);
 
 $link1: $red;
 $link2: darken($link1, 5%);
 
+$correct: $green;
+
 $players:
-  one hsl(270, 50%, 50%),
-  two hsl(100, 75%, 25%);
+  one $purple,
+  two $green;
 
 // type
 
