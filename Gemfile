@@ -13,11 +13,12 @@ group :assets do
   gem "susy"
   gem "animation"
   gem "modular-scale", "~> 1.0.2"
-  gem "jquery-rails"
-  gem "jquery-ui-rails"
   gem "coffee-rails"
   gem "uglifier"
 end
+
+gem "jquery-rails"
+gem "jquery-ui-rails"
 
 # Views
 gem "haml", "3.2.0.beta.1"
