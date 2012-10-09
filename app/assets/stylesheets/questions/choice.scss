@@ -1,6 +1,13 @@
 form.choice {
 
   &.edit, &.new {
+    li {
+      @include trailer(.5);
+      &:first-child, &:last-child {
+        @include trailer(0);
+      }
+    }
+
     div.string {
       @extend %pie-clearfix;
 

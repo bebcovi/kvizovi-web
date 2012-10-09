@@ -1,17 +1,18 @@
-form.photo {
+form.image {
 
   &.show {
     $cols: $total-columns / 2;
-
     .img {
-      @include span-columns($cols omega);
-      text-align: left;
+      float: left;
+      max-width: columns($cols);
+      margin-right: gutter();
     }
 
     .input,
     .hint,
     .buttons {
-      @include span-columns($cols);
+      float: left;
+      width: columns($cols);
     }
 
     .input { @include trailer; }
@@ -25,7 +26,7 @@ form.photo {
 
     .buttons {
       @include leader(0);
-      clear: left;
+      clear: right;
     }
   }
 

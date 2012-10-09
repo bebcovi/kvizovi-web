@@ -4,9 +4,9 @@ App.Questions.association = module = {}
 
 module.show = ($form) ->
 
-  $pairs    = $form.find '.pair'
+  $pairs    = $('li', $form)
 
-  $dynamic  = $form.find '.dynamic'
+  $dynamic  = $('.dynamic', $form)
 
   swap      = ($one, $two) ->
 
@@ -43,8 +43,10 @@ module.show = ($form) ->
 
 module.new = ($form) ->
 
-  $firstPair    = $form.find('.pair').first()
-  $otherPairs   = $firstPair.nextAll '.pair'
+  $pairs        = $('li', $form)
+
+  $firstPair    = $pairs.first()
+  $otherPairs   = $firstPair.siblings()
   $template     = $firstPair.clone()
 
   $addButton    = $.addButton.clone()
@@ -78,9 +80,10 @@ module.new = ($form) ->
 
   $otherPairs.add($template).find('.dynamic').after $removeButton.clone()
 
-  $template.find('input').val ''
-  $template.find('div').removeClass 'field_with_errors'
-  $template.find('.error').remove()
+  $template
+    .find('input').val('').end()
+    .find('div').removeClass('field_with_errors').end()
+    .find('.error').remove()
 
   $addButton
     .insertAfter($otherPairs.last())
@@ -90,10 +93,8 @@ module.new = ($form) ->
       addPair $new
 
   $form.on 'click', '.remove', ->
-    $el = $(@).parent()
+    $el = $(@).closest('li')
     removePair $el
     $otherPairs.each (i) -> updateAttrs $(@), i
 
-module.edit = ($form) ->
-
-  module.new($form)
+module.edit = module.new

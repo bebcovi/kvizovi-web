@@ -3,8 +3,9 @@ form.association {
   &.show {
     $height: 1.5;
 
-    .pair {
+    li {
       @extend %pie-clearfix;
+      @include trailer(.5);
       font-weight: 300;
 
       div, i {
@@ -48,8 +49,9 @@ form.association {
   }
 
   &.edit, &.new {
-    .pair {
+    li {
       @extend %pie-clearfix;
+      @include trailer(.5);
 
       $cols: $total-columns/2 - 1;
       div { @include span-columns($cols); }

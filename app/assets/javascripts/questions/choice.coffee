@@ -4,8 +4,9 @@ App.Questions.choice = module = {}
 
 module.new = ($form) ->
 
-  $firstOption  = $form.find('.field_with_hint')
-  $otherOptions = $firstOption.nextAll '.string'
+  $options      = $('li', $form)
+  $firstOption  = $options.first()
+  $otherOptions = $firstOption.siblings()
   $template     = $firstOption.clone()
 
   $addButton    = $.addButton.clone()
@@ -36,9 +37,10 @@ module.new = ($form) ->
 
   $otherOptions.add($template).find('input').after $removeButton.clone()
 
-  $template.find('input').val ''
-  $template.removeClass 'field_with_hint field_with_errors'
-  $template.find('.hint, .error').remove()
+  $template
+    .find('input').val('').end()
+    .find('div').removeClass('field_with_hint field_with_errors').end()
+    .find('.hint, .error').remove()
 
   $addButton
     .insertAfter($otherOptions.last())
@@ -48,7 +50,7 @@ module.new = ($form) ->
       addOption $new
 
   $form.on 'click', '.remove', ->
-    $el = $(@).parent()
+    $el = $(@).closest('li')
     removeOption $el
     $otherOptions.each (i) -> updateAttrs $(@), i
 

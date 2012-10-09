@@ -1,6 +1,6 @@
 $ = jQuery
 
-App.Questions.photo = module = {}
+App.Questions.image = module = {}
 
 module.new = ($form) ->
 
@@ -33,6 +33,4 @@ module.new = ($form) ->
     else
       alert "Datoteka #{file.name} nije slika."
 
-module.edit = ($form) ->
-
-  module.new($form)
+module.edit = module.new
