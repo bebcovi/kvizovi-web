@@ -28,6 +28,7 @@ form {
 .controls {
   @include clearfix;
   float: right;
+  height: rhythm();
   margin-left: rhythm();
   a {
     @extend %subtle;
