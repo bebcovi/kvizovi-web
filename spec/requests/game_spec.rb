@@ -161,7 +161,7 @@ describe "Game" do
           click_on "Odgovori"
         end
 
-        first(".bar").text.strip.should_not eq "0%"
+        all(".bar").map(&:text).map(&:strip).each { |str| str.should_not eq "0%" }
       end
     end
   end

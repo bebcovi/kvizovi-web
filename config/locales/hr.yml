@@ -14,10 +14,12 @@ hr:
               blank: "Nisi odabrao/la razred."
             username:
               taken: "Već postoji učenik s tim korisničkim imenom."
+              invalid: "Može sadržavati samo engleska slova, brojeve i _."
+              too_short: "Prekratko je (mora sadržavati barem 3 znaka)."
             gender:
-              blank: "Niste izabrali spol."
+              blank: "Nisi izabrao/la spol."
             year_of_birth:
-              blank: "Niste izabrali godinu rođenja."
+              blank: "Nisi izabrao/la godinu rođenja."
         school:
           attributes:
             level:

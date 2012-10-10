@@ -10,13 +10,12 @@ class Student < ActiveRecord::Base
   has_secure_password
 
   validate :validate_school_key, unless: :school_id?
-  validates_presence_of :password, on: :create
-  validates :username, presence: true, uniqueness: true
-  validates_format_of :username, with: /^[a-zA-Z0-9_]{3,}$/, message: "Može sadržavati samo (engleska) slova, brojeve i '_'"
-  validates_presence_of :first_name, :last_name, :grade, :gender, :year_of_birth
+  validates_format_of :username, with: /^[a-zA-Z0-9_]*$/
+  validates_length_of :username, minimum: 3
+  validates_presence_of :first_name, :last_name, :username, :password, :grade, :gender, :year_of_birth
+  validates_uniqueness_of :username
 
-  before_create do
-    self.school = School.find_by_key(school_key) if school_key
+  before_create { self.school ||= School.find_by_key(school_key) }
   end
 
   def full_name
