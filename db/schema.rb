@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008014837) do
+ActiveRecord::Schema.define(:version => 20121011194607) do
 
   create_table "games", :force => true do |t|
     t.text     "info"
@@ -24,14 +24,15 @@ ActiveRecord::Schema.define(:version => 20121008014837) do
     t.text     "content"
     t.text     "data"
     t.integer  "quiz_id"
+    t.text     "hint"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.text     "hint"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "type"
+    t.string   "image_meta"
   end
 
   create_table "quizzes", :force => true do |t|

@@ -30,6 +30,7 @@ gem "rails-i18n"
 # Other
 gem "paperclip"
 gem "paperclip-dropbox", "~> 1.0"
+gem "paperclip-meta"
 gem "bcrypt-ruby", "~> 3.0"
 gem "active_attr"
 gem "nokogiri"
