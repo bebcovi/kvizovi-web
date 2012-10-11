@@ -2,60 +2,68 @@ class GamesController < ApplicationController
   before_filter :authenticate_student!
 
   def new
-    @game = SubmittedGame.new
-    @quizzes = current_student.school.quizzes.activated
+    @game_submission = GameSubmission.new
+    @quizzes = current_student.available_quizzes
   end
 
   def create
-    @game = SubmittedGame.new(params[:game])
-    @game.players << current_student
+    @game_submission = GameSubmission.new(params[:game_submission])
+    @game_submission.players << current_student
 
-    if @game.valid?
-      game.create!(@game)
+    if @game_submission.valid?
+      game_state.initialize!(@game_submission.info)
       redirect_to action: :edit
     else
-      @quizzes = current_student.school.quizzes.activated
+      @quizzes = current_student.available_quizzes
       render :new
     end
   end
 
   def edit
-    @quiz = game.quiz
-    @player = game.current_player
-    @question = game.current_question
-    @question_number = game.current_question_number
-    @player_number = game.current_player_number
-    @questions_count = game.questions_count
+    @quiz = quiz
+    @player = current_player
+    @question = current_question.randomize!
+    @question_number = game_state.current_question_number
+    @player_number = game_state.current_player_number
+    @questions_count = game_state.questions_count
   end
 
   def update
-    game.update!(params[:game].try(:[], :answer))
+    game_state.save_answer!(current_question.correct_answer?(params[:game][:answer]))
 
-    if game.questions_left > 0
-      game.next_question!
+    unless game_state.game_finished?
+      game_state.next_question!
       redirect_to action: :edit
     else
-      session[:game_id] = game.create_record!
-      game.clear!
       redirect_to action: :show
     end
   end
 
   def show
-    @game = Game.find(session[:game_id])
-    @questions_count = @game.questions.count
-    @question_number = @questions_count
+    @game_review = GameReview.new(game_state.info)
+    @quiz = @game_review.quiz
+    @questions_count = @game_review.questions_count
   end
 
   def destroy
-    game.clear!
     redirect_to action: :new
   end
 
   private
 
-  def game
-    session[:game] ||= {}
-    BrowserGame.new(session[:game])
+  def game_state
+    GameState.new(cookies)
+  end
+
+  def current_question
+    Question.find(game_state.current_question_id)
+  end
+
+  def current_player
+    Student.find(game_state.current_player_id)
+  end
+
+  def quiz
+    Quiz.find(game_state.quiz_id)
   end
 end

@@ -16,6 +16,9 @@ class Student < ActiveRecord::Base
   validates_uniqueness_of :username
 
   before_create { self.school ||= School.find_by_key(school_key) }
+
+  def available_quizzes
+    school.quizzes.activated
   end
 
   def full_name
@@ -38,3 +41,5 @@ class Student < ActiveRecord::Base
     end
   end
 end
+
+Player = Student

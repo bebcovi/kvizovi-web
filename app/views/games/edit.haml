@@ -5,13 +5,15 @@
 .username{class: number(@player_number)}= @player.username.prepend_icon("user")
 
 #progress
-  - @questions_count.times do |i|
-    - if i < @question_number - 1
-      %div.done{style: "width: #{100/@questions_count.to_f}%"}
-    - else
-      %div{style: "width: #{100/@questions_count.to_f}%"}
+  - progress.number_of_answered_questions.times do
+    %div.done{style: "width: #{progress.chunk_size}%"}
+  - progress.number_of_questions_to_be_answered.times do
+    %div{style: "width: #{progress.chunk_size}%"}
 
 = simple_form_for :game, url: game_path, method: :put, html: {class: "show #{@question.category}"} do |f|
+
+  -# So that params[:game][:answer] isn't blank
+  = f.hidden_field :answer unless @question.association?
 
   = render partial: "questions/question", object: @question, locals: {f: f}
 

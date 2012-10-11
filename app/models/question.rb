@@ -30,10 +30,15 @@ class Question < ActiveRecord::Base
   end
 
   def randomize!
+    @randomized = true
     self
   end
 
   def randomize
     dup.randomize!
+  end
+
+  def randomized?
+    !!@randomized
   end
 end

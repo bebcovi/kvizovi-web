@@ -1,23 +1,21 @@
-- @title = "#{@game.quiz.name} · Kraj"
+- @title = "#{@quiz.name} · Kraj"
 
 %h1 Rezultati
 
 #progress.done
-  - @questions_count.times do |i|
+  - @questions_count.times do
     %div.done{style: "width: #{100/@questions_count.to_f}%"}
 
-- present @game do |game_presenter|
-
-  %ol.score
-    - game_presenter.results.each do |player, score, player_number, rank|
-      %li{class: number(player_number)}
-        %dl
-          %dt.username= player.username.prepend_icon("user")
-          %dd.rank Imaš #{score} od #{game_presenter.total_score} bodova. Ti si #{rank}.
-        .bar
-          .label #{percentage(score, game_presenter.total_score)}%
-          - if score != 0
-            .fill{style: "width: #{percentage(score, game_presenter.total_score)}%"}
+%ol.score
+  - @game_review.results.each do |player, score, player_number, rank|
+    %li{class: number(player_number)}
+      %dl
+        %dt.username= player.username.prepend_icon("user")
+        %dd.rank Imaš #{score} od #{@game_review.total_score} bodova. Ti si #{rank}.
+      .bar
+        .label #{percentage(score, @game_review.total_score)}%
+        - if score != 0
+          .fill{style: "width: #{percentage(score, @game_review.total_score)}%"}
 
 = buttons do |b|
   = b.cancel_button "Završi", new_game_path

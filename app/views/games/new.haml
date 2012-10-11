@@ -8,7 +8,7 @@
 
 - if @quizzes.any?
 
-  = simple_form_for @game, as: :game, url: game_path do |f|
+  = simple_form_for @game_submission, url: game_path do |f|
 
     %section.quizzes
       %p Odaberi kviz:
@@ -22,7 +22,7 @@
       %p Daj drugom igraču da se prijavi:
       %p= f.error :players_credentials
       = f.simple_fields_for :players_credentials, index: nil do |p|
-        = p.input :username, input_html: {value: (params[:game][:players_credentials].first[:username] rescue nil)}
+        = p.input :username, input_html: {value: (params[:game_submission][:players_credentials].first[:username] rescue nil)}
         = p.input :password
 
     = buttons(f) do |b|
