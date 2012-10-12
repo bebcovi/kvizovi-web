@@ -1,2 +1,2 @@
-.img= image_tag image_question.image.url(:resized)
+.img{style: "width: #{image_question.image.width(:resized)}px"}= image_tag image_question.image.url(:resized)
 = f.input :answer
