@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(:version => 20121011194607) do
     t.text     "content"
     t.text     "data"
     t.integer  "quiz_id"
-    t.text     "hint"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.text     "hint"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
