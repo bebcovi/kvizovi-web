@@ -26,7 +26,7 @@ class GameReview
   end
 
   def player_numbers
-    (1..@hash[:player_ids].count)
+    (1..@hash[:player_ids].count).to_a
   end
 
   def ranks

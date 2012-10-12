@@ -24,5 +24,9 @@ FactoryGirl.define do
       username "matija"
       password "matija"
     end
+
+    factory :player do
+      sequence(:username) { |n| "jon_#{n}" }
+    end
   end
 end

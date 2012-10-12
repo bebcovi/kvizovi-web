@@ -1,4 +1,5 @@
 # encoding: utf-8
+require "active_record"
 
 class Student < ActiveRecord::Base
   attr_accessor :school_key

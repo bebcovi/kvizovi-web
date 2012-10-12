@@ -6,7 +6,7 @@ class PasswordsController < ApplicationController
   end
 
   def update
-    @password = Password.new(params[:password], current_user)
+    @password = Password.new(params[:password].merge(user: current_user))
 
     if @password.save
       redirect_to current_user, notice: "Lozinka je uspješno izmjenjena."

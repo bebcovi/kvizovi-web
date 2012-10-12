@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SchoolsController < ApplicationController
   def new
     if flash[:authorized]
@@ -34,5 +36,11 @@ class SchoolsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    current_school.destroy
+    log_out!
+    redirect_to root_path, notice: "Vaš profil je uspješno izbrisan."
   end
 end

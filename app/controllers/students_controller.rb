@@ -41,11 +41,11 @@ class StudentsController < ApplicationController
   def destroy
     if school_logged_in?
       current_school.students.destroy(params[:id])
+      redirect_to students_path, notice: "Učenik je uspješno izbrisan."
     else
       current_student.destroy
       log_out!
+      redirect_to root_path, notice: "Tvoj profil je uspješno izbrisan."
     end
-
-    redirect_to students_path, notice: "Učenik je uspješno izbrisan."
   end
 end
