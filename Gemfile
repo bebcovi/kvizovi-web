@@ -11,8 +11,7 @@ group :assets do
   gem "compass", "~> 0.13.alpha.0"
   gem "compass-rails"
   gem "susy"
-  gem "animation"
-  gem "modular-scale", "~> 1.0.2"
+  gem "modular-scale"
   gem "coffee-rails"
   gem "uglifier"
 end
