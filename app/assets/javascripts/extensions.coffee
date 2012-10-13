@@ -3,16 +3,12 @@ $ = jQuery
 # methods
 
 $.fn.prependIcon = (name) ->
-  @.each -> $(@).prepend "<i class=\"icon-#{name}\">"
+  @.each -> $(@).prepend "<i class=\"icon-#{name}\"> "
 
 $.fn.appendIcon = (name) ->
-  @.each -> $(@).append "<i class=\"icon-#{name}\">"
+  @.each -> $(@).append " <i class=\"icon-#{name}\">"
 
 # properties
-
-$.loader = $('<div>')
-.addClass('loader')
-.prependIcon('loading')
 
 $.removeButton = $ '<button>',
   type: 'button'
@@ -25,6 +21,15 @@ $.addButton = $ '<a>',
 .addClass('add')
 .text(' Dodaj')
 .prependIcon('plus')
+
+$.timer = $('<div>')
+.addClass('timer')
+.prependIcon('stopwatch')
+.append $('<span>', {class: 'time'})
+
+$.loader = $('<div>')
+.addClass('loader')
+.prependIcon('loading')
 
 # functions
 

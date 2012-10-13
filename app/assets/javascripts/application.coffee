@@ -5,6 +5,7 @@
 #= require jquery.ui.droppable
 #
 #= require bootstrap
+#= require moment
 #
 #= require extensions
 #= require lektire

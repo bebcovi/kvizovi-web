@@ -51,7 +51,43 @@ App.Controllers.games = do ->
 
   edit: ->
 
-    # timer...
+    $form        = $('form')
+
+    $buttons     = $('.buttons', $form)
+
+    $timer       = $.timer.clone().appendTo $('#main')
+    $time        = $('.time', $timer)
+
+    clearStorage = -> localStorage.removeItem 'total'
+
+    if localStorage['total']
+      total = localStorage['total'] - 0
+    else
+      total = 2 * 60 * 1000
+      localStorage['total'] = total
+
+    countdown = do ->
+
+      current = moment.duration total
+
+      min = current.minutes()
+      sec = current.seconds()
+
+      if sec > 9
+        $time.text "#{min}:#{sec}"
+      else
+        $time.text "#{min}:0#{sec}"
+
+      if total
+        localStorage['total'] = total
+        total -= 1000
+        setTimeout arguments.callee, 1000
+      else
+        clearStorage()
+        alert "Isteklo je vrijeme! Što god da si obilježio vrijedi se."
+        $('form').submit()
+
+    $buttons.children().on 'click', clearStorage
 
   show: ->
 
