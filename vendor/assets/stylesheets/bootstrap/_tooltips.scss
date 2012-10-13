@@ -7,17 +7,18 @@
   padding: 5px;
 
   .tooltip-inner {
-    @extend %border-radius;
-    @include adjust-font-size-to($small-font-size);
-    max-width: 200px;
-    padding: 3px 8px;
-    font-family: $small-font-family;
-    color: white;
-    text: {
-      align: center;
-      decoration: none;
+    @include with-font-size($small-font-size) {
+      @extend %border-radius;
+      max-width: 200px;
+      padding: 3px 8px;
+      font-family: $small-font-family;
+      color: white;
+      text: {
+        align: center;
+        decoration: none;
+      }
+      background-color: black;
     }
-    background-color: black;
   }
 
   .tooltip-arrow {
@@ -32,6 +33,7 @@
 
   &.top {
     margin-top: -3px;
+
     .tooltip-arrow {
       bottom: 0;
       left: 50%;
@@ -43,6 +45,7 @@
 
   &.right {
     margin-left: 3px;
+
     .tooltip-arrow {
       top: 50%;
       left: 0;
@@ -54,6 +57,7 @@
 
   &.bottom {
     margin-top: 3px;
+
     .tooltip-arrow {
       top: 0;
       left: 50%;
@@ -65,6 +69,7 @@
 
   &.left {
     margin-left: -3px;
+
     .tooltip-arrow {
       top: 50%;
       right: 0;

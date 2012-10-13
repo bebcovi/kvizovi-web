@@ -6,11 +6,13 @@
 
 @import 'variables';
 @import 'mixins';
+@import 'animations';
 @import 'extends';
+
+@import 'reset';
 
 @import 'bootstrap';
 @import 'icons';
-@import 'animation';
 
 @import 'general';
 @import 'forms';

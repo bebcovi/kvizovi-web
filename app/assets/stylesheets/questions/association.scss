@@ -1,23 +1,21 @@
 form.association {
 
   &.show {
-    $height: 1.5;
-
+    $height: 3/2;
     li {
       @extend %pie-clearfix;
       @include trailer(.5);
       font-weight: 300;
 
-      div, i {
-        @include adjust-leading-to($height);
+      div,
+      i {
+        @extend %inline-block;
       }
 
-      div {
-        @extend %inline-block;
-        &:last-child { margin-top: -4px; }
-      }
+      div { @include adjust-leading-to($height); }
 
       i {
+        @include leader(1/10);
         color: rgba(black, .25);
         margin-right: gutter();
       }
@@ -32,10 +30,10 @@ form.association {
         @extend %border-radius;
         @extend %unselectable;
         @include adjust-leading-to(1);
-        @include h-borders(1px, .25);
-        @include v-borders(1px, .5);
         cursor: move;
-        border-color: darken(white, 25%);
+        height: rhythm($height);
+        padding: rhythm(.25) rhythm(.5);
+        border: 1px solid darken(white, 25%);
         background: darken(white, 2%);
       }
 
@@ -43,7 +41,7 @@ form.association {
 
       .hover {
         border-color: darken(white, 50%);
-        background: darken(white, 3%);
+        background: darken(white, 5%);
       }
     }
   }
@@ -54,22 +52,28 @@ form.association {
       @include trailer(.5);
 
       $cols: $total-columns/2 - 1;
-      div { @include span-columns($cols); }
+      div {
+        float: left;
+        width: columns($cols);
+      }
 
-      i, button { float: left; }
+      .static,
+      .arrow {
+        margin-right: rhythm(2/3);
+      }
 
-      i {
-        @include adjust-leading-to(1.5);
-        margin-right: gutter();
-        text-align: center;
+      .arrow,
+      button {
+        float: left;
+      }
+
+      .arrow {
+        @extend %inline-block;
+        @include leader(1/4);
         color: rgba(black, .25);
       }
 
       input { width: 100%; }
-
-      button { @include leader(.35); }
-
-      .dynamic { margin-right: 0; }
     }
   }
 

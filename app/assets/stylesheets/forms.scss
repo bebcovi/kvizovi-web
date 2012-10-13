@@ -9,6 +9,12 @@ form {
     @include trailer(.5);
   }
 
+  img {
+    @extend %border-radius;
+    max-width: 100%;
+    border: 1px solid rgba(black, .75);
+  }
+
   p.notice {
     @include with-font-size($small-font-size) {
       font-family: $small-font-family;
@@ -19,22 +25,18 @@ form {
   }
 }
 
-[hidden] {
-  display: none;
-}
-
 // controls
 
 .controls {
   @include clearfix;
   float: right;
-  height: rhythm();
   margin-left: rhythm();
   a {
     @extend %subtle;
     display: block;
     float: left;
     padding: 0 rhythm(.25);
+    font-family: 'icons';
   }
 }
 
@@ -49,7 +51,6 @@ form {
 
 label {
   @include user-select(none);
-  &:hover { cursor: pointer; }
   &:after { content: ':'; }
 
   &.checkbox,
@@ -69,8 +70,6 @@ input,
 button,
 textarea {
   width: columns($cols);
-  margin: 0;
-  font-family: inherit;
   color: rgba(black, .6);
 }
 
@@ -95,7 +94,6 @@ button {
     border-color: rgba(black, .25);
     &:focus {
       @include box-shadow(rgba(black, .05) 0 0 0 4px);
-      outline: none;
       border-color: rgba(black, .35);
     }
   }
@@ -131,22 +129,14 @@ label + select {
 
 // modular controls
 
-.add {
-  @extend %subtle;
-  @include trailer(.5);
-}
-
 .remove {
   @include with-font-size(12px) {
-    float: right;
-    cursor: pointer;
-    margin: 0 0 0 rhythm(.5);
-    padding: 0;
-    color: rgba(black, .15);
-    border: none;
-    background: none;
-    &:hover { color: rgba(black, .5); }
-    &:active { color: $text; }
+    @extend %un-button;
+    @include leader(.25);
+    @include color-link(rgba(black, .15), rgba(black, .5));
+    float: left;
+    margin-left: rhythm(.5);
+    font-family: 'icons';
   }
 }
 
@@ -172,7 +162,7 @@ label + select {
 span.error {
   @include with-font-size(14px) {
     color: red;
-    select + &, [type=file] + &, .hint + & {
+    select + &, [type="file"] + &, .hint + & {
       margin-left: rhythm(.25);
     }
   }
@@ -194,14 +184,26 @@ span.error {
 .buttons {
   @include rhythm(1, 0, 0, 1);
   clear: both;
-  input, button { @extend %primary-button; }
 
   a { @extend %button; }
 
+  input,
   button {
-    height: rhythm(1.5);
+    @extend %primary-button;
+    height: rhythm(3/2);
     margin-left: rhythm(.1);
   }
+}
 
-  i { height: rhythm(); }
+// loader
+
+.loader {
+  @include with-font-size(24px) {
+    &, i { @include size(24px, 27px); }
+
+    i {
+      color: rgba(black, .25);
+      @include animation(spin 1.25s infinite linear);
+    }
+  }
 }

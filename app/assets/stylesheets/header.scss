@@ -1,19 +1,18 @@
 header {
   @include clearfix;
-  @include rhythm(0, .5, .5, 0);
+  @include rhythm(0, 1/2, 1/2, 0);
   @include text-shadow(white 0 1px 1px);
   color: rgba(black, .6);
 }
 
 #logo {
-  @include with-font-size($medium) {
+  @include with-font-size($medium, 1) {
     @include trailer(0);
     float: left;
     font-weight: 900;
 
     a {
       display: block;
-      height: rhythm(lines-for-font-size(32px));
       &:hover { text-decoration: none; }
     }
 
@@ -21,7 +20,6 @@ header {
       @include with-font-size(38px) {
         position: relative;
         top: 3px;
-        height: rhythm(lines-for-font-size(32px));
       }
     }
   }
@@ -29,7 +27,7 @@ header {
 
 #log {
   @include with-font-size($small-font-size) {
-    @include rhythm(.75, 0, 0, 0);
+    @include rhythm(3/4, 0, 0, 0);
     float: right;
     font-family: $small-font-family;
   }

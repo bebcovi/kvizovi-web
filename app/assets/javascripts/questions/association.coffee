@@ -1,100 +1,102 @@
 $ = jQuery
 
-App.Questions.association = module = {}
+App.Questions.association = do ->
 
-module.show = ($form) ->
+  show: ($form) ->
 
-  $pairs    = $('li', $form)
+    $pairs    = $('li', $form)
 
-  $dynamic  = $('.dynamic', $form)
+    $dynamic  = $('.dynamic', $form)
 
-  swap      = ($one, $two) ->
+    swap      = ($one, $two) ->
 
-    $oneParent = $one.parent()
-    $twoParent = $two.parent()
+      $oneParent = $one.parent()
+      $twoParent = $two.parent()
 
-    $one.prependTo $twoParent
-    $two.prependTo $oneParent
+      $one.prependTo $twoParent
+      $two.prependTo $oneParent
 
-    $one.next().attr 'value', $one.text()
-    $two.next().attr 'value', $two.text()
+      $one.next().attr 'value', $one.text()
+      $two.next().attr 'value', $two.text()
 
-  $pairs.find('input').each ->
-    $el = $('<span>').text $(@).val()
-    $(@).before $el
-    $(@).hide()
+    $pairs.find('input').each ->
+      $el = $('<span>').text $(@).val()
+      $(@).before $el
+      $(@).hide()
 
-  $dynamic.find('span')
+    $dynamic.find('span')
 
-    .draggable
-      addClasses: false
-      revert: 'invalid'
-      revertDuration: 250
-      helper: 'clone'
-      zIndex: 10
-      start: -> $(@).addClass 'original'
-      stop:  -> $(@).removeClass 'original'
+      .draggable
+        addClasses: false
+        revert: 'invalid'
+        revertDuration: 250
+        helper: 'clone'
+        zIndex: 10
+        start: -> $(@).addClass 'original'
+        stop:  -> $(@).removeClass 'original'
 
-    .droppable
-      addClasses: false
-      hoverClass: 'hover'
-      drop: (e, ui) -> swap($(@), ui.draggable)
+      .droppable
+        addClasses: false
+        hoverClass: 'hover'
+        drop: (e, ui) -> swap($(@), ui.draggable)
 
+  new: ($form) ->
 
-module.new = ($form) ->
+    $pairs        = $('li', $form)
 
-  $pairs        = $('li', $form)
+    $firstPair    = $pairs.first()
+    $otherPairs   = $firstPair.siblings()
+    $template     = $firstPair.clone()
 
-  $firstPair    = $pairs.first()
-  $otherPairs   = $firstPair.siblings()
-  $template     = $firstPair.clone()
+    $addButton    = $.addButton.clone()
+    $removeButton = $.removeButton.clone()
 
-  $addButton    = $.addButton.clone()
-  $removeButton = $.removeButton.clone()
+    updateAttrs   = ($el, i) ->
 
-  updateAttrs   = ($el, i) ->
+      i += 2
+      j = i * 2
 
-    i += 2
-    j = i * 2
+      $el.find('.static, .dynamic').each (index) ->
 
-    $el.find('.static, .dynamic').each (index) ->
+        $input = $(@).find('input')
 
-      $input = $(@).find('input')
+        id = $input.attr('id')
+        placeholder = $input.attr('placeholder')
 
-      id = $input.attr('id')
-      placeholder = $input.attr('placeholder')
+        $input.attr 'id',           id.replace(/\d+/, if index is 1 then j else j - 1)
+        $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
 
-      $input.attr 'id',           id.replace(/\d+/, if index is 1 then j else j - 1)
-      $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
+    addPair = ($el) ->
+      $otherPairs = $otherPairs.add $el.insertBefore($addButton)
 
-  addPair = ($el) ->
-    $otherPairs = $otherPairs.add $el.insertBefore($addButton)
+    removePair = ($el) ->
+      $otherPairs = $otherPairs.not $el.remove()
 
-  removePair = ($el) ->
-    $otherPairs = $otherPairs.not $el.fadeOut('fast', -> $(@).remove())
+    filled = ($el) ->
+      result = true
+      $el.find('input').each -> result = result and !!$(@).val()
+      result
 
-  filled = ($el) ->
-    result = true
-    $el.find('input').each -> result = result and !!$(@).val()
-    result
+    $otherPairs.add($template).find('.dynamic').after $removeButton.clone()
 
-  $otherPairs.add($template).find('.dynamic').after $removeButton.clone()
+    $template
+      .find('input').val('').end()
+      .find('div').removeClass('field_with_errors').end()
+      .find('.error').remove()
 
-  $template
-    .find('input').val('').end()
-    .find('div').removeClass('field_with_errors').end()
-    .find('.error').remove()
+    $addButton
+      .insertAfter($otherPairs.last())
+      .on 'click', (event) ->
+        $new = $template.clone()
+        event.preventDefault()
+        updateAttrs $new, $otherPairs.length
+        addPair $new
 
-  $addButton
-    .insertAfter($otherPairs.last())
-    .on 'click', ->
-      $new = $template.clone()
-      updateAttrs $new, $otherPairs.length
-      addPair $new
+    $form.on 'click', '.remove', ->
+      $el = $(@).closest('li')
+      removePair $el
+      $otherPairs.each (i) -> updateAttrs $(@), i
 
-  $form.on 'click', '.remove', ->
-    $el = $(@).closest('li')
-    removePair $el
-    $otherPairs.each (i) -> updateAttrs $(@), i
+  edit: ($form) ->
 
-module.edit = module.new
+    @new $form

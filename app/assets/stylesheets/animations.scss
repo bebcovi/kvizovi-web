@@ -1,0 +1,4 @@
+@include keyframes(spin) {
+  0% { @include rotateZ(0deg); }
+  100% { @include rotateZ(360deg); }
+}

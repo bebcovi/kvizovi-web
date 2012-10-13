@@ -20,8 +20,8 @@ $.removeButton = $ '<button>',
 .addClass('remove')
 .prependIcon('cancel')
 
-$.addButton = $ '<button>',
-  type: 'button'
+$.addButton = $ '<a>',
+  href: '#'
 .addClass('add')
 .text(' Dodaj')
 .prependIcon('plus')

@@ -27,13 +27,16 @@ body.home {
   $cols: $main / 2;
   .as {
     @include with-font-size($medium) {
+      @extend %button;
       @include span-columns($cols, $main);
       @include nth-omega;
-      @extend %button;
       @include h-borders(1px, 1);
       @include v-borders(1px, .5);
       font-weight: 300;
-      &, &:hover { @include transition(background-color .2s); }
+      &,
+      &:hover {
+        @include transition(background-color .2s);
+      }
       &:hover {
         background: $red;
         @include color-link(white, white);
@@ -42,13 +45,12 @@ body.home {
       i {
         @include with-font-size($xxx-large) {
           display: block;
-          width: auto;
         }
       }
     }
   }
 
-  .student { @include border-right-radius(0); }
-  .school { @include border-left-radius(0); }
+  .student  { @include border-right-radius(0); }
+  .school   { @include border-left-radius(0); }
 
 }

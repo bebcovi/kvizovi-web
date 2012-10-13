@@ -2,22 +2,23 @@ form.choice {
 
   &.edit, &.new {
     li {
-      @include trailer(.5);
-      &:first-child, &:last-child {
+      @extend %pie-clearfix;
+      @include trailer(1/2);
+      &:first-child,
+      &:last-child {
         @include trailer(0);
       }
+
+      $cols: $total-columns / 2;
+      div {
+        width: columns($cols);
+        float: left;
+      }
+
+      input { width: 100%; }
     }
 
-    div.string {
-      @extend %pie-clearfix;
-
-      input,
-      button { float: left; }
-
-      button { @include leader(.35); }
-    }
-
-    div.field_with_hint {
+    .field_with_hint {
       input {
         float: none;
         color: $correct;

@@ -1,3 +1,9 @@
+@mixin prefix-rule($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: $value;
+  }
+}
+
 @mixin color-link($color1, $color2) {
   @include link-colors($color1, $color2, $color2, $color1, $color2);
 }

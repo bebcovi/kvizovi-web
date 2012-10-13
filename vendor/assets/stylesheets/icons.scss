@@ -1,19 +1,14 @@
 $path: 'icons/icons';
 
-@include font-face('Icons', font-files('#{$path}.woff', '#{$path}.ttf', '#{$path}.svg'), '#{$path}.eot');
+@include font-face('icons', font-files('#{$path}.woff', '#{$path}.ttf', '#{$path}.svg'), '#{$path}.eot');
 
 [class^="icon-"], [class*=" icon-"] {
-  text-decoration: inherit;
-  display: inline-block;
-  width: 1em;
-
-  &:before, {
-    font: {
-      family: 'Icons';
-      weight: normal;
-      style: normal;
-    }
-    speak: none;
+  @include prefix-rule('font-smoothing', antialiased, webkit);
+  speak: none;
+  font: {
+    family: 'icons';
+    weight: normal;
+    style: normal;
   }
 }
 

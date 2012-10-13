@@ -53,6 +53,11 @@
   }
 }
 
+%parenthesis {
+  &:before { content: '('; }
+  &:after { content: ')'; }
+}
+
 %full-width {
   padding-left: $grid-padding;
   padding-right: $grid-padding;
@@ -60,21 +65,18 @@
   margin-right: - $grid-padding;
 }
 
-%subtle {
-  $c1: rgba(black, .4);
-  $c2: $link2;
-  @include color-link($c1, $c2);
+%un-button {
   margin: 0;
   padding: 0;
   font-size: inherit;
-  color: $c1;
   border: none;
   background: none;
-  cursor: pointer;
-  &:hover {
-    text-decoration: none;
-    color: $c2;
-  }
+}
+
+%subtle {
+  @extend %un-button;
+  @include color-link(rgba(black, .4), $link2);
+  &:hover { text-decoration: none; }
 }
 
 %flash {
@@ -114,39 +116,38 @@
 %button {
   @extend %inline-block;
   @extend %border-radius;
-  $c1: rgba(black, .5);
-  $c2: rgba(black, .75);
   @include h-borders(1px, .25);
   @include v-borders(1px, .5);
-  @include color-link($c1, $c2);
+  @include color-link(rgba(black, .5), rgba(black, .75));
   font-size: inherit;
   line-height: inherit;
   text-align: center;
-  color: $c1;
   border-color: rgba(black, .25);
   background: rgba(black, .025);
   &:hover {
-    cursor: pointer;
     text-decoration: none;
-    color: $c2;
+    border-color: rgba(black, .5);
+    background: rgba(black, .05);
+  }
+  &:focus {
+    outline: none;
     border-color: rgba(black, .5);
     background: rgba(black, .05);
   }
 
-  i { vertical-align: middle; }
+  i {
+    vertical-align: middle;
+  }
 }
 
 %primary-button {
   @extend %button;
-  $c1: white;
-  $c2: $c1;
-  @include color-link($c1, $c2);
-  color: $c1;
+  @include color-link(white, white);
   border: none;
   padding: rhythm(.25) rhythm(.5);
   background: $link1;
-  &:hover {
-    color: $c2;
+  &:hover,
+  &:focus {
     background: $link2;
   }
   &[disabled] {

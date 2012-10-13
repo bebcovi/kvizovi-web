@@ -6,27 +6,10 @@ html {
   font-family: $base-font-family;
   color: $text;
   background: rgba(black, .1) image-url('bg-pattern.png') repeat;
-
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
 }
 
 body {
   @include container;
-  margin: {
-    top: 0;
-    bottom: 0;
-  }
-}
-
-header,
-hgroup,
-nav,
-article,
-section,
-aside,
-footer {
-  display: block;
 }
 
 h1,
@@ -39,21 +22,6 @@ h3 {
 h1 {
   @include with-font-size($x-large, 2) {
     @include trailer;
-
-    .name:after {
-      @extend %inline-block;
-      @include square($xx-small);
-      @include box-sizing(border-box);
-      @include border-radius(2px);
-      content: '';
-      margin-left: rhythm(.5);
-      background: rgba($text, .75);
-    }
-
-    .section {
-      font-weight: 100;
-      color: rgba($text, .5);
-    }
   }
 }
 
@@ -67,17 +35,19 @@ h2 {
 p,
 ol,
 ul,
-dl { @include rhythm(0, 0, 0, .5); }
+dl {
+  @include rhythm(0, 0, 0, .5);
+}
 
 a {
   @include hover-link;
   @include link-colors($link1, $link2, $link2, $link1, $link2);
 }
 
-q { quotes: "\201C" "\201D" "\2018" "\2019"; }
-
 dt,
-dd { display: inline; }
+dd {
+  display: inline;
+}
 
 dt {
   font-weight: bold;
@@ -87,72 +57,4 @@ dt {
 dd {
   @extend %append-newline;
   margin: 0;
-}
-
-.back {
-  @include with-font-size($small, .5) {
-    @extend %inline-block;
-    $c1: rgba(black, .35);
-    $c2: white;
-    @include color-link($c1, $c2);
-    @include border-top-left-radius;
-    @include border-bottom-right-radius;
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    padding: rhythm(.25);
-    background: rgba(black, .05);
-    &:hover, &:focus {
-      text-decoration: none;
-      background: $link1;
-    }
-  }
-}
-
-#info-expander {
-  @include with-font-size($normal, 1) {
-    @include color-link(darken(white, 20%), $red);
-    @include text-shadow(white 0 0 5px);
-    position: absolute;
-    top: rhythm(.25);
-    right: rhythm(.5);
-    &:hover { text-decoration: none; }
-  }
-}
-
-.info {
-  @include with-font-size($small) {
-    @include trailer;
-    @include h-borders(1px, .5);
-    position: relative;
-    font-family: $small-font-family;
-    color: rgba(black, .5);
-    border-color: rgba(black, .25);
-
-    &.collapsed { display: none; }
-
-    :last-child { @include trailer(0); }
-  }
-}
-
-form img {
-  @extend %border-radius;
-  max-width: 100%;
-  border: 1px solid rgba(black, .75);
-}
-
-@include keyframes(spin) {
-  0% { @include rotateZ(0deg); }
-  100% { @include rotateZ(360deg); }
-}
-
-.loader {
-  @include with-font-size(24px) {
-    &, i { @include size(24px, 27px); }
-
-    i {
-      color: rgba(black, .25);
-      @include animation(spin 1.25s infinite linear);
-    }
-  }
 }

@@ -8,10 +8,12 @@ ol.categories {
   }
 
   a {
-    @include rhythm(0, .25, .25, 0);
+    @include rhythm(0, 1/4, 1/4, 0);
     @include color-link(rgba(black, .35), $link2);
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       text-decoration: none;
+
       .icon {
         color: $link2;
         border-color: $link2;
@@ -20,17 +22,19 @@ ol.categories {
     }
   }
 
-  i { @include adjust-font-size-to(32px); }
+  i {
+    @include with-font-size(32px) {}
+  }
 
   .label {
-    @include adjust-font-size-to(20px, 2);
+    @include with-font-size(20px, 2) {}
   }
 
   .icon {
     @extend %inline-block;
     @extend %border-radius;
     @include square(rhythm(2));
-    margin-right: rhythm(.5);
+    margin-right: rhythm(1/2);
     text-align: center;
     color: rgba(black, .25);
     border: 1px solid rgba(black, .2);
@@ -48,42 +52,9 @@ ol.questions { @extend %nice-list; }
 
 #question_content,
 #question_hint {
-  height: rhythm(1.5, $text-input-font-size);
+  height: rhythm(3/2, $text-input-font-size);
 }
 
 #question_content {
   width: 100%;
-}
-
-.points {
-  clear: both;
-
-  input { display: none; }
-
-  span {
-    margin-left: rhythm(.25);
-    label {
-      @extend %unselectable;
-      @extend %inline-block;
-      @extend %circle;
-      @include square(rhythm());
-      padding: 0 2px 0 0;
-      color: rgba(black, .5);
-      background: rgba(black, .05);
-      text-align: center;
-      &:hover {
-        background: rgba(black, .1);
-        color: $text;
-      }
-    }
-  }
-
-  :checked + label {
-    &, &:hover {
-      padding-top: 1px;
-      font-weight: 900;
-      color: white;
-      background: rgba(black, .5);
-    }
-  }
 }

@@ -5,10 +5,9 @@ body.students {
     ol.students { @extend %nice-list; }
 
     .username {
+      @extend %parenthesis;
       font-weight: 300;
       color: rgba(black, .5);
-      &:before { content: '('; }
-      &:after { content: ')'; }
     }
 
   }

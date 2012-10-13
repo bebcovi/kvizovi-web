@@ -19,8 +19,8 @@ body.games {
 
     .username {
       @include with-font-size(24px) {
-        @include leader(-0.5);
-        margin-left: rhythm();
+        @include leader(-1/2);
+        margin-left: rhythm(1/2);
       }
     }
 
@@ -29,10 +29,18 @@ body.games {
       @include border-right-radius;
       position: relative;
       top: -4px;
-      height: rhythm(1.75, $large);
+      height: rhythm(7/4, $large);
       margin-left: - 2 * $normal;
-      padding: 0 rhythm(.5, $large);
+      padding: 0 rhythm(1/2, $large);
       font-weight: 700;
+    }
+
+    .timer {
+      position: absolute;
+      bottom: rhythm(1/2);
+      right: rhythm(1/4);
+      width: rhythm(5/2);
+      color: rgba(black, .3);
     }
 
   }
@@ -45,15 +53,15 @@ body.games {
       @extend %unstyled-list;
       @include trailer;
 
-      li { @include trailer(.5); }
-      dl { @include trailer(.25); }
+      li { @include trailer(1/2); }
+      dl { @include trailer(1/4); }
     }
 
     $height: 2;
     .bar {
       @extend %border-radius;
       @extend %unselectable;
-      @include trailer(.25);
+      @include trailer(1/4);
       position: relative;
       height: rhythm($height);
       overflow: hidden;
@@ -77,7 +85,7 @@ body.games {
   #progress {
     @extend %border-radius;
     @include trailer;
-    height: rhythm(.25);
+    height: rhythm(1/4);
     border: 1px solid rgba(black, .25);
     div {
       float: left;

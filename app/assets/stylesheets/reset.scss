@@ -1,0 +1,39 @@
+html {
+  @include prefix-rule('text-size-adjust', 100%, webkit ms)
+}
+
+body {
+  margin: 0;
+}
+
+header,
+hgroup,
+nav,
+article,
+section,
+aside,
+footer {
+  display: block;
+}
+
+q {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+[hidden] {
+  display: none;
+}
+
+label,
+button,
+input[type="submit"] {
+  cursor: pointer;
+}
+
+input,
+button,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  &:focus { outline: none; }
+}

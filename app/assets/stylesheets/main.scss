@@ -1,7 +1,7 @@
 #main {
   @extend %full-width;
   @extend %border-radius;
-  @include rhythm(0, 1.5, 1, 1);
+  @include rhythm(0, 3/2, 1, 1);
   @include box-shadow(
     rgba(black, .1) 0 0 0 .5em,
     rgba(black, .25) 0 0 0 1px
@@ -9,4 +9,67 @@
   position: relative;
   min-height: rhythm(20);
   background: white;
+
+  h1 {
+    .name:after {
+      @extend %inline-block;
+      @include square($xx-small);
+      @include border-radius(2px);
+      content: '';
+      margin-left: $small;
+      background: rgba($text, .75);
+    }
+
+    .section {
+      font-weight: 100;
+      color: rgba($text, .5);
+    }
+  }
+}
+
+.back {
+  @include with-font-size($small, .5) {
+    @extend %inline-block;
+    @include color-link(rgba(black, .35), white);
+    @include border-top-left-radius;
+    @include border-bottom-right-radius;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    padding: rhythm(.25);
+    background: rgba(black, .05);
+    &:hover {
+      text-decoration: none;
+      background: $link1;
+    }
+    &:focus {
+      outline: none;
+      background: $link1;
+    }
+  }
+}
+
+#info-expander {
+  @include with-font-size($normal, 1) {
+    @include color-link(rgba(black, .25), $red);
+    position: absolute;
+    top: rhythm(.25);
+    right: rhythm(.5);
+    &:hover { text-decoration: none; }
+  }
+}
+
+.info {
+  @include with-font-size($small) {
+    @include trailer;
+    @include h-borders(1px, .5);
+    position: relative;
+    font-family: $small-font-family;
+    color: rgba(black, .5);
+    border-color: rgba(black, .25);
+
+    &.collapsed { display: none; }
+
+    p:last-child { @include trailer(0); }
+  }
 }

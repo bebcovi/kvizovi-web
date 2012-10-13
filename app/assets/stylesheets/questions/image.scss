@@ -20,7 +20,7 @@ form.image {
     input[type="text"] { width: 100%; }
 
     .hint {
-      @include rhythm(-0.5, 0, 0, 1);
+      @include rhythm(-1/2, 0, 0, 1);
       color: rgba(black, .5);
     }
 
@@ -31,10 +31,7 @@ form.image {
   }
 
   &.edit, &.new {
-    .preview {
-      display: none;
-      max-height: 250px;
-    }
+    .preview { max-height: 250px; }
   }
 
 }

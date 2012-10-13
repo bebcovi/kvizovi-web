@@ -1,32 +1,34 @@
 $ = jQuery
 
-App.Questions.image = module = {}
+App.Questions.image = do ->
 
-module.new = ($form) ->
+  new: ($form) ->
 
-  # Previewing images using the FileSystem API:
-  # http://stackoverflow.com/a/4459419/1247274
+    # Previewing images using the FileSystem API:
+    # http://stackoverflow.com/a/4459419/1247274
 
-  $file = $form.find '[type=file]'
-  $img  = $form.find '.preview'
-  img   = $img[0]
+    $file = $form.find '[type=file]'
+    $img  = $form.find '.preview'
+    img   = $img[0]
 
-  $file.on 'change', (event) ->
+    $img.hide()
 
-    reader = new FileReader
-    file   = event.target.files[0]
+    $file.on 'change', (event) ->
 
-    reader.onload = (e) ->
+      reader = new FileReader
+      file   = event.target.files[0]
 
-      img.src     = e.target.result
-      img.onload  = -> $img.show()
+      reader.onload = (e) ->
 
-    if /image/.test file.type
-      reader.readAsDataURL file
-    else
-      alert "Datoteka #{file.name} nije slika."
+        img.src     = e.target.result
+        img.onload  = -> $img.show()
 
-module.edit = ($form) ->
+      if /image/.test file.type
+        reader.readAsDataURL file
+      else
+        alert "Datoteka #{file.name} nije slika."
 
-  $img.show()
-  @new $form
+  edit: ($form) ->
+
+    @new $form
+    $img.show()

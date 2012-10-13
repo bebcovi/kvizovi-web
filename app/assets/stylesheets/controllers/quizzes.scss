@@ -9,37 +9,32 @@ body.quizzes {
       .name { @include span-columns($cols); }
 
       .count {
-        color: rgba(black, .35);
+        @extend %parenthesis;
         font-weight: 300;
-        &:before { content: '('; }
-        &:after { content: ')'; }
+        color: rgba(black, .35);
       }
     }
 
     .toggle-activation {
-      @include padding-leader(.1);
+      @include padding-leader(1/10);
       float: left;
       height: rhythm();
       margin-left: gutter() * 2;
 
       button {
-        @include size(rhythm(2), rhythm(.5));
-        @include border-radius(rhythm(.25));
+        @extend %un-button;
+        @include size(rhythm(2), rhythm(1/2));
+        @include border-radius(rhythm(1/2));
         position: relative;
-        overflow: visible;
-        cursor: pointer;
-        margin: 0;
-        padding: 0;
-        font-size: inherit;
         border: 1px solid rgba(black, .3);
         background: rgba(black, .05);
         &:before {
           @extend %circle;
-          @include square(rhythm(.5));
+          @include square(rhythm(1/2));
           @include leader(-0.3);
           content: '';
           position: absolute;
-          left: - rhythm(.1);
+          left: rhythm(-1/10);
           display: block;
           border: 1px solid rgba(black, .55);
           background: white;
@@ -47,7 +42,6 @@ body.quizzes {
         &.enabled {
           border-color: rgba(black, .5);
           background: $red;
-          text-align: right;
           &:before {
             left: auto;
             right: - rhythm(.1);
