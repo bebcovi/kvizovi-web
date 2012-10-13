@@ -1,4 +1,5 @@
-= f.input :image
+= f.input :image_file, as: :file
+= f.input :image_url, hint: "Ako se vaša slika nalazi na internetu".append_icon("arrow-up")
 
 - if image_question.image?
   %img.preview{src: image_question.image.url(:resized)}

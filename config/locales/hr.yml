@@ -44,6 +44,8 @@ hr:
           attributes:
             image:
               blank: "Niste priložili sliku."
+            image_url:
+              invalid: "Nije validna URL adresa."
         submitted_game:
           attributes:
             quiz_id:

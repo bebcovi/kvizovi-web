@@ -9,7 +9,8 @@ hr:
         password_confirmation: "Potvrda lozinke"
         remember_me: "Zapamti me"
       question:
-        image: "Slika"
+        image_file: "Slika"
+        image_url: "URL od slike"
         hint: "Uputa (neobavezno)"
         answer: "Odgovor"
       school:
