@@ -5,7 +5,6 @@
   %img.preview{src: image_question.image.url(:resized)}
 - else
   %img.preview
-  .placeholder= "".prepend_icon("picture")
   = notice "Slika će se proporcionalno smanjiti na visinu od 250px."
 
 = f.input :answer, as: :string

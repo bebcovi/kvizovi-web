@@ -35,20 +35,6 @@ form.image {
       display: none;
       max-height: 250px;
     }
-
-    .placeholder {
-      @include with-font-size(100px) {
-        @extend %inline-block;
-        @extend %border-radius;
-        @extend %unselectable;
-        @include rhythm(0, 2, 0, .5);
-        @include size(300px, 250px);
-        cursor: pointer;
-        color: rgba(black, .05);
-        text-align: center;
-        border: 2px dashed rgba(black, .1);
-      }
-    }
   }
 
 }
