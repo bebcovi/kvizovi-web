@@ -17,7 +17,9 @@ Lektire::Application.routes.draw do
 
   resource :game
 
-  resources :schools, :students
+  resources :schools, :students do
+    member { get "delete" }
+  end
   resource :password, only: [:edit, :update]
 
   resources :quizzes do

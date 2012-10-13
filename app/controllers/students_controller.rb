@@ -38,14 +38,25 @@ class StudentsController < ApplicationController
     end
   end
 
+  def delete
+    @student = current_student
+  end
+
   def destroy
     if school_logged_in?
       current_school.students.destroy(params[:id])
       redirect_to students_path, notice: "Učenik je uspješno izbrisan."
     else
-      current_student.destroy
-      log_out!
-      redirect_to root_path, notice: "Tvoj profil je uspješno izbrisan."
+      @student = current_student
+
+      if @student.authenticate(params[:student][:password])
+        @student.destroy
+        log_out!
+        redirect_to root_path, notice: "Tvoj korisnički račun je uspješno izbrisan."
+      else
+        flash.now[:alert] = "Lozinka nije točna."
+        render :delete
+      end
     end
   end
 end

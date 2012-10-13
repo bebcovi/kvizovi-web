@@ -38,9 +38,20 @@ class SchoolsController < ApplicationController
     end
   end
 
+  def delete
+    @school = current_school
+  end
+
   def destroy
-    current_school.destroy
-    log_out!
-    redirect_to root_path, notice: "Vaš profil je uspješno izbrisan."
+    @school = current_school
+
+    if @school.authenticate(params[:school][:password])
+      @school.destroy
+      log_out!
+      redirect_to root_path, notice: "Vaš korisnički račun je uspješno izbrisan."
+    else
+      flash.now[:alert] = "Lozinka nije točna."
+      render :delete
+    end
   end
 end

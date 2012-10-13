@@ -2,21 +2,17 @@
 
 = back_button "Kvizovi", root_path
 
-- present @school do |school_presenter|
+%dl
+  %dt Ime škole
+  %dd= @school.name
+  %dt Tip škole
+  %dd= @school.level
+  %dt Korisničko ime
+  %dd= @school.username
+  %dt Tajni ključ
+  %dd= @school.key
 
-  %dl
-    %dt Ime škole
-    %dd= school_presenter.name
-    %dt Tip škole
-    %dd= school_presenter.level
-    %dt Korisničko ime
-    %dd= school_presenter.username
-    %dt Tajni ključ
-    %dd= school_presenter.key
-    %dt Broj kvizova
-    %dd= school_presenter.quizzes.count
-
-  %p= school_presenter.edit_button "Izmjeni profil"
-  %p= change_password_button "Izmjeni lozinku", edit_password_path
-  %p= school_presenter.delete_button "Izbriši korisnički račun"
-  %p= link_to "Učenici".prepend_icon("user"), students_path
+%p= edit_button "Izmjeni profil", edit_school_path(@school)
+%p= change_password_button "Izmjeni lozinku", edit_password_path
+%p= delete_button "Izbriši korisnički račun", delete_school_path(@school), confirm: nil, method: nil
+%p= link_to "Učenici".prepend_icon("user"), students_path

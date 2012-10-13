@@ -1,19 +1,17 @@
 - @title = @student.full_name
 
-- present @student do |student_presenter|
+%dl
+  %dt Ime
+  %dd= @student.first_name
+  %dt Prezime
+  %dd= @student.last_name
+  %dt Škola
+  %dd= @student.school.name
+  %dt Razred
+  %dd= ordinalize(@student.grade)
+  %dt Korisničko ime
+  %dd= @student.username
 
-  %dl
-    %dt Ime
-    %dd= student_presenter.first_name
-    %dt Prezime
-    %dd= student_presenter.last_name
-    %dt Škola
-    %dd= student_presenter.school_name
-    %dt Razred
-    %dd= student_presenter.grade
-    %dt Korisničko ime
-    %dd= student_presenter.username
-
-  %p= student_presenter.edit_button "Izmjeni profil"
-  %p= change_password_button "Izmjeni lozinku", edit_password_path
-  %p= student_presenter.delete_button "Izbriši korisnički račun"
+%p= edit_button "Izmjeni profil", edit_student_path(@student)
+%p= change_password_button "Izmjeni lozinku", edit_password_path
+%p= delete_button "Izbriši korisnički račun", delete_student_path(@student), confirm: nil, method: nil
