@@ -24,12 +24,12 @@ quiz.association_questions.create!(
 quiz.image_questions.create!([
   {
     content: "Kojeg opakog junaka vesterna vidimo na slici?",
-    image: uploaded_file("clint_eastwood.jpg", "image/jpeg"),
+    image_file: uploaded_file("clint_eastwood.jpg", "image/jpeg"),
     answer: "Clint Eastwood"
   },
   {
     content: "U kojem se filmu proslavio glumac na slici (desno)?",
-    image: uploaded_file("back_to_the_future.jpg", "image/jpeg"),
+    image_file: uploaded_file("back_to_the_future.jpg", "image/jpeg"),
     answer: "Povratak u budućnost"
   }
 ])
