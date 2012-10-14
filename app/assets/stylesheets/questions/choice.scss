@@ -16,6 +16,11 @@ form.choice {
       }
 
       input { width: 100%; }
+
+      button {
+        @include leader(1/4);
+        float: left;
+      }
     }
 
     .field_with_hint {

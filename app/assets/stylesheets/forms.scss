@@ -132,9 +132,8 @@ label + select {
 .remove {
   @include with-font-size(12px) {
     @extend %un-button;
-    @include leader(.25);
     @include color-link(rgba(black, .15), rgba(black, .5));
-    float: left;
+    float: right;
     margin-left: rhythm(.5);
     font-family: 'icons';
   }
