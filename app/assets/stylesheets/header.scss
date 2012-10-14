@@ -7,14 +7,11 @@ header {
 
 #logo {
   @include with-font-size($medium, 1) {
+    @extend %unselectable;
     @include trailer(0);
     float: left;
     font-weight: 900;
-
-    a {
-      display: block;
-      &:hover { text-decoration: none; }
-    }
+    color: rgba(black, .25);
 
     i {
       @include with-font-size(38px) {

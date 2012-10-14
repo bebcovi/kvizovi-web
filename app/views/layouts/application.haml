@@ -12,7 +12,7 @@
 
   %body{class: body_class}
     %header
-      %h1#logo= link_to "Lektire".prepend_icon("books"), root_path
+      %h1#logo= "Lektire".prepend_icon("books")
       = render "log" if logged_in?
 
     %article#main{role: "main"}
