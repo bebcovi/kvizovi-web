@@ -10,7 +10,7 @@ RSpec.configure do |config|
 
   config.infer_base_class_for_anonymous_controllers = true
 
-  config.before(:suite) do
+  config.before(:all) do
     DatabaseCleaner.clean_with(:truncation)
     DatabaseCleaner.clean
   end

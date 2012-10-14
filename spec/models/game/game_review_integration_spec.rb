@@ -3,9 +3,9 @@ require "spec_helper_full"
 describe GameReview do
   before(:all) do
     @school = create(:school)
-    @players = @school.students.create([attributes_for(:janko), attributes_for(:matija)])
-    @quiz = @school.quizzes.create(attributes_for(:quiz))
-    @questions = create_list(:choice_question, 4)
+    @players = [create(:janko, school: @school), create(:matija, school: @school)]
+    @quiz = create(:quiz, school: @school)
+    @questions = create_list(:choice_question, 4, quiz: @quiz)
   end
 
   let(:info) do

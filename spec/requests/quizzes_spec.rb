@@ -43,13 +43,13 @@ describe "Managing quizzes" do
       find_field("Prvi").should be_checked
     end
 
-    it "redirects to the quiz on success" do
+    it "redirects to the quizzes on success" do
       visit new_quiz_path
 
       fill_in_the_form
       expect { click_on "Stvori" }.to change{Quiz.count}.from(0).to(1)
 
-      current_path.should eq(quiz_questions_path(Quiz.first))
+      current_path.should eq(quizzes_path)
       page.should have_content("Kviz je uspješno stvoren.")
     end
 

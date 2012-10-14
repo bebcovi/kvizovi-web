@@ -13,7 +13,7 @@ class QuizzesController < ApplicationController
     @quiz = current_school.quizzes.new(params[:quiz])
 
     if @quiz.save
-      redirect_to quiz_questions_path(@quiz), notice: "Kviz je uspješno stvoren."
+      redirect_to quizzes_path, notice: "Kviz je uspješno stvoren."
     else
       render :new
     end
@@ -29,7 +29,11 @@ class QuizzesController < ApplicationController
     if @quiz.update_attributes(params[:quiz])
       redirect_to quizzes_path
     else
-      render :edit
+      if params.key?(:activated)
+        redirect_to quizzes_path, alert: @quiz.errors[:base].first
+      else
+        render :edit
+      end
     end
   end
 

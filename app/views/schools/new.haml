@@ -2,7 +2,7 @@
 
 = simple_form_for @school do |f|
 
-  = f.input :name
+  = f.input :name, hint: "Napišite puno ime škole bez grada."
   = f.input :level, collection: ["Osnovna", "Srednja"], prompt: "Izaberite..."
   = f.input :place
   = f.input :region, collection: Location.regions, prompt: "Izaberite..."

@@ -3,7 +3,8 @@ require "spec_helper_full"
 describe QuestionsController do
   describe "actions" do
     before(:all) do
-      @quiz = create(:quiz)
+      @school = create(:school)
+      @quiz = create(:quiz, school: @school)
       @question = create(:question, quiz: @quiz)
       create(:question)
     end
@@ -115,7 +116,7 @@ describe QuestionsController do
       end
     end
 
-    after(:all) { @quiz.destroy }
+    after(:all) { @school.destroy }
   end
 
   describe "methods" do

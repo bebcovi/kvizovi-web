@@ -2,6 +2,8 @@
 require_relative "../../lib/has_many_questions"
 
 class Quiz < ActiveRecord::Base
+  attr_accessible :name, :grades, :activated
+
   belongs_to :school
   extend HasManyQuestions
   has_many_questions dependent: :destroy
