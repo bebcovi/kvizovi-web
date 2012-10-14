@@ -203,14 +203,26 @@ describe "Questions" do
     after(:all) { @question.destroy }
   end
 
-  describe "delete" do
+  describe "destroy" do
     before(:all) { @question = create(:question, quiz: @quiz) }
 
-    it "redirects back to questions" do
+    it "has a link" do
       visit quiz_questions_path(@quiz)
-      expect { within(".controls") { all("a").last.click } }.to change{Question.count}.by(-1)
-      current_path.should eq(quiz_questions_path(@quiz))
-      page.should have_content("Pitanje je izbrisano.")
+      within(".controls") { all("a").last[:href].should eq delete_quiz_question_path(@quiz, @question) }
+    end
+
+    context "without javascript" do
+      it "can be canceled" do
+        visit delete_quiz_question_path(@quiz, @question)
+        click_on "Nisam"
+        current_path.should eq quiz_questions_path(@quiz)
+      end
+
+      it "can be confirmed" do
+        visit delete_quiz_question_path(@quiz, @question)
+        expect { click_on "Jesam" }.to change{Question.count}.by(-1)
+        current_path.should eq quiz_questions_path(@quiz)
+      end
     end
   end
 

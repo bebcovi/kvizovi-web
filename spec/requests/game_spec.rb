@@ -97,10 +97,25 @@ describe "Game" do
       first(".bar").text.strip.should eq "0%"
     end
 
-    it "can be given up" do
-      start_game
-      click_on "Prekini"
-      current_path.should eq new_game_path
+    describe "giving up" do
+      it "has a link" do
+        start_game
+        find_link("Prekini")[:href].should eq delete_game_path
+      end
+
+      it "can be canceled" do
+        start_game
+        visit delete_game_path
+        click_on "Nisam"
+        current_path.should eq edit_game_path
+      end
+
+      it "can be confirmed" do
+        start_game
+        visit delete_game_path
+        click_on "Jesam"
+        current_path.should eq new_game_path
+      end
     end
 
     def answer_question(category)

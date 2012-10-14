@@ -2,130 +2,100 @@
 require "spec_helper_full"
 
 describe "Managing quizzes" do
-  before(:all) do
-    @school = create(:school)
-  end
+  before(:all) { @school = create(:school) }
 
-  before(:each) do
-    login(:school, attributes_for(:school))
-  end
+  before(:each) { login(:school, attributes_for(:school)) }
 
   describe "create" do
-    before(:all) do
-      @quiz = build_stubbed(:quiz)
-    end
-
-    let(:quiz) { @quiz }
-
-    def fill_in_the_form
-      fill_in "Naziv", with: quiz.name
-      check ordinalize(quiz.grades).first
-    end
+    before(:all) { @quiz = build(:quiz, school: @school) }
 
     it "has a link" do
       visit quizzes_path
-      find_link("Novi kviz")[:href].should eq(new_quiz_path)
+      click_on "Novi kviz"
+      current_path.should eq new_quiz_path
     end
 
-    it "has a notice for visibility" do
-      visit new_quiz_path
-      page.should have_selector(".notice")
-    end
-
-    it "keeps all the fields filled in upon validation errors" do
+    it "stays on the same page on validation errors" do
       visit new_quiz_path
 
-      fill_in_the_form
-      fill_in "Naziv", with: ""
       click_on "Stvori"
 
-      current_path.should eq(quizzes_path)
-      find_field("Prvi").should be_checked
+      current_path.should eq quizzes_path
     end
 
-    it "redirects to the quizzes on success" do
+    it "redirects back to quizzes on success" do
       visit new_quiz_path
 
-      fill_in_the_form
-      expect { click_on "Stvori" }.to change{Quiz.count}.from(0).to(1)
+      fill_in "Naziv", with: @quiz.name
+      check ordinalize(@quiz.grades).first
+      expect { click_on "Stvori" }.to change{Quiz.count}.by(1)
 
-      current_path.should eq(quizzes_path)
-      page.should have_content("Kviz je uspješno stvoren.")
-    end
-
-    after(:all) do
-      Quiz.destroy_all
+      current_path.should eq quizzes_path
     end
   end
 
   describe "update" do
-    before(:all) do
-      @quiz = create(:quiz, school: @school)
-    end
+    before(:all) { @quiz = create(:quiz, school: @school) }
 
-    let(:quiz) { @quiz }
-
-    context "from form" do
-      it "has a link" do
-        visit quizzes_path
-        within(".controls") { first("a")[:href].should eq(edit_quiz_path(quiz)) }
-      end
-
-      it "has all fields filled in" do
-        visit edit_quiz_path(quiz)
-
-        find_field("Naziv").value.should_not be_nil
-        find_field("Prvi").should be_checked
-      end
-
-      it "redirects back to the form on validation errors" do
-      end
-
-      it "redirects back to quizzes on success" do
-        visit edit_quiz_path(quiz)
-        click_on "Spremi"
-        current_path.should eq(quizzes_path)
-      end
-    end
-
-    context "from icon" do
-      it "has a link" do
-        visit quizzes_path
-        first("form")[:action].should eq(quiz_path(quiz))
-      end
-
-      it "toggles the visibility" do
-        visit quizzes_path
-        expect { first("button").click }.to change{@quiz.reload.activated}.from(true).to(false)
-        expect { first("button").click }.to change{@quiz.reload.activated}.from(false).to(true)
-        current_path.should eq(quizzes_path)
-      end
-    end
-
-    after(:all) do
-      Quiz.destroy_all
-    end
-  end
-
-  describe "destroy" do
-    before(:all) do
-      @quiz = create(:quiz, school: @school)
-    end
-
-    let(:quiz) { @quiz }
-
-    it "redirects back after deletion" do
+    it "has a link" do
       visit quizzes_path
-      expect { within(".controls") { all("a").last.click } }.to change{Quiz.count}.from(1).to(0)
+      within(".controls") { first("a").click }
+      current_path.should eq edit_quiz_path(@quiz)
+    end
+
+    it "stays on the same page on validation errors" do
+      visit edit_quiz_path(@quiz)
+
+      fill_in "Naziv", with: ""
+      click_on "Spremi"
+
+      current_path.should eq quiz_path(@quiz)
+    end
+
+    it "redirects back to quizzes on success" do
+      visit edit_quiz_path(@quiz)
+
+      click_on "Spremi"
+
       current_path.should eq(quizzes_path)
     end
 
-    after(:all) do
-      Quiz.destroy_all
+    describe "activation" do
+      it "can be toggled" do
+        visit quizzes_path
+
+        expect { first("button").click }.to change{@quiz.reload.activated}.from(true).to(false)
+        expect { first("button").click }.to change{@quiz.reload.activated}.from(false).to(true)
+
+        current_path.should eq(quizzes_path)
+      end
+    end
+
+    after(:all) { @quiz.destroy }
+  end
+
+  describe "destroy" do
+    before(:all) { @quiz = create(:quiz, school: @school) }
+
+    it "has a link" do
+      visit quizzes_path
+      within(".controls") { all("a").last[:href].should eq delete_quiz_path(@quiz) }
+    end
+
+    context "without javascript" do
+      it "can be canceled" do
+        visit delete_quiz_path(@quiz)
+        expect { click_on "Nisam" }.to_not change{Quiz.count}
+        current_path.should eq quizzes_path
+      end
+
+      it "can be confirmed" do
+        visit delete_quiz_path(@quiz)
+        expect { click_on "Jesam" }.to change{Quiz.count}.by(-1)
+        current_path.should eq quizzes_path
+      end
     end
   end
 
-  after(:all) do
-    School.destroy_all
-  end
+  after(:all) { @school.destroy }
 end

@@ -1,0 +1,7 @@
+%p Jeste li sigurni da želite prekinuti igru?
+
+= form_tag game_path, method: :delete do
+
+  = buttons do |b|
+    = b.cancel_button "Nisam", edit_game_path
+    = b.submit_button "Jesam"

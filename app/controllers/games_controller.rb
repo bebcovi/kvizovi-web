@@ -45,6 +45,9 @@ class GamesController < ApplicationController
     @questions_count = @game_review.questions_count
   end
 
+  def delete
+  end
+
   def destroy
     redirect_to action: :new
   end

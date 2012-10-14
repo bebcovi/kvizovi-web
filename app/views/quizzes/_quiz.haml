@@ -1,0 +1,12 @@
+- present quiz do |quiz_presenter|
+
+  .name
+    = quiz_presenter.name
+    %span.count= quiz_presenter.questions_count
+
+  = quiz_presenter.visibility_icon
+
+.controls
+  = edit_button "", edit_quiz_path(quiz), title: "Izmjeni opcije"
+  = link_to icon("list-view"), quiz_questions_path(quiz), title: "Izmjeni pitanja"
+  = delete_button "", delete_quiz_path(quiz), title: "Izbriši"

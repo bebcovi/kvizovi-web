@@ -3,10 +3,6 @@
 class QuizPresenter < BasePresenter
   presents :quiz
 
-  def name
-    quiz.name
-  end
-
   def questions_count
     quiz.questions.count
   end
@@ -25,21 +21,5 @@ class QuizPresenter < BasePresenter
         f.button(:button, "", title: "Aktiviraj")
       end
     end
-  end
-
-  def visible?
-    quiz.activated? ? "Da" : "Ne"
-  end
-
-  def edit_button(text, options = {})
-    @template.edit_button text, edit_quiz_path(quiz), options
-  end
-
-  def manage_questions_button(text, options = {})
-    link_to text.prepend_icon("list-view"), quiz_questions_path(quiz), options
-  end
-
-  def delete_button(text, options = {})
-    @template.delete_button text, quiz_path(quiz), options
   end
 end

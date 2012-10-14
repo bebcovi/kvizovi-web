@@ -9,18 +9,7 @@
 - if @quizzes.any?
 
   %ol.quizzes
-    = list_of @quizzes do |quiz|
-      - present quiz do |quiz_presenter|
-        .name
-          = quiz_presenter.name
-          %span.count= quiz_presenter.questions_count
-
-        = quiz_presenter.visibility_icon
-
-        .controls
-          = quiz_presenter.edit_button "", title: "Izmjeni opcije"
-          = quiz_presenter.manage_questions_button "", title: "Izmjeni pitanja"
-          = quiz_presenter.delete_button "", title: "Izbriši"
+    = render collection: @quizzes, partial: "quiz_item", as: :quiz
 
 - else
 

@@ -37,8 +37,12 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def delete
+    @quiz = current_school.quizzes.find(params[:id])
+  end
+
   def destroy
     current_school.quizzes.destroy(params[:id]).first
-    redirect_to quizzes_path, notice: "Kviz je izbrisan."
+    redirect_to quizzes_path, notice: "Kviz je uspješno izbrisan."
   end
 end
