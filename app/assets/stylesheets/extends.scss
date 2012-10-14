@@ -119,16 +119,16 @@
   @extend %border-radius;
   @include h-borders(1px, .25);
   @include v-borders(1px, .5);
-  @include color-link(rgba(black, .5), rgba(black, .75));
+  @include color-link(rgba(black, .7), rgba(black, .85));
   font-size: inherit;
   line-height: inherit;
   text-align: center;
-  border-color: rgba(black, .25);
-  background: rgba(black, .025);
+  border-color: rgba(black, .4);
+  background: rgba(black, .04);
   &:hover {
     text-decoration: none;
-    border-color: rgba(black, .5);
-    background: rgba(black, .05);
+    border-color: rgba(black, .6);
+    background: rgba(black, .07);
   }
   &:focus {
     outline: none;
@@ -136,9 +136,7 @@
     background: rgba(black, .05);
   }
 
-  i {
-    vertical-align: middle;
-  }
+  i { vertical-align: middle; }
 }
 
 %primary-button {
