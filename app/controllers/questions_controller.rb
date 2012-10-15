@@ -35,6 +35,7 @@ class QuestionsController < ApplicationController
 
   def delete
     @question = @quiz.questions.find(params[:id])
+    render layout: false if request.headers["X-fancyBox"]
   end
 
   def destroy
