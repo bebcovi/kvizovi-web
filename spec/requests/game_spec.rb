@@ -100,7 +100,8 @@ describe "Game" do
     describe "giving up" do
       it "has a link" do
         start_game
-        find_link("Prekini")[:href].should eq delete_game_path
+        click_on "Prekini"
+        current_path.should eq delete_game_path
       end
 
       it "can be canceled" do

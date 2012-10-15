@@ -14,5 +14,6 @@
 
 %p= edit_button "Izmjeni profil", edit_school_path(@school)
 %p= change_password_button "Izmjeni lozinku", edit_password_path
-%p= delete_button "Izbriši korisnički račun", delete_school_path(@school), confirm: nil, method: nil
+%p= delete_button "Izbriši korisnički račun", delete_school_path(@school)
+
 %p= link_to "Učenici".prepend_icon("user"), students_path

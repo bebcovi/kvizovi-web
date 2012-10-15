@@ -208,21 +208,20 @@ describe "Questions" do
 
     it "has a link" do
       visit quiz_questions_path(@quiz)
-      within(".controls") { all("a").last[:href].should eq delete_quiz_question_path(@quiz, @question) }
+      within(".controls") { all("a").last.click }
+      current_path.should eq delete_quiz_question_path(@quiz, @question)
     end
 
-    context "without javascript" do
-      it "can be canceled" do
-        visit delete_quiz_question_path(@quiz, @question)
-        click_on "Nisam"
-        current_path.should eq quiz_questions_path(@quiz)
-      end
+    it "can be canceled" do
+      visit delete_quiz_question_path(@quiz, @question)
+      click_on "Nisam"
+      current_path.should eq quiz_questions_path(@quiz)
+    end
 
-      it "can be confirmed" do
-        visit delete_quiz_question_path(@quiz, @question)
-        expect { click_on "Jesam" }.to change{Question.count}.by(-1)
-        current_path.should eq quiz_questions_path(@quiz)
-      end
+    it "can be confirmed" do
+      visit delete_quiz_question_path(@quiz, @question)
+      expect { click_on "Jesam" }.to change{Question.count}.by(-1)
+      current_path.should eq quiz_questions_path(@quiz)
     end
   end
 
