@@ -1,10 +1,13 @@
 class GameState
-  def initialize(store)
+  def initialize(store, options = {})
     @store = store
+    @clean_method = options[:clean_method] || "clear"
   end
 
   module ActionMethods
     def initialize!(hash)
+      clean!
+
       # Storage of info
       @store[:quiz_id] = hash[:quiz_id]
       hash[:question_ids].each_with_index { |id, i| @store[:"question_id_#{i + 1}"] = id }
@@ -25,18 +28,28 @@ class GameState
     end
 
     def next_question!
-      next_player!
-      @store[:current_question] = @store[:current_question].to_i + 1
-      raise "game has already finished" if @store[:current_question].to_i > @store[:questions_count].to_i
+      unless @store[:"question_answer_#{@store[:current_question]}"].nil?
+        next_player!
+        @store[:current_question] = @store[:current_question].to_i + 1
+      end
     end
 
     def next_player!
       @store[:current_player] = (@store[:current_player].to_i % @store[:players_count].to_i) + 1
     end
+
+    def finish_game!
+      clean!
+    end
+
+    def clean!
+      @store.send(@clean_method)
+    end
   end
 
   module HelperMethods
-    # == Questions
+    # Questions
+
     def current_question_number
       Integer(@store[:current_question])
     end
@@ -60,7 +73,8 @@ class GameState
       Integer(@store[:questions_count])
     end
 
-    # == Players
+    # Players
+
     def current_player_number
       Integer(@store[:current_player])
     end
@@ -76,8 +90,18 @@ class GameState
       Integer(@store[:players_count])
     end
 
-    def game_finished?
+    # Other
+
+    def game_over?
       current_question_number == questions_count and current_question_answer != nil
+    end
+
+    def game_in_progress?
+      not clean?
+    end
+
+    def clean?
+      !@store[:quiz_id]
     end
 
     def quiz_id

@@ -1,0 +1,11 @@
+- @title = @correct_answer ? "Točan odgovor" : "Netočan odgovor"
+
+%h1= @correct_answer ? "Točan odgovor" : "Netočan odgovor"
+
+= buttons do |b|
+
+  - unless @game_finished
+    = b.cancel_button "Prekini", delete_game_path
+    = b.action_button "Sljedeće pitanje", edit_game_path
+  - else
+    = b.action_button "Završi", game_path

@@ -15,7 +15,9 @@ Lektire::Application.routes.draw do
     post "authorize" => :authorize
   end
 
-  resource :game
+  resource :game do
+    get "feedback"
+  end
 
   resources :schools, :students
   resource :password, only: [:edit, :update]

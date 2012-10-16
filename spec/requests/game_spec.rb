@@ -92,9 +92,25 @@ describe "Game" do
 
       while current_path == edit_game_path
         click_on "Odgovori"
+        within(".buttons") { all("a").last.click }
       end
 
       first(".bar").text.strip.should eq "0%"
+    end
+
+    it "displays after each answer whether that answer was correct" do
+      start_game
+
+      category = first("form")[:class].split(" ").last
+      answer_question(category)
+      click_on "Odgovori"
+
+      page.should have_content("Točan odgovor")
+
+      click_on "Sljedeće pitanje"
+      click_on "Odgovori"
+
+      page.should have_content("Netočan odgovor")
     end
 
     describe "giving up" do
@@ -117,6 +133,14 @@ describe "Game" do
         click_on "Jesam"
         current_path.should eq new_game_path
       end
+    end
+
+    it "isn't possible if the game is over" do
+      start_game
+      click_on "Prekini"
+      click_on "Jesam"
+      visit edit_game_path
+      current_path.should eq new_game_path
     end
 
     def answer_question(category)
@@ -152,6 +176,7 @@ describe "Game" do
           category = first("form")[:class].split(" ").last
           answer_question(category)
           click_on "Odgovori"
+          within(".buttons") { all("a").last.click }
         end
 
         first(".bar").text.strip.should eq "100%"
@@ -175,6 +200,7 @@ describe "Game" do
           category = first("form")[:class].split(" ").last
           answer_question(category)
           click_on "Odgovori"
+          within(".buttons") { all("a").last.click }
         end
 
         all(".bar").map(&:text).map(&:strip).each { |str| str.should_not eq "0%" }

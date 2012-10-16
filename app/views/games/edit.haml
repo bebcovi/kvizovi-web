@@ -12,9 +12,6 @@
 
 = simple_form_for :game, url: game_path, method: :put, html: {class: "show #{@question.category}"} do |f|
 
-  -# So that params[:game][:answer] isn't blank
-  = f.hidden_field :answer unless @question.association?
-
   = render partial: "questions/question", object: @question, locals: {f: f}
 
   = buttons(f) do |b|

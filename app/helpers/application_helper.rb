@@ -116,8 +116,16 @@ module ApplicationHelper
       @template = template
     end
 
-    def cancel_button(text, path, options = {})
-      @template.link_to text, path, options
+    def cancel_button(*args)
+      @template.link_to *args
+    end
+
+    def action_button(*args)
+      options = args.extract_options!.dup
+      options.merge(class: "action")
+      args << options
+
+      @template.link_to *args
     end
 
     def submit_button(*args)

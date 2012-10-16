@@ -37,9 +37,9 @@ describe GameState do
     @it.current_player_number.should eq 1
     @it.current_player_id.should eq 34
 
-    @it.game_finished?.should be_false
+    @it.game_over?.should be_false
     @it.save_answer!(true)
-    @it.game_finished?.should be_true
+    @it.game_over?.should be_true
 
     @it.info.should eq(
       {
@@ -49,5 +49,26 @@ describe GameState do
         question_answers: [true, false, true]
       }
     )
+  end
+
+  describe "#next_question!" do
+    it "doesn't go to the next question if the current one wasn't answered" do
+      @it.current_question_number.should eq 1
+      @it.next_question!
+      @it.current_question_number.should eq 1
+    end
+  end
+
+  describe "#clean!" do
+    it "cleans the store" do
+      @it.clean!
+      @it.instance_variable_get("@store").should be_empty
+    end
+  end
+
+  it "knows when a game is in progess" do
+    @it.game_in_progress?.should be_true
+    @it.finish_game!
+    @it.game_in_progress?.should be_false
   end
 end
