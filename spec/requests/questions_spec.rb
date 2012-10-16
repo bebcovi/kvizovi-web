@@ -69,7 +69,6 @@ describe "Questions" do
         expect { click_on "Stvori" }.to change{BooleanQuestion.count}.by(1)
 
         current_path.should eq(quiz_questions_path(@quiz))
-        page.should have_content("Pitanje je stvoreno.")
       end
     end
 

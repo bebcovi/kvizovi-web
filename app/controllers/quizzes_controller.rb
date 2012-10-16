@@ -27,6 +27,7 @@ class QuizzesController < ApplicationController
     @quiz = current_school.quizzes.find(params[:id])
 
     if @quiz.update_attributes(params[:quiz])
+      flash[:notice] = "Kviz je uspješno izmijenjen." unless params[:quiz][:activated]
       redirect_to quizzes_path
     else
       if params.key?(:activated)

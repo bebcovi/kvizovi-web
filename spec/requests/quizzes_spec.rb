@@ -64,8 +64,8 @@ describe "Managing quizzes" do
       it "can be toggled" do
         visit quizzes_path
 
-        expect { first("button").click }.to change{@quiz.reload.activated}.from(true).to(false)
-        expect { first("button").click }.to change{@quiz.reload.activated}.from(false).to(true)
+        expect { first("button").click }.to change{@quiz.reload.activated?}.from(true).to(false)
+        expect { first("button").click }.to change{@quiz.reload.activated?}.from(false).to(true)
 
         current_path.should eq(quizzes_path)
       end

@@ -14,7 +14,7 @@ class SchoolsController < ApplicationController
 
     if @school.save
       log_in!(@school)
-      redirect_to @school
+      redirect_to @school, notice: "Uspješno ste se registrirali."
     else
       render :new
     end
@@ -32,7 +32,7 @@ class SchoolsController < ApplicationController
     @school = current_school
 
     if @school.update_attributes(params[:school])
-      redirect_to @school
+      redirect_to @school, notice: "Vaš profil je uspješno izmijenjen."
     else
       render :edit
     end

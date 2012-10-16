@@ -32,7 +32,7 @@ class StudentsController < ApplicationController
     @student = current_student
 
     if @student.update_attributes(params[:student])
-      redirect_to @student, notice: "Profil je uspješno izmijenjen."
+      redirect_to @student, notice: "Tvoj profil je uspješno izmijenjen."
     else
       render :edit
     end
