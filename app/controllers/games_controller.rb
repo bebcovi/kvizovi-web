@@ -50,6 +50,7 @@ class GamesController < ApplicationController
 
   def destroy
     redirect_to action: :new
+    render layout: false if request.headers["X-fancyBox"]
   end
 
   private
