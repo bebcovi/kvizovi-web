@@ -1,8 +1,6 @@
 = simple_form_for @quiz do |f|
 
-  = f.error :base
-
-  = f.input :name
+  = f.input :name, input_html: {autofocus: current_page?(action: "new")}
 
   %p Predviđeni razredi:
   = f.input :grades, collection: grades, as: :check_boxes, label: false

@@ -2,7 +2,7 @@
 
 = simple_form_for @password, url: password_path, method: :put do |f|
 
-  = f.input :old_password
+  = f.input :old_password, input_html: {autofocus: current_page?(action: "edit")}
   = f.input :new_password
   = f.input :new_password_confirmation
 
