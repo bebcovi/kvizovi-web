@@ -1,0 +1,46 @@
+// fancybox
+
+.fancybox-lock {
+  overflow: visible;
+
+  .fancybox-overlay {
+    overflow-y: hidden;
+  }
+}
+
+.fancybox-wrap {
+  text-align: center;
+  &.long { text-align: left; }
+
+  h1 {
+    @include with-font-size($large, 3/2) {
+      @include trailer(1/2);
+      font-weight: 700;
+    }
+  }
+
+  .buttons {
+    margin: 0;
+
+    a + button {
+      margin-left: rhythm(1/2);
+    }
+  }
+}
+
+.fancybox-skin {
+  background: white;
+  .fancybox-opened & {
+    @include box-shadow(rgba(black, .25) 0 0 0 .5em);
+  }
+}
+
+#info {
+  display: none;
+}
+
+.confirm {
+  .buttons {
+    @include rhythm(1, 0, 0, 1/2);
+  }
+}

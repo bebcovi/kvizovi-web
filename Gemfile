@@ -12,6 +12,7 @@ group :assets do
   gem "compass-rails"
   gem "susy"
   gem "modular-scale"
+  gem "fancybox-rails", github: 'sverigemeny/fancybox-rails'
   gem "coffee-rails"
   gem "uglifier"
 end

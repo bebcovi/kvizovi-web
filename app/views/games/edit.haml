@@ -15,5 +15,5 @@
   = render partial: "questions/question", object: @question, locals: {f: f}
 
   = buttons(f) do |b|
-    = b.cancel_button "Prekini", delete_game_path
+    = b.cancel_button "Prekini", delete_game_path, data: {:"fancybox-type" => "ajax"}
     = b.button_button "Odgovori".append_icon("arrow-right")

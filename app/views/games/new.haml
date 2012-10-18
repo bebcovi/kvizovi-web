@@ -1,10 +1,12 @@
 - @title = "Nova igra"
 
-%h1 Zdravo :)
-
-.info
+- content_for :info do
   :markdown
+    # Dobrodošli
+
     Ovo je aplikacija za ispitivanje znanja iz lektire. Funkcionira vrlo jednostavno -- mi postavimo pitanje, ti odgovoriš najbolje što znaš :)
+
+%h1 Zdravo :)
 
 - if @quizzes.any?
 

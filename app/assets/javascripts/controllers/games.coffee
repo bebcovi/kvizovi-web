@@ -23,6 +23,8 @@ App.Controllers.games = do ->
     setPlural       = -> $button.html $button.html().replace(/(Započni)\b/, '$1te')
     setSingular     = -> $button.html $button.html().replace(/(Započni)\w+/, '$1')
 
+    localStorage.removeItem('total')
+
     if not $quizzesChecked.length
       $players.hide()
       $login.hide()
@@ -58,7 +60,35 @@ App.Controllers.games = do ->
     $timer       = $.timer.clone().appendTo $('#main')
     $time        = $('.time', $timer)
 
-    clearStorage = -> localStorage.removeItem 'total'
+    updateTimer  = ->
+      current = moment.duration total
+
+      min     = current.minutes()
+      sec     = current.seconds()
+
+      if sec > 9
+        $time.text "#{min}:#{sec}"
+      else
+        $time.text "#{min}:0#{sec}"
+
+    clearStorage = ->
+      localStorage.removeItem 'total'
+
+    timesUp      = ->
+      $.fancybox
+        wrapCSS:  'alert'
+        width:    300
+        modal:    true
+        content:  $.getContent 'Isteklo vrijeme!', 'Što god da si napisao, vrijedi se :)'
+
+        beforeShow: ->
+          $buttons = $.generateButtons
+            submit: 'U redu'
+          @inner.append $buttons
+
+          $buttons.find('button').on 'click', ->
+            clearStorage()
+            $form.submit()
 
     if localStorage['total']
       total = localStorage['total'] - 0
@@ -68,26 +98,23 @@ App.Controllers.games = do ->
 
     countdown = do ->
 
-      current = moment.duration total
+      if total > 0
+        total  -= 1000
 
-      min = current.minutes()
-      sec = current.seconds()
+        updateTimer()
 
-      if sec > 9
-        $time.text "#{min}:#{sec}"
-      else
-        $time.text "#{min}:0#{sec}"
-
-      if total
         localStorage['total'] = total
-        total -= 1000
         setTimeout arguments.callee, 1000
-      else
-        clearStorage()
-        alert "Isteklo je vrijeme! Što god da si obilježio vrijedi se."
-        $('form').submit()
 
-    $buttons.children().on 'click', clearStorage
+      else
+        updateTimer()
+        timesUp()
+
+    $buttons.find('a').fancybox
+      wrapCSS:  'confirm' # for styling
+      width:    350
+
+    $buttons.find('[type="submit"]').on 'click', clearStorage
 
   show: ->
 

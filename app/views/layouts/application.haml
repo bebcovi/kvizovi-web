@@ -22,4 +22,9 @@
             = remove_button
             %p= message
 
+      - if content_for? :info
+        %a.icon-info{href: '#info', title: 'Pomoć'}
+        #info
+          = content_for :info
+
       = yield

@@ -4,6 +4,7 @@
 #= require jquery.effects.core
 #= require jquery.ui.droppable
 #
+#= require jquery.fancybox
 #= require bootstrap
 #= require moment
 #

@@ -9,22 +9,16 @@ App.general = ->
   # bootstrap tooltips
 
   $('.controls a, button').tooltip()
+  $('a.icon-info').tooltip
+    placement: 'left'
 
-  # info expand/collapse
+  # info
 
-  $info         = $('.info')
-  $infoExpander = $ '<a>',
-    href: '#'
-    title: 'Pomoć'
-    id: 'info-expander'
-  .prependIcon('info')
+  $('a.icon-info').fancybox
+    wrapCSS: 'alert long'
 
-  $info.addClass('collapsed')
+  # delete confirmation
 
-  $('#main').prepend($infoExpander) if $info.length
-
-  $infoExpander.tooltip placement: 'left'
-
-  $infoExpander.on 'click', (event) ->
-    event.preventDefault()
-    $info.toggleClass 'collapsed'
+  $('.controls').find('a:last-child').fancybox
+    wrapCSS:  'confirm'
+    width:    250

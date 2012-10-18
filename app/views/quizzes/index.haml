@@ -1,10 +1,12 @@
 - @title = "Uređivanje kvizova"
 
-%h1 Kvizovi
-
-.info
+- content_for :info do
   :markdown
+    # Dobrodošli
+
     Dobrodošli u administracijsko sučelje! Ovdje možete dodavati, izmjenjivati i brisati kvizove i njihova pitanja. Ako ne želite da pojedini kviz bude vidljiv učenicima, možete ga deaktivirati klikom na prekidač u sredini.
+
+%h1 Kvizovi
 
 - if @quizzes.any?
 

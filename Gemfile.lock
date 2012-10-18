@@ -5,6 +5,13 @@ GIT
     activerecord-nulldb-adapter (0.2.1)
       activerecord (>= 2.0.0)
 
+GIT
+  remote: git://github.com/sverigemeny/fancybox-rails.git
+  revision: 10851fd5b580ba9729c21cfc2af2556a4ce4a740
+  specs:
+    fancybox-rails (0.1.4)
+      railties (>= 3.1.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -233,6 +240,7 @@ DEPENDENCIES
   database_cleaner
   debugger
   factory_girl
+  fancybox-rails!
   haml (= 3.2.0.beta.1)
   haml-rails
   jquery-rails
