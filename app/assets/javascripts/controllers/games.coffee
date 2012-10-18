@@ -33,11 +33,11 @@ App.Controllers.games = do ->
       setQuizName $quizzesChecked.next().text()
       setPlural() if $playersChecked.val() is '2'
 
-    $quizzes.on 'click', ':radio', ->
+    $quizzes.on 'click', 'input:radio', ->
       $players.show()
       setQuizName $(@).next().text()
 
-    $players.on 'click', ':radio', ->
+    $players.on 'click', 'input:radio', ->
       $buttons.show()
       switch $(@).val()
         when '1'
