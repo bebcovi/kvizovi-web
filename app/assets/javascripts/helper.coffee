@@ -2,4 +2,6 @@ $ = jQuery
 
 App.helper = ->
 
-  $('[type=text]').attr 'autocomplete', 'off'
+  # turn off auto-complete in text inputs
+
+  $('[type="text"]').attr 'autocomplete', 'off'
