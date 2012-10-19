@@ -184,13 +184,22 @@ span.error {
   @include rhythm(1, 0, 0, 1);
   clear: both;
 
+  a,
+  input,
+  button {
+    height: rhythm(3/2);
+  }
+
   a { @extend %button; }
 
   input,
-  button {
+  button,
+  .action {
     @extend %primary-button;
-    height: rhythm(3/2);
-    margin-left: rhythm(.1);
+  }
+
+  :nth-child(2) {
+    margin-left: rhythm(1/10);
   }
 }
 

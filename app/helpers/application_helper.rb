@@ -122,7 +122,7 @@ module ApplicationHelper
 
     def action_button(*args)
       options = args.extract_options!.dup
-      options.merge(class: "action")
+      options.update(class: "action")
       args << options
 
       @template.link_to *args

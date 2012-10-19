@@ -42,6 +42,7 @@ class GamesController < ApplicationController
   def feedback
     @correct_answer = game_state.current_question_answer
     @game_finished = game_state.game_over?
+    render layout: false if request.headers["X-fancyBox"]
   end
 
   def show
