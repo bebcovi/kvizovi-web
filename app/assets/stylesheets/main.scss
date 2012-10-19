@@ -1,7 +1,7 @@
 #main {
   @extend %full-width;
   @extend %border-radius;
-  @include rhythm(0, 3/2, 1, 1);
+  @include rhythm(0, 3/2, 1, 1/2);
   @include box-shadow(
     rgba(black, .1) 0 0 0 .5em,
     rgba(black, .25) 0 0 0 1px

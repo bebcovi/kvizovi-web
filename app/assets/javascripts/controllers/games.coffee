@@ -82,7 +82,6 @@ App.Controllers.games = do ->
         url: $form.attr('action')
         data: $form.serialize()
         success: (data) ->
-          console.log 'success'
           clearStorage()
           $.fancybox
             width: 300

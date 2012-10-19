@@ -1,0 +1,4 @@
+footer {
+  @include with-font-size($small-font-size) {}
+  text-align: center;
+}
