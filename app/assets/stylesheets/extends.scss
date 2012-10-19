@@ -159,7 +159,8 @@
   &:focus {
     background: $link2;
   }
-  &[disabled] {
+  &[disabled],
+  &.disabled {
     cursor: default;
     &, &:hover {
       background: scale-color($link1, $saturation: -30%, $lightness: 30%);
