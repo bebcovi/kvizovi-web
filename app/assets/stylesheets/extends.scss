@@ -113,7 +113,7 @@
 
 %flash-alert {
   @extend %flash;
-  $color: hsl(0, 90%, 60%);
+  $color: $wrong;
   color: $color;
   border-color: $color;
   background: rgba($color, .1);

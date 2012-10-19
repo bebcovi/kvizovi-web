@@ -46,6 +46,7 @@ $link1: $red;
 $link2: darken($link1, 5%);
 
 $correct: $green;
+$wrong: hsl(0, 90%, 60%);
 
 $players:
   one $purple,

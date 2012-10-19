@@ -1,6 +1,9 @@
 - @title = @correct_answer ? "Točan odgovor" : "Netočan odgovor"
 
-%h1= @correct_answer ? "Točan odgovor" : "Netočan odgovor"
+- if @correct_answer
+  %h1.correct= "Točan odgovor!".prepend_icon("checkmark")
+- else
+  %h1.wrong= "Netočan odgovor".prepend_icon("cancel")
 
 = buttons do |b|
 

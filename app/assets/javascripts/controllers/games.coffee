@@ -84,7 +84,7 @@ App.Controllers.games = do ->
         success: (data) ->
           clearStorage()
           $.fancybox
-            width: 300
+            width: 350
             modal: true
             content: data
             beforeShow: false
