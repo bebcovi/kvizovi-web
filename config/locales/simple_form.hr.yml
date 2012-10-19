@@ -9,10 +9,11 @@ hr:
         password_confirmation: "Potvrda lozinke"
         remember_me: "Zapamti me"
       question:
-        image_file: "Slika"
-        image_url: "URL od slike"
+        data:
+          image_file: "Slika"
+          image_url: "URL od slike"
+          answer: "Odgovor"
         hint: "Uputa (neobavezno)"
-        answer: "Odgovor"
       school:
         name: "Ime škole"
         level: "Tip škole"

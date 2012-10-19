@@ -9,8 +9,6 @@ describe ChoiceQuestion do
 
   it { should be_a(Question) }
 
-  its(:points) { should eq 2 }
-
   describe "#answer" do
     it "should be the first provided answer" do
       @it.answer.should eq @it.provided_answers.first
@@ -27,24 +25,26 @@ describe ChoiceQuestion do
     end
   end
 
-  describe "#provided_answers" do
-    describe "setter" do
-      it "accepts an array" do
-        @it.provided_answers = ["Foo", "Bar"]
-        @it.provided_answers.should eq ["Foo", "Bar"]
-      end
+  describe "data" do
+    describe "#provided_answers" do
+      describe "setter" do
+        it "accepts an array" do
+          @it.data.provided_answers =    ["Foo", "Bar"]
+          @it.provided_answers.should eq ["Foo", "Bar"]
+        end
 
-      it "deletes blank elements" do
-        @it.provided_answers = ["Foo", "Bar", "", ""]
-        @it.provided_answers.should eq ["Foo", "Bar"]
+        it "deletes blank elements" do
+          @it.data.provided_answers =    ["Foo", "Bar", "", ""]
+          @it.provided_answers.should eq ["Foo", "Bar"]
 
-        @it.provided_answers = ["Foo", "Bar", nil, nil]
-        @it.provided_answers.should eq ["Foo", "Bar"]
-      end
+          @it.data.provided_answers =    ["Foo", "Bar", nil, nil]
+          @it.provided_answers.should eq ["Foo", "Bar"]
+        end
 
-      it "doesn't delete the first element if it's blank" do
-        @it.provided_answers = ["", "Bar", "Baz"]
-        @it.provided_answers.should eq ["", "Bar", "Baz"]
+        it "doesn't delete the first element if it's blank" do
+          @it.data.provided_answers =    ["", "Bar", "Baz"]
+          @it.provided_answers.should eq ["", "Bar", "Baz"]
+        end
       end
     end
   end
@@ -58,7 +58,7 @@ describe ChoiceQuestion do
 
   describe "validations" do
     it "can't have the first provided answer blank" do
-      @it.provided_answers = ["", "Bar", "Baz"]
+      @it.data.provided_answers = ["", "Bar", "Baz"]
       @it.should_not be_valid
     end
   end

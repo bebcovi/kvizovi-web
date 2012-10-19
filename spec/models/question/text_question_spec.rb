@@ -9,8 +9,6 @@ describe TextQuestion do
 
   it { should be_a(Question) }
 
-  its(:points) { should eq 5 }
-
   describe "#has_answer?" do
     it "is case insensitive" do
       @it.correct_answer?(@it.answer.downcase).should be_true
@@ -27,7 +25,7 @@ describe TextQuestion do
 
   describe "validations" do
     it "can't have blank answer" do
-      @it.answer = nil
+      @it.data.answer = nil
       @it.should_not be_valid
     end
   end

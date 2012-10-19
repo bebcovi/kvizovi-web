@@ -1,10 +1,8 @@
 require_relative "../question"
+require_relative "data/text_question_data"
 
 class TextQuestion < Question
-  alias_attribute :answer, :data
-  attr_accessible :answer
-
-  validates_presence_of :answer
+  delegate :answer, to: :data
 
   def correct_answer?(value)
     answer.casecmp(value.chomp(".")) == 0

@@ -2,7 +2,7 @@ require "spec_helper_lite"
 require_relative "../../app/models/question"
 
 describe Question do
-  before(:each) { @it = build(:question) }
+  before(:each) { @it = build(:boolean_question) }
   subject { @it }
 
   use_nulldb
@@ -10,6 +10,8 @@ describe Question do
   it "belongs to a quiz" do
     @it.should respond_to(:quiz)
   end
+
+  its(:category) { should eq "boolean" }
 
   describe "#hint" do
     it "has a getter and a setter" do

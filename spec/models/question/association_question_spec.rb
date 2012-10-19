@@ -9,8 +9,6 @@ describe AssociationQuestion do
 
   it { should be_a(Question) }
 
-  its(:points) { should eq 4 }
-
   describe "#correct_answer?" do
     it "accepts a hash" do
       @it.correct_answer?(@it.answer).should be_true
@@ -29,43 +27,45 @@ describe AssociationQuestion do
     end
   end
 
-  describe "#associations" do
-    it "has left and right side" do
-      @it.associations.left_side.should eq @it.associations.keys
-      @it.associations.right_side.should eq @it.associations.values
-    end
-
-    describe "setter" do
-      it "accepts a hash" do
-        @it.associations =         {"Foo" => "Foo", "Bar" => "Bar"}
-        @it.associations.should eq({"Foo" => "Foo", "Bar" => "Bar"})
+  describe "data" do
+    describe "#associations" do
+      it "has left and right side" do
+        @it.data.associations.left_side.should eq @it.associations.keys
+        @it.associations.right_side.should eq @it.associations.values
       end
 
-      it "accepts a hash-like array" do
-        @it.associations =         [["Foo", "Foo"], ["Bar", "Bar"]]
-        @it.associations.should eq({"Foo" => "Foo", "Bar" => "Bar"})
-      end
+      describe "setter" do
+        it "accepts a hash" do
+          @it.data.associations =    {"Foo" => "Foo", "Bar" => "Bar"}
+          @it.associations.should eq({"Foo" => "Foo", "Bar" => "Bar"})
+        end
 
-      it "accepts a flat array" do
-        @it.associations =         ["Foo", "Foo", "Bar", "Bar"]
-        @it.associations.should eq({"Foo" => "Foo", "Bar" => "Bar"})
-      end
+        it "accepts a hash-like array" do
+          @it.data.associations =    [["Foo", "Foo"], ["Bar", "Bar"]]
+          @it.associations.should eq({"Foo" => "Foo", "Bar" => "Bar"})
+        end
 
-      it "deletes blank pairs" do
-        @it.associations =         {"Foo" => "Foo", "" => ""}
-        @it.associations.should eq({"Foo" => "Foo"})
-        @it.associations =         {"Foo" => "Foo", nil => nil}
-        @it.associations.should eq({"Foo" => "Foo"})
+        it "accepts a flat array" do
+          @it.data.associations =    ["Foo", "Foo", "Bar", "Bar"]
+          @it.associations.should eq({"Foo" => "Foo", "Bar" => "Bar"})
+        end
 
-        @it.associations =         {"Foo" => "Foo", "Bar" => ""}
-        @it.associations.should eq({"Foo" => "Foo", "Bar" => ""})
-        @it.associations =         {"Foo" => "Foo", "" => "Bar"}
-        @it.associations.should eq({"Foo" => "Foo", "" => "Bar"})
-      end
+        it "deletes blank pairs" do
+          @it.data.associations =    {"Foo" => "Foo", "" => ""}
+          @it.associations.should eq({"Foo" => "Foo"})
+          @it.data.associations =    {"Foo" => "Foo", nil => nil}
+          @it.associations.should eq({"Foo" => "Foo"})
 
-      it "doesn't delete the first pair if it's blank" do
-        @it.associations =         {"" => "", "Bar" => "Bar"}
-        @it.associations.should eq({"" => "", "Bar" => "Bar"})
+          @it.data.associations =    {"Foo" => "Foo", "Bar" => ""}
+          @it.associations.should eq({"Foo" => "Foo", "Bar" => ""})
+          @it.data.associations =    {"Foo" => "Foo", "" => "Bar"}
+          @it.associations.should eq({"Foo" => "Foo", "" => "Bar"})
+        end
+
+        it "doesn't delete the first pair if it's blank" do
+          @it.data.associations =    {"" => "", "Bar" => "Bar"}
+          @it.associations.should eq({"" => "", "Bar" => "Bar"})
+        end
       end
     end
   end
@@ -84,12 +84,12 @@ describe AssociationQuestion do
 
   describe "validations" do
     it "can't have the first association blank" do
-      @it.associations = {"" => "", "Bar" => "Bar"}
+      @it.data.associations = {"" => "", "Bar" => "Bar"}
       @it.should_not be_valid
     end
 
     it "has to have full pairs" do
-      @it.associations = {"Foo" => ""}
+      @it.data.associations = {"Foo" => ""}
       @it.should_not be_valid
     end
   end

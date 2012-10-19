@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121011194607) do
+ActiveRecord::Schema.define(:version => 20121016223551) do
+
+  create_table "association_question_data", :force => true do |t|
+    t.text "associations"
+  end
+
+  create_table "boolean_question_data", :force => true do |t|
+    t.boolean "answer"
+  end
+
+  create_table "choice_question_data", :force => true do |t|
+    t.text "provided_answers"
+  end
 
   create_table "games", :force => true do |t|
     t.text     "info"
@@ -20,19 +32,23 @@ ActiveRecord::Schema.define(:version => 20121011194607) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "questions", :force => true do |t|
-    t.text     "content"
-    t.text     "data"
-    t.integer  "quiz_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.text     "hint"
+  create_table "image_question_data", :force => true do |t|
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.string   "type"
     t.string   "image_meta"
+    t.string   "answer"
+  end
+
+  create_table "questions", :force => true do |t|
+    t.text     "content"
+    t.string   "hint"
+    t.integer  "data_id"
+    t.integer  "quiz_id"
+    t.string   "type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "quizzes", :force => true do |t|
@@ -67,6 +83,10 @@ ActiveRecord::Schema.define(:version => 20121011194607) do
     t.datetime "updated_at",      :null => false
     t.string   "gender"
     t.integer  "year_of_birth"
+  end
+
+  create_table "text_question_data", :force => true do |t|
+    t.string "answer"
   end
 
 end

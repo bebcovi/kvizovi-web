@@ -2,30 +2,22 @@
 
 module QuestionsHelper
   def categories
-   [
-     ["boolean",     'Točno/netočno'],
-     ["choice",      'Ponuđeni odgovori'],
-     ["association", 'Asocijacija'],
-     ["image",       'Pogodi tko/što je na slici'],
-     ["text",        'Upiši točan odgovor']
-   ]
+    {
+      boolean:     ["Točno/netočno",              icon("checkbox")],
+      choice:      ["Ponuđeni odgovori",          icon("list-view")],
+      association: ["Asocijacija",                icon("shuffle")],
+      image:       ["Pogodi tko/što je na slici", icon("picture")],
+      text:        ["Upiši točan odgovor",        content_tag(:span, "Abc")]
+    }
   end
 
   def number_of_fields(question)
-    if question.choice? or question.association?
-      current_page?(action: "new") ? 4 : question.data.count
+    if question.choice?
+      current_page?(action: "new") ? 4 : question.provided_answers.count
+    elsif question.association?
+      current_page?(action: "new") ? 4 : question.associations.count
     else
       raise ArgumentError, "The question is not a choice or association"
-    end
-  end
-
-  def category_icon(category)
-    case category
-    when "boolean"     then icon("checkbox")
-    when "choice"      then icon("list-view")
-    when "association" then icon("shuffle")
-    when "image"       then icon("picture")
-    when "text"        then content_tag(:span, "Abc")
     end
   end
 end

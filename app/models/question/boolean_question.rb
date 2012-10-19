@@ -1,13 +1,11 @@
 require_relative "../question"
+require_relative "data/boolean_question_data"
 
 class BooleanQuestion < Question
-  alias_attribute :answer, :data
-  attr_accessible :answer
-
-  validates_presence_of :answer
+  delegate :answer, to: :data
 
   def true?
-    answer.to_s == "true"
+    answer
   end
 
   def false?

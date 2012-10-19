@@ -146,8 +146,7 @@ describe "Game" do
     def answer_question(category)
       case category
       when "boolean"
-        answer = (@boolean_question.answer == "true" ? "Točno" : "Netočno")
-        choose answer
+        choose(@boolean_question.answer ? "Točno" : "Netočno")
       when "choice"
         choose @choice_question.answer
       when "association"

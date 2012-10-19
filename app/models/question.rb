@@ -1,32 +1,38 @@
 require "active_record"
 
 class Question < ActiveRecord::Base
+  def self.inherited(base)
+    super
+
+    base.class_eval do
+      belongs_to :data, class_name: "#{name}Data"
+      attr_accessible :data_attributes
+      validates_associated :data
+
+      after_initialize { self.data ||= build_data }
+    end
+
+    base.accepts_nested_attributes_for :data if self == Question
+  end
+
   attr_accessible :content, :hint
 
   belongs_to :quiz
 
   validates_presence_of :content
 
-  default_scope order("#{table_name}.created_at DESC")
-
-  CATEGORIES = %w[boolean choice association image text]
-
   def self.categories
-    CATEGORIES
+    %w[boolean choice association image text]
   end
 
-  CATEGORIES.each do |category|
+  categories.each do |category|
     define_method("#{category}?") do
       self.category == category
     end
   end
 
   def category
-    self.class.name.underscore.chomp("_question")
-  end
-
-  def to_partial_path
-    "questions/#{self.class.name.underscore}"
+    type.underscore.chomp("_question")
   end
 
   def randomize!
@@ -35,5 +41,9 @@ class Question < ActiveRecord::Base
 
   def randomize
     dup.randomize!
+  end
+
+  def to_partial_path
+    "questions/#{category}_question"
   end
 end
