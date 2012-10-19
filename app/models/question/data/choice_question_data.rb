@@ -50,7 +50,7 @@ class ChoiceQuestionData < ActiveRecord::Base
 
   def validate_provided_answers
     if provided_answers.first.blank?
-      errors[:provided_answers] << "Prvi ponuđeni odgovor (koji će ujedno biti i točan odgovor) ne smije biti prazan."
+      errors[:provided_answers] << "Prvi ponuđeni odgovor ne smije biti prazan."
     end
   end
 end
