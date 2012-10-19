@@ -22,3 +22,4 @@ App.general = ->
   $('.controls').find('a:last-child').fancybox
     wrapCSS:  'confirm'
     width:    250
+    type:     'ajax'

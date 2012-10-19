@@ -60,7 +60,7 @@ App.Controllers.games = do ->
     $timer       = $.timer.clone().appendTo $('#main')
     $time        = $('.time', $timer)
 
-    updateTimer  = ->
+    updateTimer = ->
       current = moment.duration total
 
       min     = current.minutes()
@@ -74,47 +74,54 @@ App.Controllers.games = do ->
     clearStorage = ->
       localStorage.removeItem 'total'
 
-    timesUp      = ->
-      $.fancybox
-        wrapCSS:  'alert'
-        width:    300
-        modal:    true
-        content:  $.getContent 'Isteklo vrijeme!', 'Što god da si napisao, vrijedi se :)'
+    showFeedback = ->
+      $.ajax
+        type: $form.attr('method')
+        dataType: 'html'
+        headers: {'X-fancyBox': true}
+        url: $form.attr('action')
+        data: $form.serialize()
+        success: (data) ->
+          console.log 'success'
+          clearStorage()
+          $.fancybox
+            width: 300
+            modal: true
+            content: data
+            beforeShow: false
 
-        beforeShow: ->
-          $buttons = $.generateButtons
-            submit: 'U redu'
-          @inner.append $buttons
-
-          $buttons.find('button').on 'click', ->
-            clearStorage()
-            $form.submit()
+    timesUp = showFeedback
 
     if localStorage['total']
       total = localStorage['total'] - 0
     else
       total = 2 * 60 * 1000
+      total = 10 * 1000
       localStorage['total'] = total
 
     countdown = do ->
 
-      if total > 0
-        total  -= 1000
-
+      if total > 0 and localStorage['total']
         updateTimer()
+
+        total  -= 1000
 
         localStorage['total'] = total
         setTimeout arguments.callee, 1000
 
-      else
+      else if total <= 0
         updateTimer()
         timesUp()
 
     $buttons.find('a').fancybox
-      wrapCSS:  'confirm' # for styling
+      wrapCSS:  'confirm'
       width:    350
+      type:     'ajax'
+      live:     false
 
-    $buttons.find('[type="submit"]').on 'click', clearStorage
+    $form.on 'submit', (event) ->
+      event.preventDefault()
+      showFeedback()
 
   show: ->
 
