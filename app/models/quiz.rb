@@ -1,4 +1,3 @@
-# encoding: utf-8
 require_relative "../../lib/has_many_questions"
 
 class Quiz < ActiveRecord::Base
