@@ -1,10 +1,10 @@
 = f.input :image_file, as: :file
-= f.input :image_url, hint: "Ako se vaša slika nalazi na internetu".append_icon("arrow-up")
+= f.input :image_url, placeholder: "Npr. \"http://neka-slika.jpg\""
 
 - if image_question.image?
   %img.preview{src: image_question.image.url(:resized)}
 - else
   %img.preview
-  = notice "Slika će se proporcionalno smanjiti na visinu od 250px."
+  = notice "Slika će se proporcionalno smanjiti na visinu od 250 px."
 
 = f.input :answer, as: :string

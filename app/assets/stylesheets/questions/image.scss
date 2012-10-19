@@ -32,6 +32,11 @@ form.image {
 
   &.edit, &.new {
     .preview { max-height: 250px; }
+    .toggle-type {
+      position: absolute;
+      left: $grid-padding / 4;
+      &:hover { text-decoration: none; }
+    }
   }
 
 }
