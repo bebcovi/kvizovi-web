@@ -81,12 +81,22 @@
 }
 
 %flash {
-  @extend %border-radius;
-  @include rhythm-borders(1px, .5);
-  @include trailer;
-  @include clearfix;
+  @include with-font-size($small) {
+    @include border-bottom-radius;
+    position: absolute;
+    top: 0;
+    left: rhythm(4);
+    right: rhythm(4);
+    padding: 0 rhythm(.5);
+    border: 1px solid;
+    border-top: none;
 
-  p { @include trailer(0); }
+    p { @include trailer(0); }
+
+    .remove {
+      @include with-font-size(12px) {};
+    }
+  }
 }
 
 %flash-notice {
