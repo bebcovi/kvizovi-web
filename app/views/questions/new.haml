@@ -1,16 +1,22 @@
 - @title = "Novo pitanje"
 
-= back_button "Pitanja", quiz_questions_path(@quiz)
-
-%h1
-  %span.name= @quiz.name
-  %span.section= @title.downcase
-
 - if params[:category]
+
+  = back_button "Kategorije", new_quiz_question_path(@quiz)
+
+  %h1
+    %span.name= @quiz.name
+    %span.section= @title.downcase
 
   = render partial: "form", locals: {url: quiz_questions_path(@quiz), klass: "new"}
 
 - else
+
+  = back_button "Pitanja", quiz_questions_path(@quiz)
+
+  %h1
+    %span.name= @quiz.name
+    %span.section= @title.downcase
 
   - content_for :info do
     :markdown
