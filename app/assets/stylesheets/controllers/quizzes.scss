@@ -16,37 +16,24 @@ body.quizzes {
     }
 
     .toggle-activation {
-      @include padding-leader(1/10);
       float: left;
       height: rhythm();
       margin-left: gutter() * 2;
 
       button {
-        @extend %un-button;
-        @include size(rhythm(2), rhythm(1/2));
-        @include border-radius(rhythm(1/2));
-        position: relative;
+        @extend %button;
         border: 1px solid rgba(black, .3);
         background: rgba(black, .05);
-        &:before {
-          @extend %circle;
-          @include square(rhythm(1/2));
-          @include leader(-0.3);
-          content: '';
-          position: absolute;
-          left: rhythm(-1/10);
-          display: block;
-          border: 1px solid rgba(black, .55);
-          background: white;
+        &, &.enabled {
+          @include size(rhythm(7/2), rhythm());
+          padding: 0;
+          vertical-align: baseline;
         }
         &.enabled {
+          @extend %primary-button;
+          color: white;
           border-color: rgba(black, .5);
           background: $red;
-          &:before {
-            left: auto;
-            right: - rhythm(.1);
-            border-color: rgba(black, .75);
-          }
         }
       }
     }

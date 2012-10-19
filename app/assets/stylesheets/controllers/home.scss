@@ -6,8 +6,9 @@ body.home {
   #main {
     @include pad(2, 2);
     @include leader(3);
+    @include padding-trailer(4);
     @include clearfix;
-    min-height: auto;
+    min-height: 0;
     text-align: center;
   }
 

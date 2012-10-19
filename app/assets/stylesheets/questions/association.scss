@@ -73,7 +73,10 @@ form.association {
         color: rgba(black, .25);
       }
 
-      button { @include leader(1/4) }
+      button {
+        @include leader(1/3);
+        vertical-align: middle;
+      }
 
       input { width: 100%; }
     }

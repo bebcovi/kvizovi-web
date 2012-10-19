@@ -15,10 +15,10 @@ class QuizPresenter < BasePresenter
     simple_form_for quiz, html: {class: "toggle-activation"} do |f|
       if quiz.activated?
         f.hidden_field(:activated, value: false) +
-        f.button(:button, "", title: "Deaktiviraj", class: "enabled")
+        f.button(:button, "Deaktiviraj", class: "enabled")
       else
         f.hidden_field(:activated, value: true) +
-        f.button(:button, "", title: "Aktiviraj")
+        f.button(:button, "Aktiviraj")
       end
     end
   end

@@ -48,11 +48,8 @@ ol.categories {
   }
 }
 
-ol.questions { @extend %nice-list; }
-
-#question_content,
-#question_hint {
-  height: rhythm(3/2, $text-input-font-size);
+ol.questions {
+  @extend %nice-list;
 }
 
 #question_content {

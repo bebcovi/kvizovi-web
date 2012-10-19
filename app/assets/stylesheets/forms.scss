@@ -84,9 +84,12 @@ button {
 @include text-input {
   @include with-font-size($text-input-font-size) {
     @extend %border-radius;
+    $height: rhythm(3/2, $text-input-font-size);
     @include rhythm-borders(1px, .25);
     @include input-placeholder { font-weight: 300; }
     display: block;
+    height: $height;
+    min-height: $height;
     font: {
       family: $text-input-font-family;
       weight: 300;
@@ -134,7 +137,7 @@ label + select {
     @extend %un-button;
     @include color-link(rgba(black, .15), rgba(black, .5));
     float: right;
-    margin-left: rhythm(.5);
+    margin-left: rhythm(1/2);
     font-family: 'icons';
   }
 }
