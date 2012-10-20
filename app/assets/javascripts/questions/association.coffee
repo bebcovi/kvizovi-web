@@ -6,10 +6,13 @@ App.Questions.association = do ->
 
     $pairs    = $('li', $form)
 
-    $dynamic  = $('.dynamic', $form)
+    $static   = $('.static', $pairs)
+    $dynamic  = $('.dynamic', $pairs)
 
-    swap      = ($one, $two) ->
+    widths    = []
+    limit     = $form.width() * 2/3
 
+    swap = ($one, $two) ->
       $oneParent = $one.parent()
       $twoParent = $two.parent()
 
@@ -24,8 +27,16 @@ App.Questions.association = do ->
       $(@).before $el
       $(@).hide()
 
-    $dynamic.find('span')
+    $static.css 'width', 'auto'
 
+    setTimeout ->
+      $static.each -> widths.push $(@).width()
+      maxWidth = Math.max.apply(Math, widths) + 10
+      maxWidth = limit if maxWidth > limit
+      $static.each -> $(@).width(maxWidth)
+    , 50
+
+    $dynamic.find('span')
       .draggable
         addClasses: false
         revert: 'invalid'
@@ -52,7 +63,6 @@ App.Questions.association = do ->
     $removeButton = $.removeButton.clone()
 
     updateAttrs   = ($el, i) ->
-
       i += 2
       j = i * 2
 
