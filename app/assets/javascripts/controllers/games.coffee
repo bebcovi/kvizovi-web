@@ -47,7 +47,7 @@ App.Controllers.games = do ->
           $login.show()
           setPlural()
 
-  create: ($form) ->
+  create: ->
 
     @new()
 
