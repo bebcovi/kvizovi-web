@@ -36,7 +36,7 @@ class GameSubmission
       groups.delete(random_group) if grouped_questions[random_group].empty?
     end
 
-    player_ids = players.map(&:id).shuffle
+    player_ids = players.map(&:id)
 
     {
       quiz_id:      quiz_id,
