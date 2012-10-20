@@ -9,7 +9,7 @@ FactoryGirl.define do
     year_of_birth 1991
     username "jon"
     password "jon"
-    school
+    school_id 1
 
     factory :janko do
       first_name "Janko"
