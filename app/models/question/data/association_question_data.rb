@@ -32,7 +32,7 @@ class AssociationQuestionData < ActiveRecord::Base
     end
 
     def shuffle!
-      replace(Hash[keys.zip(values.shuffle)]) until self.values != original.values
+      replace(Hash[(keys.shuffle).zip(values.shuffle)]) until self.values != original.values
       self
     end
 

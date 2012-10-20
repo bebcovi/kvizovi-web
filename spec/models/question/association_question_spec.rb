@@ -71,14 +71,9 @@ describe AssociationQuestion do
   end
 
   describe "#randomize!" do
-    it "shuffles the right side of associations" do
-      original_right_side = @it.associations.right_side
-      @it.randomize!.associations.right_side.should_not eq original_right_side
-    end
-
-    it "doesn't shuffle the left side of associations" do
-      original_left_side = @it.associations.left_side
-      @it.randomize!.associations.left_side.should eq original_left_side
+    it "shuffles the associations" do
+      original_associations = @it.associations.dup
+      @it.randomize!.associations.should_not eq original_associations
     end
   end
 
