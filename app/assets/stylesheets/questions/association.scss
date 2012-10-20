@@ -21,7 +21,7 @@ form.association {
       }
     }
 
-    $cols: 4;
+    $cols: 5;
     .static { @include span-columns($cols); }
 
     .dynamic {

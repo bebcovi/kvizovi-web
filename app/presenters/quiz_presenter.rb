@@ -12,13 +12,15 @@ class QuizPresenter < BasePresenter
   end
 
   def visibility_icon
-    simple_form_for quiz, html: {class: "toggle-activation"} do |f|
-      if quiz.activated?
+    if quiz.activated?
+      simple_form_for quiz, html: {class: "toggle-activation enabled"} do |f|
         f.hidden_field(:activated, value: false) +
-        f.button(:button, "Deaktiviraj", class: "enabled")
-      else
+        f.button(:button, "", title: "Deaktiviraj")
+      end
+    else
+      simple_form_for quiz, html: {class: "toggle-activation"} do |f|
         f.hidden_field(:activated, value: true) +
-        f.button(:button, "Aktiviraj")
+        f.button(:button, "", title: "Aktiviraj")
       end
     end
   end
