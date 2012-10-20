@@ -14,6 +14,10 @@ class GamesController < ApplicationController
     @game_submission = GameSubmission.new(params[:game_submission].merge(player_class: current_user.class))
     @game_submission.players << current_user
 
+    if request.referer.in?([new_game_url, quiz_questions_url(@game_submission.quiz)])
+      cookies[:referer] = request.referer
+    end
+
     if @game_submission.valid?
       game_state.initialize!(@game_submission.info)
       redirect_to edit_game_path
@@ -59,7 +63,7 @@ class GamesController < ApplicationController
 
   def destroy
     game_state.finish_game!
-    redirect_to new_game_path
+    redirect_to before_game_path
   end
 
   private
@@ -79,4 +83,9 @@ class GamesController < ApplicationController
   def quiz
     Quiz.find(game_state.quiz_id)
   end
+
+  def before_game_path
+    cookies[:referer]
+  end
+  helper_method :before_game_path
 end

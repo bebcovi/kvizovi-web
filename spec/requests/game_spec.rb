@@ -93,7 +93,7 @@ describe "Game" do
 
       while current_path == edit_game_path
         click_on "Odgovori"
-        within(".buttons") { all("a").last.click }
+        within(".buttons") { find("a").click }
       end
 
       first(".bar").text.strip.should eq "0%"
@@ -177,7 +177,7 @@ describe "Game" do
           category = first("form")[:class].split(" ").last
           answer_question(category)
           click_on "Odgovori"
-          within(".buttons") { all("a").last.click }
+          within(".buttons") { find("a").click }
         end
 
         first(".bar").text.strip.should eq "100%"
@@ -201,7 +201,7 @@ describe "Game" do
           category = first("form")[:class].split(" ").last
           answer_question(category)
           click_on "Odgovori"
-          within(".buttons") { all("a").last.click }
+          within(".buttons") { find("a").click }
         end
 
         all(".bar").map(&:text).map(&:strip).each { |str| str.should_not eq "0%" }

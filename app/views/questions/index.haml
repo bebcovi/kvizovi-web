@@ -2,6 +2,12 @@
 
 = back_button "Kvizovi", root_path
 
+= simple_form_for :game_submission, url: game_path, method: :post do |f|
+  = f.hidden_field :quiz_id, value: @quiz.id
+  = f.hidden_field :players_count, value: 1
+  = buttons(f) do |b|
+    = b.submit_button "Isprobaj kviz"
+
 %h1
   %span.name= @quiz.name
   %span.section pitanja
