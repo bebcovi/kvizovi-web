@@ -152,6 +152,7 @@ describe "Game" do
         choose @choice_question.answer
       when "association"
         (1..@association_question.associations.count).each do |n|
+          fill_in "game_answer_#{n * 2 - 1}", with: @association_question.associations.left_side[n - 1]
           fill_in "game_answer_#{n * 2}", with: @association_question.associations.right_side[n - 1]
         end
       when "image"

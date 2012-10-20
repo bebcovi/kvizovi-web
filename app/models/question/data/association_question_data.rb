@@ -10,7 +10,9 @@ class AssociationQuestionData < ActiveRecord::Base
   validate :validate_associations
 
   def associations
-    @associations ||= Associations.new(read_attribute(:associations))
+    @associations ||= Associations.new(read_attribute(:associations)).tap do |associations|
+      associations.original = Associations.new(read_attribute(:associations))
+    end
   end
 
   def associations=(value)
@@ -21,23 +23,30 @@ class AssociationQuestionData < ActiveRecord::Base
   end
 
   class Associations < Hash
-    attr_reader :original
+    attr_accessor :original
 
     alias left_side keys
     alias right_side values
 
     def initialize(hash)
-      @original = hash
       replace(hash)
+      @original = self.dup
     end
 
     def shuffle!
-      replace(Hash[(keys.shuffle).zip(values.shuffle)]) until self.values != original.values
+      replace(Hash[(keys.shuffle).zip(values.shuffle)]) until self != original
       self
     end
 
     def shuffle
       dup.shuffle!
+    end
+
+    def ==(hash)
+      each_key do |key|
+        return false if self[key] != hash[key]
+      end
+      true
     end
   end
 
