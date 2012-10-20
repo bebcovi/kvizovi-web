@@ -14,23 +14,19 @@ App.Questions.image = do ->
     $toggleType = $('<a>', {href: '#'}).addClass('toggle-type')
     $img        = $('.preview', $form)
     img         = $img[0]
+    existingSrc = img.src
 
     loadImg = (src) ->
       img.src = src
-      img.onload  = -> $img.show()
-      img.onerror = -> $img.hide()
+      img.onload = -> $img.show()
 
     $url.hide()
-    $img.hide()
 
     $toggleType
       .on 'click', (event) ->
         event.preventDefault()
         $file.toggle()
-        $fileInput.val('')
         $url.toggle()
-        $urlInput.val('')
-        $img.hide()
 
       .clone(true)
         .attr('title', 'Slika na internetu')
@@ -46,20 +42,36 @@ App.Questions.image = do ->
         .prependTo($url)
 
     $fileInput.on 'change', (event) ->
-      reader = new FileReader
-      file   = event.target.files[0]
+      if $(@).val()
+        reader = new FileReader
+        file   = event.target.files[0]
 
-      reader.onload = (e) ->
-        loadImg e.target.result
+        $urlInput.val('')
 
-      if /image/.test file.type
-        reader.readAsDataURL file
+        reader.onload = (e) ->
+          loadImg e.target.result
+
+        if /image/.test file.type
+          reader.readAsDataURL file
+        else
+          alert "Datoteka #{file.name} nije slika."
       else
-        alert "Datoteka #{file.name} nije slika."
+        if existingSrc
+          loadImg existingSrc
+        else
+          $img.hide()
 
-    $url
+    $urlInput
       .on 'change', ->
-        loadImg $urlInput.val()
+        if $urlInput.val()
+          $fileInput.val('')
+          loadImg $urlInput.val()
+        else
+          if existingSrc
+            loadImg existingSrc
+          else
+            $img.hide()
+
       .on 'paste', ->
         setTimeout ->
           loadImg $urlInput.val()
@@ -68,4 +80,3 @@ App.Questions.image = do ->
   edit: ($form) ->
 
     @new $form
-    $img.show()
