@@ -13,7 +13,8 @@ describe GameReview do
       player_ids: @players.map(&:id),
       quiz_id: @quiz.id,
       question_ids: @questions.map(&:id),
-      question_answers: [true, true, true, false]
+      question_answers: [true, true, true, false],
+      player_class: Student
     }
   end
 

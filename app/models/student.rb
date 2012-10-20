@@ -42,5 +42,3 @@ class Student < ActiveRecord::Base
     end
   end
 end
-
-Player = Student

@@ -8,7 +8,7 @@ class GameReview
   end
 
   def players
-    @players ||= Player.find(@hash[:player_ids])
+    @players ||= @hash[:player_class].find(@hash[:player_ids])
   end
 
   def scores

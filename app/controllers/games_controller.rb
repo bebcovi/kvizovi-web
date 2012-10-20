@@ -1,28 +1,33 @@
 class GamesController < ApplicationController
   before_filter :authenticate!
-  before_filter :check_if_game_finished, only: :edit
+
+  before_filter only: :edit do
+    redirect_to new_game_path if not game_state.game_in_progress?
+  end
 
   def new
     @game_submission = GameSubmission.new
-    @quizzes = current_student.available_quizzes
+    @quizzes = current_user.available_quizzes
   end
 
   def create
-    @game_submission = GameSubmission.new(params[:game_submission])
-    @game_submission.players << current_student
+    @game_submission = GameSubmission.new(params[:game_submission].merge(player_class: current_user.class))
+    @game_submission.players << current_user
 
     if @game_submission.valid?
       game_state.initialize!(@game_submission.info)
       redirect_to edit_game_path
     else
-      @quizzes = current_student.available_quizzes
+      @quizzes = current_user.available_quizzes
       render :new
     end
   end
 
-  def edit
+  before_filter only: :edit do
     game_state.next_question!
+  end
 
+  def edit
     @quiz = quiz
     @player = current_player
     @question = current_question.randomize!
@@ -32,7 +37,7 @@ class GamesController < ApplicationController
   end
 
   def update
-    game_state.save_answer!(current_question.correct_answer?(answer))
+    game_state.save_answer!(current_question.correct_answer?(params[:game].try(:[], :answer)))
     redirect_to feedback_game_path
   end
 
@@ -43,7 +48,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game_review = GameReview.new(game_state.info)
+    @game_review = GameReview.new(game_state.info.merge(player_class: current_user.class))
     @quiz = @game_review.quiz
     @questions_count = @game_review.questions_count
   end
@@ -59,10 +64,6 @@ class GamesController < ApplicationController
 
   private
 
-  def answer
-    params[:game][:answer] rescue nil
-  end
-
   def game_state
     GameState.new($redis, clean_method: "flushdb")
   end
@@ -72,14 +73,10 @@ class GamesController < ApplicationController
   end
 
   def current_player
-    Student.find(game_state.current_player_id)
+    current_user.class.find(game_state.current_player_id)
   end
 
   def quiz
     Quiz.find(game_state.quiz_id)
-  end
-
-  def check_if_game_finished
-    redirect_to new_game_path if not game_state.game_in_progress?
   end
 end

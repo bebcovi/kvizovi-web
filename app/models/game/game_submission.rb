@@ -7,6 +7,7 @@ class GameSubmission
   attribute :quiz_id
   attribute :players_count, type: Integer
   attribute :players_credentials, default: []
+  attribute :player_class
 
   attr_writer :players
   def players
@@ -49,7 +50,7 @@ class GameSubmission
 
   def validate_authenticity_of_players
     self.players += players_credentials
-      .map { |attributes| Player.authenticate(attributes) }
+      .map { |attributes| player_class.authenticate(attributes) }
       .reject { |player| !player }
 
     if players_count && players_count != players.count
