@@ -71,6 +71,14 @@ App.Controllers.games = do ->
       else
         $time.text "#{min}:0#{sec}"
 
+      if min == 0
+        if sec == 10
+          $timer.addClass('notice')
+        else if sec == 5
+          $timer
+            .removeClass('notice')
+            .addClass('alert')
+
     clearStorage = ->
       localStorage.removeItem 'total'
 

@@ -41,6 +41,9 @@ body.games {
       right: rhythm(1/4);
       width: rhythm(5/2);
       color: rgba(black, .3);
+
+      &.notice { color: orange; }
+      &.alert  { color: $wrong; }
     }
 
   }
