@@ -62,12 +62,13 @@ describe "Registration" do
       find_field("Tajni ključ").value.should be_nil
     end
 
-    it "redirects to school on success" do
+    it "redirects to school on success and it creates an example quiz" do
       authorize
 
       fill_in_the_form
       expect { click_on "Registriraj se" }.to change{School.count}.from(0).to(1)
 
+      School.first.quizzes.should_not be_empty
       current_path.should eq(school_path(School.first))
       find("#log").should have_link(school.name)
     end
