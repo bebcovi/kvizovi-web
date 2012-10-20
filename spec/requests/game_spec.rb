@@ -12,7 +12,7 @@ describe "Game" do
     @association_question = create_list(:association_question, 2, quiz: @quiz).first
     @image_question       = create_list(:image_question, 2, quiz: @quiz).first
     @text_question        = create_list(:text_question, 2, quiz: @quiz).first
-    @quiz.update_column(:activated, true)
+    @quiz.update_attributes!(activated: true)
   end
 
   before(:each) do
@@ -33,7 +33,7 @@ describe "Game" do
       find_field("Korisničko ime").value.should_not be_nil
     end
 
-    context "1 player" do
+    context "with 1 player" do
       def fill_in_the_form
         choose @quiz.name
         choose "1 igrač"
@@ -49,7 +49,7 @@ describe "Game" do
       end
     end
 
-    context "2 players" do
+    context "with 2 players" do
       def fill_in_the_form
         choose @quiz.name
         choose "2 igrača"
@@ -162,7 +162,7 @@ describe "Game" do
       end
     end
 
-    context "1 player" do
+    context "with 1 player" do
       def start_game
         visit new_game_path
         choose @quiz.name
@@ -184,7 +184,7 @@ describe "Game" do
       end
     end
 
-    context "2 players" do
+    context "with 2 players" do
       def start_game
         visit new_game_path
         choose @quiz.name

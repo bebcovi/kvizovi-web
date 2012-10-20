@@ -11,7 +11,7 @@ describe GameSubmission do
     @players = [create(:janko), create(:matija)]
   end
 
-  before(:each) { @it = build(:game_submission) }
+  before(:each) { @it = build(:game_submission, player_class: Student) }
   subject { @it }
 
   describe "#info" do

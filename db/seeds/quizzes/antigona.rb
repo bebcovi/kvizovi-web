@@ -3,7 +3,7 @@
 school = School.find_by_username("mioc")
 
 quiz = school.quizzes.create!([
-  {name: "Antigona", grades: [1, 3, 4], activated: true}
+  {name: "Antigona", grades: [1, 3, 4]}
 ]).first
 
 quiz.boolean_questions.create!([
@@ -104,3 +104,5 @@ quiz.text_questions.create!([
     }
   }
 ])
+
+quiz.update_attributes!(activated: true)
