@@ -72,7 +72,7 @@ App.Controllers.games = do ->
         $time.text "#{min}:0#{sec}"
 
       if min == 0
-        if sec <= 10
+        if 5 < sec <= 10
           $timer.addClass('notice')
         else if sec <= 5
           $timer
