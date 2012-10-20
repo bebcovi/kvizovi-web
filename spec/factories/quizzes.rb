@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :quiz do
     name "Name"
     grades [1]
-    activated true
-    school
+    school_id 1
   end
 end

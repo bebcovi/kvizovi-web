@@ -1,3 +1,5 @@
+require_relative "../app/models/question"
+
 module HasManyQuestions
   def has_many_questions(options = {})
     has_many :questions, options

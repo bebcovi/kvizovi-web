@@ -1,9 +1,6 @@
 class GamesController < ApplicationController
-  before_filter :authenticate_student!
-
-  before_filter only: :edit do
-    redirect_to new_game_path if not game_state.game_in_progress?
-  end
+  before_filter :authenticate!
+  before_filter :check_if_game_finished, only: :edit
 
   def new
     @game_submission = GameSubmission.new
@@ -82,5 +79,9 @@ class GamesController < ApplicationController
 
   def quiz
     Quiz.find(game_state.quiz_id)
+  end
+
+  def check_if_game_finished
+    redirect_to new_game_path if not game_state.game_in_progress?
   end
 end

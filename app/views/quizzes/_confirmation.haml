@@ -1,0 +1,7 @@
+%p Jeste li sigurni da želite izbrisati taj kviz?
+
+= simple_form_for @quiz, method: :delete do |f|
+
+  = buttons(f) do |b|
+    = b.cancel_button "Nisam", quizzes_path
+    = b.submit_button "Jesam"

@@ -30,7 +30,7 @@ class QuizzesController < ApplicationController
       flash[:notice] = "Kviz je uspješno izmijenjen." unless params[:quiz][:activated]
       redirect_to quizzes_path
     else
-      if params.key?(:activated)
+      if params[:quiz][:activated]
         redirect_to quizzes_path, alert: @quiz.errors[:base].first
       else
         render :edit
