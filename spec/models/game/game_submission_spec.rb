@@ -1,24 +1,42 @@
-require "spec_helper_lite"
-require_relative "../../../app/models/game/game_submission"
+require "spec_helper_full"
+require "set"
 
 describe GameSubmission do
+  before(:all) do
+    @quiz = create(:quiz)
+    @questions = []
+    @questions += create_list(:boolean_question, 2, quiz: @quiz)
+    @questions += create_list(:choice_question, 2, quiz: @quiz)
+    @questions += create_list(:association_question, 2, quiz: @quiz)
+    @players = [create(:janko), create(:matija)]
+  end
+
   before(:each) { @it = build(:game_submission) }
   subject { @it }
 
-  before(:each) do
-    stub_const("Quiz", Class.new)
-    stub_const("Player", Class.new)
-  end
-
   describe "#info" do
-    it "fetches the info correctly" do
-      @it.stub(:quiz_id) { 1 }
-      @it.stub(:quiz) { double("quiz", question_ids: [1, 2, 3, 4]) }
-      @it.stub(:players) { [double("player", id: 1), double("player", id: 2)] }
+    before(:each) do
+      @it.quiz_id = @quiz.id
+      @it.players_count = @players.count
+      @it.players = @players
+    end
 
-      @it.info[:quiz_id].should eq 1
-      (1..4).each { |id| @it.info[:question_ids].should include(id) }
-      (1..2).each { |id| @it.info[:player_ids].should include(id) }
+    it "is correct" do
+      @it.info[:quiz_id].should eq @quiz.id
+      Set.new(@it.info[:question_ids]).should eq Set.new(@questions.map(&:id))
+      Set.new(@it.info[:player_ids]).should eq Set.new(@players.map(&:id))
+    end
+
+    it "distributes the questions fairly amongst players" do
+      grouped_questions = []
+      (1..@it.players_count).each do |n|
+        grouped_questions << @it.info[:question_ids].select.each_with_index { |_, i| i % @it.players_count == (n - 1) }
+      end
+      grouped_question_categories = grouped_questions.map { |question_ids| Question.find(question_ids).map(&:category) }
+      Question.categories.each do |category|
+        counts = grouped_question_categories.map { |categories| categories.select { |c| c == category }.count }
+        counts.each { |count| count.should eq counts.first }
+      end
     end
   end
 
@@ -39,37 +57,40 @@ describe GameSubmission do
         @it.players_credentials = []
         @it.should_not be_valid
 
-        @it.players_credentials = [{}]
-        Player.stub(:authenticate) { true }
+        @it.players_credentials = [attributes_for(:janko)]
         @it.should be_valid
       end
 
-      it "rejects both nil and false" do
+      it "succesfully authenticates players" do
         @it.players_count = 1
-        @it.players_credentials = [{}]
 
-        Player.stub(:authenticate) { false }
+        @it.players_credentials = [{username: "johndoe", password: "secret"}]
         @it.should_not be_valid
-        Player.stub(:authenticate) { nil }
+
+        @it.players_credentials = [{username: "janko", password: "wrong"}]
         @it.should_not be_valid
-      end
-
-      it "clears out duplicate players" do
-        @it.players_count = 2
-        @it.players_credentials = [{}, {}]
-        Player.stub(:authenticate) { "student" }
-        @it.should_not be_valid
-      end
-
-      it "doesn't give validation errors when #players_count is blank" do
-        @it.players_count = nil
-        @it.valid?
-        @it.errors[:players_credentials].should be_empty
-
-        @it.players_count = ""
-        @it.valid?
-        @it.errors[:players_credentials].should be_empty
       end
     end
+
+    it "validates uniqueness of players" do
+      @it.players_count = 2
+      @it.players_credentials = [attributes_for(:janko), attributes_for(:janko)]
+      @it.should_not be_valid
+    end
+
+    it "doesn't give validation errors on #players_credentials when #players_count is blank" do
+      @it.players_count = nil
+      @it.valid?
+      @it.errors[:players_credentials].should be_empty
+
+      @it.players_count = ""
+      @it.valid?
+      @it.errors[:players_credentials].should be_empty
+    end
+  end
+
+  after(:all) do
+    @quiz.destroy
+    @players.each(&:destroy)
   end
 end

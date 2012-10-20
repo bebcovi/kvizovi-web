@@ -4,14 +4,15 @@ require "spec_helper_full"
 describe "Game" do
   before(:all) do
     @school = create(:school)
-    @janko = @school.students.create(attributes_for(:janko))
-    @matija = @school.students.create(attributes_for(:matija))
+    @janko = create(:janko, school: @school)
+    @matija = create(:matija, school: @school)
     @quiz = create(:quiz, school: @school)
-    @boolean_question = create(:boolean_question, quiz: @quiz)
-    @choice_question = create(:choice_question, quiz: @quiz)
-    @association_question = create(:association_question, quiz: @quiz)
-    @image_question = create(:image_question, quiz: @quiz)
-    @text_question = create(:text_question, quiz: @quiz)
+    @boolean_question     = create_list(:boolean_question, 2, quiz: @quiz).first
+    @choice_question      = create_list(:choice_question, 2, quiz: @quiz).first
+    @association_question = create_list(:association_question, 2, quiz: @quiz).first
+    @image_question       = create_list(:image_question, 2, quiz: @quiz).first
+    @text_question        = create_list(:text_question, 2, quiz: @quiz).first
+    @quiz.update_column(:activated, true)
   end
 
   before(:each) do
