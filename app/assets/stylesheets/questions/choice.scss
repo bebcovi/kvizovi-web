@@ -29,7 +29,7 @@ form.choice {
         float: none;
         color: $correct;
         font-weight: 400;
-        border-color: rgba($green, .75);
+        border-color: rgba($correct, .75);
       }
 
       .error { display: inline; }

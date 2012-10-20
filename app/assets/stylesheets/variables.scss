@@ -36,21 +36,21 @@ $default-border-radius: 3px;
 
 // colors
 
-$red: hsl(0, 50%, 50%);
-$purple: hsl(270, 50%, 50%);
-$green: hsl(100, 75%, 25%);
+$red:     hsl(0, 50%, 50%);
+$purple:  hsl(270, 50%, 50%);
+$orange:  hsl(30, 60%, 50%);
 
-$text: lighten(black, 30%);
+$text:    lighten(black, 30%);
 
-$link1: $red;
-$link2: darken($link1, 5%);
+$link1:   $red;
+$link2:   darken($link1, 5%);
 
-$correct: $green;
-$wrong: hsl(0, 90%, 60%);
+$correct: hsl(100, 75%, 25%);
+$wrong:   hsl(0, 90%, 60%);
 
 $players:
   one $purple,
-  two $green;
+  two $orange;
 
 // type
 

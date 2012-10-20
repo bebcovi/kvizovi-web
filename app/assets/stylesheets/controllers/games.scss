@@ -29,6 +29,7 @@ body.games {
       @include border-right-radius;
       position: relative;
       top: -4px;
+      left: -1px;
       height: rhythm(7/4, $large);
       margin-left: - 2 * $normal;
       padding: 0 rhythm(1/2, $large);
