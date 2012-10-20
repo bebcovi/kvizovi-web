@@ -11,7 +11,7 @@
     %li{class: number(player_number)}
       %dl
         %dt.username= player.username.prepend_icon("user")
-        %dd.rank Imaš #{score} od #{@game_review.total_score} bodova. Ti si #{rank}! :)
+        %dd.rank Imaš #{score} od #{@game_review.total_score} bodova. Ti si <strong>#{rank}</strong>! :)
       .bar
         .label #{percentage(score, @game_review.total_score)}%
         - if score != 0
