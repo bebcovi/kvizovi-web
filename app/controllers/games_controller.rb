@@ -44,8 +44,6 @@ class GamesController < ApplicationController
 
   def show
     @game_review = GameReview.new(game_state.info)
-    game_state.clean!
-
     @quiz = @game_review.quiz
     @questions_count = @game_review.questions_count
   end
