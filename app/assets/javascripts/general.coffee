@@ -9,13 +9,8 @@ App.general = ->
   # bootstrap tooltips
 
   $('.controls a, button').tooltip()
-  $('a.icon-info').tooltip
+  $('a.tour').tooltip
     placement: 'left'
-
-  # info
-
-  $('a.icon-info').fancybox
-    wrapCSS: 'alert long'
 
   # delete confirmation
 

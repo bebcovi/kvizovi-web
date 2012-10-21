@@ -1,6 +1,7 @@
 #main {
   @extend %full-width;
   @extend %border-radius;
+  @include clearfix;
   @include rhythm(0, 3/2, 1, 1/2);
   @include box-shadow(
     rgba(black, .1) 0 0 0 .5em,
@@ -49,7 +50,7 @@
   }
 }
 
-a.icon-info {
+a.tour {
   @include with-font-size($normal, 1) {
     @include color-link(rgba(black, .25), $red);
     position: absolute;

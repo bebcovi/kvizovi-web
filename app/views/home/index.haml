@@ -1,9 +1,11 @@
 - @title = "Početna"
 
 %article#intro
-  :markdown
-    # #{icon("books")} Lektire
-    Aplikacija za ispitivanje znanja iz lektire.
+  %h1 #{icon("books")} Lektire
+  %h2 Aplikacija za ispitivanje znanja iz lektire.
 
-= link_to "Ja sam učenik".prepend_icon("user"), student_login_path, class: "as student"
-= link_to "Ja sam škola".prepend_icon("home"), school_login_path, class: "as school"
+%ol.role
+  %li= link_to "Ja sam učenik".prepend_icon("user"), student_login_path, class: "as student"
+  %li= link_to "Ja sam škola".prepend_icon("home"), school_login_path, class: "as school"
+
+%p.tour Prvi puta ste ovdje? Treba li vam #{link_to "vodič", tour_path}?

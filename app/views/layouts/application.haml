@@ -23,12 +23,9 @@
               = remove_button
               %p= message
 
-        - if content_for? :info
-          %a.icon-info{href: '#info', title: 'Pomoć'}
-          #info
-            = content_for :info
+        = link_to "", tour_path, class: "tour icon-book", title: "Vodič", target: "_blank"
 
         = yield
 
       %footer
-        %p Za prijave grešaka, savjete ili nešto treće, slobodno nas #{mail_to "matija.marohnic@gmail.com, janko.marohnic@gmail.com", "kontaktirajte", target: "_blank"} :)
+        %p Za prijave grešaka, savjete ili nešto treće, slobodno nas #{contact_link "kontaktirajte"} :)

@@ -1,0 +1,59 @@
+body.tour {
+
+  a.tour { display: none; }
+
+}
+
+$cols: 2;
+#toc {
+  @include span-columns($cols);
+  ul { @extend %unstyled-list; }
+  position: fixed;
+  top: rhythm(10/2);
+  width: 126px;
+  a {
+    display: block;
+    padding: {
+      top: rhythm(1/4);
+      bottom: rhythm(1/4);
+    }
+    &:hover { text-decoration: none; }
+  }
+}
+
+$padding: 1/6;
+.toc-h2 {
+  a {
+    @include color-link(rgba(black, .35), $link2);
+    &:hover { text-decoration: none; }
+  }
+
+  &.active a {
+    @include color-link($link2, $link2);
+    font-weight: 700;
+  }
+}
+
+.toc-h3 {
+  @include with-font-size($normal - 2px) {
+    a {
+      @include color-link(rgba(black, .35), $link2);
+      padding-left: rhythm(1/4);
+      font-weight: 300;
+    }
+
+    &.active a {
+      @include color-link($link2, $link2);
+      font-weight: 500;
+    }
+  }
+}
+
+$cols: $total-columns - $cols;
+#toc-content {
+  @include span-columns($cols omega);
+
+  h2 {
+    border-bottom: 2px solid $text;
+  }
+}

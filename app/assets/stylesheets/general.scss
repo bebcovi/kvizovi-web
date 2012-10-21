@@ -22,13 +22,23 @@ h3 {
 h1 {
   @include with-font-size($x-large, 2) {
     @include trailer;
+    strong { font-weight: 900; }
   }
 }
 
 h2 {
-  @include with-font-size($large, 1.75) {
-    @include trailer(.75);
+  @include with-font-size($large, 7/4) {
+    @include trailer(3/4);
     font-weight: 300;
+    strong { font-weight: 700; }
+  }
+}
+
+h3 {
+  @include with-font-size($medium, 3/2) {
+    @include trailer(1/2);
+    font-weight: 100;
+    strong { font-weight: 500; }
   }
 }
 

@@ -11,6 +11,10 @@ module ApplicationHelper
     yield presenter
   end
 
+  def contact_link(string, options = {})
+    mail_to "matija.marohnic@gmail.com, janko.marohnic@gmail.com", string, {target: "_blank"}.merge(options)
+  end
+
   def back_button(string, path, options = {})
     link_to string.prepend_icon("arrow-left"), path, {class: "back"}.merge(options)
   end

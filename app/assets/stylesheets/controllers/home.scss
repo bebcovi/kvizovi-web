@@ -1,12 +1,16 @@
 body.home {
 
-  header { display: none; }
+  header,
+  footer,
+  a.tour {
+    display: none;
+  }
 
   $main: $total-columns - 4;
   #main {
     @include pad(2, 2);
-    @include leader(3);
-    @include padding-trailer(4);
+    @include leader(2);
+    @include padding-trailer(2);
     @include clearfix;
     min-height: 0;
     text-align: center;
@@ -26,16 +30,24 @@ body.home {
   }
 
   $cols: $main / 2;
+  .role {
+    @extend %unstyled-list;
+    @include clearfix;
+
+    li {
+      @include span-columns($cols, $main);
+      @include nth-omega();
+    }
+  }
+
   .as {
     @include with-font-size($medium) {
       @extend %button;
-      @include span-columns($cols, $main);
-      @include nth-omega;
       @include h-borders(1px, 1);
       @include v-borders(1px, .5);
+      display: block;
       font-weight: 300;
-      &,
-      &:hover {
+      &, &:hover {
         @include transition(background-color .2s);
       }
       &:hover {
@@ -53,5 +65,10 @@ body.home {
 
   .student  { @include border-right-radius(0); }
   .school   { @include border-left-radius(0); }
+
+  .tour {
+    @include leader;
+    clear: both;
+  }
 
 }

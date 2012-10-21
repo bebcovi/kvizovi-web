@@ -4,7 +4,7 @@
   %div
     = label_tag :secret_key, "Tajni ključ aplikacije"
     = password_field_tag :secret_key, nil, size: 50, value: (ENV["LEKTIRE_KEY"] if Rails.env.development?), autofocus: current_page?(action: "show")
-    %p.hint Ako nemate ključ, možete ga #{mail_to "matija.marohnic@gmail.com,janko.marohnic@gmail.com?subject=Zahtjev%20za%20tajni%20ključ", "zatražiti", target: "_blank"}.
+    %p.hint Ako nemate ključ, možete ga #{contact_link "zatražiti", subject: "Zahtjev za tajni ključ"}.
 
   = buttons do |b|
     = b.cancel_button "Odustani", school_login_path

@@ -5,6 +5,7 @@
 #= require jquery.ui.droppable
 #
 #= require jquery.fancybox
+#= require jquery.toc
 #= require bootstrap
 #= require moment
 #
