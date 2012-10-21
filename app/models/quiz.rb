@@ -3,14 +3,12 @@ require "active_record"
 require_relative "../../lib/has_many_questions"
 
 class Quiz < ActiveRecord::Base
-  attr_accessible :name, :grades, :activated
-
   belongs_to :school
   extend HasManyQuestions
   has_many_questions dependent: :destroy
   has_many :games
 
-  serialize :grades, Array
+  serialize :grades, ActiveRecord::Coders::Hstore
 
   validates_presence_of :name, :school_id
   validate :validate_questions, if: :activated
@@ -19,7 +17,21 @@ class Quiz < ActiveRecord::Base
   scope :activated, where(activated: true)
 
   def grades=(array)
-    write_attribute(:grades, array.reject(&:blank?).map(&:to_i))
+    grades = array.reject(&:blank?).map(&:to_i)
+    hash = {}
+    if grades.any?
+      (1..8).each { |grade| hash[grade.to_s] = grades.include?(grade).to_s }
+    else
+      (1..8).each { |grade| hash[grade.to_s] = "true" }
+    end
+
+    write_attribute(:grades, hash)
+  end
+
+  def grades
+    (read_attribute(:grades) || {}).
+      select { |grade, presence| presence == "true" }.
+      keys.map(&:to_i)
   end
 
   def to_s

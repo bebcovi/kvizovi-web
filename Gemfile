@@ -35,6 +35,7 @@ gem "bcrypt-ruby", "~> 3.0"
 gem "active_attr"
 gem "nokogiri"
 gem "redis"
+gem "activerecord-postgres-hstore"
 
 group :development, :test do
   gem "pry-rails"
