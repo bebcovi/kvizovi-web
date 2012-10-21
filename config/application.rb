@@ -9,7 +9,9 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-ENV.update YAML.load(File.read(File.expand_path('../application.yml', __FILE__)))
+unless ENV["MANUAL_ENV"] == "yes"
+  ENV.update YAML.load(File.read(File.expand_path('../application.yml', __FILE__)))
+end
 
 module Lektire
   class Application < Rails::Application
@@ -65,5 +67,7 @@ module Lektire
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.assets.initialize_on_precompile = false
   end
 end
