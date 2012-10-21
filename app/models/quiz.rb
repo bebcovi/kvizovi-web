@@ -16,6 +16,7 @@ class Quiz < ActiveRecord::Base
 
   default_scope order("#{table_name}.created_at DESC")
   scope :activated, where(activated: true)
+  scope :with_intended_grade, ->(grade) { where("grades -> '#{grade}' = 'true'") }
 
   def grades=(array)
     grades = array.reject(&:blank?).map(&:to_i)

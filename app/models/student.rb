@@ -17,7 +17,7 @@ class Student < ActiveRecord::Base
   before_create { self.school ||= School.find_by_key(school_key) }
 
   def available_quizzes
-    school.quizzes.activated
+    school.quizzes.activated.with_intended_grade(grade)
   end
 
   def full_name
