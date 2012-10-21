@@ -7,9 +7,9 @@
   = f.input :gender, collection: ["Muško", "Žensko"], as: :radio_buttons
   = f.input :year_of_birth, collection: (30.years.ago.year..Time.now.year).to_a.reverse, prompt: "Izaberite..."
   = f.input :username
+  = f.input :email
   = f.input :password
   = f.input :password_confirmation
-  = f.input :email
 
   = f.input :grade, collection: classes, as: :grouped_select, group_label_method: :first, group_method: :last, prompt: "Izaberi..."
   = f.input :school_key, hint: "Kôd koji ti je tvoja škola dala".append_icon("arrow-up")
