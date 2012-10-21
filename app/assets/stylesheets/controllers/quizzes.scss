@@ -30,12 +30,13 @@ body.quizzes {
 
         // path
 
+        $top: 13px;
         &:before {
           $height: 14px;
           @include border-radius($height);
           content: '';
           position: absolute;
-          top: rhythm(1/2);
+          top: $top;
           left: 0;
           right: 0;
           display: block;
@@ -53,7 +54,7 @@ body.quizzes {
           @include square($size);
           content: '';
           position: absolute;
-          top: rhythm(1/2);
+          top: $top;
           left: 2px;
           margin-top: - $size / 2;
           z-index: 10;
