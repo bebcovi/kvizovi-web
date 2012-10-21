@@ -37,13 +37,13 @@ describe "School" do
 
     it "has the link for it on the quiz page" do
       visit quiz_questions_path(@quiz)
-      click_on "Isprobaj kviz"
+      click_on "Isprobajte kviz"
       current_path.should eq edit_game_path
     end
 
     it "is redirected back to the quiz when the game is interrupted" do
       visit quiz_questions_path(@quiz)
-      click_on "Isprobaj kviz"
+      click_on "Isprobajte kviz"
       click_on "Prekini"
       click_on "Jesam"
       current_path.should eq quiz_questions_path(@quiz)
@@ -51,7 +51,7 @@ describe "School" do
 
     it "is redirected back to the quiz when the game is finished" do
       visit quiz_questions_path(@quiz)
-      click_on "Isprobaj kviz"
+      click_on "Isprobajte kviz"
       click_on "Odgovori"
       within(".buttons") { find("a").click }
       click_on "Završi"
