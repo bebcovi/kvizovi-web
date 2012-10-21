@@ -4,9 +4,9 @@ require "spec_helper_full"
 describe "Game" do
   before(:all) do
     @school = create(:school)
-    @janko = create(:janko, school: @school)
-    @matija = create(:matija, school: @school)
     @quiz = create(:quiz, school: @school)
+    @janko = create(:janko, school: @school, grade: @quiz.grades.first)
+    @matija = create(:matija, school: @school, grade: @quiz.grades.first)
     @boolean_question     = create_list(:boolean_question, 2, quiz: @quiz).first
     @choice_question      = create_list(:choice_question, 2, quiz: @quiz).first
     @association_question = create_list(:association_question, 2, quiz: @quiz).first
