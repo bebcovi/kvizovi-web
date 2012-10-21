@@ -2,15 +2,15 @@
 
 = simple_form_for @school do |f|
 
-  = f.input :name, hint: "Napišite puno ime škole bez grada."
+  = f.input :name, placeholder: "Npr. Osnovna škola Antuna Gustava Matoša" , hint: "Napišite puno ime škole, bez grada (osim ako je on dio naziva)."
   = f.input :level, collection: ["Osnovna", "Srednja"], prompt: "Izaberite..."
   = f.input :place
   = f.input :region, collection: Location.regions, prompt: "Izaberite..."
-  = f.input :username
+  = f.input :username, placeholder: "Npr. ag-matos"
   = f.input :password
   = f.input :password_confirmation
   = f.input :email
-  = f.input :key, as: :password, hint: "Ovo će vaši učenici morati napisati pri registraciji".append_icon("arrow-up")
+  = f.input :key, as: :password, hint: "Ovo će vaši učenici koristiti za registraciju".append_icon("arrow-up")
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", school_login_path
