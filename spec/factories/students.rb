@@ -9,6 +9,7 @@ FactoryGirl.define do
     year_of_birth 1991
     username "jon"
     password "jon"
+    email "jon@snow.com"
     school_id 1
 
     factory :janko do
@@ -16,6 +17,7 @@ FactoryGirl.define do
       last_name "Marohnić"
       username "janko"
       password "janko"
+      email "janko.marohnic@gmail.com"
     end
 
     factory :matija do
@@ -23,6 +25,7 @@ FactoryGirl.define do
       last_name "Marohnić"
       username "matija"
       password "matija"
+      email "matija.marohnic@gmail.com"
     end
 
     factory :player do

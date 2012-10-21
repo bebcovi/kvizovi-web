@@ -3,8 +3,6 @@ require "active_record"
 
 class Student < ActiveRecord::Base
   attr_accessor :school_key
-  attr_accessible :first_name, :last_name, :grade, :gender, :year_of_birth,
-    :username, :password, :password_confirmation, :school_key
 
   belongs_to :school
 
@@ -13,8 +11,8 @@ class Student < ActiveRecord::Base
   validate :validate_school_key, unless: :school_id?
   validates_format_of :username, with: /^[a-zA-Z0-9_]*$/
   validates_length_of :username, minimum: 3
-  validates_presence_of :first_name, :last_name, :username, :password, :grade, :gender, :year_of_birth
-  validates_uniqueness_of :username
+  validates_presence_of :first_name, :last_name, :username, :password, :grade, :gender, :year_of_birth, :email
+  validates_uniqueness_of :username, :email
 
   before_create { self.school ||= School.find_by_key(school_key) }
 

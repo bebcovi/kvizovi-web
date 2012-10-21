@@ -4,6 +4,7 @@ FactoryGirl.define do
     level    "Srednja"
     username "mioc"
     password "mioc"
+    email    "mioc@skola.hr"
     key      "mioc"
     place    "Zagreb"
     region   "Grad Zagreb"

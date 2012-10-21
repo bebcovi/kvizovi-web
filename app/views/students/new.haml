@@ -9,6 +9,7 @@
   = f.input :username
   = f.input :password
   = f.input :password_confirmation
+  = f.input :email
 
   = f.input :grade, collection: classes, as: :grouped_select, group_label_method: :first, group_method: :last, prompt: "Izaberi..."
   = f.input :school_key

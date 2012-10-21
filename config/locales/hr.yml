@@ -20,6 +20,9 @@ hr:
               blank: "Nisi izabrao/la spol."
             year_of_birth:
               blank: "Nisi izabrao/la godinu rođenja."
+            email:
+              taken: "Ova e-mail adresa je već zauzeta."
+              blank: "Ne smije biti prazna."
         school:
           attributes:
             level:
@@ -31,6 +34,9 @@ hr:
             username:
               taken: "Već postoji škola s tim korisničkim imenom."
             password:
+              blank: "Ne smije biti prazna."
+            email:
+              taken: "Ova e-mail adresa je već zauzeta."
               blank: "Ne smije biti prazna."
         boolean_question_data:
           attributes:
