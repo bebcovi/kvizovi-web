@@ -7,14 +7,7 @@
 - if @students.any?
 
   %ol.students
-    = list_of @students do |student|
-      - present student do |student_presenter|
-        .controls
-          = delete_button "", student_path(student), title: "Izbriši"
-
-        .name
-          = student_presenter.full_name
-          %span.username= student_presenter.username
+    = render collection: @students, partial: "student_item", as: :student
 
 - else
 
