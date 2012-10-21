@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   before_filter :authenticate!
 
-  before_filter only: :edit do
+  before_filter except: [:new, :create] do
     redirect_to new_game_path if not game_state.game_in_progress?
   end
 
@@ -62,8 +62,13 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    game_state.finish_game!
-    redirect_to before_game_path
+    Game.create_from_info(game_state.info) unless current_user.is_a?(School)
+
+    unless params[:interrupted] == "true"
+      redirect_to game_path
+    else
+      redirect_to before_game_path
+    end
   end
 
   private

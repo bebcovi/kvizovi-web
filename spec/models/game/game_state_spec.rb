@@ -9,7 +9,8 @@ describe GameState do
     {
       player_ids: [34, 12],
       quiz_id: 1,
-      question_ids: [23, 14, 2]
+      question_ids: [23, 14, 2],
+      clock: Time
     }
   end
 
@@ -37,18 +38,8 @@ describe GameState do
     @it.current_player_number.should eq 1
     @it.current_player_id.should eq 34
 
-    @it.game_over?.should be_false
     @it.save_answer!(true)
     @it.game_over?.should be_true
-
-    @it.info.should eq(
-      {
-        player_ids: [34, 12],
-        quiz_id: 1,
-        question_ids: [23, 14, 2],
-        question_answers: [true, false, true]
-      }
-    )
   end
 
   describe "#next_question!" do
@@ -68,7 +59,7 @@ describe GameState do
 
   it "knows when a game is in progess" do
     @it.game_in_progress?.should be_true
-    @it.finish_game!
+    @it.clean!
     @it.game_in_progress?.should be_false
   end
 end

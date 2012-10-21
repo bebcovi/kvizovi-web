@@ -1,3 +1,5 @@
+require "active_support/inflector/methods"
+
 class GameState
   def initialize(store, options = {})
     @store = store
@@ -16,9 +18,13 @@ class GameState
       @store[:questions_count] = hash[:question_ids].count
       @store[:players_count] = hash[:player_ids].count
 
+      @store[:clock] = hash[:clock]
+
       # Initialization
       @store[:current_player] = 1
       @store[:current_question] = 1
+
+      @store[:start] = hash[:clock].now
 
       self
     end
@@ -36,10 +42,6 @@ class GameState
 
     def next_player!
       @store[:current_player] = (@store[:current_player].to_i % @store[:players_count].to_i) + 1
-    end
-
-    def finish_game!
-      clean!
     end
 
     def clean!
@@ -93,7 +95,7 @@ class GameState
     # Other
 
     def game_over?
-      current_question_number == questions_count and current_question_answer != nil
+      current_question_number == questions_count
     end
 
     def game_in_progress?
@@ -108,13 +110,25 @@ class GameState
       Integer(@store[:quiz_id])
     end
 
+    def start
+      clock.parse(@store[:start].to_s)
+    end
+
     def info
       {
         player_ids:       (1..players_count).map { |i| player_id(i) },
         quiz_id:          quiz_id,
         question_ids:     (1..questions_count).map { |i| question_id(i) },
-        question_answers: (1..questions_count).map { |i| question_answer(i) }
+        question_answers: (1..questions_count).map { |i| question_answer(i) },
+        duration:         (clock.now - start).to_i,
+        interrupted:      (current_question_answer == nil)
       }
+    end
+
+    private
+
+    def clock
+      @store[:clock].to_s.constantize
     end
   end
 

@@ -5,9 +5,10 @@
 - else
   %h1.wrong= "Netočan odgovor".prepend_icon("cancel")
 
-= buttons do |b|
+= form_tag game_path, method: :delete do
 
-  - unless @game_finished
-    = b.action_button "Sljedeće pitanje".append_icon("arrow-right"), edit_game_path
-  - else
-    = b.action_button "Rezultati".append_icon("arrow-right"), game_path
+  = buttons do |b|
+    - unless @game_finished
+      = b.action_button "Sljedeće pitanje".append_icon("arrow-right"), edit_game_path
+    - else
+      = b.submit_button "Rezultati".append_icon("arrow-right")

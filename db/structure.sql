@@ -135,10 +135,14 @@ ALTER SEQUENCE choice_question_data_id_seq OWNED BY choice_question_data.id;
 
 CREATE TABLE games (
     id integer NOT NULL,
-    info text,
     quiz_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    question_answers hstore,
+    question_ids text,
+    duration integer,
+    interrupted boolean,
+    first_player_id integer,
+    second_player_id integer,
+    created_at timestamp without time zone
 );
 
 
@@ -580,3 +584,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121021183343');
 INSERT INTO schema_migrations (version) VALUES ('20121021183641');
 
 INSERT INTO schema_migrations (version) VALUES ('20121021192106');
+
+INSERT INTO schema_migrations (version) VALUES ('20121021200442');

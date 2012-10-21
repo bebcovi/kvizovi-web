@@ -42,7 +42,8 @@ class GameSubmission
     {
       quiz_id:      quiz_id,
       question_ids: question_ids,
-      player_ids:   player_ids
+      player_ids:   player_ids,
+      clock:        Time
     }
   end
 

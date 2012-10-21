@@ -140,7 +140,7 @@ module ApplicationHelper
       if @form_builder
         @form_builder.button :submit, *args
       else
-        @template.submit_tag *args
+        @template.button_tag *args
       end
     end
 

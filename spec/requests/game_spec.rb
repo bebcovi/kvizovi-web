@@ -93,7 +93,7 @@ describe "Game" do
 
       while current_path == edit_game_path
         click_on "Odgovori"
-        within(".buttons") { find("a").click }
+        within(".buttons") { find("*").click }
       end
 
       first(".bar").text.strip.should eq "0%"
@@ -123,25 +123,17 @@ describe "Game" do
 
       it "can be canceled" do
         start_game
-        visit delete_game_path
+        click_on "Prekini"
         click_on "Nisam"
         current_path.should eq edit_game_path
       end
 
       it "can be confirmed" do
         start_game
-        visit delete_game_path
+        click_on "Prekini"
         click_on "Jesam"
         current_path.should eq new_game_path
       end
-    end
-
-    it "isn't possible if the game is over" do
-      start_game
-      click_on "Prekini"
-      click_on "Jesam"
-      visit edit_game_path
-      current_path.should eq new_game_path
     end
 
     def answer_question(category)
@@ -177,7 +169,7 @@ describe "Game" do
           category = first("form")[:class].split(" ").last
           answer_question(category)
           click_on "Odgovori"
-          within(".buttons") { find("a").click }
+          within(".buttons") { find("*").click }
         end
 
         first(".bar").text.strip.should eq "100%"
@@ -201,7 +193,7 @@ describe "Game" do
           category = first("form")[:class].split(" ").last
           answer_question(category)
           click_on "Odgovori"
-          within(".buttons") { find("a").click }
+          within(".buttons") { find("*").click }
         end
 
         all(".bar").map(&:text).map(&:strip).each { |str| str.should_not eq "0%" }

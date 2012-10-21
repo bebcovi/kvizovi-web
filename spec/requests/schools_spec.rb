@@ -49,11 +49,11 @@ describe "School" do
       current_path.should eq quiz_questions_path(@quiz)
     end
 
-    it "is redirected back to the quiz when the game is finished" do
+    it "goes back to the quiz when the game is finished" do
       visit quiz_questions_path(@quiz)
       click_on "Isprobajte kviz"
       click_on "Odgovori"
-      within(".buttons") { find("a").click }
+      within(".buttons") { find("*").click }
       click_on "Završi"
       current_path.should eq quiz_questions_path(@quiz)
     end
