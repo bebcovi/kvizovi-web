@@ -31,8 +31,12 @@ form.choice {
         font-weight: 400;
         border-color: rgba($correct, .75);
       }
+    }
 
-      .error { display: inline; }
+    .field_with_errors {
+      input {
+        border-color: $wrong;
+      }
     }
 
     span.error {
