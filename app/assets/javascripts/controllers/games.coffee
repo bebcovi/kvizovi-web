@@ -99,10 +99,15 @@ App.Controllers.games = do ->
             modal:    true
             content:  data
             beforeShow: ->
-              $button = @inner.find('.buttons').find('a')
-              $button.hide()
+              $link = @inner.find('.buttons').find('a')
+              $form = @inner.find('form')
+              $link.hide()
+              $form.find('[type="submit"]').hide()
               setTimeout ->
-                location.href = $button.attr('href')
+                if $link.length
+                  location.href = $link.attr('href')
+                else if $form.length
+                  $form.submit()
               , 1500
 
     timesUp = showFeedback
