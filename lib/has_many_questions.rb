@@ -4,7 +4,7 @@ module HasManyQuestions
   def has_many_questions(options = {})
     has_many :questions, options
     Question.categories.each do |category|
-      has_many :"#{category}_questions", options
+      has_many :"#{category}_questions", options.except(:dependent)
     end
 
     alias_method :all_questions, :questions
