@@ -1,6 +1,7 @@
 # encoding: utf-8
 require "active_record"
 require_relative "../../lib/has_many_questions"
+require "activerecord-postgres-hstore"
 
 class Quiz < ActiveRecord::Base
   belongs_to :school
@@ -44,7 +45,7 @@ class Quiz < ActiveRecord::Base
     if questions.count < 2
       errors[:base] << "Kviz mora imati barem 2 pitanja prije nego što se može aktivirati."
     elsif not questions.group_by(&:category).values.map(&:count).all?(&:even?)
-      errors[:base] << "Kviz mora imati paran broj svakog tipa pitanja prije nego što se može aktivirati."
+      errors[:base] << "Kviz mora imati paran broj (može i 0) svakog tipa pitanja prije nego što se može aktivirati."
     end
   end
 end

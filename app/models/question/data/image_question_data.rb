@@ -1,5 +1,6 @@
 require_relative "text_question_data"
 require "paperclip"
+require "active_support/core_ext/numeric/bytes"
 require "uri"
 
 class ImageQuestionData < TextQuestionData
