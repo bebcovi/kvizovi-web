@@ -11,7 +11,10 @@ class ImageQuestionData < TextQuestionData
   after_initialize :assign_image
 
   include Paperclip::Glue
-  has_attached_file :image, styles: {resized: "x250>"}
+  has_attached_file :image, styles: {resized: "x250>"},
+    dropbox_options: {
+      path: ->(style) { "lektire/#{id}_#{image.original_filename}" }
+    }
 
   validates_format_of :image_url, with: URI.regexp, allow_blank: true
   validates :image, attachment_presence: true
