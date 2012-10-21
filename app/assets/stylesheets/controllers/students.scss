@@ -1,5 +1,11 @@
 body.students {
 
+  &.new {
+
+    .notice { @include leader(1/2, $small-font-size); }
+
+  }
+
   &.index {
 
     ol.students { @extend %nice-list; }

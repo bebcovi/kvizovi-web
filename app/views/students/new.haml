@@ -14,6 +14,8 @@
   = f.input :grade, collection: classes, as: :grouped_select, group_label_method: :first, group_method: :last, prompt: "Izaberi..."
   = f.input :school_key, hint: "Kôd koji ti je tvoja škola dala".append_icon("arrow-up")
 
+  = notice "Tvoje podatke koristit ćemo samo za ovu aplikaciju, nikada ih nećemo dijeliti trećoj strani."
+
   = buttons(f) do |b|
     = b.cancel_button "Odustani", student_login_path
     = b.submit_button "Registriraj se"
