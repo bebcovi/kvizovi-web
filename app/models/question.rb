@@ -5,7 +5,7 @@ class Question < ActiveRecord::Base
     super
 
     base.class_eval do
-      belongs_to :data, class_name: "#{name}Data"
+      belongs_to :data, class_name: "#{name}Data", dependent: :destroy
       attr_accessible :data_attributes
       validates_associated :data
 
