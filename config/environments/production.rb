@@ -72,4 +72,18 @@ Lektire::Application.configure do
     storage: :dropbox,
     dropbox_credentials: "#{Rails.root}/config/dropbox.yml"
   }
+
+  config.middleware.use ExceptionNotifier,
+    sender_address: "Lektire <#{ENV["SENDGRID_USERNAME"]}>",
+    exception_recipients: ["janko.marohnic@gmail.com"]
+
+  config.action_mailer.smtp_settings = {
+    address:        'smtp.sendgrid.net',
+    port:           '587',
+    authentication: :plain,
+    user_name:      ENV["SENDGRID_USERNAME"],
+    password:       ENV["SENDGRID_PASSWORD"],
+    domain:         'herokuapp.com'
+  }
+  config.action_mailer.delivery_method = :smtp
 end

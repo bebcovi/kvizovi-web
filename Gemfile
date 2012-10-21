@@ -36,6 +36,7 @@ gem "active_attr"
 gem "nokogiri"
 gem "redis"
 gem "activerecord-postgres-hstore"
+gem "exception_notification"
 
 group :development, :test do
   gem "pry-rails"
