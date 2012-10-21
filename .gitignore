@@ -20,3 +20,5 @@ public/system/
 doc/*.lyx~
 doc/*.lyx#
 doc/*.pdf
+
+config/application.yml
