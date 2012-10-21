@@ -62,9 +62,9 @@ class AssociationQuestionData < ActiveRecord::Base
 
   def validate_associations
     if associations.all? { |key, value| key.blank? and value.blank? }
-      errors[:associations] << "Mora postojati barem jedna asocijacija."
+      errors[:base] << "Mora postojati barem jedna asocijacija."
     elsif associations.any? { |key, value| key.blank? or value.blank? }
-      errors[:associations] << "Svaka asocijacija mora imati obje strane popunjene."
+      errors[:base] << "Svaka asocijacija mora imati obje strane popunjene."
     end
   end
 end
