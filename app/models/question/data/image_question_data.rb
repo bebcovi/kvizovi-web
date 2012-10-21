@@ -17,7 +17,7 @@ class ImageQuestionData < TextQuestionData
     }
 
   validates_format_of :image_url, with: URI.regexp, allow_blank: true
-  validates :image, attachment_presence: true
+  validates_attachment :image, presence: true, size: {less_than_or_equal_to: 1.megabyte}
 
   private
 

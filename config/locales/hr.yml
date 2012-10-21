@@ -52,6 +52,8 @@ hr:
               blank: "Niste priložili sliku."
             image_url:
               invalid: "Nije validna URL adresa."
+            image_file_size:
+              less_than_or_equal_to: "Slika ne smije biti veća od 1 MB."
         submitted_game:
           attributes:
             quiz_id:
