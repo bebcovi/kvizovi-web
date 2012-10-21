@@ -64,11 +64,17 @@ $.flashMsg = (msg, name) ->
 
   $msg = $('<p>').append(msg)
 
+  $('.flash').remove()
+
   $flash
     .append($msg)
     .prependTo('#main')
+    .hide()
+    .fadeIn('fast')
 
   $button.on 'click', -> $flash.fadeOut('fast')
+
+  $flash
 
 $.getContent = (title, body) ->
   $title    = $('<h1>').text(title)

@@ -94,7 +94,7 @@
     p { @include trailer(0); }
 
     .remove {
-      @include with-font-size(12px) {};
+      @include with-font-size(10px) {};
     }
   }
 }
