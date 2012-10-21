@@ -23,7 +23,6 @@ App.Controllers.games = do ->
     setPlural       = -> $button.html $button.html().replace(/(Započni)\b/, '$1te')
     setSingular     = -> $button.html $button.html().replace(/(Započni)\w+/, '$1')
 
-    localStorage.removeItem('total')
 
     if not $quizzesChecked.length
       $players.hide()
@@ -46,6 +45,9 @@ App.Controllers.games = do ->
         when '2'
           $login.show()
           setPlural()
+
+    $button.on 'click', ->
+      localStorage.removeItem('total')
 
   create: ->
 
