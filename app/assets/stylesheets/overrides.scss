@@ -35,6 +35,7 @@
   .buttons {
     @include rhythm(1, 0, 0, 1/2);
   }
+  input { width: 100%; }
 }
 
 .feedback {

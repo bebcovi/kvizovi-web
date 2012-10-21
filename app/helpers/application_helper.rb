@@ -36,7 +36,7 @@ module ApplicationHelper
   end
 
   def delete_button(string, path, options = {})
-    link_to string.prepend_icon("remove"), path, options
+    link_to string.prepend_icon("remove"), path, {class: "delete"}.merge(options)
   end
 
   def add_button(string, path, options = {})

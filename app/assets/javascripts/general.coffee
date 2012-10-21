@@ -14,7 +14,7 @@ App.general = ->
 
   # delete confirmation
 
-  $('.controls').find('a:last-child').fancybox
+  $('.controls').find('.delete').fancybox
     wrapCSS:  'confirm'
     width:    250
     type:     'ajax'
