@@ -11,23 +11,24 @@
     %script try{Typekit.load();}catch(e){}
 
   %body{class: body_class}
-    %header
-      %h1#logo= "Lektire".prepend_icon("books")
-      = render "log" if logged_in?
+    #wrapper
+      %header
+        %h1#logo= "Lektire".prepend_icon("books")
+        = render "log" if logged_in?
 
-    %article#main{role: "main"}
-      - flash.each do |name, message|
-        - if name.in?([:notice, :alert])
-          %div{class: "flash #{name}"}
-            = remove_button
-            %p= message
+      %article#main{role: "main"}
+        - flash.each do |name, message|
+          - if name.in?([:notice, :alert])
+            %div{class: "flash #{name}"}
+              = remove_button
+              %p= message
 
-      - if content_for? :info
-        %a.icon-info{href: '#info', title: 'Pomoć'}
-        #info
-          = content_for :info
+        - if content_for? :info
+          %a.icon-info{href: '#info', title: 'Pomoć'}
+          #info
+            = content_for :info
 
-      = yield
+        = yield
 
-    %footer
-      %p Za prijave grešaka, savjete ili nešto treće, slobodno nas #{mail_to "matija.marohnic@gmail.com, janko.marohnic@gmail.com", "kontaktirajte"} :)
+      %footer
+        %p Za prijave grešaka, savjete ili nešto treće, slobodno nas #{mail_to "matija.marohnic@gmail.com, janko.marohnic@gmail.com", "kontaktirajte"} :)

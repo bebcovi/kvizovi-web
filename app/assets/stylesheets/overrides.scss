@@ -1,13 +1,5 @@
 // fancybox
 
-.fancybox-lock {
-  overflow: visible;
-
-  .fancybox-overlay {
-    overflow-y: hidden;
-  }
-}
-
 .fancybox-wrap {
   text-align: center;
   &.long { text-align: left; }

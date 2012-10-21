@@ -1,14 +1,14 @@
 @include establish-baseline;
 @include border-box-sizing;
 
-html {
+body {
   overflow-y: scroll;
   font-family: $base-font-family;
   color: $text;
   background: rgba(black, .1) image-url('bg-pattern.png') repeat;
 }
 
-body {
+#wrapper {
   @include container;
 }
 
