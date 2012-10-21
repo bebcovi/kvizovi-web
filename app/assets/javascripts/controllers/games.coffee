@@ -94,10 +94,16 @@ App.Controllers.games = do ->
         success: (data) ->
           clearStorage()
           $.fancybox
-            width: 350
-            modal: true
-            content: data
-            beforeShow: false
+            wrapCSS:  'feedback'
+            width:    400
+            modal:    true
+            content:  data
+            beforeShow: ->
+              $button = @inner.find('.buttons').find('a')
+              $button.hide()
+              setTimeout ->
+                location.href = $button.attr('href')
+              , 1500
 
     timesUp = showFeedback
 
