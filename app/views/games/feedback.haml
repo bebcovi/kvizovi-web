@@ -9,10 +9,12 @@
     = icon("cancel-2")
     %span Netočan odgovor
 
+  = render partial: "questions/#{@question.category}_question_answer", object: @question, as: :question
+
 = form_tag game_path, method: :delete do
 
   = buttons do |b|
-    - unless @game_finished
+    - unless @game_over
       = b.action_button "Sljedeće pitanje".append_icon("arrow-right"), edit_game_path
     - else
       = b.submit_button "Rezultati".append_icon("arrow-right")
