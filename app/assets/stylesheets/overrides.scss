@@ -40,6 +40,8 @@
 
 .feedback {
   h1 {
-    @include leader(5/4, $x-large);
+    @include with-font-size($large) {
+      @include rhythm(1/2, 0, 0, 1/2);
+    }
   }
 }

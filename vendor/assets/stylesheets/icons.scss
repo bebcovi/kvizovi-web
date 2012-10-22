@@ -96,9 +96,6 @@ $path: 'icons/icons';
 .icon-drive:before {
   content: "\e01c";
 }
-.icon-checkmark:before {
-  content: "\e01d";
-}
 .icon-book:before {
   content: "\e01e";
 }
@@ -107,4 +104,10 @@ $path: 'icons/icons';
 }
 .icon-pencil-2:before {
   content: "\e01d";
+}
+.icon-checkmark:before {
+  content: "\e01f";
+}
+.icon-cancel-2:before {
+  content: "\e020";
 }

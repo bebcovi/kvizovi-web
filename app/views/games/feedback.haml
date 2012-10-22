@@ -1,9 +1,13 @@
 - @title = @correct_answer ? "Točan odgovor" : "Netočan odgovor"
 
 - if @correct_answer
-  %h1.correct= "Točan odgovor!".prepend_icon("checkmark")
+  %h1.correct
+    = icon("checkmark")
+    %span Točan odgovor!
 - else
-  %h1.wrong= "Netočan odgovor".prepend_icon("cancel")
+  %h1.wrong
+    = icon("cancel-2")
+    %span Netočan odgovor
 
 = form_tag game_path, method: :delete do
 
