@@ -11,8 +11,8 @@
       = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
 
     %section.players
-      %p U koliko igrača želiš igrati?
-      = f.input :players_count, collection: [["1 igrač", 1], ["2 igrača", 2]], as: :radio_buttons, label: false
+      %p Igraš li sam ili još s nekim?
+      = f.input :players_count, collection: [["Samo ja", 1], ["Još netko", 2]], as: :radio_buttons, label: false
 
     %section.login
       %p Daj drugom igraču da se prijavi:
