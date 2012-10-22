@@ -17,20 +17,15 @@ describe Quiz do
       before(:each) { @it.activated = true }
 
       it "has to have at least 2 questions" do
-        require_relative "../../app/models/question/boolean_question"
-
-        @it.stub(:questions).and_return([build(:boolean_question)])
+        @it.stub(:questions).and_return([double("question")])
         @it.should_not be_valid
 
-        @it.stub(:questions).and_return([build(:boolean_question), build(:boolean_question)])
+        @it.stub(:questions).and_return([double("question"), double("question")])
         @it.should be_valid
       end
 
-      it "has to have an even number of each category of questions" do
-        require_relative "../../app/models/question/boolean_question"
-        require_relative "../../app/models/question/text_question"
-
-        @it.stub(:questions).and_return([build(:boolean_question), build(:text_question)])
+      it "has to have even number of questions" do
+        @it.stub(:questions).and_return([double("question"), double("question"), double("question")])
         @it.should_not be_valid
       end
     end

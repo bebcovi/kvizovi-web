@@ -26,18 +26,6 @@ describe GameSubmission do
       Set.new(@it.info[:question_ids]).should eq Set.new(@questions.map(&:id))
       Set.new(@it.info[:player_ids]).should eq Set.new(@players.map(&:id))
     end
-
-    it "distributes the questions fairly amongst players" do
-      grouped_questions = []
-      (1..@it.players_count).each do |n|
-        grouped_questions << @it.info[:question_ids].select.each_with_index { |_, i| i % @it.players_count == (n - 1) }
-      end
-      grouped_question_categories = grouped_questions.map { |question_ids| Question.find(question_ids).map(&:category) }
-      Question.categories.each do |category|
-        counts = grouped_question_categories.map { |categories| categories.select { |c| c == category }.count }
-        counts.each { |count| count.should eq counts.first }
-      end
-    end
   end
 
   describe "validations" do

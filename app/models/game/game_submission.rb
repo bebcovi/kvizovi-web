@@ -24,19 +24,7 @@ class GameSubmission
   end
 
   def info
-    grouped_questions = quiz.questions.group_by(&:category)
-    groups = grouped_questions.keys
-    question_ids = []
-    until groups.empty?
-      random_group = groups.sample
-      players_count.times do
-        random_question = grouped_questions[random_group].sample
-        grouped_questions[random_group].delete(random_question)
-        question_ids << random_question.id
-      end
-      groups.delete(random_group) if grouped_questions[random_group].empty?
-    end
-
+    question_ids = quiz.question_ids.shuffle
     player_ids = players.map(&:id)
 
     {

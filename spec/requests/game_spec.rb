@@ -24,19 +24,19 @@ describe "Game" do
       visit new_game_path
 
       choose @quiz.name
-      choose "2 igrača"
+      choose "Još netko"
       fill_in "Korisničko ime", with: @matija.username
       click_on "Započni kviz"
 
       find_field(@quiz.name).should be_checked
-      find_field("2 igrača").should be_checked
+      find_field("Još netko").should be_checked
       find_field("Korisničko ime").value.should_not be_nil
     end
 
     context "with 1 player" do
       def fill_in_the_form
         choose @quiz.name
-        choose "1 igrač"
+        choose "Samo ja"
       end
 
       it "works" do
@@ -52,7 +52,7 @@ describe "Game" do
     context "with 2 players" do
       def fill_in_the_form
         choose @quiz.name
-        choose "2 igrača"
+        choose "Još netko"
         fill_in "Korisničko ime", with: attributes_for(:matija)[:username]
         fill_in "Lozinka", with: attributes_for(:matija)[:password]
       end
@@ -61,7 +61,7 @@ describe "Game" do
         visit new_game_path
 
         choose @quiz.name
-        choose "2 igrača"
+        choose "Još netko"
         fill_in "Korisničko ime", with: attributes_for(:janko)[:username]
         fill_in "Lozinka", with: attributes_for(:janko)[:password]
         click_on "Započni kviz"
@@ -84,7 +84,7 @@ describe "Game" do
     def start_game
       visit new_game_path
       choose @quiz.name
-      choose "1 igrač"
+      choose "Samo ja"
       click_on "Započni kviz"
     end
 
@@ -166,7 +166,7 @@ describe "Game" do
       def start_game
         visit new_game_path
         choose @quiz.name
-        choose "1 igrač"
+        choose "Samo ja"
         click_on "Započni kviz"
       end
 
@@ -188,7 +188,7 @@ describe "Game" do
       def start_game
         visit new_game_path
         choose @quiz.name
-        choose "2 igrača"
+        choose "Još netko"
         fill_in "Korisničko ime", with: attributes_for(:matija)[:username]
         fill_in "Lozinka", with: attributes_for(:matija)[:password]
         click_on "Započni kviz"

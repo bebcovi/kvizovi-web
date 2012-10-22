@@ -43,10 +43,10 @@ class Quiz < ActiveRecord::Base
   private
 
   def validate_questions
-    if questions.count < 2
+    if questions.count == 0
       errors[:base] << "Kviz mora imati barem 2 pitanja prije nego što se može aktivirati."
-    elsif not questions.group_by(&:category).values.map(&:count).all?(&:even?)
-      errors[:base] << "Kviz mora imati paran broj (može i 0) svakog tipa pitanja prije nego što se može aktivirati."
+    elsif questions.count.odd?
+      errors[:base] << "Kviz mora imati paran broj pitanja prije nego što se može aktivirati (zato da se može igrati u 2 igrača)."
     end
   end
 end

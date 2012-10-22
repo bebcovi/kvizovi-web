@@ -16,13 +16,13 @@ class GameReview
       group_by.each_with_index { |_, i| i % @hash[:player_ids].count }.values
     grouped_questions.map do |question_group|
       question_group.inject(0) do |score, (question_id, answered)|
-        score += (answered ? Question.find(question_id).points : 0)
+        score += (answered ? 1 : 0)
       end
     end
   end
 
   def total_score
-    Question.find(@hash[:question_ids]).map(&:points).inject(:+) / @hash[:player_ids].count
+    @hash[:question_ids].count / @hash[:player_ids].count
   end
 
   def player_numbers

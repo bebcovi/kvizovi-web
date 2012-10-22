@@ -26,11 +26,11 @@ describe GameReview do
   end
 
   it "knows scores" do
-    @it.scores.should eq [@questions.first.points + @questions.third.points, @questions.second.points]
+    @it.scores.should eq [2, 1]
   end
 
   it "knows total score" do
-    @it.total_score.should eq @questions.map(&:points).inject(:+) / @players.count
+    @it.total_score.should eq @questions.count / @players.count
   end
 
   it "knows player numbers" do
