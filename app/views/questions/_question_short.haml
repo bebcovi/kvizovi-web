@@ -4,4 +4,4 @@
 
 .name
   = categories[question.category.to_sym][1]
-  %span.content= question.content
+  %span.content= truncate question.content, length: 75
