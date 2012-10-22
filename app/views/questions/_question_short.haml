@@ -2,4 +2,6 @@
   = edit_button "", edit_quiz_question_path(@quiz, question), title: "Izmjeni"
   = delete_button "", delete_quiz_question_path(@quiz, question), title: "Izbriši"
 
-.name= question.content
+.name
+  = categories[question.category.to_sym][1]
+  %span.content= question.content

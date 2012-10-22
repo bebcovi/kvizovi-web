@@ -52,6 +52,10 @@ ol.categories {
 
 ol.questions {
   @extend %nice-list;
+  i {
+    margin-right: rhythm(1/4);
+    color: rgba(black, .35);
+  }
 }
 
 #question_content {
