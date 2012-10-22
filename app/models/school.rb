@@ -1,5 +1,5 @@
 # encoding: utf-8
-require_relative "school/example_quiz"
+require_relative "school/example_quizzes"
 
 class School < ActiveRecord::Base
   has_many :students, dependent: :destroy

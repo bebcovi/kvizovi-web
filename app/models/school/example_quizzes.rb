@@ -2,7 +2,7 @@
 require "rack/test/uploaded_file"
 
 class School < ActiveRecord::Base
-  def create_example_quiz
+  def create_example_quizzes
     quiz = quizzes.create!([
       {name: "Antigona", grades: [1, 3, 4]}
     ]).first
@@ -105,7 +105,5 @@ class School < ActiveRecord::Base
         }
       }
     ])
-
-    quiz.update_attributes!(activated: true)
   end
 end
