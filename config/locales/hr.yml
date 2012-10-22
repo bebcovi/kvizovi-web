@@ -8,8 +8,6 @@ hr:
       models:
         student:
           attributes:
-            password:
-              blank: "Ne smije biti prazna."
             grade:
               blank: "Nisi odabrao/la razred."
             username:
@@ -21,27 +19,21 @@ hr:
             year_of_birth:
               blank: "Nisi izabrao/la godinu rođenja."
             email:
-              taken: "Ova e-mail adresa je već zauzeta."
-              blank: "Ne smije biti prazna."
+              taken: "Ova email adresa je već zauzeta."
         school:
           attributes:
             level:
               blank: "Niste odabrali tip škole."
             region:
               blank: "Niste odabrali županiju."
-            key:
-              blank: "Ne smije biti prazan."
             username:
               taken: "Već postoji škola s tim korisničkim imenom."
-            password:
-              blank: "Ne smije biti prazna."
             email:
               taken: "Ova e-mail adresa je već zauzeta."
-              blank: "Ne smije biti prazna."
         boolean_question_data:
           attributes:
             answer:
-              blank: "Niste odabrali točan odgovor."
+              inclusion: "Niste odabrali koji je točan odgovor."
         text_question_data:
           attributes:
             answer:
@@ -58,10 +50,6 @@ hr:
           attributes:
             quiz_id:
               blank: "Nisi izabrao/la kviz."
-        quiz:
-          attributes:
-            grades:
-              blank: "Ovaj kviz mora biti namijenjen barem jednom razredu."
 
   support:
     array:
