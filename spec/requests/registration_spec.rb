@@ -70,7 +70,6 @@ describe "Registration" do
       expect { click_on "Registriraj se" }.to change{School.count}.from(0).to(1)
 
       School.first.quizzes.should_not be_empty
-      current_path.should eq(school_path(School.first))
       find("#log").should have_link(school.name)
     end
 

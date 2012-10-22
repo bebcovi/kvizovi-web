@@ -15,7 +15,7 @@ class SchoolsController < ApplicationController
     if @school.save
       log_in!(@school)
       @school.create_example_quiz
-      redirect_to @school, notice: "Uspješno ste se registrirali."
+      redirect_to quizzes_path, notice: "Uspješno ste se registrirali."
     else
       render :new
     end
