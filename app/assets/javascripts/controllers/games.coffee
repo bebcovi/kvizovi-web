@@ -115,7 +115,7 @@ App.Controllers.games = do ->
     if localStorage['total']
       total = localStorage['total'] - 0
     else
-      total = 2 * 60 * 1000
+      total = 1 * 60 * 1000
       localStorage['total'] = total
 
     countdown = do ->
