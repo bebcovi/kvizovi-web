@@ -59,6 +59,7 @@ $cols: $total-columns - $cols;
 }
 
 .question-types {
+  padding-left: rhythm(1/2);
   list-style: none;
   i { margin-right: rhythm(1/2); }
 }
