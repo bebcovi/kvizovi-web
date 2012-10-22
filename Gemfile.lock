@@ -13,7 +13,7 @@ GIT
       railties (>= 3.1.0)
 
 GEM
-  remote: http://rubygems.org/
+  remote: http://bundler-api.herokuapp.com/
   specs:
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
