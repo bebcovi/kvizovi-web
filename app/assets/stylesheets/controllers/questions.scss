@@ -13,19 +13,18 @@ ol.categories {
   @extend %unstyled-list;
 
   a,
-  .icon,
   .label {
     @extend %inline-block;
   }
 
   a {
     @include rhythm(0, 1/4, 1/4, 0);
-    @include color-link(rgba(black, .35), $link2);
+    @include color-link(rgba(black, 1/2), $link2);
     &:hover,
     &:focus {
       text-decoration: none;
 
-      .icon {
+      i {
         color: $link2;
         border-color: $link2;
         background: rgba($link2, .025);
@@ -34,28 +33,20 @@ ol.categories {
   }
 
   i {
-    @include with-font-size(32px) {}
+    @include with-font-size(32px) {
+      @extend %inline-block;
+      @extend %border-radius;
+      @include square(rhythm(2));
+      margin-right: rhythm(1/2);
+      text-align: center;
+      color: rgba(black, .25);
+      border: 1px solid rgba(black, .2);
+      background: rgba(black, .025);
+    }
   }
 
   .label {
     @include with-font-size(20px, 2) {}
-  }
-
-  .icon {
-    @extend %inline-block;
-    @extend %border-radius;
-    @include square(rhythm(2));
-    margin-right: rhythm(1/2);
-    text-align: center;
-    color: rgba(black, .25);
-    border: 1px solid rgba(black, .2);
-    background: rgba(black, .025);
-  }
-
-  .text span {
-    @include with-font-size(20px, 2) {
-      font-weight: bold;
-    }
   }
 }
 

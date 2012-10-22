@@ -23,5 +23,5 @@
   %ol.categories
     = list_of categories do |value, (label, icon)|
       %a{href: new_quiz_question_path(@quiz, category: value)}
-        .icon{class: value}= icon
+        = icon
         .label= label

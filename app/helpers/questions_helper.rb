@@ -7,7 +7,7 @@ module QuestionsHelper
       choice:      ["Ponuđeni odgovori",          icon("list-view")],
       association: ["Asocijacija",                icon("shuffle")],
       image:       ["Pogodi tko/što je na slici", icon("picture")],
-      text:        ["Upiši točan odgovor",        content_tag(:span, "Abc")]
+      text:        ["Upiši točan odgovor",        icon("pencil-2")]
     }
   end
 
