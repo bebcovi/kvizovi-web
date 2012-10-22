@@ -7,9 +7,9 @@ body.tour {
 $cols: 2;
 .toc {
   @extend %unstyled-list;
-  @include span-columns($cols);
+  // @include span-columns($cols);
   position: fixed;
-  top: rhythm(10/2);
+  top: rhythm(9/2);
   width: 126px;
   a {
     display: block;
