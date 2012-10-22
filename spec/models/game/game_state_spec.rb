@@ -50,13 +50,6 @@ describe GameState do
     end
   end
 
-  describe "#clean!" do
-    it "cleans the store" do
-      @it.clean!
-      @it.instance_variable_get("@store").should be_empty
-    end
-  end
-
   it "knows when a game is in progess" do
     @it.game_in_progress?.should be_true
     @it.clean!

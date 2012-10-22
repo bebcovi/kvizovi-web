@@ -67,6 +67,7 @@ class GamesController < ApplicationController
     unless params[:interrupted] == "true"
       redirect_to game_path
     else
+      game_state.clean!
       redirect_to before_game_path
     end
   end
@@ -74,7 +75,7 @@ class GamesController < ApplicationController
   private
 
   def game_state
-    GameState.new($redis, clean_method: "flushdb")
+    GameState.new(cookies)
   end
 
   def current_question

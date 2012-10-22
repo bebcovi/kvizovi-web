@@ -34,7 +34,6 @@ gem "paperclip-meta"
 gem "bcrypt-ruby", "~> 3.0"
 gem "active_attr"
 gem "nokogiri"
-gem "redis"
 gem "activerecord-postgres-hstore"
 gem "exception_notification"
 

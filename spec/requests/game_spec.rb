@@ -136,6 +136,14 @@ describe "Game" do
       end
     end
 
+    it "redirects back when it wants to play again after interrupt" do
+      start_game
+      click_on "Prekini"
+      click_on "Jesam"
+      visit edit_game_path
+      current_path.should eq new_game_path
+    end
+
     def answer_question(category)
       case category
       when "boolean"

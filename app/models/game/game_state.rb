@@ -3,7 +3,6 @@ require "active_support/inflector/methods"
 class GameState
   def initialize(store, options = {})
     @store = store
-    @clean_method = options[:clean_method] || "clear"
   end
 
   module ActionMethods
@@ -45,7 +44,16 @@ class GameState
     end
 
     def clean!
-      @store.send(@clean_method)
+      conditions = [
+        ->(key) { key.to_s =~ /question_id_\d+/ },
+        ->(key) { key.to_s =~ /question_answer_\d+/ },
+        ->(key) { key.to_s =~ /player_id_\d+/ },
+      ]
+      @store.each do |key, _|
+        if conditions.any? { |condition| condition.call(key) }
+          @store.delete(key)
+        end
+      end
     end
   end
 
@@ -103,7 +111,7 @@ class GameState
     end
 
     def clean?
-      !@store[:quiz_id]
+      !@store.has_key?(:question_id_1)
     end
 
     def quiz_id
