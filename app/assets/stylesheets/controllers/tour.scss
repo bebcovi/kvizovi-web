@@ -5,9 +5,9 @@ body.tour {
 }
 
 $cols: 2;
-#toc {
+.toc {
+  @extend %unstyled-list;
   @include span-columns($cols);
-  ul { @extend %unstyled-list; }
   position: fixed;
   top: rhythm(10/2);
   width: 126px;
@@ -50,7 +50,7 @@ $padding: 1/6;
 }
 
 $cols: $total-columns - $cols;
-#toc-content {
+.toc-content {
   @include span-columns($cols omega);
 
   h2 {
