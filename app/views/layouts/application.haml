@@ -23,7 +23,7 @@
               = remove_button
               %p= message
 
-        = link_to "", tour_path, class: "tour icon-book", title: "Vodič", target: "_blank"
+        = link_to "Vodič".append_icon("book"), tour_path, class: "tour", target: "_blank"
 
         = yield
 

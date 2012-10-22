@@ -51,11 +51,17 @@
 }
 
 a.tour {
-  @include with-font-size($normal, 1) {
-    @include color-link(rgba(black, .25), $red);
+  @include with-font-size($small-font-size) {
+    @include color-link(rgba(black, .35), $red);
     position: absolute;
     top: rhythm(.25);
     right: rhythm(.5);
+    font-weight: 300;
     &:hover { text-decoration: none; }
+
+    i {
+      @include with-font-size($normal);
+      vertical-align: middle;
+    }
   }
 }
