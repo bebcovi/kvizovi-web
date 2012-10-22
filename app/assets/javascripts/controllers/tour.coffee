@@ -29,3 +29,9 @@ App.Controllers.tour = do ->
       event.preventDefault()
       highlight $(@).parent()
       $('html, body').animate {scrollTop: $(@hash).offset().top}, 250
+
+    # make the question type list unstyled
+
+    $('ul').each ->
+      if $(@).find('i').length > 3
+        $(@).addClass 'question-types'

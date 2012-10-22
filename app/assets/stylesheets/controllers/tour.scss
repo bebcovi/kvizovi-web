@@ -57,3 +57,8 @@ $cols: $total-columns - $cols;
     border-bottom: 2px solid $text;
   }
 }
+
+.question-types {
+  list-style: none;
+  i { margin-right: rhythm(1/2); }
+}
