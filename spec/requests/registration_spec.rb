@@ -16,7 +16,7 @@ describe "Registration" do
       select school.region, from: "Županija"
       fill_in "Korisničko ime", with: school.username
       fill_in "Lozinka", with: school.password
-      fill_in "E-mail", with: school.email
+      fill_in "Email", with: school.email
       fill_in "Potvrda lozinke", with: school.password
       fill_in "Tajni ključ", with: school.key
     end
@@ -99,7 +99,6 @@ describe "Registration" do
       fill_in "Korisničko ime", with: student.username
       fill_in "Lozinka", with: student.password
       fill_in "Potvrda lozinke", with: student.password
-      fill_in "E-mail", with: student.email
       select ordinalize(student.grade), from: "Razred"
       fill_in "Tajni ključ škole", with: student.school.key
     end

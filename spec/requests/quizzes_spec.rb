@@ -35,7 +35,7 @@ describe "Managing quizzes" do
   end
 
   describe "update" do
-    before(:all) { @quiz = create(:quiz, school: @school) }
+    before(:all) { @quiz = Quiz.last }
 
     it "has a link" do
       visit quizzes_path
@@ -72,8 +72,8 @@ describe "Managing quizzes" do
         it "can be toggled" do
           visit quizzes_path
 
-          expect { first("button").click }.to change{@quiz.reload.activated?}.from(false).to(true)
-          expect { first("button").click }.to change{@quiz.reload.activated?}.from(true).to(false)
+          expect { within("form") { first("button").click } }.to change{@quiz.reload.activated?}.from(false).to(true)
+          expect { within("form") { first("button").click } }.to change{@quiz.reload.activated?}.from(true).to(false)
 
           current_path.should eq(quizzes_path)
         end

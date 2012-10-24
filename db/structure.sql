@@ -330,8 +330,7 @@ CREATE TABLE students (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     gender character varying(255),
-    year_of_birth integer,
-    email character varying(255)
+    year_of_birth integer
 );
 
 
@@ -586,3 +585,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121021183641');
 INSERT INTO schema_migrations (version) VALUES ('20121021192106');
 
 INSERT INTO schema_migrations (version) VALUES ('20121021200442');
+
+INSERT INTO schema_migrations (version) VALUES ('20121024130719');

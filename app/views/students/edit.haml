@@ -10,7 +10,6 @@
   = f.input :year_of_birth, collection: (30.years.ago.year..Time.now.year).to_a.reverse, include_blank: false
   = f.input :grade, collection: classes, as: :grouped_select, group_label_method: :first, group_method: :last
   = f.input :username
-  = f.input :email
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", @student
