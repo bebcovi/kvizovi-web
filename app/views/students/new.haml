@@ -10,7 +10,7 @@
   = f.input :password
   = f.input :password_confirmation
 
-  = f.input :grade, collection: classes, as: :grouped_select, group_label_method: :first, group_method: :last, prompt: "Izaberi..."
+  = f.input :grade, placeholder: "Npr. 2d", hint: "Ako tvoja škola ima samo jedan razred, onda napiši samo broj."
   = f.input :school_key, hint: "Kôd koji ti je tvoja škola dala".append_icon("arrow-up")
 
   = notice "Tvoje podatke koristit ćemo samo za ovu aplikaciju, nikada ih nećemo dijeliti trećoj strani."

@@ -9,7 +9,7 @@ hr:
         student:
           attributes:
             grade:
-              blank: "Nisi odabrao/la razred."
+              invalid: "Mora biti formata \"[broj][slovo]\", npr. \"2d\""
             username:
               taken: "Već postoji učenik s tim korisničkim imenom."
               invalid: "Može sadržavati samo engleska slova, brojeve i _."

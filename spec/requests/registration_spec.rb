@@ -99,7 +99,7 @@ describe "Registration" do
       fill_in "Korisničko ime", with: student.username
       fill_in "Lozinka", with: student.password
       fill_in "Potvrda lozinke", with: student.password
-      select ordinalize(student.grade), from: "Razred"
+      fill_in "Razred", with: student.grade
       fill_in "Tajni ključ škole", with: student.school.key
     end
 
@@ -124,7 +124,7 @@ describe "Registration" do
       find_field("Korisničko ime").value.should_not be_nil
       find_field("Lozinka").value.should be_nil
       find_field("Potvrda lozinke").value.should be_nil
-      find("option[value=\"#{student.grade}\"]").should be_selected
+      find_field("Razred").value.should_not be_nil
       find_field("Tajni ključ škole").value.should_not be_nil
     end
 

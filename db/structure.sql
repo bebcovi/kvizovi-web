@@ -326,7 +326,7 @@ CREATE TABLE students (
     username character varying(255),
     password_digest character varying(255),
     school_id integer,
-    grade integer,
+    grade character varying(2),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     gender character varying(255),
@@ -587,3 +587,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121021192106');
 INSERT INTO schema_migrations (version) VALUES ('20121021200442');
 
 INSERT INTO schema_migrations (version) VALUES ('20121024130719');
+
+INSERT INTO schema_migrations (version) VALUES ('20121025172235');

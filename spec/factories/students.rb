@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :student do
     first_name "Jon"
     last_name "Snow"
-    grade 2
+    grade "2d"
     gender "Muško"
     year_of_birth 1991
     username "jon"
