@@ -32,10 +32,12 @@ $.loader = $('<div>')
 .prependIcon('loading')
 
 $.extend $.fancybox.defaults,
+  width:        'auto'
   height:       'auto'
-  autoSize:     false
+  minHeight:    'auto'
   topRatio:     0.3
-  padding:      30
+  padding:      40
+  margin:       40
   openEffect:   'none'
   closeEffect:  'none'
 
@@ -49,7 +51,7 @@ $.extend $.fancybox.defaults,
           close: 'Nisam'
           submit: 'Jesam'
 
-    @inner.find('.buttons').find('a').on 'click', (event) ->
+    @inner.find('.form_controls').find('a').on 'click', (event) ->
       event.preventDefault()
       $.fancybox.close(true)
 
@@ -68,7 +70,7 @@ $.flashMsg = (msg, name) ->
 
   $flash
     .append($msg)
-    .prependTo('#main')
+    .prependTo('.main_content')
     .hide()
     .fadeIn('fast')
 
@@ -88,7 +90,7 @@ $.getContent = (title, body) ->
   $content
 
 $.generateButtons = (labels) ->
-  $result = $('<div>').addClass('buttons')
+  $result = $('<div>').addClass('form_controls')
 
   if labels['close']
     $close = $('<a>', href: '#').text(labels['close'])

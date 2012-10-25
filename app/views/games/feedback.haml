@@ -3,11 +3,11 @@
 - if @correct_answer
   %h1.correct
     = icon("checkmark")
-    %span Točan odgovor!
+    %span Točan odgovor, bravo!
 - else
   %h1.wrong
     = icon("cancel-2")
-    %span Netočan odgovor
+    %span Ne baš&hellip;
 
   = render partial: "questions/#{@question.category}_question_answer", object: @question, as: :question
 

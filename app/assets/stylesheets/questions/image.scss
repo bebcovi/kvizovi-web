@@ -1,6 +1,7 @@
-form.image {
+.question_image {
 
   &.show {
+
     $cols: $total-columns / 2;
     .img {
       float: left;
@@ -10,7 +11,7 @@ form.image {
 
     .input,
     .hint,
-    .buttons {
+    .form_controls {
       float: left;
       width: columns($cols);
     }
@@ -24,19 +25,23 @@ form.image {
       color: rgba(black, .5);
     }
 
-    .buttons {
+    .form_controls {
       @include leader(0);
       clear: right;
     }
   }
 
-  &.edit, &.new {
+  &.edit,
+  &.new {
+
     .preview { max-height: 250px; }
-    .toggle-type {
+
+    .toggle_type {
       position: absolute;
       left: $grid-padding / 4;
       &:hover { text-decoration: none; }
     }
+
   }
 
 }

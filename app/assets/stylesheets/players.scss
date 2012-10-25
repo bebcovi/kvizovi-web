@@ -1,9 +1,9 @@
 @each $player in $players {
-  .#{nth($player, 1)} {
+  .player_#{nth($player, 1)} {
     $color: nth($player, 2);
     color: $color;
 
-    &.question-number {
+    &.question_number {
       color: white;
       background: $color;
     }

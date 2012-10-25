@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def back_button(string, path, options = {})
-    link_to string.prepend_icon("arrow-left"), path, {class: "back"}.merge(options)
+    link_to string.prepend_icon("arrow-left"), path, {class: "go_back"}.merge(options)
   end
 
   def logout_button(string, path, options = {})
@@ -109,7 +109,7 @@ module ApplicationHelper
   end
 
   def buttons(form_builder = nil)
-    content_tag :div, class: "buttons" do
+    content_tag :div, class: "form_controls" do
       yield ButtonBuilder.new(form_builder, self)
     end
   end

@@ -1,16 +1,14 @@
-form.association {
+.question_association {
 
   &.show {
+
     $height: 3/2;
     li {
       @extend %pie-clearfix;
       @include trailer(.5);
       font-weight: 300;
 
-      div,
-      i {
-        @extend %inline-block;
-      }
+      div, i { @extend %inline-block; }
 
       div { @include adjust-leading-to($height); }
 
@@ -44,9 +42,12 @@ form.association {
         background: darken(white, 5%);
       }
     }
+
   }
 
-  &.edit, &.new {
+  &.edit,
+  &.new {
+
     li {
       @extend %pie-clearfix;
       @include trailer(.5);
@@ -80,6 +81,7 @@ form.association {
 
       input { width: 100%; }
     }
+
   }
 
 }

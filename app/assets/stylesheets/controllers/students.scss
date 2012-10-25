@@ -1,21 +1,13 @@
-body.students {
+.new_student {
+  .notice { @include leader(1/2, $small-font-size); }
+}
 
-  &.new {
+.student_list {
+  @extend %nice-list;
 
-    .notice { @include leader(1/2, $small-font-size); }
-
+  .username {
+    @extend %parenthesis;
+    font-weight: 300;
+    color: rgba(black, .5);
   }
-
-  &.index {
-
-    ol.students { @extend %nice-list; }
-
-    .username {
-      @extend %parenthesis;
-      font-weight: 300;
-      color: rgba(black, .5);
-    }
-
-  }
-
 }

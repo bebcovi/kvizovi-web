@@ -5,7 +5,7 @@ header {
   color: rgba(black, .6);
 }
 
-#logo {
+.logo {
   @include with-font-size($medium, 1) {
     @extend %unselectable;
     @include trailer(0);
@@ -22,7 +22,7 @@ header {
   }
 }
 
-#log {
+.log {
   @include with-font-size($small-font-size) {
     @include rhythm(3/4, 0, 0, 0);
     float: right;

@@ -6,7 +6,7 @@
 
 - if @students.any?
 
-  %ol.students
+  %ol.student_list
     = render collection: @students, partial: "student_item", as: :student
 
 - else

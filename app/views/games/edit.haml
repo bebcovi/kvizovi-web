@@ -2,15 +2,15 @@
 
 %h1= @quiz.name
 
-.username{class: number(@player_number)}= @player.username.prepend_icon("user")
+.username{class: "player_#{number(@player_number)}"}= @player.username.prepend_icon("user")
 
-#progress
+.game_progress
   - progress.number_of_answered_questions.times do
     %div.done{style: "width: #{progress.chunk_size}%"}
   - progress.number_of_questions_to_be_answered.times do
     %div{style: "width: #{progress.chunk_size}%"}
 
-= simple_form_for :game, url: game_path, method: :put, html: {class: "show #{@question.category}"} do |f|
+= simple_form_for :game, url: game_path, method: :put, html: {class: "show question_#{@question.category}"} do |f|
 
   = render partial: "questions/question", object: @question, locals: {f: f}
 

@@ -11,12 +11,12 @@
     %script try{Typekit.load();}catch(e){}
 
   %body{class: body_class}
-    #wrapper
+    .page_wrapper
       %header
-        %h1#logo= "Lektire".prepend_icon("books")
+        %h1.logo= "Lektire".prepend_icon("books")
         = render "log" if logged_in?
 
-      %article#main{role: "main"}
+      %article.main_content
         - flash.each do |name, message|
           - if name.in?([:notice, :alert])
             %div{class: "flash #{name}"}

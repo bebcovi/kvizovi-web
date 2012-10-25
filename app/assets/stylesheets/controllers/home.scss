@@ -1,3 +1,6 @@
+$main-spacing: 2;
+$main: $total-columns - 2 * $main-spacing;
+
 body.home {
 
   header,
@@ -6,45 +9,53 @@ body.home {
     display: none;
   }
 
-  $main: $total-columns - 4;
-  #main {
-    @include pad(2, 2);
-    @include leader(2);
-    @include padding-trailer(2);
+  .main_content {
+    @include pad($main-spacing, $main-spacing);
+    @include leader($main-spacing);
+    @include padding-trailer($main-spacing);
     @include clearfix;
     min-height: 0;
     text-align: center;
-  }
 
-  #intro {
-    @include rhythm(1, 0, 0, 1);
     h1 {
       @include with-font-size($xx-large) {
-        @include trailer(.5);
+        @include rhythm(1/2, 0, 0, 1/2);
       }
       i {
         position: relative;
         top: 5px;
       }
     }
-  }
 
-  $cols: $main / 2;
-  .role {
-    @extend %unstyled-list;
-    @include clearfix;
-
-    li {
-      @include span-columns($cols, $main);
-      @include nth-omega();
+    h2 {
+      @include with-font-size($large) {
+        @include trailer;
+      }
     }
   }
 
-  .as {
+}
+
+p.tour {
+  @include leader;
+  clear: both;
+}
+
+$cols: $main / 2;
+.app_role {
+  @extend %unstyled-list;
+  @include clearfix;
+
+  li {
+    @include span-columns($cols, $main);
+    @include nth-omega();
+  }
+
+  a {
     @include with-font-size($medium) {
       @extend %button;
       @include h-borders(1px, 1);
-      @include v-borders(1px, .5);
+      @include v-borders(1px, 1/2);
       display: block;
       font-weight: 300;
       &, &:hover {
@@ -63,12 +74,7 @@ body.home {
     }
   }
 
-  .student  { @include border-right-radius(0); }
-  .school   { @include border-left-radius(0); }
-
-  .tour {
-    @include leader;
-    clear: both;
-  }
+  li:first-child a  { @include border-right-radius(0); }
+  li:last-child a   { @include border-left-radius(0); }
 
 }

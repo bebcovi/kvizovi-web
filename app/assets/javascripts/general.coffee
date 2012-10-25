@@ -8,13 +8,13 @@ App.general = ->
 
   # bootstrap tooltips
 
-  $('.controls a, button').tooltip()
+  $('.item_controls a, button').tooltip()
   $('a.tour').tooltip
     placement: 'left'
 
   # delete confirmation
 
-  $('.controls').find('.delete').fancybox
+  $('.item_controls').find('.delete').fancybox
     wrapCSS:  'confirm'
     width:    250
     type:     'ajax'

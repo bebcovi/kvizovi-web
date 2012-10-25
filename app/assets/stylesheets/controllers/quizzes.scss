@@ -1,82 +1,74 @@
-body.quizzes {
+$cols: 2;
+.quiz_toggle_activation {
+  @include span-columns($cols);
+  padding: 0 rhythm();
+  height: rhythm();
 
-  &.index {
+  button {
+    @extend %un-button;
+    position: relative;
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
 
-    ol.quizzes {
-      @extend %nice-list;
+    // path
 
-      $cols: 5;
-      .name { @include span-columns($cols); }
-
-      .count {
-        @extend %parenthesis;
-        font-weight: 300;
-        color: rgba(black, .35);
-      }
+    $top: 13px;
+    &:before {
+      $height: 14px;
+      @include border-radius($height);
+      content: '';
+      position: absolute;
+      top: $top;
+      left: 0;
+      right: 0;
+      display: block;
+      height: $height;
+      margin-top: - $height / 2;
+      border: 1px solid rgba(black, .25);
+      background: rgba(black, .05);
     }
 
-    $cols: 2;
-    .toggle-activation {
-      @include span-columns($cols);
-      padding: 0 rhythm();
-      height: rhythm();
+    // switch
 
-      button {
-        @extend %un-button;
-        position: relative;
-        vertical-align: top;
-        width: 100%;
-        height: 100%;
-
-        // path
-
-        $top: 13px;
-        &:before {
-          $height: 14px;
-          @include border-radius($height);
-          content: '';
-          position: absolute;
-          top: $top;
-          left: 0;
-          right: 0;
-          display: block;
-          height: $height;
-          margin-top: - $height / 2;
-          border: 1px solid rgba(black, .25);
-          background: rgba(black, .05);
-        }
-
-        // switch
-
-        &:after {
-          @extend %circle;
-          $size: 10px;
-          @include square($size);
-          content: '';
-          position: absolute;
-          top: $top;
-          left: 2px;
-          margin-top: - $size / 2;
-          z-index: 10;
-          border: 1px solid rgba(black, .2);
-          background: white;
-        }
-      }
-
-      &.enabled button {
-        &:before {
-          border-color: rgba(black, .25);
-          background: $red;
-        }
-
-        &:after {
-          left: auto;
-          right: 2px;
-          border-color: rgba(black, .75);
-        }
-      }
+    &:after {
+      @extend %circle;
+      $size: 10px;
+      @include square($size);
+      content: '';
+      position: absolute;
+      top: $top;
+      left: 2px;
+      margin-top: - $size / 2;
+      z-index: 10;
+      border: 1px solid rgba(black, .2);
+      background: white;
     }
-
   }
 
+  &.enabled button {
+    &:before {
+      border-color: rgba(black, .25);
+      background: $red;
+    }
+
+    &:after {
+      left: auto;
+      right: 2px;
+      border-color: rgba(black, .75);
+    }
+  }
+}
+
+.quiz_list {
+  @extend %nice-list;
+
+  $cols: 5;
+  .name { @include span-columns($cols); }
+
+  .count {
+    @extend %parenthesis;
+    font-weight: 300;
+    color: rgba(black, .35);
+  }
 }

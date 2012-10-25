@@ -12,7 +12,7 @@ App.Controllers.games = do ->
     $players        = $sections.filter '.players'
     $login          = $sections.filter '.login'
 
-    $buttons        = $form.find '.buttons'
+    $buttons        = $form.find '.form_controls'
     $button         = $buttons.find 'button'
 
     $quizzesChecked = $quizzes.find ':checked'
@@ -57,9 +57,9 @@ App.Controllers.games = do ->
 
     $form        = $('form')
 
-    $buttons     = $('.buttons', $form)
+    $buttons     = $('.form_controls', $form)
 
-    $timer       = $.timer.clone().appendTo $('#main')
+    $timer       = $.timer.clone().appendTo $('.main_content')
     $time        = $('.time', $timer)
 
     updateTimer = ->
@@ -95,20 +95,23 @@ App.Controllers.games = do ->
           clearStorage()
           $.fancybox
             wrapCSS:  'feedback'
-            width:    400
+            autoSize: false
             modal:    true
             content:  data
             beforeShow: ->
-              $link = @inner.find('.buttons').find('a')
-              $form = @inner.find('form')
-              $link.hide()
-              $form.find('[type="submit"]').hide()
-              setTimeout ->
-                if $link.length
-                  location.href = $link.attr('href')
-                else if $form.length
-                  $form.submit()
-              , 1500
+              if @inner.find('.correct').length
+                $link = @inner.find('.form_controls').find('a')
+                $form = @inner.find('form')
+                $link.hide()
+                $form.find('input, button').hide()
+                setTimeout ->
+                  if $link.length
+                    location.href = $link.attr('href')
+                  else if $form.length
+                    $form.submit()
+                , 1500
+              else
+                @wrap.addClass('wrong') if @inner.find('.wrong').length
 
     timesUp = showFeedback
 

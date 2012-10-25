@@ -1,6 +1,8 @@
-form.choice {
+.question_choice {
 
-  &.edit, &.new {
+  &.edit,
+  &.new {
+
     li {
       @extend %pie-clearfix;
       @include trailer(1/2);
@@ -43,6 +45,7 @@ form.choice {
       display: block;
       clear: both;
     }
+
   }
 
 }

@@ -1,21 +1,21 @@
 body.questions.index {
+
   .game_submission {
     @include leader(1/3);
     margin-left: rhythm();
     float: right;
-    .buttons {
+
+    .form_controls {
       margin: 0;
     }
   }
+
 }
 
-ol.categories {
+.question_categories {
   @extend %unstyled-list;
 
-  a,
-  .label {
-    @extend %inline-block;
-  }
+  a, .label { @extend %inline-block; }
 
   a {
     @include rhythm(0, 1/4, 1/4, 0);
@@ -50,7 +50,7 @@ ol.categories {
   }
 }
 
-ol.questions {
+.question_list {
   @extend %nice-list;
   i {
     margin-right: rhythm(1/4);

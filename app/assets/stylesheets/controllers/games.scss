@@ -1,16 +1,6 @@
 body.games {
 
-  &.new, &.create {
-
-    .buttons .name {
-      font-weight: 700;
-    }
-
-  }
-
   &.edit {
-
-    // general
 
     h1,
     .username {
@@ -24,99 +14,99 @@ body.games {
       }
     }
 
-    .question-number {
-      @extend %inline-block;
-      @include border-right-radius;
-      position: relative;
-      top: -4px;
-      left: -1px;
-      height: rhythm(7/4, $large);
-      margin-left: - 2 * $normal;
-      padding: 0 rhythm(1/2, $large);
-      font-weight: 700;
-    }
-
-    .timer {
-      position: absolute;
-      bottom: rhythm(1/2);
-      right: rhythm(1/4);
-      width: rhythm(5/2);
-      color: rgba(black, .3);
-
-      &.notice { color: orange; }
-      &.alert  { color: $wrong; }
-    }
-
   }
 
-  &.edit,
+  &.edit .fancybox-wrap,
   &.feedback {
 
     h1 {
       i, span { vertical-align: middle; }
 
       i {
-        @include with-font-size($x-large, $from-size: $large) {
-          margin-right: rhythm(1/3);
-        }
+        @include with-font-size($x-large, $from-size: $large) {}
       }
 
       &.correct i { color: $correct; }
       &.wrong   i { color: $wrong; }
     }
 
-  }
-
-  &.show {
-
-    // score
-
-    .score {
-      @extend %unstyled-list;
-      @include trailer;
-
-      li { @include trailer(1/2); }
-      dl { @include trailer(1/4); }
-    }
-
-    $height: 2;
-    .bar {
-      @extend %border-radius;
-      @extend %unselectable;
-      @include trailer(1/4);
-      position: relative;
-      height: rhythm($height);
-      overflow: hidden;
-    }
-
-    .label {
-      @include with-font-size(28px, $height) {
-        position: absolute;
-        z-index: 10;
-        width: 100%;
-        text-align: center;
+    .question_association {
+      div {
+        @include adjust-leading-to(3/4);
+        display: block;
+        font-weight: 700;
       }
     }
 
-    .fill { height: 100%; }
-
   }
 
-  // progress
+}
 
-  #progress {
+.game_progress {
+  @extend %border-radius;
+  @include trailer;
+  height: rhythm(1/4);
+  border: 1px solid rgba(black, .25);
+
+  div {
+    float: left;
+    height: 100%;
+    border-right: 1px solid rgba(black, .25);
+    &:last-child { border: none; }
+  }
+
+  &.done,
+  .done { background: darken(white, 10%); }
+}
+
+.question_number {
+  @extend %inline-block;
+  @include border-right-radius;
+  position: relative;
+  top: -4px;
+  left: -1px;
+  height: rhythm(7/4, $large);
+  margin-left: - 2 * $normal;
+  padding: 0 rhythm(1/2, $large);
+  font-weight: 700;
+}
+
+.timer {
+  position: absolute;
+  bottom: rhythm(1/2);
+  right: rhythm(1/4);
+  width: rhythm(5/2);
+  color: rgba(black, .3);
+
+  &.notice { color: orange; }
+  &.alert  { color: $wrong; }
+}
+
+.game_score {
+  @extend %unstyled-list;
+  @include trailer;
+
+  li { @include trailer(1/2); }
+  dl { @include trailer(1/4); }
+
+  $height: 2;
+  .bar {
     @extend %border-radius;
-    @include trailer;
-    height: rhythm(1/4);
-    border: 1px solid rgba(black, .25);
-    div {
-      float: left;
-      height: 100%;
-      border-right: 1px solid rgba(black, .25);
-      &:last-child { border: none; }
+    @extend %unselectable;
+    @include trailer(1/4);
+    position: relative;
+    height: rhythm($height);
+    overflow: hidden;
+  }
+
+  .label {
+    @include with-font-size(28px, $height) {
+      position: absolute;
+      z-index: 10;
+      width: 100%;
+      text-align: center;
     }
   }
 
-  .done { background: darken(white, 10%); }
-
+  .fill { height: 100%; }
 }

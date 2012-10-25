@@ -8,7 +8,7 @@ body {
   background: rgba(black, .1) image-url('bg-pattern.png') repeat;
 }
 
-#wrapper {
+.page_wrapper {
   @include container;
 }
 

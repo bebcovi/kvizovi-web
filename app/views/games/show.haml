@@ -2,13 +2,13 @@
 
 %h1 Rezultati
 
-#progress.done
+.game_progress.done
   - @questions_count.times do
     %div.done{style: "width: #{100/@questions_count.to_f}%"}
 
-%ol.score
+%ol.game_score
   - @game_review.results.each do |player, score, player_number, rank|
-    %li{class: number(player_number)}
+    %li{class: "player_#{number(player_number)}"}
       %dl
         %dt.username= player.username.prepend_icon("user")
         %dd.rank Točno si odgovorio na #{score} od #{@game_review.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)

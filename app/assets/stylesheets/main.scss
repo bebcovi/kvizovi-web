@@ -1,4 +1,4 @@
-#main {
+.main_content {
   @extend %full-width;
   @extend %border-radius;
   @include clearfix;
@@ -28,7 +28,7 @@
   }
 }
 
-.back {
+.go_back {
   @include with-font-size($small, .5) {
     @extend %inline-block;
     @include color-link(rgba(black, .35), white);

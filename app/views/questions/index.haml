@@ -13,7 +13,7 @@
   %span.section pitanja
 
 - if @quiz.questions.any?
-  %ol.questions
+  %ol.question_list
     = render collection: @quiz.questions, partial: "question_item", as: :question
 - else
   %p Ovaj kviz trenutno nema pitanja.

@@ -7,7 +7,6 @@ body.tour {
 $cols: 2;
 .toc {
   @extend %unstyled-list;
-  // @include span-columns($cols);
   position: fixed;
   top: rhythm(9/2);
   width: 126px;
@@ -22,7 +21,7 @@ $cols: 2;
 }
 
 $padding: 1/6;
-.toc-h2 {
+.toc_h2 {
   a {
     @include color-link(rgba(black, .35), $link2);
     &:hover { text-decoration: none; }
@@ -34,7 +33,7 @@ $padding: 1/6;
   }
 }
 
-.toc-h3 {
+.toc_h3 {
   @include with-font-size($normal - 2px) {
     a {
       @include color-link(rgba(black, .35), $link2);
@@ -50,7 +49,7 @@ $padding: 1/6;
 }
 
 $cols: $total-columns - $cols;
-.toc-content {
+.toc_content {
   @include span-columns($cols omega);
 
   h2 {
@@ -58,7 +57,7 @@ $cols: $total-columns - $cols;
   }
 }
 
-.question-types {
+.question_types {
   padding-left: rhythm(1/2);
   list-style: none;
   i { margin-right: rhythm(1/2); }

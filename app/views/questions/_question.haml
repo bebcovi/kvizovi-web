@@ -1,5 +1,5 @@
 %h2
-  %span.question-number{class: number(@player_number)}= @question_number
+  %span.question_number{class: "player_#{number(@player_number)}"}= @question_number
   = smarty_pants question.content
 
 = render object: question, partial: question.to_partial_path, locals: {f: f}

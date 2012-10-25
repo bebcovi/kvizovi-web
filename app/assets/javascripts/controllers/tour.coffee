@@ -14,9 +14,10 @@ App.Controllers.tour = do ->
       $active = $item
 
     $content
-      .attr('class', 'toc-content')
+      .removeClass('content')
+      .addClass('toc_content')
       .find('h1, h2, h3').each (i) ->
-        $li = $('<li>').addClass("toc-#{@.tagName.toLowerCase()}")
+        $li = $('<li>').addClass("toc_#{@.tagName.toLowerCase()}")
         $a  = $('<a>')
           .attr('href', "#toc#{i}")
           .text($(@).text())
@@ -34,4 +35,4 @@ App.Controllers.tour = do ->
 
     $('ul').each ->
       if $(@).find('i').length > 3
-        $(@).addClass 'question-types'
+        $(@).addClass 'question_types'

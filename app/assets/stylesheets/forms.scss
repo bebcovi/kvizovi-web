@@ -15,7 +15,7 @@ form {
     border: 1px solid rgba(black, .75);
   }
 
-  p.notice {
+  .notice {
     @include with-font-size($small-font-size) {
       font-family: $small-font-family;
       color: rgba(black, .4);
@@ -25,17 +25,18 @@ form {
   }
 }
 
-// controls
+// item controls (edit/delete/...)
 
-.controls {
+.item_controls {
   @include clearfix;
   float: right;
   margin-left: rhythm();
+
   a {
     @extend %subtle;
     display: block;
     float: left;
-    padding: 0 rhythm(.25);
+    padding: 0 rhythm(1/4);
     font-family: 'icons';
   }
 }
@@ -130,7 +131,7 @@ label + select {
   margin-left: rhythm(.5);
 }
 
-// modular controls
+// "x" button
 
 .remove {
   @include with-font-size(12px) {
@@ -181,9 +182,9 @@ span.error {
   }
 }
 
-// buttons
+// form controls
 
-.buttons {
+.form_controls {
   @include rhythm(1, 0, 0, 1);
   clear: both;
 
@@ -201,6 +202,8 @@ span.error {
     @extend %primary-button;
   }
 
+  strong { font-weight: 700; }
+
   :nth-child(2) {
     margin-left: rhythm(1/10);
   }
@@ -210,11 +213,11 @@ span.error {
 
 .loader {
   @include with-font-size(24px) {
-    &, i { @include size(24px, 27px); }
+    font-family: 'icons';
 
     i {
+      @include animation(spin 1.25s linear infinite);
       color: rgba(black, .25);
-      @include animation(spin 1.25s infinite linear);
     }
   }
 }

@@ -1,4 +1,4 @@
-%p#log
+%p.log
   - if current_user.is_a?(Student)
     Bok, #{link_to current_student.first_name, current_student} | #{logout_button "Odjava", logout_path}
   - else
