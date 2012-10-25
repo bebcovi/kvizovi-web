@@ -38,11 +38,11 @@ App.Questions.association = do ->
 
     $dynamic.find('span')
       .draggable
-        addClasses: false
-        revert: 'invalid'
+        addClasses:     false
+        revert:         'invalid'
         revertDuration: 250
-        helper: 'clone'
-        zIndex: 10
+        helper:         'clone'
+        zIndex:         10
         start: -> $(@).addClass 'original'
         stop:  -> $(@).removeClass 'original'
 
