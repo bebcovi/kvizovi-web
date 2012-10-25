@@ -2,6 +2,7 @@
 
 class SessionsController < ApplicationController
   def new_student
+    render layout: false if request.headers["X-fancyBox"]
   end
 
   def create_student
@@ -15,6 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def new_school
+    render layout: false if request.headers["X-fancyBox"]
   end
 
   def create_school

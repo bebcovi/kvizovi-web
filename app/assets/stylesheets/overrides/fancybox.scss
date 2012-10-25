@@ -2,20 +2,6 @@
   text-align: center;
   &.long { text-align: left; }
 
-  h1 {
-    @include with-font-size($large, 3/2) {
-      @include trailer(1/2);
-      font-weight: 700;
-    }
-  }
-
-  .form_controls {
-    margin: 0;
-
-    a + button {
-      margin-left: rhythm(1/2);
-    }
-  }
 }
 
 .fancybox-skin {
@@ -25,12 +11,37 @@
   }
 }
 
+.fancybox-inner {
+  overflow: visible;
+
+  h1 {
+    @include with-font-size($large, 3/2) {
+      @include trailer(1/2);
+      font-weight: 700;
+    }
+  }
+
+  @include text-input {
+    width: 100%;
+  }
+
+  .form_controls {
+    @include rhythm(0, 0, 0, 1/2);
+
+    a + button {
+      margin-left: rhythm(1/2);
+    }
+  }
+
+  &, form {
+    > :last-child { @include trailer(0); }
+  }
+}
+
 .confirm {
   .form_controls {
     @include rhythm(1, 0, 0, 1/2);
   }
-
-  input { width: 100%; }
 }
 
 .feedback {
