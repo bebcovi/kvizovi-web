@@ -16,7 +16,7 @@ App.Controllers.tour = do ->
     $content
       .removeClass('content')
       .addClass('toc_content')
-      .find('h1, h2, h3').each (i) ->
+      .find('h2, h3').each (i) ->
         $li = $('<li>').addClass("toc_#{@.tagName.toLowerCase()}")
         $a  = $('<a>')
           .attr('href', "#toc#{i}")
