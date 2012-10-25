@@ -41,3 +41,12 @@
     @content;
   }
 }
+
+// by Harry Roberts (@csswizardry)
+
+@mixin truncate($truncation-boundary) {
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

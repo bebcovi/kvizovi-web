@@ -52,9 +52,16 @@ body.questions.index {
 
 .question_list {
   @extend %nice-list;
-  i {
+
+  .name i {
+    vertical-align: middle;
     margin-right: rhythm(1/4);
     color: rgba(black, .35);
+  }
+
+  .content {
+    @extend %inline-block;
+    @include truncate(80%);
   }
 }
 
