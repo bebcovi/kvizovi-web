@@ -20,4 +20,8 @@ module QuestionsHelper
       raise ArgumentError, "The question is not a choice or association"
     end
   end
+
+  def answer_title
+    %(<ul><li>"Matoš" = "matoš"</li><li>"Matoš" = "Matoš."</li><li>"Matoš" ≠ "Matos"</li>)
+  end
 end

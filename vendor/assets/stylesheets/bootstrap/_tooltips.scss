@@ -18,6 +18,8 @@
         decoration: none;
       }
       background-color: black;
+
+      ol, ul { @extend %unstyled-list; }
     }
   }
 

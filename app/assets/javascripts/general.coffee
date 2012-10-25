@@ -9,8 +9,17 @@ App.general = ->
   # bootstrap tooltips
 
   $('.item_controls a, button').tooltip()
+
   $('a.tour').tooltip
     placement: 'left'
+
+  $('input[type="text"]')
+    .tooltip
+      placement: 'right'
+      trigger: 'focus'
+      title: ->
+        if $(@).val()
+          console.log $(@).attr('data-original-title')
 
   # delete confirmation
 
