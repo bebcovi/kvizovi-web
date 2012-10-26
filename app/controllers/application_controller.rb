@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  private
+
   def current_student() @current_student ||= Student.find(cookies[:student_id]) end
   def student_logged_in?() cookies[:student_id].present? end
   def authenticate_student!() redirect_to root_path if not student_logged_in? end
@@ -26,8 +28,6 @@ class ApplicationController < ActionController::Base
   def authenticate!
     redirect_to root_path if not logged_in?
   end
-
-  protected
 
   def log_in!(user)
     name = user.class.name.underscore

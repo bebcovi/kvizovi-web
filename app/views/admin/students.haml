@@ -1,0 +1,13 @@
+- @title = "Učenici"
+
+= back_button "Škole", admin_schools_path
+
+%h1 Učenici
+
+%table
+  - @students.each_with_index do |student, index|
+    %tr
+      %td= "#{index + 1}."
+      %td= student.full_name
+      %td= enumerate("games", student.games.count)
+      %td= "Zadnja aktivnost: #{activity(student.games.maximum(:created_at))}"

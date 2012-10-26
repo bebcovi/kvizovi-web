@@ -17,6 +17,10 @@ class Student < ActiveRecord::Base
 
   before_create { self.school ||= School.find_by_key(school_key) }
 
+  def games
+    Game.where("games.first_player_id = #{id} or games.second_player_id = #{id}")
+  end
+
   def available_quizzes
     school.quizzes.activated.with_intended_grade(grade)
   end

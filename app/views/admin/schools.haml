@@ -1,0 +1,12 @@
+- @title = "Škole"
+
+%h1 Škole
+
+%table
+  - @schools.each_with_index do |school, index|
+    %tr
+      %td= "#{index + 1}."
+      %td= school.name
+      %td= link_to enumerate("students", school.students.count), admin_school_students_path(school)
+      %td= link_to enumerate("quizzes", school.quizzes.activated.count), admin_school_quizzes_path(school)
+      %td= "Zadnja aktivnost: #{activity(school.quizzes.maximum(:updated_at))}."

@@ -17,7 +17,7 @@ class Question < ActiveRecord::Base
 
   attr_accessible :content, :hint
 
-  belongs_to :quiz
+  belongs_to :quiz, touch: true
 
   validates_presence_of :content
 

@@ -32,4 +32,11 @@ Lektire::Application.routes.draw do
 
   match "404" => "errors#not_found"
   match "500" => "errors#internal_server_error"
+
+  controller :admin do
+    get "admin" => :index
+    get "admin/schools"                     => :schools
+    get "admin/schools/:school_id/students" => :students,  as: "admin_school_students"
+    get "admin/schools/:school_id/quizzes"  => :quizzes,   as: "admin_school_quizzes"
+  end
 end
