@@ -4,7 +4,6 @@ $main: $total-columns - 2 * $main-spacing;
 body.home {
 
   header,
-  footer,
   a.tour {
     display: none;
   }
@@ -20,10 +19,11 @@ body.home {
     h1 {
       @include with-font-size($xx-large) {
         @include rhythm(1/2, 0, 0, 1/2);
-      }
-      i {
-        position: relative;
-        top: 5px;
+
+        i {
+          position: relative;
+          top: 5px;
+        }
       }
     }
 
