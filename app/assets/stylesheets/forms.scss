@@ -14,15 +14,6 @@ form {
     max-width: 100%;
     border: 1px solid rgba(black, .75);
   }
-
-  .notice {
-    @include with-font-size($small-font-size) {
-      font-family: $small-font-family;
-      color: rgba(black, .4);
-
-      i { margin-right: rhythm(.1); }
-    }
-  }
 }
 
 // item controls (edit/delete/...)

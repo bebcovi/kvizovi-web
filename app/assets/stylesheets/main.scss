@@ -65,3 +65,12 @@ a.tour {
     }
   }
 }
+
+p.notice {
+  @include with-font-size($small-font-size) {
+    font-family: $small-font-family;
+    color: rgba(black, .4);
+
+    i { margin-right: rhythm(.1); }
+  }
+}
