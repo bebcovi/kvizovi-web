@@ -52,3 +52,7 @@ hr:
   support:
     array:
       last_word_connector: " i "
+
+  will_paginate:
+    previous_label: "← Novije"
+    next_label: "Starije →"

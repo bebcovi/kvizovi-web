@@ -1,0 +1,20 @@
+body.notifications {
+
+  h2 {
+    border-bottom: 2px solid $text;
+  }
+
+  .pagination {
+    @include leader;
+
+    * { display: none; }
+
+    :first-child,
+    :last-child {
+      @extend %button;
+    }
+
+    .disabled { display: none; }
+  }
+
+}
