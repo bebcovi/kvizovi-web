@@ -7,8 +7,7 @@
 - else
   %h1.wrong
     = icon("cancel-2")
-    - wrong = ["Ne baš…", "Pogrešno", "Nažalost, ne…"]
-    %span= wrong.sample
+    %span= ["Ne baš…", "Pogrešno", "Nažalost, ne…"].sample
 
   = render partial: "questions/#{@question.category}_question_answer", object: @question, as: :question
 

@@ -15,7 +15,7 @@ shared_examples_for "login" do
     fill_in "Lozinka", with: @user.password
     click_on "Prijava"
     current_path.should eq(home_path)
-    find("#log").should have_link(name)
+    page.should have_content(name)
   end
 
   it "handles the 'remember_me' check box" do

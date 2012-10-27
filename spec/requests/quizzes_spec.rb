@@ -39,7 +39,7 @@ describe "Managing quizzes" do
 
     it "has a link" do
       visit quizzes_path
-      within(".controls") { first("a").click }
+      within(".item_controls") { first("a").click }
       current_path.should eq edit_quiz_path(@quiz)
     end
 
@@ -102,7 +102,7 @@ describe "Managing quizzes" do
 
     it "has a link" do
       visit quizzes_path
-      within(".controls") { all("a").last.click }
+      within(".item_controls") { all("a").last.click }
       current_path.should eq delete_quiz_path(@quiz)
     end
 

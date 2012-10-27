@@ -13,7 +13,7 @@ describe "Questions" do
 
   it "has a link" do
     visit quizzes_path
-    within(".controls") { all("a").second[:href].should eq(quiz_questions_path(@quiz)) }
+    within(".item_controls") { all("a").second[:href].should eq(quiz_questions_path(@quiz)) }
   end
 
   describe "create" do
@@ -194,7 +194,7 @@ describe "Questions" do
 
     it "redirects back to questions" do
       visit quiz_questions_path(@quiz)
-      within(".controls") { first("a").click }
+      within(".item_controls") { first("a").click }
       click_on "Spremi"
       current_path.should eq(quiz_questions_path(@quiz))
     end
@@ -207,7 +207,7 @@ describe "Questions" do
 
     it "has a link" do
       visit quiz_questions_path(@quiz)
-      within(".controls") { all("a").last.click }
+      within(".item_controls") { all("a").last.click }
       current_path.should eq delete_quiz_question_path(@quiz, @question)
     end
 

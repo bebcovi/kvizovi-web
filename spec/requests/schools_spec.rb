@@ -53,7 +53,7 @@ describe "School" do
       visit quiz_questions_path(@quiz)
       click_on "Isprobajte kviz"
       click_on "Odgovori"
-      within(".buttons") { find("*").click }
+      within(".form_controls") { find("*").click }
       click_on "Završi"
       current_path.should eq quiz_questions_path(@quiz)
     end

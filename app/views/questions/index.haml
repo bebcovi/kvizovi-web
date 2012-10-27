@@ -6,7 +6,7 @@
   = f.hidden_field :quiz_id, value: @quiz.id
   = f.hidden_field :players_count, value: 1
   = buttons(f) do |b|
-    = b.submit_button "Isprobajte kviz"
+    = b.submit_button "Isprobajte kviz", (@quiz.questions.count == 0 ? {disabled: true} : {})
 
 %h1
   %span.name= @quiz.name

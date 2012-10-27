@@ -149,7 +149,7 @@ App.Controllers.games = do ->
 
     delay = 500
 
-    $('.score li').each ->
+    $('.game_score li').each ->
 
       $rank  = $(@).find '.rank'
       $label = $(@).find '.label'

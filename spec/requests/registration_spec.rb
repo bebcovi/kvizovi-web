@@ -70,7 +70,7 @@ describe "Registration" do
       expect { click_on "Registriraj se" }.to change{School.count}.from(0).to(1)
 
       School.first.quizzes.should_not be_empty
-      find("#log").should have_link(school.name)
+      page.should have_content(school.name)
     end
 
     after(:all) do
@@ -135,7 +135,7 @@ describe "Registration" do
       expect { click_on "Registriraj se" }.to change{Student.count}.by(1)
 
       current_path.should eq(new_game_path)
-      find("#log").should have_link(student.first_name)
+      page.should have_content(student.first_name)
     end
 
     after(:all) do

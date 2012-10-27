@@ -93,7 +93,7 @@ describe "Game" do
 
       while current_path == edit_game_path
         click_on "Odgovori"
-        within(".buttons") { find("*").click }
+        within(".form_controls") { find("*").click }
       end
 
       first(".bar").text.strip.should eq "0%"
@@ -102,7 +102,7 @@ describe "Game" do
     it "displays after each answer whether that answer was correct" do
       start_game
 
-      category = first("form")[:class].split(" ").last
+      category = first("form")[:class].split(" ").last.split("_").last
       answer_question(category)
       click_on "Odgovori"
 
@@ -111,7 +111,7 @@ describe "Game" do
       click_on "Sljedeće pitanje"
       click_on "Odgovori"
 
-      page.should have_content("Netočan odgovor")
+      page.should_not have_content("Točan odgovor")
     end
 
     describe "giving up" do
@@ -174,10 +174,10 @@ describe "Game" do
         start_game
 
         while current_path == edit_game_path
-          category = first("form")[:class].split(" ").last
+          category = first("form")[:class].split(" ").last.split("_").last
           answer_question(category)
           click_on "Odgovori"
-          within(".buttons") { find("*").click }
+          within(".form_controls") { find("*").click }
         end
 
         first(".bar").text.strip.should eq "100%"
@@ -198,10 +198,10 @@ describe "Game" do
         start_game
 
         while current_path == edit_game_path
-          category = first("form")[:class].split(" ").last
+          category = first("form")[:class].split(" ").last.split("_").last
           answer_question(category)
           click_on "Odgovori"
-          within(".buttons") { find("*").click }
+          within(".form_controls") { find("*").click }
         end
 
         all(".bar").map(&:text).map(&:strip).each { |str| str.should_not eq "0%" }
