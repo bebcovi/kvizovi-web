@@ -2,34 +2,31 @@
 
 = back_button "Početna", root_path
 
-%h2 Škole
+%h2 Škole (#{@schools.length})
 
 %table
 
   %thead
     %tr
-      %th
       %th Naziv škole
       %th Broj učenika
       %th Broj kvizova
       %th Zadnja aktivnost
 
   %tbody
-    - @schools.each_with_index do |school, index|
+    - @schools.each do |school|
       %tr
-        %td= "#{index + 1}."
         %td= link_to school.name, admin_school_path(school)
         %td= school.students.count
         %td= school.quizzes.activated.count
         %td= activity(school.quizzes.maximum(:updated_at))
 
-%h2 Učenici
+%h2 Učenici (#{@students.length})
 
 %table
 
   %thead
     %tr
-      %th
       %th Ime i prezime
       %th Korisničko ime
       %th Škola
@@ -37,9 +34,8 @@
       %th Zadnja aktivnost
 
   %tbody
-    - @students.each_with_index do |student, index|
+    - @students.each do |student|
       %tr
-        %td= "#{index + 1}."
         %td= student.full_name
         %td= student.username
         %td= student.school.name
