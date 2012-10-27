@@ -54,6 +54,10 @@ a {
   @include link-colors($link1, $link2, $link2, $link1, $link2);
 }
 
+img {
+  vertical-align: middle;
+}
+
 dt,
 dd {
   display: inline;
