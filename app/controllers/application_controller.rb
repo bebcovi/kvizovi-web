@@ -48,6 +48,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_notification
-    flash.now[:notification] = "Dogodile su se neke promjene. Možete ih vidjeti #{view_context.link_to "ovdje", notifications_path}."
+    flash.now[:notification] = "Napravili smo neke važne promijene, možete ih vidjeti #{view_context.link_to "ovdje", notifications_path}."
   end
 end

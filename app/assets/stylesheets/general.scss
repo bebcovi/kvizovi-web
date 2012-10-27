@@ -81,3 +81,8 @@ dd {
   @extend %append-newline;
   margin: 0;
 }
+
+time {
+  font-weight: 300;
+  color: rgba(black, 1/2);
+}

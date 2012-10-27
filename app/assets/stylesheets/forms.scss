@@ -35,8 +35,11 @@ form {
 // flash messages
 
 .flash {
-  &.notice { @extend %flash-notice; }
-  &.alert { @extend %flash-alert; }
+  @extend %flash;
+
+  &.notice        { @extend %flash-notice; }
+  &.notification  { @extend %flash-notification; }
+  &.alert         { @extend %flash-alert; }
 }
 
 // labels
