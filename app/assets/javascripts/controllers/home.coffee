@@ -10,3 +10,4 @@ App.Controllers.home = do ->
       live: false
       afterShow: ->
         @inner.css 'overflow', 'visible'
+        $('[type="text"]').attr 'autocomplete', 'off'
