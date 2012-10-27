@@ -9,16 +9,16 @@
   %thead
     %tr
       %th Naziv škole
-      %th Broj učenika
-      %th Broj kvizova
+      %th.short Broj učenika
+      %th.short Broj kvizova
       %th Zadnja aktivnost
 
   %tbody
     - @schools.each do |school|
       %tr
         %td= link_to school.name, admin_school_path(school)
-        %td= school.students.count
-        %td= school.quizzes.activated.count
+        %td.short= school.students.count
+        %td.short= school.quizzes.activated.count
         %td= activity(school.quizzes.maximum(:updated_at))
 
 %h2 Učenici (#{@students.length})
@@ -28,16 +28,16 @@
   %thead
     %tr
       %th Ime i prezime
-      %th Korisničko ime
+      %th.short Korisničko ime
       %th Škola
-      %th Broj odigranih kvizova
+      %th.short Broj odigranih kvizova
       %th Zadnja aktivnost
 
   %tbody
     - @students.each do |student|
       %tr
         %td= student.full_name
-        %td= student.username
+        %td.short= student.username
         %td= student.school.name
-        %td= student.games.count
+        %td.short= student.games.count
         %td= activity(student.games.maximum(:created_at))

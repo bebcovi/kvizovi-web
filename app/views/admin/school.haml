@@ -11,16 +11,16 @@
   %thead
     %tr
       %th Ime i prezime
-      %th Korisničko ime
-      %th Broj odigranih kvizova
+      %th.short Korisničko ime
+      %th.short Broj odigranih kvizova
       %th Zadnja aktivnost
 
   %tbody
     - @school.students.each do |student|
       %tr
         %td= student.full_name
-        %td= student.username
-        %td= student.games.count
+        %td.short= student.username
+        %td.short= student.games.count
         %td= activity(student.games.maximum(:created_at))
 
 %h2 Kvizovi (#{@school.quizzes.length})
@@ -30,12 +30,12 @@
   %thead
     %tr
       %th Naziv kviza
-      %th Broj pitanja
+      %th.short Broj pitanja
       %th Zadnja promjena
 
   %tbody
     - @school.quizzes.each do |quiz|
       %tr
         %td= quiz.name
-        %td= quiz.questions.count
+        %td.short= quiz.questions.count
         %td= activity(quiz.updated_at)
