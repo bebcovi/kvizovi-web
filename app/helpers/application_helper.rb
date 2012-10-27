@@ -104,6 +104,10 @@ module ApplicationHelper
     Redcarpet::Render::SmartyPants.render(text.to_s).html_safe
   end
 
+  def markdown(text)
+    smarty_pants(Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(text))
+  end
+
   def percentage(part, total)
     (part/total.to_f * 100).round
   end

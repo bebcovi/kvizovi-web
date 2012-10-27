@@ -36,6 +36,7 @@ gem "active_attr"
 gem "nokogiri"
 gem "activerecord-postgres-hstore"
 gem "exception_notification"
+gem "will_paginate", require: ["will_paginate", "will_paginate/array"]
 
 group :development, :test do
   gem "pry-rails"
