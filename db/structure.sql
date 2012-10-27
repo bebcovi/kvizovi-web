@@ -292,7 +292,8 @@ CREATE TABLE schools (
     updated_at timestamp without time zone NOT NULL,
     place character varying(255),
     region character varying(255),
-    email character varying(255)
+    email character varying(255),
+    notified boolean DEFAULT true
 );
 
 
@@ -589,3 +590,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121021200442');
 INSERT INTO schema_migrations (version) VALUES ('20121024130719');
 
 INSERT INTO schema_migrations (version) VALUES ('20121025172235');
+
+INSERT INTO schema_migrations (version) VALUES ('20121027184715');

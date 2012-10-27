@@ -23,8 +23,13 @@ Lektire::Application.routes.draw do
     get "feedback"
   end
 
-  resources :schools, :students
+  resources :schools do
+    member { put "notify" }
+  end
+  resources :students
   resource :password, only: [:edit, :update]
+
+  resources :notifications
 
   resources :quizzes do
     resources :questions

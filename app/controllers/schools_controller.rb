@@ -39,6 +39,11 @@ class SchoolsController < ApplicationController
     end
   end
 
+  def notify
+    current_school.update_attributes(notified: true)
+    redirect_to :back
+  end
+
   def delete
     @school = current_school
     render layout: false if request.headers["X-fancyBox"]

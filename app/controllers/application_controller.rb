@@ -1,4 +1,8 @@
+# encoding: utf-8
+
 class ApplicationController < ActionController::Base
+  before_filter :set_notification, if: ->{ school_logged_in? and not current_school.notified? }
+
   private
 
   def current_student() @current_student ||= Student.find(cookies[:student_id]) end
@@ -41,5 +45,9 @@ class ApplicationController < ActionController::Base
   def log_out!
     cookies.delete(:school_id)
     cookies.delete(:student_id)
+  end
+
+  def set_notification
+    flash.now[:notification] = "Dogodile su se neke promjene. Možete ih vidjeti #{view_context.link_to "ovdje", notifications_path}."
   end
 end

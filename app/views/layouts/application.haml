@@ -23,6 +23,11 @@
             %div{class: "flash #{name}"}
               = remove_button
               %p= message
+          - elsif name == :notification
+            %div{class: "flash #{name}"}
+              = simple_form_for current_school, url: notify_school_path(current_school), method: :put do |f|
+                = f.button :button, "".prepend_icon("cancel"), class: "remove"
+              %p= raw message
 
         = link_to "Vodič".append_icon("book"), tour_path, class: "tour", target: "_blank"
 
