@@ -4,17 +4,17 @@ table {
 }
 
 th, td {
-  text-align: left;
   padding: rhythm(1/4);
+  text-align: left;
 }
 
 thead {
-  th { font-weight: 500; }
+  color: rgba(black, 1/2);
+  th { font-weight: 300; }
 }
 
 tbody {
-  font-weight: 300;
-  color: rgba(black, 1/2);
+  font-weight: 500;
 
   tr:nth-child(odd) {
     background: rgba(black, 1/30);
