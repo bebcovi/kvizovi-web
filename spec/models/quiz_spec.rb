@@ -13,22 +13,6 @@ describe Quiz do
   end
 
   describe "validations" do
-    context "upon activation" do
-      before(:each) { @it.activated = true }
-
-      it "has to have at least 2 questions" do
-        @it.stub(:questions).and_return([double("question")])
-        @it.should_not be_valid
-
-        @it.stub(:questions).and_return([double("question"), double("question")])
-        @it.should be_valid
-      end
-
-      it "has to have even number of questions" do
-        @it.stub(:questions).and_return([double("question"), double("question"), double("question")])
-        @it.should_not be_valid
-      end
-    end
   end
 end
 

@@ -61,36 +61,13 @@ describe "Managing quizzes" do
     end
 
     describe "activation" do
-      context "when valid" do
-        before(:each) do
-          Quiz.any_instance.stub(:questions).and_return([
-            build(:boolean_question),
-            build(:boolean_question)
-          ])
-        end
+      it "can be toggled" do
+        visit quizzes_path
 
-        it "can be toggled" do
-          visit quizzes_path
+        expect { within("form") { first("button").click } }.to change{@quiz.reload.activated?}.from(false).to(true)
+        expect { within("form") { first("button").click } }.to change{@quiz.reload.activated?}.from(true).to(false)
 
-          expect { within("form") { first("button").click } }.to change{@quiz.reload.activated?}.from(false).to(true)
-          expect { within("form") { first("button").click } }.to change{@quiz.reload.activated?}.from(true).to(false)
-
-          current_path.should eq(quizzes_path)
-        end
-      end
-
-      context "when invalid" do
-        it "can't be toggled" do
-          visit quizzes_path
-          expect { first("button").click }.to_not change{@quiz.reload.activated?}
-        end
-
-        it "displays validation errors" do
-          visit quizzes_path
-          first("button").click
-          current_path.should eq(quizzes_path)
-          all(".flash.alert").should_not be_empty
-        end
+        current_path.should eq(quizzes_path)
       end
     end
 

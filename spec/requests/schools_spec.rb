@@ -32,7 +32,6 @@ describe "School" do
     before(:all) do
       @quiz = create(:quiz, school: @school)
       create(:boolean_question, quiz: @quiz)
-      @quiz.update_column(:activated, true)
     end
 
     it "has the link for it on the quiz page" do

@@ -27,20 +27,16 @@ class QuizzesController < ApplicationController
     @quiz = current_school.quizzes.find(params[:id])
 
     if @quiz.update_attributes(params[:quiz])
-      if params[:quiz][:activated] == "true"
-        flash[:notice] = "Kviz \"#{@quiz.name}\" je aktiviran."
-      elsif params[:quiz][:activated] == "false"
-        flash[:notice] = "Kviz \"#{@quiz.name}\" je deaktiviran."
-      else
-        flash[:notice] = "Kviz je uspješno izmijenjen."
-      end
+      flash[:notice] = if params[:quiz][:activated] == "true"
+                         "Kviz \"#{@quiz.name}\" je aktiviran."
+                       elsif params[:quiz][:activated] == "false"
+                         "Kviz \"#{@quiz.name}\" je deaktiviran."
+                       else
+                         "Kviz je uspješno izmijenjen."
+                       end
       redirect_to quizzes_path
     else
-      if params[:quiz][:activated]
-        redirect_to quizzes_path, alert: @quiz.errors[:base].first
-      else
-        render :edit
-      end
+      render :edit
     end
   end
 

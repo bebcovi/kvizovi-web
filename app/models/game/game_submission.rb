@@ -25,6 +25,7 @@ class GameSubmission
 
   def info
     question_ids = quiz.question_ids.shuffle
+    question_ids.pop if players.count.even? and quiz.questions.count.odd?
     player_ids = players.map(&:id)
 
     {

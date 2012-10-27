@@ -12,7 +12,6 @@ class Quiz < ActiveRecord::Base
   serialize :grades, ActiveRecord::Coders::Hstore
 
   validates_presence_of :name, :school_id
-  validate :validate_questions, if: :activated
 
   default_scope order("#{table_name}.created_at DESC")
   scope :activated, where(activated: true)
@@ -38,15 +37,5 @@ class Quiz < ActiveRecord::Base
 
   def to_s
     name
-  end
-
-  private
-
-  def validate_questions
-    if questions.count == 0
-      errors[:base] << "Kviz mora imati barem 2 pitanja prije nego što se može aktivirati."
-    elsif questions.count.odd?
-      errors[:base] << "Kviz mora imati paran broj pitanja prije nego što se može aktivirati (zato da se može igrati u 2 igrača)."
-    end
   end
 end
