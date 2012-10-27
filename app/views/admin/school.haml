@@ -4,7 +4,7 @@
 
 %h1= @school.name
 
-%h2 Učenici (#{@school.students.length})
+%h2 Učenici (#{@school.students.count})
 
 %table
 
@@ -23,7 +23,7 @@
         %td.short= student.games.count
         %td= activity(student.games.maximum(:created_at))
 
-%h2 Kvizovi (#{@school.quizzes.length})
+%h2 Kvizovi (#{@school.quizzes.count})
 
 %table
 
