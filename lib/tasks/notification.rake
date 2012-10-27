@@ -6,7 +6,7 @@ namespace :notification do
 
     path = "#{Rails.root}/app/views/notifications/index"
     name = ENV["NAME"]
-    last_id = Dir["#{path}/*.md.erb"].max { |filename| filename.split("/").last[/^\d+/].to_i } || 0
+    last_id = Dir["#{path}/*.md.erb"].map { |filename| filename.split("/").last[/^\d+/].to_i }.max || 0
     filename = "#{last_id + 1}_#{name}.md.erb"
 
     touch File.join(path, filename)
