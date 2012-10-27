@@ -33,7 +33,7 @@
     }
   }
 
-  &, form {
+  &, form:last-child {
     > :last-child { @include trailer(0); }
   }
 }
