@@ -1,0 +1,45 @@
+- @title = @school.name
+
+= back_button "Admin", admin_path
+
+%h1= @school.name
+
+%h2 Učenici
+
+%table
+
+  %thead
+    %tr
+      %th
+      %th Ime i prezime
+      %th Korisničko ime
+      %th Broj odigranih kvizova
+      %th Zadnja aktivnost
+
+  %tbody
+    - @school.students.each_with_index do |student, index|
+      %tr
+        %td= "#{index + 1}."
+        %td= student.full_name
+        %td= student.username
+        %td= student.games.count
+        %td= activity(student.games.maximum(:created_at))
+
+%h2 Kvizovi
+
+%table
+
+  %thead
+    %tr
+      %th
+      %th Naziv kviza
+      %th Broj pitanja
+      %th Zadnja promjena
+
+  %tbody
+    - @school.quizzes.each_with_index do |quiz, index|
+      %tr
+        %td= "#{index + 1}."
+        %td= quiz.name
+        %td= quiz.questions.count
+        %td= activity(quiz.updated_at)

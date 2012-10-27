@@ -52,25 +52,3 @@ hr:
   support:
     array:
       last_word_connector: " i "
-
-  misc:
-    students:
-      zero: "0 učenika"
-      one: "1 učenik"
-      few: "%{count} učenika"
-      many: "%{count} učenika"
-    quizzes:
-      zero: "0 učenika"
-      one: "1 kviz"
-      few: "%{count} kviza"
-      many: "%{count} kvizova"
-    questions:
-      zero: "0 pitanja"
-      one: "1 pitanje"
-      few: "%{count} pitanja"
-      many: "%{count} pitanja"
-    games:
-      zero: "0 odigranih kvizova"
-      one: "1 odigrani kviz"
-      few: "%{count} odigrana kviza"
-      many: "%{count} odigranih kvizova"

@@ -35,8 +35,6 @@ Lektire::Application.routes.draw do
 
   controller :admin do
     get "admin" => :index
-    get "admin/schools"                     => :schools
-    get "admin/schools/:school_id/students" => :students,  as: "admin_school_students"
-    get "admin/schools/:school_id/quizzes"  => :quizzes,   as: "admin_school_quizzes"
+    get "admin/school/:id" => :school, as: :admin_school
   end
 end
