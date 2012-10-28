@@ -1,6 +1,6 @@
 $ = jQuery
 
-App.Controllers.home = do ->
+App.Controllers.home =
 
   index: ->
 

@@ -1,6 +1,6 @@
 $ = jQuery
 
-App.Controllers.tour = do ->
+App.Controllers.tour =
 
   index: ->
 

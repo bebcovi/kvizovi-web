@@ -1,6 +1,6 @@
 $ = jQuery
 
-App.Questions.image = do ->
+App.Questions.image =
 
   new: ($form) ->
 

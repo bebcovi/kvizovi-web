@@ -1,6 +1,6 @@
 $ = jQuery
 
-App.Questions.association = do ->
+App.Questions.association =
 
   show: ($form) ->
 

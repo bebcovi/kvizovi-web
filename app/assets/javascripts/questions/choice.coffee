@@ -1,6 +1,6 @@
 $ = jQuery
 
-App.Questions.choice = do ->
+App.Questions.choice =
 
   new: ($form) ->
 

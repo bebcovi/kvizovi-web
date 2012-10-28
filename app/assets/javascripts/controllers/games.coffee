@@ -1,6 +1,6 @@
 $ = jQuery
 
-App.Controllers.games = do ->
+App.Controllers.games =
 
   new: ->
 
