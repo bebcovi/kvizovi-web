@@ -1,5 +1,6 @@
 # encoding: utf-8
 require_relative "school/example_quizzes"
+require "securerandom"
 
 class School < ActiveRecord::Base
   has_many :students, dependent: :destroy
@@ -10,10 +11,16 @@ class School < ActiveRecord::Base
 
   validates_presence_of :name, :level, :username, :key, :place, :region, :email
   validates_presence_of :password, on: :create
-  validates_uniqueness_of :username
+  validates_uniqueness_of :username, :email
 
   def to_s
     name
+  end
+
+  def reset_password
+    new_password = SecureRandom.hex(5)
+    update_attributes(password: new_password)
+    new_password
   end
 
   def grades

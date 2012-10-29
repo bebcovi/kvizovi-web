@@ -38,6 +38,20 @@ class StudentsController < ApplicationController
     end
   end
 
+  def new_password
+    @student = current_school.students.find(params[:id])
+  end
+
+  def change_password
+    @student = current_school.students.find(params[:id])
+
+    if @student.update_attributes(params[:student])
+      redirect_to students_path, notice: "Lozinka je uspješno promijenjena."
+    else
+      render :new_password
+    end
+  end
+
   def delete
     @student = current_student
     render layout: false if request.headers["X-fancyBox"]

@@ -26,8 +26,13 @@ Lektire::Application.routes.draw do
   resources :schools do
     member { put "notify" }
   end
-  resources :students
-  resource :password, only: [:edit, :update]
+  resources :students do
+    member do
+      get "new_password"
+      put "change_password"
+    end
+  end
+  resource :password
 
   resources :notifications
 

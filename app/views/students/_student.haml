@@ -1,5 +1,6 @@
 .item_controls
   = delete_button "", student_path(student), confirm: "Jeste li sigurni da želite izbrisati ovog učenika?", method: :delete, title: "Izbriši"
+  = change_password_button "", new_password_student_path(student)
 
 .name
   = student.full_name
