@@ -6,8 +6,8 @@
   = f.input :level, collection: ["Osnovna", "Srednja"], prompt: "Izaberite..."
   = f.input :place
   = f.input :region, collection: Location.regions, prompt: "Izaberite..."
-  = f.input :username
   = f.input :email
+  = f.input :username
   = f.input :password
   = f.input :password_confirmation
   = f.input :key, as: :password, hint: "Ovo će vaši učenici koristiti za registraciju".append_icon("arrow-up")
