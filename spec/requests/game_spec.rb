@@ -105,12 +105,12 @@ describe "Game" do
       answer_question(category)
       click_on "Odgovori"
 
-      page.should have_content("Točan odgovor")
+      page.should have_css("h1.correct")
 
       click_on "Sljedeće pitanje"
       click_on "Odgovori"
 
-      page.should_not have_content("Točan odgovor")
+      page.should have_css("h1.wrong")
     end
 
     describe "giving up" do
