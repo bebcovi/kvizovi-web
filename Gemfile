@@ -51,6 +51,6 @@ end
 group :test do
   gem "factory_girl"
   gem "capybara"
-  gem "activerecord-nulldb-adapter", github: "nulldb/nulldb"
+  gem "activerecord-nulldb-adapter", ">= 0.2.3"
   gem "database_cleaner"
 end
