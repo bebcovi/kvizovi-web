@@ -4,7 +4,7 @@ footer {
     text-align: center;
     .emails {
       @include adjust-leading-to(2/3);
-      color: rgba(black, 1/2);
+      color: rgba(black, 1/3);
     }
   }
 }
