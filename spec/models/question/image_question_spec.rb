@@ -22,7 +22,6 @@ describe ImageQuestion do
 
       it "can receive a URL" do
         @it.image_url = "https://dl.dropbox.com/u/16783504/image.jpg"
-        @it.send(:assign_image)
         @it.image_file_name.should eq "image.jpg"
       end
     end
@@ -43,6 +42,7 @@ describe ImageQuestion do
     end
 
     it "validates the URL" do
+      @it.image = nil
       @it.image_url = "invalid URL"
       @it.should_not be_valid
     end
