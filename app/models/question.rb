@@ -9,7 +9,7 @@ class Question < ActiveRecord::Base
     include Module.new {
       names.each do |name|
         define_method(name) do
-          self.data[name]
+          self.data[name] rescue nil
         end
 
         define_method("#{name}=") do |value|

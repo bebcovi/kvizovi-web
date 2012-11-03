@@ -86,6 +86,8 @@ class IntegrateQuestionDataQuestions < ActiveRecord::Migration
              end
 
       question.update_column(:data_id, data.id)
+      question.send(:prepare_for_destroy)
+      question.send(:destroy_attached_files)
     end
 
     remove_column :questions, :data
