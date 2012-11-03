@@ -19,6 +19,8 @@ class Question < ActiveRecord::Base
     }
   end
 
+  default_scope -> { order("updated_at DESC") }
+
   validates_presence_of :content
 
   def self.categories
