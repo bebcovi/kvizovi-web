@@ -11,54 +11,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121021174122) do
-
-  create_table "association_question_data", :force => true do |t|
-    t.text "associations"
-  end
-
-  create_table "boolean_question_data", :force => true do |t|
-    t.boolean "answer"
-  end
-
-  create_table "choice_question_data", :force => true do |t|
-    t.text "provided_answers"
-  end
+ActiveRecord::Schema.define(:version => 20121102233327) do
 
   create_table "games", :force => true do |t|
-    t.text     "info"
     t.integer  "quiz_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "image_question_data", :force => true do |t|
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.string   "image_meta"
-    t.string   "answer"
+    t.hstore   "question_answers"
+    t.text     "question_ids"
+    t.integer  "duration"
+    t.boolean  "interrupted"
+    t.integer  "first_player_id"
+    t.integer  "second_player_id"
+    t.datetime "created_at"
   end
 
   create_table "questions", :force => true do |t|
     t.text     "content"
     t.string   "hint"
-    t.integer  "data_id"
     t.integer  "quiz_id"
     t.string   "type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.text     "data"
   end
 
   create_table "quizzes", :force => true do |t|
     t.string   "name"
-    t.string   "grades"
     t.boolean  "activated",  :default => false
     t.integer  "school_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.hstore   "grades"
   end
+
+  add_index "quizzes", ["grades"], :name => "quizzes_grades"
 
   create_table "schools", :force => true do |t|
     t.string   "name"
@@ -66,11 +51,12 @@ ActiveRecord::Schema.define(:version => 20121021174122) do
     t.string   "password_digest"
     t.string   "level"
     t.string   "key"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "place"
     t.string   "region"
     t.string   "email"
+    t.boolean  "notified",        :default => true
   end
 
   create_table "students", :force => true do |t|
@@ -79,16 +65,11 @@ ActiveRecord::Schema.define(:version => 20121021174122) do
     t.string   "username"
     t.string   "password_digest"
     t.integer  "school_id"
-    t.integer  "grade"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.string   "grade",           :limit => 2
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "gender"
     t.integer  "year_of_birth"
-    t.string   "email"
-  end
-
-  create_table "text_question_data", :force => true do |t|
-    t.string "answer"
   end
 
 end

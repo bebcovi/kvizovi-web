@@ -21,30 +21,38 @@ describe ImageQuestion do
       its(:image) { should respond_to(:url) }
 
       it "can receive a URL" do
-        @it.data.image_url = "https://dl.dropbox.com/u/16783504/image.jpg"
-        @it.data.send(:assign_image)
-        @it.data.image_file_name.should eq "image.jpg"
+        @it.image_url = "https://dl.dropbox.com/u/16783504/image.jpg"
+        @it.send(:assign_image)
+        @it.image_file_name.should eq "image.jpg"
       end
+    end
+
+    it "saves sizes" do
+      @it.send(:assign_image_sizes)
+      @it.image_width(:original).should be_a(Integer)
+      @it.image_height(:original).should be_a(Integer)
+      @it.image_width(:resized).should be_a(Integer)
+      @it.image_height(:resized).should be_a(Integer)
     end
   end
 
   describe "validations" do
     it "can't have a blank image" do
-      @it.data.image = nil
+      @it.image = nil
       @it.should_not be_valid
     end
 
     it "validates the URL" do
-      @it.data.image_url = "invalid URL"
+      @it.image_url = "invalid URL"
       @it.should_not be_valid
     end
 
     it "accepts either file or an URL as the image" do
-      @it.data.image_url = "https://dl.dropbox.com/u/16783504/image.jpg"
+      @it.image_url = "https://dl.dropbox.com/u/16783504/image.jpg"
       @it.should be_valid
 
-      @it.data.image_url = nil
-      @it.data.image_file = Rack::Test::UploadedFile.new("#{ROOT}/spec/fixtures/files/image.jpg")
+      @it.image_url = nil
+      @it.image_file = Rack::Test::UploadedFile.new("#{ROOT}/spec/fixtures/files/image.jpg")
       @it.should be_valid
     end
   end

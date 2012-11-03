@@ -43,93 +43,6 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: association_question_data; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE association_question_data (
-    id integer NOT NULL,
-    associations text
-);
-
-
---
--- Name: association_question_data_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE association_question_data_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: association_question_data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE association_question_data_id_seq OWNED BY association_question_data.id;
-
-
---
--- Name: boolean_question_data; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE boolean_question_data (
-    id integer NOT NULL,
-    answer boolean
-);
-
-
---
--- Name: boolean_question_data_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE boolean_question_data_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: boolean_question_data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE boolean_question_data_id_seq OWNED BY boolean_question_data.id;
-
-
---
--- Name: choice_question_data; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE choice_question_data (
-    id integer NOT NULL,
-    provided_answers text
-);
-
-
---
--- Name: choice_question_data_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE choice_question_data_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: choice_question_data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE choice_question_data_id_seq OWNED BY choice_question_data.id;
-
-
---
 -- Name: games; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -166,40 +79,6 @@ ALTER SEQUENCE games_id_seq OWNED BY games.id;
 
 
 --
--- Name: image_question_data; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE image_question_data (
-    id integer NOT NULL,
-    image_file_name character varying(255),
-    image_content_type character varying(255),
-    image_file_size integer,
-    image_updated_at timestamp without time zone,
-    image_meta character varying(255),
-    answer character varying(255)
-);
-
-
---
--- Name: image_question_data_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE image_question_data_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: image_question_data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE image_question_data_id_seq OWNED BY image_question_data.id;
-
-
---
 -- Name: questions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -207,11 +86,12 @@ CREATE TABLE questions (
     id integer NOT NULL,
     content text,
     hint character varying(255),
-    data_id integer,
     quiz_id integer,
     type character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    data text DEFAULT '--- {}
+'::text
 );
 
 
@@ -355,67 +235,10 @@ ALTER SEQUENCE students_id_seq OWNED BY students.id;
 
 
 --
--- Name: text_question_data; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE text_question_data (
-    id integer NOT NULL,
-    answer character varying(255)
-);
-
-
---
--- Name: text_question_data_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE text_question_data_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: text_question_data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE text_question_data_id_seq OWNED BY text_question_data.id;
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY association_question_data ALTER COLUMN id SET DEFAULT nextval('association_question_data_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY boolean_question_data ALTER COLUMN id SET DEFAULT nextval('boolean_question_data_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY choice_question_data ALTER COLUMN id SET DEFAULT nextval('choice_question_data_id_seq'::regclass);
-
-
---
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY games ALTER COLUMN id SET DEFAULT nextval('games_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY image_question_data ALTER COLUMN id SET DEFAULT nextval('image_question_data_id_seq'::regclass);
 
 
 --
@@ -447,50 +270,11 @@ ALTER TABLE ONLY students ALTER COLUMN id SET DEFAULT nextval('students_id_seq':
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY text_question_data ALTER COLUMN id SET DEFAULT nextval('text_question_data_id_seq'::regclass);
-
-
---
--- Name: association_question_data_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY association_question_data
-    ADD CONSTRAINT association_question_data_pkey PRIMARY KEY (id);
-
-
---
--- Name: boolean_question_data_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY boolean_question_data
-    ADD CONSTRAINT boolean_question_data_pkey PRIMARY KEY (id);
-
-
---
--- Name: choice_question_data_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY choice_question_data
-    ADD CONSTRAINT choice_question_data_pkey PRIMARY KEY (id);
-
-
---
 -- Name: games_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY games
     ADD CONSTRAINT games_pkey PRIMARY KEY (id);
-
-
---
--- Name: image_question_data_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY image_question_data
-    ADD CONSTRAINT image_question_data_pkey PRIMARY KEY (id);
 
 
 --
@@ -523,14 +307,6 @@ ALTER TABLE ONLY schools
 
 ALTER TABLE ONLY students
     ADD CONSTRAINT students_pkey PRIMARY KEY (id);
-
-
---
--- Name: text_question_data_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY text_question_data
-    ADD CONSTRAINT text_question_data_pkey PRIMARY KEY (id);
 
 
 --
@@ -592,3 +368,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121024130719');
 INSERT INTO schema_migrations (version) VALUES ('20121025172235');
 
 INSERT INTO schema_migrations (version) VALUES ('20121027184715');
+
+INSERT INTO schema_migrations (version) VALUES ('20121102233327');

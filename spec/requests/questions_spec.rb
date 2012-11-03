@@ -78,7 +78,7 @@ describe "Questions" do
       def fill_in_the_form
         fill_in "Tekst pitanja", with: question.content
         (1..3).each do |n|
-          fill_in "question_data_attributes_provided_answers_#{n}", with: question.provided_answers[n-1]
+          fill_in "question_provided_answers_#{n}", with: question.provided_answers[n-1]
         end
       end
 
@@ -89,7 +89,7 @@ describe "Questions" do
         click_on "Stvori"
 
         (1..3).each do |n|
-          find_field("question_data_attributes_provided_answers_#{n}").value.should eq(question.provided_answers[n-1])
+          find_field("question_provided_answers_#{n}").value.should eq(question.provided_answers[n-1])
         end
 
         all("li input").count.should eq 3
@@ -109,8 +109,8 @@ describe "Questions" do
         fill_in "Tekst pitanja", with: question.content
         (1..3).each do |n|
           field_n = (n-1)*2 + 1
-          fill_in "question_data_attributes_associations_#{field_n}", with: question.associations.keys[n-1]
-          fill_in "question_data_attributes_associations_#{field_n + 1}", with: question.associations.values[n-1]
+          fill_in "question_associations_#{field_n}", with: question.associations.keys[n-1]
+          fill_in "question_associations_#{field_n + 1}", with: question.associations.values[n-1]
         end
       end
 
@@ -123,8 +123,8 @@ describe "Questions" do
 
         (1..3).each do |n|
           field_n = (n-1)*2 + 1
-          find_field("question_data_attributes_associations_#{field_n}").value.should eq question.associations.keys[n-1]
-          find_field("question_data_attributes_associations_#{field_n + 1}").value.should eq question.associations.values[n-1]
+          find_field("question_associations_#{field_n}").value.should eq question.associations.keys[n-1]
+          find_field("question_associations_#{field_n + 1}").value.should eq question.associations.values[n-1]
         end
 
         all("li input").count.should eq 6

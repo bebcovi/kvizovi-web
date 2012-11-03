@@ -29,20 +29,20 @@ describe ChoiceQuestion do
     describe "#provided_answers" do
       describe "setter" do
         it "accepts an array" do
-          @it.data.provided_answers =    ["Foo", "Bar"]
+          @it.provided_answers =    ["Foo", "Bar"]
           @it.provided_answers.should eq ["Foo", "Bar"]
         end
 
         it "deletes blank elements" do
-          @it.data.provided_answers =    ["Foo", "Bar", "", ""]
+          @it.provided_answers =    ["Foo", "Bar", "", ""]
           @it.provided_answers.should eq ["Foo", "Bar"]
 
-          @it.data.provided_answers =    ["Foo", "Bar", nil, nil]
+          @it.provided_answers =    ["Foo", "Bar", nil, nil]
           @it.provided_answers.should eq ["Foo", "Bar"]
         end
 
         it "doesn't delete the first element if it's blank" do
-          @it.data.provided_answers =    ["", "Bar", "Baz"]
+          @it.provided_answers =    ["", "Bar", "Baz"]
           @it.provided_answers.should eq ["", "Bar", "Baz"]
         end
       end
@@ -58,7 +58,7 @@ describe ChoiceQuestion do
 
   describe "validations" do
     it "can't have the first provided answer blank" do
-      @it.data.provided_answers = ["", "Bar", "Baz"]
+      @it.provided_answers = ["", "Bar", "Baz"]
       @it.should_not be_valid
     end
   end

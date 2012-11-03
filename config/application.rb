@@ -26,7 +26,6 @@ module Lektire
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += [
       "#{config.root}/app/models/question",
-      "#{config.root}/app/models/question/data",
       "#{config.root}/app/models/game",
       "#{config.root}/lib"
     ]

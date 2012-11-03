@@ -4,8 +4,7 @@
 
   = f.input :content, label: "Tekst pitanja", input_html: {autofocus: current_page?(action: "new")}
 
-  = f.simple_fields_for :data, @question.data, as: :data do |d|
-    = render partial: "#{@question.category}_question_fields", object: @question, as: "#{@question.category}_question", locals: {f: d}
+  = render partial: "#{@question.category}_question_fields", object: @question, as: "#{@question.category}_question", locals: {f: f}
 
   = f.input :hint, placeholder: %(Npr. "Odgovor piši u nominativu."), hint: "Ovo će se prikazati kao pomoć pri odgovaranju na pitanje."
 

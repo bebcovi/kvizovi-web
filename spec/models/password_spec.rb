@@ -1,4 +1,3 @@
-require "spec_helper_lite"
 require_relative "../../app/models/password"
 require_relative "../../app/models/student"
 

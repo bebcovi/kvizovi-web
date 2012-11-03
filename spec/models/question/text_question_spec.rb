@@ -25,7 +25,7 @@ describe TextQuestion do
 
   describe "validations" do
     it "can't have blank answer" do
-      @it.data.answer = nil
+      @it.answer = nil
       @it.should_not be_valid
     end
   end

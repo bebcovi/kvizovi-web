@@ -1,8 +1,17 @@
 require_relative "../question"
-require_relative "data/boolean_question_data"
 
 class BooleanQuestion < Question
-  delegate :answer, to: :data
+  data_accessor :answer
+
+  validates_inclusion_of :answer, in: [true, false]
+
+  def answer
+    super
+  end
+
+  def answer=(value)
+    super(eval(value.to_s))
+  end
 
   def true?
     answer
@@ -14,9 +23,5 @@ class BooleanQuestion < Question
 
   def correct_answer?(value)
     answer.to_s == value.to_s
-  end
-
-  def points
-    1
   end
 end

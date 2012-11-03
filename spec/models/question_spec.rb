@@ -11,7 +11,6 @@ describe Question do
     @it.should respond_to(:quiz)
   end
 
-  its(:category) { should eq "boolean" }
 
   describe "#hint" do
     it "has a getter and a setter" do

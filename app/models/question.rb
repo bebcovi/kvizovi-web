@@ -1,23 +1,23 @@
 require "active_record"
+require "activerecord-postgres-hstore"
 
 class Question < ActiveRecord::Base
-  def self.inherited(base)
-    super
-
-    base.class_eval do
-      belongs_to :data, class_name: "#{name}Data", dependent: :destroy
-      attr_accessible :data_attributes
-      validates_associated :data
-
-      after_initialize { self.data ||= build_data }
-    end
-
-    base.accepts_nested_attributes_for :data if self == Question
-  end
-
-  attr_accessible :content, :hint
-
   belongs_to :quiz, touch: true
+
+  serialize :data, Hash
+  def self.data_accessor(*names)
+    include Module.new {
+      names.each do |name|
+        define_method(name) do
+          self.data[name]
+        end
+
+        define_method("#{name}=") do |value|
+          self.data = (data || {}).merge(name => value)
+        end
+      end
+    }
+  end
 
   validates_presence_of :content
 

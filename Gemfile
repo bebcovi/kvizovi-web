@@ -27,14 +27,15 @@ gem "simple_form"
 gem "redcarpet"
 gem "rails-i18n"
 
-# Other
+# Database
 gem "paperclip"
 gem "paperclip-dropbox", "~> 1.0"
-gem "paperclip-meta"
 gem "bcrypt-ruby", "~> 3.0"
+gem "activerecord-postgres-hstore"
+
+# Other
 gem "active_attr"
 gem "nokogiri"
-gem "activerecord-postgres-hstore"
 gem "exception_notification"
 gem "will_paginate", require: ["will_paginate", "will_paginate/array"]
 

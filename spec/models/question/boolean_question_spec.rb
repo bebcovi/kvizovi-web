@@ -16,11 +16,11 @@ describe BooleanQuestion do
 
   describe "#correct_answer?" do
     it "recognizes both string and boolean argument" do
-      @it.data.answer = true
+      @it.answer = true
       @it.correct_answer?(true).should be_true
       @it.correct_answer?("true").should be_true
 
-      @it.data.answer = false
+      @it.answer = false
       @it.correct_answer?(false).should be_true
       @it.correct_answer?("false").should be_true
     end
@@ -32,7 +32,7 @@ describe BooleanQuestion do
 
   describe "validations" do
     it "can't have blank answer" do
-      @it.data.answer = nil
+      @it.answer = nil
       @it.should_not be_valid
     end
   end
