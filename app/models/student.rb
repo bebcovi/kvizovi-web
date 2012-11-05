@@ -18,7 +18,7 @@ class Student < ActiveRecord::Base
   before_create { self.school ||= School.find_by_key(school_key) }
 
   def grade=(value)
-    write_attribute(:grade, value.to_s.delete(" ."))
+    write_attribute(:grade, value.to_s.delete(" .").downcase)
   end
 
   def games
