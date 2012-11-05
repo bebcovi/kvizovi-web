@@ -10,12 +10,16 @@ class Student < ActiveRecord::Base
 
   validate :validate_school_key, unless: :school_id?
   validates_format_of :username, with: /^[a-zA-Z0-9_]*$/
-  validates_format_of :grade, with: /^[0-8][a-z]?/, allow_blank: true
+  validates_format_of :grade, with: /^[0-8][a-z]?$/, allow_blank: true
   validates_length_of :username, minimum: 3
   validates_presence_of :first_name, :last_name, :username, :password, :gender, :grade, :year_of_birth
   validates_uniqueness_of :username
 
   before_create { self.school ||= School.find_by_key(school_key) }
+
+  def grade=(value)
+    write_attribute(:grade, value.to_s.delete(" ."))
+  end
 
   def games
     Game.where("games.first_player_id = #{id} or games.second_player_id = #{id}")
