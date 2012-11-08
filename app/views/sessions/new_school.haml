@@ -2,12 +2,13 @@
 
 %h1 Prijava škole
 
-= simple_form_for :school, url: school_login_path do |f|
+= simple_form_for @session, as: :user, url: login_path do |f|
 
-  = f.input :username, input_html: {value: params[:school].try(:[], :username), autofocus: current_page?(action: "new_school")}
+  = f.input :username, input_html: {autofocus: current_page?(action: "new")}
   = f.input :password, hint: "Zaboravili ste lozinku? #{link_to "Zatražite novu", new_password_path}."
-  = f.input :remember_me do
-    = check_box_tag :remember_me, 1, params[:remember_me], id: "school_remember_me"
+  = f.input :remember_me, as: :boolean
+
+  = hidden_field_tag :type, "school"
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", root_path

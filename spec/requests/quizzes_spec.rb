@@ -1,97 +1,98 @@
 # encoding: utf-8
 require "spec_helper_full"
 
-describe "Managing quizzes" do
+describe "School" do
   before(:all) { @school = create(:school) }
 
   before(:each) { login(:school, attributes_for(:school)) }
 
-  describe "create" do
-    before(:all) { @quiz = build(:quiz, school: @school) }
-
-    it "has a link" do
+  context "when creating quizzes" do
+    it "has the link for it on the quizzes page" do
       visit quizzes_path
       click_on "Novi kviz"
       current_path.should eq new_quiz_path
     end
 
-    it "stays on the same page on validation errors" do
-      visit new_quiz_path
-
-      click_on "Stvori"
-
-      current_path.should eq quizzes_path
+    context "on validation errors" do
+      it "is held on the same page" do
+        visit new_quiz_path
+        expect { click_on "Stvori" }.to_not change{@school.quizzes.count}
+        current_path.should eq quizzes_path
+      end
     end
 
-    it "redirects back to quizzes on success" do
-      visit new_quiz_path
+    context "on success" do
+      let(:attributes) { attributes_for(:quiz) }
 
-      fill_in "Naziv", with: @quiz.name
-      check ordinalize(@quiz.grades).first
-      expect { click_on "Stvori" }.to change{Quiz.count}.by(1)
+      it "gets redirected back to the quizzes page" do
+        visit new_quiz_path
 
-      current_path.should eq quizzes_path
+        fill_in "Naziv", with: attributes[:name]
+        expect { click_on "Stvori" }.to change{@school.quizzes.count}.by(1)
+
+        current_path.should eq quizzes_path
+      end
     end
+
+    after(:all) { @school.quizzes.destroy_all }
   end
 
-  describe "update" do
-    before(:all) { @quiz = Quiz.last }
+  context "when updating quizzes" do
+    before(:all) { @quiz = create(:quiz, school: @school) }
 
-    it "has a link" do
+    it "has the link for it on the quizzes page" do
       visit quizzes_path
       within(".item_controls") { first("a").click }
       current_path.should eq edit_quiz_path(@quiz)
     end
 
-    it "stays on the same page on validation errors" do
-      visit edit_quiz_path(@quiz)
-
-      fill_in "Naziv", with: ""
-      click_on "Spremi"
-
-      current_path.should eq quiz_path(@quiz)
+    context "on validation errors" do
+      it "is held on the same page" do
+        visit edit_quiz_path(@quiz)
+        fill_in "Naziv", with: ""
+        click_on "Spremi"
+        current_path.should eq quiz_path(@quiz)
+      end
     end
 
-    it "redirects back to quizzes on success" do
-      visit edit_quiz_path(@quiz)
+    context "on success" do
+      it "gets redirected back to quizzes" do
+        visit edit_quiz_path(@quiz)
+        click_on "Spremi"
+        current_path.should eq quizzes_path
+      end
+    end
 
-      click_on "Spremi"
+    it "can toggle the activation" do
+      visit quizzes_path
+
+      expect { click_on "Deaktiviraj" }.to change{@quiz.reload.activated?}.from(true).to(false)
+      expect { click_on "Aktiviraj" }.to change{@quiz.reload.activated?}.from(false).to(true)
 
       current_path.should eq(quizzes_path)
-    end
-
-    describe "activation" do
-      it "can be toggled" do
-        visit quizzes_path
-
-        expect { within("form") { first("button").click } }.to change{@quiz.reload.activated?}.from(false).to(true)
-        expect { within("form") { first("button").click } }.to change{@quiz.reload.activated?}.from(true).to(false)
-
-        current_path.should eq(quizzes_path)
-      end
     end
 
     after(:all) { @quiz.destroy }
   end
 
-  describe "destroy" do
+  describe "when destroying a quiz" do
     before(:all) { @quiz = create(:quiz, school: @school) }
 
-    it "has a link" do
+    it "has the link for it" do
       visit quizzes_path
       within(".item_controls") { all("a").last.click }
       current_path.should eq delete_quiz_path(@quiz)
     end
 
-    it "can be canceled" do
+    it "can cancel it" do
       visit delete_quiz_path(@quiz)
-      expect { click_on "Nisam" }.to_not change{Quiz.count}
+      expect { click_on "Nisam" }.to_not change{@school.quizzes.count}
       current_path.should eq quizzes_path
     end
 
-    it "can be confirmed" do
+    it "can confirm it" do
       visit delete_quiz_path(@quiz)
-      expect { click_on "Jesam" }.to change{Quiz.count}.by(-1)
+      expect { click_on "Jesam" }.to change{@school.quizzes.count}.by(-1)
       current_path.should eq quizzes_path
     end
   end

@@ -4,7 +4,7 @@
 %h2 Aplikacija za ispitivanje znanja iz lektire.
 
 %ol.app_role
-  %li= link_to "Ja sam učenik".prepend_icon("user"), student_login_path
-  %li= link_to "Ja sam škola".prepend_icon("home"), school_login_path
+  %li= link_to "Ja sam učenik".prepend_icon("user"), login_path(type: "student")
+  %li= link_to "Ja sam škola".prepend_icon("home"), login_path(type: "school")
 
 %p.tour Prvi puta ste ovdje? Treba li vam #{link_to "vodič", tour_path}?

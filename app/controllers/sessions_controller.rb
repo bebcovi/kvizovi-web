@@ -1,36 +1,28 @@
-# encoding: utf-8
-
 class SessionsController < ApplicationController
-  def new_student
-    render layout: false if request.headers["X-fancyBox"]
+  def new
+    @session = new_session
+    render "new_#{params[:type]}"
   end
 
-  def create_student
-    if student = Student.authenticate(params[:student])
-      log_in!(student)
-      redirect_to new_game_path
+  def create
+    @session = new_session(params[:user])
+    if user = @session.authenticate_user
+      log_in!(user, permanent: @session.remember_me?)
+      redirect_to root_path
     else
-      flash.now[:alert] = "Pogrešno korisničko ime ili lozinka."
-      render :new_student
-    end
-  end
-
-  def new_school
-    render layout: false if request.headers["X-fancyBox"]
-  end
-
-  def create_school
-    if school = School.authenticate(params[:school])
-      log_in!(school)
-      redirect_to quizzes_path
-    else
-      flash.now[:alert] = "Pogrešno korisničko ime ili lozinka."
-      render :new_school
+      flash.now[:alert] = alert
+      render "new_#{params[:type]}"
     end
   end
 
   def destroy
     log_out!
     redirect_to root_path
+  end
+
+  private
+
+  def new_session(attributes = {})
+    Session.new({type: params[:type]}.merge(attributes))
   end
 end

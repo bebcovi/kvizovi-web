@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class PasswordsController < ApplicationController
   def new
   end
@@ -8,9 +6,9 @@ class PasswordsController < ApplicationController
     if school = School.find_by_email(params[:email])
       new_password = school.reset_password
       PasswordResetNotifier.password_reset(school, new_password).deliver
-      redirect_to root_path, notice: "Nova lozinka je poslana na vaš email."
+      redirect_to root_path, notice: notice
     else
-      flash.now[:alert] = "Škola s tom email adresom nije nađena."
+      flash.now[:alert] = alert
       render :new
     end
   end
@@ -23,7 +21,7 @@ class PasswordsController < ApplicationController
     @password = Password.new(params[:password].merge(user: current_user))
 
     if @password.save
-      redirect_to current_user, notice: "Lozinka je uspješno izmjenjena."
+      redirect_to current_user, notice: notice
     else
       render :edit
     end

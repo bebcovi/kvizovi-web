@@ -22,15 +22,15 @@ class SchoolsController < ApplicationController
   end
 
   def show
-    @school = current_school
+    @school = current_user
   end
 
   def edit
-    @school = current_school
+    @school = current_user
   end
 
   def update
-    @school = current_school
+    @school = current_user
 
     if @school.update_attributes(params[:school])
       redirect_to @school, notice: "Vaš profil je uspješno izmijenjen."
@@ -40,17 +40,17 @@ class SchoolsController < ApplicationController
   end
 
   def notify
-    current_school.update_attributes(notified: true)
+    current_user.update_attributes(notified: true)
     redirect_to :back
   end
 
   def delete
-    @school = current_school
+    @school = current_user
     render layout: false if request.headers["X-fancyBox"]
   end
 
   def destroy
-    @school = current_school
+    @school = current_user
 
     if @school.authenticate(params[:school][:password])
       @school.destroy

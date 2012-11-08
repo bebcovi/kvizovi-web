@@ -1,30 +1,29 @@
 # encoding: utf-8
 require "spec_helper_full"
 
-describe "Questions" do
-  before(:all) do
+describe "School" do
+  before(:all) {
     @school = create(:school)
     @quiz = create(:quiz, school: @school)
-  end
+  }
 
-  before(:each) do
-    login(:school, attributes_for(:school))
-  end
+  before(:each) { login(:school, attributes_for(:school)) }
 
-  it "has a link" do
+  it "has a link for managing questions from a quiz" do
     visit quizzes_path
-    within(".item_controls") { all("a").second[:href].should eq(quiz_questions_path(@quiz)) }
+    within(".item_controls") { all("a").second.click }
+    current_path.should eq quiz_questions_path(@quiz)
   end
 
-  describe "create" do
-    it "has a link" do
+  context "when creating a question" do
+    it "has the link for it" do
       visit quiz_questions_path(@quiz)
-      find_link("Novo pitanje")[:href].should eq(new_quiz_question_path(@quiz))
+      click_on "Novo pitanje"
+      current_path.should eq new_quiz_question_path(@quiz)
     end
 
     it "first asks for the category" do
       visit new_quiz_question_path(@quiz)
-      all("form").should be_empty
 
       category_labels = [
         "Točno/netočno",
@@ -39,160 +38,138 @@ describe "Questions" do
       end
     end
 
-    def fill_in_the_form_incorrectly
-      fill_in_the_form
-      fill_in "Tekst pitanja", with: ""
-    end
-
     describe "boolean" do
-      let(:question) { build(:boolean_question) }
-
-      def fill_in_the_form
-        fill_in "Tekst pitanja", with: question.content
-        choose "Točno"
+      context "on validation errors" do
+        it "is held on the same page" do
+          visit new_quiz_question_path(@quiz, category: "boolean")
+          expect { click_on "Stvori" }.to_not change{BooleanQuestion.count}
+          current_path.should eq quiz_questions_path(@quiz)
+        end
       end
 
-      it "keeps the fields filled in on validation errors" do
-        visit new_quiz_question_path(@quiz, category: "boolean")
+      context "on success" do
+        let(:attributes) { attributes_for(:boolean_question) }
 
-        fill_in_the_form_incorrectly
-        expect { click_on "Stvori" }.to_not change{BooleanQuestion.count}
+        it "gets redirected back to questions" do
+          visit new_quiz_question_path(@quiz, category: "boolean")
 
-        current_path.should eq(quiz_questions_path(@quiz))
-        find_field("Točno").should be_checked
-      end
+          fill_in "Tekst pitanja", with: attributes[:content]
+          choose "Točno"
 
-      it "redirects back to questions on success" do
-        visit new_quiz_question_path(@quiz, category: "boolean")
-
-        fill_in_the_form
-        expect { click_on "Stvori" }.to change{BooleanQuestion.count}.by(1)
-
-        current_path.should eq(quiz_questions_path(@quiz))
+          expect { click_on "Stvori" }.to change{BooleanQuestion.count}.by(1)
+          current_path.should eq quiz_questions_path(@quiz)
+        end
       end
     end
 
     describe "choice" do
-      let(:question) { build(:choice_question) }
-
-      def fill_in_the_form
-        fill_in "Tekst pitanja", with: question.content
-        (1..3).each do |n|
-          fill_in "question_provided_answers_#{n}", with: question.provided_answers[n-1]
+      context "on validation errors" do
+        it "is held on the same page" do
+          visit new_quiz_question_path(@quiz, category: "choice")
+          expect { click_on "Stvori" }.to_not change{ChoiceQuestion.count}
+          current_path.should eq quiz_questions_path(@quiz)
         end
       end
 
-      it "keeps the fields filled in on validation errors" do
-        visit new_quiz_question_path(@quiz, category: "choice")
+      context "on success" do
+        let(:attributes) { attributes_for(:choice_question) }
 
-        fill_in_the_form_incorrectly
-        click_on "Stvori"
+        it "gets redirected back to questions" do
+          visit new_quiz_question_path(@quiz, category: "choice")
 
-        (1..3).each do |n|
-          find_field("question_provided_answers_#{n}").value.should eq(question.provided_answers[n-1])
+          fill_in "Tekst pitanja", with: attributes[:content]
+          (1..3).each { |n| fill_in "question_provided_answers_#{n}", with: attributes[:provided_answers][n-1] }
+
+          expect { click_on "Stvori" }.to change{ChoiceQuestion.count}.by(1)
+          current_path.should eq quiz_questions_path(@quiz)
         end
-
-        all("li input").count.should eq 3
-      end
-
-      it "is expected to be valid" do
-        visit new_quiz_question_path(@quiz, category: "choice")
-        fill_in_the_form
-        expect { click_on "Stvori" }.to change{ChoiceQuestion.count}.by(1)
       end
     end
 
     describe "association" do
-      let(:question) { build(:association_question) }
-
-      def fill_in_the_form
-        fill_in "Tekst pitanja", with: question.content
-        (1..3).each do |n|
-          field_n = (n-1)*2 + 1
-          fill_in "question_associations_#{field_n}", with: question.associations.keys[n-1]
-          fill_in "question_associations_#{field_n + 1}", with: question.associations.values[n-1]
+      context "on validation errors" do
+        it "is held on the same page" do
+          visit new_quiz_question_path(@quiz, category: "association")
+          expect { click_on "Stvori" }.to_not change{AssociationQuestion.count}
+          current_path.should eq quiz_questions_path(@quiz)
         end
       end
 
-      it "keeps the fields filled in on validation errors" do
-        visit new_quiz_question_path(@quiz)
-        click_on "Asocijacija"
+      context "on success" do
+        let(:attributes) { attributes_for(:association_question) }
 
-        fill_in_the_form_incorrectly
-        click_on "Stvori"
+        it "gets redirected back to questions" do
+          visit new_quiz_question_path(@quiz, category: "association")
 
-        (1..3).each do |n|
-          field_n = (n-1)*2 + 1
-          find_field("question_associations_#{field_n}").value.should eq question.associations.keys[n-1]
-          find_field("question_associations_#{field_n + 1}").value.should eq question.associations.values[n-1]
+          fill_in "Tekst pitanja", with: attributes[:content]
+          (1..3).each do |n|
+            field_n = (n-1)*2 + 1
+            fill_in "question_associations_#{field_n}", with: attributes[:associations].keys[n-1]
+            fill_in "question_associations_#{field_n + 1}", with: attributes[:associations].values[n-1]
+          end
+
+          expect { click_on "Stvori" }.to change{AssociationQuestion.count}.by(1)
+          current_path.should eq quiz_questions_path(@quiz)
         end
-
-        all("li input").count.should eq 6
-      end
-
-      it "is expected to be valid" do
-        visit new_quiz_question_path(@quiz, category: "association")
-        fill_in_the_form
-        expect { click_on "Stvori" }.to change{AssociationQuestion.count}.by(1)
       end
     end
 
     describe "image" do
-      let(:question) { build(:image_question) }
-
-      def fill_in_the_form
-        fill_in "Tekst pitanja", with: question.content
-        attach_file "Slika", "#{Rails.root}/spec/fixtures/files/image.jpg"
-        fill_in "Odgovor", with: question.answer
+      context "on validation errors" do
+        it "is held on the same page" do
+          visit new_quiz_question_path(@quiz, category: "image")
+          expect { click_on "Stvori" }.to_not change{ImageQuestion.count}
+          current_path.should eq quiz_questions_path(@quiz)
+        end
       end
 
-      it "keeps the fields filled in on validation errors" do
-        visit new_quiz_question_path(@quiz, category: "image")
+      context "on success" do
+        let(:attributes) { attributes_for(:image_question) }
 
-        fill_in_the_form_incorrectly
-        click_on "Stvori"
+        it "gets redirected back to questions" do
+          visit new_quiz_question_path(@quiz, category: "image")
 
-        find_field("Odgovor").value.should eq question.answer
-      end
+          fill_in "Tekst pitanja", with: attributes[:content]
+          attach_file "Slika", "#{Rails.root}/spec/fixtures/files/image.jpg"
+          fill_in "Odgovor", with: attributes[:answer]
 
-      it "is expected to be valid" do
-        visit new_quiz_question_path(@quiz, category: "image")
-        fill_in_the_form
-        expect { click_on "Stvori" }.to change{ImageQuestion.count}.by(1)
+          expect { click_on "Stvori" }.to change{ImageQuestion.count}.by(1)
+          current_path.should eq quiz_questions_path(@quiz)
+        end
       end
     end
 
     describe "text" do
-      let(:question) { build(:text_question) }
-
-      def fill_in_the_form
-        fill_in "Tekst pitanja", with: question.content
-        fill_in "Odgovor", with: question.answer
+      context "on validation errors" do
+        it "is held on the same page" do
+          visit new_quiz_question_path(@quiz, category: "text")
+          expect { click_on "Stvori" }.to_not change{TextQuestion.count}
+          current_path.should eq quiz_questions_path(@quiz)
+        end
       end
 
-      it "keeps the fields filled in on validation errors" do
-        visit new_quiz_question_path(@quiz, category: "text")
+      context "on success" do
+        let(:attributes) { attributes_for(:text_question) }
 
-        fill_in_the_form_incorrectly
-        click_on "Stvori"
+        it "gets redirected back to questions" do
+          visit new_quiz_question_path(@quiz, category: "text")
 
-        find_field("Odgovor").value.should eq question.answer
-      end
+          fill_in "Tekst pitanja", with: attributes[:content]
+          fill_in "Odgovor", with: attributes[:answer]
 
-      it "is expected to be valid" do
-        visit new_quiz_question_path(@quiz, category: "text")
-        fill_in_the_form
-        expect { click_on "Stvori" }.to change{TextQuestion.count}.by(1)
+          expect { click_on "Stvori" }.to change{TextQuestion.count}.by(1)
+          current_path.should eq quiz_questions_path(@quiz)
+        end
       end
     end
 
     after(:all) { Question.destroy_all }
   end
 
-  describe "update" do
-    before(:all) { @question = create(:boolean_question, quiz: @quiz) }
+  context "when updating questions" do
+    before(:all) { @question = create(:question, quiz: @quiz) }
 
-    it "redirects back to questions" do
+    it "gets redirected back to questions" do
       visit quiz_questions_path(@quiz)
       within(".item_controls") { first("a").click }
       click_on "Spremi"
@@ -202,27 +179,30 @@ describe "Questions" do
     after(:all) { @question.destroy }
   end
 
-  describe "destroy" do
+  context "when destroying questions" do
     before(:all) { @question = create(:question, quiz: @quiz) }
 
-    it "has a link" do
+    it "has the link for it" do
       visit quiz_questions_path(@quiz)
       within(".item_controls") { all("a").last.click }
       current_path.should eq delete_quiz_question_path(@quiz, @question)
     end
 
-    it "can be canceled" do
+    it "can cancel it" do
       visit delete_quiz_question_path(@quiz, @question)
       click_on "Nisam"
       current_path.should eq quiz_questions_path(@quiz)
     end
 
-    it "can be confirmed" do
+    it "can confirm it" do
       visit delete_quiz_question_path(@quiz, @question)
       expect { click_on "Jesam" }.to change{Question.count}.by(-1)
       current_path.should eq quiz_questions_path(@quiz)
     end
   end
 
-  after(:all) { @school.destroy }
+  after(:all) {
+    @quiz.destroy
+    @school.destroy
+  }
 end

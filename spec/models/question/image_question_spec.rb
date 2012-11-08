@@ -2,11 +2,13 @@ require "spec_helper_lite"
 require_relative "../../../app/models/question/image_question"
 
 describe ImageQuestion do
+  before(:all) { Paperclip.options[:log] = false }
+
   before(:each) { @it = build(:image_question) }
   subject { @it }
 
   before(:each) do
-  # Paperclip want to use this when assigning the attachment
+    # Paperclip want to use this when assigning the attachment
     stub_const("Rails", Module.new)
     Rails.stub(:root)
   end

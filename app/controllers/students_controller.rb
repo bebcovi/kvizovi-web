@@ -2,7 +2,8 @@
 
 class StudentsController < ApplicationController
   def index
-    @students = current_school.students
+    school = current_user
+    @students = school.students
   end
 
   def new
@@ -14,62 +15,64 @@ class StudentsController < ApplicationController
 
     if @student.save
       log_in!(@student)
-      redirect_to new_game_path, notice: "Uspješno si se registrirao."
+      redirect_to new_game_path, notice: notice
     else
       render :new
     end
   end
 
   def show
-    @student = current_student
+    @student = current_user
   end
 
   def edit
-    @student = current_student
+    @student = current_user
   end
 
   def update
-    @student = current_student
+    @student = current_user
 
     if @student.update_attributes(params[:student])
-      redirect_to @student, notice: "Tvoj profil je uspješno izmijenjen."
+      redirect_to @student, notice: notice
     else
       render :edit
     end
   end
 
   def new_password
-    @student = current_school.students.find(params[:id])
+    school = current_user
+    @student = school.students.find(params[:id])
   end
 
   def change_password
-    @student = current_school.students.find(params[:id])
+    school = current_user
+    @student = school.students.find(params[:id])
 
     if @student.update_attributes(params[:student])
-      redirect_to students_path, notice: "Lozinka je uspješno promijenjena."
+      redirect_to students_path, notice: notice
     else
       render :new_password
     end
   end
 
   def delete
-    @student = current_student
+    @student = current_user
     render layout: false if request.headers["X-fancyBox"]
   end
 
   def destroy
-    if school_logged_in?
-      current_school.students.destroy(params[:id])
-      redirect_to students_path, notice: "Učenik je uspješno izbrisan."
+    if current_user.is_a?(School)
+      school = current_user
+      school.students.destroy(params[:id])
+      redirect_to students_path, notice: notice("school_destroy")
     else
-      @student = current_student
-
+      @student = current_user
       if @student.authenticate(params[:student][:password])
         @student.destroy
         log_out!
-        redirect_to root_path, notice: "Tvoj korisnički račun je uspješno izbrisan."
+        redirect_to root_path, notice: notice
       else
-        flash.now[:alert] = "Lozinka nije točna."
+        flash.now[:alert] = alert
         render :delete
       end
     end

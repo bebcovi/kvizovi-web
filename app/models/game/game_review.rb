@@ -8,7 +8,7 @@ class GameReview
   end
 
   def players
-    @players ||= @hash[:player_class].find(@hash[:player_ids])
+    @players ||= player_class.find(@hash[:player_ids])
   end
 
   def scores
@@ -51,5 +51,9 @@ class GameReview
 
   def percentage(part, whole)
     ((part.to_f / whole) * 100).round
+  end
+
+  def player_class
+    @hash[:player_class]
   end
 end

@@ -5,6 +5,18 @@ module ApplicationHelper
     [params[:controller], params[:action]].join(" ")
   end
 
+  def log_message
+    if user_logged_in?
+      if current_user.is_a?(Student)
+        student = current_user
+        raw "Bok, #{link_to student.first_name, student} | #{logout_button "Odjava", logout_path}"
+      else
+        school = current_user
+        raw "Prijavljeni ste kao #{link_to school.name, school} | #{logout_button "Odjava", logout_path}"
+      end
+    end
+  end
+
   def present(object, klass = nil)
     klass ||= "#{object.class}Presenter".constantize
     presenter = klass.new(object, self)

@@ -7,11 +7,9 @@ Lektire::Application.routes.draw do
   end
 
   controller :sessions do
-    get   "student_login"  => :new_student
-    post  "student_login"  => :create_student
-    get   "school_login"   => :new_school
-    post  "school_login"   => :create_school
-    match "logout"         => :destroy
+    get   "login"  => :new
+    post  "login"  => :create
+    match "logout" => :destroy
   end
 
   controller :authorize do
@@ -38,6 +36,8 @@ Lektire::Application.routes.draw do
 
   resources :quizzes do
     resources :questions
+
+    member { put "toggle_activation" }
   end
 
   match "404" => "errors#not_found"

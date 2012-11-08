@@ -1,5 +1,6 @@
 module QuizzesHelper
   def grades
-    ordinalize(current_school.grades).zip(current_school.grades)
+    school = current_user
+    ordinalize(school.grades).zip(school.grades)
   end
 end

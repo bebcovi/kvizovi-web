@@ -1,50 +1,52 @@
 # encoding: utf-8
 
 class ApplicationController < ActionController::Base
-  before_filter :set_notification, if: ->{ school_logged_in? and not current_school.notified? }
+  before_filter :set_notification, if: proc {
+    user_logged_in? and current_user.is_a?(School) and not current_user.notified?
+  }
 
-  private
+  protected
 
-  def current_student() @current_student ||= Student.find(cookies[:student_id]) end
-  def student_logged_in?() cookies[:student_id].present? end
-  def authenticate_student!() redirect_to root_path if not student_logged_in? end
-  helper_method :current_student, :student_logged_in?
-
-  def current_school() @current_school ||= School.find(cookies[:school_id]) end
-  def school_logged_in?() cookies[:school_id].present? end
-  def authenticate_school!() redirect_to root_path if not school_logged_in? end
-  helper_method :current_school, :school_logged_in?
-
-  def current_user
-    if student_logged_in?
-      @current_user ||= current_student
-    elsif school_logged_in?
-      @current_user ||= current_school
-    end
-  end
-  helper_method :current_user
-
-  def logged_in?
-    cookies[:student_id].present? or cookies[:school_id].present?
-  end
-  helper_method :logged_in?
-
-  def authenticate!
-    redirect_to root_path if not logged_in?
-  end
-
-  def log_in!(user)
-    name = user.class.name.underscore
-    if params[:remember_me]
-      cookies.permanent[:"#{name}_id"] = user.id
+  def log_in!(user, options = {})
+    if options[:permanent]
+      cookies.permanent[:user_id] = user.id
+      cookies.permanent[:user_type] = user.class.name.underscore
     else
-      cookies[:"#{name}_id"] = user.id
+      cookies[:user_id] = user.id
+      cookies[:user_type] = user.class.name.underscore
     end
   end
 
   def log_out!
-    cookies.delete(:school_id)
-    cookies.delete(:student_id)
+    cookies.delete(:user_id)
+    cookies.delete(:user_type)
+  end
+
+  def user_logged_in?
+    cookies[:user_id].present?
+  end
+  helper_method :user_logged_in?
+
+  def current_user
+    @current_user ||= user_class.find(cookies[:user_id])
+  end
+  helper_method :current_user
+
+  def user_class
+    cookies[:user_type].camelize.constantize
+  end
+
+  def authenticate!
+    redirect_to root_path if not user_logged_in?
+  end
+
+  [:alert, :notice].each do |flash_name|
+    define_method(flash_name) do |*args|
+      options = args.extract_options!
+      controller = params[:controller]
+      action = args.first || params[:action]
+      t("flash.#{controller}.#{action}.#{flash_name}", options)
+    end
   end
 
   def set_notification

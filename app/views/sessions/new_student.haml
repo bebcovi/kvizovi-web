@@ -2,12 +2,13 @@
 
 %h1 Prijava učenika
 
-= simple_form_for :student, url: student_login_path do |f|
+= simple_form_for @session, as: :user, url: login_path do |f|
 
-  = f.input :username, input_html: {value: params[:student].try(:[], :username), autofocus: current_page?(action: "new_student")}
+  = f.input :username, input_html: {autofocus: current_page?(action: "new")}
   = f.input :password
-  = f.input :remember_me do
-    = check_box_tag :remember_me, 1, params[:remember_me], id: "student_remember_me"
+  = f.input :remember_me, as: :boolean
+
+  = hidden_field_tag :type, "student"
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", root_path

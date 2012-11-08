@@ -15,7 +15,8 @@
     .page_wrapper
       %header
         %h1.logo= "Lektire".prepend_icon("books")
-        = render "log" if logged_in?
+        - if user_logged_in?
+          %p.log= log_message
 
       %article.main_content
         - flash.each do |name, message|
