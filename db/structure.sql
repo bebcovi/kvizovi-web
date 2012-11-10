@@ -86,12 +86,13 @@ CREATE TABLE questions (
     id integer NOT NULL,
     content text,
     hint character varying(255),
-    quiz_id integer,
     type character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     data text DEFAULT '--- {}
-'::text
+'::text,
+    school_id integer,
+    quiz_id integer
 );
 
 
@@ -112,6 +113,16 @@ CREATE SEQUENCE questions_id_seq
 --
 
 ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
+
+
+--
+-- Name: questions_quizzes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE questions_quizzes (
+    quiz_id integer,
+    question_id integer
+);
 
 
 --
@@ -370,3 +381,7 @@ INSERT INTO schema_migrations (version) VALUES ('20121025172235');
 INSERT INTO schema_migrations (version) VALUES ('20121027184715');
 
 INSERT INTO schema_migrations (version) VALUES ('20121102233327');
+
+INSERT INTO schema_migrations (version) VALUES ('20121110203228');
+
+INSERT INTO schema_migrations (version) VALUES ('20121110222149');
