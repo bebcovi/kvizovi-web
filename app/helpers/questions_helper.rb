@@ -22,7 +22,13 @@ module QuestionsHelper
   end
 
   def answer_title
-    %(<ul><li>"Matoš" = "matoš"</li><li>"Matoš" = "Matoš."</li><li>"Matoš" ≠ "Matos"</li>)
+    content_tag :ul do
+      list_of [
+        %("Matoš" = "matoš"),
+        %("Matoš" = "Matoš."),
+        %("Matoš" ≠ "Matos")
+      ] { |item| concat(item) }
+    end
   end
 
   def tag_filter
