@@ -6,7 +6,7 @@ require "activerecord-postgres-hstore"
 class Quiz < ActiveRecord::Base
   belongs_to :school
   extend HasManyQuestions
-  has_many_questions dependent: :destroy
+  has_and_belongs_to_many_questions association_foreign_key: "question_id"
   has_many :games
 
   serialize :grades, ActiveRecord::Coders::Hstore

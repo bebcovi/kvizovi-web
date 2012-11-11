@@ -139,7 +139,7 @@ describe "School" do
     context "when it wants to try out its quiz" do
       before(:all) {
         @quiz = create(:quiz, school: @school)
-        create(:question, quiz: @quiz)
+        create(:question, quizzes: [@quiz])
       }
 
       it "has the link for it on the quiz page" do

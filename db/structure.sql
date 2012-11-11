@@ -91,8 +91,7 @@ CREATE TABLE questions (
     updated_at timestamp without time zone NOT NULL,
     data text DEFAULT '--- {}
 '::text,
-    school_id integer,
-    quiz_id integer
+    school_id integer
 );
 
 
@@ -385,3 +384,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121102233327');
 INSERT INTO schema_migrations (version) VALUES ('20121110203228');
 
 INSERT INTO schema_migrations (version) VALUES ('20121110222149');
+
+INSERT INTO schema_migrations (version) VALUES ('20121110225446');

@@ -1,7 +1,9 @@
-.item_controls
-  = edit_button "", edit_quiz_question_path(@quiz, question), title: "Izmjeni"
-  = delete_button "", delete_quiz_question_path(@quiz, question), title: "Izbriši"
+- if @parent
+  .item_controls
+    = edit_button "", polymorphic_path([@parent, question.becomes(Question)], action: "edit"), title: "Izmjeni"
+    = delete_button "", polymorphic_path([@parent, question.becomes(Question)], action: "delete"), title: "Izbriši"
 
 .name
   = categories[question.category.to_sym][1]
   %span.content= question.content
+  = link_to "Dodaj", copy_question_path(question) if not @parent

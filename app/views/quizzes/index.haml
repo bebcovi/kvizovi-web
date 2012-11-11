@@ -1,5 +1,8 @@
 - @title = "Uređivanje kvizova"
 
+%p= link_to "Vaša pitanja", school_questions_path(current_user)
+%p= link_to "Sva pitanja", questions_path
+
 %h1 Kvizovi
 
 - if @quizzes.any?

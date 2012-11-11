@@ -1,11 +1,14 @@
 # encoding: utf-8
+require "active_record"
 require_relative "school/example_quizzes"
+require_relative "../../lib/has_many_questions"
 require "securerandom"
 
 class School < ActiveRecord::Base
   has_many :students, dependent: :destroy
   has_many :quizzes, dependent: :destroy
-  has_many :questions, through: :quizzes
+  extend HasManyQuestions
+  has_many_questions dependent: :destroy
 
   has_secure_password
 

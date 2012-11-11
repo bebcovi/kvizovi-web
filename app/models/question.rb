@@ -2,7 +2,8 @@ require "active_record"
 require "activerecord-postgres-hstore"
 
 class Question < ActiveRecord::Base
-  belongs_to :quiz, touch: true
+  has_and_belongs_to_many :quizzes, foreign_key: "question_id"
+  belongs_to :school
 
   serialize :data, Hash
   def self.data_accessor(*names)
@@ -34,7 +35,7 @@ class Question < ActiveRecord::Base
   end
 
   def category
-    type.underscore.chomp("_question")
+    self.class.name.underscore.chomp("_question")
   end
 
   def randomize!

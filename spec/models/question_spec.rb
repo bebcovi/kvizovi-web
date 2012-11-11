@@ -7,10 +7,6 @@ describe Question do
 
   use_nulldb
 
-  it "belongs to a quiz" do
-    @it.should respond_to(:quiz)
-  end
-
 
   describe "#hint" do
     it "has a getter and a setter" do

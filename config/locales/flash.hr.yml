@@ -51,3 +51,5 @@ hr:
         notice: "Pitanje je uspješno izmijenjeno."
       destroy:
         notice: "Pitanje je uspješno izbrisano."
+      copy:
+        notice: "Pitanje je uspješno preuzeto."

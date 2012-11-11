@@ -2,26 +2,26 @@
 
 - if params[:category]
 
-  = back_button "Kategorije", new_quiz_question_path(@quiz)
+  = back_button "Kategorije", polymorphic_path([@parent, Question], action: "new")
 
   %h1
-    %span.name= @quiz.name
+    %span.name= @parent.name
     %span.section= @title.downcase
 
-  = render partial: "form", locals: {url: quiz_questions_path(@quiz), klass: "new"}
+  = render partial: "form", locals: {url: polymorphic_path([@parent, Question]), klass: "new"}
 
 - else
 
-  = back_button "Pitanja", quiz_questions_path(@quiz)
+  = back_button "Pitanja", polymorphic_path([@parent, Question])
 
   %h1
-    %span.name= @quiz.name
+    %span.name= @parent.name
     %span.section= @title.downcase
 
   %p Izaberite kategoriju:
 
   %ol.question_categories
     = list_of categories do |value, (label, icon)|
-      %a{href: new_quiz_question_path(@quiz, category: value)}
+      %a{href: polymorphic_path([@parent, Question], action: "new", category: value)}
         = icon
         .label= label

@@ -1,21 +1,27 @@
-- @title = @quiz.name
+- @title = (@parent.is_a?(Quiz) ? @parent.name : "Pitanja")
 
-= back_button "Kvizovi", root_path
-
-= simple_form_for :game_submission, url: game_path, method: :post do |f|
-  = f.hidden_field :quiz_id, value: @quiz.id
-  = f.hidden_field :players_count, value: 1
-  = buttons(f) do |b|
-    = b.submit_button "Isprobajte kviz", (@quiz.questions.count == 0 ? {disabled: true} : {})
+= back_button "Natrag", root_path
 
 %h1
-  %span.name= @quiz.name
+  %span.name= (@parent ? @parent.name : "Svi")
   %span.section pitanja
 
-- if @quiz.questions.any?
-  %ol.question_list
-    = render collection: @quiz.questions, partial: "question_item", as: :question
-- else
-  %p Ovaj kviz trenutno nema pitanja.
+- if @parent.is_a?(Quiz)
+  = simple_form_for :game_submission, url: game_path, method: :post do |f|
+    = f.hidden_field :quiz_id, value: @parent.id
+    = f.hidden_field :players_count, value: 1
+    = buttons(f) do |b|
+      = b.submit_button "Isprobajte kviz", (@questions.count == 0 ? {disabled: true} : {})
 
-%p= add_button "Novo pitanje", new_quiz_question_path(@quiz)
+- if @parent
+  %p= add_button "Novo pitanje", polymorphic_path([@parent, Question], action: "new")
+
+- if @questions.any?
+
+  %ol.question_list
+    = render collection: @questions, partial: "question_item", as: :question
+
+- else
+
+  %p Trenutno nemate pitanja.
+

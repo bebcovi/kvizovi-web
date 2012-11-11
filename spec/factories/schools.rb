@@ -8,5 +8,10 @@ FactoryGirl.define do
     key      "mioc"
     place    "Zagreb"
     region   "Grad Zagreb"
+
+    factory :other_school do
+      username "other"
+      email "other@skola.hr"
+    end
   end
 end

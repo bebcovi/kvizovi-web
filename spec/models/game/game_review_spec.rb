@@ -5,7 +5,7 @@ describe GameReview do
     @school = create(:school)
     @players = [create(:janko, school: @school), create(:matija, school: @school)]
     @quiz = create(:quiz, school: @school)
-    @questions = create_list(:choice_question, 4, quiz: @quiz)
+    @questions = create_list(:choice_question, 4, school: @school, quizzes: [@quiz])
   end
 
   let(:info) do

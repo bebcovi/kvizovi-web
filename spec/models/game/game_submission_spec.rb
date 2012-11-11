@@ -5,9 +5,9 @@ describe GameSubmission do
   before(:all) do
     @quiz = create(:quiz)
     @questions = []
-    @questions += create_list(:boolean_question, 2, quiz: @quiz)
-    @questions += create_list(:choice_question, 2, quiz: @quiz)
-    @questions += create_list(:association_question, 2, quiz: @quiz)
+    @questions += create_list(:boolean_question, 2, quizzes: [@quiz])
+    @questions += create_list(:choice_question, 2, quizzes: [@quiz])
+    @questions += create_list(:association_question, 2, quizzes: [@quiz])
     @players = [create(:janko), create(:matija)]
   end
 

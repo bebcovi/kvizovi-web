@@ -7,11 +7,11 @@ describe "Game" do
     @quiz = create(:quiz, school: @school)
     @janko = create(:janko, school: @school, grade: "#{@quiz.grades.first}a")
     @matija = create(:matija, school: @school, grade: "#{@quiz.grades.first}d")
-    @boolean_question     = create(:boolean_question, quiz: @quiz)
-    @choice_question      = create(:choice_question, quiz: @quiz)
-    @association_question = create(:association_question, quiz: @quiz)
-    @image_question       = create(:image_question, quiz: @quiz)
-    @text_question        = create(:text_question, quiz: @quiz)
+    @boolean_question     = create(:boolean_question, quizzes: [@quiz])
+    @choice_question      = create(:choice_question, quizzes: [@quiz])
+    @association_question = create(:association_question, quizzes: [@quiz])
+    @image_question       = create(:image_question, quizzes: [@quiz])
+    @text_question        = create(:text_question, quizzes: [@quiz])
   end
 
   before(:each) do

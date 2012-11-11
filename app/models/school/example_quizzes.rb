@@ -85,5 +85,7 @@ class School < ActiveRecord::Base
         answer: "Edip"
       }
     ])
+
+    quiz.questions.update_all(school_id: id)
   end
 end

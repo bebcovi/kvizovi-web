@@ -1,7 +1,7 @@
 %p Jeste li sigurni da želite izbrisati to pitanje?
 
-= simple_form_for @question, url: quiz_question_path(@quiz, @question), method: :delete do |f|
+= simple_form_for @question, url: polymorphic_path([@parent, @question.becomes(Question)]), method: :delete do |f|
 
   = buttons(f) do |b|
-    = b.cancel_button "Nisam", quiz_questions_path(@quiz)
+    = b.cancel_button "Nisam", polymorphic_path([@parent, Question])
     = b.submit_button "Jesam"
