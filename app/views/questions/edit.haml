@@ -1,9 +1,9 @@
 - @title = "Izmjena pitanja"
 
-= back_button "Pitanja", polymorphic_path([@parent, Question])
+= back_button "Pitanja", polymorphic_path([@scope, Question])
 
 %h1
-  %span.name= @parent.name
+  %span.name= @scope.name
   %span.section= @title.downcase
 
-= render partial: "form", locals: {url: polymorphic_path([@parent, @question.becomes(Question)]), klass: "edit"}
+= render partial: "form", locals: {url: polymorphic_path([@scope, @question.becomes(Question)]), klass: "edit"}

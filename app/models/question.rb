@@ -21,6 +21,7 @@ class Question < ActiveRecord::Base
   end
 
   default_scope -> { order("updated_at DESC") }
+  scope :not_owned_by, ->(school) { where("school_id <> #{school.id}") }
 
   validates_presence_of :content
 
