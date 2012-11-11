@@ -46,7 +46,7 @@
 
   - else
 
-    - if params.has_key?(:tags)
+    - if params[:filter]
       %p Nema pitanja s tim kategorijama.
     - else
       %p Trenutno nemate pitanja.
@@ -72,7 +72,7 @@
 
   - else
 
-    - if params.has_key?(:tags)
+    - if params[:filter]
       %p Nema pitanja s tim kategorijama.
     - else
       %p Druge škole trenutno nemaju pitanja.

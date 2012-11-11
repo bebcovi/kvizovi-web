@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
                  else
                    Question.not_owned_by(current_user)
                  end
-    @questions = @questions.tagged_with(params[:tags]) if params[:tags]
+    @questions = @questions.filter(params[:filter]) if params[:filter]
     @questions = @questions.page(params[:page]).per_page(20) unless @scope.is_a?(Quiz)
   end
 
