@@ -1,5 +1,6 @@
 require "active_record"
 require "activerecord-postgres-hstore"
+require "acts-as-taggable-on"
 
 class Question < ActiveRecord::Base
   has_and_belongs_to_many :quizzes, foreign_key: "question_id"
@@ -19,6 +20,7 @@ class Question < ActiveRecord::Base
       end
     }
   end
+  acts_as_taggable
 
   default_scope -> { order("updated_at DESC") }
   scope :not_owned_by, ->(school) { where("school_id <> #{school.id}") }

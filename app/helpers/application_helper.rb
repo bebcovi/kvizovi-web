@@ -167,4 +167,14 @@ module ApplicationHelper
       @form_builder.button :button, *args
     end
   end
+
+  def tag_filter
+    simple_form_for :filter, url: request.path, method: "get" do |f|
+      f.input(:tags, input_html: {name: "tags", value: params[:tags]}) +
+      buttons(f) do |b|
+        b.button_button("Filtrirajte", name: nil) +
+        b.cancel_button("Očistite filter", request.path)
+      end
+    end
+  end
 end

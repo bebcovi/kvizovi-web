@@ -32,6 +32,7 @@ gem "paperclip"
 gem "paperclip-dropbox", "~> 1.0"
 gem "bcrypt-ruby", "~> 3.0"
 gem "activerecord-postgres-hstore"
+gem "acts-as-taggable-on"
 
 # Other
 gem "active_attr"

@@ -35,6 +35,8 @@
     %span.name= school.name
     %span.section pitanja
 
+  = tag_filter
+
   %p= add_button "Novo pitanje", polymorphic_path([school, Question], action: "new")
 
   - if @questions.any?
@@ -44,7 +46,12 @@
 
   - else
 
-    %p Trenutno nemate pitanja.
+    - if params.has_key?(:tags)
+      %p Nema pitanja s tim kategorijama.
+    - else
+      %p Trenutno nemate pitanja.
+
+  = will_paginate @questions
 
 - else
 
@@ -56,6 +63,8 @@
     %span.name= "Svi"
     %span.section pitanja
 
+  = tag_filter
+
   - if @questions.any?
 
     %ol.question_list
@@ -63,4 +72,9 @@
 
   - else
 
-    %p Druge škole trenutno nemaju pitanja.
+    - if params.has_key?(:tags)
+      %p Nema pitanja s tim kategorijama.
+    - else
+      %p Druge škole trenutno nemaju pitanja.
+
+  = will_paginate @questions

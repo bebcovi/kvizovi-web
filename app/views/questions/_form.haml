@@ -8,6 +8,8 @@
 
   = f.input :hint, placeholder: %(Npr. "Odgovor piši u nominativu."), hint: "Ovo će se prikazati kao pomoć pri odgovaranju na pitanje."
 
+  = f.input :tag_list, hint: "Kategorije odvajajte zarezom."
+
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", polymorphic_path([@quiz, Question])
