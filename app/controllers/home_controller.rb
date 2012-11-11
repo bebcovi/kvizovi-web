@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     if user_logged_in?
       if current_user.is_a?(School)
         redirect_to quizzes_path
-      else
+      elsif current_user.is_a?(Student)
         redirect_to new_game_path
       end
     else

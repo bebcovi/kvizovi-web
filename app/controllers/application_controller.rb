@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   helper_method :user_logged_in?
 
   def current_user
-    @current_user ||= user_class.find(cookies[:user_id])
+    @current_user ||= user_class.find(cookies[:user_id]) if user_class.exists?(cookies[:user_id])
   end
   helper_method :current_user
 

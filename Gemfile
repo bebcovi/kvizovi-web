@@ -1,6 +1,6 @@
 ruby "1.9.3"
 
-source "http://bundler-api.herokuapp.com"
+source :rubygems
 
 gem "thin"
 gem "rails"
