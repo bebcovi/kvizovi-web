@@ -48,7 +48,6 @@ class QuestionsController < ApplicationController
 
   def delete
     @question = @scope.questions.find(params[:id])
-    render layout: false if request.headers["X-fancyBox"]
   end
 
   def destroy
@@ -68,5 +67,11 @@ class QuestionsController < ApplicationController
 
   def nested?
     params.has_key?(:quiz_id) or params.has_key?(:school_id)
+  end
+
+  protected
+
+  def sub_layout
+    "questions"
   end
 end

@@ -6,6 +6,10 @@ Lektire::Application.routes.draw do
     get "tour" => :index
   end
 
+  controller :contact do
+    get "contact" => :index
+  end
+
   controller :sessions do
     get   "login"  => :new
     post  "login"  => :create

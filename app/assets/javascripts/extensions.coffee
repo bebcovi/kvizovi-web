@@ -10,11 +10,7 @@ $.fn.appendIcon = (name) ->
 
 # properties
 
-$.removeButton = $ '<button>',
-  type: 'button'
-  tabindex: -1
-.addClass('remove')
-.prependIcon('cancel')
+$.removeButton = $('<button>', type: 'button').text('×')
 
 $.addButton = $ '<a>',
   href: '#'
@@ -31,31 +27,88 @@ $.loader = $('<div>')
 .addClass('loader')
 .prependIcon('loading')
 
-$.extend $.fancybox.defaults,
-  width:        'auto'
-  height:       'auto'
-  minHeight:    'auto'
-  topRatio:     0.3
-  padding:      40
-  margin:       40
-  openEffect:   'none'
-  closeEffect:  'none'
-
-  beforeShow: ->
-    unless @type is 'ajax'
-      if /alert/.test @wrapCSS
-        @inner.append $.generateButtons
-          close: 'U redu'
-      if /confirm/.test @wrapCSS
-        @inner.append $.generateButtons
-          close: 'Nisam'
-          submit: 'Jesam'
-
-    @inner.find('.form_controls').find('a').on 'click', (event) ->
-      event.preventDefault()
-      $.fancybox.close(true)
-
 # functions
+
+$.modalAjax = (options = {}) ->
+  $.loader.show()
+
+  $.ajax
+    type: options['type'] or 'GET'
+    url: options['url']
+    data: options['data'] or ''
+    dataType: 'html'
+    headers: {'X-noLayout': true}
+
+    success: (data) ->
+      $data         = $(data)
+
+      $removeButton = $.removeButton
+        .clone()
+        .addClass('close')
+        .attr('data-dismiss', 'modal')
+
+      $dataHeader   = $data.filter('h1')
+      $dataFooter   = $data.filter('form')
+      $dataBody     = $data.not('h1, form')
+
+      $modal        = $('<div>').addClass('modal')
+
+      # loader
+
+      $.loader.hide()
+
+      # modifications
+
+      $dataFooter.find('.cancel')
+        .removeClass('cancel')
+        .attr('data-dismiss', 'modal')
+
+      # component insertion
+
+      $modalHeader = $('<div>')
+        .addClass('modal-header')
+        .append($removeButton)
+        .append($dataHeader)
+
+      $modalBody = $('<div>')
+        .addClass('modal-body')
+        .append($dataBody)
+
+      $modalFooter = $('<div>')
+        .addClass('modal-footer')
+        .append($dataFooter)
+
+      # modal insertion
+
+      $modal.append($modalHeader)
+      $modal.append($modalBody)   if $dataBody.length
+      $modal.append($modalFooter) if $dataFooter.length
+
+      $modal.modal()
+
+      # required
+
+      if options['required']
+        $removeButton.remove()
+        $modal.on 'hide', -> return false
+
+      # callbacks
+
+      $modal.on 'hidden', ->
+        $modal.remove()
+
+      if options['onOpen']
+        options['onOpen']()
+
+      if options['onCancel']
+        $modal.on 'hidden', ->
+          options['onCancel']()
+
+      if options['onSubmit']
+        $modalFooter.find('.btn-primary')
+          .on 'click', options['onSubmit']
+
+    error: -> location.href options['url']
 
 $.flashMsg = (msg, name) ->
   $flash = $('<div>').addClass("flash #{name}")

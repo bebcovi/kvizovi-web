@@ -1,80 +1,23 @@
-$main-spacing: 2;
-$main: $total-columns - 2 * $main-spacing;
-
 body.home {
 
-  header,
-  a.tour {
-    display: none;
-  }
-
-  .main_content {
-    @include pad($main-spacing, $main-spacing);
-    @include leader($main-spacing);
-    @include padding-trailer($main-spacing);
-    @include clearfix;
-    min-height: 0;
+  .hero-unit {
     text-align: center;
+    font-weight: inherit;
+    border-bottom: 1px solid $linkColor;
+    border-radius: 0;
 
     h1 {
-      @include with-font-size($xx-large) {
-        @include rhythm(1/2, 0, 0, 1/2);
-
-        i {
-          position: relative;
-          top: 5px;
-        }
-      }
+      font-size: 80px;
     }
 
-    h2 {
-      @include with-font-size($large) {
-        @include trailer;
+    .lead,
+    .app_role {
+      margin-bottom: $baseLineHeight/2;
+      .btn {
+        font-weight: $light;
+        &:first-child { margin-right: .5em; }
       }
     }
   }
-
-}
-
-p.tour {
-  @include leader;
-  clear: both;
-}
-
-$cols: $main / 2;
-.app_role {
-  @extend %unstyled-list;
-  @include clearfix;
-
-  li {
-    @include span-columns($cols, $main);
-    @include nth-omega();
-  }
-
-  a {
-    @include with-font-size($medium) {
-      @extend %button;
-      @include h-borders(1px, 1);
-      @include v-borders(1px, 1/2);
-      display: block;
-      font-weight: 300;
-      &, &:hover {
-        @include transition(background-color .2s);
-      }
-      &:hover {
-        background: $red;
-        @include color-link(white, white);
-      }
-
-      i {
-        @include with-font-size($xxx-large) {
-          display: block;
-        }
-      }
-    }
-  }
-
-  li:first-child a  { @include border-right-radius(0); }
-  li:last-child a   { @include border-left-radius(0); }
 
 }

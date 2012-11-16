@@ -2,50 +2,21 @@
 
   &.edit,
   &.new {
+    li:nth-child(n+2) {
+      margin-bottom: $baseLineHeight/2;
 
-    li {
-      @extend %pie-clearfix;
-      @include trailer(1/2);
-      &:first-child,
-      &:last-child {
-        @include trailer(0);
+      .control-group,
+      .close {
+        display: inline-block;
       }
 
-      $cols: $total-columns / 2;
-      div {
-        width: columns($cols);
-        float: left;
-      }
+      input.string { margin-bottom: 0; }
 
-      input { width: 100%; }
-
-      button {
-        @include leader(1/3);
-        vertical-align: middle;
-        float: left;
-      }
-    }
-
-    .field_with_hint {
-      input {
+      .close {
         float: none;
-        color: $correct;
-        font-weight: 400;
-        border-color: rgba($correct, .75);
+        margin-left: 8px;
       }
     }
-
-    .field_with_errors {
-      input {
-        border-color: $wrong;
-      }
-    }
-
-    span.error {
-      display: block;
-      clear: both;
-    }
-
   }
 
 }

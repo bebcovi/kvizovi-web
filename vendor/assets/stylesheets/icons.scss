@@ -3,7 +3,10 @@ $path: 'icons/icons';
 @include font-face('icons', font-files('#{$path}.woff', '#{$path}.ttf', '#{$path}.svg'), '#{$path}.eot');
 
 [class^="icon-"], [class*=" icon-"] {
-  @include prefix-rule('font-smoothing', antialiased, webkit);
+  @include experimental(
+    'font-smoothing',
+    antialiased
+  );
   speak: none;
   font: {
     family: 'icons';
@@ -48,30 +51,6 @@ $path: 'icons/icons';
 .icon-trophy:before {
   content: "\e00b";
 }
-.icon-arrow-up-left:before {
-  content: "\e00c";
-}
-.icon-arrow-up:before {
-  content: "\e00d";
-}
-.icon-arrow-up-right:before {
-  content: "\e00e";
-}
-.icon-arrow-right:before {
-  content: "\e00f";
-}
-.icon-arrow-down-right:before {
-  content: "\e010";
-}
-.icon-arrow-down:before {
-  content: "\e011";
-}
-.icon-arrow-down-left:before {
-  content: "\e012";
-}
-.icon-arrow-left:before {
-  content: "\e013";
-}
 .icon-exit:before {
   content: "\e015";
 }
@@ -110,4 +89,55 @@ $path: 'icons/icons';
 }
 .icon-cancel-2:before {
   content: "\e020";
+}
+.icon-lamp-off:before {
+  content: "\e022";
+}
+.icon-lamp-on:before {
+  content: "\e023";
+}
+.icon-caret-up:before {
+  content: "\e021";
+}
+.icon-caret-right:before {
+  content: "\e024";
+}
+.icon-caret-down:before {
+  content: "\e025";
+}
+.icon-caret-left:before {
+  content: "\e026";
+}
+.icon-chevron-up:before {
+  content: "\e027";
+}
+.icon-chevron-right:before {
+  content: "\e028";
+}
+.icon-chevron-down:before {
+  content: "\e029";
+}
+.icon-chevron-left:before {
+  content: "\e02a";
+}
+.icon-move:before {
+  content: "\e00c";
+}
+.icon-arrow-up:before {
+  content: "\e00d";
+}
+.icon-arrow-right:before {
+  content: "\e00f";
+}
+.icon-arrow-down:before {
+  content: "\e00e";
+}
+.icon-arrow-left:before {
+  content: "\e010";
+}
+.icon-phone:before {
+  content: "\e011";
+}
+.icon-calendar:before {
+  content: "\e012";
 }

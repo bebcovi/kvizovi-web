@@ -2,43 +2,45 @@ $ = jQuery
 
 App.general = ->
 
-  # closing flash messages
+  # loader
 
-  $('.flash button').on 'click', -> $(@).parent().fadeOut('fast')
+  $('body').append $.loader.hide()
 
-  # bootstrap tooltips
+  # tooltips & popovers
 
-  $('.item_controls a, button').tooltip()
+  $('a[title], button[title]').tooltip
+    animation: false
+    placement: 'top'
+    container: 'body'
 
-  $('a.tour').tooltip
-    placement: 'left'
+  $('input[type="text"]').popover
+    html: true
+    trigger: 'focus'
 
-  $('input[type="text"]')
-    .tooltip
-      placement: 'right'
-      trigger: 'focus'
-      title: ->
-        if $(@).val()
-          console.log $(@).attr('data-original-title')
+  # modals
 
-  # delete confirmation
-
-  $('.item_controls').find('.delete').fancybox
-    wrapCSS:  'confirm'
-    width:    250
-    type:     'ajax'
-
-  # notification
-
-  $('.flash.notification').find('form').on 'submit', (event) ->
+  $(document).on 'click', '.modal_close', (event) ->
     event.preventDefault()
+    $(@).closest('.modal').modal('hide').remove()
 
-    $form = $(@)
+  $(document).on 'click', '.delete_item', (event) ->
+    event.preventDefault()
+    $.modalAjax
+      url: @href
 
-    $.ajax
-      type: $form.attr('method')
-      url: $form.attr('action')
-      data: $form.serialize()
+  $('.alert-info').find('.close').removeClass('btn')
 
-    $form.closest('.flash')
-      .fadeOut 'fast', -> $(@).remove()
+  # # notification
+
+  # $('.flash.notification').find('form').on 'submit', (event) ->
+  #   event.preventDefault()
+
+  #   $form = $(@)
+
+  #   $.ajax
+  #     type: $form.attr('method')
+  #     url: $form.attr('action')
+  #     data: $form.serialize()
+
+  #   $form.closest('.flash')
+  #     .fadeOut 'fast', -> $(@).remove()

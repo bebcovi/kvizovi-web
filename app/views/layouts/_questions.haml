@@ -1,0 +1,14 @@
+- if params[:action] == "index"
+  - if @scope.is_a?(School)
+    = breadcrumb([["Pitanja", nil]])
+  - elsif @scope.is_a?(Quiz)
+    = breadcrumb([["Kvizovi", quizzes_path], [@title, nil]])
+  - else
+    = breadcrumb([["Pitanja", nil]])
+- else
+  - if @scope.is_a?(School)
+    = breadcrumb([["Pitanja", school_questions_path(current_user)], [@title, nil]])
+  - elsif @scope.is_a?(Quiz)
+    = breadcrumb([["Kvizovi", quizzes_path], [@scope.name, quiz_questions_path(@scope)], [@title, nil]])
+
+= yield

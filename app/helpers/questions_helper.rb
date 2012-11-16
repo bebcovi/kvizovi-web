@@ -30,16 +30,6 @@ module QuestionsHelper
       ] { |item| concat(item) }
     end
   end
-
-  def tag_filter
-    simple_form_for Filter.new(params[:filter]), url: request.path, method: "get" do |f|
-      f.input(:tags) +
-      buttons(f) do |b|
-        b.button_button("Filtrirajte", name: nil) +
-        b.cancel_button("Očistite filter", request.path)
-      end
-    end
-  end
 end
 
 class Filter

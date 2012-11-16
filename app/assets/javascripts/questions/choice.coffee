@@ -34,22 +34,30 @@ App.Questions.choice =
       $el.find('input').each -> result = result and !!$(@).val()
       result
 
-    $otherOptions.add($template).append $.removeButton.clone()
+    $otherOptions.add($template)
+      .append $.removeButton
+        .clone()
+        .addClass('close')
+        .attr('tabindex', -1)
 
     $template
       .find('input').val('').end()
       .find('div').removeClass('field_with_hint field_with_errors').end()
-      .find('.hint, .error').remove()
+      .find('.help-block, .error-block').remove()
+
+    if $otherOptions.length
+      $addButton.insertAfter($otherOptions.last())
+    else
+      $addButton.insertAfter($firstOption)
 
     $addButton
-      .insertAfter($otherOptions.last())
       .on 'click', (event) ->
         $new = $template.clone()
         event.preventDefault()
         updateAttrs $new, $otherOptions.length
         addOption $new
 
-    $form.on 'click', '.remove', ->
+    $form.on 'click', '.close', ->
       $el = $(@).closest('li')
       removeOption $el
       $otherOptions.each (i) -> updateAttrs $(@), i

@@ -2,19 +2,14 @@
 
   - @title = quiz.name
 
-  = back_button "Natrag na kvizove", root_path
+  = render "dropdown"
 
-  %h1
-    %span.name= quiz.name
-    %span.section pitanja
+  = edit_button "Izmjeni informacije o kvizu", edit_quiz_path(quiz), class: "btn edit_quiz"
 
   = simple_form_for :game_submission, url: game_path, method: :post do |f|
     = f.hidden_field :quiz_id, value: quiz.id
     = f.hidden_field :players_count, value: 1
-    = buttons(f) do |b|
-      = b.submit_button "Isprobajte kviz", (@questions.count == 0 ? {disabled: true} : {})
-
-  %p= add_button "Novo pitanje", polymorphic_path([quiz, Question], action: "new")
+    = f.button :button, "Isprobajte kviz", {class: "btn btn-info"}.merge(@questions.count == 0 ? {disabled: true} : {})
 
   - if @questions.any?
 
@@ -23,21 +18,20 @@
 
   - else
 
-    %p Ovaj kviz trenutno nema pitanja.
+    %p.no_items Ovaj kviz trenutno nema pitanja.
 
 - elsif @scope.is_a?(School) && (school = @scope)
 
   - @title = "Pitanja"
 
-  = back_button "Natrag", root_path
+  %ul.nav.nav-pills
+    %li{class: (request.path == school_questions_path(current_user) && "active")}
+      = link_to "Vaša pitanja", school_questions_path(current_user)
+    %li{class: (request.path == questions_path && "active")}
+      = link_to "Pitanja drugih škola", questions_path
 
-  %h1
-    %span.name= school.name
-    %span.section pitanja
-
-  = tag_filter
-
-  %p= add_button "Novo pitanje", polymorphic_path([school, Question], action: "new")
+  = render "tag_filter"
+  = render "dropdown"
 
   - if @questions.any?
 
@@ -57,13 +51,13 @@
 
   - @title = "Pitanja"
 
-  = back_button "Natrag", root_path
+  %ul.nav.nav-pills
+    %li{class: (request.path == school_questions_path(current_user) && "active")}
+      = link_to "Vaša pitanja", school_questions_path(current_user)
+    %li{class: (request.path == questions_path && "active")}
+      = link_to "Pitanja drugih škola", questions_path
 
-  %h1
-    %span.name= "Svi"
-    %span.section pitanja
-
-  = tag_filter
+  = render "tag_filter"
 
   - if @questions.any?
 

@@ -1,4 +1,18 @@
 @include keyframes(spin) {
-  0% { @include rotateZ(0deg); }
-  100% { @include rotateZ(360deg); }
+  from {
+    @include transform(rotate(0deg));
+  }
+  to {
+    @include transform(rotate(360deg));
+  }
+}
+
+@include keyframes(slide) {
+  0%, 30% { width: auto; }
+  100%    { width: 0% !important; }
+}
+
+@include keyframes(fadeIn) {
+  0%, 95% { opacity: 0; }
+  100%    { opacity: 1; }
 }

@@ -10,15 +10,12 @@ group :assets do
   gem "sass-rails"
   gem "compass", "~> 0.13.alpha.0"
   gem "compass-rails"
-  gem "susy"
-  gem "modular-scale"
-  gem "fancybox-rails", github: 'sverigemeny/fancybox-rails'
+  gem "anjlab-bootstrap-rails", require: "bootstrap-rails"
+  gem "jquery-rails"
+  gem "jquery-ui-rails"
   gem "coffee-rails"
   gem "uglifier"
 end
-
-gem "jquery-rails"
-gem "jquery-ui-rails"
 
 # Views
 gem "haml", "3.2.0.beta.1"
@@ -39,6 +36,7 @@ gem "active_attr"
 gem "nokogiri"
 gem "exception_notification"
 gem "will_paginate", require: ["will_paginate", "will_paginate/array"]
+gem "bootstrap-will_paginate"
 
 group :development do
   gem "letter_opener"

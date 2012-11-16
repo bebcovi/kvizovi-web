@@ -1,17 +1,26 @@
 - @title = @student.full_name
 
-%dl
-  %dt Ime
-  %dd= @student.first_name
-  %dt Prezime
-  %dd= @student.last_name
-  %dt Škola
-  %dd= @student.school.name
-  %dt Razred
-  %dd= ordinalize(@student.grade)
-  %dt Korisničko ime
-  %dd= @student.username
+%table.profile_info
+  %tbody
+    %tr
+      %th Ime
+      %td= @student.first_name
+    %tr
+      %th Prezime
+      %td= @student.last_name
+    %tr
+      %th Škola
+      %td= @student.school.name
+    %tr
+      %th Razred
+      %td= ordinalize(@student.grade)
+    %tr
+      %th Korisničko ime
+      %td= @student.username
 
-%p= edit_button "Izmjeni profil", edit_student_path(@student)
-%p= change_password_button "Izmjeni lozinku", edit_password_path
-%p= delete_button "Izbriši korisnički račun", delete_student_path(@student)
+.btn-toolbar.edit_profile
+  .btn-group
+    = edit_button "Izmjeni profil", edit_student_path(@student)
+    = change_password_button "Izmjeni lozinku", edit_password_path
+
+%p= delete_profile_button "Izbriši korisnički račun", delete_student_path(@student)

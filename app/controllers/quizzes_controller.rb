@@ -48,4 +48,10 @@ class QuizzesController < ApplicationController
     current_user.quizzes.destroy(params[:id])
     redirect_to quizzes_path, notice: notice
   end
+
+  protected
+
+  def sub_layout
+    "quizzes"
+  end
 end

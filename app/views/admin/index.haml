@@ -2,9 +2,17 @@
 
 = back_button "Početna", root_path
 
-%h2 Škole (#{@schools.count})
+%h2
+  Škole
+  %span.count= @schools.count
 
-%table
+%table.school_list
+
+  %colgroup
+    %col.full_name
+    %col.student_count
+    %col.quiz_count
+    %col.last_activity
 
   %thead
     %tr
@@ -21,9 +29,18 @@
         %td.short= school.quizzes.activated.count
         %td= activity(school.quizzes.maximum(:updated_at))
 
-%h2 Učenici (#{@students.count})
+%h2
+  Učenici
+  %span.count= @students.count
 
-%table
+%table.student_list
+
+  %colgroup
+    %col.full_name
+    %col.username
+    %col.school_name
+    %col.quiz_count
+    %col.last_activity
 
   %thead
     %tr

@@ -1,30 +1,6 @@
-%inline-block {
-  display: inline-block;
-  vertical-align: middle;
-}
-
 %unstyled-list {
-  margin: 0;
-  padding: 0;
+  margin-left: 0;
   list-style: none;
-}
-
-%nice-list {
-  @extend %unstyled-list;
-  @include rhythm(1, 0, 0, 1);
-
-  li {
-    @include padding-leader(.5);
-    @include trailing-border(1px, .5);
-    @include clearfix;
-    border-color: rgba(black, .25);
-    &:first-child { @include padding-leader(0); }
-    &:last-child { @include trailing-border(0px, 0); }
-  }
-}
-
-%pie-clearfix {
-  @include pie-clearfix;
 }
 
 %unselectable {
@@ -32,167 +8,34 @@
   cursor: default;
 }
 
-%border-radius {
-  @include border-radius;
-}
+%pretty-list {
+  @extend %unstyled-list;
+  clear: both;
 
-%circle {
-  @include border-radius(50%);
-}
+  li {
+    @include clearfix;
+    padding: 8px .5em;
 
-%prepend-newline {
-  &:before {
-    content: '\a';
-    white-space: pre;
-  }
-}
-
-%append-newline {
-  &:after {
-    content: '\a';
-    white-space: pre;
-  }
-}
-
-%parenthesis {
-  &:before { content: '('; }
-  &:after { content: ')'; }
-}
-
-%full-width {
-  padding-left: $grid-padding;
-  padding-right: $grid-padding;
-  margin-left: - $grid-padding;
-  margin-right: - $grid-padding;
-}
-
-%un-button {
-  margin: 0;
-  padding: 0;
-  font-size: inherit;
-  border: none;
-  background: none;
-}
-
-%subtle {
-  @extend %un-button;
-  @include color-link(rgba(black, .4), $link2);
-  &:hover { text-decoration: none; }
-}
-
-%flash {
-  @include with-font-size($small) {
-    @include border-bottom-radius;
-    position: absolute;
-    top: 0;
-    left: rhythm(4);
-    right: rhythm(4);
-    padding: 0 rhythm(.5);
-    border: 1px solid;
-    border-top: none;
-
-    p { @include trailer(0); }
-
-    .remove {
-      @include with-font-size(10px) {};
+    &:nth-child(odd) {
+      background: $tableBackgroundAccent;
+      border: {
+        top: 1px solid $tableBorder;
+        bottom: 1px solid $tableBorder;
+      }
     }
   }
-}
 
-%flash-notice {
-  $color: hsl(120, 80%, 35%);
-  color: $color;
-  border-color: $color;
-  background: rgba($color, .1);
+  .btn-group { float: right; }
 
-  a {
-    $c1: darken($color, 15%);
-    $c2: $c1;
-    @include color-link($c1, $c2);
+  span {
+    display: inline-block;
+    line-height: $inputHeight;
   }
 
-  button {
-    color: rgba($color, .25);
-    &:hover { color: $color; }
-  }
-}
-
-%flash-notification {
-  $color: hsl(50, 100%, 40%);
-  color: $color;
-  border-color: $color;
-  background: rgba($color, .1);
-
-  a {
-    $c1: darken($color, 15%);
-    $c2: $c1;
-    @include color-link($c1, $c2);
-  }
-
-  button {
-    color: rgba($color, .25);
-    &:hover { color: $color; }
-  }
-}
-
-%flash-alert {
-  $color: $wrong;
-  color: $color;
-  border-color: $color;
-  background: rgba($color, .1);
-
-  a {
-    $c1: darken($color, 15%);
-    $c2: $c1;
-    @include color-link($c1, $c2);
-  }
-
-  button {
-    color: rgba($color, .25);
-    &:hover { color: $color; }
-  }
-}
-
-%button {
-  @extend %inline-block;
-  @extend %border-radius;
-  @include h-borders(1px, .25);
-  @include v-borders(1px, .5);
-  @include color-link(rgba(black, .7), rgba(black, .85));
-  font-size: inherit;
-  line-height: inherit;
-  text-align: center;
-  border-color: rgba(black, .4);
-  background: rgba(black, .04);
-  &:hover {
-    text-decoration: none;
-    border-color: rgba(black, .6);
-    background: rgba(black, .07);
-  }
-  &:focus {
-    outline: none;
-    border-color: rgba(black, .5);
-    background: rgba(black, .05);
-  }
-
-  i { vertical-align: middle; }
-}
-
-%primary-button {
-  @extend %button;
-  @include color-link(white, white);
-  border: none;
-  padding: rhythm(.25) rhythm(.5);
-  background: $link1;
-  &:hover,
-  &:focus {
-    background: $link2;
-  }
-  &[disabled],
-  &.disabled {
-    cursor: default;
-    &, &:hover {
-      background: scale-color($link1, $saturation: -30%, $lightness: 30%);
-    }
+  &.list-hover li:hover {
+    cursor: pointer;
+    background: rgba($linkColor, .05);
+    color: $linkColor;
+    &, .category { color: $linkColor; }
   }
 }

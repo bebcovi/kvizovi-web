@@ -1,5 +1,7 @@
 - @title = "Brisanje korisničkog računa"
 
+%h1 Jesi li siguran?
+
 %p Ovime ćeš trajno izbrisati svoj korisnički račun. Ako si potpuno siguran da to želiš napraviti, upiši svoju lozinku:
 
 = simple_form_for @student, method: :delete do |f|
@@ -8,4 +10,4 @@
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", student_path(@student)
-    = b.submit_button "Potvrdi"
+    = b.button_button "Potvrdi".prepend_icon("remove"), class: "btn-danger"

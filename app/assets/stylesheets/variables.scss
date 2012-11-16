@@ -1,63 +1,46 @@
-// susy
+// bootstrap
 
-$total-columns: 12;
-$gutter-width: 2em;
-$grid-padding: 2em;
+$sansFontFamily:                      'museo-sans', sans-serif;
+$baseFontSize:                        18px;
+$baseLineHeight:                      28px;
 
-$container-width: 960px;
-$container-style: static;
+$smallFontFamily:                     Verdana, 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-// modular scale
+$linkColor:                           hsl(15, 70%, 55%);
+$linkColorHover:                      darken($linkColor, 15%);
 
-$base-size: 13px 18px;
-$ratio: golden();
+$tableBackgroundHover:                rgba($linkColor, .1);
 
-$xxx-small:   ms(-3);
-$xx-small:    ms(-2);
-$x-small:     ms(-1);
-$small:       ms(0);
+$btnPrimaryBackground:                adjust-lightness($linkColor, 5%);
+$btnPrimaryBackgroundHighlight:       adjust-lightness($linkColor, -10%);
 
-$normal:      ms(1);
-$medium:      ms(3);
+$navbarHeight:                        50px;
 
-$large:       ms(4);
-$x-large:     ms(6);
-$xx-large:    ms(7);
-$xxx-large:   ms(8);
+$navbarInverseBackground:             hsl(15, 55%, 45%);
+$navbarInverseBackgroundHighlight:    adjust-lightness($navbarInverseBackground, 5%);
+$navbarInverseBorder:                 adjust-lightness($navbarInverseBackground, -10%);
 
-// vertical rhythm
+$navbarInverseText:                   white;
+$navbarInverseLinkColor:              rgba(white, .8);
+$navbarInverseLinkColorHover:         white;
+$navbarInverseLinkColorActive:        $navbarInverseLinkColorHover;
+$navbarInverseLinkBackgroundHover:    transparent;
+$navbarInverseLinkBackgroundActive:   $navbarInverseBackground;
 
-$base-font-size: $normal;
-$base-line-height: $medium;
+$heroUnitBackground:                  adjust-color($linkColor, $hue: 50, $lightness: 40%);
 
-// css3
+$gridGutterWidth:                     35px;
 
-$default-border-radius: 3px;
+// weights
+
+$thin:    100;
+$light:   300;
+$regular: 500;
+$bold:    700;
+$black:   900;
 
 // colors
 
-$red:     hsl(0, 50%, 50%);
-$purple:  hsl(270, 50%, 50%);
-$orange:  hsl(30, 60%, 50%);
-
-$text:    lighten(black, 30%);
-
-$link1:   $red;
-$link2:   darken($link1, 5%);
-
-$correct: hsl(100, 75%, 25%);
-$wrong:   hsl(0, 90%, 60%);
-
 $players:
-  one $purple,
-  two $orange;
-
-// type
-
-$base-font-family: 'museo-sans', 'Trebuchet MS', Verdana, sans-serif;
-
-$text-input-font-family: $base-font-family;
-$text-input-font-size: $base-font-size - 2px;
-
-$small-font-family: verdana, sans-serif;
-$small-font-size: $small;
+  one hsl(270, 50%, 50%),
+  two hsl(30, 60%, 50%);

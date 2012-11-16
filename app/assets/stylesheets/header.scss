@@ -1,31 +1,29 @@
-header {
-  @include clearfix;
-  @include rhythm(0, 1/2, 1/2, 0);
-  @include text-shadow(white 0 1px 1px);
-  color: rgba(black, .6);
-}
-
-.logo {
-  @include with-font-size($medium, 1) {
-    @extend %unselectable;
-    @include trailer(0);
-    float: left;
-    font-weight: 900;
-    color: rgba(black, .25);
-
-    i {
-      @include with-font-size(38px) {
-        position: relative;
-        top: 3px;
-      }
-    }
+.navbar-inverse .navbar-inner .brand {
+  font-weight: $black;
+  @include text-shadow(rgba(white, .25) 0 1px 0);
+  @include color-link(darken($navbarInverseBackground, 10%), white);
+  &, &:hover { @include transition(all .2s); }
+  &:hover {
+    @include text-shadow(rgba(black, .25) 0 -1px 0);
   }
 }
 
-.log {
-  @include with-font-size($small-font-size) {
-    @include rhythm(3/4, 0, 0, 0);
-    float: right;
-    font-family: $small-font-family;
+.navbar-inner {
+  padding: {
+    left: $gridGutterWidth;
+    right: $gridGutterWidth;
   }
+}
+
+body > .alert {
+  @include border-radius(0);
+  padding-left: $gridGutterWidth;
+  margin-bottom: 0;
+
+  form { margin: 0; }
+  .close { right: 12px; }
+}
+
+.container-fluid {
+  padding-bottom: $gridGutterWidth;
 }

@@ -1,0 +1,9 @@
+%ul.nav.pull-right
+  - if current_user.is_a?(Student) && (student = current_user)
+    %li{class: (params[:controller] == "students" && "active")}
+      = link_to student.first_name.prepend_icon("cog"), student
+  - elsif current_user.is_a?(School) && (school = current_user)
+    %li{class: (params[:controller] == "schools" && "active")}
+      = link_to school.name.prepend_icon("cog"), school
+
+  %li= logout_button "Odjava", logout_path

@@ -1,47 +1,15 @@
 .question_image {
 
-  &.show {
-
-    $cols: $total-columns / 2;
-    .img {
-      float: left;
-      max-width: columns($cols);
-      margin-right: gutter();
-    }
-
-    .input,
-    .hint,
-    .form_controls {
-      float: left;
-      width: columns($cols);
-    }
-
-    .input { @include trailer; }
-
-    input[type="text"] { width: 100%; }
-
-    .hint {
-      @include rhythm(-1/2, 0, 0, 1);
-      color: rgba(black, .5);
-    }
-
-    .form_controls {
-      @include leader(0);
-      clear: right;
-    }
-  }
-
   &.edit,
   &.new {
-
-    .preview { max-height: 250px; }
-
-    .toggle_type {
-      position: absolute;
-      left: $grid-padding / 4;
-      &:hover { text-decoration: none; }
+    .btn {
+      margin: 0 5px 6px 0;
     }
 
+    .preview {
+      margin-bottom: $baseLineHeight/2;
+      max-height: 250px;
+    }
   }
 
 }

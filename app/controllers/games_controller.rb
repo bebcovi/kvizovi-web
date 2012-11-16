@@ -14,7 +14,7 @@ class GamesController < ApplicationController
     @game_submission = GameSubmission.new(params[:game_submission].merge(player_class: current_user.class))
     @game_submission.players << current_user
 
-    if request.referer.in?([new_game_url, quiz_questions_url(@game_submission.quiz)])
+    if request.referer.in?([new_game_url, edit_quiz_url(@game_submission.quiz)])
       cookies[:referer] = request.referer
     end
 
@@ -49,7 +49,6 @@ class GamesController < ApplicationController
     @correct_answer = game_state.current_question_answer
     @game_over = game_state.game_over?
     @question = current_question
-    render layout: false if request.headers["X-fancyBox"]
   end
 
   def show
@@ -59,7 +58,6 @@ class GamesController < ApplicationController
   end
 
   def delete
-    render layout: false if request.headers["X-fancyBox"]
   end
 
   def destroy
@@ -92,7 +90,7 @@ class GamesController < ApplicationController
   end
 
   def before_game_path
-    cookies[:referer]
+    cookies[:referer] || root_path
   end
   helper_method :before_game_path
 end

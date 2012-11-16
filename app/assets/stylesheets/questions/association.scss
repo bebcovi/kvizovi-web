@@ -1,87 +1,98 @@
 .question_association {
 
-  &.show {
-
-    $height: 3/2;
+  &.edit,
+  &.new {
     li {
-      @extend %pie-clearfix;
-      @include trailer(.5);
-      font-weight: 300;
+      margin-bottom: $baseLineHeight/2;
 
-      div, i { @extend %inline-block; }
+      .control-group,
+      .close,
+      i {
+        display: inline-block;
+      }
 
-      div { @include adjust-leading-to($height); }
+      input.string { margin-bottom: 0; }
 
       i {
-        @include leader(1/10);
+        position: relative;
+        top: 3px;
+        margin: 0 5px;
         color: rgba(black, .25);
-        margin-right: gutter();
+      }
+
+      .close {
+        float: none;
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &.show {
+    .static,
+    .dynamic,
+    .controls,
+    ul span,
+    ul i {
+      display: inline-block;
+    }
+
+    ul span, i {
+      padding: {
+        top: 8px;
+        bottom: 8px;
       }
     }
 
-    $cols: 5;
-    .static { @include span-columns($cols); }
+    ul {
+      margin-bottom: $baseLineHeight;
+      li { margin-bottom: $baseLineHeight/2; }
+      i {
+        color: rgba(black, .2);
+        padding: {
+          left: 1em;
+          right: 1em;
+        }
+      }
+    }
 
     .dynamic {
       span {
-        @extend %inline-block;
-        @extend %border-radius;
         @extend %unselectable;
-        @include adjust-leading-to(1);
+        position: relative;
         cursor: move;
-        height: rhythm($height);
-        padding: rhythm(.25) rhythm(.5);
-        border: 1px solid darken(white, 25%);
-        background: darken(white, 2%);
+        padding: {
+          left: 12px;
+          right: 12px;
+        }
+        border: 1px solid darken(white, 14%);
+        border-radius: $baseBorderRadius;
+        background: darken(white, 4%);
       }
-
-      .original { @include opacity(.25); }
 
       .hover {
-        border-color: darken(white, 50%);
-        background: darken(white, 5%);
+        color: $linkColor;
+        border-color: rgba($linkColor, .75);
+        background: rgba($linkColor, .1);
+      }
+
+      .original {
+        opacity: .5;
       }
     }
-
   }
 
-  &.edit,
-  &.new {
-
-    li {
-      @extend %pie-clearfix;
-      @include trailer(.5);
-
-      $cols: $total-columns/2 - 1;
-      div {
-        float: left;
-        width: columns($cols);
-      }
-
-      .static,
-      .arrow {
-        margin-right: rhythm(2/3);
-      }
-
-      .arrow,
-      button {
-        float: left;
-      }
-
-      .arrow {
-        @extend %inline-block;
-        @include leader(1/4);
-        color: rgba(black, .25);
-      }
-
-      button {
-        @include leader(1/3);
-        vertical-align: middle;
-      }
-
-      input { width: 100%; }
+  &.feedback {
+    ul {
+      @extend %unstyled-list;
+      color: rgba(black, .5);
     }
 
+    li { margin-bottom: $baseLineHeight/2; }
+
+    i {
+      color: $textColor;
+      font-size: 14px;
+    }
   }
 
 }

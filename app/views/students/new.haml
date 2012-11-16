@@ -13,7 +13,7 @@
   = f.input :grade, placeholder: "Npr. 2d", hint: "Ako tvoja škola ima samo jedan razred, onda napiši samo broj."
   = f.input :school_key, hint: "Kôd koji ti je tvoja škola dala".append_icon("arrow-up")
 
-  = notice "Tvoje podatke koristit ćemo samo za ovu aplikaciju, nikada ih nećemo dijeliti trećoj strani."
+  = alert_message "Tvoje podatke koristit ćemo samo za ovu aplikaciju, nikada ih nećemo dijeliti trećoj strani.", "info", close: false
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", root_path

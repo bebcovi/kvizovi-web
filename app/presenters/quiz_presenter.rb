@@ -13,13 +13,9 @@ class QuizPresenter < BasePresenter
 
   def visibility_icon
     if quiz.activated?
-      text = "Deaktiviraj"
-      options = {class: "quiz_toggle_activation enabled"}
+      link_to icon("lamp-on"), toggle_activation_quiz_path(quiz), class: "toggle-activation btn btn-success", title: "Deaktiviraj", method: :put
     else
-      text = "Aktiviraj"
-      options = {class: "quiz_toggle_activation"}
+      link_to icon("lamp-off"), toggle_activation_quiz_path(quiz), class: "toggle-activation btn", title: "Aktiviraj", method: :put
     end
-
-    link_to text, toggle_activation_quiz_path(quiz), options.merge(method: :put)
   end
 end

@@ -1,6 +1,6 @@
 - @title = "Nova igra"
 
-%h1 Zdravo
+%h1 Zdravo :)
 
 - if @quizzes.any?
 
@@ -16,7 +16,8 @@
 
     %section.login
       %p Daj drugom igraču da se prijavi:
-      %p= f.error :players_credentials
+      - if @game_submission.errors.has_key?(:players_credentials)
+        = alert_message f.error(:players_credentials), "error", close: false
       = f.simple_fields_for :players_credentials, index: nil do |p|
         = p.input :username, input_html: {value: (params[:game_submission][:players_credentials].first[:username] rescue nil)}
         = p.input :password
@@ -26,4 +27,4 @@
 
 - else
 
-  %p Nema još kvizova za igrati.
+  %p.no_items Nema još kvizova za igrati.

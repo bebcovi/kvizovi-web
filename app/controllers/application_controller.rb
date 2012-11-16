@@ -52,4 +52,18 @@ class ApplicationController < ActionController::Base
   def set_notification
     flash.now[:notification] = "Napravili smo neke važne promijene, možete ih vidjeti #{view_context.link_to "ovdje", notifications_path}."
   end
+
+  def sub_layout
+    "application"
+  end
+
+  def render(*args)
+    options = args.extract_options!
+    if request.headers["X-noLayout"]
+      options.update(layout: false)
+      sleep 1
+    end
+    args << options
+    super(*args)
+  end
 end

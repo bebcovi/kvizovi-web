@@ -1,112 +1,61 @@
 body.games {
 
   &.edit {
+    .timer {
+      @include border-bottom-radius($baseBorderRadius);
+      $width: 64px;
+      $padding: 8px;
+      position: absolute;
+      width: $width;
+      padding: $padding;
+      top: 0;
+      left: 50%;
+      margin-left: - ($width/2 + $padding);
+      border: 1px solid rgba(black, .1);
+      background: rgba(black, .05);
+
+      &.text-warning {
+        background: $warningBackground;
+        border-color: $warningBorder;
+      }
+
+      &.text-error {
+        background: $errorBackground;
+        border-color: $errorBorder;
+      }
+    }
 
     h1,
     .username {
-      @extend %inline-block;
+      display: inline-block;
+      vertical-align: middle;
     }
 
     .username {
-      @include with-font-size(24px) {
-        @include leader(-1/2);
-        margin-left: rhythm(1/2);
-      }
+      margin-top: 12px;
+      margin-left: 20px;
+      font-size: $fontSizeLarge;
     }
 
-  }
-
-  &.edit .fancybox-wrap,
-  &.feedback {
-
-    h1 {
-      i, span { vertical-align: middle; }
-
-      i {
-        @include with-font-size($x-large, $from-size: $large) {}
-      }
-
-      &.correct i { color: $correct; }
-      &.wrong   i { color: $wrong; }
+    .question_number {
+      font-weight: $black;
+      &:after { content: '.' }
     }
-
-    .question_association {
-      div {
-        @include adjust-leading-to(3/4);
-        display: block;
-        font-weight: 700;
-      }
-    }
-
   }
 
-}
-
-.game_progress {
-  @extend %border-radius;
-  @include trailer;
-  height: rhythm(1/4);
-  border: 1px solid rgba(black, .25);
-
-  div {
-    float: left;
-    height: 100%;
-    border-right: 1px solid rgba(black, .25);
-    &:last-child { border: none; }
-  }
-
-  &.done,
-  .done { background: darken(white, 10%); }
-}
-
-.question_number {
-  @extend %inline-block;
-  @include border-right-radius;
-  position: relative;
-  top: -4px;
-  left: -1px;
-  height: rhythm(7/4, $large);
-  margin-left: - 2 * $normal;
-  padding: 0 rhythm(1/2, $large);
-  font-weight: 700;
-}
-
-.timer {
-  position: absolute;
-  bottom: rhythm(1/2);
-  right: rhythm(1/4);
-  width: rhythm(5/2);
-  color: rgba(black, .3);
-
-  &.notice { color: orange; }
-  &.alert  { color: $wrong; }
 }
 
 .game_score {
   @extend %unstyled-list;
-  @include trailer;
 
-  li { @include trailer(1/2); }
-  dl { @include trailer(1/4); }
+  .username:after { content: ':'; }
 
-  $height: 2;
+  .rank {
+    @include animation(fadeIn 4s linear);
+  }
+
   .bar {
-    @extend %border-radius;
-    @extend %unselectable;
-    @include trailer(1/4);
-    position: relative;
-    height: rhythm($height);
-    overflow: hidden;
+    @include transition(none);
+    @include animation(slide 4s ease-in-out);
   }
-
-  .label {
-    @include with-font-size(28px, $height) {
-      position: absolute;
-      z-index: 10;
-      width: 100%;
-      text-align: center;
-    }
-  }
-
-  .fill { height: 100%; }
 }

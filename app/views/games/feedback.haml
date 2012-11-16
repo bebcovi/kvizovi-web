@@ -1,11 +1,14 @@
 - @title = @correct_answer ? "Točan odgovor" : "Netočan odgovor"
 
 - if @correct_answer
-  %h1.correct
+  %h1.text-success
     = icon("checkmark")
-    %span Točan odgovor, bravo!
+    %span Točan odgovor!
+
+  %p= ["Bravo! :)", "Svaka čast! :D", "Čestitamo! :)"].sample
+
 - else
-  %h1.wrong
+  %h1.text-error
     = icon("cancel-2")
     %span= ["Ne baš…", "Pogrešno", "Nažalost, ne…"].sample
 

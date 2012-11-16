@@ -5,5 +5,5 @@
     - number_of_fields(association_question).times do |idx|
       %li.pair
         = c.input :associations, as: :string, label: false, placeholder: "Opcija #{idx + 1}a", input_html: {value: association_question.associations.left_side[idx]}, wrapper_html: {class: 'static'}
-        = icon("arrow-right", class: "arrow")
+        = icon("chevron-right", class: "arrow")
         = c.input :associations, as: :string, label: false, placeholder: "Opcija #{idx + 1}b", input_html: {value: association_question.associations.right_side[idx]}, wrapper_html: {class: 'dynamic'}

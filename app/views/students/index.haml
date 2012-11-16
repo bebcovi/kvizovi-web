@@ -1,9 +1,5 @@
 - @title = "Uređivanje učenika"
 
-= back_button "Profil", school_path(current_school)
-
-%h1 Učenici
-
 - if @students.any?
 
   %ol.student_list
@@ -11,4 +7,4 @@
 
 - else
 
-  %p Nijedan vaš učenik još nije registriran.
+  %p.no_items Nijedan vaš učenik još nije registriran.

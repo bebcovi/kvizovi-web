@@ -87,22 +87,30 @@ App.Questions.association =
       $el.find('input').each -> result = result and !!$(@).val()
       result
 
-    $otherPairs.add($template).find('.dynamic').after $removeButton.clone()
+    $otherPairs.add($template).find('.dynamic')
+      .after $removeButton
+        .clone()
+        .addClass('close')
+        .attr('tabindex', -1)
 
     $template
       .find('input').val('').end()
       .find('div').removeClass('field_with_errors').end()
       .find('.error').remove()
 
+    if $otherPairs.length
+      $addButton.insertAfter($otherPairs.last())
+    else
+      $addButton.insertAfter($firstPair)
+
     $addButton
-      .insertAfter($otherPairs.last())
       .on 'click', (event) ->
         $new = $template.clone()
         event.preventDefault()
         updateAttrs $new, $otherPairs.length
         addPair $new
 
-    $form.on 'click', '.remove', ->
+    $form.on 'click', '.close', ->
       $el = $(@).closest('li')
       removePair $el
       $otherPairs.each (i) -> updateAttrs $(@), i

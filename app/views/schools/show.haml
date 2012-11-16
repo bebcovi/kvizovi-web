@@ -1,19 +1,23 @@
 - @title = @school.name
 
-= back_button "Kvizovi", root_path
+%table.profile_info
+  %tbody
+    %tr
+      %th Ime škole
+      %td= @school.name
+    %tr
+      %th Tip škole
+      %td= @school.level
+    %tr
+      %th Korisničko ime
+      %td= @school.username
+    %tr
+      %th Tajni ključ
+      %td= @school.key
 
-%dl
-  %dt Ime škole
-  %dd= @school.name
-  %dt Tip škole
-  %dd= @school.level
-  %dt Korisničko ime
-  %dd= @school.username
-  %dt Tajni ključ
-  %dd= @school.key
+.btn-toolbar.edit_profile
+  .btn-group
+    = edit_button "Izmjeni profil", edit_school_path(@school)
+    = change_password_button "Izmjeni lozinku", edit_password_path
 
-%p= edit_button "Izmjeni profil", edit_school_path(@school)
-%p= change_password_button "Izmjeni lozinku", edit_password_path
-%p= delete_button "Izbriši korisnički račun", delete_school_path(@school)
-
-%p= link_to "Učenici".prepend_icon("user"), students_path
+%p= delete_profile_button "Izbriši korisnički račun", delete_school_path(@school)

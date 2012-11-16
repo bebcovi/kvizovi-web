@@ -1,91 +1,96 @@
 - @title = "Vodič"
 
-= back_button "Natrag", back_link
+%ul.nav.nav-tabs
+  - attrs = {data: {toggle: "tab"}}
+  %li.active= link_to "Općenito", "#opcenito", attrs
+  %li= link_to        "Učenici",  "#ucenici",  attrs
+  %li= link_to        "Škole",    "#skole",    attrs
+  %li= link_to        "Kontakt",  "#kontakt",  attrs
 
-.content
-  :markdown
-    # Vodič
+.tab-content
+  #opcenito.tab-pane.active
+    :markdown
+      Ove upute se mogu vidjeti bilo kad i bilo gdje tijekom uporabe aplikacije, samo potražite link "Vodič" na vrhu stranice.
 
-    ## Općenito
+      ### Hrvatska slova
 
-    Ove upute se mogu vidjeti bilo kad i bilo gdje tijekom uporabe aplikacije. Potrebno je samo kliknuti na #{icon("book")} u gornjem desnom kutu.
+      Jedna od jako bitnih napomena je korištenje hrvatskih znakova (čćžšđ). Možda ste na internetu naviknuti izbjegavati ih, ali ovdje vas ohrabrujemo da ih koristite kako biste izbjegli potencijalne probleme. Npr. "Matos" nije isto što i "Mato**š**", dakle takav se odgovor ne bi vrijedio, iako se mislilo na istu osobu.
 
-    ### Hrvatska slova
+      Ako ste škola i baš ne želite koristiti hrvatske znakove, ne morate, ali onda trebate reći svojim učenicima da ih također ne koriste.
 
-    Jedna od jako bitnih napomena je korištenje hrvatskih znakova (čćžšđ). Možda ste na internetu naviknuti izbjegavati ih, ali ovdje vas ohrabrujemo da ih koristite kako biste izbjegli potencijalne probleme. Npr. "Matos" nije isto što i "Mato**š**", dakle takav se odgovor ne bi vrijedio, iako se mislilo na istu osobu.
+      ### Mala i velika slova
 
-    Ako ste škola i baš ne želite koristiti hrvatske znakove, ne morate, ali onda trebate reći svojim učenicima da ih također ne koriste.
+      Ne morate se brinuti za mala i velika slova, jer ih aplikacija ne razlikuje, odnosno "Gustave Flaubert" je isto što i "gustave flaubert".
 
-    ### Mala i velika slova
+      ### Točka na kraju
 
-    Ne morate se brinuti za mala i velika slova, jer ih aplikacija ne razlikuje, odnosno "Gustave Flaubert" je isto što i "gustave flaubert".
+      U nekim okolnostima učenicima nije jasno trebaju li staviti točku na kraju odgovora ili ne. Bez brige, točka na kraju odgovora se ignorira, dakle odgovor na pitanje "Koje je boje Juditin crveni prsten?" može biti i "Crvene" i "Crvene." (primjetite točku na kraju), aplikacija oba odgovora uvažava.
 
-    ### Točka na kraju
+  #ucenici.tab-pane
+    :markdown
+      Ako si učenik, na početnoj stranici odaberi gumb na kojemu piše "Ja sam učenik". Zatim se možeš prijaviti ili, ako nemaš korisnički račun, registrirati se klikom na link ispod obrasca za prijavu.
 
-    U nekim okolnostima učenicima nije jasno trebaju li staviti točku na kraju odgovora ili ne. Bez brige, točka na kraju odgovora se ignorira, dakle odgovor na pitanje "Koje je boje Juditin crveni prsten?" može biti i "Crvene" i "Crvene." (primjetite točku na kraju), nema razlike u sustavu.
+      ### Registracija
 
-    ## Učenici
+      Nadamo se da ti je registracijska forma više-manje jasna. Ako ne znaš što je "tajni ključ škole", to vjerojatno znači da ga nisi još dobio. Zatraži ga od svoje škole.
 
-    Ako si učenik, na početnoj stranici odaberi gumb na kojemu piše "Ja sam učenik". Zatim se možeš prijaviti ili, ako nemaš korisnički račun, registrirati se klikom na link ispod obrasca za prijavu.
+      ### Kvizovi
 
-    ### Registracija
+      Kada se prijaviš, prvo što te dočeka je popis kvizova koje možeš rješavati. Ako ih nema, to znači da ih tvoja škola nije još objavila, u tom se slučaju samo trebaš strpiti :)
 
-    Nadamo se da ti je registracijska forma više-manje jasna. Ako ne znaš što je "tajni ključ škole", to vjerojatno znači da ga nisi još dobio. Zatraži ga od svoje škole.
+      Nakon što odabereš kviz, pojavit će ti se pitanje želiš li igrati s još nekim. Ako pored sebe imaš osobu koja bi htjela igrati s tobom i ima korisnički račun na Lektirama, možeš označiti da želiš igrati u 2 igrača, zatim daj osobi da upiše svoje korisničko ime i lozinku 
 
-    ### Kvizovi
+      Nakon toga možeš početi!
 
-    Kada se prijaviš, prvo što te dočeka je popis kvizova koje možeš rješavati. Ako ih nema, to znači da ih tvoja škola nije još objavila, u tom se slučaju samo trebaš strpiti :)
+      Dobit ćeš niz pitanja na koje odgovori najbolje što znaš. Ako igraš u 2 igrača, na svakom pitanju se izmjenjujete. Vidjet ćete tko je na redu po korisničkom imenu koje će se nalaziti pored glavnog naslova.
 
-    Nakon što odabereš kviz, pojavit će ti se pitanje želiš li igrati s još nekim. Ako pored sebe imaš osobu koja bi htjela igrati s tobom i ima korisnički račun na Lektirama, možeš označiti da želiš igrati u 2 igrača, zatim daj osobi da upiše svoje korisničko ime i lozinku 
+      Crta ispod glavnog naslova pokazuje koliko još imate do kraja. Podijeljena je na onoliko sekcija koliko ima pitanja u kvizu.
 
-    Nakon toga možeš početi!
+      Budi oprezan. Za svako pitanje imaš **1 minutu**, odbrojavanje možeš vidjeti dolje desno, pored #{icon("stopwatch")}. Kada istekne vrijeme, što god da si označio ili napisao, vrijedi se ;) Dakle nije problem ako si sve obavio, ali nisi stigao kliknuti gumb.
 
-    Dobit ćeš niz pitanja na koje odgovori najbolje što znaš. Ako igraš u 2 igrača, na svakom pitanju se izmjenjujete. Vidjet ćete tko je na redu po korisničkom imenu koje će se nalaziti pored glavnog naslova.
+      Kada odgovoriš na posljednje pitanje, zbrajaju se bodovi koje si osvojio i prikaže ti se rezultat.
 
-    Crta ispod glavnog naslova pokazuje koliko još imate do kraja. Podijeljena je na onoliko sekcija koliko ima pitanja u kvizu.
+      **Zapamti**: nije bitno tko pobijedi, bitno je da se zabaviš ;)
 
-    Budi oprezan. Za svako pitanje imaš **1 minutu**, odbrojavanje možeš vidjeti dolje desno, pored #{icon("stopwatch")}. Kada istekne vrijeme, što god da si označio ili napisao, vrijedi se ;) Dakle nije problem ako si sve obavio, ali nisi stigao kliknuti gumb.
+  #skole.tab-pane
+    :markdown
+      Ako ste škola, na početnoj stranici odaberite gumb na kojemu piše "Ja sam škola". Zatim se možete prijaviti ili, ako nemate korisnički račun, registrirati se klikom na link ispod obrasca za prijavu.
 
-    Kada odgovoriš na posljednje pitanje, zbrajaju se bodovi koje si osvojio i prikaže ti se rezultat.
+      ### Registracija
 
-    **Zapamti**: nije bitno tko pobijedi, bitno je da se zabaviš ;)
+      Prvo što trebate imati da biste se prijavili je tajni ključ aplikacije. Ako ga niste dobili, možete ga #{contact_link "zatražiti", subject: "Zahtjev za tajni ključ"}. Zašto školama ne dopustimo registraciju bez našeg posredovanja? Zato što bi se u tom slučaju bilo tko mogao prijaviti kao škola, jer trenutno nemamo način provjere jesu li unešeni podaci legitimni.
 
-    ## Škole
+      Nakon što unesete ključ i kliknete na gumb, dočeka vas obrazac za registraciju. Nadamo se da su sva polja više-manje jasna. Ako vam nije jasno što je "tajni ključ", to je lozinka pomoću koje će se učenici prijaviti kao vaši, odnosno služi kao autorizacija. Taj ključ ćete kasnije dati svojim učenicima.
 
-    Ako ste škola, na početnoj stranici odaberite gumb na kojemu piše "Ja sam škola". Zatim se možete prijaviti ili, ako nemate korisnički račun, registrirati se klikom na link ispod obrasca za prijavu.
+      Nakon što obavite registraciju i prijavite se, možete početi stvarati kvizove!
 
-    ### Registracija
+      ### Kvizovi
 
-    Prvo što trebate imati da biste se prijavili je tajni ključ aplikacije. Ako ga niste dobili, možete ga #{contact_link "zatražiti", subject: "Zahtjev za tajni ključ"}. Zašto školama ne dopustimo registraciju bez našeg posredovanja? Zato što bi se u tom slučaju bilo tko mogao prijaviti kao škola, jer trenutno nemamo način provjere jesu li unešeni podaci legitimni.
+      Na početku će vas dočekati kviz "Antigona", možete ga pregledati da vidite kako bi gotovi kviz mogao izgledati.
 
-    Nakon što unesete ključ i kliknete na gumb, dočeka vas obrazac za registraciju. Nadamo se da su sva polja više-manje jasna. Ako vam nije jasno što je "tajni ključ", to je lozinka pomoću koje će se učenici prijaviti kao vaši, odnosno služi kao autorizacija. Taj ključ ćete kasnije dati svojim učenicima.
+      Kada stvarate novi kviz, prvo mu trebate dati naziv (obično tema kviza, npr. "Srednji vijek") i odrediti za koje razrede je namijenjen (to ćete kasnije moći izmjenjivati, naravno). Ne brinite se, kviz će na početku biti nevidljiv učenicima (terminologija koju koristimo je *aktivacija*-*deaktivacija*), kasnije ga možete učiniti vidljivim klikom na "prekidač" u sredini koji se nalazi u ravnini s nazivom kviza.
 
-    Nakon što obavite registraciju i prijavite se, možete početi stvarati kvizove!
+      ### Pitanja
 
-    ### Kvizovi
+      Nakon što stvorite kviz, možete početi stvarati pitanja klikom na #{icon("list-view")}. Postoji 5 različitih tipova pitanja:
 
-    Na početku će vas dočekati kviz "Antigona", možete ga pregledati da vidite kako bi gotovi kviz mogao izgledati.
+      1. #{icon("checkbox")} **Točno/netočno**: je li tvrdnja točna ili netočna
+      1. #{icon("list-view")} **Ponuđeni odgovori**: koji je točan odgovor od ponuđenih
+      1. #{icon("shuffle")} **Asocijacije**: poveži pojmove iz prvog s pojmovima iz drugog stupca
+      1. #{icon("picture")} **Pogodi tko/što je na slici**: koji je odgovor na pitanje vezano uz priloženu sliku
+      1. #{icon("pencil-2")} **Upiši točan odgovor**: koji je odgovor na postavljeno pitanje
 
-    Kada stvarate novi kviz, prvo mu trebate dati naziv (obično tema kviza, npr. "Srednji vijek") i odrediti za koje razrede je namijenjen (to ćete kasnije moći izmjenjivati, naravno). Ne brinite se, kviz će na početku biti nevidljiv učenicima (terminologija koju koristimo je *aktivacija*-*deaktivacija*), kasnije ga možete učiniti vidljivim klikom na "prekidač" u sredini koji se nalazi u ravnini s nazivom kviza.
+      U slučajevima kada kviz ima neparan broj pitanja a rješava se u 2 igrača, jedno se od tih pitanja neće prikazati (nasumično odabrano). To je tako zbog raspodjele bodova po učenicima, jer oba učenika moraju imati pravo na jednaki broj bodova.
 
-    ### Pitanja
+      Kada sastavite pitanja, ako želite znati kako će taj kviz izgledati učenicima, možete ga testirati klikom na gumb gore desno.
 
-    Nakon što stvorite kviz, možete početi stvarati pitanja klikom na #{icon("list-view")}. Postoji 5 različitih tipova pitanja:
+      Nemojte zaboraviti aktivirati kviz kada ga dovršite. Uvijek provijerite stanje prekidača pored naziva kviza – sivo znači da je neaktivan, crveno znači da je aktivan.
 
-    - #{icon("checkbox")} **Točno/netočno**: je li tvrdnja točna ili netočna
-    - #{icon("list-view")} **Ponuđeni odgovori**: koji je točan odgovor od ponuđenih
-    - #{icon("shuffle")} **Asocijacije**: poveži pojmove iz prvog s pojmovima iz drugog stupca
-    - #{icon("picture")} **Pogodi tko/što je na slici**: koji je odgovor na pitanje vezano uz priloženu sliku
-    - #{icon("pencil-2")} **Upiši točan odgovor**: koji je odgovor na postavljeno pitanje
+  #kontakt.tab-pane
+    :markdown
+      Aplikaciju razvijaju dvojica studenata, stoga se nemojte ljutiti ako naiđete na koji propust, radije nam se #{contact_link "javite"} :) Ako zbog nekog razloga ne želite klikati na kontakt linkove, ovo su naše email adrese:
 
-    U slučajevima kada kviz ima neparan broj pitanja a rješava se u 2 igrača, jedno se od tih pitanja neće prikazati (nasumično odabrano). To je tako zbog raspodjele bodova po učenicima, jer oba učenika moraju imati pravo na jednaki broj bodova.
+      - janko.marohnic@gmail.com
+      - matija.marohnic@gmail.com
 
-    Kada sastavite pitanja, ako želite znati kako će taj kviz izgledati učenicima, možete ga testirati klikom na gumb gore desno.
-
-    Nemojte zaboraviti aktivirati kviz kada ga dovršite. Uvijek provijerite stanje prekidača pored naziva kviza – sivo znači da je neaktivan, crveno znači da je aktivan.
-
-    ## Kraj
-
-    Aplikaciju razvijaju dvojica studenata, stoga se nemojte ljutiti ako naiđete na koji propust, radije nam se #{contact_link "javite"} :)
-
-    To je sve, uživajte u lektirama!
+      To je sve, uživajte u lektirama!

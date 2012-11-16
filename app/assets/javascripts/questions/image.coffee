@@ -11,7 +11,7 @@ App.Questions.image =
     $fileInput  = $('input', $file)
     $url        = $('div.url', $form)
     $urlInput   = $('input', $url)
-    $toggleType = $('<a>', {href: '#'}).addClass('toggle_type')
+    $toggleType = $('<a>', {href: '#'}).addClass('btn toggle_type')
     $img        = $('.preview', $form)
     img         = $img[0]
     existingSrc = img.src
@@ -29,14 +29,14 @@ App.Questions.image =
         $url.toggle()
 
       .clone(true)
-        .attr('title', 'Slika na internetu')
+        .attr('title', 'Na internetu')
         .prependIcon('link')
         .prependTo($file)
         .tooltip()
         .end()
 
       .clone(true)
-        .attr('title', 'Slika na računalu')
+        .attr('title', 'Na računalu')
         .prependIcon('drive')
         .tooltip()
         .prependTo($url)

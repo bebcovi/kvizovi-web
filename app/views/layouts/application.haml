@@ -12,28 +12,19 @@
     %script try{Typekit.load();}catch(e){}
 
   %body{class: body_class}
-    .page_wrapper
-      %header
-        %h1.logo= "Lektire".prepend_icon("books")
-        - if user_logged_in?
-          %p.log= log_message
+    .navbar.navbar-static-top.navbar-inverse
+      .navbar-inner
+        = link_to "Lektire".prepend_icon("books"), root_path, class: "brand"
+        = render "navigation"
+        = render "log" if user_logged_in?
+        = render "contact"
 
-      %article.main_content
-        - flash.each do |name, message|
-          - if name.in?([:notice, :alert])
-            %div{class: "flash #{name}"}
-              = remove_button
-              %p= message
-          - elsif name == :notification
-            %div{class: "flash #{name}"}
-              = simple_form_for current_school, url: notify_school_path(current_school), method: :put do |f|
-                = f.button :button, "".prepend_icon("cancel"), class: "remove"
-              %p= raw message
+    = render partial: "flash", locals: {flash: flash}
 
-        = link_to "Vodič".append_icon("book"), tour_path, class: "tour", target: "_blank"
+    - if content_for? :hero_unit
+      .hero-unit
+        = content_for :hero_unit
 
-        = yield
-
-      %footer
-        %p Za prijave grešaka, savjete ili nešto treće, slobodno nas #{contact_link "kontaktirajte"} :)
-        %p.emails janko.marohnic@gmail.com<br>matija.marohnic@gmail.com
+    .container-fluid
+      .main_content
+        = render "layouts/#{controller.send(:sub_layout)}"

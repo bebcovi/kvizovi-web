@@ -12,7 +12,7 @@ App.Controllers.games =
     $players        = $sections.filter '.players'
     $login          = $sections.filter '.login'
 
-    $buttons        = $form.find '.form_controls'
+    $buttons        = $form.find '.btn-toolbar'
     $button         = $buttons.find 'button'
 
     $quizzesChecked = $quizzes.find ':checked'
@@ -57,9 +57,9 @@ App.Controllers.games =
 
     $form        = $('form')
 
-    $buttons     = $('.form_controls', $form)
+    $buttons     = $('.btn-toolbar', $form)
 
-    $timer       = $.timer.clone().appendTo $('.main_content')
+    $timer       = $.timer.clone().prependTo $('.main_content')
     $time        = $('.time', $timer)
 
     updateTimer = ->
@@ -75,43 +75,22 @@ App.Controllers.games =
 
       if min == 0
         if 5 < sec <= 10
-          $timer.addClass('notice')
+          $timer.addClass('text-warning')
         else if sec <= 5
           $timer
-            .removeClass('notice')
-            .addClass('alert')
+            .removeClass('text-warning')
+            .addClass('text-error')
 
     clearStorage = ->
       localStorage.removeItem 'total'
 
     showFeedback = ->
-      $.ajax
+      $.modalAjax
         type: $form.attr('method')
-        dataType: 'html'
-        headers: {'X-fancyBox': true}
         url: $form.attr('action')
         data: $form.serialize()
-        success: (data) ->
-          clearStorage()
-          $.fancybox
-            wrapCSS:  'feedback'
-            autoSize: false
-            modal:    true
-            content:  data
-            beforeShow: ->
-              if @inner.find('.correct').length
-                $link = @inner.find('.form_controls').find('a')
-                $form = @inner.find('form')
-                $link.hide()
-                $form.find('input, button').hide()
-                setTimeout ->
-                  if $link.length
-                    location.href = $link.attr('href')
-                  else if $form.length
-                    $form.submit()
-                , 1500
-              else
-                @wrap.addClass('wrong') if @inner.find('.wrong').length
+        required: true
+        onOpen: clearStorage
 
     timesUp = showFeedback
 
@@ -135,55 +114,24 @@ App.Controllers.games =
         updateTimer()
         timesUp()
 
-    $buttons.find('a').fancybox
-      wrapCSS:  'confirm'
-      width:    350
-      type:     'ajax'
-      live:     false
+    $form.find('.cancel').on 'click', (event) ->
+      event.preventDefault()
+
+      $quitButton     = $(@)
+      quitButtonText  = $quitButton.text()
+
+      $quitButton
+        .attr('disabled', 'disabled')
+        .text('Pričekajte...')
+
+      $.modalAjax
+        url: @href
+        onCancel: ->
+          $quitButton
+            .removeAttr('disabled')
+            .text(quitButtonText)
+        onSubmit: clearStorage
 
     $form.on 'submit', (event) ->
       event.preventDefault()
       showFeedback()
-
-  show: ->
-
-    delay = 500
-
-    $('.game_score li').each ->
-
-      $rank  = $(@).find '.rank'
-      $label = $(@).find '.label'
-      $fill  = $(@).find '.fill'
-
-      width  = $fill.css 'width'
-
-      update = ->
-
-        currentWidth = parseFloat $fill.width()
-        percentage = currentWidth / $label.width() * 100
-
-        if currentWidth then $label.text "#{Math.round(percentage)}%" else $label.text "0%"
-
-      $rank.hide()
-      $fill.hide()
-
-      $fill.css 'width', '0%'
-
-      update()
-
-      if width?
-        window.setTimeout ->
-          $fill.show().animate
-            width     : width
-          ,
-            duration  : 2000
-            easing    : 'easeOutCubic'
-            step      : update
-            complete  : -> $rank.fadeIn 'fast'
-        , delay
-
-        delay += 2000
-      else
-        window.setTimeout ->
-          $rank.fadeIn 'fast'
-        , delay

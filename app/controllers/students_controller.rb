@@ -57,7 +57,6 @@ class StudentsController < ApplicationController
 
   def delete
     @student = current_user
-    render layout: false if request.headers["X-fancyBox"]
   end
 
   def destroy

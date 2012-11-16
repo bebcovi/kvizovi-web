@@ -1,88 +1,76 @@
-@include establish-baseline;
-@include border-box-sizing;
-
 body {
-  overflow-y: scroll;
-  font-family: $base-font-family;
-  color: $text;
-  background: rgba(black, .1) image-url('bg-pattern.png') repeat;
+  font-weight: $light;
 }
 
-.page_wrapper {
-  @include container;
-}
-
-h1,
-h2,
-h3 {
-  @include leader(0);
-  color: darken($text, 10%);
+.container-fluid {
+  position: relative;
+  padding-top: 1em;
 }
 
 h1 {
-  @include with-font-size($x-large, 2) {
-    @include trailer;
-    strong { font-weight: 900; }
+  .name:after,
+  .section {
+    color: rgba(black, .5);
+  }
+
+  .name:after {
+    content: ' \e028';
+    font-size: 28px;
+    font-family: 'icons';
+  }
+
+  .section {
+    font-weight: $light;
   }
 }
 
 h2 {
-  @include with-font-size($large, 7/4) {
-    @include trailer(3/4);
-    font-weight: 300;
-    strong { font-weight: 700; }
-  }
+  font-size: 34px;
+  font-weight: $light;
 }
 
 h3 {
-  @include with-font-size($medium, 3/2) {
-    @include trailer(1/2);
-    font-weight: 100;
-    strong { font-weight: 500; }
-  }
+  margin-bottom: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 20px;
+  font-weight: $light;
 }
 
-p,
-ol,
-ul,
-dl,
+.unstyled-list {
+  @extend %unstyled-list;
+}
+
 table {
-  @include rhythm(0, 0, 0, .5);
+  @extend .table;
+  @extend .table-striped;
+
+  td { vertical-align: middle; }
+
+  .short { text-align: center; }
 }
 
-a {
-  @include hover-link;
-  @include link-colors($link1, $link2, $link2, $link1, $link2);
+.no_items { clear: both; }
+
+.count {
+  color: rgba(black, .5);
+  &:before  { content: '('; }
+  &:after   { content: ')'; }
 }
 
-img {
-  vertical-align: middle;
+.breadcrumb {
+  i { font-size: 12px; }
 }
 
-hr {
-  @include rhythm(1/2, 0, 0, 1/2);
-  display: block;
-  height: 1px;
-  border: none;
-  border-top: 1px solid $text;
+.profile_info {
+  width: 400px;
+  margin-bottom: $baseLineHeight/2;
 }
 
-dt,
-dd {
-  display: inline;
+.edit_profile {
+  margin-bottom: $baseLineHeight;
 }
 
-dt {
-  font-weight: bold;
-  &:after { content: ': '; }
-}
-
-dd {
-  @extend %append-newline;
-  margin: 0;
-}
-
-time {
-  font-weight: 300;
-  color: rgba(black, 1/2);
+.delete_profile {
+  @include color-link($errorText, darken($errorText, 10%));
 }

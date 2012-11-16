@@ -1,10 +1,3 @@
-GIT
-  remote: git://github.com/sverigemeny/fancybox-rails.git
-  revision: 10851fd5b580ba9729c21cfc2af2556a4ce4a740
-  specs:
-    fancybox-rails (0.1.4)
-      railties (>= 3.1.0)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -47,8 +40,13 @@ GEM
     acts-as-taggable-on (2.3.3)
       rails (~> 3.0)
     addressable (2.3.2)
+    anjlab-bootstrap-rails (2.2.1.0)
+      railties (>= 3.0)
+      sass (>= 3.2)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bootstrap-will_paginate (0.0.9)
+      will_paginate
     builder (3.0.4)
     capybara (1.1.3)
       mime-types (>= 1.16)
@@ -134,9 +132,6 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.1)
     mime-types (1.19)
-    modular-scale (1.0.2)
-      compass (>= 0.11.5)
-      sassy-math (>= 1.2)
     multi_json (1.3.7)
     multipart-post (1.1.5)
     nokogiri (1.5.5)
@@ -204,8 +199,6 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    sassy-math (1.2)
-      compass (~> 0.11)
     selenium-webdriver (2.25.0)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
@@ -221,9 +214,6 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    susy (1.0.3)
-      compass (>= 0.12.2)
-      sass (>= 3.2.0)
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -263,7 +253,9 @@ DEPENDENCIES
   activerecord-nulldb-adapter (>= 0.2.3)
   activerecord-postgres-hstore
   acts-as-taggable-on
+  anjlab-bootstrap-rails
   bcrypt-ruby (~> 3.0)
+  bootstrap-will_paginate
   capybara
   coffee-rails
   compass (~> 0.13.alpha.0)
@@ -272,13 +264,11 @@ DEPENDENCIES
   debugger
   exception_notification
   factory_girl
-  fancybox-rails!
   haml (= 3.2.0.beta.1)
   haml-rails
   jquery-rails
   jquery-ui-rails
   letter_opener
-  modular-scale
   nokogiri
   paperclip
   paperclip-dropbox (~> 1.0)
@@ -290,7 +280,6 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   simple_form
-  susy
   thin
   uglifier
   will_paginate

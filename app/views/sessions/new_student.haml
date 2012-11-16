@@ -6,12 +6,14 @@
 
   = f.input :username, input_html: {autofocus: current_page?(action: "new")}
   = f.input :password
-  = f.input :remember_me, as: :boolean
+  = f.input :remember_me, as: :boolean, label: false do
+    %label.checkbox
+      Zapamti me
+      = f.input :remember_me, wrapper: false, label: false
 
   = hidden_field_tag :type, "student"
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", root_path
     = b.submit_button "Prijava"
-
-%p Nemaš korisnički račun? Registriraj se #{link_to "ovdje", new_student_path}.
+    %span Nemaš korisnički račun? #{link_to "Registriraj se", new_student_path}.

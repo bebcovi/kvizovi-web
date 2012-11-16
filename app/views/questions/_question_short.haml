@@ -1,9 +1,8 @@
 - if @scope
-  .item_controls
+  .btn-group
     = edit_button "", polymorphic_path([@scope, question.becomes(Question)], action: "edit"), title: "Izmjeni"
     = delete_button "", polymorphic_path([@scope, question.becomes(Question)], action: "delete"), title: "Izbriši"
 
-.name
-  = categories[question.category.to_sym][1]
-  %span.content= question.content
-  = link_to "Dodaj", polymorphic_path(question.becomes(Question), action: "copy") if @scope.nil?
+= link_to "Dodaj", polymorphic_path(question.becomes(Question), action: "copy") if @scope.nil?
+%span.category= categories[question.category.to_sym][1]
+%span.name= question.content

@@ -9,7 +9,7 @@ hr:
         password_confirmation: "Potvrda lozinke"
         remember_me: "Zapamti me"
         email: "Email"
-        tag_list: "Kategorije"
+        tag_list: "Tagovi"
       question:
         answer: "Odgovor"
         hint: "Uputa (neobavezno)"
@@ -39,7 +39,7 @@ hr:
         new_password: "Nova lozinka"
         new_password_confirmation: "Potvrda nove lozinke"
       filter:
-        tags: "Kategorije"
+        tags: "Tagovi"
 
   helpers:
     submit:

@@ -1,9 +1,6 @@
 - @title = "Uređivanje kvizova"
 
-%p= link_to "Vaša pitanja", school_questions_path(current_user)
-%p= link_to "Sva pitanja", questions_path
-
-%h1 Kvizovi
+%p= add_button "Novi kviz", new_quiz_path
 
 - if @quizzes.any?
 
@@ -12,6 +9,4 @@
 
 - else
 
-  %p Trenutno nemate nikakvih kvizova.
-
-%p= add_button "Novi kviz", new_quiz_path
+  %p.no_items Trenutno nemate nikakvih kvizova.

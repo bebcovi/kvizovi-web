@@ -23,6 +23,23 @@ module ApplicationHelper
     yield presenter
   end
 
+  def breadcrumb(items)
+    content_tag :ol, class: "breadcrumb" do
+      items.map.with_index do |(name, path), index|
+        if index < items.count - 1
+          content_tag :li do
+            link_to(name, path) +
+            content_tag(:i, class: "divider") { icon("chevron-right") }
+          end
+        else
+          content_tag :li, class: "active" do
+            name
+          end
+        end
+      end.join.html_safe
+    end
+  end
+
   def contact_link(string, options = {})
     mail_to "matija.marohnic@gmail.com, janko.marohnic@gmail.com", string, {target: "_blank"}.merge(options)
   end
@@ -36,35 +53,36 @@ module ApplicationHelper
   end
 
   def change_password_button(string, path, options = {})
-    link_to string.prepend_icon("locked"), path, options
+    link_to string.prepend_icon("locked"), path, {class: "btn"}.merge(options)
+  end
+
+  def delete_profile_button(string, path, options = {})
+    link_to string.prepend_icon("remove"), path, {class: "delete_profile"}.merge(options)
   end
 
   def edit_button(string, path, options = {})
-    link_to string.prepend_icon("pencil"), path, options
-  end
-
-  def preview_button(string, path, options = {})
-    link_to string.prepend_icon("search"), path, options
+    link_to string.prepend_icon("pencil"), path, {class: "edit_item btn"}.merge(options)
   end
 
   def delete_button(string, path, options = {})
-    link_to string.prepend_icon("remove"), path, {class: "delete"}.merge(options)
+    link_to string.prepend_icon("remove"), path, {class: "delete_item btn btn-danger"}.merge(options)
   end
 
   def add_button(string, path, options = {})
-    link_to string.prepend_icon("plus"), path, options
+    link_to string.prepend_icon("plus"), path, {class: "add_item btn btn-primary"}.merge(options)
   end
 
   def remove_button(options = {})
-    content_tag :button, "".prepend_icon("cancel"), {class: "remove"}.merge(options)
+    content_tag :button, "×", type: "button", class: "close", data: {dismiss: options[:dismiss]}
   end
 
   def settings_button(string, path, options = {})
     link_to string.prepend_icon("cog"), path, options
   end
 
-  def notice(string, options = {})
-    content_tag :p, string.prepend_icon("info"), {class: "notice"}.merge(options)
+  def alert_message(string, type, options = {})
+    options[:close] = true if options[:close].nil?
+    content_tag :div, raw("#{remove_button(dismiss: "alert")}#{string}"), class: "alert alert-#{type} fade in #{"no-close" unless options[:close]}"
   end
 
   def icon(name, options = {})
@@ -125,7 +143,7 @@ module ApplicationHelper
   end
 
   def buttons(form_builder = nil)
-    content_tag :div, class: "form_controls" do
+    content_tag :div, class: "btn-toolbar" do
       yield ButtonBuilder.new(form_builder, self)
     end
   end
@@ -137,12 +155,15 @@ module ApplicationHelper
     end
 
     def cancel_button(*args)
+      options = args.extract_options!.dup
+      options.reverse_merge!(class: "btn cancel")
+      args << options
       @template.link_to *args
     end
 
     def action_button(*args)
       options = args.extract_options!.dup
-      options.update(class: "action")
+      options.reverse_merge!(class: "action btn btn-primary")
       args << options
 
       @template.link_to *args
@@ -150,7 +171,7 @@ module ApplicationHelper
 
     def submit_button(*args)
       options = args.extract_options!.dup
-      options.deep_merge!(data: {"disable-with" => "Učitavanje..."})
+      options.reverse_merge!(class: "btn btn-primary", data: {"disable-with" => "Učitavanje..."})
       args << options
 
       if @form_builder
@@ -162,7 +183,7 @@ module ApplicationHelper
 
     def button_button(*args)
       options = args.extract_options!.dup
-      options.deep_merge!(data: {"disable-with" => "Učitavanje..."})
+      options.reverse_merge!(class: "btn-primary", data: {"disable-with" => "Učitavanje..."})
       args << options
       @form_builder.button :button, *args
     end

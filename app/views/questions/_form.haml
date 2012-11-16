@@ -2,7 +2,7 @@
 
   = hidden_field_tag :category, params[:category]
 
-  = f.input :content, label: "Tekst pitanja", input_html: {autofocus: current_page?(action: "new")}
+  = f.input :content, label: "Tekst pitanja", input_html: {autofocus: current_page?(action: "new"), class: "input-block-level"}
 
   = render partial: "#{@question.category}_question_fields", object: @question, as: "#{@question.category}_question", locals: {f: f}
 

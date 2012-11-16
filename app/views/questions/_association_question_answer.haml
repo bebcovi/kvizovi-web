@@ -1,7 +1,8 @@
 %p Točni parovi bili su:
 
-.show.question_association
+.feedback.question_association
   %ul
     = list_of question.associations do |key, value|
-      %div= key
-      %div= value
+      %span= key
+      = icon("chevron-right")
+      %span= value

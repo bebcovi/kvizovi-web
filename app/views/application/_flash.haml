@@ -1,0 +1,9 @@
+- flash.each do |name, message|
+  - if name.in?([:alert, :notice])
+    - type = (name == :alert ? "error" : "success")
+    = alert_message(message, type)
+  - elsif name == :notification
+    %div{class: "alert alert-info fade in"}
+      = simple_form_for current_school, url: notify_school_path(current_school), method: :put do |f|
+        = f.button :button, "×", class: "close"
+      = raw message

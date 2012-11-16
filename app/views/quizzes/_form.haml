@@ -3,11 +3,11 @@
   = f.input :name, input_html: {autofocus: current_page?(action: "new")}
 
   %p Predviđeni razredi:
-  = f.input :grades, collection: grades, as: :check_boxes, label: false
+  = f.input :grades, collection: grades, as: :check_boxes, label: false, item_wrapper_tag: :li
 
   = buttons(f) do |b|
-    = b.cancel_button "Odustani", quizzes_path
-    = b.submit_button
+    = b.cancel_button "Odustani", (@quiz.new_record? ? quizzes_path : quiz_questions_path(@quiz))
+    = b.submit_button "Spremi"
 
-  - if @quiz.new_record?
-    = notice "Kviz zasad neće biti vidljiv učenicima. Kasnije ga možete učiniti vidljivim kada bude spreman."
+  - if @quiz.new_record? and not request.headers["X-noLayout"]
+    = alert_message "Kviz zasad neće biti vidljiv učenicima. Kasnije ga možete učiniti vidljivim kada bude spreman.", "info", close: false

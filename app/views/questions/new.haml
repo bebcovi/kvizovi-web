@@ -1,27 +1,3 @@
 - @title = "Novo pitanje"
 
-- if params[:category]
-
-  = back_button "Kategorije", polymorphic_path([@scope, Question], action: "new")
-
-  %h1
-    %span.name= @scope.name
-    %span.section= @title.downcase
-
-  = render partial: "form", locals: {url: polymorphic_path([@scope, Question]), klass: "new"}
-
-- else
-
-  = back_button "Pitanja", polymorphic_path([@scope, Question])
-
-  %h1
-    %span.name= @scope.name
-    %span.section= @title.downcase
-
-  %p Izaberite kategoriju:
-
-  %ol.question_categories
-    = list_of categories do |value, (label, icon)|
-      %a{href: polymorphic_path([@scope, Question], action: "new", category: value)}
-        = icon
-        .label= label
+= render partial: "form", locals: {url: polymorphic_path([@scope, Question]), klass: "new"}

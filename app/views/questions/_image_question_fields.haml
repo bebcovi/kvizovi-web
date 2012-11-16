@@ -2,11 +2,11 @@
 = f.error :image_file_size
 
 = f.input :image_file, as: :file
-= f.input :image_url, placeholder: "Npr. \"http://neka-slika.jpg\""
+= f.input :image_url, placeholder: %(Npr. "http://www.primjer.hr/neka-slika.jpg")
 
 - if image_question.image.present?
   %img.preview{src: image_question.image.url(:resized)}
 - else
   %img.preview{style: 'display: none'}
 
-= f.input :answer, as: :string, input_html: {title: answer_title}
+= f.input :answer, as: :string, input_html: {title: "Dobro za znati...", data: {content: answer_title}}

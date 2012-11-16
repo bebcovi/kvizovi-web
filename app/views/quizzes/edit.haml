@@ -1,9 +1,3 @@
-- @title = "Izmjena kviza"
-
-= back_button "Kvizovi", root_path
-
-%h1
-  %span.name= @quiz.name
-  %span.section= @title.downcase
+- @title = @quiz.name
 
 = render "form"

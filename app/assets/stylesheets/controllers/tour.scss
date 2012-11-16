@@ -1,64 +1,8 @@
 body.tour {
 
-  a.tour { display: none; }
-
-}
-
-$cols: 2;
-.toc {
-  @extend %unstyled-list;
-  position: fixed;
-  top: rhythm(9/2);
-  width: 126px;
-  a {
-    display: block;
-    padding: {
-      top: rhythm(1/4);
-      bottom: rhythm(1/4);
-    }
-    &:hover { text-decoration: none; }
-  }
-}
-
-$padding: 1/6;
-.toc_h2 {
-  a {
-    @include color-link(rgba(black, .35), $link2);
-    &:hover { text-decoration: none; }
+  #skole .question-types {
+    list-style: none;
+    margin-left: $baseLineHeight/2;
   }
 
-  &.active a {
-    @include color-link($link2, $link2);
-    font-weight: 700;
-  }
-}
-
-.toc_h3 {
-  @include with-font-size($normal - 2px) {
-    a {
-      @include color-link(rgba(black, .35), $link2);
-      padding-left: rhythm(1/4);
-      font-weight: 300;
-    }
-
-    &.active a {
-      @include color-link($link2, $link2);
-      font-weight: 500;
-    }
-  }
-}
-
-$cols: $total-columns - $cols;
-.toc_content {
-  @include span-columns($cols omega);
-
-  h2 {
-    border-bottom: 2px solid $text;
-  }
-}
-
-.question_types {
-  padding-left: rhythm(1/2);
-  list-style: none;
-  i { margin-right: rhythm(1/2); }
 }

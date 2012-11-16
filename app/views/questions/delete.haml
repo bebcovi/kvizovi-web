@@ -1,3 +1,5 @@
+%h1 Jeste li sigurni?
+
 %p Jeste li sigurni da želite izbrisati to pitanje?
 
 = simple_form_for @question, url: polymorphic_path([@scope, @question.becomes(Question)]), method: :delete do |f|
