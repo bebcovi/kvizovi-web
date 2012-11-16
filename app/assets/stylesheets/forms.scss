@@ -212,16 +212,6 @@ form {
 
 // loader
 
-.loader {
-  $size: 36px;
-  @include square($size);
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  margin-left: - $size/2;
-  padding-top: $size/4;
-  font-family: 'icons';
-  font-size: $size;
-  color: rgba(black, .5);
-  @include animation(spin 1s linear infinite);
+.spinner {
+  position: fixed !important;
 }

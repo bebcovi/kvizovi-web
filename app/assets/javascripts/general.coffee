@@ -2,10 +2,6 @@ $ = jQuery
 
 App.general = ->
 
-  # loader
-
-  $('body').append $.loader.hide()
-
   # tooltips & popovers
 
   $('a[title], button[title]').tooltip

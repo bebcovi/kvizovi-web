@@ -2,6 +2,8 @@
 //= require jquery_ujs
 //= require jquery.ui.droppable
 //= require twitter/bootstrap
+//= require spin
+//= require jquery.spin
 //= require moment
 //
 //= require extensions
