@@ -1,26 +1,27 @@
 $ = jQuery
 
-# methods
+# icons
 
-$.fn.prependIcon = (name) ->
-  @.each -> $(@).prepend "<i class=\"icon-#{name}\"> "
+$.icon = (name) -> "<i class='icon-#{name}'></i>"
 
-$.fn.appendIcon = (name) ->
-  @.each -> $(@).append " <i class=\"icon-#{name}\">"
+String.prototype.prependIcon  = (name) -> "#{$.icon(name)} #{@}"
+String.prototype.appendIcon   = (name) -> "#{@} #{$.icon(name)}"
 
 # properties
 
-$.removeButton = $('<button>', type: 'button').text('×')
+$.removeButton = $ '<button>',
+  text: '×'
+  type: 'button'
 
 $.addButton = $ '<a>',
+  html: 'Dodaj'.prependIcon('plus')
+  class: 'add'
   href: '#'
-.addClass('add')
-.text(' Dodaj')
-.prependIcon('plus')
 
-$.timer = $('<div>')
-.addClass('timer')
-.prependIcon('stopwatch')
+$.timer = $ '<div>',
+  html: $.icon('stopwatch')
+  class: 'timer'
+.append(' ')
 .append $('<span>', {class: 'time'})
 
 $.spinnerOptions =
