@@ -176,4 +176,21 @@ module ApplicationHelper
       @form_builder.button :button, *args
     end
   end
+
+  Page = Class.new(Struct.new(:title, :path, :active)) { alias active? active }
+  def navigation_pages_for(user)
+    result = []
+
+    if user.is_a?(School)
+      result << Page.new("Kvizovi", quizzes_path, (params[:controller] == "quizzes" or (params[:controller] == "questions" and @scope.is_a?(Quiz))))
+      result << Page.new("Pitanja", school_questions_path(user), (params[:controller] == "questions" and not @scope.is_a?(Quiz)))
+      result << Page.new("Učenici", students_path, params[:controller] == "students")
+    elsif user.is_a?(Student)
+      result << Page.new("Kvizovi", new_game_path, params[:controller] == "games")
+    end
+
+    result << Page.new("Vodič", tour_path, params[:controller] == "tour")
+
+    result
+  end
 end
