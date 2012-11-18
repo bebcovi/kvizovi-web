@@ -58,6 +58,10 @@ input,
   .close { display: none; }
 }
 
+.alert-error {
+  p { margin: 0; }
+}
+
 .form-inline {
   .controls,
   ol, ul, li,
