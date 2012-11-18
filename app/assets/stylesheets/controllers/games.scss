@@ -51,11 +51,11 @@ body.games {
   .username:after { content: ':'; }
 
   .rank {
-    @include animation(fadeIn 4s linear);
+    @include animation(fadeIn 3s linear);
   }
 
   .bar {
     @include transition(none);
-    @include animation(slide 4s ease-in-out);
+    @include animation(slide 3s ease-in-out);
   }
 }
