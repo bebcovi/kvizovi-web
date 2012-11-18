@@ -39,11 +39,6 @@ class SchoolsController < ApplicationController
     end
   end
 
-  def notify
-    current_user.update_attributes(notified: true)
-    redirect_to :back
-  end
-
   def delete
     @school = current_user
   end

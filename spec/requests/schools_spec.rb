@@ -172,6 +172,31 @@ describe "School" do
       after(:all) { @quiz.destroy }
     end
 
+    context "when there is a new update" do
+      before(:each) { @school.connection.execute %(UPDATE "schools" SET "notified" = 'f') }
+
+      it "receives an announcement that there is a new update" do
+        visit quizzes_path
+        page.should have_content("Napravili smo neke važne promjene")
+      end
+
+      it "can view that announcement, and then it won't be displayed anymore" do
+        visit quizzes_path
+        within(".announcement") { click_link("ovdje") }
+        current_path.should eq updates_path
+        page.should_not have_content("Napravili smo neke važne promjene")
+        click_on "Natrag"
+        page.should_not have_content("Napravili smo neke važne promjene")
+      end
+
+      it "can close that announcement, and then it won't be displayed anymore" do
+        visit quizzes_path
+        within(".announcement") { find(".remove").click }
+        current_path.should eq quizzes_path
+        page.should_not have_content("Napravili smo neke važne promjene")
+      end
+    end
+
     context "when changing password" do
       it "has the link for it on the profile page" do
         visit school_path(@school)

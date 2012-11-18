@@ -1,10 +1,10 @@
-namespace :notification do
+namespace :updates do
   task :generate do
     if ENV["NAME"].nil?
-      raise "Usage: rake notification:generate NAME=validation_on_quiz_activation"
+      raise "Usage: rake updates:generate NAME=name_of_update"
     end
 
-    path = "#{Rails.root}/app/views/notifications/index"
+    path = "#{Rails.root}/app/views/updates/index"
     name = ENV["NAME"]
     last_id = Dir["#{path}/*.md.erb"].map { |filename| filename.split("/").last[/^\d+/].to_i }.max || 0
     id = (ENV["ID"] || last_id + 1).to_i

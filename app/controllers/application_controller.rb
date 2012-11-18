@@ -1,9 +1,7 @@
 # encoding: utf-8
 
 class ApplicationController < ActionController::Base
-  before_filter :set_notification, if: proc {
-    user_logged_in? and current_user.is_a?(School) and not current_user.notified?
-  }
+  before_filter :set_announcement, if: proc { current_user.is_a?(School) and not current_user.notified?  }
 
   protected
 
@@ -49,8 +47,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_notification
-    flash.now[:notification] = "Napravili smo neke važne promijene, možete ih vidjeti #{view_context.link_to "ovdje", notifications_path}."
+  def set_announcement
+    flash.now[:announcement] = "Napravili smo neke važne promjene, možete ih vidjeti #{view_context.link_to "ovdje", updates_path}."
   end
 
   def sub_layout

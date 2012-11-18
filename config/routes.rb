@@ -5,6 +5,8 @@ Lektire::Application.routes.draw do
   controller :tour do
     get "tour" => :index
   end
+  get "updates", to: "updates#index"
+  put "updates/hide", to: "updates#hide", as: "hide_update"
 
   controller :contact do
     get "contact" => :index
@@ -41,8 +43,6 @@ Lektire::Application.routes.draw do
     end
   end
   resource :password
-
-  resources :notifications
 
   resources :quizzes do
     resources :questions
