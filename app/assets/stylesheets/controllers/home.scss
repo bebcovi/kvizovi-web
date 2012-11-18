@@ -3,8 +3,9 @@ body.home {
   .hero-unit {
     text-align: center;
     font-weight: inherit;
-    border-bottom: 1px solid $linkColor;
+    border-bottom: 1px solid rgba($linkColor, .5);
     border-radius: 0;
+    background-image: image-url('bg-pattern.png');
 
     h1 {
       font-size: 80px;
