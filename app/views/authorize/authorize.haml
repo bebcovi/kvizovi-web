@@ -1,11 +1,10 @@
 - @title = "Autorizacija"
 
-= form_tag authorize_path do
-  %div
-    = label_tag :secret_key, "Tajni ključ aplikacije"
-    = password_field_tag :secret_key, nil, size: 50, value: (ENV["LEKTIRE_KEY"] if Rails.env.development?), autofocus: current_page?(action: "show")
-    %p.hint Ako nemate ključ, možete ga #{contact_link "zatražiti", subject: "Zahtjev za tajni ključ"}.
+= simple_form_for :authorize, url: authorize_path do |f|
 
-  = buttons do |b|
+  = f.input :secret_key, as: :password, input_html: {value: (ENV["LEKTIRE_KEY"] if Rails.env.development?), autofocus: current_page?("show")},
+    hint: "Ako nemate ključ, možete ga #{link_to "zatražiti", contact_path}."
+
+  = buttons(f) do |b|
     = b.cancel_button "Odustani", login_path(type: "school")
     = b.submit_button "Potvrdi"

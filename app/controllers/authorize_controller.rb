@@ -4,7 +4,7 @@ class AuthorizeController < ApplicationController
   end
 
   def authorize
-    if params[:secret_key] == ENV["LEKTIRE_KEY"]
+    if params[:authorize][:secret_key] == ENV["LEKTIRE_KEY"]
       flash[:authorized] = true
       redirect_to new_school_path, notice: flash_message(:notice)
     else
