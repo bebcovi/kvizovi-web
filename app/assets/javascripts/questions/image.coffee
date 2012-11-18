@@ -30,14 +30,14 @@ App.Questions.image =
 
       .clone(true)
         .attr('title', 'Na internetu')
-        .prependIcon('link')
+        .html($.icon('link'))
         .prependTo($file)
         .tooltip()
         .end()
 
       .clone(true)
         .attr('title', 'Na računalu')
-        .prependIcon('drive')
+        .html($.icon('drive'))
         .tooltip()
         .prependTo($url)
 

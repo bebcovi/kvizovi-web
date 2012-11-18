@@ -9,7 +9,7 @@ hr:
         password_confirmation: "Potvrda lozinke"
         remember_me: "Zapamti me"
         email: "Email"
-        tag_list: "Tagovi"
+        tag_list: "Tagovi (neobavezno)"
       question:
         answer: "Odgovor"
         hint: "Uputa (neobavezno)"

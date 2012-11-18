@@ -7,5 +7,5 @@
     %p.hint Ako nemate ključ, možete ga #{contact_link "zatražiti", subject: "Zahtjev za tajni ključ"}.
 
   = buttons do |b|
-    = b.cancel_button "Odustani", root_path
+    = b.cancel_button "Odustani", login_path(type: "school")
     = b.submit_button "Potvrdi"
