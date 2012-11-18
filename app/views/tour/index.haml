@@ -2,13 +2,13 @@
 
 %ul.nav.nav-tabs
   - attrs = {data: {toggle: "tab"}}
-  %li.active= link_to "Općenito", "#opcenito", attrs
-  %li= link_to        "Učenici",  "#ucenici",  attrs
-  %li= link_to        "Škole",    "#skole",    attrs
-  %li= link_to        "Kontakt",  "#kontakt",  attrs
+  %li= link_to  "Općenito", "#opcenito", attrs
+  %li= link_to  "Učenici",  "#ucenici",  attrs
+  %li= link_to  "Škole",    "#skole",    attrs
+  %li= link_to  "Kontakt",  "#kontakt",  attrs
 
 .tab-content
-  #opcenito.tab-pane.active
+  #opcenito.tab-pane
     :markdown
       Ove upute se mogu vidjeti bilo kad i bilo gdje tijekom uporabe aplikacije, samo potražite link "Vodič" na vrhu stranice.
 
