@@ -40,9 +40,9 @@ describe "School" do
   context "when updating quizzes" do
     before(:all) { @quiz = create(:quiz, school: @school) }
 
-    it "has the link for it on the quizzes page" do
-      visit quizzes_path
-      within(".item_controls") { first("a").click }
+    it "has the link for it" do
+      visit quiz_questions_path(@quiz)
+      click_on "Izmjeni informacije o kvizu"
       current_path.should eq edit_quiz_path(@quiz)
     end
 
@@ -80,7 +80,7 @@ describe "School" do
 
     it "has the link for it" do
       visit quizzes_path
-      within(".item_controls") { all("a").last.click }
+      within(".btn-group") { all("a").last.click }
       current_path.should eq delete_quiz_path(@quiz)
     end
 

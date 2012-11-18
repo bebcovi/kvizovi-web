@@ -5,7 +5,7 @@ describe "School" do
   context "when registering" do
     it "has the link for it on the login page" do
       visit login_path(type: "school")
-      find_link("ovdje")[:href].should eq new_school_path
+      find_link("Registrirajte se")[:href].should eq new_school_path
     end
 
     it "is required to authorize" do
@@ -163,7 +163,7 @@ describe "School" do
           visit quiz_questions_path(@quiz)
           click_on "Isprobajte kviz"
           click_on "Odgovori"
-          within(".form_controls") { find("*").click }
+          within(".btn-toolbar") { find("*").click }
           click_on "Završi"
           current_path.should eq quiz_questions_path(@quiz)
         end
@@ -182,16 +182,16 @@ describe "School" do
 
       it "can view that announcement, and then it won't be displayed anymore" do
         visit quizzes_path
-        within(".announcement") { click_link("ovdje") }
+        within(".alert-info") { click_link("ovdje") }
         current_path.should eq updates_path
         page.should_not have_content("Napravili smo neke važne promjene")
-        click_on "Natrag"
+        visit quizzes_path
         page.should_not have_content("Napravili smo neke važne promjene")
       end
 
       it "can close that announcement, and then it won't be displayed anymore" do
         visit quizzes_path
-        within(".announcement") { find(".remove").click }
+        within(".alert-info") { find(".close").click }
         current_path.should eq quizzes_path
         page.should_not have_content("Napravili smo neke važne promjene")
       end

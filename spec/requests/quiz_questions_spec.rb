@@ -11,34 +11,17 @@ describe "School" do
 
   it "has a link for managing questions from a quiz" do
     visit quizzes_path
-    within(".item_controls") { all("a").second.click }
+    within(".btn-group") { all("a").first.click }
     current_path.should eq quiz_questions_path(@quiz)
   end
 
   context "when creating a question" do
-    it "has the link for it" do
-      visit quiz_questions_path(@quiz)
-      click_on "Novo pitanje"
-      current_path.should eq new_quiz_question_path(@quiz)
-    end
-
-    it "first asks for the category" do
-      visit new_quiz_question_path(@quiz)
-
-      category_labels = [
-        "Točno/netočno",
-        "Ponuđeni odgovori",
-        "Asocijacija",
-        "Pogodi tko/što je na slici",
-        "Upiši točan odgovor"
-      ]
-      category_labels.each do |label|
-        click_on(label)
-        visit new_quiz_question_path(@quiz)
-      end
-    end
-
     describe "boolean" do
+      it "has a link for it" do
+        visit quiz_questions_path(@quiz)
+        find(%(a[href="#{new_quiz_question_path(@quiz, category: "boolean")}"])).click
+      end
+
       context "on validation errors" do
         it "is held on the same page" do
           visit new_quiz_question_path(@quiz, category: "boolean")
@@ -63,6 +46,11 @@ describe "School" do
     end
 
     describe "choice" do
+      it "has a link for it" do
+        visit quiz_questions_path(@quiz)
+        find(%(a[href="#{new_quiz_question_path(@quiz, category: "choice")}"])).click
+      end
+
       context "on validation errors" do
         it "is held on the same page" do
           visit new_quiz_question_path(@quiz, category: "choice")
@@ -87,6 +75,11 @@ describe "School" do
     end
 
     describe "association" do
+      it "has a link for it" do
+        visit quiz_questions_path(@quiz)
+        find(%(a[href="#{new_quiz_question_path(@quiz, category: "association")}"])).click
+      end
+
       context "on validation errors" do
         it "is held on the same page" do
           visit new_quiz_question_path(@quiz, category: "association")
@@ -115,6 +108,11 @@ describe "School" do
     end
 
     describe "image" do
+      it "has a link for it" do
+        visit quiz_questions_path(@quiz)
+        find(%(a[href="#{new_quiz_question_path(@quiz, category: "image")}"])).click
+      end
+
       context "on validation errors" do
         it "is held on the same page" do
           visit new_quiz_question_path(@quiz, category: "image")
@@ -140,6 +138,11 @@ describe "School" do
     end
 
     describe "text" do
+      it "has a link for it" do
+        visit quiz_questions_path(@quiz)
+        find(%(a[href="#{new_quiz_question_path(@quiz, category: "text")}"])).click
+      end
+
       context "on validation errors" do
         it "is held on the same page" do
           visit new_quiz_question_path(@quiz, category: "text")
@@ -171,7 +174,7 @@ describe "School" do
 
     it "gets redirected back to questions" do
       visit quiz_questions_path(@quiz)
-      within(".item_controls") { first("a").click }
+      within(".btn-group") { first("a").click }
       click_on "Spremi"
       current_path.should eq quiz_questions_path(@quiz)
     end
@@ -184,7 +187,7 @@ describe "School" do
 
     it "has the link for it" do
       visit quiz_questions_path(@quiz)
-      within(".item_controls") { all("a").last.click }
+      within(".btn-group") { all("a").last.click }
       current_path.should eq delete_quiz_question_path(@quiz, @question)
     end
 

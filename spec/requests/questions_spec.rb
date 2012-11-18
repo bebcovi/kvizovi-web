@@ -23,7 +23,7 @@ describe "Questions" do
       visit school_questions_path(@school)
 
       question = Question.first
-      within(".item_controls") { first("a").click }
+      within(".btn-group") { first("a").click }
 
       current_path.should eq edit_school_question_path(@school, question)
       fill_in "Tekst pitanja", with: "Question content 2"
@@ -37,13 +37,13 @@ describe "Questions" do
       visit school_questions_path(@school)
 
       question = Question.first
-      within(".item_controls") { all("a").last.click }
+      within(".btn-group") { all("a").last.click }
 
       current_path.should eq delete_school_question_path(@school, question)
       click_on "Nisam"
 
       current_path.should eq school_questions_path(@school)
-      within(".item_controls") { all("a").last.click }
+      within(".btn-group") { all("a").last.click }
       expect { click_on "Jesam" }.to change{Question.count}.by -1
 
       current_path.should eq school_questions_path(@school)

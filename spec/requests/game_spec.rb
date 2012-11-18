@@ -92,10 +92,10 @@ describe "Game" do
 
       while current_path == edit_game_path
         click_on "Odgovori"
-        within(".form_controls") { find("*").click }
+        within(".btn-toolbar") { find("*").click }
       end
 
-      first(".bar").text.strip.should eq "0%"
+      first(".bar")[:style].should eq "width: 0%"
     end
 
     it "displays after each answer whether that answer was correct" do
@@ -105,12 +105,12 @@ describe "Game" do
       answer_question(category)
       click_on "Odgovori"
 
-      page.should have_css("h1.correct")
+      page.should have_css("h1.text-success")
 
       click_on "Sljedeće pitanje"
       click_on "Odgovori"
 
-      page.should have_css("h1.wrong")
+      page.should have_css("h1.text-error")
     end
 
     describe "giving up" do
@@ -176,10 +176,10 @@ describe "Game" do
           category = first("form")[:class].split(" ").last.split("_").last
           answer_question(category)
           click_on "Odgovori"
-          within(".form_controls") { find("*").click }
+          within(".btn-toolbar") { find("*").click }
         end
 
-        first(".bar").text.strip.should eq "100%"
+        first(".bar")[:style].should eq "width: 100%"
       end
     end
 
@@ -200,10 +200,10 @@ describe "Game" do
           category = first("form")[:class].split(" ").last.split("_").last
           answer_question(category)
           click_on "Odgovori"
-          within(".form_controls") { find("*").click }
+          within(".btn-toolbar") { find("*").click }
         end
 
-        all(".bar").map(&:text).map(&:strip).each { |str| str.should_not eq "0%" }
+        all(".bar").each { |bar| bar[:style].should_not eq "width: 0%" }
       end
     end
   end

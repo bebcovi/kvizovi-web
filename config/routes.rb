@@ -5,10 +5,7 @@ Lektire::Application.routes.draw do
   get "tour", to: "tour#index"
   get "updates", to: "updates#index"
   put "updates/hide", to: "updates#hide", as: "hide_update"
-
-  controller :contact do
-    get "contact" => :index
-  end
+  get "contact", to: "contact#index"
 
   controller :sessions do
     get   "login",  to: :new

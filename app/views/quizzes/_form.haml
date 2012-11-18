@@ -7,7 +7,7 @@
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", (@quiz.new_record? ? quizzes_path : quiz_questions_path(@quiz))
-    = b.submit_button "Spremi"
+    = b.submit_button
 
   - if @quiz.new_record? and not request.headers["X-noLayout"]
     = alert_message "Kviz zasad neće biti vidljiv učenicima. Kasnije ga možete učiniti vidljivim kada bude spreman.", "info", close: false

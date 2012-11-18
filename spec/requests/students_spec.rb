@@ -7,7 +7,7 @@ describe "Student" do
 
     it "has the link for it on the login page" do
       visit login_path(type: "student")
-      click_on "ovdje"
+      click_on "Registriraj se"
       current_path.should eq new_student_path
     end
 

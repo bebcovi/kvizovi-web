@@ -8,6 +8,6 @@
   - elsif name == :announcement
 
     .alert.alert-info.fade.in
-      = simple_form_for current_school, url: hide_update_path, method: :put do |f|
+      = simple_form_for current_user, url: hide_update_path, method: :put do |f|
         = f.button :button, "×", class: "close"
       = raw message

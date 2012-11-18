@@ -14,7 +14,7 @@ class GamesController < ApplicationController
     @game_submission = GameSubmission.new(params[:game_submission].merge(player_class: current_user.class))
     @game_submission.players << current_user
 
-    if request.referer.in?([new_game_url, edit_quiz_url(@game_submission.quiz)])
+    if request.referer.in?([new_game_url, quiz_questions_url(@game_submission.quiz)])
       cookies[:referer] = request.referer
     end
 
