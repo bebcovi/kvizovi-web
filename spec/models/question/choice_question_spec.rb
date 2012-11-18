@@ -1,5 +1,5 @@
 require "spec_helper_lite"
-require_relative "../../../app/models/question/choice_question"
+use_nulldb { require_relative "../../../app/models/question/choice_question" }
 
 describe ChoiceQuestion do
   before(:each) { @it = build(:choice_question) }

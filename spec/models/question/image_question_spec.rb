@@ -1,5 +1,5 @@
 require "spec_helper_lite"
-require_relative "../../../app/models/question/image_question"
+use_nulldb { require_relative "../../../app/models/question/image_question" }
 
 describe ImageQuestion do
   before(:all) { Paperclip.options[:log] = false }

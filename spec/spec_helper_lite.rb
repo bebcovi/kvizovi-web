@@ -11,3 +11,11 @@ RSpec.configure do |config|
 
   config.alias_example_to :they
 end
+
+include NullDBSpecHelpers
+
+def use_nulldb(&block)
+  setup_nulldb
+  yield
+  teardown_nulldb
+end

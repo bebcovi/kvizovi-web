@@ -1,5 +1,5 @@
 require "spec_helper_lite"
-require_relative "../../../app/models/question/association_question"
+use_nulldb { require_relative "../../../app/models/question/association_question" }
 
 describe AssociationQuestion do
   before(:each) { @it = build(:association_question) }

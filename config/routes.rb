@@ -2,9 +2,7 @@ Lektire::Application.routes.draw do
   root to: "home#index"
   get "home/index"
 
-  controller :tour do
-    get "tour" => :index
-  end
+  get "tour", to: "tour#index"
   get "updates", to: "updates#index"
   put "updates/hide", to: "updates#hide", as: "hide_update"
 
@@ -13,14 +11,14 @@ Lektire::Application.routes.draw do
   end
 
   controller :sessions do
-    get   "login"  => :new
-    post  "login"  => :create
-    match "logout" => :destroy
+    get   "login",  to: :new
+    post  "login",  to: :create
+    match "logout", to: :destroy
   end
 
   controller :authorize do
-    get  "authorize" => :show
-    post "authorize" => :authorize
+    get  "authorize", to: :show
+    post "authorize", to: :authorize
   end
 
   resource :game do
@@ -50,11 +48,11 @@ Lektire::Application.routes.draw do
     member { put "toggle_activation" }
   end
 
-  match "404" => "errors#not_found"
-  match "500" => "errors#internal_server_error"
-
   controller :admin do
-    get "admin" => :index
-    get "admin/school/:id" => :school, as: :admin_school
+    get "admin", to: :index
+    get "admin/school/:id", to: :school, as: "admin_school"
   end
+
+  match "404", to: "errors#not_found"
+  match "500", to: "errors#internal_server_error"
 end

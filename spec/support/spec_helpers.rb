@@ -29,6 +29,7 @@ module NullDBSpecHelpers
   end
 
   def setup_nulldb
+    require "active_record"
     require "nulldb"
     require "activerecord-postgres-hstore/activerecord"
     NullDB.nullify(schema: "#{ROOT}/db/schema.rb")

@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   helper_method :user_logged_in?
 
   def current_user
-    @current_user ||= user_class.find(cookies[:user_id]) if user_class.exists?(cookies[:user_id])
+    @current_user ||= user_class.find(cookies[:user_id]) if cookies[:user_id]
   end
   helper_method :current_user
 
@@ -38,13 +38,12 @@ class ApplicationController < ActionController::Base
     redirect_to root_path if not user_logged_in?
   end
 
-  [:alert, :notice].each do |flash_name|
-    define_method(flash_name) do |*args|
-      options = args.extract_options!
-      controller = params[:controller]
-      action = args.first || params[:action]
-      t("flash.#{controller}.#{action}.#{flash_name}", options)
-    end
+  def flash_message(type, *args)
+    options = args.extract_options!
+    controller = params[:controller]
+    action = args.first || params[:action]
+
+    t("flash.#{controller}.#{action}.#{type}", options)
   end
 
   def set_announcement

@@ -13,7 +13,7 @@ class QuizzesController < ApplicationController
     @quiz = current_user.quizzes.new(params[:quiz])
 
     if @quiz.save
-      redirect_to quizzes_path, notice: notice
+      redirect_to quizzes_path, notice: flash_message(:notice)
     else
       render :new
     end
@@ -27,7 +27,7 @@ class QuizzesController < ApplicationController
     @quiz = current_user.quizzes.find(params[:id])
 
     if @quiz.update_attributes(params[:quiz])
-      redirect_to quizzes_path, notice: notice
+      redirect_to quizzes_path, notice: flash_message(:notice)
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class QuizzesController < ApplicationController
   def toggle_activation
     quiz = current_user.quizzes.find(params[:id])
     quiz.toggle!(:activated)
-    redirect_to quizzes_path, notice: notice((quiz.activated? ? "activate" : "deactivate"), name: quiz.name)
+    redirect_to quizzes_path, notice: flash_message(:notice, (quiz.activated? ? "activate" : "deactivate"), name: quiz.name)
   end
 
   def delete
@@ -46,7 +46,7 @@ class QuizzesController < ApplicationController
 
   def destroy
     current_user.quizzes.destroy(params[:id])
-    redirect_to quizzes_path, notice: notice
+    redirect_to quizzes_path, notice: flash_message(:notice)
   end
 
   protected

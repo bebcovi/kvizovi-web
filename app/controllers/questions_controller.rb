@@ -21,7 +21,7 @@ class QuestionsController < ApplicationController
     @question.school = current_user
 
     if @question.save
-      redirect_to polymorphic_path([@scope, Question]), notice: notice
+      redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)
     else
       render :new
     end
@@ -35,7 +35,7 @@ class QuestionsController < ApplicationController
     @question = @scope.questions.find(params[:id])
 
     if @question.update_attributes(params[:question])
-      redirect_to polymorphic_path([@scope, Question]), notice: notice
+      redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class QuestionsController < ApplicationController
 
   def copy
     current_user.questions << Question.find(params[:id]).dup
-    redirect_to polymorphic_path([@scope, Question]), notice: notice
+    redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)
   end
 
   def delete
@@ -52,7 +52,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     @scope.questions.find(params[:id]).destroy
-    redirect_to polymorphic_path([@scope, Question]), notice: notice
+    redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)
   end
 
   private

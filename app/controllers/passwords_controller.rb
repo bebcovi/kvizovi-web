@@ -6,9 +6,9 @@ class PasswordsController < ApplicationController
     if school = School.find_by_email(params[:email])
       new_password = school.reset_password
       PasswordResetNotifier.password_reset(school, new_password).deliver
-      redirect_to root_path, notice: notice
+      redirect_to root_path, notice: flash_message(:notice)
     else
-      flash.now[:alert] = alert
+      flash.now[:alert] = flash_message(:alert)
       render :new
     end
   end
@@ -21,7 +21,7 @@ class PasswordsController < ApplicationController
     @password = Password.new(params[:password].merge(user: current_user))
 
     if @password.save
-      redirect_to current_user, notice: notice
+      redirect_to current_user, notice: flash_message(:notice)
     else
       render :edit
     end

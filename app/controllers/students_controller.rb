@@ -15,7 +15,7 @@ class StudentsController < ApplicationController
 
     if @student.save
       log_in!(@student)
-      redirect_to new_game_path, notice: notice
+      redirect_to new_game_path, notice: flash_message(:notice)
     else
       render :new
     end
@@ -33,7 +33,7 @@ class StudentsController < ApplicationController
     @student = current_user
 
     if @student.update_attributes(params[:student])
-      redirect_to @student, notice: notice
+      redirect_to @student, notice: flash_message(:notice)
     else
       render :edit
     end
@@ -49,7 +49,7 @@ class StudentsController < ApplicationController
     @student = school.students.find(params[:id])
 
     if @student.update_attributes(params[:student])
-      redirect_to students_path, notice: notice
+      redirect_to students_path, notice: flash_message(:notice)
     else
       render :new_password
     end
@@ -63,15 +63,15 @@ class StudentsController < ApplicationController
     if current_user.is_a?(School)
       school = current_user
       school.students.destroy(params[:id])
-      redirect_to students_path, notice: notice("school_destroy")
+      redirect_to students_path, notice: flash_message(:notice, "school_destroy")
     else
       @student = current_user
       if @student.authenticate(params[:student][:password])
         @student.destroy
         log_out!
-        redirect_to root_path, notice: notice
+        redirect_to root_path, notice: flash_message(:notice)
       else
-        flash.now[:alert] = alert
+        flash.now[:alert] = flash_message(:alert)
         render :delete
       end
     end

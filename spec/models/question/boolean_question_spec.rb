@@ -1,5 +1,5 @@
 require "spec_helper_lite"
-require_relative "../../../app/models/question/boolean_question"
+use_nulldb { require_relative "../../../app/models/question/boolean_question" }
 
 describe BooleanQuestion do
   before(:each) { @it = build(:boolean_question) }

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class SchoolsController < ApplicationController
   def new
     if flash[:authorized]
@@ -15,7 +13,7 @@ class SchoolsController < ApplicationController
     if @school.save
       log_in!(@school)
       @school.create_example_quizzes
-      redirect_to quizzes_path, notice: "Uspješno ste se registrirali."
+      redirect_to quizzes_path, notice: flash_message(:notice)
     else
       render :new
     end
@@ -33,7 +31,7 @@ class SchoolsController < ApplicationController
     @school = current_user
 
     if @school.update_attributes(params[:school])
-      redirect_to @school, notice: "Vaš profil je uspješno izmijenjen."
+      redirect_to @school, notice: flash_message(:notice)
     else
       render :edit
     end
@@ -49,9 +47,9 @@ class SchoolsController < ApplicationController
     if @school.authenticate(params[:school][:password])
       @school.destroy
       log_out!
-      redirect_to root_path, notice: "Vaš korisnički račun je uspješno izbrisan."
+      redirect_to root_path, notice: flash_message(:notice)
     else
-      flash.now[:alert] = "Lozinka nije točna."
+      flash.now[:alert] = flash_message(:alert)
       render :delete
     end
   end
