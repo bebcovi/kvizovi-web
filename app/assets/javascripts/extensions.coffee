@@ -118,27 +118,6 @@ $.modalAjax = (options = {}) ->
 
     error: -> location.href options['url']
 
-$.flashMsg = (msg, name) ->
-  $flash = $('<div>').addClass("flash #{name}")
-
-  $button = $.removeButton
-    .clone()
-    .appendTo($flash)
-
-  $msg = $('<p>').append(msg)
-
-  $('.flash').remove()
-
-  $flash
-    .append($msg)
-    .prependTo('.main_content')
-    .hide()
-    .fadeIn('fast')
-
-  $button.on 'click', -> $flash.fadeOut('fast')
-
-  $flash
-
 $.getContent = (title, body) ->
   $title    = $('<h1>').text(title)
   $body     = $('<p>').text(body)
