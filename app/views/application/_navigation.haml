@@ -1,10 +1,10 @@
 - if user_logged_in?
   %ul.nav.pull-left
     - if current_user.is_a?(School)
-      %li{class: (params[:controller] == "questions" && "active")}
-        = link_to "Pitanja", school_questions_path(current_user)
       %li{class: (params[:controller] == "quizzes" && "active")}
         = link_to "Kvizovi", quizzes_path
+      %li{class: (params[:controller] == "questions" && "active")}
+        = link_to "Pitanja", school_questions_path(current_user)
       %li{class: (params[:controller] == "students" && "active")}
         = link_to "Učenici", students_path
     - elsif current_user.is_a?(Student)

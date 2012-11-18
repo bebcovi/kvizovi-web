@@ -4,12 +4,12 @@ App.general = ->
 
   # tooltips & popovers
 
-  $('a[title], button[title]').tooltip
+  $('a, input[type="submit"], button').filter('[title]').tooltip
     animation: false
     placement: 'top'
     container: 'body'
 
-  $('input[type="text"]').popover
+  $('input[data-body]').popover
     html: true
     trigger: 'focus'
 

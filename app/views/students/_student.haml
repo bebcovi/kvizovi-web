@@ -1,5 +1,5 @@
 .btn-group
-  = change_password_button "", new_password_student_path(student)
+  = change_password_button "", new_password_student_path(student), title: "Izmjeni lozinku"
   = delete_button "", student_path(student), confirm: "Jeste li sigurni da želite izbrisati ovog učenika?", method: :delete, title: "Izbriši"
 
 %span.name

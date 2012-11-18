@@ -69,6 +69,6 @@
     - if params[:filter]
       %p.no_items Nema pitanja s tim tagovima.
     - else
-      %p Druge škole trenutno nemaju pitanja.
+      %p.no_items Druge škole trenutno nemaju pitanja.
 
   = will_paginate @questions

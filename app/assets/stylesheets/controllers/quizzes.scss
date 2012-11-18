@@ -13,6 +13,8 @@ body.quizzes {
     margin-right: 8px;
   }
 
+  .name { vertical-align: middle; }
+
   &.list-hover li:hover .count {
     color: rgba($linkColor, .5);
   }

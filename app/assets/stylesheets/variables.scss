@@ -14,7 +14,7 @@ $tableBackgroundHover:                rgba($linkColor, .1);
 $btnPrimaryBackground:                adjust-lightness($linkColor, 5%);
 $btnPrimaryBackgroundHighlight:       adjust-lightness($linkColor, -10%);
 
-$navbarHeight:                        50px;
+$navbarHeight:                        $baseLineHeight*2;
 
 $navbarInverseBackground:             hsl(15, 55%, 45%);
 $navbarInverseBackgroundHighlight:    adjust-lightness($navbarInverseBackground, 5%);
