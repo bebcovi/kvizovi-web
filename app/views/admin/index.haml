@@ -22,7 +22,7 @@
       %th Zadnja aktivnost
 
   %tbody
-    - @schools.where("name <> 'Admin'").each do |school|
+    - @schools.each do |school|
       %tr
         %td= link_to school.name, admin_school_path(school)
         %td.short= school.students.count
