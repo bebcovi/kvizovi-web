@@ -27,7 +27,7 @@ $navbarInverseLinkColorActive:        $navbarInverseLinkColorHover;
 $navbarInverseLinkBackgroundHover:    transparent;
 $navbarInverseLinkBackgroundActive:   $navbarInverseBackground;
 
-$heroUnitBackground:                  adjust-color($linkColor, $hue: 50, $lightness: 40%);
+$heroUnitBackground:                  adjust-color($linkColor, $lightness: 40%);
 
 $gridGutterWidth:                     35px;
 

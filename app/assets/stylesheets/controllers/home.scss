@@ -1,6 +1,7 @@
 body.home {
 
   .hero-unit {
+    @include text-shadow(white 0 1px 0);
     text-align: center;
     font-weight: inherit;
     border-bottom: 1px solid rgba($linkColor, .5);
@@ -14,10 +15,15 @@ body.home {
     .lead,
     .app_role {
       margin-bottom: $baseLineHeight/2;
-      .btn {
-        font-weight: $light;
-        &:first-child { margin-right: .5em; }
-      }
+    }
+
+    .lead {
+      font-weight: 300;
+    }
+
+    .app_role .btn {
+      font-weight: $light;
+      &:first-child { margin-right: .5em; }
     }
   }
 
