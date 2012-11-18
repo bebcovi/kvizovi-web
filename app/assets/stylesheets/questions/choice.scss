@@ -2,8 +2,14 @@
 
   &.edit,
   &.new {
-    li:nth-child(n+2) {
+    li {
       margin-bottom: $baseLineHeight/2;
+
+      .help-block {
+        display: inline-block;
+        margin-bottom: 0;
+        margin-left: 12px;
+      }
 
       .control-group,
       .close {

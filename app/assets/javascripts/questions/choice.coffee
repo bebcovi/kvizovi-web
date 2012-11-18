@@ -34,6 +34,11 @@ App.Questions.choice =
       $el.find('input').each -> result = result and !!$(@).val()
       result
 
+    $firstOption.find('input')
+      .tooltip
+        placement: 'right'
+        trigger: 'focus'
+
     $otherOptions.add($template)
       .append $.removeButton
         .clone()
@@ -42,7 +47,7 @@ App.Questions.choice =
 
     $template
       .find('input').val('').end()
-      .find('div').removeClass('field_with_hint field_with_errors').end()
+      .find('div').removeClass('success').end()
       .find('.help-block, .error-block').remove()
 
     if $otherOptions.length
