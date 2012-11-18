@@ -22,12 +22,12 @@ Lektire::Application.routes.draw do
     get "feedback"
   end
 
-  resources :questions do
-    member { get "copy" }
-  end
+  resources :questions
 
   resources :schools do
-    resources :questions
+    resources :questions do
+      member { get "copy" }
+    end
 
     member { put "notify" }
   end
