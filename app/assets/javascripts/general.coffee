@@ -23,5 +23,3 @@ App.general = ->
     event.preventDefault()
     $.modalAjax
       url: @href
-
-  $('.alert-info').find('.close').removeClass('btn')
