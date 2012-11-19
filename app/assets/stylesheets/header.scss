@@ -9,25 +9,14 @@
 }
 
 .navbar-inner {
-  padding: {
-    left: $gridGutterWidth;
-    right: $gridGutterWidth;
-  }
+  padding-left: 0;
+  padding-right: 0;
 
   .nav.pull-right i {
     font-size: 16px;
   }
 }
 
-body > .alert {
-  @include border-radius(0);
-  padding-left: $gridGutterWidth;
-  margin-bottom: 0;
-
-  form { margin: 0; }
-  .close { right: 12px; }
-}
-
-.container-fluid {
+.main_content {
   padding-bottom: $gridGutterWidth;
 }

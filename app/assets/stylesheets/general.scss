@@ -3,6 +3,12 @@ body {
   font-weight: $light;
 }
 
+.container-fluid {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .main_content {
   position: relative;
   padding-top: $baseLineHeight;
