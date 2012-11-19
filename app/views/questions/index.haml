@@ -2,14 +2,16 @@
 
   - @title = quiz.name
 
-  = render "dropdown"
+  = render "new_question"
 
-  = edit_button "Izmjeni informacije o kvizu", edit_quiz_path(quiz), class: "btn edit_quiz"
+  = edit_button "Izmjeni informacije", edit_quiz_path(quiz), class: "btn edit_quiz"
 
   = simple_form_for :game_submission, url: game_path, method: :post do |f|
     = f.hidden_field :quiz_id, value: quiz.id
     = f.hidden_field :players_count, value: 1
-    = f.button :button, "Isprobajte kviz", {class: "btn btn-info"}.merge(@questions.count == 0 ? {disabled: true} : {})
+    = f.button :button, "Testiraj kviz".prepend_icon("play"), {class: "btn btn-info"}.merge(@questions.count == 0 ? {disabled: true} : {})
+
+  = render "tag_filter"
 
   - if @questions.any?
 
@@ -18,7 +20,10 @@
 
   - else
 
-    %p.no_items Ovaj kviz trenutno nema pitanja.
+    - if params[:filter]
+      %p.no_items Nema pitanja s tim tagovima.
+    - else
+      %p.no_items Ovaj kviz trenutno nema pitanja.
 
 - elsif @scope.is_a?(School) && (school = @scope)
 
@@ -30,8 +35,8 @@
     %li{class: (request.path == questions_path && "active")}
       = link_to "Pitanja drugih škola", questions_path
 
+  = render "new_question"
   = render "tag_filter"
-  = render "dropdown"
 
   - if @questions.any?
 
@@ -57,9 +62,9 @@
     %li{class: (request.path == questions_path && "active")}
       = link_to "Pitanja drugih škola", questions_path
 
-  = render "tag_filter"
-
   - if @questions.any?
+
+    = render "tag_filter"
 
     %ol.question_list
       = render collection: @questions, partial: "question_item", as: :question

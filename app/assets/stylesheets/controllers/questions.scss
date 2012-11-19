@@ -1,22 +1,32 @@
 body.questions {
 
-  .dropdown { float: left; }
-  .nav-pills ~ .dropdown {
-    float: none;
-    margin-bottom: $baseLineHeight;
+  .new_question { float: left; }
+
+  .edit_quiz,
+  .game_submission {
+    margin-left: 8px;
   }
 
-  .edit_quiz { margin-left: 8px; }
+  .edit_quiz {
+    float: left;
+  }
 
   .game_submission {
     display: inline-block;
+    float: left;
+  }
+
+  .new_filter {
     float: right;
+    margin-bottom: $baseLineHeight;
+    .input-append { margin-bottom: 0; }
   }
 
 }
 
 .question_list {
   @extend %pretty-list;
+  margin-top: $baseLineHeight;
 
   .category {
     margin-right: .5em;

@@ -63,9 +63,6 @@ $path: 'icons/icons';
 .icon-search:before {
   content: "\e018";
 }
-.icon-loading:before {
-  content: "\e019";
-}
 .icon-stopwatch:before {
   content: "\e01a";
 }
@@ -77,9 +74,6 @@ $path: 'icons/icons';
 }
 .icon-book:before {
   content: "\e01e";
-}
-.icon-info:before {
-  content: "\e014";
 }
 .icon-pencil-2:before {
   content: "\e01d";
@@ -140,4 +134,7 @@ $path: 'icons/icons';
 }
 .icon-calendar:before {
   content: "\e012";
+}
+.icon-play:before {
+  content: "\e014";
 }
