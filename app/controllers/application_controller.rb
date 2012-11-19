@@ -56,11 +56,8 @@ class ApplicationController < ActionController::Base
 
   def render(*args)
     options = args.extract_options!
-    if request.headers["X-noLayout"]
-      options.update(layout: false)
-      sleep 1
-    end
+    options.update(layout: false) if request.headers["X-noLayout"]
     args << options
-    super(*args)
+    super
   end
 end

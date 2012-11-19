@@ -12,15 +12,14 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = @scope.questions(params[:category]).new
-    @question.school = current_user
+    @question = current_user.questions(params[:category]).new
   end
 
   def create
-    @question = @scope.questions(params[:category]).new(params[:question])
-    @question.school = current_user
+    @question = current_user.questions(params[:category]).new(params[:question])
 
     if @question.save
+      @scope.questions << @question if @scope.is_a?(Quiz)
       redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)
     else
       render :new
