@@ -43,7 +43,7 @@
     - if params[:filter]
       %p.no_items Nema pitanja s tim tagovima.
     - else
-      %p Trenutno nemate pitanja.
+      %p.no_items Trenutno nemate pitanja.
 
   = will_paginate @questions
 
