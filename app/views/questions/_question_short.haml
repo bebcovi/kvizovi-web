@@ -1,7 +1,11 @@
 .btn-group
-  = edit_button "", polymorphic_path([@scope, question.becomes(Question)], action: "edit"), title: "Izmjeni" if @scope
-  = link_to icon("plus"), polymorphic_path([(@scope || current_user), question.becomes(Question)], action: "copy"), class: "btn", title: "Kopiraj"
-  = delete_button "", polymorphic_path([@scope, question.becomes(Question)], action: "delete"), title: "Izbriši" if @scope
+  - if @scope
+    = edit_button "", polymorphic_path([@scope, question.becomes(Question)], action: "edit"), title: "Izmjeni"
+    = link_to icon("plus"), polymorphic_path([(@scope || current_user), question.becomes(Question)], action: "copy"), class: "btn", title: "Kopiraj"
+    = delete_button "", polymorphic_path([@scope, question.becomes(Question)], action: "delete"), title: "Izbriši"
+  - else
+    = link_to icon("clipboard"), "#", class: "btn", title: "Pogledaj"
+    = link_to icon("plus"), copy_school_question_path(current_user, question), class: "btn", title: "Kopiraj"
 
 %span.category= categories[question.category.to_sym][1]
 %span.name= question.content
