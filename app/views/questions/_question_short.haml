@@ -1,6 +1,6 @@
 .btn-group
   = edit_button "", polymorphic_path([@scope, question.becomes(Question)], action: "edit"), title: "Izmjeni" if @scope
-  = link_to icon("plus"), copy_school_question_path(current_user, question), class: "btn", title: "Kopiraj"
+  = link_to icon("plus"), polymorphic_path([(@scope || current_user), question.becomes(Question)], action: "copy"), class: "btn", title: "Kopiraj"
   = delete_button "", polymorphic_path([@scope, question.becomes(Question)], action: "delete"), title: "Izbriši" if @scope
 
 %span.category= categories[question.category.to_sym][1]

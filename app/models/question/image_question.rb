@@ -38,6 +38,13 @@ class ImageQuestion < TextQuestion
 
   before_save :assign_image_sizes
 
+  def dup
+    super.tap do |question|
+      question.instance_variable_set("@image_url", image.url)
+      question.image = URI.parse(image.url)
+    end
+  end
+
   private
 
   def assign_image_sizes
