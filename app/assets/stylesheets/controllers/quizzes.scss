@@ -1,5 +1,9 @@
 body.quizzes {
 
+  .new_quiz {
+    margin-bottom: $baseLineHeight;
+  }
+
   &.new {
     .alert { margin-top: $baseLineHeight/2; }
   }

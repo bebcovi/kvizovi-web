@@ -1,6 +1,9 @@
 body.questions {
 
-  .new_question { float: left; }
+  .new_question {
+    float: left;
+    margin-bottom: $baseLineHeight;
+  }
 
   .edit_quiz,
   .game_submission {
@@ -18,7 +21,7 @@ body.questions {
 
   .new_filter {
     float: right;
-    margin-bottom: $baseLineHeight;
+    margin-bottom: 0;
     .input-append { margin-bottom: 0; }
   }
 
