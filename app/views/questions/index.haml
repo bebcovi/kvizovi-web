@@ -56,6 +56,8 @@
 
   - @title = "Pitanja"
 
+  = render "tag_filter"
+
   %ul.nav.nav-pills
     %li{class: (request.path == school_questions_path(current_user) && "active")}
       = link_to "Vaša pitanja", school_questions_path(current_user)
@@ -63,8 +65,6 @@
       = link_to "Pitanja drugih škola", questions_path
 
   - if @questions.any?
-
-    = render "tag_filter"
 
     %ol.question_list
       = render collection: @questions, partial: "question_item", as: :question
