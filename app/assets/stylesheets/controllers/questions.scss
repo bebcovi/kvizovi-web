@@ -29,12 +29,14 @@ body.questions {
   margin-top: $baseLineHeight;
 
   .category {
+    float: left;
     margin-right: .5em;
     color: rgba(black, .3);
   }
 
   .name {
-    @include truncate(70%);
+    @include text-overflow;
+    display: block;
   }
 
   &.list-hover li:hover .category {
