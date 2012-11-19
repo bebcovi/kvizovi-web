@@ -22,19 +22,21 @@ App.Questions.association =
       $one.next().attr 'value', $one.text()
       $two.next().attr 'value', $two.text()
 
+    $('ul', $form).show()
+
     $pairs.find('input').each ->
       $el = $('<span>').text $(@).val()
       $(@).before $el
       $(@).hide()
 
-    $static.css 'width', 'auto'
+    $static
+      .css('width', 'auto')
+      .each -> widths.push $(@).width()
 
-    setTimeout ->
-      $static.each -> widths.push $(@).width()
-      maxWidth = Math.max.apply(Math, widths) + 10
-      maxWidth = limit if maxWidth > limit
-      $static.each -> $(@).width(maxWidth)
-    , 50
+    maxWidth = Math.max.apply(Math, widths) + 10
+    maxWidth = limit if maxWidth > limit
+
+    $static.width(maxWidth)
 
     $dynamic.find('span')
       .draggable

@@ -18,12 +18,6 @@ $.addButton = $ '<a>',
   class: 'add'
   href: '#'
 
-$.timer = $ '<div>',
-  html: $.icon('stopwatch')
-  class: 'timer'
-.append(' ')
-.append $('<span>', {class: 'time'})
-
 $.spinnerOptions =
   lines: 13
   length: 11

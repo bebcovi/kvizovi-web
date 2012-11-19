@@ -20,7 +20,7 @@ class GameSubmission
   validate :validate_uniqueness_of_players
 
   def quiz
-    @quiz ||= Quiz.find(quiz_id)
+    @quiz ||= Quiz.find(quiz_id) if quiz_id
   end
 
   def info

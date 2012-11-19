@@ -23,12 +23,7 @@ App.Controllers.games =
     setPlural       = -> $button.html $button.html().replace(/(Započni)\b/, '$1te')
     setSingular     = -> $button.html $button.html().replace(/(Započni)\w+/, '$1')
 
-
-    if not $quizzesChecked.length
-      $players.hide()
-      $login.hide()
-      $buttons.hide()
-    else
+    if $quizzesChecked.length
       setQuizName $quizzesChecked.next().text()
       setPlural() if $playersChecked.val() is '2'
 
@@ -59,7 +54,7 @@ App.Controllers.games =
 
     $buttons     = $('.btn-toolbar', $form)
 
-    $timer       = $.timer.clone().prependTo $('.main_content')
+    $timer       = $('.timer')
     $time        = $('.time', $timer)
 
     updateTimer = ->

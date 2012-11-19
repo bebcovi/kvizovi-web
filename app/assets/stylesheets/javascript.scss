@@ -1,0 +1,19 @@
+.js {
+
+  body.games {
+    &.new {
+      .players,
+      .login,
+      .btn-toolbar {
+        display: none;
+      }
+    }
+  }
+
+  .question_association {
+    &.show {
+      ul { display: none; }
+    }
+  }
+
+}

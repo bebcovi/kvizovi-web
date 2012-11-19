@@ -1,5 +1,5 @@
 !!!
-%html{lang: "hr"}
+%html.no-js{lang: "hr"}
   %head
     %meta{charset: "utf-8"}
     %meta{:"http-equiv" => "X-UA-Compatibile", content: "IE=edge,chrome=1"}
@@ -7,9 +7,11 @@
     %meta{name: "robots", content: "noindex"}
     = favicon_link_tag
     = stylesheet_link_tag "application"
-    = javascript_include_tag "application"
     = javascript_include_tag "//use.typekit.net/nfo7hcu.js"
     %script try{Typekit.load();}catch(e){}
+    %script
+      -# by Paul Irish (@paul_irish)
+      (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
 
   %body{class: body_class}
     .navbar.navbar-static-top.navbar-inverse
@@ -28,3 +30,5 @@
     .container-fluid
       .main_content
         = render "layouts/#{controller.send(:sub_layout)}"
+
+    = javascript_include_tag "application"
