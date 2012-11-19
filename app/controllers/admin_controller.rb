@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   def index
-    @schools = School.where("name <> '#{admin_school.name}'")
-    @students = Student.where("school_id <> #{admin_school.id}").includes(:school)
+    @schools = (admin_school ? School.where("name <> '#{admin_school.name}'") : School.scoped)
+    @students = (admin_school ? Student.where("school_id <> #{admin_school.id}") : Student.scoped).includes(:school)
   end
 
   def school
