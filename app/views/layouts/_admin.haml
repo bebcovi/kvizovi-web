@@ -1,0 +1,6 @@
+- if params[:action] == "index"
+  = breadcrumb [["Admin", nil]]
+- elsif params[:action] == "school"
+  = breadcrumb [["Admin", admin_path], [@school.name, nil]]
+
+= yield
