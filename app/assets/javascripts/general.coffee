@@ -9,7 +9,7 @@ App.general = ->
     placement: 'top'
     container: 'body'
 
-  $('input[data-body]').popover
+  $('input[data-content]').popover
     html: true
     trigger: 'focus'
 

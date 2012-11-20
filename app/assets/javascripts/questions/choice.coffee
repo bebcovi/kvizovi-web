@@ -70,3 +70,7 @@ App.Questions.choice =
   edit: ($form) ->
 
     @new $form
+
+  create: ($form) ->
+
+    @new $form

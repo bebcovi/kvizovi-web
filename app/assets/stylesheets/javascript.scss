@@ -22,11 +22,14 @@
   }
 
   .question_image {
+    &.new,
     &.edit,
-    &.new {
-      > .file,
-      > .url {
-        display: none;
+    &.create {
+      > .file {
+        div.file,
+        div.url {
+          display: none;
+        }
       }
     }
   }

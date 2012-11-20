@@ -120,3 +120,7 @@ App.Questions.association =
   edit: ($form) ->
 
     @new $form
+
+  create: ($form) ->
+
+    @new $form

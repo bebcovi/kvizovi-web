@@ -5,6 +5,6 @@
 - if params[:action] == "edit"
   %img.img-polaroid.preview{src: image_question.image.url(:resized)}
 - else
-  %img.img-polaroid.preview{style: 'display: none'}
+  %img.img-polaroid.preview.hide
 
 = f.input :answer, as: :string, input_html: {title: "Dobro za znati...", data: {content: answer_title}}

@@ -7,32 +7,36 @@ App.Questions.image =
     # Previewing images using the FileSystem API:
     # http://stackoverflow.com/a/4459419/1247274
 
-    $file       = $('div.file', $form)
-    $fileInput  = $('input', $file)
-    $url        = $('div.url', $form)
-    $urlInput   = $('input', $url)
+    $fileWrapper = $form.children('div.file')
+    $file        = $fileWrapper.find('div.file')
+    $fileInput   = $file.find('input')
+    $url         = $fileWrapper.find('div.url')
+    $urlInput    = $url.find('input')
 
-    $toggleType = $('<a>', {href: '#'}).addClass('btn toggle_type')
+    $toggleType  = $('<a>', {href: '#'}).addClass('btn toggle_type')
 
-    $img        = $('.preview', $form)
-    img         = $img[0]
-    existingSrc = img.src
+    $img         = $('.preview', $form)
+    img          = $img[0]
+    existingSrc  = img.src
 
-    isFileEmpty = not $fileInput.val() # it's always empty, lol
-    isUrlEmpty  = not $urlInput.val()
+    isFileEmpty  = not $fileInput.val() # it always is, lol
+    isUrlEmpty   = not $urlInput.val()
 
-    isNew       = not existingSrc
-    isEdit      = $form.hasClass('edit')
-    isCreate    = not (isNew or isEdit)
+    isNew        = $form.hasClass('new')
+    isEdit       = $form.hasClass('edit')
+    isCreate     = $form.hasClass('create')
 
     loadImg = (src) ->
       img.src = src
       img.onload = -> $img.show()
 
-    if isNew or isUrlEmpty
+    if isUrlEmpty
       $file.show()
     else
       $url.show()
+
+    if isCreate and not isUrlEmpty
+      loadImg $urlInput.val()
 
     $toggleType
       .on 'click', (event) ->
@@ -68,7 +72,7 @@ App.Questions.image =
         else
           alert "Datoteka #{file.name} nije slika."
       else
-        if not isNew
+        if existingSrc
           loadImg existingSrc
         else
           $img.hide()
@@ -79,9 +83,18 @@ App.Questions.image =
           $fileInput.val('')
           loadImg $urlInput.val()
         else
-          if not isNew
+          if existingSrc
             loadImg existingSrc
           else
+            img.src = ''
+            $img.hide()
+
+      .on 'keyup', ->
+        unless $urlInput.val()
+          if existingSrc
+            loadImg existingSrc
+          else
+            img.src = ''
             $img.hide()
 
       .on 'paste', ->
@@ -90,5 +103,9 @@ App.Questions.image =
         , 100
 
   edit: ($form) ->
+
+    @new $form
+
+  create: ($form) ->
 
     @new $form

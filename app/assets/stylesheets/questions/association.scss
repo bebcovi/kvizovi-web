@@ -1,7 +1,8 @@
 .question_association {
 
+  &.new,
   &.edit,
-  &.new {
+  &.create {
     li {
       margin-bottom: $baseLineHeight/2;
 
