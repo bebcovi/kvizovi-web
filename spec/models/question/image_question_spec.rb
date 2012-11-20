@@ -23,15 +23,20 @@ describe ImageQuestion do
       its(:image) { should respond_to(:url) }
 
       it "can receive a URL" do
-        @it.image_url = "https://dl.dropbox.com/u/16783504/image.jpg"
+        @it.image_url = "http://designyoutrust.com/wp-content/uploads2/bla.jpg"
+        @it.image_file_name.should eq "bla.jpg"
+      end
+
+      it "can receive a file" do
+        @it.image = nil
+        @it.image_file = Rack::Test::UploadedFile.new("#{ROOT}/spec/fixtures/files/image.jpg", "image/jpeg")
         @it.image_file_name.should eq "image.jpg"
       end
     end
 
     it "saves sizes" do
-      @it.send(:assign_image_sizes)
-      @it.image_width(:original).should be_a(Integer)
-      @it.image_height(:original).should be_a(Integer)
+      @it.image_width.should be_a(Integer)
+      @it.image_height.should be_a(Integer)
       @it.image_width(:resized).should be_a(Integer)
       @it.image_height(:resized).should be_a(Integer)
     end
@@ -47,15 +52,6 @@ describe ImageQuestion do
       @it.image = nil
       @it.image_url = "invalid URL"
       @it.should_not be_valid
-    end
-
-    it "accepts either file or an URL as the image" do
-      @it.image_url = "https://dl.dropbox.com/u/16783504/image.jpg"
-      @it.should be_valid
-
-      @it.image_url = nil
-      @it.image_file = Rack::Test::UploadedFile.new("#{ROOT}/spec/fixtures/files/image.jpg")
-      @it.should be_valid
     end
   end
 end

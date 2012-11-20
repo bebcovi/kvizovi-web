@@ -1,3 +1,4 @@
+# encoding: utf-8
 require_relative "text_question"
 require "paperclip"
 require "active_support/core_ext/numeric/bytes"
@@ -12,6 +13,12 @@ class ImageQuestion < TextQuestion
   include Paperclip::Glue
   has_attached_file :image, styles: {resized: "x250>"},
     dropbox_options: { path: ->(style) { "lektire/#{id}_#{image.original_filename}" } }
+
+  assign_image = instance_method(:image=)
+  define_method(:image=) do |file|
+    assign_image.bind(self).call(file)
+    assign_image_sizes
+  end
 
   attr_reader :image_url, :image_file
   def image_url=(url)
@@ -34,9 +41,7 @@ class ImageQuestion < TextQuestion
   def image_height(style = :original) image_size[style][:height] end
 
   validate :validate_image_url
-  validates_attachment :image, presence: true, size: {less_than_or_equal_to: 1.megabyte}
-
-  before_save :assign_image_sizes
+  validate :validate_image_size
 
   def dup
     super.tap do |question|
@@ -47,17 +52,21 @@ class ImageQuestion < TextQuestion
   private
 
   def assign_image_sizes
-    size = {}
-    image.instance_variable_get("@queued_for_write").each do |style, file|
+    self.image_size = image.instance_variable_get("@queued_for_write").inject({}) do |hash, (style, file)|
       geometry = Paperclip::Geometry.from_file(file)
-      size[style] = {width: geometry.width.to_i, height: geometry.height.to_i}
+      hash.update(style => {width: geometry.width.to_i, height: geometry.height.to_i})
     end
-    self.image_size = size
   end
 
   def validate_image_url
     if image_url.present? and not image.present?
       errors[:image] << "Nije validna URL adresa."
+    end
+  end
+
+  def validate_image_size
+    if image.present?
+      errors[:image] << "Slika ne smije biti veća od 1 MB." if image.size > 1.megabyte
     end
   end
 end
