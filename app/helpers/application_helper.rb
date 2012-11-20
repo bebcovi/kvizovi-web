@@ -37,7 +37,7 @@ module ApplicationHelper
   end
 
   def logout_button(string, path, options = {})
-    link_to string.prepend_icon("exit"), path, {method: :delete}.merge(options)
+    link_to string.prepend_icon("exit"), path, options
   end
 
   def change_password_button(string, path, options = {})
