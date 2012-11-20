@@ -57,9 +57,18 @@ describe "Questions" do
       create(:question, school: other_school, quizzes: [quiz])
     }
 
-    they "can be added to the school" do
+
+    they "can be copied" do
       visit questions_path
-      expect { click_on "Dodaj" }.to change{@school.questions.count}.by 1
+      within(".btn-group") { all("a").first.click }
+
+      click_on "Natrag"
+      current_path.should eq questions_path
+
+      within(".btn-group") { all("a").first.click }
+      click_on "Kopiraj"
+
+      expect { click_on "Stvori" }.to change{@school.questions.count}.by 1
       current_path.should eq questions_path
     end
   end

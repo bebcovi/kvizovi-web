@@ -26,6 +26,10 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def show
+    @question = Question.find(params[:id])
+  end
+
   def edit
     @question = @scope.questions.find(params[:id])
   end

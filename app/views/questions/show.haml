@@ -1,0 +1,12 @@
+= simple_form_for :game, url: polymorphic_path([@scope, @question.becomes(Question)], action: "copy"), method: "get", html: {class: "show question_#{@question.category}"} do |f|
+
+  %h2= smarty_pants @question.content
+
+  = render object: @question, partial: @question.to_partial_path, locals: {f: f}
+
+  - if @question.hint?
+    %p.hint Uputa: #{@question.hint}
+
+  = buttons(f) do |b|
+    = b.cancel_button "Natrag", polymorphic_path([@scope, Question])
+    = b.button_button "Kopiraj".prepend_icon("plus")
