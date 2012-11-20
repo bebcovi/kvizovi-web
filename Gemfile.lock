@@ -27,6 +27,8 @@ GEM
       tzinfo (~> 0.3.29)
     activerecord-nulldb-adapter (0.2.3)
       activerecord (>= 2.0.0)
+    activerecord-postgres-array (0.0.8)
+      activerecord
     activerecord-postgres-hstore (0.4.1)
       pg
       rails
@@ -251,6 +253,7 @@ PLATFORMS
 DEPENDENCIES
   active_attr
   activerecord-nulldb-adapter (>= 0.2.3)
+  activerecord-postgres-array
   activerecord-postgres-hstore
   acts-as-taggable-on
   anjlab-bootstrap-rails
