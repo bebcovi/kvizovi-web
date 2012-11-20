@@ -55,5 +55,28 @@ describe "Questions" do
     after(:all) { @question.destroy }
   end
 
+  describe "removing question from a quiz" do
+    before(:all) { @question = create(:question, school: @school) }
+    before(:each) { @question.quizzes << @quiz }
+
+    it "removes the question from the quiz" do
+      visit quiz_questions_path(@quiz)
+
+      expect {
+        within(".btn-group") { all("a").last.click }
+      }.to change{@quiz.questions.count}.by -1
+    end
+
+    it "does not delete the question" do
+      visit quiz_questions_path(@quiz)
+
+      expect {
+        within(".btn-group") { all("a").last.click }
+      }.to_not change{@school.questions.count}
+    end
+
+    after(:all) { @question.destroy }
+  end
+
   after(:all) { @school.destroy }
 end

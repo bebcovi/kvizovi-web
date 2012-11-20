@@ -1,5 +1,9 @@
 .btn-group
-  - if @scope
+  - if @scope.is_a?(Quiz)
+    = edit_button "", polymorphic_path([@scope, question.becomes(Question)], action: "edit"), title: "Izmjeni"
+    = link_to icon("plus"), polymorphic_path([@scope, question.becomes(Question)], action: "copy"), class: "btn", title: "Kopiraj"
+    = link_to icon("remove"), polymorphic_path([@scope, question.becomes(Question)], action: "remove"), class: "btn", method: :post, title: "Ukloni iz kviza"
+  - elsif @scope.is_a?(School)
     - if params[:include].blank?
       = edit_button "", polymorphic_path([@scope, question.becomes(Question)], action: "edit"), title: "Izmjeni"
       = link_to icon("plus"), polymorphic_path([@scope, question.becomes(Question)], action: "copy"), class: "btn", title: "Kopiraj"

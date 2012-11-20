@@ -44,6 +44,7 @@ Lektire::Application.routes.draw do
       member {
         get "copy"
         post "include"
+        post "remove"
       }
     end
 

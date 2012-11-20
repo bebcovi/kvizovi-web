@@ -65,6 +65,11 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.find(params[:id])
   end
 
+  def remove
+    @scope.questions.delete(current_user.questions.find(params[:id]))
+    redirect_to :back, notice: flash_message(:notice)
+  end
+
   def destroy
     current_user.questions.find(params[:id]).destroy
     redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)

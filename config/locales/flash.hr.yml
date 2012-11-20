@@ -53,3 +53,5 @@ hr:
         notice: "Pitanje je uspješno izbrisano."
       copy:
         notice: "Pitanje je uspješno preuzeto."
+      remove:
+        notice: "Pitanje je uspješno uklonjeno iz kviza."
