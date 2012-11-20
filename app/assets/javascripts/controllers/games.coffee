@@ -24,6 +24,7 @@ App.Controllers.games =
     setSingular     = -> $button.html $button.html().replace(/(Započni)\w+/, '$1')
 
     if $quizzesChecked.length
+      $buttons.show()
       setQuizName $quizzesChecked.next().text()
       setPlural() if $playersChecked.val() is '2'
 
@@ -128,8 +129,8 @@ App.Controllers.games =
         onSubmit: clearStorage
 
     $('.navbar').on 'click', 'a', (event) ->
-      href = @href
       event.preventDefault()
+      href = @href
       $.modalAjax
         url: $form.find('.cancel').attr('href')
         onSubmit: (event) ->

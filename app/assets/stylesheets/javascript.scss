@@ -8,6 +8,11 @@
         display: none;
       }
     }
+    &.create {
+      .btn-toolbar {
+        display: none;
+      }
+    }
   }
 
   .question_association {
