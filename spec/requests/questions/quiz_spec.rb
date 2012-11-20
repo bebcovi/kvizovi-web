@@ -51,7 +51,6 @@ describe "Questions" do
       current_path.should eq quiz_questions_path(@quiz)
     end
 
-    after(:each) { @question.quizzes.clear }
     after(:all) { @question.destroy }
   end
 

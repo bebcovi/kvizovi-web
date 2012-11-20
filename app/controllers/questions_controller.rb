@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   def index
     @quiz = Quiz.find(params[:include]) if params[:include]
     @questions = if nested?
-                   unless params[:include]
+                   unless @quiz
                      @scope.questions
                    else
                      @scope.questions.not_belonging_to(@quiz)
@@ -57,7 +57,7 @@ class QuestionsController < ApplicationController
   end
 
   def include
-    @scope.questions << Question.find(params[:id])
+    @scope.questions << current_user.questions.find(params[:id])
     redirect_to :back
   end
 
