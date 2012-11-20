@@ -59,7 +59,7 @@ describe "School" do
       it "gets redirected back to quizzes" do
         visit edit_quiz_path(@quiz)
         click_on "Spremi"
-        current_path.should eq quizzes_path
+        current_path.should eq quiz_questions_path(@quiz)
       end
     end
 
