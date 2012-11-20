@@ -11,7 +11,7 @@
     %li{class: "player_#{number(player_number)}"}
       %p
         %strong.username= player.username.prepend_icon("user")
-        %span.rank Točno si odgovorio na #{score} od #{@game_review.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
+        %span.rank Točno si odgovori#{player.male? ? "o" : "la"} na #{score} od #{@game_review.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
       .progress
         .bar{style: "width: #{percentage(score, @game_review.total_score)}%"}
 

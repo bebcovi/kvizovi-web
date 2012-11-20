@@ -8,7 +8,14 @@ class GameReview
   end
 
   def players
-    @players ||= player_class.find(@hash[:player_ids])
+    @players ||= player_class.find(@hash[:player_ids]).each do |player|
+      if player.is_a?(School)
+        player.instance_eval do
+          def male?;   true end
+          def female?; false end
+        end
+      end
+    end
   end
 
   def scores

@@ -37,6 +37,14 @@ class Student < ActiveRecord::Base
     full_name
   end
 
+  def male?
+    gender == "Muško"
+  end
+
+  def female?
+    gender == "Žensko"
+  end
+
   def self.authenticate(credentials)
     find_by_username(credentials[:username]).try(:authenticate, credentials[:password])
   end
