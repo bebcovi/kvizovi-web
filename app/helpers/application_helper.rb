@@ -111,8 +111,7 @@ module ApplicationHelper
         @n = @n.to_i + 1
         name = "#{object_name}[#{attribute_name}][]"
         id = name.gsub(/\[([^\]]+)\]/, '_\1').sub(/\[\]$/, "_#{@n}")
-        label_text = "#{Nokogiri::HTML(label(attribute_name)).at(:label).inner_text} #{@n}"
-        super(attribute_name, {input_html: {id: id, name: name}, label: label_text, label_html: {for: id}}.deep_merge(options))
+        super(attribute_name, {input_html: {id: id, name: name}, label_html: {for: id}}.deep_merge(options))
       end
     end
     yield f

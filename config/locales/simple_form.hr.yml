@@ -15,6 +15,7 @@ hr:
         hint: "Uputa (neobavezno)"
         image_file: "Slika"
         image_url: "URL od slike"
+        provided_answers: "Ponuđeni odgovori"
       school:
         name: "Ime škole"
         level: "Tip škole"

@@ -2,10 +2,9 @@ require "spec_helper_lite"
 use_nulldb { require_relative "../../../app/models/question/image_question" }
 
 describe ImageQuestion do
+  before(:each) { stub_for_paperclip }
   before(:each) { @it = build(:image_question) }
   subject { @it }
-
-  before(:each) { setup_paperclip }
 
   use_nulldb
 

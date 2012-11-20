@@ -22,10 +22,8 @@ module UnitSpecHelpers
     result
   end
 
-  def setup_paperclip
+  def stub_for_paperclip
     Paperclip.options[:log] = false
-
-    # Paperclip want to use this when assigning the attachment
     stub_const("Rails", Module.new)
     Rails.stub(:root)
   end

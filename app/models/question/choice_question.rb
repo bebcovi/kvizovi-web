@@ -10,10 +10,9 @@ class ChoiceQuestion < Question
     @provided_answers ||= ProvidedAnswers.new(super || [])
   end
 
-  def provided_answers=(value)
+  def provided_answers=(array)
     @provided_answers = nil
-    array = convert_to_array(value).reject.each_with_index { |element, index| element.blank? and index != 0 }
-    super(array)
+    super([array.first] + array[1..-1].reject(&:blank?))
   end
 
   def answer
@@ -33,12 +32,8 @@ class ChoiceQuestion < Question
 
   def validate_provided_answers
     if provided_answers.first.blank?
-      errors[:base] << "Prvi ponuđeni odgovor ne smije biti prazan."
+      errors[:provided_answers] << "Prvi ponuđeni odgovor ne smije biti prazan."
     end
-  end
-
-  def convert_to_array(value)
-    Array(value)
   end
 end
 

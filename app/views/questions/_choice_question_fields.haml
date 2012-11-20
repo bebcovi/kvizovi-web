@@ -1,8 +1,8 @@
 = f.error :base
 
-= f.label :provided_answers, "Ponuđeni odgovori"
-
+= f.label :provided_answers
 %ol
   - input_collection(f) do |c|
-    - number_of_fields(choice_question).times do |idx|
-      %li= c.input :provided_answers, as: :string, label: false, placeholder: "Opcija #{idx + 1}", wrapper_html: {class: ("success" if idx == 0)}, input_html: {value: choice_question.provided_answers[idx], title: ("To će biti točan odgovor" if idx == 0)}
+    %li= c.input :provided_answers, label: false, placeholder: "Opcija 1", wrapper_html: {class: "success"}, input_html: {value: choice_question.provided_answers[0], title: "Ovo će biti točan odgovor"}
+    - (2..number_of_fields(choice_question)).each do |n|
+      %li= c.input :provided_answers, label: false, placeholder: "Opcija #{n}", input_html: {value: choice_question.provided_answers[n - 1]}, error: false
