@@ -25,7 +25,7 @@ describe "School" do
       context "on validation errors" do
         it "is held on the same page" do
           visit new_quiz_question_path(@quiz, category: "boolean")
-          expect { click_on "Stvori" }.to_not change{@quiz.reload.boolean_questions.count}
+          expect { click_on "Stvori" }.to_not change{@quiz.boolean_questions.count}
           current_path.should eq quiz_questions_path(@quiz)
         end
       end
@@ -39,7 +39,7 @@ describe "School" do
           fill_in "Tekst pitanja", with: attributes[:content]
           choose "Točno"
 
-          expect { click_on "Stvori" }.to change{@quiz.reload.boolean_questions.count}.by 1
+          expect { click_on "Stvori" }.to change{@quiz.boolean_questions.count}.by 1
           current_path.should eq quiz_questions_path(@quiz)
         end
       end
@@ -54,7 +54,7 @@ describe "School" do
       context "on validation errors" do
         it "is held on the same page" do
           visit new_quiz_question_path(@quiz, category: "choice")
-          expect { click_on "Stvori" }.to_not change{@quiz.reload.choice_questions.count}
+          expect { click_on "Stvori" }.to_not change{@quiz.choice_questions.count}
           current_path.should eq quiz_questions_path(@quiz)
         end
       end
@@ -68,7 +68,7 @@ describe "School" do
           fill_in "Tekst pitanja", with: attributes[:content]
           (1..3).each { |n| fill_in "question_provided_answers_#{n}", with: attributes[:provided_answers][n-1] }
 
-          expect { click_on "Stvori" }.to change{@quiz.reload.choice_questions.count}.by 1
+          expect { click_on "Stvori" }.to change{@quiz.choice_questions.count}.by 1
           current_path.should eq quiz_questions_path(@quiz)
         end
       end
@@ -83,7 +83,7 @@ describe "School" do
       context "on validation errors" do
         it "is held on the same page" do
           visit new_quiz_question_path(@quiz, category: "association")
-          expect { click_on "Stvori" }.to_not change{@quiz.reload.association_questions.count}
+          expect { click_on "Stvori" }.to_not change{@quiz.association_questions.count}
           current_path.should eq quiz_questions_path(@quiz)
         end
       end
@@ -101,7 +101,7 @@ describe "School" do
             fill_in "question_associations_#{field_n + 1}", with: attributes[:associations].values[n-1]
           end
 
-          expect { click_on "Stvori" }.to change{@quiz.reload.association_questions.count}.by 1
+          expect { click_on "Stvori" }.to change{@quiz.association_questions.count}.by 1
           current_path.should eq quiz_questions_path(@quiz)
         end
       end
@@ -124,19 +124,19 @@ describe "School" do
 
         it "can be done" do
           fill_in "URL od slike", with: "http://2.bp.blogspot.com/-pZQCOrLJWI0/TcvM0X_mjOI/AAAAAAAADQI/UcxDKSzseBg/s640/Cool+Images+by+cool+images786+%25283%2529.jpg"
-          expect { click_on "Stvori" }.to change{@quiz.reload.image_questions.count}.by 1
+          expect { click_on "Stvori" }.to change{@quiz.image_questions.count}.by 1
         end
 
         it "shows validation errors when URL is invalid" do
           fill_in "URL od slike", with: "http://invalid-url"
-          expect { click_on "Stvori" }.to_not change{@quiz.reload.image_questions.count}
+          expect { click_on "Stvori" }.to_not change{@quiz.image_questions.count}
         end
       end
 
       context "on validation errors" do
         it "is held on the same page" do
           visit new_quiz_question_path(@quiz, category: "image")
-          expect { click_on "Stvori" }.to_not change{@quiz.reload.image_questions.count}
+          expect { click_on "Stvori" }.to_not change{@quiz.image_questions.count}
           current_path.should eq quiz_questions_path(@quiz)
         end
       end
@@ -149,7 +149,7 @@ describe "School" do
           attach_file "Slika", "#{Rails.root}/spec/fixtures/files/image.jpg"
           fill_in "Odgovor", with: attributes[:answer]
 
-          expect { click_on "Stvori" }.to change{@quiz.reload.image_questions.count}.by 1
+          expect { click_on "Stvori" }.to change{@quiz.image_questions.count}.by 1
           current_path.should eq quiz_questions_path(@quiz)
         end
       end
@@ -164,7 +164,7 @@ describe "School" do
       context "on validation errors" do
         it "is held on the same page" do
           visit new_quiz_question_path(@quiz, category: "text")
-          expect { click_on "Stvori" }.to_not change{@quiz.reload.text_questions.count}
+          expect { click_on "Stvori" }.to_not change{@quiz.text_questions.count}
           current_path.should eq quiz_questions_path(@quiz)
         end
       end
@@ -178,7 +178,7 @@ describe "School" do
           fill_in "Tekst pitanja", with: attributes[:content]
           fill_in "Odgovor", with: attributes[:answer]
 
-          expect { click_on "Stvori" }.to change{@quiz.reload.text_questions.count}.by(1)
+          expect { click_on "Stvori" }.to change{@quiz.text_questions.count}.by(1)
           current_path.should eq quiz_questions_path(@quiz)
         end
       end
@@ -194,7 +194,7 @@ describe "School" do
       visit quiz_questions_path(@quiz)
 
       within(".btn-group") { all("a").second.click }
-      expect { click_on "Stvori" }.to change{@quiz.reload.questions.count}.by 1
+      expect { click_on "Stvori" }.to change{@quiz.questions.count}.by 1
 
       Question.first.destroy
     end

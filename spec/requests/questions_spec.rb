@@ -48,15 +48,28 @@ describe "Questions" do
 
       current_path.should eq school_questions_path(@school)
     end
+
+    they "can be copied" do
+      pending
+    end
   end
 
   context "from everyone" do
     before(:all) {
-      other_school = create(:other_school)
-      quiz = create(:quiz, school: other_school)
-      create(:question, school: other_school, quizzes: [quiz])
+      @other_school = create(:other_school)
+      create(:question, school: @other_school)
     }
 
+    they "aren't displayed if they belong to the logged in school" do
+      question1 = create(:question, content: "Question 1", school: @school)
+      question2 = create(:question, content: "Question 2", school: @other_school)
+      visit questions_path
+
+      page.should have_content(question2.content)
+      page.should_not have_content(question1.content)
+
+      [question1, question2].each(&:destroy)
+    end
 
     they "can be copied" do
       visit questions_path
@@ -71,6 +84,8 @@ describe "Questions" do
       expect { click_on "Stvori" }.to change{@school.questions.count}.by 1
       current_path.should eq questions_path
     end
+
+    after(:all) { @other_school.destroy }
   end
 
   after(:all) { @school.destroy }

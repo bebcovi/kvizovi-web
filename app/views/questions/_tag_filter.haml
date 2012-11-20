@@ -1,6 +1,7 @@
 = simple_form_for Filter.new(params[:filter]), url: request.path, method: "get" do |f|
+
   .input-append{class: ("input-prepend" if params[:filter])}
     - if params[:filter]
       = link_to icon("cancel"), request.path, class: "btn", title: "Očisti filter"
-    = f.input :tags, label: false, placeholder: %(Npr. "antika, realizam..."), wrapper: false, bootstrap_wrapper: false, input_html: {class: "input-xlarge", title: "Pretražuje se po tagovima"}
+    = f.input :tags, label: false, placeholder: (%(Npr. "antika, realizam...") unless params[:filter]), wrapper: false, bootstrap_wrapper: false, input_html: {class: "input-xlarge", title: "Pretražuje se po tagovima"}
     = f.button :button, icon("search"), name: nil, wrapper: false, title: "Traži"

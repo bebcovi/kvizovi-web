@@ -1,4 +1,5 @@
-require 'spec_helper_lite'
+require "spec_helper_lite"
+use_nulldb { require_relative "../../app/models/quiz" }
 
 describe Quiz do
   before(:each) { @it = build(:quiz) }

@@ -24,10 +24,7 @@ class Question < ActiveRecord::Base
 
   default_scope -> { order("updated_at DESC") }
   scope :not_owned_by, ->(school) { where("school_id <> #{school.id}") }
-  scope :filter, ->(filter) {
-    result = scoped
-    result = result.tagged_with(filter[:tags]) if filter[:tags].present?
-  }
+  scope :filter, ->(filter) { tagged_with(filter[:tags]) }
 
   validates_presence_of :content
 

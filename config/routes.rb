@@ -30,8 +30,6 @@ Lektire::Application.routes.draw do
     resources :questions do
       member { get "copy" }
     end
-
-    member { put "notify" }
   end
   resources :students do
     member do

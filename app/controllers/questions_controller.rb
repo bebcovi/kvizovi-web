@@ -31,11 +31,11 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @question = @scope.questions.find(params[:id])
+    @question = current_user.questions.find(params[:id])
   end
 
   def update
-    @question = @scope.questions.find(params[:id])
+    @question = current_user.questions.find(params[:id])
 
     if @question.update_attributes(params[:question])
       redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)
@@ -51,11 +51,11 @@ class QuestionsController < ApplicationController
   end
 
   def delete
-    @question = @scope.questions.find(params[:id])
+    @question = current_user.questions.find(params[:id])
   end
 
   def destroy
-    @scope.questions.find(params[:id]).destroy
+    current_user.questions.find(params[:id]).destroy
     redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)
   end
 
