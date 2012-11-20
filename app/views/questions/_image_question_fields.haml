@@ -2,7 +2,7 @@
   = f.input :image_file, as: :file
   = f.input :image_url, placeholder: %(Npr. "http://www.primjer.hr/neka-slika.jpg")
 
-- if image_question.valid?
+- if params[:action] == "edit"
   %img.img-polaroid.preview{src: image_question.image.url(:resized)}
 - else
   %img.img-polaroid.preview{style: 'display: none'}

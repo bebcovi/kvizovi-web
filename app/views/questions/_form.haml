@@ -1,4 +1,4 @@
-= simple_form_for @question, url: url, as: :question, html: {class: "#{klass} question_#{@question.category}"} do |f|
+= simple_form_for @question, url: polymorphic_path([@scope, @question.becomes(Question)]), as: :question, html: {class: "#{params[:action]} question_#{@question.category}"} do |f|
 
   = hidden_field_tag :category, (params[:category] || @question.category)
 
