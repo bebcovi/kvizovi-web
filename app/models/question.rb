@@ -43,6 +43,12 @@ class Question < ActiveRecord::Base
     normal_cased_tag_list.map(&:downcase).join(", ")
   end
 
+  def dup
+    super.tap do |question|
+      question.tag_list = self.tag_list
+    end
+  end
+
   def category
     self.class.name.underscore.chomp("_question")
   end
