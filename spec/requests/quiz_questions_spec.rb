@@ -187,21 +187,6 @@ describe "School" do
     after(:all) { Question.destroy_all }
   end
 
-  describe "copying" do
-    before(:all) { @question = create(:question, school: @school, quizzes: [@quiz]) }
-
-    it "can be done" do
-      visit quiz_questions_path(@quiz)
-
-      within(".btn-group") { all("a").second.click }
-      expect { click_on "Stvori" }.to change{@quiz.questions.count}.by 1
-
-      Question.first.destroy
-    end
-
-    after(:all) { @question.destroy }
-  end
-
   context "when updating questions" do
     before(:all) { @question = create(:question, school: @school, quizzes: [@quiz]) }
 

@@ -1,6 +1,6 @@
 require "spec_helper_full"
 
-describe "Tagging" do
+describe "Tagging questions" do
   before(:all) {
     @school = create(:school)
     @question = create(:question, school: @school)
@@ -35,5 +35,8 @@ describe "Tagging" do
     page.should have_content("Nema pitanja s tim kategorijama.")
   end
 
-  after(:all) { @school.destroy }
+  after(:all) {
+    @question.destroy
+    @school.destroy
+  }
 end
