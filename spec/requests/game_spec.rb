@@ -5,8 +5,8 @@ describe "Game" do
   before(:all) do
     @school = create(:school)
     @quiz = create(:quiz, school: @school)
-    @janko = create(:janko, school: @school, grade: "#{@quiz.grades.first}a")
-    @matija = create(:matija, school: @school, grade: "#{@quiz.grades.first}d")
+    @janko = create(:janko, school: @school, grade: @quiz.grades.first)
+    @matija = create(:matija, school: @school, grade: @quiz.grades.last)
     @boolean_question     = create(:boolean_question, quizzes: [@quiz])
     @choice_question      = create(:choice_question, quizzes: [@quiz])
     @association_question = create(:association_question, quizzes: [@quiz])
