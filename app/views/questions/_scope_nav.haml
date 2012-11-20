@@ -1,0 +1,5 @@
+%ul.nav.nav-pills
+  %li{class: (request.path == school_questions_path(current_user) && "active")}
+    = link_to "Vaša pitanja", school_questions_path(current_user)
+  %li{class: (request.path == questions_path && "active")}
+    = link_to "Pitanja drugih škola", questions_path
