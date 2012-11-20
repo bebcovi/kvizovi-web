@@ -22,7 +22,7 @@ class Student < ActiveRecord::Base
   end
 
   def games
-    Game.where("games.first_player_id = #{id} or games.second_player_id = #{id}")
+    Game.where("games.first_player_id = #{id} OR games.second_player_id = #{id}")
   end
 
   def available_quizzes
