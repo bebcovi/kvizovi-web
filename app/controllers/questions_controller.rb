@@ -58,7 +58,7 @@ class QuestionsController < ApplicationController
 
   def include
     @scope.questions << current_user.questions.find(params[:id])
-    redirect_to :back
+    redirect_to :back, notice: flash_message(:notice, name: @scope.name)
   end
 
   def delete

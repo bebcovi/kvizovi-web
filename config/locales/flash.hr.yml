@@ -51,6 +51,8 @@ hr:
         notice: "Pitanje je uspješno izmijenjeno."
       destroy:
         notice: "Pitanje je uspješno izbrisano."
+      include:
+        notice: "Pitanje je uspješno dodano u kviz \"%{name}\"."
       copy:
         notice: "Pitanje je uspješno preuzeto."
       remove:
