@@ -4,7 +4,7 @@ App.helper = ->
 
   # turn off auto-complete in text inputs
 
-  $('[type="text"]').attr 'autocomplete', 'off'
+  $('[type="text"], [type="url"]').attr 'autocomplete', 'off'
 
   # remove the .btn class
 

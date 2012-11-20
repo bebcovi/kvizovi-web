@@ -3,8 +3,8 @@
   = f.input :image_url, placeholder: %(Npr. "http://www.primjer.hr/neka-slika.jpg")
 
 - if image_question.valid?
-  %img.preview{src: image_question.image.url(:resized)}
+  %img.img-polaroid.preview{src: image_question.image.url(:resized)}
 - else
-  %img.preview{style: 'display: none'}
+  %img.img-polaroid.preview{style: 'display: none'}
 
 = f.input :answer, as: :string, input_html: {title: "Dobro za znati...", data: {content: answer_title}}

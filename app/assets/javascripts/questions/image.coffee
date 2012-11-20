@@ -11,16 +11,28 @@ App.Questions.image =
     $fileInput  = $('input', $file)
     $url        = $('div.url', $form)
     $urlInput   = $('input', $url)
+
     $toggleType = $('<a>', {href: '#'}).addClass('btn toggle_type')
+
     $img        = $('.preview', $form)
     img         = $img[0]
     existingSrc = img.src
+
+    isFileEmpty = not $fileInput.val() # it's always empty, lol
+    isUrlEmpty  = not $urlInput.val()
+
+    isNew       = not existingSrc
+    isEdit      = $form.hasClass('edit')
+    isCreate    = not (isNew or isEdit)
 
     loadImg = (src) ->
       img.src = src
       img.onload = -> $img.show()
 
-    $url.hide()
+    if isNew or isUrlEmpty
+      $file.show()
+    else
+      $url.show()
 
     $toggleType
       .on 'click', (event) ->
@@ -56,7 +68,7 @@ App.Questions.image =
         else
           alert "Datoteka #{file.name} nije slika."
       else
-        if existingSrc
+        if not isNew
           loadImg existingSrc
         else
           $img.hide()
@@ -67,7 +79,7 @@ App.Questions.image =
           $fileInput.val('')
           loadImg $urlInput.val()
         else
-          if existingSrc
+          if not isNew
             loadImg existingSrc
           else
             $img.hide()

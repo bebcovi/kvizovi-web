@@ -16,4 +16,14 @@
     }
   }
 
+  .question_image {
+    &.edit,
+    &.new {
+      > .file,
+      > .url {
+        display: none;
+      }
+    }
+  }
+
 }
