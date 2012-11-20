@@ -29,6 +29,7 @@ class GamesController < ApplicationController
 
   before_filter only: :edit do
     game_state.next_question!
+    redirect_to game_path if game_state.current_question_number > game_state.questions_count
   end
 
   def edit

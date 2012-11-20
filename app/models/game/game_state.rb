@@ -103,7 +103,7 @@ class GameState
     # Other
 
     def game_over?
-      current_question_number == questions_count
+      current_question_number >= questions_count
     end
 
     def game_in_progress?
