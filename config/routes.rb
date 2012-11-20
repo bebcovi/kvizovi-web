@@ -41,7 +41,10 @@ Lektire::Application.routes.draw do
 
   resources :quizzes do
     resources :questions do
-      member { get "copy" }
+      member {
+        get "copy"
+        post "include"
+      }
     end
 
     member { put "toggle_activation" }

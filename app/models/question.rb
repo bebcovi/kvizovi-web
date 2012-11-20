@@ -24,6 +24,10 @@ class Question < ActiveRecord::Base
 
   default_scope -> { order("updated_at DESC") }
   scope :not_owned_by, ->(school) { where("school_id <> #{school.id}") }
+  scope :not_belonging_to, ->(quiz) {
+    joins("LEFT OUTER JOIN questions_quizzes ON questions_quizzes.question_id = questions.id").
+    where("questions_quizzes.quiz_id IS NULL OR questions_quizzes.quiz_id <> #{quiz.id}")
+  }
   scope :filter, ->(filter) { tagged_with(filter[:tags]) }
 
   validates_presence_of :content

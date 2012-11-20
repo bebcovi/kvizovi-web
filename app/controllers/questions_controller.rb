@@ -2,11 +2,17 @@ class QuestionsController < ApplicationController
   before_filter :assign_scope
 
   def index
+    @quiz = Quiz.find(params[:include]) if params[:include]
     @questions = if nested?
-                   @scope.questions
+                   unless params[:include]
+                     @scope.questions
+                   else
+                     @scope.questions.not_belonging_to(@quiz)
+                   end
                  else
                    Question.not_owned_by(current_user)
                  end
+
     @questions = @questions.filter(params[:filter]) if params[:filter]
     @questions = @questions.page(params[:page]).per_page(20) unless @scope.is_a?(Quiz)
   end
@@ -48,6 +54,11 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id]).dup
     @question.school = current_user
     render :new
+  end
+
+  def include
+    @scope.questions << Question.find(params[:id])
+    redirect_to :back
   end
 
   def delete

@@ -11,6 +11,8 @@
     = f.hidden_field :players_count, value: 1
     = f.button :button, "Testiraj kviz".prepend_icon("play"), {class: "btn btn-info"}.merge(@questions.count == 0 ? {disabled: true} : {})
 
+  = link_to "Uključi pitanje", school_questions_path(current_user, include: @scope.id), class: "btn"
+
   = render "tag_filter"
 
   - if @questions.any?
@@ -25,18 +27,25 @@
     - else
       %p.no_items Ovaj kviz trenutno nema pitanja.
 
-- elsif @scope.is_a?(School) && (school = @scope)
+- elsif @scope.is_a?(School)
 
   - @title = "Pitanja"
 
-  %ul.nav.nav-pills
-    %li{class: (request.path == school_questions_path(current_user) && "active")}
-      = link_to "Vaša pitanja", school_questions_path(current_user)
-    %li{class: (request.path == questions_path && "active")}
-      = link_to "Pitanja drugih škola", questions_path
+  - if params[:include].blank?
 
-  = render "new_question"
-  = render "tag_filter"
+    %ul.nav.nav-pills
+      %li{class: (request.path == school_questions_path(current_user) && "active")}
+        = link_to "Vaša pitanja", school_questions_path(current_user)
+      %li{class: (request.path == questions_path && "active")}
+        = link_to "Pitanja drugih škola", questions_path
+
+    = render "new_question"
+    = render "tag_filter"
+
+  - else
+
+    = render "tag_filter"
+    = link_to "Završi", quiz_questions_path(@quiz), class: "btn"
 
   - if @questions.any?
 
@@ -47,6 +56,8 @@
 
     - if params[:filter]
       %p.no_items Nema pitanja s tim tagovima.
+    - elsif params[:include]
+      %p.no_items Nemate pitanja izvan trenutnog kviza.
     - else
       %p.no_items Trenutno nemate pitanja.
 
