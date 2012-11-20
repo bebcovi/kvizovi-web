@@ -42,6 +42,7 @@ class ImageQuestion < TextQuestion
 
   validate :validate_image_url
   validate :validate_image_size
+  validates_attachment_presence :image
 
   def dup
     super.tap do |question|
