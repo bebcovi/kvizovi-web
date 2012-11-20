@@ -1,12 +1,11 @@
 require "spec_helper_lite"
-use_nulldb { require_relative "../../app/models/question" }
+use_nulldb { require_relative "../../app/models/question/boolean_question" }
 
 describe Question do
-  before(:each) { @it = build(:boolean_question) }
+  before(:each) { @it = build(:question) }
   subject { @it }
 
   use_nulldb
-
 
   describe "#hint" do
     it "has a getter and a setter" do
