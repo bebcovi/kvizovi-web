@@ -3,7 +3,9 @@
   = f.input :name, input_html: {autofocus: current_page?(action: "new")}
 
   %p Predviđeni razredi:
-  = f.input :grades, collection: grades, as: :check_boxes, label: false, item_wrapper_tag: :li
+  - current_user.grades.each do |grade|
+    %ol.grades
+      = f.input :grades, collection: grades(grade), as: :check_boxes, label: false, item_wrapper_tag: :li
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", (@quiz.new_record? ? quizzes_path : quiz_questions_path(@quiz))

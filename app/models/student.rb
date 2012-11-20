@@ -26,7 +26,7 @@ class Student < ActiveRecord::Base
   end
 
   def available_quizzes
-    school.quizzes.activated.with_intended_grade(grade)
+    school.quizzes.activated.for_student(self)
   end
 
   def full_name

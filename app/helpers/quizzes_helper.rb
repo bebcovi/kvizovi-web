@@ -1,6 +1,5 @@
 module QuizzesHelper
-  def grades
-    school = current_user
-    school.grades.map { |n| "#{n}." }.zip(school.grades)
+  def grades(grade)
+    ("#{grade}.a".."#{grade}.l").map { |label| [label, label.delete(".")] }
   end
 end

@@ -7,9 +7,9 @@ describe Quiz do
 
   use_nulldb
 
-  it "removes blanks and converts to integer when assigning grades" do
-    @it.grades = ["1", "", "2"]
-    @it.grades.should eq [1, 2]
+  it "assigns grades correctly" do
+    @it.grades = ["1b", "2a", "3c"]
+    @it.grades.should eq ["1b", "2a", "3c"]
   end
 
   describe "validations" do

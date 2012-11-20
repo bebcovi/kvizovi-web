@@ -47,7 +47,7 @@ require "rack/test/uploaded_file"
 class School < ActiveRecord::Base
   def create_example_quizzes
     quiz = quizzes.create!([
-      {name: "Antigona", grades: [1, 3, 4]}
+      {name: "Antigona"}
     ]).first
 
     quiz.boolean_questions.create!([

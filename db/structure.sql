@@ -135,8 +135,7 @@ CREATE TABLE quizzes (
     school_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    grades hstore,
-    grades_array character varying[]
+    grades character varying[]
 );
 
 
@@ -429,13 +428,6 @@ CREATE INDEX index_taggings_on_taggable_id_and_taggable_type_and_context ON tagg
 
 
 --
--- Name: quizzes_grades; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX quizzes_grades ON quizzes USING gin (grades);
-
-
---
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -501,3 +493,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121111164634');
 INSERT INTO schema_migrations (version) VALUES ('20121119215439');
 
 INSERT INTO schema_migrations (version) VALUES ('20121119220110');
+
+INSERT INTO schema_migrations (version) VALUES ('20121120153852');

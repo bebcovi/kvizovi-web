@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111164634) do
+ActiveRecord::Schema.define(:version => 20121120153852) do
 
   create_table "games", :force => true do |t|
     t.integer  "quiz_id"
@@ -40,15 +40,13 @@ ActiveRecord::Schema.define(:version => 20121111164634) do
   end
 
   create_table "quizzes", :force => true do |t|
-    t.string   "name"
-    t.boolean  "activated",  :default => false
-    t.integer  "school_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.hstore   "grades"
+    t.string       "name"
+    t.boolean      "activated",  :default => false
+    t.integer      "school_id"
+    t.datetime     "created_at",                    :null => false
+    t.datetime     "updated_at",                    :null => false
+    t.string_array "grades"
   end
-
-  add_index "quizzes", ["grades"], :name => "quizzes_grades"
 
   create_table "schools", :force => true do |t|
     t.string   "name"
