@@ -42,7 +42,7 @@ describe "School" do
 
     it "has the link for it" do
       visit quiz_questions_path(@quiz)
-      click_on "Izmjeni informacije o kvizu"
+      click_on "Izmjeni informacije"
       current_path.should eq edit_quiz_path(@quiz)
     end
 

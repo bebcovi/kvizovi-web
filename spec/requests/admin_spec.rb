@@ -11,4 +11,6 @@ describe "Admin page" do
     visit admin_path
     click_on @school.name
   end
+
+  after(:all) { @school.destroy }
 end

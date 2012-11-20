@@ -21,6 +21,14 @@ module UnitSpecHelpers
     puts "#{name} (#{Time.now - start}s)"
     result
   end
+
+  def setup_paperclip
+    Paperclip.options[:log] = false
+
+    # Paperclip want to use this when assigning the attachment
+    stub_const("Rails", Module.new)
+    Rails.stub(:root)
+  end
 end
 
 module NullDBSpecHelpers

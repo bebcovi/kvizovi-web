@@ -1,6 +1,6 @@
 require "spec_helper_full"
 
-describe "Tagging questions" do
+describe "Tags" do
   before(:all) {
     @school = create(:school)
     @question = create(:question, school: @school)
@@ -8,31 +8,36 @@ describe "Tagging questions" do
 
   before(:each) { login(:school, attributes_for(:school)) }
 
-  it "can be done through the form" do
-    visit edit_school_question_path(@school, @question)
+  def filter_with(tags)
+    fill_in "filter_tags", with: tags
+    within("#new_filter") { first("button").click }
+  end
 
-    fill_in "Tagovi", with: "Foo, Bar"
-    click_on "Spremi"
+  describe "filtering" do
+    before(:all) { @question.update_attributes(tag_list: "foo, bar") }
+    before(:each) { visit school_questions_path(@school) }
 
-    # Now we're on the index page
-    fill_in "Tagovi", with: "Foo"
-    click_on "Filtrirajte"
-    page.should_not have_content("Nema pitanja s tim kategorijama.")
+    it "does the obvious" do
+      filter_with("foo, bar")
+      page.should have_content(@question.content)
 
-    # Now we're on the index page
-    fill_in "Tagovi", with: "Bar"
-    click_on "Filtrirajte"
-    page.should_not have_content("Nema pitanja s tim kategorijama.")
+      filter_with("foo")
+      page.should have_content(@question.content)
 
-    # Now we're on the index page
-    fill_in "Tagovi", with: "Foo, Bar"
-    click_on "Filtrirajte"
-    page.should_not have_content("Nema pitanja s tim kategorijama.")
+      filter_with("bar")
+      page.should have_content(@question.content)
 
-    # Now we're on the index page
-    fill_in "Tagovi", with: "Baz"
-    click_on "Filtrirajte"
-    page.should have_content("Nema pitanja s tim kategorijama.")
+      filter_with("baz")
+      page.should_not have_content(@question.content)
+
+      filter_with("foo, bar, baz")
+      page.should_not have_content(@question.content)
+    end
+
+    it "is case insensitive" do
+      filter_with("Foo, Bar")
+      page.should have_content(@question.content)
+    end
   end
 
   after(:all) {
