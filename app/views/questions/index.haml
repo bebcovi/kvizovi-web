@@ -4,14 +4,14 @@
 
   = render "new_question"
 
-  = edit_button "Izmjeni informacije", edit_quiz_path(quiz), class: "btn edit_quiz"
+  = edit_button "", edit_quiz_path(quiz), class: "btn edit_quiz", title: "Izmjeni informacije"
+
+  = link_to icon("file-add"), school_questions_path(current_user, include: @scope.id), class: "btn associate_questions", title: "Pridruži pitanja"
 
   = simple_form_for :game_submission, url: game_path, method: :post do |f|
     = f.hidden_field :quiz_id, value: quiz.id
     = f.hidden_field :players_count, value: 1
-    = f.button :button, "Testiraj kviz".prepend_icon("play"), {class: "btn btn-info"}.merge(@questions.count == 0 ? {disabled: true} : {})
-
-  = link_to "Uključi pitanje", school_questions_path(current_user, include: @scope.id), class: "btn"
+    = f.button :button, icon("play"), {class: "btn btn-info", title: "Testiraj kviz"}.merge(@questions.count == 0 ? {disabled: true} : {})
 
   = render "tag_filter"
 
@@ -40,7 +40,7 @@
   - else
 
     = render "tag_filter"
-    = link_to "Završi", quiz_questions_path(@quiz), class: "btn"
+    = link_to "Završi", quiz_questions_path(@quiz), class: "btn btn-primary finish_associating"
 
   - if @questions.any?
 
