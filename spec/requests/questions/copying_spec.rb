@@ -13,10 +13,12 @@ describe "Copying questions" do
     it "copies the question" do
       visit quiz_questions_path(@quiz)
 
-      within(".btn-group") { all("a").second.click }
+      within(".actions .dropdown-menu") { all("a").third.click }
       expect { click_on "Stvori" }.to change{@quiz.questions.count}.by 1
 
-      copied_question = Question.first
+      current_path.should eq quiz_questions_path(@quiz)
+
+      copied_question = @school.questions.first
       copied_question.should_not eq @question
       copied_question.content.strip.should eq @question.content
 
@@ -35,10 +37,12 @@ describe "Copying questions" do
     it "copies the question" do
       visit school_questions_path(@school)
 
-      within(".btn-group") { all("a").second.click }
+      within(".actions .dropdown-menu") { all("a").third.click }
       expect { click_on "Stvori" }.to change{@school.questions.count}.by 1
 
-      copied_question = Question.first
+      current_path.should eq school_questions_path(@school)
+
+      copied_question = @school.questions.first
       copied_question.should_not eq @question
       copied_question.content.strip.should eq @question.content
 
@@ -54,20 +58,15 @@ describe "Copying questions" do
       @question = create(:question, school: @other_school)
     }
 
-    it "copies the question" do
+    it "moves the question to the currently logged in school" do
       visit questions_path
-      within(".btn-group") { all("a").first.click }
 
-      click_on "Natrag"
-      current_path.should eq questions_path
-
-      within(".btn-group") { all("a").first.click }
-      click_on "Kopiraj"
-
+      within(".actions .dropdown-menu") { all("a").second.click }
       expect { click_on "Stvori" }.to change{@school.questions.count}.by 1
-      current_path.should eq questions_path
 
-      copied_question = Question.first
+      current_path.should eq school_questions_path(@school)
+
+      copied_question = @school.questions.first
       copied_question.should_not eq @question
       copied_question.content.strip.should eq @question.content
 

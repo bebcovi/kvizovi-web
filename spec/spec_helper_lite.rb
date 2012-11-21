@@ -10,7 +10,6 @@ RSpec.configure do |config|
   config.include NullDBSpecHelpers
 
   config.alias_example_to :they
-  config.fail_fast = true
 end
 
 include NullDBSpecHelpers

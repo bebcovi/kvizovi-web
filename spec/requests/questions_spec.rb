@@ -1,74 +1,45 @@
-# encoding: utf-8
 require "spec_helper_full"
 
 describe "Questions" do
-  before(:all) { @school = create(:school) }
+  before(:all) {
+    @school = create(:school)
+    @other_school = create(:other_school)
+    @quiz = create(:quiz, school: @school)
+    @question_in_quiz       = create(:question, content: "In quiz", school: @school, quizzes: [@quiz])
+    @question_not_in_quiz   = create(:question, content: "Not in quiz", school: @school)
+    @question_not_in_school = create(:question, content: "Not in school", school: @other_school)
+  }
   before(:each) { login(:school, attributes_for(:school)) }
 
-  context "from a school" do
-    they "can be created" do
-      visit school_questions_path(@school)
-      click_on "Novo pitanje"
-      click_on "Točno/netočno"
+  context "inside a quiz" do
+    before(:each) { visit quiz_questions_path(@quiz) }
 
-      fill_in "Tekst pitanja", with: "Question content"
-      choose "Točno"
-      expect { click_on "Stvori" }.to change{Question.count}.by 1
-
-      current_path.should eq school_questions_path(@school)
-      page.should have_content("Question content")
-    end
-
-    they "can be edited" do
-      visit school_questions_path(@school)
-
-      question = Question.first
-      within(".btn-group") { first("a").click }
-
-      current_path.should eq edit_school_question_path(@school, question)
-      fill_in "Tekst pitanja", with: "Question content 2"
-      click_on "Spremi"
-
-      current_path.should eq school_questions_path(@school)
-      question.reload.content.should eq "Question content 2"
-    end
-
-    they "can be deleted" do
-      visit school_questions_path(@school)
-
-      question = Question.first
-      within(".btn-group") { all("a").last.click }
-
-      current_path.should eq delete_school_question_path(@school, question)
-      click_on "Nisam"
-
-      current_path.should eq school_questions_path(@school)
-      within(".btn-group") { all("a").last.click }
-      expect { click_on "Jesam" }.to change{Question.count}.by -1
-
-      current_path.should eq school_questions_path(@school)
+    it "shows only questions in that quiz" do
+      page.should have_content(@question_in_quiz.content)
+      page.should_not have_content(@question_not_in_quiz.content)
+      page.should_not have_content(@question_not_in_school.content)
     end
   end
 
-  context "from everyone" do
-    before(:all) {
-      @other_school = create(:other_school)
-      @question = create(:question, school: @other_school)
-    }
+  context "inside the logged in school" do
+    before(:each) { visit school_questions_path(@school) }
 
-    they "aren't displayed if they belong to the logged in school" do
-      question1 = create(:question, content: "Question 1", school: @school)
-      question2 = create(:question, content: "Question 2", school: @other_school)
-      visit questions_path
-
-      page.should have_content(question2.content)
-      page.should_not have_content(question1.content)
-
-      [question1, question2].each(&:destroy)
+    it "shows all questions from the logged in school" do
+      page.should have_content(@question_in_quiz.content)
+      page.should have_content(@question_not_in_quiz.content)
+      page.should_not have_content(@question_not_in_school.content)
     end
-
-    after(:all) { @other_school.destroy }
   end
 
-  after(:all) { @school.destroy }
+  context "inside other schools" do
+    before(:each) { visit questions_path(@quiz) }
+
+    it "shows all questions expect the ones from the logged in school" do
+      page.should_not have_content(@question_in_quiz.content)
+      page.should_not have_content(@question_not_in_quiz.content)
+      page.should have_content(@question_not_in_school.content)
+    end
+  end
+
+  after(:all) { [@school, @other_school].each(&:destroy) }
 end

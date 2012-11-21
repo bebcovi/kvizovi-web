@@ -1,6 +1,9 @@
 require "spec_helper_full"
 
-describe "Tags" do
+describe "Tagging" do
+end
+
+describe "Filtering tags" do
   before(:all) {
     @school = create(:school)
     @question = create(:question, school: @school)

@@ -1,43 +1,36 @@
 # encoding: utf-8
 require "spec_helper_full"
 
-describe "School" do
+describe "Quizzes" do
   before(:all) { @school = create(:school) }
-
   before(:each) { login(:school, attributes_for(:school)) }
 
-  context "when creating quizzes" do
+  describe "creating" do
+    let(:attributes) { attributes_for(:quiz) }
+
     it "has the link for it on the quizzes page" do
       visit quizzes_path
       click_on "Novi kviz"
       current_path.should eq new_quiz_path
     end
 
-    context "on validation errors" do
-      it "is held on the same page" do
-        visit new_quiz_path
-        expect { click_on "Stvori" }.to_not change{@school.quizzes.count}
-        current_path.should eq quizzes_path
-      end
+    it "stays on the same page on validation errors" do
+      visit new_quiz_path
+      expect { click_on "Stvori" }.to_not change{@school.quizzes.count}
+      page.should have_css("form.new_quiz")
     end
 
-    context "on success" do
-      let(:attributes) { attributes_for(:quiz) }
+    it "redirects back to quizzes on success" do
+      visit new_quiz_path
 
-      it "gets redirected back to the quizzes page" do
-        visit new_quiz_path
+      fill_in "Naziv", with: attributes[:name]
+      expect { click_on "Stvori" }.to change{@school.quizzes.count}.by(1)
 
-        fill_in "Naziv", with: attributes[:name]
-        expect { click_on "Stvori" }.to change{@school.quizzes.count}.by(1)
-
-        current_path.should eq quizzes_path
-      end
+      current_path.should eq quizzes_path
     end
-
-    after(:all) { @school.quizzes.destroy_all }
   end
 
-  context "when updating quizzes" do
+  describe "updating" do
     before(:all) { @quiz = create(:quiz, school: @school) }
 
     it "has the link for it" do
@@ -46,21 +39,17 @@ describe "School" do
       current_path.should eq edit_quiz_path(@quiz)
     end
 
-    context "on validation errors" do
-      it "is held on the same page" do
-        visit edit_quiz_path(@quiz)
-        fill_in "Naziv", with: ""
-        click_on "Spremi"
-        current_path.should eq quiz_path(@quiz)
-      end
+    it "stays on the same page on validation errors" do
+      visit edit_quiz_path(@quiz)
+      fill_in "Naziv", with: ""
+      click_on "Spremi"
+      page.should have_css("form.edit_quiz")
     end
 
-    context "on success" do
-      it "gets redirected back to quizzes" do
-        visit edit_quiz_path(@quiz)
-        click_on "Spremi"
-        current_path.should eq quiz_questions_path(@quiz)
-      end
+    it "gets redirected back to quizzes on success" do
+      visit edit_quiz_path(@quiz)
+      click_on "Spremi"
+      current_path.should eq quiz_questions_path(@quiz)
     end
 
     it "can toggle the activation" do
@@ -75,12 +64,12 @@ describe "School" do
     after(:all) { @quiz.destroy }
   end
 
-  describe "when destroying a quiz" do
+  describe "destroying" do
     before(:all) { @quiz = create(:quiz, school: @school) }
 
     it "has the link for it" do
       visit quizzes_path
-      within(".btn-group") { all("a").last.click }
+      within(".dropdown-menu") { all("a").last.click }
       current_path.should eq delete_quiz_path(@quiz)
     end
 
