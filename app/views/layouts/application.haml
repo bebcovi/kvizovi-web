@@ -20,8 +20,10 @@
           = link_to "Lektire".prepend_icon("books"), root_path, class: "brand"
 
           = render "navigation"
-          = render "log" if user_logged_in?
-          = render "contact"
+
+          .pull-right
+            = render "contact"
+            = render "log" if user_logged_in?
 
     - if content_for? :hero_unit
       .hero-unit
