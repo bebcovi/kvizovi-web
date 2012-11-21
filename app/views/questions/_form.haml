@@ -1,14 +1,6 @@
 = simple_form_for @question, url: polymorphic_path([@scope, @question.becomes(Question)]), as: :question, html: {class: "#{params[:action]} question_#{@question.category}"} do |f|
 
-  = hidden_field_tag :category, (params[:category] || @question.category)
-
-  = f.input :content, label: "Tekst pitanja", input_html: {autofocus: current_page?(action: "new"), class: "input-block-level"}
-
-  = render partial: "#{@question.category}_question_fields", object: @question, as: "#{@question.category}_question", locals: {f: f}
-
-  = f.input :hint, placeholder: %(Npr. "Odgovor piši u nominativu."), hint: "Ovo će se prikazati kao pomoć pri odgovaranju na pitanje."
-
-  = f.input :tag_list, hint: "Tagove odvajajte zarezom."
+  = render partial: "fields", locals: {f: f}
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", polymorphic_path([@scope, Question])

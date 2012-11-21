@@ -10,12 +10,24 @@ hr:
         remember_me: "Zapamti me"
         email: "Email"
         tag_list: "Tagovi (neobavezno)"
-      question:
+      question: &question
+        content: "Tekst pitanja"
         answer: "Odgovor"
         hint: "Uputa (neobavezno)"
+        provided_answers: "Ponuđeni odgovori"
+        associations: "Parovi"
         image_file: "Slika"
         image_url: "URL od slike"
-        provided_answers: "Ponuđeni odgovori"
+      boolean_question:
+        <<: *question
+      choice_question:
+        <<: *question
+      association_question:
+        <<: *question
+      image_question:
+        <<: *question
+      text_question:
+        <<: *question
       school:
         name: "Ime škole"
         level: "Tip škole"
