@@ -13,7 +13,7 @@
   clear: both;
 
   $height: 2 * $baseLineHeight;
-  $padding: 8px;
+  $padding: 8px 16px;
   > li {
     @include box-sizing(border-box);
     @include clearfix;
@@ -34,17 +34,19 @@
     float: right;
   }
 
+  $padding-vertical: nth($padding, 1);
+  $padding-horizontal: nth($padding, 2);
   .actions {
     height: $height + 1px;
-    margin-top: - $padding;
+    margin-top: - $padding-vertical;
     line-height: $height;
 
     .dropdown-toggle {
       @include color-link(rgba(black, .25), $linkColor);
       display: inline-block;
       height: 100%;
-      padding-right: $padding;
-      margin-right: - $padding;
+      padding-right: $padding-horizontal;
+      margin-right: - $padding-horizontal;
       &:hover { text-decoration: none; }
       &:focus { outline: 0; }
     }

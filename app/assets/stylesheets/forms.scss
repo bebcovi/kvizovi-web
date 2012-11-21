@@ -111,7 +111,7 @@ button {
 }
 
 .dropdown.hover {
-  $offset: 8px;
+  $offset: 16px;
 
   padding-left: $offset;
 
@@ -122,7 +122,7 @@ button {
 
   .dropdown-menu {
     top: 0;
-    right: 18px + $offset;
+    right: 16px + $offset;
     margin: 0;
   }
 }
