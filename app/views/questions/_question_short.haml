@@ -8,7 +8,7 @@
       %li= remove_file_button "Ukloni iz kviza", polymorphic_path([@scope, question.becomes(Question)], action: "remove"), method: :post
     - elsif @scope.is_a?(School)
       - if params[:include]
-        %li= view_button "Pogledaj", polymorphic_path([@scope, question.becomes(Question)])
+        %li= view_button "Pogledaj", polymorphic_path([@scope, question.becomes(Question)], params.slice(:include))
         %li= add_file_button "Dodaj kvizu", polymorphic_path([@quiz, question.becomes(Question)], action: "include"), method: :post
       - else
         %li= view_button "Pogledaj", polymorphic_path([@scope, question.becomes(Question)])

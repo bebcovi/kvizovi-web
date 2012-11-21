@@ -1,8 +1,8 @@
 class QuestionsController < ApplicationController
   before_filter :assign_scope
+  before_filter :assign_quiz, if: -> { params[:include] }
 
   def index
-    @quiz = Quiz.find(params[:include]) if params[:include]
     @questions = if nested?
                    unless @quiz
                      @scope.questions
@@ -63,7 +63,7 @@ class QuestionsController < ApplicationController
 
   def include
     @scope.questions << current_user.questions.find(params[:id])
-    redirect_to :back, notice: flash_message(:notice, name: @scope.name)
+    redirect_to polymorphic_path([current_user, Question], include: params[:quiz_id]), notice: flash_message(:notice, name: @scope.name)
   end
 
   def remove
@@ -88,6 +88,10 @@ class QuestionsController < ApplicationController
               elsif params.has_key?(:school_id)
                 current_user
               end
+  end
+
+  def assign_quiz
+    @quiz = Quiz.find(params[:include])
   end
 
   def nested?
