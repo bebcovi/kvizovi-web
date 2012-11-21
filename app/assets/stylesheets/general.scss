@@ -81,5 +81,5 @@ table {
 }
 
 .delete_profile {
-  @include color-link($errorText, darken($errorText, 10%));
+  @include color-link($btnDangerBackgroundHighlight, darken($btnDangerBackgroundHighlight, 10%));
 }
