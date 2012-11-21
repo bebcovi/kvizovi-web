@@ -110,6 +110,23 @@ button {
   font-weight: inherit;
 }
 
+.dropdown.hover {
+  $offset: 8px;
+
+  padding-left: $offset;
+
+  .dropdown-toggle {
+    padding-left: $offset;
+    margin-left: - $offset;
+  }
+
+  .dropdown-menu {
+    top: 0;
+    right: 18px + $offset;
+    margin: 0;
+  }
+}
+
 .dropdown-menu li > a {
   font-weight: inherit;
 }

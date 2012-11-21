@@ -12,9 +12,13 @@
   @extend %unstyled-list;
   clear: both;
 
-  li {
+  $height: 2 * $baseLineHeight;
+  $padding: 8px;
+  > li {
+    @include box-sizing(border-box);
     @include clearfix;
-    padding: 8px .5em;
+    height: $height;
+    padding: $padding;
 
     &:nth-child(odd) {
       background: $tableBackgroundAccent;
@@ -25,17 +29,34 @@
     }
   }
 
-  .btn-group { float: right; }
+  .btn-group,
+  .actions {
+    float: right;
+  }
+
+  .actions {
+    height: $height + 1px;
+    margin-top: - $padding;
+    line-height: $height;
+
+    .dropdown-toggle {
+      @include color-link(rgba(black, .25), $linkColor);
+      display: inline-block;
+      height: 100%;
+      padding-right: $padding;
+      margin-right: - $padding;
+      &:hover { text-decoration: none; }
+      &:focus { outline: 0; }
+    }
+
+    .delete_item {
+      @include color-link($btnDangerBackgroundHighlight, white);
+      &:hover { background: $btnDangerBackgroundHighlight; }
+    }
+  }
 
   span {
     display: inline-block;
     line-height: $inputHeight;
-  }
-
-  &.list-hover li:hover {
-    cursor: pointer;
-    background: rgba($linkColor, .05);
-    color: $linkColor;
-    &, .category { color: $linkColor; }
   }
 }

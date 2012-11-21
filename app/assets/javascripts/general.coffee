@@ -13,6 +13,20 @@ App.general = ->
     html: true
     trigger: 'focus'
 
+  # dropdowns
+
+  $('.dropdown.hover')
+    .on 'mouseenter', ->
+      unless $(@).hasClass('open')
+        $(@).find('.dropdown-toggle')
+          .dropdown('toggle')
+
+    .on 'mouseleave', ->
+      if $(@).hasClass('open')
+        $(@).find('.dropdown-toggle')
+          .dropdown('toggle')
+          .blur()
+
   # modals
 
   $(document).on 'click', '.modal_close', (event) ->
