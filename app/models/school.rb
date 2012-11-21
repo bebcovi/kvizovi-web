@@ -54,23 +54,10 @@ class School < ActiveRecord::Base
       {
         content: %("Antigona" je komedija.),
         answer: false
-      },
-      {
-        content: %(Antigona je kći tebanskog kralja Edipa.),
-        answer: true
       }
     ])
 
     quiz.choice_questions.create!([
-      {
-        content: %(Tko je napisao "Antigonu"?),
-        provided_answers: [
-          "Sofoklo",
-          "Euripid",
-          "Miguel de Cervantes",
-          "Antun Gustav Matoš"
-        ]
-      },
       {
         content: %(Kako se zove Antigonin zaručnik?),
         provided_answers: [
@@ -90,27 +77,10 @@ class School < ActiveRecord::Base
           "Tiresija"  => "Prorok",
           "Hemon"     => "Antigonin zaručnik"
         }
-      },
-      {
-        content: %(Kako je počinjao pojedini čin?),
-        associations: {
-           "Antigona i Izmena razgovaraju"                   => "Prvi čin",
-           "Kreont daje proglas za Polinika"                 => "Drugi čin",
-           "Stražar Antigonu dovodi Kreontu"                 => "Treći čin",
-           "Hemon pokušava uvjeriti Kreonta da je u krivu"   => "Četvrti čin",
-           "Antigona pjeva tužaljku o svom životu"           => "Peti čin",
-           "Dolazi prorok Tiresija"                          => "Šesti čin",
-           "Glasnik objavljuje Hemonovu smrt"                => "Sedmi čin"
-        }
       }
     ])
 
     quiz.image_questions.create!([
-      {
-        content: %(Koji je ovo grčki tragičar?),
-        image_file: Rack::Test::UploadedFile.new("#{Rails.root}/db/seeds/files/sofoklo.jpg", "image/jpeg"),
-        answer: "Sofoklo"
-      },
       {
         content: %(Koji je ovo lik iz "Antigone"?),
         image_file: Rack::Test::UploadedFile.new("#{Rails.root}/db/seeds/files/antigona.jpg", "image/jpeg"),
@@ -119,10 +89,6 @@ class School < ActiveRecord::Base
     ])
 
     quiz.text_questions.create!([
-      {
-        content: %(U kojem se gradu odvija radnja "Antigone"?),
-        answer: "Tebi"
-      },
       {
         content: %(Tko je Antigonin i Izmenin otac?),
         answer: "Edip"
