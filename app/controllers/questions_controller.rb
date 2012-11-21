@@ -56,18 +56,24 @@ class QuestionsController < ApplicationController
     render :new
   end
 
+  def download
+    question = Question.find(params[:id]).dup
+    question.school = current_user
+    redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)
+  end
+
   def include
     @scope.questions << current_user.questions.find(params[:id])
     redirect_to :back, notice: flash_message(:notice, name: @scope.name)
   end
 
-  def delete
-    @question = current_user.questions.find(params[:id])
-  end
-
   def remove
     @scope.questions.delete(current_user.questions.find(params[:id]))
     redirect_to :back, notice: flash_message(:notice)
+  end
+
+  def delete
+    @question = current_user.questions.find(params[:id])
   end
 
   def destroy

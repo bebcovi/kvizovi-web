@@ -36,6 +36,10 @@ module ApplicationHelper
     link_to string.prepend_icon("arrow-left"), path, {class: "go_back"}.merge(options)
   end
 
+  def cancel_button(string, path, options = {})
+    link_to string, path, {class: "btn cancel"}.merge(options)
+  end
+
   def logout_button(string, path, options = {})
     link_to string.prepend_icon("exit"), path, options
   end
@@ -58,6 +62,26 @@ module ApplicationHelper
 
   def add_button(string, path, options = {})
     link_to string.prepend_icon("plus"), path, {class: "add_item btn btn-primary"}.merge(options)
+  end
+
+  def copy_button(string, path, options = {})
+    link_to string.prepend_icon("copy"), path, options
+  end
+
+  def download_button(string, path, options = {})
+    link_to string.prepend_icon("file-download"), path, options
+  end
+
+  def view_button(string, path, options = {})
+    link_to string.prepend_icon("file"), path, options
+  end
+
+  def add_file_button(string, path, options = {})
+    link_to string.prepend_icon("file-add"), path, options
+  end
+
+  def remove_file_button(string, path, options = {})
+    link_to string.prepend_icon("file-remove"), path, options
   end
 
   def remove_button(options = {})
