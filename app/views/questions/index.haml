@@ -33,9 +33,9 @@
 
   - if params[:include].blank?
 
+    = render "tag_filter"
     = render "scope_nav"
     = render "new_question"
-    = render "tag_filter"
 
   - else
 
