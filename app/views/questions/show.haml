@@ -9,4 +9,7 @@
 
   = buttons do
     = cancel_button "Natrag", polymorphic_path([@scope, Question])
-    = copy_button "Dupliciraj", polymorphic_path([@scope, @question.becomes(Question)], action: "copy"), class: "btn btn-primary"
+    - if @scope
+      = copy_button "Dupliciraj", polymorphic_path([@scope, @question.becomes(Question)], action: "copy"), class: "btn btn-primary"
+    - else
+      = download_button "Kopiraj kod sebe", polymorphic_path([@scope, @question.becomes(Question)], action: "download"), class: "btn btn-primary", method: :post

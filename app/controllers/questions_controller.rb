@@ -57,8 +57,7 @@ class QuestionsController < ApplicationController
   end
 
   def download
-    question = Question.find(params[:id]).dup
-    question.school = current_user
+    current_user.questions << Question.find(params[:id]).dup
     redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)
   end
 

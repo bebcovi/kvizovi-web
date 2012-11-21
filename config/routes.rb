@@ -23,7 +23,7 @@ Lektire::Application.routes.draw do
   end
 
   resources :questions do
-    member { get "copy" }
+    member { post "download" }
   end
 
   resources :schools do

@@ -55,5 +55,7 @@ hr:
         notice: "Pitanje je uspješno dodano u kviz \"%{name}\"."
       copy:
         notice: "Pitanje je uspješno preuzeto."
+      download:
+        notice: "Pitanje je uspješno kopirano kod vas."
       remove:
         notice: "Pitanje je uspješno uklonjeno iz kviza."
