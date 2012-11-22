@@ -1,3 +1,6 @@
+- unless @scope
+  %p.muted Ovo pitanje napravila je #{@question.school}.
+
 = simple_form_for @question, url: "", defaults: {input_html: {disabled: true}}, html: {class: "show question_#{@question.category}"} do |f|
 
   = render partial: "fields", locals: {f: f}
