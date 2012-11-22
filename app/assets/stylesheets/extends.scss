@@ -37,6 +37,15 @@
     }
   }
 
+  .highlight{
+    &:nth-child(odd) {
+      @include animation(highlightOdd 2.5s linear);
+    }
+    &:nth-child(even) {
+      @include animation(highlightEven 2.5s linear);
+    }
+  }
+
   .btn-group,
   .actions {
     float: right;
