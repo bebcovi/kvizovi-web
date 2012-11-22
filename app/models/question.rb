@@ -22,14 +22,11 @@ class Question < ActiveRecord::Base
   end
   acts_as_taggable
 
-  default_scope -> { order("#{table_name}.updated_at DESC") }
-  scope :not_owned_by, ->(school) { where("#{table_name}.school_id <> #{school.id}") }
-  scope :not_belonging_to, ->(quiz) {
-    joins("LEFT OUTER JOIN questions_quizzes ON questions_quizzes.question_id = #{table_name}.id").
-    where("questions_quizzes.quiz_id IS NULL OR questions_quizzes.quiz_id <> #{quiz.id}")
-  }
-  scope :public, -> { joins(:school).where("schools.public_questions = 't'") }
-  scope :filter, ->(filter) { tagged_with(filter[:tags]) }
+  default_scope            ->         { order("#{table_name}.updated_at DESC") }
+  scope :not_owned_by,     ->(school) { where("#{table_name}.school_id <> #{school.id}") }
+  scope :not_belonging_to, ->(quiz)   { includes(:quizzes).where("quizzes.id IS NULL OR quizzes.id <> #{quiz.id}") }
+  scope :public,           ->         { joins(:school).where("schools.public_questions = 't'") }
+  scope :filter,           ->(filter) { tagged_with(filter[:tags]) }
 
   validates_presence_of :content
 
