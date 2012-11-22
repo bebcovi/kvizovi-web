@@ -4,7 +4,8 @@ input[type="checkbox"] {
   top: 2px;
 }
 
-[type="submit"] {
+[type="submit"],
+button {
   @include box-sizing(content-box);
 }
 

@@ -1,0 +1,13 @@
+.profile_info {
+  width: 400px;
+  margin-bottom: $baseLineHeight/2;
+}
+
+.edit_profile,
+.questions_privacy {
+  margin-bottom: $baseLineHeight;
+}
+
+.delete_profile {
+  @include color-link($btnDangerBackgroundHighlight, darken($btnDangerBackgroundHighlight, 10%));
+}

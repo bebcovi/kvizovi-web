@@ -4,14 +4,19 @@ App.general = ->
 
   # tooltips & popovers
 
-  $('a, input[type="submit"], button').filter('[title]').tooltip
+  $('a, input[type="submit"], button').filter('[title]').not('[data-content]').tooltip
     animation: false
     placement: 'top'
     container: 'body'
 
-  $('input[data-content]').popover
+  $('input[type="text"][data-content]').popover
     html: true
     trigger: 'focus'
+
+  $('button[data-content]').popover
+    animation: false
+    html: true
+    trigger: 'hover'
 
   # dropdowns
 

@@ -20,4 +20,15 @@
     = edit_button "Izmjeni profil", edit_school_path(@school)
     = change_password_button "Izmjeni lozinku", edit_password_path
 
+%p.questions_privacy
+  - content = capture_haml do
+    %ul.unstyled_list
+      %li= "Pitanja mogu koristiti i druge škole.".prepend_icon("globe")
+      %li= "Pitanja ne vide druge škole.".prepend_icon("key")
+  - attributes = {title: "Privatnost pitanja", data: {content: content.delete("\n")}}
+  - if @school.public_questions?
+    = content_tag :button, "Pitanja su javna".prepend_icon("globe"), {class: "btn btn-success"}.merge(attributes)
+  - else
+    = content_tag :button, "Pitanja su tajna".prepend_icon("key"), {class: "btn btn-inverse"}.merge(attributes)
+
 %p= delete_profile_button "Izbriši korisnički račun", delete_school_path(@school)

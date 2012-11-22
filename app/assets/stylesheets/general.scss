@@ -45,8 +45,13 @@ h3 {
   color: rgba(black, 1);
 }
 
-.unstyled-list {
+.unstyled_list {
   @extend %unstyled-list;
+}
+
+.no_bullets {
+  list-style: none;
+  margin-left: $baseLineHeight/2;
 }
 
 table {
@@ -69,17 +74,4 @@ table {
 .breadcrumb {
   li { height: $baseLineHeight; }
   i { font-size: 12px; }
-}
-
-.profile_info {
-  width: 400px;
-  margin-bottom: $baseLineHeight/2;
-}
-
-.edit_profile {
-  margin-bottom: $baseLineHeight;
-}
-
-.delete_profile {
-  @include color-link($btnDangerBackgroundHighlight, darken($btnDangerBackgroundHighlight, 10%));
 }
