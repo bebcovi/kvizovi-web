@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120153852) do
+ActiveRecord::Schema.define(:version => 20121122204234) do
 
   create_table "games", :force => true do |t|
     t.integer  "quiz_id"
@@ -54,12 +54,13 @@ ActiveRecord::Schema.define(:version => 20121120153852) do
     t.string   "password_digest"
     t.string   "level"
     t.string   "key"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "place"
     t.string   "region"
     t.string   "email"
-    t.boolean  "notified",        :default => true
+    t.boolean  "notified",         :default => true
+    t.boolean  "public_questions", :default => true
   end
 
   create_table "students", :force => true do |t|

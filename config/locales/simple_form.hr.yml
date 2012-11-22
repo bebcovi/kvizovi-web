@@ -34,6 +34,7 @@ hr:
         place: "Mjesto"
         region: "Županija"
         key: "Tajni ključ"
+        public_questions: "Javna pitanja?"
       student:
         first_name: "Ime"
         last_name: "Prezime"

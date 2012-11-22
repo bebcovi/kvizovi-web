@@ -28,6 +28,7 @@ class Question < ActiveRecord::Base
     joins("LEFT OUTER JOIN questions_quizzes ON questions_quizzes.question_id = questions.id").
     where("questions_quizzes.quiz_id IS NULL OR questions_quizzes.quiz_id <> #{quiz.id}")
   }
+  scope :public, -> { joins(:school).where("schools.public_questions = 't'") }
   scope :filter, ->(filter) { tagged_with(filter[:tags]) }
 
   validates_presence_of :content

@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
                      @scope.questions.not_belonging_to(@quiz)
                    end
                  else
-                   Question.not_owned_by(current_user)
+                   Question.not_owned_by(current_user).public
                  end
 
     @questions = @questions.filter(params[:filter]) if params[:filter]

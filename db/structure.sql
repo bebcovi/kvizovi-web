@@ -183,7 +183,8 @@ CREATE TABLE schools (
     place character varying(255),
     region character varying(255),
     email character varying(255),
-    notified boolean DEFAULT true
+    notified boolean DEFAULT true,
+    public_questions boolean DEFAULT true
 );
 
 
@@ -495,3 +496,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121119215439');
 INSERT INTO schema_migrations (version) VALUES ('20121119220110');
 
 INSERT INTO schema_migrations (version) VALUES ('20121120153852');
+
+INSERT INTO schema_migrations (version) VALUES ('20121122204234');
