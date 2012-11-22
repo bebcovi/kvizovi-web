@@ -8,7 +8,7 @@ Student.create!([
     last_name: "Perić",
     username: "pero",
     password: "pero",
-    grade: "3",
+    grade: "3d",
     gender: "Muško",
     year_of_birth: 1991,
     school_key: school_key
@@ -18,7 +18,7 @@ Student.create!([
     last_name: "Anić",
     username: "ana",
     password: "ana",
-    grade: "4",
+    grade: "4a",
     gender: "Žensko",
     year_of_birth: 1990,
     school_key: school_key

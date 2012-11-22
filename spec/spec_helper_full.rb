@@ -12,7 +12,7 @@ Paperclip.options[:log] = false
 RSpec.configure do |config|
   config.include IntegrationSpecHelpers
 
-  config.before(:suite) do
+  config.before(:all) do
     DatabaseCleaner.clean_with(:truncation)
     DatabaseCleaner.clean
   end

@@ -12,7 +12,8 @@ class Student < ActiveRecord::Base
   validates_format_of :username, with: /^[a-zA-Z0-9_]*$/
   validates_format_of :grade, with: /^[0-8][a-z]$/, allow_blank: true
   validates_length_of :username, minimum: 3
-  validates_presence_of :first_name, :last_name, :username, :password, :gender, :grade, :year_of_birth
+  validates_presence_of :first_name, :last_name, :username, :gender, :grade, :year_of_birth
+  validates_presence_of :password, on: :create
   validates_uniqueness_of :username
 
   before_create { self.school ||= School.find_by_key(school_key) }
