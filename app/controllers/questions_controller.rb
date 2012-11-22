@@ -57,7 +57,9 @@ class QuestionsController < ApplicationController
   end
 
   def download
-    current_user.questions << Question.find(params[:id]).dup
+    new_question = Question.find(params[:id]).dup
+    @scope.questions << new_question
+    flash[:highlight] = new_question.id
     redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)
   end
 
@@ -68,7 +70,7 @@ class QuestionsController < ApplicationController
 
   def remove
     @scope.questions.delete(current_user.questions.find(params[:id]))
-    redirect_to :back, notice: flash_message(:notice)
+    redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)
   end
 
   def delete

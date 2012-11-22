@@ -17,7 +17,11 @@ describe "Downloading questions" do
         within(".actions .dropdown-menu") { all("a").second.click }
       }.to change{@school.questions.count}.by 1
 
-      current_path.should eq questions_path
+      current_path.should eq school_questions_path(@school)
+
+      page.should have_css(".highlight")
+      visit current_path
+      page.should_not have_css(".highlight")
 
       copied_question = @school.questions.first
       copied_question.should_not eq @question
@@ -32,7 +36,7 @@ describe "Downloading questions" do
       within(".actions .dropdown-menu") { all("a").first.click }
       expect { click_on "Kopiraj kod sebe" }.to change{@school.questions.count}.by 1
 
-      current_path.should eq questions_path
+      current_path.should eq school_questions_path(@school)
     end
 
     after(:all) {

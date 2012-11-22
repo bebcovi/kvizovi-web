@@ -17,7 +17,7 @@
         %li= delete_button "Izbriši", polymorphic_path([@scope, question.becomes(Question)], action: "delete"), class: "delete_item"
     - else
       %li= view_button "Pogledaj", polymorphic_path([@scope, question.becomes(Question)])
-      %li= download_button "Kopiraj kod sebe", polymorphic_path([@scope, question.becomes(Question)], action: "download"), method: :post
+      %li= download_button "Kopiraj kod sebe", polymorphic_path([current_user, question.becomes(Question)], action: "download"), method: :post
 
 %span.category= categories[question.category.to_sym][1]
 %span.name= question.content
