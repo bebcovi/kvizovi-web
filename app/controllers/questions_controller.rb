@@ -13,6 +13,7 @@ class QuestionsController < ApplicationController
                    Question.not_owned_by(current_user).public.without_example
                  end
 
+    @questions = @questions.includes(:school)
     @questions = @questions.filter(params[:filter]) if params[:filter]
     @questions = @questions.page(params[:page]).per_page(20) unless @scope.is_a?(Quiz)
   end
