@@ -33,9 +33,15 @@ describe "Quizzes" do
   describe "updating" do
     before(:all) { @quiz = create(:quiz, school: @school) }
 
-    it "has the link for it" do
+    it "has the link for it inside quiz" do
       visit quiz_questions_path(@quiz)
       click_on "Izmjeni informacije"
+      current_path.should eq edit_quiz_path(@quiz)
+    end
+
+    it "has the link for it outside quiz" do
+      visit quizzes_path
+      within(".actions .dropdown-menu") { all("a").second.click }
       current_path.should eq edit_quiz_path(@quiz)
     end
 

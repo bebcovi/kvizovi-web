@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "spec_helper_full"
 
 describe "Questions" do
@@ -10,6 +11,25 @@ describe "Questions" do
     @question_not_in_school = create(:question, content: "Not in school", school: @other_school)
   }
   before(:each) { login(:school, attributes_for(:school)) }
+
+  they "can be accessed on quiz" do
+    visit quizzes_path
+    within(".actions .dropdown-menu") { all("a").first.click }
+    current_path.should eq quiz_questions_path(@quiz)
+  end
+
+  they "can be accessed in the navigation" do
+    within(".nav") { click_on "Pitanja" }
+    current_path.should eq school_questions_path(@school)
+  end
+
+  they "can be accessed elsewhere" do
+    visit school_questions_path(@school)
+    click_on "Pitanja drugih škola"
+    current_path.should eq questions_path
+    click_on "Vaša pitanja"
+    current_path.should eq school_questions_path(@school)
+  end
 
   context "inside a quiz" do
     before(:each) { visit quiz_questions_path(@quiz) }
