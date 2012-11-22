@@ -135,7 +135,7 @@ CREATE TABLE quizzes (
     school_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    grades character varying[]
+    grades character varying[] DEFAULT '{}'::character varying[]
 );
 
 
@@ -498,3 +498,9 @@ INSERT INTO schema_migrations (version) VALUES ('20121119220110');
 INSERT INTO schema_migrations (version) VALUES ('20121120153852');
 
 INSERT INTO schema_migrations (version) VALUES ('20121122204234');
+
+INSERT INTO schema_migrations (version) VALUES ('20121122215818');
+
+INSERT INTO schema_migrations (version) VALUES ('20121122220011');
+
+INSERT INTO schema_migrations (version) VALUES ('20121122220159');
