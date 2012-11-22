@@ -37,9 +37,9 @@ class QuizzesController < ApplicationController
     quiz = current_user.quizzes.find(params[:id])
     quiz.toggle!(:activated)
     if quiz.activated?
-      flash[:notice] = "Kviz \"#{quiz}\" je aktiviran." + (quiz.grades.none? ? " Ali trenutno nije dostupan niti jednom razredu." : "")
+      flash[:notice] = %(Kviz "#{quiz}" je aktiviran") + (quiz.grades.none? ? ", ali trenutno nije dostupan niti jednom razredu." : ".")
     else
-      flash[:notice] = "Kviz \"#{quiz}\" je deaktiviran."
+      flash[:notice] = %(Kviz "#{quiz}" je deaktiviran.)
     end
     redirect_to quizzes_path
   end
