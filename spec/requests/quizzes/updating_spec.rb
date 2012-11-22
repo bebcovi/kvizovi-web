@@ -7,12 +7,6 @@ describe "Updating quizzes" do
   }
   before(:each) { login(:school, attributes_for(:school)) }
 
-  it "has the link for it inside quiz" do
-    visit quiz_questions_path(@quiz)
-    click_on "Izmjeni informacije"
-    current_path.should eq edit_quiz_path(@quiz)
-  end
-
   it "has the link for it outside quiz" do
     visit quizzes_path
     within(".actions .dropdown-menu") { all("a").second.click }
@@ -29,7 +23,7 @@ describe "Updating quizzes" do
   it "gets redirected back to quizzes on success" do
     visit edit_quiz_path(@quiz)
     click_on "Spremi"
-    current_path.should eq quiz_questions_path(@quiz)
+    current_path.should eq quizzes_path
   end
 
   it "can toggle the activation" do

@@ -4,8 +4,6 @@
 
   = render "new_question"
 
-  = edit_button "", edit_quiz_path(quiz), class: "btn edit_quiz", title: "Izmjeni informacije"
-
   = link_to icon("file-add"), school_questions_path(current_user, include: @scope.id), class: "btn associate_questions", title: "Pridruži pitanja"
 
   = simple_form_for :game_submission, url: game_path, method: :post do |f|

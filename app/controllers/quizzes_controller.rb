@@ -27,7 +27,7 @@ class QuizzesController < ApplicationController
     @quiz = current_user.quizzes.find(params[:id])
 
     if @quiz.update_attributes(params[:quiz])
-      redirect_to quiz_questions_path(@quiz), notice: flash_message(:notice)
+      redirect_to quizzes_path, notice: flash_message(:notice)
     else
       render :edit
     end
