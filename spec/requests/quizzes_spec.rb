@@ -5,6 +5,20 @@ describe "Quizzes" do
   before(:all) { @school = create(:school) }
   before(:each) { login(:school, attributes_for(:school)) }
 
+  describe "assigning attributes" do
+    before(:all) { @quiz = create(:quiz, school: @school) }
+    before(:each) { @quiz.update_attributes(attributes_for(:quiz)) }
+
+    it "assigns grades correctly" do
+      @quiz.update_attributes(grades: [])
+      visit edit_quiz_path(@quiz)
+      ["1a", "2b", "4d"].each { |grade| check grade }
+      expect { click_on "Spremi" }.to change{@quiz.reload.grades}.from([]).to(["1a", "2b", "4d"])
+    end
+
+    after(:all) { @quiz.destroy }
+  end
+
   describe "creating" do
     let(:attributes) { attributes_for(:quiz) }
 
