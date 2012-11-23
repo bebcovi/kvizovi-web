@@ -51,6 +51,7 @@ class Question < ActiveRecord::Base
       question.tag_list = self.tag_list
     end
   end
+  alias duplicate dup
 
   def category
     self.class.name.underscore.chomp("_question")

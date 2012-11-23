@@ -50,6 +50,13 @@ class ImageQuestion < TextQuestion
     end
   end
 
+  def duplicate
+    dup.tap do |question|
+      question.image_url = self.image.url
+      question.save
+    end
+  end
+
   private
 
   def assign_image_sizes

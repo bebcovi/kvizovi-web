@@ -58,7 +58,7 @@ class QuestionsController < ApplicationController
   end
 
   def download
-    new_question = Question.find(params[:id]).dup
+    new_question = Question.find(params[:id]).duplicate
     @scope.questions << new_question
     flash[:highlight] = new_question.id
     redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)

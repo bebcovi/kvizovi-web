@@ -34,6 +34,7 @@ App.Questions.image =
       $file.show()
     else
       $url.show()
+      loadImg $urlInput.val()
 
     if isCreate and not isUrlEmpty
       loadImg $urlInput.val()
