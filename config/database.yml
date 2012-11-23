@@ -12,6 +12,10 @@ test:
   <<: *defaults
   database: lektire_test
 
+staging:
+  <<: *defaults
+  database: lektire_staging
+
 production:
   <<: *defaults
   database: lektire_production
