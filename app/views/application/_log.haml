@@ -1,9 +1,12 @@
-%ul.nav.pull-right
+%li.dropdown{class: params[:controller].in?(["students", "schools"]) && "active"}
   - if current_user.is_a?(Student) && (student = current_user)
-    %li{class: (params[:controller] == "students" && "active")}
-      = link_to student.first_name.prepend_icon("cog"), student
-  - elsif current_user.is_a?(School) && (school = current_user)
-    %li{class: (params[:controller] == "schools" && "active")}
-      = link_to school.name.prepend_icon("cog"), school
+    = link_to student.username.prepend_icon("cog").append_icon("caret-down"), "#", class: "dropdown-toggle", data: {toggle: "dropdown"}
+    %ul.dropdown-menu
+      %li= link_to "Uredi profil".prepend_icon("user"), student
+      %li= logout_button "Odjava", logout_path
 
-  %li= logout_button "Odjava", logout_path
+  - elsif current_user.is_a?(School) && (school = current_user)
+    = link_to school.username.prepend_icon("cog").append_icon("caret-down"), "#", class: "dropdown-toggle", data: {toggle: "dropdown"}
+    %ul.dropdown-menu
+      %li= link_to "Uredi profil".prepend_icon("home"), school
+      %li= logout_button "Odjava", logout_path
