@@ -39,8 +39,8 @@
       %li= "Pitanja ne vide druge škole.".prepend_icon("key")
   - attributes = {title: "Privatnost pitanja", data: {content: content.delete("\n")}}
   - if @school.public_questions?
-    = content_tag :button, "Pitanja su javna".prepend_icon("globe"), {class: "btn btn-success"}.merge(attributes)
+    = link_to "Pitanja su javna".prepend_icon("globe"), toggle_question_privacy_school_path(@school), {class: "btn btn-success", method: :put}.merge(attributes)
   - else
-    = content_tag :button, "Pitanja su tajna".prepend_icon("key"), {class: "btn btn-inverse"}.merge(attributes)
+    = link_to "Pitanja su tajna".prepend_icon("key"), toggle_question_privacy_school_path(@school), {class: "btn btn-inverse", method: :put}.merge(attributes)
 
 %p= delete_profile_button "Izbriši korisnički račun", delete_school_path(@school)

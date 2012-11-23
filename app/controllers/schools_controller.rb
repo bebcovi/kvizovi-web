@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SchoolsController < ApplicationController
   def new
     if flash[:authorized]
@@ -35,6 +37,17 @@ class SchoolsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def toggle_question_privacy
+    @school = current_user
+    @school.toggle!(:public_questions)
+    flash[:notice] = if @school.public_questions?
+                       "Vaša pitanja su sada javna, druge škole ih mogu vidjeti."
+                     else
+                       "Vaša pitanja su sada privatna, samo ih vi možete vidjeti."
+                     end
+    redirect_to @school
   end
 
   def delete

@@ -31,6 +31,8 @@ Lektire::Application.routes.draw do
         post "download"
       }
     end
+
+    member { put "toggle_question_privacy" }
   end
   resources :students do
     member do
