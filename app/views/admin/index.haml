@@ -25,7 +25,7 @@
         %td= link_to school.name, admin_school_path(school)
         %td.short= school.students.count
         %td.short= school.quizzes.activated.count
-        %td= activity(school.quizzes.maximum(:updated_at))
+        %td= activity([school.updated_at, school.quizzes.maximum(:updated_at)].max)
 
 %h2
   Učenici
