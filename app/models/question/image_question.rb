@@ -25,7 +25,9 @@ class ImageQuestion < TextQuestion
       @image_url = url
       begin
         self.image = URI.parse(url)
-      rescue SocketError, URI::InvalidURIError
+      rescue SocketError, URI::InvalidURIError => exception
+        puts exception.message
+        puts exception.backtrace
       end
     end
   end
