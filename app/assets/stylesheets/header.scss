@@ -23,4 +23,8 @@
 
 .main_content {
   padding-bottom: $gridGutterWidth;
+
+  > .alert-info:first-child {
+    form { margin: 0; }
+  }
 }
