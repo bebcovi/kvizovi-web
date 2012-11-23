@@ -5,7 +5,7 @@ class CopyGradesOnQuizzes < ActiveRecord::Migration
 
   def up
     Quiz.all.each do |quiz|
-      quiz.grades_array = quiz.grades.select { |_, present| present }.keys.map { |grade| Array("#{grade}a".."#{grade}l") }.flatten
+      quiz.grades_array = quiz.grades.select { |_, present| present == "true" }.keys.map { |grade| Array("#{grade}a".."#{grade}l") }.flatten
       quiz.save
     end
   end
