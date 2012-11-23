@@ -56,7 +56,11 @@ class StudentsController < ApplicationController
   end
 
   def delete
-    @student = current_user
+    @student = if current_user.is_a?(School)
+                 current_user.students.find(params[:id])
+               else
+                 current_user
+               end
   end
 
   def destroy
