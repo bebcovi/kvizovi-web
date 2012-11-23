@@ -13,7 +13,7 @@
     %p.hint Uputa: #{@question.hint}
 
   = buttons do
-    = cancel_button "Natrag", polymorphic_path([@scope, Question], params.slice(:include))
+    = cancel_button "Natrag", :back
     - if @scope
       - if params[:include]
         = add_file_button "Dodaj kvizu", polymorphic_path([@quiz, @question.becomes(Question)], action: "include"), class: "btn btn-primary", method: :post

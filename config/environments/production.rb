@@ -70,7 +70,10 @@ Lektire::Application.configure do
 
   config.paperclip_defaults = {
     storage: :dropbox,
-    dropbox_credentials: "#{Rails.root}/config/dropbox.yml"
+    dropbox_credentials: "#{Rails.root}/config/dropbox.yml",
+    dropbox_options: {
+      path: ->(style) { "#{ENV["DROPBOX_DIR"]}/#{id}_#{image.original_filename}" }
+    }
   }
 
   config.middleware.use ExceptionNotifier,

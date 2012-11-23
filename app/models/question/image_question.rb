@@ -11,8 +11,7 @@ class ImageQuestion < TextQuestion
   serialize :image_size, Hash
 
   include Paperclip::Glue
-  has_attached_file :image, styles: {resized: "x250>"},
-    dropbox_options: { path: ->(style) { "lektire/#{id}_#{image.original_filename}" } }
+  has_attached_file :image, styles: {resized: "x250>"}
 
   assign_image = instance_method(:image=)
   define_method(:image=) do |file|
