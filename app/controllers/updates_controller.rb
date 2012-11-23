@@ -5,7 +5,7 @@ class UpdatesController < ApplicationController
     current_user.update_attributes(notified: true)
     flash.delete(:announcement)
 
-    @updates = Dir["#{Rails.root}/app/views/notifications/index/*.md.erb"].sort.
+    @updates = Dir["#{Rails.root}/app/views/updates/index/*.md.erb"].sort.reverse.
       map { |filename| ERB.new(File.read(filename)).result(binding) }.
       paginate(page: params[:page], per_page: 4)
   end
