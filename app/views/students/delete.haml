@@ -14,9 +14,9 @@
 
   - @title = "Brisanje korisničkog računa"
 
-  %h1 Jesi li siguran?
+  %h1 Jesi li sigur#{current_user.male? ? "an" : "na"}?
 
-  %p Ovime ćeš trajno izbrisati svoj korisnički račun. Ako si potpuno siguran da to želiš napraviti, upiši svoju lozinku:
+  %p Ovime ćeš trajno izbrisati svoj korisnički račun. Ako si potpuno sigur#{current_user.male? ? "an" : "na"} da to želiš napraviti, upiši svoju lozinku:
 
   = simple_form_for @student, method: :delete do |f|
 

@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       log_in!(user, permanent: @session.remember_me?)
       redirect_to root_path
     else
-      flash.now[:alert] = alert
+      flash.now[:alert] = flash_message(:alert)
       render "new_#{params[:type]}"
     end
   end
