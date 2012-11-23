@@ -1,6 +1,8 @@
 .profile_info {
-  width: 400px;
   margin-bottom: $baseLineHeight/2;
+  .field {
+    width: 200px;
+  }
 }
 
 .edit_profile,
