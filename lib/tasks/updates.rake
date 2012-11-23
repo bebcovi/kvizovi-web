@@ -2,7 +2,8 @@ namespace :updates do
   desc "Generates updates"
   task :generate do
     if ENV["NAME"].nil?
-      raise "Usage: rake updates:generate NAME=name_of_update"
+      puts "Usage: rake updates:generate NAME=name_of_update"
+      exit
     end
 
     path = "#{Rails.root}/app/views/updates/index"
