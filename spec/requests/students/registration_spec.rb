@@ -34,6 +34,6 @@ describe "Registering student" do
     expect { click_on "Registriraj se" }.to change{Student.count}.by 1
 
     current_path.should eq new_game_path
-    page.should have_content(attributes[:first_name])
+    page.should have_content(attributes[:username])
   end
 end

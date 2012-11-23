@@ -27,6 +27,6 @@ describe "Student login" do
     click_on "Prijava"
 
     current_path.should eq new_game_path
-    page.should have_content(attributes[:first_name])
+    page.should have_content(attributes[:username])
   end
 end

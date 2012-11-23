@@ -24,6 +24,6 @@ describe "School login" do
     click_on "Prijava"
 
     current_path.should eq quizzes_path
-    page.should have_content(attributes[:name])
+    page.should have_content(attributes[:username])
   end
 end

@@ -14,9 +14,8 @@ describe "Making public" do
     logout
 
     login(:school, attributes_for(:school))
-    visit edit_school_path(@school)
-    uncheck "Javna pitanja?"
-    click_on "Spremi"
+    visit school_path(@school)
+    click_on "Pitanja su javna"
     logout
 
     login(:school, attributes_for(:other_school))

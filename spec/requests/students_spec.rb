@@ -8,7 +8,7 @@ describe "Students" do
   before(:each) { login(:student, attributes_for(:student)) }
 
   they "can access their profiles from any page" do
-    click_on @student.first_name
+    click_on "Uredi profil"
     current_path.should eq student_path(@student)
   end
 end

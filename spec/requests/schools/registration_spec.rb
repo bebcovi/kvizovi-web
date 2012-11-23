@@ -59,6 +59,6 @@ describe "School registration" do
 
     School.first.quizzes.should_not be_empty
     current_path.should eq quizzes_path
-    page.should have_content(attributes[:name])
+    page.should have_content(attributes[:username])
   end
 end

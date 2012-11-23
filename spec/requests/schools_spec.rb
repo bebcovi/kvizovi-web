@@ -5,7 +5,7 @@ describe "Schools" do
   before(:each) { login(:school, attributes_for(:school)) }
 
   they "can access their profiles from any page" do
-    click_on @school.name
+    click_on "Uredi profil"
     current_path.should eq school_path(@school)
   end
 end

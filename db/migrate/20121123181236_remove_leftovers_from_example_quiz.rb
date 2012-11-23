@@ -4,6 +4,11 @@ class RemoveLeftoversFromExampleQuiz < ActiveRecord::Migration
   class Question < ActiveRecord::Base
     has_and_belongs_to_many :quizzes, foreign_key: "question_id"
   end
+  class BooleanQuestion     < Question; end
+  class ChoiceQuestion      < Question; end
+  class AssociationQuestion < Question; end
+  class ImageQuestion       < Question; end
+  class TextQuestion        < Question; end
 
   def up
     ActiveRecord::Base.record_timestamps = false

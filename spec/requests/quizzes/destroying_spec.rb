@@ -9,7 +9,7 @@ describe "Destroying quizzes" do
 
   it "has the link for it" do
     visit quizzes_path
-    within(".dropdown-menu") { all("a").last.click }
+    within(".actions .dropdown-menu") { all("a").last.click }
     current_path.should eq delete_quiz_path(@quiz)
   end
 
