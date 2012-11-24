@@ -55,4 +55,4 @@
         %td.short= student.username
         %td= student.school.name
         %td.short= student.games.count
-        %td= activity(student.games.maximum(:created_at))
+        %td= activity([student.updated_at, student.games.maximum(:created_at)].max)

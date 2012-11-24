@@ -27,7 +27,7 @@
         %td= student.full_name
         %td.short= student.username
         %td.short= student.games.count
-        %td= activity(student.games.maximum(:created_at))
+        %td= activity([student.updated_at, student.games.maximum(:created_at)].max)
 
 %h2
   Kvizovi
