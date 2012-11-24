@@ -5,7 +5,8 @@ module AdminHelper
     t("misc.#{name}", count: count)
   end
 
-  def activity(time)
+  def activity(*times)
+    time = times.compact.max
     if time
       "prije #{time_ago_in_words(time)}"
     else
