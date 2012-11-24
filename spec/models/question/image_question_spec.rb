@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "spec_helper_lite"
 use_nulldb { require_relative "../../../app/models/question/image_question" }
 
@@ -22,8 +23,11 @@ describe ImageQuestion do
 
       it "can receive a file" do
         @it.image = nil
-        @it.image_file = Rack::Test::UploadedFile.new("#{ROOT}/spec/fixtures/files/image.jpg", "image/jpeg")
-        @it.image_file_name.should eq "image.jpg"
+        @it.image_file = uploaded_file("image.jpg", "image/jpeg")
+        @it.save
+        File.basename(@it.image.url.match(/\?\d+$/).pre_match).should eq "image.jpg"
+        @it.send(:prepare_for_destroy)
+        @it.send(:destroy_attached_files)
       end
     end
 
@@ -32,6 +36,15 @@ describe ImageQuestion do
       @it.image_height.should be_a(Integer)
       @it.image_width(:resized).should be_a(Integer)
       @it.image_height(:resized).should be_a(Integer)
+    end
+
+    it "removes special characters from filenames" do
+      @it.image_file = uploaded_file("image_ščćžđ.jpg", "image/jpeg")
+      @it.save
+      File.basename(@it.image.url.match(/\?\d+$/).pre_match).should eq "image_scczd.jpg"
+      File.exists?(File.join("#{ROOT}/public", "#{@it.image.url.match(/\?\d+$/).pre_match}")).should be_true
+      @it.send(:prepare_for_destroy)
+      @it.send(:destroy_attached_files)
     end
   end
 

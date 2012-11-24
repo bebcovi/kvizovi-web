@@ -1,4 +1,5 @@
 # encoding: utf-8
+require "rack/test"
 
 module IntegrationSpecHelpers
   def login(name, attributes)
@@ -25,7 +26,11 @@ module UnitSpecHelpers
   def stub_for_paperclip
     Paperclip.options[:log] = false
     stub_const("Rails", Module.new)
-    Rails.stub(:root)
+    Rails.stub(:root).and_return(ROOT)
+  end
+
+  def uploaded_file(filename, content_type)
+    Rack::Test::UploadedFile.new("#{ROOT}/spec/fixtures/files/#{filename}", content_type)
   end
 end
 

@@ -2,6 +2,7 @@
 require_relative "text_question"
 require "paperclip"
 require "active_support/core_ext/numeric/bytes"
+require "active_support/inflector/transliterate"
 require "uri"
 require "open-uri"
 
@@ -25,16 +26,30 @@ class ImageQuestion < TextQuestion
       @image_url = url
       begin
         self.image = URI.parse(url)
-      rescue SocketError, URI::InvalidURIError => exception
-        puts exception.message
-        puts exception.backtrace
+      rescue SocketError, URI::InvalidURIError
       end
     end
   end
   def image_file=(file)
     if file.present?
       @image_file = file
-      self.image = file
+      self.image = UploadedFile.new(file)
+    end
+  end
+
+  class UploadedFile < SimpleDelegator
+    include ActiveSupport::Inflector
+
+    def initialize(file)
+      @file = file
+    end
+
+    def original_filename
+      transliterate(@file.original_filename)
+    end
+
+    def method_missing(*args, &block)
+      @file.send(*args, &block)
     end
   end
 
