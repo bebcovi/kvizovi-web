@@ -1,7 +1,11 @@
 class SessionsController < ApplicationController
   def new
-    @session = new_session
-    render "new_#{params[:type]}"
+    if params[:type]
+      @session = new_session
+      render "new_#{params[:type]}"
+    else
+      redirect_to root_path
+    end
   end
 
   def create
