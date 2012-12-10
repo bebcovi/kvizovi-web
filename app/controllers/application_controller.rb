@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class ApplicationController < ActionController::Base
-  before_filter :set_announcement, if: proc { current_user.is_a?(School) and not current_user.notified?  }
+  before_filter :set_announcement, if: proc { current_user.is_a?(School) and not current_user.notified? }
 
   protected
 
@@ -21,12 +21,12 @@ class ApplicationController < ActionController::Base
   end
 
   def user_logged_in?
-    cookies[:user_id].present?
+    [cookies[:user_id], cookies[:user_type]].all?(&:present?)
   end
   helper_method :user_logged_in?
 
   def current_user
-    @current_user ||= user_class.find(cookies[:user_id]) if cookies[:user_id]
+    @current_user ||= user_class.find(cookies[:user_id]) if user_logged_in?
   end
   helper_method :current_user
 
