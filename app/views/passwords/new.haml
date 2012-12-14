@@ -4,5 +4,5 @@
   = text_field_tag :email, params[:email]
 
   = buttons do |b|
-    = b.cancel_button "Odustani", school_login_path
+    = b.cancel_button "Odustani", login_path(type: "school")
     = b.submit_button "Zatraži novu lozinku"

@@ -6,7 +6,7 @@ class PasswordsController < ApplicationController
     if school = School.find_by_email(params[:email])
       new_password = school.reset_password
       PasswordResetNotifier.password_reset(school, new_password).deliver
-      redirect_to root_path, notice: flash_message(:notice)
+      redirect_to login_path(type: "school"), notice: flash_message(:notice)
     else
       flash.now[:alert] = flash_message(:alert)
       render :new
