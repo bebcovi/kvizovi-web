@@ -1,6 +1,6 @@
 ruby "1.9.3"
 
-source :rubygems
+source "https://rubygems.org"
 
 gem "thin"
 gem "rails"

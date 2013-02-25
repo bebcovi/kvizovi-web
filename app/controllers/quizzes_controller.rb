@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class QuizzesController < ApplicationController
+  before_filter :authenticate!
+
   def index
     @quizzes = current_user.quizzes
   end

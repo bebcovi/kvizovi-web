@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_logged_in?
-    [cookies[:user_id], cookies[:user_type]].all?(&:present?)
+    cookies[:user_id].present? and cookies[:user_type].present? and user_class.exists?(cookies[:user_id])
   end
   helper_method :user_logged_in?
 
@@ -35,7 +35,9 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate!
-    redirect_to root_path if not user_logged_in?
+    if not user_logged_in?
+      redirect_to root_path, alert: "Najprije se trebate prijaviti :)"
+    end
   end
 
   def flash_message(type, *args)
