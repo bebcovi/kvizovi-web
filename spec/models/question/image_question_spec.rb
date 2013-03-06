@@ -15,13 +15,27 @@ describe ImageQuestion do
     describe "#image" do
       its(:image) { should be_file }
       its(:image) { should respond_to(:url) }
+    end
 
-      it "can receive a URL" do
-        @it.image_url = "http://designyoutrust.com/wp-content/uploads2/bla.jpg"
+    describe "#image_url=" do
+      it "assigns the URL to #image" do
+        @it.image_url = "http://designyoutrust.com/wp-content/uploads2/bla.jpg?q=2"
         @it.image_file_name.should eq "bla.jpg"
       end
 
-      it "can receive a file" do
+      it "doesn't raise errors on invalid URLs" do
+        expect { @it.image_url = "bla"            }.not_to raise_error
+        expect { @it.image_url = "http://bla.bla" }.not_to raise_error
+      end
+
+      it "gives validation errors on URLs which do not point to a photo" do
+        expect { @it.image_url = "http://google.com" }.not_to raise_error
+        @it.errors[:image_url].should_not be_empty
+      end
+    end
+
+    describe "#image_file=" do
+      it "assigns file to #image" do
         @it.image = nil
         @it.image_file = uploaded_file("image.jpg", "image/jpeg")
         @it.save

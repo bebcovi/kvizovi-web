@@ -25,8 +25,12 @@ class ImageQuestion < TextQuestion
     if url.present?
       @image_url = url
       begin
+        validate_image_url!
         self.image = URI.parse(url)
-      rescue SocketError, URI::InvalidURIError
+      rescue SocketError, URI::InvalidURIError, InvalidImageFormat => exception
+        if exception.is_a?(InvalidImageFormat)
+          errors.add(:image_url, "URL ne pokazuje na sliku (URL mora završavati sa \".jpg\", \".png\" i sl, a ne npr. sa \".html\")")
+        end
       end
     end
   end
@@ -37,7 +41,7 @@ class ImageQuestion < TextQuestion
     end
   end
 
-  class UploadedFile < SimpleDelegator
+  class UploadedFile
     include ActiveSupport::Inflector
 
     def initialize(file)
@@ -93,4 +97,23 @@ class ImageQuestion < TextQuestion
       errors[:image] << "Slika ne smije biti veća od 1 MB." if image.size > 1.megabyte
     end
   end
+
+  def validate_image_url!
+    url = URI.parse(image_url)
+    url.query = nil
+    if not IMAGE_EXTENSIONS.include?(File.extname(url.to_s))
+      raise InvalidImageFormat
+    end
+  end
+
+  IMAGE_EXTENSIONS = [
+    %w[.jpg .jpeg .jpe .jif .jfif .jfi],
+    %w[.gif],
+    %w[.png],
+    %w[.svg .svgz],
+    %w[.tiff .tif],
+    %w[.ico],
+  ].flatten
+
+  class InvalidImageFormat < RuntimeError; end
 end
