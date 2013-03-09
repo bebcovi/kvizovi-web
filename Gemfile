@@ -1,4 +1,4 @@
-ruby "1.9.3"
+ruby "2.0.0"
 
 source "https://rubygems.org"
 
@@ -46,7 +46,6 @@ end
 group :development, :test do
   gem "pry-rails"
   gem "rspec-rails"
-  gem "debugger"
 end
 
 group :test do
