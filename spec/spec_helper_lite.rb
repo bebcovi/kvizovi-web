@@ -1,5 +1,11 @@
-ROOT = File.expand_path("../", File.dirname(__FILE__))
-Dir["#{ROOT}/spec/support/**/*.rb"].each { |f| require f }
+ENV["RAILS_ENV"] = "test"
+require "rspec" # for "spring"
+
+require "bundler"
+Bundler.setup
+
+ROOT = Bundler.root
+Dir[File.join(ROOT, "spec/support/**/*.rb"].each &method(:require)
 
 require "factory_girl"
 FactoryGirl.find_definitions
