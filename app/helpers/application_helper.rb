@@ -1,6 +1,8 @@
-# encoding: utf-8
+require_relative "../../lib/markdown_rendering"
 
 module ApplicationHelper
+  include MarkdownRendering
+
   def body_class
     [params[:controller], params[:action]].join(" ")
   end
@@ -139,14 +141,6 @@ module ApplicationHelper
       end
     end
     yield f
-  end
-
-  def smarty_pants(text)
-    Redcarpet::Render::SmartyPants.render(text.to_s).html_safe
-  end
-
-  def markdown(text)
-    smarty_pants(Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(text))
   end
 
   def percentage(part, total)
