@@ -2,10 +2,13 @@ ruby "2.0.0"
 
 source "https://rubygems.org"
 
-gem "thin"
-gem "rails"
-gem "pg"
+gem "rails", "~> 3.2.12"
 
+# Web servers
+gem "thin",    group: :development
+gem "unicorn", group: :production
+
+# Frontend
 group :assets do
   gem "sass-rails"
   gem "compass", "~> 0.13.alpha.0"
@@ -18,39 +21,48 @@ group :assets do
 end
 
 # Views
-gem "haml", "3.2.0.beta.1"
+gem "haml", ">= 4"
 gem "haml-rails"
-gem "simple_form"
-gem "redcarpet"
+gem "simple_form", ">= 2"
+gem "redcarpet", ">= 2"
 gem "rails-i18n"
+gem "will_paginate", ">= 3", require: ["will_paginate", "will_paginate/array"]
+gem "bootstrap-will_paginate"
 
 # Database
-gem "paperclip"
+gem "pg"
+gem "paperclip", ">= 3.3"
 gem "paperclip-dropbox", "~> 1.0"
 gem "bcrypt-ruby", "~> 3.0"
 gem "activerecord-postgres-hstore"
 gem "activerecord-postgres-array"
 gem "acts-as-taggable-on"
 
+# Security
+gem "strong_parameters", ">= 0.2"
+gem "dotenv", group: [:development, :test]
+
 # Other
 gem "active_attr"
-gem "nokogiri"
-gem "exception_notification"
-gem "will_paginate", require: ["will_paginate", "will_paginate/array"]
-gem "bootstrap-will_paginate"
-
-group :development do
-  gem "letter_opener"
-end
-
-group :development, :test do
-  gem "pry-rails"
-  gem "rspec-rails"
-end
 
 group :test do
-  gem "factory_girl"
-  gem "capybara"
+  gem "rspec-rails"
+  gem "capybara", ">= 2"
+  gem "factory_girl", ">= 4.2"
   gem "activerecord-nulldb-adapter", ">= 0.2.3"
-  gem "database_cleaner"
+  gem "guard-rspec", ">= 2.4.1"
+  gem "rb-inotify", "~> 0.8.8"
+  gem "pry"
+end
+
+# Development stuff
+group :development do
+  gem "letter_opener"
+  gem "pry-rails"
+  gem "better_errors"
+  gem "binding_of_caller", ">= 0.7.1"
+end
+
+group :production do
+  gem "exception_notification"
 end
