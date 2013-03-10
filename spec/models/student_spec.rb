@@ -1,42 +1,86 @@
-require 'spec_helper_lite'
-require_relative "../../app/models/student"
+require "spec_helper"
 
 describe Student do
-  before(:each) { @it = build(:student, school_id: 1) }
-  subject { @it }
-
-  before(:each) { stub_const("School", Class.new) }
-
   use_nulldb
 
-  it "belongs to a school" do
-    @it.should respond_to(:school)
-  end
+  before(:each) { @it = build(:student) }
+  subject { @it }
 
-  it "has a full name" do
-    @it.full_name.should eq "#{@it.first_name} #{@it.last_name}"
-  end
-
-  it "can authenticate" do
-    @it.authenticate(attributes_for(:student)[:password]).should be_true
-    @it.authenticate("").should be_false
+  describe "#grade=" do
+    it "removes spaces and dots" do
+      @it.grade = "4. b"
+      @it.grade.should eq "4b"
+    end
   end
 
   describe "validations" do
-    it "validates school key" do
-      @it.school_id = nil
-      School.stub(:find_by_key) { nil }
-      @it.should_not be_valid
+    context "#username" do
+      it "validates presence" do
+        expect { @it.username = nil }.to invalidate(@it)
+      end
+
+      it "validates format" do
+        expect { @it.username = "@@@" }.to invalidate(@it)
+      end
+
+      it "validates length" do
+        expect { @it.username = "ab" }.to invalidate(@it)
+        expect { @it.username = "abc" }.to revalidate(@it)
+      end
     end
 
-    it "validates format of username" do
-      @it.username = "@@@"
-      @it.should_not be_valid
+    context "#password" do
+      it "validates presence" do
+        expect { @it.password = nil }.to invalidate(@it)
+      end
     end
 
-    it "validates length of username" do
-      @it.username = "ab"
-      @it.should_not be_valid
+    context "#grade" do
+      it "validates presence" do
+        expect { @it.grade = nil }.to invalidate(@it)
+      end
+
+      it "validates format" do
+        expect { @it.grade = "bla" }.to invalidate(@it)
+      end
+    end
+
+    context "#first_name" do
+      it "validates presence" do
+        expect { @it.first_name = nil }.to invalidate(@it)
+      end
+    end
+
+    context "#last_name" do
+      it "validates presence" do
+        expect { @it.last_name = nil }.to invalidate(@it)
+      end
+    end
+
+    context "#gender" do
+      it "validates presence" do
+        expect { @it.gender = nil }.to invalidate(@it)
+      end
+    end
+
+    context "#year_of_birth" do
+      it "validates presence" do
+        expect { @it.year_of_birth = nil }.to invalidate(@it)
+      end
+
+      it "validates numericality" do
+        expect { @it.year_of_birth = "bla" }.to invalidate(@it)
+      end
+    end
+
+    context "#school_key" do
+      it "validates existence" do
+        @it.school_id = nil
+        School.stub(:find_by_key).and_return(true)
+
+        expect { School.stub(:find_by_key).and_return(nil) }.to invalidate(@it)
+        expect { School.stub(:find_by_key).and_return(true) }.to revalidate(@it)
+      end
     end
   end
 end

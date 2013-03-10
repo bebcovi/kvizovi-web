@@ -48,11 +48,12 @@ gem "active_attr"
 group :test do
   gem "rspec-rails"
   gem "capybara", ">= 2"
-  gem "factory_girl", ">= 4.2"
+  gem "factory_girl_rails", ">= 4.2"
   gem "activerecord-nulldb-adapter", ">= 0.2.3"
   gem "guard-rspec", ">= 2.4.1"
   gem "rb-inotify", "~> 0.8.8"
   gem "pry"
+  gem "spring", ">= 0.0.7"
 end
 
 # Development stuff
@@ -61,6 +62,7 @@ group :development do
   gem "pry-rails"
   gem "better_errors"
   gem "binding_of_caller", ">= 0.7.1"
+  gem "spring", ">= 0.0.7"
 end
 
 group :production do

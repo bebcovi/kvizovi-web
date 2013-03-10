@@ -13,3 +13,4 @@ doc/*.pdf
 *-backup*
 
 config/application.yml
+.rspec

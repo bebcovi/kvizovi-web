@@ -1,5 +1,4 @@
 # encoding: utf-8
-require "active_record"
 require_relative "../../lib/has_many_questions"
 require "securerandom"
 
