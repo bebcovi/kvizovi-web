@@ -21,7 +21,7 @@ feature "Student" do
     click_on "Spremi"
 
     logout
-    visit login_path(type: "school")
+    visit login_path(type: "student")
     fill_in "Korisničko ime", with: @student.username
     fill_in "Lozinka", with: "new password"
     click_on "Prijava"
