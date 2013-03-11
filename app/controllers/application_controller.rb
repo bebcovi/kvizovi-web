@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class ApplicationController < ActionController::Base
   before_filter :set_announcement, if: proc { current_user.is_a?(School) and not current_user.notified? }
 

@@ -1,12 +1,13 @@
 # encoding: utf-8
 require "rack/test"
+require "active_support/core_ext/string/inflections"
 
 module SpecHelpers
-  def login(name, attributes)
-    visit login_path(type: name)
+  def login_as(user)
+    visit login_path(type: user.class.name.underscore)
 
-    fill_in "Korisničko ime", with: attributes[:username]
-    fill_in "Lozinka", with: attributes[:password]
+    fill_in "Korisničko ime", with: user.username
+    fill_in "Lozinka", with: user.password
     click_on "Prijava"
   end
 

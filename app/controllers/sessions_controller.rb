@@ -1,32 +1,25 @@
 class SessionsController < ApplicationController
   def new
     if params[:type]
-      @session = new_session
-      render "new_#{params[:type]}"
+      @login = Login.new
     else
       redirect_to root_path
     end
   end
 
   def create
-    @session = new_session(params[:user])
-    if user = @session.authenticate_user
-      log_in!(user, permanent: @session.remember_me?)
+    @login = Login.new(params[:login])
+    if user = @login.authenticate(params[:type])
+      log_in!(user, permanent: @login.remember_me?)
       redirect_to root_path
     else
       flash.now[:alert] = flash_message(:alert)
-      render "new_#{params[:type]}"
+      render :new
     end
   end
 
   def destroy
     log_out!
     redirect_to root_path
-  end
-
-  private
-
-  def new_session(attributes = {})
-    Session.new({type: params[:type]}.merge(attributes))
   end
 end

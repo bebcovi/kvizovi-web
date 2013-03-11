@@ -14,12 +14,8 @@ RSpec.configure do |config|
   config.include SpecHelpers
 
   config.include NullDBSpecHelpers
-  config.around(:each) do |example|
-    if example.metadata[:nulldb]
-      use_nulldb { example.run }
-    end
-  end
+
+  config.before(:each) { ActionMailer::Base.deliveries.clear }
 
   config.use_transactional_fixtures = true
-  config.treat_symbols_as_metadata_keys_with_true_values = true
 end

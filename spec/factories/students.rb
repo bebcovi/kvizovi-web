@@ -11,6 +11,10 @@ FactoryGirl.define do
     password "jon"
     school_id 1
 
+    trait :with_school do
+      school
+    end
+
     factory :janko do
       first_name "Janko"
       last_name "Marohnić"

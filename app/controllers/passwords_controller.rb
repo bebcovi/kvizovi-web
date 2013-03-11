@@ -4,7 +4,7 @@ class PasswordsController < ApplicationController
 
   def create
     if school = School.find_by_email(params[:email])
-      new_password = school.reset_password
+      new_password = PasswordResetter.new(school).reset_password
       PasswordResetNotifier.password_reset(school, new_password).deliver
       redirect_to login_path(type: "school"), notice: flash_message(:notice)
     else

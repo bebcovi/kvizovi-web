@@ -53,7 +53,7 @@ group :test do
   gem "guard-rspec", ">= 2.4.1"
   gem "rb-inotify", "~> 0.8.8"
   gem "pry"
-  gem "spring", ">= 0.0.7"
+  gem "nokogiri"
 end
 
 # Development stuff
@@ -62,7 +62,6 @@ group :development do
   gem "pry-rails"
   gem "better_errors"
   gem "binding_of_caller", ">= 0.7.1"
-  gem "spring", ">= 0.0.7"
 end
 
 group :production do

@@ -220,7 +220,6 @@ GEM
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     slop (3.4.3)
-    spring (0.0.7)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -279,6 +278,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   letter_opener
+  nokogiri
   paperclip (>= 3.3)
   paperclip-dropbox (~> 1.0)
   pg
@@ -291,7 +291,6 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   simple_form (>= 2)
-  spring (>= 0.0.7)
   strong_parameters (>= 0.2)
   thin
   uglifier

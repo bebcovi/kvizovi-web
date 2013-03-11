@@ -12,5 +12,5 @@ doc/*.lyx#
 doc/*.pdf
 *-backup*
 
-config/application.yml
+.env
 .rspec

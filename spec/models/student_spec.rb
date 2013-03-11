@@ -27,6 +27,10 @@ describe Student do
         expect { @it.username = "ab" }.to invalidate(@it)
         expect { @it.username = "abc" }.to revalidate(@it)
       end
+
+      it "validates uniqueness" do
+        it { should validate_uniqueness_of(:username) }
+      end
     end
 
     context "#password" do
@@ -74,8 +78,12 @@ describe Student do
     end
 
     context "#school_key" do
+      it "validates presence" do
+        expect { @it.school_key = nil }.to invalidate(@it)
+      end
+
       it "validates existence" do
-        @it.school_id = nil
+        @it.school_key = "secret"
         School.stub(:find_by_key).and_return(true)
 
         expect { School.stub(:find_by_key).and_return(nil) }.to invalidate(@it)

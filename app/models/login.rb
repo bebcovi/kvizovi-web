@@ -1,8 +1,7 @@
 require "active_attr"
 
-class Session
+class Login
   include ActiveAttr::Model
-  attr_accessor :type
 
   attribute :username
   attribute :password
@@ -12,13 +11,13 @@ class Session
     remember_me == 1
   end
 
-  def authenticate_user
-    user_class.authenticate(username: username, password: password)
+  def authenticate(type)
+    user_class(type).find_by_username(username).try(:authenticate, password)
   end
 
   private
 
-  def user_class
+  def user_class(type)
     type.camelize.constantize
   end
 end

@@ -12,9 +12,10 @@ class SchoolsController < ApplicationController
   def create
     @school = School.new(params[:school])
 
-    if @school.save
+    if @school.valid?
+      @school.save
+      ExampleQuizzesCreator.new(@school).create
       log_in!(@school)
-      @school.create_example_quizzes
       redirect_to quizzes_path, notice: flash_message(:notice)
     else
       render :new
