@@ -26,6 +26,11 @@ module SpecHelpers
   def revalidate(object)
     change{object.valid?}.to(true)
   end
+
+  def click_on(*args)
+    super
+    expect(page).not_to have_content("translation missing")
+  end
 end
 
 module NullDBSpecHelpers
