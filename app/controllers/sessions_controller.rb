@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
 
   def create
     @login = Login.new(params[:login])
+
     if user = @login.authenticate(params[:type])
       log_in!(user, permanent: @login.remember_me?)
       redirect_to root_path

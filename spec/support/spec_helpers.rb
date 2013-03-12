@@ -3,6 +3,10 @@ require "rack/test"
 require "active_support/core_ext/string/inflections"
 
 module SpecHelpers
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+
   def login_as(user)
     visit login_path(type: user.class.name.underscore)
 
@@ -30,6 +34,12 @@ module SpecHelpers
   def click_on(*args)
     super
     expect(page).not_to have_content("translation missing")
+  end
+
+  module ClassMethods
+    def benchmark_examples
+      around(:each) { |example| benchmark { example.run } }
+    end
   end
 end
 

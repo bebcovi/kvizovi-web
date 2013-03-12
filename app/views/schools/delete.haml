@@ -6,7 +6,7 @@
 
 = simple_form_for @school, method: :delete do |f|
 
-  = f.input :password
+  = f.input :password, input_html: {name: "password"}
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", school_path(@school)

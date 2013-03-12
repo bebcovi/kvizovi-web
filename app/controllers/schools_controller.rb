@@ -1,23 +1,4 @@
 class SchoolsController < ApplicationController
-  before_filter :authorize, only: :new
-
-  def new
-    @school = School.new
-  end
-
-  def create
-    @school = School.new(params[:school])
-
-    if @school.valid?
-      @school.save
-      ExampleQuizzesCreator.new(@school).create
-      log_in!(@school)
-      redirect_to quizzes_path, notice: flash_message(:notice)
-    else
-      render :new
-    end
-  end
-
   def show
     @school = current_user
   end
@@ -29,7 +10,8 @@ class SchoolsController < ApplicationController
   def update
     @school = current_user
 
-    if @school.update_attributes(params[:school])
+    if @school.valid?
+      @school.update_attributes(params[:school])
       redirect_to @school, notice: flash_message(:notice)
     else
       render :edit
@@ -54,19 +36,13 @@ class SchoolsController < ApplicationController
   def destroy
     @school = current_user
 
-    if @school.authenticate(params[:school][:password])
+    if UserAuthenticator.new(@school).authenticate(params[:password])
       @school.destroy
       log_out!
       redirect_to root_path, notice: flash_message(:notice)
     else
-      flash.now[:alert] = flash_message(:alert)
+      set_alert_message
       render :delete
     end
-  end
-
-  private
-
-  def authorize
-    redirect_to new_authorization_path if not flash[:authorized]
   end
 end

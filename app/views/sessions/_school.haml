@@ -15,4 +15,4 @@
   = buttons(f) do |b|
     = b.cancel_button "Odustani", root_path
     = b.submit_button "Prijava"
-    %span Nemate korisnički račun? #{link_to "Registrirajte se", new_school_path}.
+    %span Nemate korisnički račun? #{link_to "Registrirajte se", new_registration_path(type: "school")}.

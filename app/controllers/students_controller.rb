@@ -4,22 +4,6 @@ class StudentsController < ApplicationController
     @students = school.students
   end
 
-  def new
-    @student = Student.new
-  end
-
-  def create
-    @student = Student.new(params[:student])
-
-    if @student.valid?
-      @student.save
-      log_in!(@student)
-      redirect_to new_game_path, notice: flash_message(:notice)
-    else
-      render :new
-    end
-  end
-
   def show
     @student = current_user
   end

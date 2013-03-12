@@ -7,13 +7,13 @@ Lektire::Application.routes.draw do
   put "updates/hide", to: "updates#hide", as: "hide_update"
   get "contact", to: "contact#index"
 
+  resources :registrations
+  resources :authorizations
   controller :sessions do
     get   "login",  to: :new
     post  "login",  to: :create
     match "logout", to: :destroy
   end
-
-  resources :authorizations
 
   resource :game do
     get "feedback"

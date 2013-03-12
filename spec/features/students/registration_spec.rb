@@ -10,6 +10,7 @@ feature "Students" do
     visit root_path
     click_on "Ja sam učenik"
     click_on "Registriraj se"
+    expect(current_path).to eq new_registration_path
 
     # unsuccessful registration
     click_on "Registriraj se"

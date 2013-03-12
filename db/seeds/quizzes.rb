@@ -1,1 +1,3 @@
-School.all.each(&:create_example_quizzes)
+School.find_each do |school|
+  ExampleQuizzesCreator.new(school).create
+end

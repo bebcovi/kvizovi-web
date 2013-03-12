@@ -15,7 +15,7 @@ feature "Schools" do
     # successful authorization
     fill_in "Tajni ključ aplikacije", with: ENV["LEKTIRE_KEY"]
     click_on "Potvrdi"
-    expect(current_path).to eq new_school_path
+    expect(current_path).to eq new_registration_path
 
     # unsuccessful registration
     click_on "Registriraj se"

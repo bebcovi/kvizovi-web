@@ -1,0 +1,9 @@
+- @title = "Registracija"
+
+= simple_form_for @user, url: registrations_path do |f|
+
+  = render partial: @user.class.name.underscore, locals: {user: @user, f: f}
+
+  = buttons(f) do |b|
+    = b.cancel_button "Odustani", login_path
+    = b.submit_button "Registriraj se"
