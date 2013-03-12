@@ -40,8 +40,8 @@ hr:
         notice: "Učenik je uspješno izbrisan."
       change_password:
         notice: "Lozinka je uspješno promijenjena."
-    authorize:
-      authorize:
+    authorizations:
+      create:
         notice: "Točno ste napisali ključ. Sada se možete registrirati :)"
         alert: "Ključ je netočan."
     questions:

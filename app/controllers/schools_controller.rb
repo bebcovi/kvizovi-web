@@ -1,10 +1,8 @@
 class SchoolsController < ApplicationController
+  before_filter :authorize, only: :new
+
   def new
-    if flash[:authorized]
-      @school = School.new
-    else
-      redirect_to authorize_path
-    end
+    @school = School.new
   end
 
   def create
@@ -64,5 +62,11 @@ class SchoolsController < ApplicationController
       flash.now[:alert] = flash_message(:alert)
       render :delete
     end
+  end
+
+  private
+
+  def authorize
+    redirect_to new_authorization_path if not flash[:authorized]
   end
 end

@@ -54,7 +54,7 @@ hr:
         new_password_confirmation: "Potvrda nove lozinke"
       filter:
         tags: "Tagovi"
-      authorize:
+      authorization:
         secret_key: "Tajni ključ aplikacije"
 
   helpers:

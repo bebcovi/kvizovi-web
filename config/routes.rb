@@ -13,10 +13,7 @@ Lektire::Application.routes.draw do
     match "logout", to: :destroy
   end
 
-  controller :authorize do
-    get  "authorize", to: :show
-    post "authorize", to: :authorize
-  end
+  resources :authorizations
 
   resource :game do
     get "feedback"

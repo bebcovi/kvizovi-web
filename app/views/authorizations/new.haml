@@ -1,8 +1,8 @@
 - @title = "Autorizacija"
 
-= simple_form_for :authorize, url: authorize_path do |f|
+= simple_form_for @authorization do |f|
 
-  = f.input :secret_key, as: :password, input_html: {value: (ENV["LEKTIRE_KEY"] if Rails.env.development?), autofocus: current_page?("show")},
+  = f.input :secret_key, as: :password, input_html: {autofocus: current_page?("show")},
     hint: "Ako nemate ključ, možete ga #{link_to "zatražiti", contact_path}."
 
   = buttons(f) do |b|

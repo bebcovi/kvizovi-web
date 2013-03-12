@@ -7,7 +7,7 @@ feature "Schools" do
     visit root_path
     click_on "Ja sam škola"
     click_on "Registrirajte se"
-    expect(current_path).to eq authorize_path
+    expect(current_path).to eq new_authorization_path
 
     # unsuccessful authorization
     click_on "Potvrdi"
