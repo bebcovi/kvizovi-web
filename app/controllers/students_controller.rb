@@ -12,7 +12,6 @@ class StudentsController < ApplicationController
     @student = Student.new(params[:student])
 
     if @student.valid?
-      @student.school = School.find_by_key(@student.school_key)
       @student.save
       log_in!(@student)
       redirect_to new_game_path, notice: flash_message(:notice)

@@ -1,8 +1,8 @@
 ENV["RAILS_ENV"] = "test"
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each &method(:require)
-
 require_relative "../config/environment"
+
+Dir[Rails.root.join("spec/support/**/*.rb")].each &method(:require)
 
 require "rspec/rails"
 require "capybara/rspec"

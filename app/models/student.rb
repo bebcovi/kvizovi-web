@@ -16,6 +16,8 @@ class Student < ActiveRecord::Base
   validates :school_key, presence: true, unless: :school_id?
   validate :validate_existence_of_school_key, if: -> { school_key.present? }
 
+  before_create :assign_school
+
   def full_name; "#{first_name} #{last_name}"; end
 
   def to_s; full_name; end
@@ -33,5 +35,9 @@ class Student < ActiveRecord::Base
     unless School.find_by_key(school_key)
       errors[:school_key] << "Ne postoji škola s tim ključem."
     end
+  end
+
+  def assign_school
+    self.school ||= School.find_by_key(school_key)
   end
 end

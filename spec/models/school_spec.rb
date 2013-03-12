@@ -11,10 +11,6 @@ describe School do
       it "validates presence" do
         expect { @it.username = nil }.to invalidate(@it)
       end
-
-      it "validate uniqueness" do
-        it { should validate_uniqueness_of(:username) }
-      end
     end
 
     context "#password" do
@@ -26,10 +22,6 @@ describe School do
     context "#email" do
       it "validates presence" do
         expect { @it.email = nil }.to invalidate(@it)
-      end
-
-      it "validate uniqueness" do
-        it { should validate_uniqueness_of(:email) }
       end
     end
 
