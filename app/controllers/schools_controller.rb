@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class SchoolsController < ApplicationController
   def new
     if flash[:authorized]

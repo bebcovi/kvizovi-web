@@ -1,7 +1,7 @@
 require "spec_helper"
 require "nokogiri"
 
-feature "School" do
+feature "Schools" do
   before { @school = create(:school) }
 
   scenario "resetting password" do

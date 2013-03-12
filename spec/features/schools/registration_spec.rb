@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "School" do
+feature "Schools" do
   before { @school = build(:school) }
 
   scenario "registration" do

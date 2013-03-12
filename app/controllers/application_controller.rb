@@ -50,6 +50,10 @@ class ApplicationController < ActionController::Base
     flash.now[:announcement] = "Napravili smo neke važne promjene, možete ih vidjeti #{view_context.link_to "ovdje", updates_path}."
   end
 
+  def set_alert_message(*args)
+    flash.now[:alert] = flash_message(:alert, *args)
+  end
+
   def sub_layout
     "application"
   end
