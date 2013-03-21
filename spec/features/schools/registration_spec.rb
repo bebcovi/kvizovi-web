@@ -1,28 +1,18 @@
 require "spec_helper"
 
-feature "Schools" do
-  before { @school = build(:school) }
+feature "Registration" do
+  before do
+    @school = build(:school)
+  end
 
-  scenario "registration" do
+  scenario "A school can register" do
     visit root_path
     click_on "Ja sam škola"
     click_on "Registrirajte se"
-    expect(current_path).to eq new_authorization_path
 
-    # unsuccessful authorization
+    fill_in "Tajni ključ aplikacije", with: ENV["SECRET_KEY"]
     click_on "Potvrdi"
 
-    # successful authorization
-    fill_in "Tajni ključ aplikacije", with: ENV["LEKTIRE_KEY"]
-    click_on "Potvrdi"
-    expect(current_path).to eq new_registration_path
-
-    # unsuccessful registration
-    click_on "Registriraj se"
-
-    expect(page).to have_css(".error")
-
-    # successful registration
     fill_in "Ime škole",       with: @school.name
     fill_in "Mjesto",          with: @school.place
     fill_in "Korisničko ime",  with: @school.username
@@ -35,7 +25,5 @@ feature "Schools" do
     click_on "Registriraj se"
 
     expect(current_path).to eq quizzes_path
-    expect(page).to have_content(@school.username)
-    expect(page).to have_content("Antigona")
   end
 end

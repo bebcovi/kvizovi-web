@@ -1,32 +1,35 @@
-require_relative "../../app/models/password"
-require_relative "../../app/models/student"
+require "spec_helper"
 
 describe Password do
-  before(:each) { @it = Password.new(old_password: "secret", new_password: "secret", new_password_confirmation: "secret") }
-  subject { @it }
+  before do
+    @user = build(:school)
+    @it = Password.new(
+      user: @user,
+      old: @user.password,
+      new: "new password",
+      new_confirmation: "new password",
+    )
+  end
 
-  use_nulldb
-
-  describe "validations" do
-    it "validates the old password" do
-      @it.user = build(:student, school_id: 1)
-      @it.old_password = "wrong password"
-      @it.should_not be_valid
-
-      @it.old_password = attributes_for(:student)[:password]
-      @it.should be_valid
+  context "validations" do
+    context "#old" do
+      it "validates that it matches the current one" do
+        expect { @it.old = "wrong password" }.to invalidate(@it)
+      end
     end
 
-    it "validates presence of the new password" do
-      @it.stub(:validate_old_password) { true }
-      @it.new_password = nil
-      @it.should_not be_valid
-    end
+    context "#new" do
+      before do
+        @user.stub(:authenticate).and_return(true)
+      end
 
-    it "validates confirmation of the new password" do
-      @it.stub(:validate_old_password) { true }
-      @it.new_password_confirmation = "wrong password"
-      @it.should_not be_valid
+      it "validates presence" do
+        expect { @it.new = nil }.to invalidate(@it)
+      end
+
+      it "validates confirmation" do
+        expect { @it.new_confirmation = "wrong password" }.to invalidate(@it)
+      end
     end
   end
 end

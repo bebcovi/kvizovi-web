@@ -1,10 +1,9 @@
 require "spec_helper"
 
 describe Student do
-  use_nulldb
-
-  before(:each) { @it = build(:student) }
-  subject { @it }
+  before do
+    @it = build(:student)
+  end
 
   describe "#grade=" do
     it "removes spaces and dots" do
@@ -13,7 +12,7 @@ describe Student do
     end
   end
 
-  describe "validations" do
+  context "validations" do
     context "#username" do
       it "validates presence" do
         expect { @it.username = nil }.to invalidate(@it)
@@ -26,6 +25,13 @@ describe Student do
       it "validates length" do
         expect { @it.username = "ab" }.to invalidate(@it)
         expect { @it.username = "abc" }.to revalidate(@it)
+      end
+
+      it "validates uniqueness" do
+        expect {
+          create(:student, username: "john")
+          @it.username = "john"
+        }.to invalidate(@it)
       end
     end
 
@@ -75,18 +81,20 @@ describe Student do
 
     context "#school_key" do
       it "validates presence" do
-        @it.school_id = nil
-        @it.school_key = "bla"
-        School.stub(:find_by_key).and_return(true)
-        expect { @it.school_key = nil }.to invalidate(@it)
+        expect {
+          @it.school_id = nil
+          @it.school_key = nil
+        }.to invalidate(@it)
       end
 
       it "validates existence" do
+        @it.school_id = nil
         @it.school_key = "secret"
-        School.stub(:find_by_key).and_return(true)
+        create(:school, key: "secret")
+        @it.valid?
+        puts @it.errors.full_messages
 
-        expect { School.stub(:find_by_key).and_return(nil) }.to invalidate(@it)
-        expect { School.stub(:find_by_key).and_return(true) }.to revalidate(@it)
+        expect { @it.school_key = "other_secret" }.to invalidate(@it)
       end
     end
   end

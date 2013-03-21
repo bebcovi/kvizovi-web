@@ -49,9 +49,9 @@ hr:
       game:
         answer: "Odgovor"
       password:
-        old_password: "Stara lozinka"
-        new_password: "Nova lozinka"
-        new_password_confirmation: "Potvrda nove lozinke"
+        old: "Stara lozinka"
+        new: "Nova lozinka"
+        new_confirmation: "Potvrda nove lozinke"
       filter:
         tags: "Tagovi"
       authorization:

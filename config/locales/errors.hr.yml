@@ -1,5 +1,5 @@
 hr:
-  activerecord:
+  activerecord: &errors
     errors:
       format: ! "%{message}"
       messages:
@@ -18,6 +18,8 @@ hr:
               blank: "Nisi izabrao/la spol."
             year_of_birth:
               blank: "Nisi izabrao/la godinu rođenja."
+            school_key:
+              inclusion: "Ne postoji škola s tim ključem."
         school:
           attributes:
             level:
@@ -28,6 +30,11 @@ hr:
               taken: "Već postoji škola s tim korisničkim imenom."
             email:
               taken: "Ova e-mail adresa je već zauzeta."
+        password:
+          attributes:
+            new:
+              blank: "Ne smije biti prazna."
+              confirmation: "Ne slaže se sa svojom potvrdom."
         boolean_question:
           attributes:
             answer:
@@ -48,3 +55,6 @@ hr:
           attributes:
             quiz_id:
               blank: "Nisi izabrao/la kviz."
+
+  activemodel:
+    <<: *errors

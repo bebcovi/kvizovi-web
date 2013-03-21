@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_filter :authorize, only: :new
+  before_filter :authorize_if_school, only: :new
 
   def new
     @user = user_class.new
@@ -19,9 +19,9 @@ class RegistrationsController < ApplicationController
 
   private
 
-  def authorize
-    if params[:type] == "school" and not flash[:authorized]
-      redirect_to new_authorization_path
+  def authorize_if_school
+    if params[:type] == "school"
+      redirect_to new_authorization_path if not flash[:authorized]
     end
   end
 
@@ -30,10 +30,6 @@ class RegistrationsController < ApplicationController
   end
 
   def user_params
-    params[:school] || params[:student]
-  end
-
-  def default_url_options(options = {})
-    params[:type] ? {type: params[:type]} : {}
+    params[:student] || params[:school]
   end
 end

@@ -1,23 +1,16 @@
 require "spec_helper"
 
-feature "Students" do
-  before {
+feature "Registration" do
+  before do
     @student = build(:student)
     @school = create(:school)
-  }
+  end
 
-  scenario "registration" do
+  scenario "A student can register" do
     visit root_path
     click_on "Ja sam učenik"
     click_on "Registriraj se"
-    expect(current_path).to eq new_registration_path
 
-    # unsuccessful registration
-    click_on "Registriraj se"
-
-    expect(page).to have_css(".error")
-
-    # successful registration
     fill_in "Ime",               with: @student.first_name
     fill_in "Prezime",           with: @student.last_name
     fill_in "Korisničko ime",    with: @student.username
@@ -30,7 +23,5 @@ feature "Students" do
     click_on "Registriraj se"
 
     expect(current_path).to eq new_game_path
-    expect(page).to have_content(@student.username)
-    expect(Student.first.reload.school).to eq @school
   end
 end

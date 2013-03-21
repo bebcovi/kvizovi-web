@@ -2,7 +2,7 @@
 
 = simple_form_for @user, url: registrations_path do |f|
 
-  = render partial: @user.class.name.underscore, locals: {user: @user, f: f}
+  = render partial: "#{params[:type]}_fields", locals: {user: @user, f: f}
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", login_path

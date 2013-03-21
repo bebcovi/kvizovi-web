@@ -5,7 +5,5 @@ class Authorization
 
   attribute :secret_key
 
-  def valid?
-    secret_key == ENV["LEKTIRE_KEY"]
-  end
+  validates :secret_key, format: {with: /\A#{ENV["SECRET_KEY"]}\Z/}
 end

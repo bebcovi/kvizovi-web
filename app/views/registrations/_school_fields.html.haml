@@ -7,3 +7,5 @@
 = f.input :password
 = f.input :password_confirmation
 = f.input :key, as: :password, hint: "Ovo će vaši učenici koristiti za registraciju".append_icon("arrow-up")
+
+= hidden_field_tag :type, params[:type]

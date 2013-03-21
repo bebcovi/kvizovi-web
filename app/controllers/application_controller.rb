@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :set_announcement, if: proc { current_user.is_a?(School) and not current_user.notified? }
+  protect_from_forgery
 
   protected
 
@@ -24,13 +24,11 @@ class ApplicationController < ActionController::Base
   helper_method :user_logged_in?
 
   def current_user
-    @current_user ||= user_class.find(cookies[:user_id]) if user_logged_in?
+    if user_logged_in?
+      @current_user ||= user_class.find(cookies[:user_id])
+    end
   end
   helper_method :current_user
-
-  def user_class
-    cookies[:user_type].camelize.constantize
-  end
 
   def authenticate!
     if not user_logged_in?
@@ -46,16 +44,8 @@ class ApplicationController < ActionController::Base
     t("flash.#{controller}.#{action}.#{type}", options)
   end
 
-  def set_announcement
-    flash.now[:announcement] = "Napravili smo neke važne promjene, možete ih vidjeti #{view_context.link_to "ovdje", updates_path}."
-  end
-
   def set_alert_message(*args)
     flash.now[:alert] = flash_message(:alert, *args)
-  end
-
-  def sub_layout
-    "application"
   end
 
   def render(*args)
@@ -63,5 +53,15 @@ class ApplicationController < ActionController::Base
     options.update(layout: false) if request.headers["X-noLayout"]
     args << options
     super
+  end
+
+  private
+
+  def user_class
+    cookies[:user_type].camelize.constantize if cookies[:user_type]
+  end
+
+  def sub_layout
+    "application"
   end
 end

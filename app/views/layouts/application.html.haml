@@ -19,18 +19,18 @@
         .container-fluid
           = link_to "Lektire".prepend_icon("books"), root_path, class: "brand"
 
-          = render "navigation"
+          = render "application/navigation"
 
           %ul.nav.pull-right
-            = render "contact"
-            = render "log" if user_logged_in?
+            = render "application/contact"
+            = render "application/log" if user_logged_in?
 
     - if content_for? :hero_unit
       .hero-unit
         = content_for :hero_unit
 
     .main_content.container-fluid
-      = render partial: "flash", locals: {flash: flash}
+      = render partial: "application/flash", locals: {flash: flash}
       = render "layouts/#{controller.send(:sub_layout)}"
 
     = javascript_include_tag "application"

@@ -13,8 +13,7 @@ class Student < ActiveRecord::Base
   validates :last_name, presence: true
   validates :gender, presence: true
   validates :year_of_birth, presence: true, numericality: {only_integer: true}
-  validates :school_key, presence: true, unless: :school_id?
-  validate :validate_existence_of_school_key, if: -> { school_key.present? }
+  validates :school_key, presence: true, inclusion: {in: proc { School.pluck(:key) }}, unless: :school_id?
 
   before_create :assign_school
 
@@ -30,12 +29,6 @@ class Student < ActiveRecord::Base
   end
 
   private
-
-  def validate_existence_of_school_key
-    unless School.find_by_key(school_key)
-      errors[:school_key] << "Ne postoji škola s tim ključem."
-    end
-  end
 
   def assign_school
     self.school ||= School.find_by_key(school_key)

@@ -10,7 +10,7 @@ Lektire::Application.routes.draw do
   resources :registrations
   resources :authorizations
   controller :sessions do
-    get   "login",  to: :new
+    get   "login",  to: :new, constraints: ->(request) { request.params[:type].present? }
     post  "login",  to: :create
     match "logout", to: :destroy
   end
@@ -58,4 +58,7 @@ Lektire::Application.routes.draw do
 
   match "404", to: "errors#not_found"
   match "500", to: "errors#internal_server_error"
+
+  # Legacy routes
+  get "login", to: redirect("")
 end

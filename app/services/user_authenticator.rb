@@ -1,9 +1,10 @@
 class UserAuthenticator
-  def initialize(user)
-    @user = user
+  def initialize(user_class)
+    @user_class = user_class
   end
 
-  def authenticate(password)
-    @user.try(:authenticate, password)
+  def authenticate(credentials)
+    user = @user_class.where(username: credentials[:username]).first
+    user.try(:authenticate, credentials[:password])
   end
 end

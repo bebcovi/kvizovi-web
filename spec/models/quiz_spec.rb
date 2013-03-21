@@ -1,11 +1,9 @@
-require "spec_helper_lite"
-use_nulldb { require_relative "../../app/models/quiz" }
+require "spec_helper"
 
 describe Quiz do
-  before(:each) { @it = build(:quiz) }
-  subject { @it }
-
-  use_nulldb
+  before do
+    @it = build(:quiz)
+  end
 
   it "assigns grades correctly" do
     @it.grades = ["1b", "2a", "3c"]

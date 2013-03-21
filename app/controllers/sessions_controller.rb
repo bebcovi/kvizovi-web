@@ -1,20 +1,16 @@
 class SessionsController < ApplicationController
   def new
-    if params[:type]
-      @login = Login.new
-    else
-      redirect_to root_path
-    end
+    @login = Login.new
   end
 
   def create
     @login = Login.new(params[:login])
 
-    if user = @login.authenticate(params[:type])
+    if user = UserAuthenticator.new(user_class).authenticate(username: @login.username, password: @login.password)
       log_in!(user, permanent: @login.remember_me?)
       redirect_to root_path
     else
-      flash.now[:alert] = flash_message(:alert)
+      set_alert_message
       render :new
     end
   end
@@ -22,5 +18,11 @@ class SessionsController < ApplicationController
   def destroy
     log_out!
     redirect_to root_path
+  end
+
+  private
+
+  def user_class
+    params[:type].camelize.constantize
   end
 end

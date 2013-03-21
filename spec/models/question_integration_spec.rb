@@ -1,8 +1,7 @@
-require "spec_helper_full"
+require "spec_helper"
 
 describe Question do
   before(:all) { @it = create(:question) }
-  subject { @it }
 
   describe "#dup" do
     it "copies tags" do

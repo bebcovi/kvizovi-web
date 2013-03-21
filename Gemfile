@@ -49,7 +49,6 @@ group :test do
   gem "rspec-rails"
   gem "capybara", ">= 2"
   gem "factory_girl_rails", ">= 4.2"
-  gem "activerecord-nulldb-adapter", ">= 0.2.3"
   gem "guard-rspec", ">= 2.4.1"
   gem "rb-inotify", "~> 0.8.8"
   gem "pry"

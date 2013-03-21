@@ -1,4 +1,4 @@
-require "spec_helper_full"
+require "spec_helper"
 
 describe Quiz do
   before(:all) { @it = create(:quiz) }

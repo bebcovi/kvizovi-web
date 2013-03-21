@@ -10,7 +10,7 @@
       = f.input :remember_me, as: :boolean, wrapper: false, bootstrap_wrapper: false, label: false
       Zapamti me
 
-  = hidden_field_tag :type, "school"
+  = hidden_field_tag :type, params[:type]
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", root_path

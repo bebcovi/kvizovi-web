@@ -1,15 +1,21 @@
 require "spec_helper"
 
 describe School do
-  use_nulldb
+  before do
+    @it = build(:school)
+  end
 
-  before(:each) { @it = build(:school) }
-  subject { @it }
-
-  describe "validations" do
+  context "validations" do
     context "#username" do
       it "validates presence" do
         expect { @it.username = nil }.to invalidate(@it)
+      end
+
+      it "validates uniqueness" do
+        expect {
+          create(:school, username: "jon")
+          @it.username = "jon"
+        }.to invalidate(@it)
       end
     end
 
@@ -22,6 +28,13 @@ describe School do
     context "#email" do
       it "validates presence" do
         expect { @it.email = nil }.to invalidate(@it)
+      end
+
+      it "validates uniqueness" do
+        expect {
+          create(:school, email: "jon.snow@north.com")
+          @it.email = "jon.snow@north.com"
+        }.to invalidate(@it)
       end
     end
 
