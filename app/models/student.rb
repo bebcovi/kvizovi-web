@@ -1,4 +1,6 @@
 class Student < ActiveRecord::Base
+  GENDERS = ["Muško", "Žensko"]
+
   belongs_to :school
   def games; Game.where("games.first_player_id = #{id} OR games.second_player_id = #{id}"); end
   def available_quizzes; school.quizzes.activated.for_student(self); end
@@ -11,15 +13,16 @@ class Student < ActiveRecord::Base
   validates :grade, presence: true, format: {with: /\A[0-8][a-z]\Z$/}
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :gender, presence: true
+  validates :gender, presence: true, inclusion: {in: GENDERS}
   validates :year_of_birth, presence: true, numericality: {only_integer: true}
   validates :school_key, presence: true, inclusion: {in: proc { School.pluck(:key) }}, unless: :school_id?
 
   before_create :assign_school
 
-  def full_name; "#{first_name} #{last_name}"; end
+  def type; "student"; end
 
   def to_s; full_name; end
+  def full_name; "#{first_name} #{last_name}"; end
 
   def male?;   gender == "Muško"; end
   def female?; gender == "Žensko"; end

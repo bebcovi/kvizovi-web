@@ -67,6 +67,10 @@ describe Student do
       it "validates presence" do
         expect { @it.gender = nil }.to invalidate(@it)
       end
+
+      it "validates inclusion" do
+        expect { @it.gender = "bla" }.to invalidate(@it)
+      end
     end
 
     context "#year_of_birth" do

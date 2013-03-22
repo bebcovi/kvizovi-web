@@ -1,0 +1,10 @@
+- @title = "Profil"
+
+= render partial: @user.type, object: @user
+
+.btn-toolbar.edit_profile
+  .btn-group
+    = edit_button "Izmjeni profil", edit_profile_path
+    = change_password_button "Izmjeni lozinku", edit_profile_password_path
+
+%p= delete_profile_button "Izbriši korisnički račun", delete_profile_path

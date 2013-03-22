@@ -54,6 +54,10 @@ describe School do
       it "validates presence" do
         expect { @it.level = nil }.to invalidate(@it)
       end
+
+      it "validates inclusion" do
+        expect { @it.level = "bla" }.to invalidate(@it)
+      end
     end
 
     context "#key" do

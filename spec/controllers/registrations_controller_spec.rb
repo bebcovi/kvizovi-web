@@ -1,81 +1,66 @@
 require "spec_helper"
 
 describe RegistrationsController do
-  before do
-    @parameters = {}
-  end
-
   describe "#new" do
-    context "with student" do
-      before do
-        @parameters.update(type: "student")
-      end
-
-      it "renders the template" do
-        get :new, @parameters
-        expect(response).to render_template(:new)
+    context "when not authorized" do
+      it "requires authorization" do
+        get :new, type: "school"
+        expect(response).to redirect_to new_authorization_path
       end
     end
 
-    context "with school" do
-      before do
-        @parameters.update(type: "school")
+    context "when authorized" do
+      it "assigns @user" do
+        get :new, {type: "school"}, {}, {authorized: true}
+        expect(assigns(:user)).not_to be_nil
       end
 
-      context "when not authorized" do
-        it "requires authorization" do
-          get :new, @parameters
-          expect(response).to redirect_to new_authorization_path
-        end
-      end
-
-      context "when authorized" do
-        before do
-          controller.stub(:flash).and_return({authorized: true})
-        end
-
-        it "renders :new" do
-          get :new, @parameters
-          expect(response).to render_template(:new)
-        end
+      it "renders :new" do
+        get :new, {type: "school"}, {}, {authorized: true}
+        expect(response).to render_template(:new)
       end
     end
   end
 
   describe "#create" do
-    before do
-      @parameters.update(type: "student")
-    end
-
     context "when valid" do
       before do
-        @parameters.update(student: attributes_for(:student))
+        School.any_instance.stub(:valid?).and_return(true)
+        School.any_instance.stub(:save)
+        ExampleQuizzesCreator.any_instance.stub(:create)
       end
 
-      it "creates a new student" do
-        post :create, @parameters
-        Student.count.should eq 1
+      it "creates the user" do
+        School.any_instance.should_receive(:save)
+        post :create, type: "school"
+      end
+
+      context "when school" do
+        it "creates example quizzes" do
+          ExampleQuizzesCreator.any_instance.should_receive(:create)
+          post :create, type: "school"
+        end
       end
 
       it "log the created student in" do
-        post :create, @parameters
-        expect(cookies[:user_id]).not_to be_nil
+        controller.should_receive(:log_in!).with(an_instance_of(School))
+        post :create, type: "school"
       end
     end
 
     context "when invalid" do
       before do
-        @parameters.update(student: attributes_for(:student).slice(:username))
+        School.any_instance.stub(:valid?).and_return(false)
       end
 
       it "assigns @user and its attributes" do
-        post :create, @parameters
+        post :create, type: "school", school: {username: "janko"}
         expect(assigns(:user)).not_to be_nil
-        expect(assigns(:user).username).to eq @parameters[:student][:username]
+        expect(assigns(:user).username).to eq "janko"
       end
 
       it "renders :new" do
-        post :create, @parameters
+        post :create, type: "school"
         expect(flash).to render_template(:new)
       end
     end

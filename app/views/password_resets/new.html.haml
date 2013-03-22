@@ -1,8 +1,10 @@
-= form_tag password_path, method: :post do
+= form_tag password_resets_path, method: :post do
 
   %p Upišite vašu email adresu:
   = text_field_tag :email, params[:email]
 
+  = hidden_field_tag :type, params[:type]
+
   = buttons do |b|
-    = b.cancel_button "Odustani", login_path(type: "school")
+    = b.cancel_button "Odustani", login_path
     = b.submit_button "Zatraži novu lozinku"

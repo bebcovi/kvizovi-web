@@ -2,10 +2,9 @@ require "spec_helper"
 
 describe Password do
   before do
-    @user = build(:school)
     @it = Password.new(
-      user: @user,
-      old: @user.password,
+      user: stub,
+      old: "old password",
       new: "new password",
       new_confirmation: "new password",
     )
@@ -14,13 +13,15 @@ describe Password do
   context "validations" do
     context "#old" do
       it "validates that it matches the current one" do
-        expect { @it.old = "wrong password" }.to invalidate(@it)
+        @it.old = "wrong password"
+        @it.user.stub(:authenticate).with("wrong password").and_return(false)
+        expect(@it).not_to be_valid
       end
     end
 
     context "#new" do
       before do
-        @user.stub(:authenticate).and_return(true)
+        @it.user.stub(:authenticate).and_return(true)
       end
 
       it "validates presence" do

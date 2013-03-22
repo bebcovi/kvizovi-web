@@ -30,6 +30,6 @@ class RegistrationsController < ApplicationController
   end
 
   def user_params
-    params[:student] || params[:school]
+    params[params[:type]]
   end
 end

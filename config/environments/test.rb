@@ -34,4 +34,13 @@ Lektire::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Raise errors on translation errors
+  config.i18n.exception_handler = proc do |exception, *args|
+    if exception.is_a?(I18n::MissingTranslation)
+      raise "translation missing: \"#{exception.key}\""
+    else
+      raise exception
+    end
+  end
 end

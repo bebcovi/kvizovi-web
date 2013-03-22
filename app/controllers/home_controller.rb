@@ -7,10 +7,9 @@ class HomeController < ApplicationController
   private
 
   def redirect_if_user_logged_in
-    if current_user.is_a?(School)
-      redirect_to quizzes_path
-    elsif current_user.is_a?(Student)
-      redirect_to new_game_path
+    case current_user
+    when School  then redirect_to quizzes_path
+    when Student then redirect_to new_game_path
     end
   end
 end

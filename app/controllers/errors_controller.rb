@@ -1,9 +1,11 @@
 class ErrorsController < ApplicationController
-  def not_found
-    render :not_found, status: 404
+  def show
+    render status_code.to_s, status: status_code
   end
 
-  def internal_server_error
-    render :internal_server_error, status: 500
+  private
+
+  def status_code
+    params[:code].to_i
   end
 end

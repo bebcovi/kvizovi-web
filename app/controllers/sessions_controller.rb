@@ -5,9 +5,10 @@ class SessionsController < ApplicationController
 
   def create
     @login = Login.new(params[:login])
+    @login.user_class = user_class
 
-    if user = UserAuthenticator.new(user_class).authenticate(username: @login.username, password: @login.password)
-      log_in!(user, permanent: @login.remember_me?)
+    if @login.valid?
+      log_in!(@login.user, permanent: @login.remember_me?)
       redirect_to root_path
     else
       set_alert_message

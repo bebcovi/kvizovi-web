@@ -1,26 +1,18 @@
 require "spec_helper"
-require "nokogiri"
 
-feature "Changing password" do
+feature "Profile" do
   before do
     @school = create(:school)
   end
 
-  scenario "A school can reset its password" do
-    visit root_path
-    click_on "Ja sam škola"
-    click_on "Zatražite novu"
+  scenario "A school can edit its profile" do
+    login_as(@school)
+    click_on "Uredi profil"
 
-    fill_in "email", with: @school.email
-    click_on "Zatraži novu lozinku"
+    click_on "Izmjeni profil"
+    click_on "Spremi"
 
-    new_password = Nokogiri::HTML(PasswordResetNotifier.deliveries.first.body.to_s).at("strong").text
-
-    fill_in "Korisničko ime", with: @school.username
-    fill_in "Lozinka",        with: new_password
-    click_on "Prijava"
-
-    expect(current_path).to eq quizzes_path
+    expect(current_path).to eq profile_path
   end
 
   scenario "A school can update its password" do
@@ -41,5 +33,17 @@ feature "Changing password" do
     click_on "Prijava"
 
     expect(current_path).to eq quizzes_path
+  end
+
+  scenario "A school can delete its account" do
+    login_as(@school)
+    click_on "Uredi profil"
+    click_on "Izbriši korisnički račun"
+
+    fill_in "Lozinka", with: @school.password
+    click_on "Potvrdi"
+
+    expect(current_path).to eq root_path
+    expect(School.exists?(@student)).to be_false
   end
 end

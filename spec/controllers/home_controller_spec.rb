@@ -1,14 +1,10 @@
 require "spec_helper"
 
 describe HomeController do
-  before do
-    @parameters = {}
-  end
-
   describe "#index" do
     context "when user is not logged in" do
       it "renders :index" do
-        get :index, @parameters
+        get :index
         expect(response).to render_template(:index)
       end
     end
@@ -19,7 +15,7 @@ describe HomeController do
       end
 
       it "redirects to quizzes" do
-        get :index, @parameters
+        get :index
         expect(response).to redirect_to(quizzes_path)
       end
     end
@@ -30,7 +26,7 @@ describe HomeController do
       end
 
       it "redirects to new game" do
-        get :index, @parameters
+        get :index
         expect(response).to redirect_to(new_game_path)
       end
     end

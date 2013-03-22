@@ -8,6 +8,7 @@ require "rspec/rails"
 require "capybara/rspec"
 
 Paperclip.options[:log] = false
+I18n.backend.send(:init_translations)
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true

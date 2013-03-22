@@ -32,6 +32,8 @@ hr:
               taken: "Ova e-mail adresa je već zauzeta."
         password:
           attributes:
+            old:
+              confirmation: "Ne podudara se sa trenutnom lozinkom."
             new:
               blank: "Ne smije biti prazna."
               confirmation: "Ne slaže se sa svojom potvrdom."

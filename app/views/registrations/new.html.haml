@@ -2,7 +2,9 @@
 
 = simple_form_for @user, url: registrations_path do |f|
 
-  = render partial: "#{params[:type]}_fields", locals: {user: @user, f: f}
+  = render partial: "#{@user.type}_fields", locals: {user: @user, f: f}
+
+  = hidden_field_tag :type, params[:type]
 
   = buttons(f) do |b|
     = b.cancel_button "Odustani", login_path

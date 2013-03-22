@@ -1,64 +1,49 @@
 Lektire::Application.routes.draw do
   root to: "home#index"
-  get "home/index"
 
-  get "tour", to: "tour#index"
-  get "updates", to: "updates#index"
-  put "updates/hide", to: "updates#hide", as: "hide_update"
-  get "contact", to: "contact#index"
+  get "tour", to: "home#index"
+  get "contact", to: "home#index"
 
-  resources :registrations
-  resources :authorizations
+  ########################
+  # Login and registration
+  ########################
   controller :sessions do
     get   "login",  to: :new, constraints: ->(request) { request.params[:type].present? }
     post  "login",  to: :create
     match "logout", to: :destroy
   end
+  resources :registrations
+  resources :authorizations
+  resources :password_resets
 
-  resource :game do
-    get "feedback"
+  ########################
+  # Profile
+  ########################
+  resource :profile
+  namespace :profile do
+    resource :password
   end
 
-  resources :questions
-
-  resources :schools do
-    resources :questions do
-      member {
-        get "copy"
-        post "download"
-      }
-    end
-
-    member { put "toggle_question_privacy" }
-  end
-  resources :students do
-    member do
-      get "new_password"
-      put "change_password"
-    end
-  end
-  resource :password
-
+  ########################
+  # School
+  ########################
   resources :quizzes do
-    resources :questions do
-      member {
-        get "copy"
-        post "include"
-        post "remove"
-      }
-    end
+    resources :questions
 
     member { put "toggle_activation" }
   end
 
-  controller :admin do
-    get "admin", to: :index
-    get "admin/school/:id", to: :school, as: "admin_school"
+  resources :schools do
+    resources :questions
   end
+  resources :students
 
-  match "404", to: "errors#not_found"
-  match "500", to: "errors#internal_server_error"
+  ########################
+  # Student
+  ########################
+  resource :game
 
-  # Legacy routes
-  get "login", to: redirect("")
+  controller :errors do
+    get ":code", to: :show, constraints: {code: /\d+/}
+  end
 end

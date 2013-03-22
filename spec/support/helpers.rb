@@ -1,4 +1,5 @@
-# encoding: utf-8
+require "rack/test"
+require "active_support/core_ext/string/inflections"
 
 module Helpers
   def self.included(base)
@@ -9,7 +10,6 @@ module Helpers
   end
 
   def uploaded_file(filename, content_type)
-    require "rack/test"
     Rack::Test::UploadedFile.new(Rails.root.join("spec/fixtures/files/#{filename}"), content_type)
   end
 
@@ -32,8 +32,7 @@ end
 
 module CapybaraHelpers
   def login_as(user)
-    require "active_support/core_ext/string/inflections"
-    visit login_path(type: user.class.name.underscore)
+    visit login_path(type: user.type)
 
     fill_in "Korisničko ime", with: user.username
     fill_in "Lozinka", with: user.password
@@ -42,11 +41,6 @@ module CapybaraHelpers
 
   def logout
     click_on "Odjava"
-  end
-
-  def click_on(*args)
-    super
-    expect(page).not_to have_content("translation missing")
   end
 end
 

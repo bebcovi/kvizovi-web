@@ -1,9 +1,8 @@
-class PasswordResetNotifier < ActionMailer::Base
+class PasswordSender < ActionMailer::Base
   default from: "Lektire <#{ENV["SENDGRID_USERNAME"]}>"
 
-  def password_reset(user, new_password)
+  def password(user)
     @user = user
-    @new_password = new_password
     mail(subject: "Nova lozinka", to: @user.email)
   end
 end

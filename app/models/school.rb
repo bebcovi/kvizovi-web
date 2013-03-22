@@ -1,6 +1,8 @@
 require_relative "../../lib/has_many_questions"
 
 class School < ActiveRecord::Base
+  LEVELS = ["Osnovna", "Srednja"]
+
   has_many :students, dependent: :destroy
   has_many :quizzes, dependent: :destroy
   extend HasManyQuestions
@@ -13,8 +15,10 @@ class School < ActiveRecord::Base
   validates :email,    presence: true, uniqueness: true
   validates :place,    presence: true
   validates :region,   presence: true
-  validates :level,    presence: true
+  validates :level,    presence: true, inclusion: {in: LEVELS}
   validates :key,      presence: true
+
+  def type; "school"; end
 
   def to_s; name; end
 
