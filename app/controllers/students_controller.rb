@@ -4,24 +4,6 @@ class StudentsController < ApplicationController
     @students = school.students
   end
 
-  def show
-    @student = current_user
-  end
-
-  def edit
-    @student = current_user
-  end
-
-  def update
-    @student = current_user
-
-    if @student.update_attributes(params[:student])
-      redirect_to @student, notice: flash_message(:notice)
-    else
-      render :edit
-    end
-  end
-
   def new_password
     school = current_user
     @student = school.students.find(params[:id])

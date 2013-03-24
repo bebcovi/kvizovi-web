@@ -3,10 +3,10 @@ require "spec_helper"
 feature "Quizzes" do
   before do
     @school = create(:school)
-    login_as(@school)
   end
 
   scenario "A school can create, update and delete quizzes" do
+    login_as(@school)
     click_on "Novi kviz"
 
     fill_in "Naziv", with: "Neki naziv"
@@ -22,5 +22,13 @@ feature "Quizzes" do
     click_on "Jesam"
 
     expect(page).not_to have_content("Neki kviz")
+  end
+
+  scenario "A school can activate and deactivate quizzes" do
+    quiz = create(:quiz, school: @school)
+    login_as(@school)
+
+    within(quiz) { find(".toggle-activation").click }
+    within(quiz) { find(".toggle-activation").click }
   end
 end
