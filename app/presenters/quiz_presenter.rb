@@ -1,14 +1,8 @@
-# encoding: utf-8
-
 class QuizPresenter < BasePresenter
   presents :quiz
 
   def questions_count
     quiz.questions.count
-  end
-
-  def grades
-    ordinalize(quiz.grades).to_sentence
   end
 
   def visibility_icon

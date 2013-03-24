@@ -5,10 +5,7 @@
   = f.input :username, input_html: {autofocus: current_page?(action: "new")}
   = f.input :password,
     hint: "Zaboravili ste lozinku? #{link_to "Zatražite novu", new_password_reset_path(type: "school")}."
-  = f.input :remember_me, label: false do
-    %label.checkbox
-      = f.input :remember_me, as: :boolean, wrapper: false, bootstrap_wrapper: false, label: false
-      Zapamti me
+  = f.input :remember_me, as: :boolean, label: false, inline_label: "Zapamti me"
 
   = hidden_field_tag :type, params[:type]
 

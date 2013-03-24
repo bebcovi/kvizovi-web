@@ -8,7 +8,7 @@ class AuthorizationsController < ApplicationController
 
     if @authorization.valid?
       flash[:authorized] = true
-      redirect_to new_registration_path(type: "school"), notice: flash_message(:notice)
+      redirect_to new_registration_path(type: params[:type]), notice: flash_message(:notice)
     else
       render :new
     end

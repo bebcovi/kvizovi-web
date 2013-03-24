@@ -9,7 +9,7 @@ feature "Profile" do
     login_as(@student)
     click_on "Uredi profil"
 
-    click_on "Izmjeni profil"
+    click_on "Izmijeni profil"
     click_on "Spremi"
 
     expect(current_path).to eq profile_path
@@ -18,7 +18,7 @@ feature "Profile" do
   scenario "A student can update his password" do
     login_as(@student)
     click_on "Uredi profil"
-    click_on "Izmjeni lozinku"
+    click_on "Izmijeni lozinku"
 
     fill_in "Stara lozinka",        with: @student.password
     fill_in "Nova lozinka",         with: "new password"

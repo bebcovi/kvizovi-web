@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(:version => 20121122204234) do
     t.integer      "school_id"
     t.datetime     "created_at",                    :null => false
     t.datetime     "updated_at",                    :null => false
-    t.string_array "grades"
   end
 
   create_table "schools", :force => true do |t|

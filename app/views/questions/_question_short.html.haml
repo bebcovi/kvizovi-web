@@ -3,7 +3,7 @@
   %ul.dropdown-menu.pull-right
     - if @scope.is_a?(Quiz)
       %li= view_button "Pogledaj", polymorphic_path([@scope, question.becomes(Question)])
-      %li= edit_button "Izmjeni", polymorphic_path([@scope, question.becomes(Question)], action: "edit"), class: ""
+      %li= edit_button "Izmijeni", polymorphic_path([@scope, question.becomes(Question)], action: "edit"), class: ""
       %li= copy_button "Dupliciraj", polymorphic_path([@scope, question.becomes(Question)], action: "copy")
       %li= remove_file_button "Ukloni iz kviza", polymorphic_path([@scope, question.becomes(Question)], action: "remove"), method: :post
     - elsif @scope.is_a?(School)
@@ -12,7 +12,7 @@
         %li= add_file_button "Dodaj kvizu", polymorphic_path([@quiz, question.becomes(Question)], action: "include"), method: :post
       - else
         %li= view_button "Pogledaj", polymorphic_path([@scope, question.becomes(Question)])
-        %li= edit_button "Izmjeni", polymorphic_path([@scope, question.becomes(Question)], action: "edit"), class: ""
+        %li= edit_button "Izmijeni", polymorphic_path([@scope, question.becomes(Question)], action: "edit"), class: ""
         %li= copy_button "Dupliciraj", polymorphic_path([@scope, question.becomes(Question)], action: "copy")
         %li= delete_button "Izbriši", polymorphic_path([@scope, question.becomes(Question)], action: "delete"), class: "delete_item"
     - else

@@ -3,7 +3,6 @@ class Student < ActiveRecord::Base
 
   belongs_to :school
   def games; Game.where("games.first_player_id = #{id} OR games.second_player_id = #{id}"); end
-  def available_quizzes; school.quizzes.activated.for_student(self); end
 
   has_secure_password
   attr_accessor :school_key

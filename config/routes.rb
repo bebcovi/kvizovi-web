@@ -30,7 +30,9 @@ Lektire::Application.routes.draw do
   resources :quizzes do
     resources :questions
 
-    member { put "toggle_activation" }
+    member do
+      put "toggle_activation"
+    end
   end
 
   resources :schools do

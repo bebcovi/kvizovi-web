@@ -1,8 +1,8 @@
-- @title = "Registracija"
+- title "Registracija"
 
 = simple_form_for @user, url: registrations_path do |f|
 
-  = render partial: "#{@user.type}_fields", locals: {user: @user, f: f}
+  = render "#{@user.type}_fields", {user: @user, f: f}
 
   = hidden_field_tag :type, params[:type]
 

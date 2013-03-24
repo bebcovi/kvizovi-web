@@ -2,9 +2,9 @@ FactoryGirl.define do
   factory :school do
     name     "MIOC"
     level    "Srednja"
-    username "mioc"
+    sequence(:username) { |n| "mioc#{n}" }
     password "mioc"
-    email    "mioc@skola.hr"
+    sequence(:email) { |n| "mioc#{n}@skola.hr" }
     key      "mioc"
     place    "Zagreb"
     region   "Grad Zagreb"
@@ -14,6 +14,4 @@ FactoryGirl.define do
       email "other@skola.hr"
     end
   end
-
-  factory :user, parent: :school
 end

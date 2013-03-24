@@ -5,7 +5,9 @@
 - if @quizzes.any?
 
   %ol.quiz_list
-    = render collection: @quizzes, partial: "quiz_item", as: :quiz
+    - @quizzes.each do |quiz|
+      = content_tag_for :li, quiz do
+        = render quiz
 
 - else
 

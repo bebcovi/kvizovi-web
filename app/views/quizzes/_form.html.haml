@@ -2,14 +2,9 @@
 
   = f.input :name, input_html: {autofocus: current_page?(action: "new")}
 
-  %p Predviđeni razredi:
-  - current_user.grades.each do |grade|
-    %ol.grades
-      = f.input :grades, collection: grades(grade), as: :check_boxes, label: false, item_wrapper_tag: :li
-
   = buttons(f) do |b|
     = b.cancel_button "Odustani", quizzes_path
-    = b.submit_button
+    = b.submit_button "Spremi"
 
   - if @quiz.new_record?
     = alert_message "Kviz zasad neće biti vidljiv učenicima. Kasnije ga možete učiniti vidljivim kada bude spreman.", "info", close: false

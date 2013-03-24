@@ -4,7 +4,7 @@ describe SessionsController do
   describe "#new" do
     it "assigns @login" do
       get :new, type: "school"
-      expect(assigns(:login)).not_to be_nil
+      expect(assigns(:login)).to be_a(Login)
     end
 
     it "renders :new" do
@@ -17,12 +17,12 @@ describe SessionsController do
     context "on valid login" do
       before do
         Login.any_instance.stub(:valid?).and_return(true)
-        Login.any_instance.stub(:user).and_return(stub(id: 1))
+        controller.stub(:log_in!)
       end
 
       it "logs in the user" do
+        controller.should_receive(:log_in!)
         post :create, type: "school"
-        expect(cookies[:user_id]).to eq 1
       end
 
       it "redirects to root" do

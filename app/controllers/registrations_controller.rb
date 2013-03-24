@@ -21,7 +21,7 @@ class RegistrationsController < ApplicationController
 
   def authorize_if_school
     if params[:type] == "school"
-      redirect_to new_authorization_path if not flash[:authorized]
+      redirect_to new_authorization_path(type: "school") if not flash[:authorized]
     end
   end
 

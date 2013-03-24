@@ -2,13 +2,13 @@ require "spec_helper"
 
 describe AuthorizationsController do
   describe "#new" do
-    it "assigns @authorization" do
-      get :new
-      expect(assigns(:authorization)).not_to be_nil
+    it "assigns new authorization" do
+      get :new, type: "school"
+      expect(assigns(:authorization)).to be_a(Authorization)
     end
 
     it "renders :new" do
-      get :new
+      get :new, type: "school"
       expect(response).to render_template(:new)
     end
   end
@@ -19,14 +19,14 @@ describe AuthorizationsController do
         Authorization.any_instance.stub(:valid?).and_return(true)
       end
 
-      it "redirects to new registration" do
-        post :create
-        expect(response).to redirect_to(new_registration_path(type: "school"))
+      it "assigns the flash authorization" do
+        post :create, type: "school"
+        expect(flash[:authorized]).to eq true
       end
 
-      it "assigns the flash authorization" do
-        post :create
-        expect(flash[:authorized]).to eq true
+      it "redirects to new registration" do
+        post :create, type: "school"
+        expect(response).to redirect_to(new_registration_path(type: "school"))
       end
     end
 
@@ -35,13 +35,13 @@ describe AuthorizationsController do
         Authorization.any_instance.stub(:valid?).and_return(false)
       end
 
-      it "assigns @authorization" do
-        post :create
-        expect(assigns(:authorization)).not_to be_nil
+      it "assigns authorization" do
+        post :create, type: "school"
+        expect(assigns(:authorization)).to be_a(Authorization)
       end
 
       it "renders :new" do
-        post :create
+        post :create, type: "school"
         expect(response).to render_template(:new)
       end
     end

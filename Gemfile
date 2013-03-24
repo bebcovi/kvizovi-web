@@ -37,6 +37,7 @@ gem "bcrypt-ruby", "~> 3.0"
 gem "activerecord-postgres-hstore"
 gem "activerecord-postgres-array"
 gem "acts-as-taggable-on"
+gem "squeel"
 
 # Security
 gem "strong_parameters", ">= 0.2"

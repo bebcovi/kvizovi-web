@@ -7,7 +7,7 @@ class GamesController < ApplicationController
 
   def new
     @game_submission = GameSubmission.new
-    @quizzes = current_user.available_quizzes
+    @quizzes = current_user.school.quizzes
   end
 
   def create

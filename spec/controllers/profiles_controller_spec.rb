@@ -1,15 +1,16 @@
 require "spec_helper"
 
 describe ProfilesController do
+  before(:all) { @user = create(:school) }
+
   before do
-    @user = School.new
-    controller.stub(:current_user).and_return(@user)
+    controller.send(:log_in!, @user)
   end
 
   describe "#show" do
     it "assigns @user" do
       get :show
-      expect(assigns(:user)).not_to be_nil
+      expect(assigns(:user)).to eq @user
     end
 
     it "renders :show" do
@@ -21,7 +22,7 @@ describe ProfilesController do
   describe "#edit" do
     it "assigns @user" do
       get :edit
-      expect(assigns(:user)).not_to be_nil
+      expect(assigns(:user)).to eq @user
     end
 
     it "renders :edit" do
@@ -33,14 +34,14 @@ describe ProfilesController do
   describe "#update" do
     context "when valid" do
       before do
-        @user.stub(:valid?).and_return(true)
-        @user.stub(:save)
+        @user.class.any_instance.stub(:valid?).and_return(true)
+        @user.class.any_instance.stub(:update_attributes)
       end
 
       it "updates user's attributes" do
-        @user.should_receive(:save)
+        @user.class.any_instance.unstub(:update_attributes)
         post :update, school: {name: "Name"}
-        expect(assigns(:user).name).to eq "Name"
+        expect(@user.reload.name).to eq "Name"
       end
 
       it "redirects to profile" do
@@ -51,12 +52,12 @@ describe ProfilesController do
 
     context "when invalid" do
       before do
-        @user.stub(:valid?).and_return(false)
+        @user.class.any_instance.stub(:valid?).and_return(false)
       end
 
-      it "assigns @user and its attributes" do
-        post :update, school: {name: "Name"}
-        expect(assigns(:user)).not_to be_nil
+      it "assigns user and its attributes" do
+        post :update, @user.type => {name: "Name"}
+        expect(assigns(:user)).to eq @user
         expect(assigns(:user).name).to eq "Name"
       end
 
@@ -77,16 +78,20 @@ describe ProfilesController do
   describe "#destroy" do
     context "when valid" do
       before do
-        @user.stub(:authenticate).and_return(true)
+        @user.class.any_instance.stub(:authenticate).and_return(true)
+        @user.class.any_instance.stub(:destroy)
       end
 
       it "deletes the user" do
-        @user.should_receive(:destroy)
-        delete :destroy
+        user = create(:school)
+        user.class.any_instance.unstub(:destroy)
+        controller.send(:log_in!, user)
+        expect {
+          delete :destroy
+        }.to change{user.class.count}.by -1
       end
 
       it "logs the user out" do
-        cookies[:user_id] = 1
         delete :destroy
         expect(cookies[:user_id]).to be_nil
       end
@@ -118,4 +123,6 @@ describe ProfilesController do
       end
     end
   end
+
+  after(:all) { @user.destroy }
 end

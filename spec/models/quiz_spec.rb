@@ -5,12 +5,18 @@ describe Quiz do
     @it = build(:quiz)
   end
 
-  it "assigns grades correctly" do
-    @it.grades = ["1b", "2a", "3c"]
-    @it.grades.should eq ["1b", "2a", "3c"]
-  end
+  context "validations" do
+    context "#name" do
+      it "validates presence" do
+        expect { @it.name = nil }.to invalidate(@it)
+      end
+    end
 
-  describe "validations" do
+    context "#school_id" do
+      it "validates presence" do
+        expect { @it.school_id = nil }.to invalidate(@it)
+      end
+    end
   end
 end
 

@@ -7,30 +7,26 @@
     %meta{name: "robots", content: "noindex"}
     = favicon_link_tag
     = stylesheet_link_tag "application"
-    = javascript_include_tag "//use.typekit.net/nfo7hcu.js"
-    %script try{Typekit.load();}catch(e){}
-    %script
-      -# by Paul Irish (@paul_irish)
-      (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+    = render "typekit"
 
-  %body{class: body_class}
+  %body{class: "#{params[:controller]} #{params[:action]}"}
     .navbar.navbar-static-top.navbar-inverse
       .navbar-inner
         .container-fluid
           = link_to "Lektire".prepend_icon("books"), root_path, class: "brand"
 
-          = render "application/navigation"
+          = render "navigation"
 
           %ul.nav.pull-right
-            = render "application/contact"
-            = render "application/log" if user_logged_in?
+            = render "contact"
+            = render "log" if user_logged_in?
 
     - if content_for? :hero_unit
       .hero-unit
         = content_for :hero_unit
 
     .main_content.container-fluid
-      = render partial: "application/flash", locals: {flash: flash}
+      = render "flash", {flash: flash}
       = render "layouts/#{controller.send(:sub_layout)}"
 
     = javascript_include_tag "application"

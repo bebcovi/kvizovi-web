@@ -134,8 +134,7 @@ CREATE TABLE quizzes (
     activated boolean DEFAULT false,
     school_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    grades character varying[] DEFAULT '{}'::character varying[]
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -183,8 +182,7 @@ CREATE TABLE schools (
     place character varying(255),
     region character varying(255),
     email character varying(255),
-    notified boolean DEFAULT true,
-    public_questions boolean DEFAULT true
+    notified boolean DEFAULT true
 );
 
 
@@ -508,3 +506,7 @@ INSERT INTO schema_migrations (version) VALUES ('20121122220159');
 INSERT INTO schema_migrations (version) VALUES ('20121123181236');
 
 INSERT INTO schema_migrations (version) VALUES ('20121124120426');
+
+INSERT INTO schema_migrations (version) VALUES ('20130324164318');
+
+INSERT INTO schema_migrations (version) VALUES ('20130324164613');
