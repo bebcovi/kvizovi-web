@@ -99,7 +99,7 @@ module ApplicationHelper
       result << Page.new("Kvizovi", new_game_path, params[:controller] == "games")
     end
 
-    result << Page.new("Vodič", tour_path, params[:controller] == "tour")
+    result << Page.new("Vodič", tour_path, params[:action] == "tour")
 
     result
   end

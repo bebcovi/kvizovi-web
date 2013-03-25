@@ -1,9 +1,6 @@
 Lektire::Application.routes.draw do
   root to: "home#index"
 
-  get "tour", to: "home#index"
-  get "contact", to: "home#index"
-
   ########################
   # Login and registration
   ########################
@@ -33,6 +30,11 @@ Lektire::Application.routes.draw do
     member do
       put "toggle_activation"
     end
+  end
+
+  controller :static_pages do
+    get "tour"
+    get "contact"
   end
 
   resources :schools do
