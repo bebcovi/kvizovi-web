@@ -14,9 +14,9 @@ class Student < ActiveRecord::Base
   validates :last_name, presence: true
   validates :gender, presence: true, inclusion: {in: GENDERS}
   validates :year_of_birth, presence: true, numericality: {only_integer: true}
-  validates :school_key, presence: true, inclusion: {in: proc { School.pluck(:key) }}, unless: :school_id?
+  validates :school_key, presence: true, inclusion: {in: proc { School.pluck(:key) }, allow_blank: true}, unless: :school_id?
 
-  before_create :assign_school
+  before_create :assign_school, unless: :school_id?
 
   def type; "student"; end
 

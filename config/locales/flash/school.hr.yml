@@ -1,0 +1,51 @@
+hr:
+  flash:
+    school/sessions:
+      create:
+        alert: "Pogrešno korisničko ime ili lozinka."
+    school/registrations:
+      create:
+        notice: "Registracija je bila uspješna."
+    school/authorizations:
+      create:
+        notice: "Točno ste napisali ključ. Sada se možete registrirati :)"
+        alert: "Ključ je netočan."
+    school/password_resets:
+      create:
+        notice: "Nova lozinka je poslana na vaš email."
+        alert: "Škola s tom email adresom nije nađena."
+    school/profiles:
+      update:
+        notice: "Vaš profil je uspješno izmijenjen."
+      destroy:
+        notice: "Vaš korisnički račun je uspješno izbrisan."
+        alert: "Lozinka nije ispravna."
+    school/passwords:
+      update:
+        notice: "Vaša lozinka je uspješno izmijenjena."
+    school/quizzes:
+      create:
+        notice: "Kviz je uspješno stvoren."
+      update:
+        notice: "Kviz je uspješno izmijenjen."
+      destroy:
+        notice: "Kviz je uspješno izbrisan."
+      activate:
+        notice: "Kviz \"%{name}\" je aktiviran."
+      deactivate:
+        notice: "Kviz \"%{name}\" je deaktiviran."
+    school/questions:
+      create:
+        notice: "Pitanje je uspješno stvoreno."
+      update:
+        notice: "Pitanje je uspješno izmijenjeno."
+      destroy:
+        notice: "Pitanje je uspješno izbrisano."
+      include:
+        notice: "Pitanje je uspješno dodano u kviz \"%{name}\"."
+      copy:
+        notice: "Pitanje je uspješno preuzeto."
+      download:
+        notice: "Pitanje je uspješno kopirano kod vas."
+      remove:
+        notice: "Pitanje je uspješno uklonjeno iz kviza."

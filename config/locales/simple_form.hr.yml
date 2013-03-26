@@ -7,9 +7,10 @@ hr:
         username: "Korisničko ime"
         password: "Lozinka"
         password_confirmation: "Potvrda lozinke"
-        remember_me: "Zapamti me"
         email: "Email"
         tag_list: "Tagovi (neobavezno)"
+      login:
+        remember_me: "Zapamti me"
       question: &question
         content: "Tekst pitanja"
         answer: "Odgovor"

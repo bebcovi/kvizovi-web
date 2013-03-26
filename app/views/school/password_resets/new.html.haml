@@ -1,0 +1,10 @@
+- title "Nova lozinka"
+
+= simple_form_for :password_reset, url: password_reset_path do |f|
+
+  %p Upišite vašu email adresu:
+  = f.input :email, input_html: {name: "email", value: params[:email]}
+
+  = buttons(f) do |b|
+    = b.cancel_button "Odustani", login_path
+    = b.submit_button "Zatraži novu lozinku"

@@ -93,8 +93,8 @@ module ApplicationHelper
 
     if user.is_a?(School)
       result << Page.new("Kvizovi", quizzes_path, (params[:controller] == "quizzes" or (params[:controller] == "questions" and @scope.is_a?(Quiz)) or (params[:controller] == "questions" and params[:include].present?)))
-      result << Page.new("Pitanja", school_questions_path(user), (params[:controller] == "questions" and not @scope.is_a?(Quiz) and not params[:include].present?))
-      result << Page.new("Učenici", students_path, params[:controller] == "students")
+      # result << Page.new("Pitanja", questions_path(user), (params[:controller] == "questions" and not @scope.is_a?(Quiz) and not params[:include].present?))
+      # result << Page.new("Učenici", students_path, params[:controller] == "students")
     elsif user.is_a?(Student)
       result << Page.new("Kvizovi", new_game_path, params[:controller] == "games")
     end

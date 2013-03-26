@@ -5,7 +5,7 @@ feature "Login" do
     @school = create(:school)
   end
 
-  scenario "A school can login" do
+  scenario "A school can login, and gets redirected to quizzes" do
     visit root_path
     click_on "Ja sam škola"
 

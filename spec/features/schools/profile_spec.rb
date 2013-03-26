@@ -32,7 +32,7 @@ feature "Profile" do
     fill_in "Lozinka",        with: "new password"
     click_on "Prijava"
 
-    expect(current_path).to eq quizzes_path
+    expect(current_path).not_to eq login_path
   end
 
   scenario "A school can delete its account" do
@@ -44,6 +44,6 @@ feature "Profile" do
     click_on "Potvrdi"
 
     expect(current_path).to eq root_path
-    expect(School.exists?(@student)).to be_false
+    expect(School.exists?(@school)).to be_false
   end
 end

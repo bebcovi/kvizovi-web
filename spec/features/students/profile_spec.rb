@@ -32,7 +32,7 @@ feature "Profile" do
     fill_in "Lozinka",        with: "new password"
     click_on "Prijava"
 
-    expect(current_path).to eq new_game_path
+    expect(current_path).not_to eq login_path
   end
 
   scenario "A student can delete its account" do

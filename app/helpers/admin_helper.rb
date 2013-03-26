@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module AdminHelper
   def enumerate(name, count)
     t("misc.#{name}", count: count)

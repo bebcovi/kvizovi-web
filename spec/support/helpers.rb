@@ -32,7 +32,7 @@ end
 
 module CapybaraHelpers
   def login_as(user)
-    visit login_path(type: user.type)
+    visit login_url(subdomain: user.type)
 
     fill_in "Korisničko ime", with: user.username
     fill_in "Lozinka", with: user.password

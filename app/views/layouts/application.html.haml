@@ -13,7 +13,7 @@
     .navbar.navbar-static-top.navbar-inverse
       .navbar-inner
         .container-fluid
-          = link_to "Lektire".prepend_icon("books"), root_path, class: "brand"
+          = link_to "Lektire".prepend_icon("books"), root_url(subdomain: false), class: "brand"
 
           = render "navigation"
 

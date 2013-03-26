@@ -24,6 +24,6 @@ feature "Registration" do
     select @school.region, from: "Županija"
     click_on "Registriraj se"
 
-    expect(current_path).to eq quizzes_path
+    expect(current_path).not_to eq registrations_path
   end
 end

@@ -1,0 +1,35 @@
+- title "Profil"
+
+%table.profile_info
+  %colgroup
+    %col.field
+    %col.value
+  %tbody
+    %tr
+      %th Ime škole
+      %td= @school.name
+    %tr
+      %th Korisničko ime
+      %td= @school.username
+    %tr
+      %th Email
+      %td= @school.email
+    %tr
+      %th Tip škole
+      %td= @school.level
+    %tr
+      %th Mjesto
+      %td= @school.place
+    %tr
+      %th Županija
+      %td= @school.region
+    %tr
+      %th Tajni ključ
+      %td= @school.key
+
+.btn-toolbar.edit_profile
+  .btn-group
+    = edit_button "Izmijeni profil", edit_profile_path
+    = change_password_button "Izmijeni lozinku", edit_password_path
+
+%p= delete_profile_button "Izbriši korisnički račun", delete_profile_path

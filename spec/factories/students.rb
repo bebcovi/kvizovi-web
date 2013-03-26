@@ -5,7 +5,7 @@ FactoryGirl.define do
     grade "2d"
     gender "Muško"
     year_of_birth 1991
-    username "jon"
+    sequence(:username) { |n| "jon#{n}" }
     password "jon"
     school_id 1
 

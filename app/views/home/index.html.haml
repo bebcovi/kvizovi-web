@@ -4,7 +4,7 @@
   %h1= "Lektire".prepend_icon("books")
   %p.lead Jednostavna aplikacija za igranje kvizova.
   .app_role
-    = link_to "Ja sam učenik".prepend_icon("user"), login_path(type: "student"), class: "btn btn-primary btn-large"
-    = link_to "Ja sam škola".append_icon("home"), login_path(type: "school"), class: "btn btn-primary btn-large"
+    = link_to "Ja sam učenik".prepend_icon("user"), login_url(subdomain: "student"), class: "btn btn-primary btn-large"
+    = link_to "Ja sam škola".append_icon("home"), login_url(subdomain: "school"), class: "btn btn-primary btn-large"
   %p.tour
     %small Prvi puta ste ovdje? Treba li vam #{link_to "vodič", tour_path}?

@@ -1,9 +1,0 @@
-- @title = "Uređivanje profila"
-
-= simple_form_for @user, url: profile_path do |f|
-
-  = render partial: "#{current_user.type}_fields", locals: {f: f}
-
-  = buttons(f) do |b|
-    = b.cancel_button "Odustani", profile_path
-    = b.submit_button "Spremi"

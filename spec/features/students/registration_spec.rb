@@ -2,8 +2,7 @@ require "spec_helper"
 
 feature "Registration" do
   before do
-    @student = build(:student)
-    @school = create(:school)
+    @student = build(:student, :with_school)
   end
 
   scenario "A student can register" do
@@ -17,11 +16,11 @@ feature "Registration" do
     fill_in "Lozinka",           with: @student.password
     fill_in "Potvrda lozinke",   with: @student.password
     fill_in "Razred",            with: @student.grade
-    fill_in "Tajni ključ škole", with: @school.key
+    fill_in "Tajni ključ škole", with: @student.school.key
     choose @student.gender
     select @student.year_of_birth.to_s, from: "Godina rođenja"
     click_on "Registriraj se"
 
-    expect(current_path).to eq new_game_path
+    expect(current_path).not_to eq registrations_path
   end
 end

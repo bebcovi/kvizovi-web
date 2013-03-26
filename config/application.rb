@@ -15,6 +15,10 @@ module Lektire
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Only load the plugins named here, in the order given (default is alphabetical).
+    # :all can be used as a placeholder for all plugins not explicitly named.
+    # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
+
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += [
       "#{config.root}/app/models/question",
@@ -22,9 +26,8 @@ module Lektire
       "#{config.root}/lib"
     ]
 
-    # Only load the plugins named here, in the order given (default is alphabetical).
-    # :all can be used as a placeholder for all plugins not explicitly named.
-    # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
+    # Search for locales recursively
+    config.i18n.load_path = Dir[config.root.join("config/locales/**/*.yml")]
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
