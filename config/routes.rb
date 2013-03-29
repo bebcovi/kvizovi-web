@@ -67,4 +67,11 @@ Lektire::Application.routes.draw do
   controller :errors do
     get ":code", to: :show, constraints: {code: /\d+/}
   end
+
+  ########################
+  # Legacy routes
+  ########################
+  get "login",        to: redirect("/")
+  get "schools/new",  to: redirect(subdomain: "school",  path: "/registration/new")
+  get "students/new", to: redirect(subdomain: "student", path: "/registration/new")
 end
