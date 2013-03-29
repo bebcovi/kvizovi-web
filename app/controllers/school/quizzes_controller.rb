@@ -1,17 +1,17 @@
 class School::QuizzesController < School::BaseController
   before_filter :authenticate!
-  before_filter :load_user
+  before_filter :load_school
 
   def index
-    @quizzes = @user.quizzes
+    @quizzes = @school.quizzes
   end
 
   def new
-    @quiz = @user.quizzes.new
+    @quiz = @school.quizzes.new
   end
 
   def create
-    @quiz = @user.quizzes.new(params[:quiz])
+    @quiz = @school.quizzes.new(params[:quiz])
 
     if @quiz.valid?
       @quiz.save
@@ -22,11 +22,11 @@ class School::QuizzesController < School::BaseController
   end
 
   def edit
-    @quiz = @user.quizzes.find(params[:id])
+    @quiz = @school.quizzes.find(params[:id])
   end
 
   def update
-    @quiz = @user.quizzes.find(params[:id])
+    @quiz = @school.quizzes.find(params[:id])
     @quiz.assign_attributes(params[:quiz])
 
     if @quiz.valid?
@@ -38,25 +38,25 @@ class School::QuizzesController < School::BaseController
   end
 
   def toggle_activation
-    quiz = @user.quizzes.find(params[:id])
+    quiz = @school.quizzes.find(params[:id])
     quiz.toggle!(:activated)
     redirect_to quizzes_path
   end
 
   def delete
-    @quiz = @user.quizzes.find(params[:id])
+    @quiz = @school.quizzes.find(params[:id])
   end
 
   def destroy
-    quiz = @user.quizzes.find(params[:id])
+    quiz = @school.quizzes.find(params[:id])
     quiz.destroy
     redirect_to quizzes_path, notice: flash_message(:notice)
   end
 
   private
 
-  def load_user
-    @user = current_user
+  def load_school
+    @school = current_user
   end
 
   protected

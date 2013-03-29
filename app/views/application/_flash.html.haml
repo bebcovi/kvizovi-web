@@ -1,13 +1,3 @@
 - flash.each do |name, message|
 
-  - if name.in?([:alert, :notice])
-
-    - type = (name == :alert ? "error" : "success")
-    = alert_message(message, type)
-
-  - elsif name == :announcement
-
-    .alert.alert-info.fade.in
-      = simple_form_for current_user, url: hide_update_path, method: :put do |f|
-        = f.button :button, "×", class: "close"
-      = raw message
+    = alert_message(message, {alert: "error", notice: "success"}[name])

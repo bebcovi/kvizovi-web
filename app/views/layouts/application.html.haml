@@ -26,7 +26,7 @@
         = content_for :hero_unit
 
     .main_content.container-fluid
-      = render "flash", {flash: flash}
+      = render "flash", flash: flash
       = render "layouts/#{controller.send(:sub_layout)}"
 
     = javascript_include_tag "application"

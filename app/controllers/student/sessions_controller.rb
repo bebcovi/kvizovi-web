@@ -9,7 +9,7 @@ class Student::SessionsController < Student::BaseController
 
     if @login.valid?
       log_in!(@login.user, permanent: @login.remember_me?)
-      redirect_to root_path
+      redirect_to return_point
     else
       set_alert_message
       render :new
