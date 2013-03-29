@@ -26,7 +26,7 @@ gem "haml-rails"
 gem "simple_form", ">= 2"
 gem "redcarpet", ">= 2"
 gem "rails-i18n"
-gem "will_paginate", ">= 3", require: ["will_paginate", "will_paginate/array"]
+gem "will_paginate", ">= 3"
 gem "bootstrap-will_paginate"
 
 # Database
@@ -54,6 +54,8 @@ group :test do
   gem "rb-inotify", "~> 0.8.8"
   gem "pry"
   gem "nokogiri"
+  gem "cucumber-rails", require: false
+  gem "database_cleaner"
 end
 
 # Development stuff
