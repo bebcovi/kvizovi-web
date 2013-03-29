@@ -1,5 +1,5 @@
 Given(/^I'm logged in$/) do
-  step "I go to my profile page"
+  step "I go to the login page"
   step "I fill in my login information"
   click_on "Prijava"
 end
