@@ -10,11 +10,19 @@ class Login
   attr_accessor :user_class
   attr_accessor :user
 
+  validate :validate_authentication_of_user
+
   def remember_me?
     remember_me == 1
   end
 
-  def valid?
-    self.user = UserAuthenticator.new(user_class).authenticate(username: username, password: password)
+  private
+
+  def validate_authentication_of_user
+    if user = user_class.find_by_username(username).try(:authenticate, password)
+      self.user = user
+    else
+      errors.add(:base)
+    end
   end
 end
