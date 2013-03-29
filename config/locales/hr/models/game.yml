@@ -1,0 +1,5 @@
+hr:
+  simple_form:
+    labels:
+      game:
+        answer: "Odgovor"

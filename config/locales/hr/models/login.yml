@@ -1,0 +1,15 @@
+hr:
+  activemodel:
+    errors:
+      models:
+        login:
+          attributes:
+            base:
+              invalid: "Pogrešno korisničko ime ili lozinka."
+
+  simple_form:
+    labels:
+      login:
+        username: "Korisničko ime"
+        password: "Lozinka"
+        remember_me: "Zapamti me"

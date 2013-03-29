@@ -1,0 +1,10 @@
+hr:
+  simple_form:
+    error_notification:
+      default_message: "Neka polja nisu ispravno popunjena."
+
+  helpers:
+    submit:
+      create: "Stvori"
+      update: "Spremi"
+      submit: "Spremi"

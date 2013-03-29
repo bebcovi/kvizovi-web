@@ -25,7 +25,6 @@ gem "haml", ">= 4"
 gem "haml-rails"
 gem "simple_form", ">= 2"
 gem "redcarpet", ">= 2"
-gem "rails-i18n"
 gem "will_paginate", ">= 3"
 gem "bootstrap-will_paginate"
 

@@ -1,0 +1,32 @@
+hr:
+
+  activerecord:
+    errors:
+      models:
+        student:
+          attributes:
+            grade:
+              invalid: "Mora biti formata \"[broj][slovo]\", npr. \"2d\""
+            username:
+              taken: "Već postoji učenik s tim korisničkim imenom."
+              invalid: "Može sadržavati samo engleska slova, brojeve i _."
+              too_short: "Prekratko je (mora sadržavati barem 3 znaka)."
+            gender:
+              blank: "Nisi izabrao/la spol."
+            year_of_birth:
+              blank: "Nisi izabrao/la godinu rođenja."
+            school_key:
+              inclusion: "Ne postoji škola s tim ključem."
+
+  simple_form:
+    labels:
+      student:
+        username: "Korisničko ime"
+        password: "Lozinka"
+        password_confirmation: "Potvrda lozinke"
+        first_name: "Ime"
+        last_name: "Prezime"
+        grade: "Razred"
+        school_key: "Tajni ključ škole"
+        gender: "Spol"
+        year_of_birth: "Godina rođenja"

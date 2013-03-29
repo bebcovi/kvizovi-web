@@ -1,0 +1,29 @@
+hr:
+
+  activerecord:
+    errors:
+      models:
+        school:
+          attributes:
+            level:
+              blank: "Niste odabrali tip škole."
+            region:
+              blank: "Niste odabrali županiju."
+            username:
+              taken: "Već postoji škola s tim korisničkim imenom."
+            email:
+              taken: "Ova email adresa je već zauzeta."
+
+  simple_form:
+    labels:
+      school:
+        username: "Korisničko ime"
+        password: "Lozinka"
+        password_confirmation: "Potvrda lozinke"
+        email: "Email"
+        name: "Ime škole"
+        level: "Tip škole"
+        place: "Mjesto"
+        region: "Županija"
+        key: "Tajni ključ"
+        public_questions: "Javna pitanja?"

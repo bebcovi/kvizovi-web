@@ -1,0 +1,6 @@
+hr:
+  simple_form:
+    labels:
+      quiz:
+        name: "Naziv"
+        activated: "Vidljiv"

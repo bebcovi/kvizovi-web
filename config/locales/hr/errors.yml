@@ -1,0 +1,10 @@
+hr:
+  activerecord: &errors
+    errors:
+      format: ! "%{message}"
+      messages:
+        blank: "Ne smije biti prazno."
+        confirmation: "Ne slaže se sa svojom potvrdom."
+
+  activemodel:
+    <<: *errors
