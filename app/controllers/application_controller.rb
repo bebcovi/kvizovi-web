@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   end
 
   def return_point
-    cookies[:return_to] || root_path
+    cookies.delete(:return_to) || root_path
   end
 
   def flash_message(type, *args)
