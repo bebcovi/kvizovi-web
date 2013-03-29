@@ -2,11 +2,11 @@ require "rack/test"
 require "active_support/core_ext/string/inflections"
 
 module Helpers
-  def self.included(base)
-    base.send(:include, SpecHelpers)
-    base.send(:include, CapybaraHelpers)
+  extend ActiveSupport::Concern
 
-    base.extend(ClassMethods)
+  included do
+    include SpecHelpers
+    include CapybaraHelpers
   end
 
   def uploaded_file(filename, content_type)
@@ -28,6 +28,8 @@ module Helpers
 end
 
 module SpecHelpers
+  extend ActiveSupport::Concern
+
   def invalidate(object)
     change{object.valid?}.to(false)
   end
@@ -35,9 +37,26 @@ module SpecHelpers
   def revalidate(object)
     change{object.valid?}.to(true)
   end
+
+  module ClassMethods
+    def reset_attributes(attributes)
+      after do
+        metadata = example.metadata
+        until metadata[:description_args].first =~ /^#\w+$/ or metadata[:example_group] == nil
+          metadata = metadata[:example_group]
+        end
+        unless metadata.nil?
+          attribute = metadata[:description_args].first.delete("#").to_sym
+          @it.send("#{attribute}=", attributes[attribute])
+        end
+      end
+    end
+  end
 end
 
 module CapybaraHelpers
+  extend ActiveSupport::Concern
+
   def login_as(user)
     visit login_url(subdomain: user.type)
 

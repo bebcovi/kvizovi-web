@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Student do
-  before do
+  before(:all) do
     @it = build(:student)
   end
 
@@ -13,6 +13,8 @@ describe Student do
   end
 
   context "validations" do
+    reset_attributes(FactoryGirl.attributes_for(:student))
+
     context "#username" do
       it "validates presence" do
         expect { @it.username = nil }.to invalidate(@it)
