@@ -1,6 +1,10 @@
 require "spec_helper"
 
 describe Student::RegistrationsController do
+  before do
+    controller.stub(:authenticate!)
+  end
+
   describe "#new" do
     it "assigns student" do
       get :new, {}, {}, {authorized: true}
@@ -54,5 +58,73 @@ describe Student::RegistrationsController do
         expect(flash).to render_template(:new)
       end
     end
+  end
+
+  describe "#delete" do
+    before do
+      controller.stub(:current_user)
+    end
+
+    it "renders :delete" do
+      get :delete
+      expect(response).to render_template(:delete)
+    end
+  end
+
+  describe "#destroy" do
+    before(:all) { @student = create(:student) }
+
+    before do
+      controller.stub(:current_user).and_return(@student)
+    end
+
+    context "when valid" do
+      before do
+        Student.any_instance.stub(:authenticate).and_return(true)
+        Student.any_instance.stub(:destroy)
+      end
+
+      it "deletes the student" do
+        Student.any_instance.unstub(:destroy)
+        transaction_with_rollback do
+          expect {
+            delete :destroy
+          }.to change{Student.count}.by -1
+        end
+      end
+
+      it "logs the student out" do
+        delete :destroy
+        expect(cookies[:user_id]).to be_nil
+      end
+
+      it "redirects to root" do
+        delete :destroy
+        expect(response).to redirect_to(root_path)
+      end
+
+      it "sets a flash notice" do
+        delete :destroy
+        expect(flash[:notice]).not_to be_nil
+      end
+    end
+
+    context "when not valid" do
+      before do
+        Student.any_instance.stub(:authenticate).and_return(false)
+      end
+
+      it "sets an alert message" do
+        delete :destroy
+        expect(flash[:alert]).not_to be_nil
+      end
+
+      it "renders :delete" do
+        delete :destroy
+        expect(response).to render_template(:delete)
+      end
+    end
+
+    after(:all) { @student.destroy }
   end
 end

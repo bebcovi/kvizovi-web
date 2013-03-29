@@ -4,7 +4,7 @@
 
 %p Ovime ćete trajno izbrisati svoj korisnički račun. Ako ste potpuno sigurni da to želite napraviti, upišite svoju lozinku:
 
-= simple_form_for :school, url: profile_path, method: :delete do |f|
+= simple_form_for :school, url: registration_path, method: :delete do |f|
 
   = f.input :password, input_html: {name: "password"}
 

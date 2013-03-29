@@ -1,6 +1,6 @@
 - title "Autorizacija"
 
-= simple_form_for @authorization do |f|
+= simple_form_for @authorization, url: authorization_path do |f|
 
   = f.input :secret_key, as: :password, input_html: {autofocus: (params[:action] == "new")},
     hint: "Ako nemate ključ, možete ga #{link_to "zatražiti", contact_path}."

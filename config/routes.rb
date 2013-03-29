@@ -11,8 +11,8 @@ Lektire::Application.routes.draw do
       post  "login",  to: :create
       match "logout", to: :destroy
     end
-    resources :registrations
-    resources :authorizations
+    resource :registration
+    resource :authorization
     resource :password_reset
 
     # Profile
@@ -41,7 +41,7 @@ Lektire::Application.routes.draw do
       post  "login",  to: :create
       match "logout", to: :destroy
     end
-    resources :registrations
+    resource :registration
 
     # Profile
     resource :profile

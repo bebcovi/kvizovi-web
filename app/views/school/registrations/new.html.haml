@@ -1,6 +1,6 @@
 - title "Registracija"
 
-= simple_form_for @school, url: registrations_path do |f|
+= simple_form_for @school, url: registration_path do |f|
 
   = f.input :name, placeholder: %(Npr. "Osnovna škola Antuna Gustava Matoša") , hint: "Napišite puno ime škole, bez grada (osim ako je on dio naziva)."
   = f.input :level, collection: School::LEVELS, prompt: "Izaberite..."

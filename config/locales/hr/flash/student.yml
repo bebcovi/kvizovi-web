@@ -6,12 +6,12 @@ hr:
     student/registrations:
       create:
         notice: "Registracija je bila uspješna."
-    student/profiles:
-      update:
-        notice: "Tvoj profil je uspješno izmijenjen."
       destroy:
         notice: "Tvoj korisnički račun je uspješno izbrisan."
         alert: "Lozinka nije ispravna."
+    student/profiles:
+      update:
+        notice: "Tvoj profil je uspješno izmijenjen."
     student/passwords:
       update:
         notice: "Tvoja lozinka je uspješno izmijenjena."

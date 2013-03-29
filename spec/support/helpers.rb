@@ -13,6 +13,13 @@ module Helpers
     Rack::Test::UploadedFile.new(Rails.root.join("spec/fixtures/files/#{filename}"), content_type)
   end
 
+  def transaction_with_rollback(&block)
+    ActiveRecord::Base.transaction do
+      yield
+      raise ActiveRecord::Rollback
+    end
+  end
+
   module ClassMethods
     def benchmark_examples
       around(:each) { |example| benchmark { example.run } }

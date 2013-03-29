@@ -12,9 +12,10 @@ I18n.backend.send(:init_translations)
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
-  config.infer_base_class_for_anonymous_controllers = true
 
-  config.before(:each) { ActionMailer::Base.deliveries.clear }
+  config.before(:each) do
+    ActionMailer::Base.deliveries.clear
+  end
 
   config.include FactoryGirl::Syntax::Methods
   config.include Helpers

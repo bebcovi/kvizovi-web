@@ -20,21 +20,4 @@ class School::ProfilesController < School::BaseController
       render :edit
     end
   end
-
-  def delete
-    @school = current_user
-  end
-
-  def destroy
-    @school = current_user
-
-    if @school.authenticate(params[:password])
-      @school.destroy
-      log_out!
-      redirect_to root_url(subdomain: false), notice: flash_message(:notice)
-    else
-      set_alert_message
-      render :delete
-    end
-  end
 end

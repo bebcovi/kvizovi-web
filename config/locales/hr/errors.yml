@@ -5,6 +5,7 @@ hr:
       messages:
         blank: "Ne smije biti prazno."
         confirmation: "Ne slaže se sa svojom potvrdom."
+        record_invalid: "Validacija nije uspjela: %{errors}"
 
   activemodel:
     <<: *errors

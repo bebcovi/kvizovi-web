@@ -6,6 +6,9 @@ hr:
     school/registrations:
       create:
         notice: "Registracija je bila uspješna."
+      destroy:
+        notice: "Vaš korisnički račun je uspješno izbrisan."
+        alert: "Lozinka nije ispravna."
     school/authorizations:
       create:
         notice: "Točno ste napisali ključ. Sada se možete registrirati :)"
@@ -17,9 +20,6 @@ hr:
     school/profiles:
       update:
         notice: "Vaš profil je uspješno izmijenjen."
-      destroy:
-        notice: "Vaš korisnički račun je uspješno izbrisan."
-        alert: "Lozinka nije ispravna."
     school/passwords:
       update:
         notice: "Vaša lozinka je uspješno izmijenjena."
