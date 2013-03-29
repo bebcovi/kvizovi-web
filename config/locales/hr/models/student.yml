@@ -13,8 +13,10 @@ hr:
               too_short: "Prekratko je (mora sadržavati barem 3 znaka)."
             gender:
               blank: "Nisi izabrao/la spol."
+              inclusion: "Mora biti \"Muško\" ili \"Žensko\""
             year_of_birth:
               blank: "Nisi izabrao/la godinu rođenja."
+              not_a_number: "Mora biti broj"
             school_key:
               inclusion: "Ne postoji škola s tim ključem."
 

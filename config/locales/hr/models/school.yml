@@ -7,6 +7,7 @@ hr:
           attributes:
             level:
               blank: "Niste odabrali tip škole."
+              inclusion: "Mora biti ili \"Osnovna\" ili \"Srednja\""
             region:
               blank: "Niste odabrali županiju."
             username:

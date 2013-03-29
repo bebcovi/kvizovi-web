@@ -7,14 +7,14 @@ class Student < ActiveRecord::Base
   has_secure_password
   attr_accessor :school_key
 
-  validates :username, presence: true, format: {with: /\A[a-zA-Z0-9_]*\Z/}, length: {minimum: 3}, uniqueness: true
-  validates :password, presence: true, on: :create
-  validates :grade, presence: true, format: {with: /\A[0-8][a-z]\Z$/}
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :gender, presence: true, inclusion: {in: GENDERS}
-  validates :year_of_birth, presence: true, numericality: {only_integer: true}
-  validates :school_key, presence: true, inclusion: {in: proc { School.pluck(:key) }, allow_blank: true}, unless: :school_id?
+  validates :username,      presence: true, format: {with: /\A[a-zA-Z0-9_]*\Z/}, length: {minimum: 3}, uniqueness: true
+  validates :password,      presence: true, on: :create
+  validates :grade,         presence: true, format: {with: /\A[0-8][a-z]\Z$/}
+  validates :first_name,    presence: true
+  validates :last_name,     presence: true
+  validates :gender,        presence: true, inclusion: {in: GENDERS, allow_blank: true}
+  validates :year_of_birth, presence: true, numericality: {only_integer: true, allow_blank: true}
+  validates :school_key,    presence: true, inclusion: {in: proc { School.pluck(:key) }, allow_blank: true}, unless: :school_id?
 
   before_create :assign_school, unless: :school_id?
 

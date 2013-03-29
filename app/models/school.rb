@@ -15,7 +15,7 @@ class School < ActiveRecord::Base
   validates :email,    presence: true, uniqueness: true
   validates :place,    presence: true
   validates :region,   presence: true
-  validates :level,    presence: true, inclusion: {in: LEVELS}
+  validates :level,    presence: true, inclusion: {in: LEVELS, allow_blank: true}
   validates :key,      presence: true
 
   def type; "school"; end
