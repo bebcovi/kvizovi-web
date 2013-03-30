@@ -1,7 +1,3 @@
-require "active_record"
-require "activerecord-postgres-hstore"
-require "acts-as-taggable-on"
-
 class Question < ActiveRecord::Base
   has_and_belongs_to_many :quizzes, foreign_key: "question_id"
   belongs_to :school

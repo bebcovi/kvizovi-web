@@ -40,7 +40,7 @@ class GameSubmission
 
   def validate_authenticity_of_players
     self.players += players_credentials
-      .map { |attributes| UserAuthenticator.new(player_class).authenticate(*attributes.values) }
+      .map { |attributes| UserAuthenticator.new(player_class).authenticate(attributes[:username], attributes[:password]) }
       .reject { |player| !player }
 
     if players_count && players_count != players.count

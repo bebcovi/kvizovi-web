@@ -1,8 +1,8 @@
 require "bcrypt"
 
 class UserAuthenticator
-  def initialize(argument)
-    @user_class
+  def initialize(user_class)
+    @user_class = user_class
   end
 
   def authenticate(username, password)
