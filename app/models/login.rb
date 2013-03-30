@@ -19,7 +19,7 @@ class Login
   private
 
   def validate_authentication_of_user
-    if user = user_class.find_by_username(username).try(:authenticate, password)
+    if user = UserAuthenticator.new(user_class).authenticate(username, password)
       self.user = user
     else
       errors.add(:base)

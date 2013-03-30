@@ -11,11 +11,13 @@ describe Login do
     end
 
     it "validates authentication of user and assigns the user" do
-      expect(@it).not_to be_valid
-
-      user = create(:student, username: "janko", password: "secret")
+      user = stub
+      UserAuthenticator.any_instance.stub(:authenticate).with("janko", "secret").and_return(user)
       expect(@it).to be_valid
       expect(@it.user).to eq user
+
+      UserAuthenticator.any_instance.stub(:authenticate).with("janko", "secret").and_return(false)
+      expect(@it).not_to be_valid
     end
   end
 end
