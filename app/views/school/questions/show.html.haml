@@ -7,7 +7,7 @@
 
   %h2= smarty_pants @question.content
 
-  = render object: @question, partial: @question.to_partial_path, locals: {f: f}
+  = render object: @question, partial: "#{@question.category}_question", locals: {f: f}
 
   - if @question.hint?
     %p.hint Uputa: #{@question.hint}

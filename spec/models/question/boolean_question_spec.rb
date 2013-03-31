@@ -1,36 +1,49 @@
 require "spec_helper"
 
 describe BooleanQuestion do
-  before(:each) { @it = build(:boolean_question) }
-  subject { @it }
-
-  it { should be_a(Question) }
-
-  it "should be true or false" do
-    @it.true?.should be_true
-    @it.false?.should be_false
+  before do
+    @it = build(:boolean_question)
   end
 
-  describe "#correct_answer?" do
-    it "recognizes both string and boolean argument" do
+  describe "#answer" do
+    it "accepts boolean" do
       @it.answer = true
-      @it.correct_answer?(true).should be_true
-      @it.correct_answer?("true").should be_true
-
-      @it.answer = false
-      @it.correct_answer?(false).should be_true
-      @it.correct_answer?("false").should be_true
+      expect(@it.answer).to eq true
     end
 
-    it "is false on incorrect answer" do
-      @it.correct_answer?(!@it.answer).should be_false
+    it "accepts string" do
+      @it.answer = "true"
+      expect(@it.answer).to eq true
+    end
+
+    describe "#==" do
+      before do
+        @it.answer = true
+      end
+
+      it "recognizes a boolean" do
+        expect(@it.answer).to eq true
+      end
+
+      it "recognizes a string" do
+        expect(@it.answer).to eq "true"
+      end
+
+      it "is of course false on incorrect answer" do
+        expect(@it.answer).not_to eq false
+      end
     end
   end
 
-  describe "validations" do
-    it "can't have blank answer" do
-      @it.answer = nil
-      @it.should_not be_valid
+  context "validations" do
+    context "#answer" do
+      it "validates presence" do
+        expect { @it.answer = nil }.to invalidate(@it)
+      end
+
+      it "validates inclusion" do
+        expect { @it.answer = stub }.to invalidate(@it)
+      end
     end
   end
 end

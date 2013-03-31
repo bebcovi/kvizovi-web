@@ -4,7 +4,7 @@
 
   = render "new_question"
 
-  = link_to icon("file-add"), school_questions_path(current_user, include: @scope.id), class: "btn associate_questions", title: "Pridruži pitanja"
+  -# = link_to icon("file-add"), school_questions_path(current_user, include: @scope.id), class: "btn associate_questions", title: "Pridruži pitanja"
 
   = simple_form_for :game_submission, url: game_path, method: :post do |f|
     = f.hidden_field :quiz_id, value: quiz.id

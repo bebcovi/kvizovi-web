@@ -1,62 +1,54 @@
 require "spec_helper"
 
 describe ChoiceQuestion do
-  before(:each) { @it = build(:choice_question) }
-  subject { @it }
-
-  it { should be_a(Question) }
+  before do
+    @it = build(:choice_question)
+  end
 
   describe "#answer" do
-    it "should be the first provided answer" do
-      @it.answer.should eq @it.provided_answers.first
-    end
-  end
+    describe "#==" do
+      before do
+        @it.provided_answers == ["Foo", "Bar", "Baz"]
+      end
 
-  describe "#has_answer?" do
-    it "accepts a string" do
-      @it.correct_answer?(@it.answer).should be_true
-    end
+      it "recognizes a string" do
+        expect(@it.answer).to eq "Foo"
+      end
 
-    it "is false on incorrect answer" do
-      @it.correct_answer?("Not the right answer").should be_false
-    end
-  end
-
-  describe "data" do
-    describe "#provided_answers" do
-      describe "setter" do
-        it "accepts an array" do
-          @it.provided_answers =         ["Foo", "Bar"]
-          @it.provided_answers.should eq ["Foo", "Bar"]
-        end
-
-        it "deletes blank elements" do
-          @it.provided_answers =         ["Foo", "Bar", "", ""]
-          @it.provided_answers.should eq ["Foo", "Bar"]
-
-          @it.provided_answers =         ["Foo", "Bar", nil, nil]
-          @it.provided_answers.should eq ["Foo", "Bar"]
-        end
-
-        it "doesn't delete the first element if it's blank" do
-          @it.provided_answers =         ["", "Bar", "Baz"]
-          @it.provided_answers.should eq ["", "Bar", "Baz"]
-        end
+      it "is of course false in incorrect answer" do
+        expect(@it.answer).not_to eq "wrong answer"
       end
     end
   end
 
-  describe "#randomize" do
-    it "doesn't put the correct answer at the first place" do
-      answer = @it.answer
-      @it.randomize!.provided_answers.first.should_not eq answer
+  describe "#randomize!" do
+    it "moves the first item somewhere else, since that's the correct answer" do
+      @it.randomize!
+      expect(@it.provided_answers.first).not_to eq @it.answer
+    end
+
+    it "doesn't change the original order" do
+      provided_answers = @it.provided_answers.dup
+      @it.randomize!
+      expect(@it.provided_answers.original).to eq provided_answers
+    end
+
+    it "doesn't change the answer" do
+      answer = @it.answer.dup
+      @it.randomize!
+      expect(@it.answer).to eq answer
     end
   end
 
-  describe "validations" do
-    it "can't have the first provided answer blank" do
-      @it.provided_answers = ["", "Bar", "Baz"]
-      @it.should_not be_valid
+  context "validations" do
+    context "#provided_answers" do
+      it "validates presence" do
+        expect { @it.provided_answers = [] }.to invalidate(@it)
+      end
+
+      it "validates that each provided answer is present" do
+        expect { @it.provided_answers = ["Foo", "Bar", ""] }.to invalidate(@it)
+      end
     end
   end
 end

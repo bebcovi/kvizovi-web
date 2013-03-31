@@ -11,7 +11,7 @@ class School::QuestionsController < School::BaseController
                      @scope.questions.not_belonging_to(@quiz)
                    end
                  else
-                   Question.not_owned_by(current_user).public.without_example
+                   Question.scoped
                  end
 
     @questions = @questions.includes(:school)
@@ -59,7 +59,7 @@ class School::QuestionsController < School::BaseController
   end
 
   def download
-    new_question = Question.find(params[:id]).duplicate
+    new_question = Question.find(params[:id]).dup
     @scope.questions << new_question
     flash[:highlight] = new_question.id
     redirect_to polymorphic_path([@scope, Question]), notice: flash_message(:notice)

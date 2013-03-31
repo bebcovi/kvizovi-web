@@ -1,72 +1,79 @@
 require "spec_helper"
+require "active_support/core_ext/numeric/bytes"
 
 describe ImageQuestion do
-  before(:each) { @it = build(:image_question) }
-  subject { @it }
+  before(:all) do
+    @it = build(:image_question)
+  end
 
-  it { should be_a(TextQuestion) }
-
-  describe "data" do
-    describe "#image" do
-      its(:image) { should be_file }
-      its(:image) { should respond_to(:url) }
-    end
-
-    describe "#image_url=" do
-      it "assigns the URL to #image" do
+  describe "#image_url=" do
+    it "assigns the URL to #image" do
+      expect {
         @it.image_url = "http://designyoutrust.com/wp-content/uploads2/bla.jpg?q=2"
-        @it.image_file_name.should eq "bla.jpg"
-      end
-
-      it "doesn't raise errors on invalid URLs" do
-        expect { @it.image_url = "bla"            }.not_to raise_error
-        expect { @it.image_url = "http://bla.bla" }.not_to raise_error
-      end
-
-      it "gives validation errors on URLs which do not point to a photo" do
-        expect { @it.image_url = "http://google.com" }.not_to raise_error
-        @it.errors[:image_url].should_not be_empty
-      end
+      }.to change{@it.image_file_name}.to "bla.jpg"
     end
 
-    describe "#image_file=" do
-      it "assigns file to #image" do
-        @it.image = nil
+    it "doesn't raise errors on invalid URLs" do
+      expect { @it.image_url = "bla"            }.not_to raise_error
+      expect { @it.image_url = "http://bla.bla" }.not_to raise_error
+    end
+
+    it "deassigns image on invalid URL" do
+      @it.image_url = "bla"
+      expect(@it.image).not_to be_present
+    end
+  end
+
+  describe "#image_file=" do
+    it "assigns file to #image" do
+      @it.image = nil
+      expect {
         @it.image_file = uploaded_file("image.jpg", "image/jpeg")
-        @it.save
-        File.basename(@it.image.url.match(/\?\d+$/).pre_match).should eq "image.jpg"
-        @it.send(:prepare_for_destroy)
-        @it.send(:destroy_attached_files)
-      end
+      }.to change{@it.image_file_name}.to "image.jpg"
     end
 
+    it "removes special characters from filenames" do
+      create_file("image_ščćžđ.jpg", "image/jpeg") do |image|
+        @it.image_file = image
+        expect(@it.image_file_name).to eq "image_scczd.jpg"
+      end
+    end
+  end
+
+  context "callbacks" do
     it "saves sizes" do
+      @it.image = uploaded_file("image.jpg", "image/jpeg")
+      transaction_with_rollback { @it.save }
       @it.image_width.should be_a(Integer)
       @it.image_height.should be_a(Integer)
       @it.image_width(:resized).should be_a(Integer)
       @it.image_height(:resized).should be_a(Integer)
     end
-
-    it "removes special characters from filenames" do
-      @it.image_file = uploaded_file("image_ščćžđ.jpg", "image/jpeg")
-      @it.save
-      File.basename(@it.image.url.match(/\?\d+$/).pre_match).should eq "image_scczd.jpg"
-      File.exists?(File.join(Rails.root.join("public"), "#{@it.image.url.match(/\?\d+$/).pre_match}")).should be_true
-      @it.send(:prepare_for_destroy)
-      @it.send(:destroy_attached_files)
-    end
   end
 
-  describe "validations" do
-    it "can't have a blank image" do
-      @it.image = nil
-      @it.should_not be_valid
-    end
+  context "validations" do
+    reset_attributes(FactoryGirl.attributes_for(:image_question))
 
-    it "validates the URL" do
-      @it.image = nil
-      @it.image_url = "invalid URL"
-      @it.should_not be_valid
+    context "#image" do
+      it "validates presence" do
+        expect { @it.image = nil }.to invalidate(@it)
+      end
+
+      it "validates content type" do
+        create_file("video.mp4", "video/mp4") do |not_image|
+          expect { @it.image = not_image }.to invalidate(@it)
+        end
+      end
+
+      it "validates size" do
+        create_file("image.jpg", "image/jpeg", size: 2.megabytes) do |image|
+          expect { @it.image = image }.to invalidate(@it)
+        end
+      end
+
+      it "validates the image URL" do
+        expect { @it.image_url = "invalid url" }.to invalidate(@it)
+      end
     end
   end
 end

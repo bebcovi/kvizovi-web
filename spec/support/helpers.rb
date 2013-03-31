@@ -1,5 +1,5 @@
 require "rack/test"
-require "active_support/core_ext/string/inflections"
+require "fileutils"
 
 module Helpers
   extend ActiveSupport::Concern
@@ -17,6 +17,21 @@ module Helpers
     ActiveRecord::Base.transaction do
       yield
       raise ActiveRecord::Rollback
+    end
+  end
+
+  def create_file(filename, content_type, options = {}, &block)
+    file_path = Rails.root.join("tmp/#{filename}")
+    begin
+      File.open(file_path, "w") do |f|
+        size = options[:size] || 0
+        until f.size >= size
+          f.write "a" * 10000
+        end
+      end
+      yield Rack::Test::UploadedFile.new(file_path, content_type)
+    ensure
+      FileUtils.rm(file_path) if File.exists?(file_path)
     end
   end
 

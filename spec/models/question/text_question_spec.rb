@@ -1,35 +1,43 @@
 require "spec_helper"
 
 describe TextQuestion do
-  before(:each) { @it = build(:text_question) }
-  subject { @it }
+  before do
+    @it = build(:text_question)
+  end
 
-  it { should be_a(Question) }
+  describe "#answer" do
+    describe "#==" do
+      before do
+        @it.answer = "Answer"
+      end
 
-  describe "#has_answer?" do
-    before(:each) { @it.answer = "Answer" }
+      it "is of course true on correct answer" do
+        expect(@it.answer).to eq "Answer"
+      end
 
-    it "is case insensitive" do
-      @it.correct_answer?("answer").should be_true
-    end
+      it "is case insensitive" do
+        expect(@it.answer).to eq "answer"
+      end
 
-    it "ignores a potential period at the end" do
-      @it.correct_answer?("Answer.").should be_true
-    end
+      it "ignores a potential period at the end" do
+        expect(@it.answer).to eq "Answer."
+      end
 
-    it "is false on incorrect answer" do
-      @it.correct_answer?("Not the right answer").should be_false
-    end
+      it "ignores whitespace at the beginning and the end of answers" do
+        expect(@it.answer).to eq "  Answer  "
+      end
 
-    it "ignores whitespace at the beginning and the end of answers" do
-      @it.correct_answer?(" Answer  ").should be_true
+      it "is of course false on incorrect answer" do
+        expect(@it.answer).not_to eq "Not answer"
+      end
     end
   end
 
-  describe "validations" do
-    it "can't have blank answer" do
-      @it.answer = nil
-      @it.should_not be_valid
+  context "validations" do
+    context "#answer" do
+      it "validates presence" do
+        expect { @it.answer = "" }.to invalidate(@it)
+      end
     end
   end
 end

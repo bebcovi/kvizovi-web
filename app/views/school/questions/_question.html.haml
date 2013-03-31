@@ -2,7 +2,7 @@
   %span.question_number{class: "player_#{number(@player_number)}"}= @question_number
   = smarty_pants question.content
 
-= render object: question, partial: question.to_partial_path, locals: {f: f}
+= render object: question, partial: "questions/#{question.category}_question", locals: {f: f}
 
 - if question.hint?
   %p.hint Uputa: #{question.hint}

@@ -1,27 +1,11 @@
-# encoding: utf-8
-require_relative "../question"
-
 class AssociationQuestion < Question
-  data_accessor :associations
+  store :data, accessors: [:associations]
+  data_value :associations
 
   validate :validate_associations
 
-  def associations
-    @associations ||= Associations.new(super || {})
-  end
-
-  def associations=(value)
-    @associations = nil
-    hash = convert_to_hash(value).reject.each_with_index { |(key, value), index| key.blank? and value.blank? and index != 0 }
-    super(hash)
-  end
-
   def answer
     associations.original
-  end
-
-  def correct_answer?(value)
-    answer == convert_to_hash(value)
   end
 
   def randomize!
@@ -29,17 +13,17 @@ class AssociationQuestion < Question
     super
   end
 
-  private
-
-  def convert_to_hash(value)
-    value.flatten == value ? Hash[*value] : Hash[value]
+  def category
+    "association"
   end
 
+  private
+
   def validate_associations
-    if associations.all? { |key, value| key.blank? and value.blank? }
-      errors[:base] << "Mora postojati barem jedna asocijacija."
+    if associations.empty?
+      errors.add(:associations, :blank)
     elsif associations.any? { |key, value| key.blank? or value.blank? }
-      errors[:base] << "Svaka asocijacija mora imati obje strane popunjene."
+      errors.add(:associations, :invalid)
     end
   end
 end
@@ -52,8 +36,8 @@ class AssociationQuestion
     alias right_side values
 
     def initialize(value)
-      replace(value)
-      @original = self.dup
+      replace(convert_to_hash(value))
+      @original = dup
     end
 
     def shuffle!
@@ -61,15 +45,18 @@ class AssociationQuestion
       self
     end
 
-    def shuffle
-      dup.shuffle!
+    def ==(value)
+      super(convert_to_hash(value))
     end
 
-    def ==(hash)
-      each_key do |key|
-        return false if self[key] != hash[key]
+    private
+
+    def convert_to_hash(value)
+      if value
+        value.flatten == value ? Hash[*value] : Hash[value]
+      else
+        {}
       end
-      true
     end
   end
 end

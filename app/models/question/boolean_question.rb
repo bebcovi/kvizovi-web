@@ -1,27 +1,49 @@
-require_relative "../question"
-
 class BooleanQuestion < Question
-  data_accessor :answer
+  store :data, accessors: [:answer]
+  data_value :answer
 
-  validates_inclusion_of :answer, in: [true, false]
+  validate :validate_answer
 
-  def answer
-    super
+  def true?;  answer == true;  end
+  def false?; answer == false; end
+
+  def category
+    "boolean"
   end
 
-  def answer=(value)
-    super(eval(value.to_s))
-  end
+  private
 
-  def true?
-    answer
+  def validate_answer
+    if answer == nil
+      errors.add(:answer, :blank)
+    elsif not (answer == true or answer == false)
+      errors.add(:answer, :inclusion)
+    end
   end
+end
 
-  def false?
-    not true?
-  end
+class BooleanQuestion
+  class Answer
+    def initialize(value)
+      @value = convert_to_boolean(value)
+    end
 
-  def correct_answer?(value)
-    answer.to_s == value.to_s
+    def ==(value)
+      @value == convert_to_boolean(value)
+    end
+
+    def method_missing(name, *args, &block)
+      @value.send(name, *args, &block)
+    end
+
+    private
+
+    def convert_to_boolean(value)
+      if value.is_a?(String)
+        {"true" => true, "false" => false}[value]
+      else
+        value
+      end
+    end
   end
 end

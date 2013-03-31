@@ -6,19 +6,30 @@ hr:
         boolean_question:
           attributes:
             answer:
-              inclusion: "Niste odabrali koji je točan odgovor."
+              blank: "Niste odabrali koji je točan odgovor."
+              inclusion: "Mora biti točno ili netočno."
+        association_question:
+          attributes:
+            associations:
+              invalid: "Svaka asocijacija mora imati obje strane popunjene."
+              blank: "Mora postojati barem jedna asocijacija."
+        choice_question:
+          attributes:
+            provided_answers:
+              blank: "Mora postojati barem jedan ponuđeni odgovor."
+              invalid: "Nijedan ponuđeni odgovor ne smije biti prazan."
         text_question:
           attributes:
             answer:
               blank: "Niste napisali koji je točan odgovor."
         image_question:
           attributes:
-            image:
-              blank: "Niste priložili sliku."
+            image_content_type:
+              invalid: "Datoteka koju ste priložili nije slika (mora završavati sa \".jpg\", \".png\" ili \".gif\", a ne npr. sa \".html\")."
+            image_file_size:
+              in_between: "Slika ne smije biti veća od 1 MB."
             image_url:
               invalid: "Nije validna URL adresa."
-            image_file_size:
-              less_than_or_equal_to: "Slika ne smije biti veća od 1 MB."
 
   simple_form:
     labels:
@@ -41,3 +52,10 @@ hr:
         image_url: "URL od slike"
       text_question:
         <<: *question
+
+  number:
+    human:
+      storage_units:
+        format: ""
+        units:
+          byte: ""

@@ -10,9 +10,10 @@ module School::QuestionsHelper
   end
 
   def number_of_fields(question)
-    if question.choice?
+    case question.category
+    when "choice"
       current_page?(action: "new") ? 4 : question.provided_answers.count
-    elsif question.association?
+    when "association"
       current_page?(action: "new") ? 4 : question.associations.count
     else
       raise ArgumentError, "The question is not a choice or association"

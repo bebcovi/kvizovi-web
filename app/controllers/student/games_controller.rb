@@ -42,7 +42,7 @@ class Student::GamesController < Student::BaseController
   end
 
   def update
-    game_state.save_answer!(current_question.correct_answer?(params[:game].try(:[], :answer)))
+    game_state.save_answer!(current_question.answer == params[:game].try(:[], :answer))
     redirect_to feedback_game_path
   end
 

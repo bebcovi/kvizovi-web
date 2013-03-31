@@ -1,21 +1,17 @@
 require "spec_helper"
 
 describe Question do
-  before do
+  before(:all) do
     @it = build(:question)
   end
 
-  describe "#hint" do
-    it "has a getter and a setter" do
-      @it.hint = "Hint"
-      @it.hint.should eq "Hint"
-    end
-  end
+  context "validations" do
+    reset_attributes(FactoryGirl.build(:question))
 
-  describe "validations" do
-    it "can't have blank content" do
-      @it.content = nil
-      @it.should_not be_valid
+    context "#content" do
+      it "validates presence" do
+        expect { @it.content = nil }.to invalidate(@it)
+      end
     end
   end
 end
