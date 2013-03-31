@@ -1,6 +1,3 @@
-require "active_record"
-require "activerecord-postgres-hstore"
-
 class Game < ActiveRecord::Base
   serialize :question_answers, ActiveRecord::Coders::Hstore
   serialize :question_ids, Array
