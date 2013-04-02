@@ -6,7 +6,7 @@ class Question < ActiveRecord::Base
 
   acts_as_taggable
 
-  scope :filter, ->(filter) { tagged_with(filter[:tags]) }
+  scope :search, ->(query) { scoped }
 
   validates :content, presence: true
 

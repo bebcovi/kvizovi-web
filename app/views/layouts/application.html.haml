@@ -7,26 +7,26 @@
     %meta{name: "robots", content: "noindex"}
     = favicon_link_tag
     = stylesheet_link_tag "application"
-    = render "typekit"
+    = render partial: "typekit"
 
-  %body{class: "#{params[:controller]} #{params[:action]}"}
+  %body{class: "#{params[:controller].split("/").last} #{params[:action]}"}
     .navbar.navbar-static-top.navbar-inverse
       .navbar-inner
         .container-fluid
           = link_to "Lektire".prepend_icon("books"), root_url(subdomain: false), class: "brand"
 
-          = render "navigation"
+          = render partial: "navigation"
 
           %ul.nav.pull-right
-            = render "contact"
-            = render "log" if user_logged_in?
+            = render partial: "contact"
+            = render partial: "log" if user_logged_in?
 
     - if content_for? :hero_unit
       .hero-unit
         = content_for :hero_unit
 
     .main_content.container-fluid
-      = render "flash", flash: flash
-      = render "layouts/#{controller.send(:sub_layout)}"
+      = render partial: "flash", locals: {flash: flash}
+      = render partial: "layouts/#{controller.send(:sub_layout)}"
 
     = javascript_include_tag "application"

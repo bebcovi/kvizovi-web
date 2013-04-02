@@ -7,22 +7,22 @@
   %tbody
     %tr
       %th Ime i prezime
-      %td= @student.full_name
+      %td= @user.full_name
     %tr
       %th Korisničko ime
-      %td= @student.username
+      %td= @user.username
     %tr
       %th Škola
-      %td= @student.school.name
+      %td= @user.school.name
     %tr
       %th Razred
-      %td= @student.grade
+      %td= @user.grade
     %tr
       %th Spol
-      %td= @student.gender
+      %td= @user.gender
     %tr
       %th Godina rođenja
-      %td= @student.year_of_birth.to_s + "."
+      %td= @user.year_of_birth.to_s + "."
 
 .btn-toolbar.edit_profile
   .btn-group

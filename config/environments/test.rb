@@ -43,4 +43,8 @@ Lektire::Application.configure do
       raise exception
     end
   end
+
+  config.paperclip_defaults = {
+    path: ":rails_root/tmp/test/:id/:basename_:style.:extension",
+  }
 end

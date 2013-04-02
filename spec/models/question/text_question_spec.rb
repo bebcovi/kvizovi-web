@@ -27,6 +27,10 @@ describe TextQuestion do
         expect(@it.answer).to eq "  Answer  "
       end
 
+      it "transliterates special characters" do
+        expect(@it.answer).to eq "Anšwer"
+      end
+
       it "is of course false on incorrect answer" do
         expect(@it.answer).not_to eq "Not answer"
       end

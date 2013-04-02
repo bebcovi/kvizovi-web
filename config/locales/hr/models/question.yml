@@ -17,11 +17,9 @@ hr:
           attributes:
             provided_answers:
               blank: "Mora postojati barem jedan ponuđeni odgovor."
-              invalid: "Nijedan ponuđeni odgovor ne smije biti prazan."
+              invalid: "Neki ponuđeni odgovori su prazni."
         text_question:
           attributes:
-            answer:
-              blank: "Niste napisali koji je točan odgovor."
         image_question:
           attributes:
             image_content_type:
@@ -33,25 +31,27 @@ hr:
 
   simple_form:
     labels:
-      question: &question
-        content: "Tekst pitanja"
+      boolean_question: &boolean
         answer: "Odgovor"
-        hint: "Uputa (neobavezno)"
-        tag_list: "Tagovi (neobavezno)"
-      boolean_question:
-        <<: *question
-      choice_question:
-        <<: *question
+      choice_question: &choice
         provided_answers: "Ponuđeni odgovori"
-      association_question:
-        <<: *question
+      association_question: &association
         associations: "Parovi"
-      image_question:
-        <<: *question
+      image_question: &image
         image_file: "Slika"
         image_url: "URL od slike"
-      text_question:
-        <<: *question
+        answer: "Odgovor"
+      text_question: &text
+        answer: "Odgovor"
+      question:
+        content: "Tekst pitanja"
+        hint: "Uputa (neobavezno)"
+        tag_list: "Tagovi (neobavezno)"
+        <<: *boolean
+        <<: *association
+        <<: *choice
+        <<: *text
+        <<: *image
 
   number:
     human:

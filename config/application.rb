@@ -9,6 +9,12 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+def load_engine(name)
+  require_relative "../engines/#{name}/lib/#{name}"
+end
+
+load_engine "authentication"
+
 module Lektire
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

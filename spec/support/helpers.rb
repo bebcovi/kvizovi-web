@@ -85,6 +85,10 @@ module CapybaraHelpers
   end
 end
 
+RSpec.configure do |config|
+  config.include Helpers
+end
+
 def benchmark(name = nil, &block)
   start = Time.now
   result = yield

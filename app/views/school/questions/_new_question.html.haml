@@ -1,7 +1,0 @@
-.dropdown.new_question
-  = add_button "Novo pitanje".append_icon("caret-down"), "#", {class: "btn btn-primary dropdown-toggle", data: {toggle: "dropdown"}}
-  %ul.dropdown-menu
-    = list_of categories do |value, (label, icon)|
-      %a{href: polymorphic_path([@scope, Question], action: "new", category: value)}
-        = icon
-        = label

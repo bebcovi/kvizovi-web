@@ -2,24 +2,9 @@ Lektire::Application.routes.draw do
   ########################
   # School
   ########################
-  scope constraints: {subdomain: "school"}, module: :school do
+  scope constraints: {subdomain: "school"} do
     root to: redirect("/quizzes")
 
-    # Login and registration
-    controller :sessions do
-      get   "login",  to: :new
-      post  "login",  to: :create
-      match "logout", to: :destroy
-    end
-    resource :registration
-    resource :authorization
-    resource :password_reset
-
-    # Profile
-    resource :profile
-    resource :password
-
-    # Making quizzes
     resources :quizzes do
       resources :questions
 
@@ -32,24 +17,17 @@ Lektire::Application.routes.draw do
   ########################
   # Student
   ########################
-  scope constraints: {subdomain: "student"}, module: :student do
+  scope constraints: {subdomain: "student"} do
     root to: redirect("/game/new")
 
-    # Login and registration
-    controller :sessions do
-      get   "login",  to: :new
-      post  "login",  to: :create
-      match "logout", to: :destroy
-    end
-    resource :registration
-
-    # Profile
-    resource :profile
-    resource :password
-
-    # Playing quizzes
     resource :game
   end
+
+  ########################
+  # Profile
+  ########################
+  resource :profile
+  resource :password
 
   ########################
   # Static pages
@@ -67,11 +45,4 @@ Lektire::Application.routes.draw do
   controller :errors do
     get ":code", to: :show, constraints: {code: /\d+/}
   end
-
-  ########################
-  # Legacy routes
-  ########################
-  get "login",        to: redirect("/")
-  get "schools/new",  to: redirect(subdomain: "school",  path: "/registration/new")
-  get "students/new", to: redirect(subdomain: "student", path: "/registration/new")
 end

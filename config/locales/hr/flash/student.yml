@@ -1,17 +1,18 @@
 hr:
   flash:
-    student/sessions:
-      create:
-        alert: "Pogrešno korisničko ime ili lozinka."
-    student/registrations:
-      create:
-        notice: "Registracija je bila uspješna."
-      destroy:
-        notice: "Tvoj korisnički račun je uspješno izbrisan."
-        alert: "Lozinka nije ispravna."
-    student/profiles:
-      update:
-        notice: "Tvoj profil je uspješno izmijenjen."
-    student/passwords:
-      update:
-        notice: "Tvoja lozinka je uspješno izmijenjena."
+    student:
+      sessions:
+        create:
+          error: "Pogrešno korisničko ime ili lozinka."
+      registrations:
+        create:
+          success: "Registracija je bila uspješna."
+        destroy:
+          success: "Tvoj korisnički račun je uspješno izbrisan."
+          error: "Lozinka nije ispravna."
+      profiles:
+        update:
+          success: "Tvoj profil je uspješno izmijenjen."
+      passwords:
+        update:
+          success: "Tvoja lozinka je uspješno izmijenjena."

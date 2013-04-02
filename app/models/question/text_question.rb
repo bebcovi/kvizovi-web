@@ -1,3 +1,5 @@
+require "active_support/inflector/transliterate"
+
 class TextQuestion < Question
   store :data, accessors: [:answer]
   data_value :answer
@@ -18,17 +20,17 @@ class TextQuestion < Question
 end
 
 class TextQuestion
-  class Answer
-    def initialize(value)
-      @value = value
-    end
+  class Answer < SimpleDelegator
+    include ActiveSupport::Inflector
 
     def ==(value)
-      @value.chomp(".").strip.casecmp(value.chomp(".").strip) == 0
+      apply_transformations(__getobj__).casecmp(apply_transformations(value)) == 0
     end
 
-    def blank?
-      @value.blank?
+    private
+
+    def apply_transformations(string)
+      transliterate(string.chomp(".").strip)
     end
   end
 end

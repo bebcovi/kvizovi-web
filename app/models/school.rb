@@ -1,12 +1,8 @@
-require_relative "../../lib/has_many_questions"
-
 class School < ActiveRecord::Base
   LEVELS = ["Osnovna", "Srednja"]
 
-  has_many :students, dependent: :destroy
-  has_many :quizzes, dependent: :destroy
-  extend HasManyQuestions
-  has_many_questions dependent: :destroy
+  has_many :students,  dependent: :destroy
+  has_many :quizzes,   dependent: :destroy
 
   has_secure_password
 

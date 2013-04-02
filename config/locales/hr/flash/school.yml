@@ -1,51 +1,54 @@
 hr:
   flash:
-    school/sessions:
-      create:
-        alert: "Pogrešno korisničko ime ili lozinka."
-    school/registrations:
-      create:
-        notice: "Registracija je bila uspješna."
-      destroy:
-        notice: "Vaš korisnički račun je uspješno izbrisan."
-        alert: "Lozinka nije ispravna."
-    school/authorizations:
-      create:
-        notice: "Točno ste napisali ključ. Sada se možete registrirati :)"
-        alert: "Ključ je netočan."
-    school/password_resets:
-      create:
-        notice: "Nova lozinka je poslana na vaš email."
-        alert: "Škola s tom email adresom nije nađena."
-    school/profiles:
-      update:
-        notice: "Vaš profil je uspješno izmijenjen."
-    school/passwords:
-      update:
-        notice: "Vaša lozinka je uspješno izmijenjena."
-    school/quizzes:
-      create:
-        notice: "Kviz je uspješno stvoren."
-      update:
-        notice: "Kviz je uspješno izmijenjen."
-      destroy:
-        notice: "Kviz je uspješno izbrisan."
-      activate:
-        notice: "Kviz \"%{name}\" je aktiviran."
-      deactivate:
-        notice: "Kviz \"%{name}\" je deaktiviran."
-    school/questions:
-      create:
-        notice: "Pitanje je uspješno stvoreno."
-      update:
-        notice: "Pitanje je uspješno izmijenjeno."
-      destroy:
-        notice: "Pitanje je uspješno izbrisano."
-      include:
-        notice: "Pitanje je uspješno dodano u kviz \"%{name}\"."
-      copy:
-        notice: "Pitanje je uspješno preuzeto."
-      download:
-        notice: "Pitanje je uspješno kopirano kod vas."
-      remove:
-        notice: "Pitanje je uspješno uklonjeno iz kviza."
+    school:
+      sessions:
+        create:
+          error: "Pogrešno korisničko ime ili lozinka."
+      registrations:
+        create:
+          success: "Registracija je bila uspješna."
+        destroy:
+          success: "Vaš korisnički račun je uspješno izbrisan."
+          error: "Lozinka nije ispravna."
+      authorizations:
+        create:
+          success: "Točno ste napisali ključ. Sada se možete registrirati :)"
+          error: "Ključ je netočan."
+      password_resets:
+        create:
+          success: "Nova lozinka je poslana na vaš email."
+          error: "Škola s tom email adresom nije nađena."
+      profiles:
+        update:
+          success: "Vaš profil je uspješno izmijenjen."
+      passwords:
+        update:
+          success: "Vaša lozinka je uspješno izmijenjena."
+      quizzes:
+        create:
+          success: "Kviz je uspješno stvoren."
+        update:
+          success: "Kviz je uspješno izmijenjen."
+        destroy:
+          success: "Kviz je uspješno izbrisan."
+        activate:
+          success: "Kviz \"%{name}\" je aktiviran."
+        deactivate:
+          success: "Kviz \"%{name}\" je deaktiviran."
+      questions:
+        create:
+          success: "Pitanje je uspješno stvoreno."
+        update:
+          success: "Pitanje je uspješno izmijenjeno."
+        destroy:
+          success: "Pitanje je uspješno izbrisano."
+        include:
+          success: "Pitanje je uspješno dodano u kviz \"%{name}\"."
+        copy:
+          success: "Pitanje je uspješno preuzeto."
+        download:
+          success: "Pitanje je uspješno kopirano kod vas."
+        remove:
+          success: "Pitanje je uspješno uklonjeno iz kviza."
+        unauthorized:
+          error: "Ovaj kviz ne pripada vama – ne možete ga mijenjati."

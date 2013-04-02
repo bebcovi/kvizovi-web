@@ -1,78 +1,20 @@
-- if @scope.is_a?(Quiz) && (quiz = @scope)
+- title @quiz.name
 
-  - @title = quiz.name
+.dropdown.new_question
+  = add_button "Novo pitanje".append_icon("caret-down"), "#", class: "btn btn-primary dropdown-toggle", data: {toggle: "dropdown"}
+  %ul.dropdown-menu
+    = list_of question_categories do |category_name, category|
+      = link_to category[:label].prepend_icon(category[:icon_name]), new_quiz_question_path(@quiz, category: category_name)
 
-  = render "new_question"
+= render "tag_filter"
 
-  -# = link_to icon("file-add"), school_questions_path(current_user, include: @scope.id), class: "btn associate_questions", title: "Pridruži pitanja"
+- if @questions.any?
 
-  = simple_form_for :game_submission, url: game_path, method: :post do |f|
-    = f.hidden_field :quiz_id, value: quiz.id
-    = f.hidden_field :players_count, value: 1
-    = f.button :button, icon("play"), {class: "btn btn-info", title: "Testiraj kviz"}.merge(@questions.count == 0 ? {disabled: true} : {})
-
-  = render "tag_filter"
-
-  - if @questions.any?
-
-    %ol.question_list
-      = render collection: @questions, partial: "question_item", as: :question
-
-  - else
-
-    - if params[:filter]
-      %p.no_items Nema pitanja s tim tagovima.
-    - else
-      %p.no_items Ovaj kviz trenutno nema pitanja.
-
-- elsif @scope.is_a?(School)
-
-  - @title = "Pitanja"
-
-  - if params[:include].blank?
-
-    = render "tag_filter"
-    = render "scope_nav"
-    = render "new_question"
-
-  - else
-
-    = render "tag_filter"
-    = link_to "Završi", quiz_questions_path(@quiz), class: "btn btn-primary finish_associating"
-
-  - if @questions.any?
-
-    %ol.question_list
-      = render collection: @questions, partial: "question_item", as: :question
-
-  - else
-
-    - if params[:filter]
-      %p.no_items Nema pitanja s tim tagovima.
-    - elsif params[:include]
-      %p.no_items Nemate pitanja izvan trenutnog kviza.
-    - else
-      %p.no_items Trenutno nemate pitanja.
-
-  = will_paginate @questions
+  %ol.question_list
+    - @questions.each do |question|
+      %li{class: (flash[:highlight] == question.id ? "highlight" : nil)}
+        = render partial: "questions/question_short"
 
 - else
 
-  - @title = "Pitanja"
-
-  = render "tag_filter"
-  = render "scope_nav"
-
-  - if @questions.any?
-
-    %ol.question_list
-      = render collection: @questions, partial: "question_item", as: :question
-
-  - else
-
-    - if params[:filter]
-      %p.no_items Nema pitanja s tim tagovima.
-    - else
-      %p.no_items Druge škole trenutno nemaju pitanja.
-
-  = will_paginate @questions
+  %p.no_items= params[:query] ? "Nema pitanja s tim tagovima." : "Ovaj kviz trenutno nema pitanja."

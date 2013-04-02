@@ -13,7 +13,7 @@ class ImageQuestion < TextQuestion
 
   has_attached_file :image, styles: {resized: "x250>"}, whiny: false
 
-  validates_attachment :image, presence: true,
+  validates_attachment :image, presence: {if: -> { image_url.blank? and image_file.blank? }},
     content_type: {content_type: ["image/jpeg", "image/gif", "image/png"], allow_blank: true},
     size: {in: 0..1.megabyte}
   validate :validate_image_url
@@ -22,22 +22,34 @@ class ImageQuestion < TextQuestion
 
   attr_reader :image_url
   def image_url=(url)
-    begin
-      @image_url = url
-      self.image = URI.parse(url)
-    rescue
-      self.image = nil
+    if url.present?
+      begin
+        @image_url = url
+        self.image = URI.parse(url)
+      rescue
+        self.image = nil
+      end
     end
   end
 
   attr_reader :image_file
   def image_file=(file)
-    @image_file = file
-    self.image = SanitizedFile.new(file)
+    if file.present?
+      begin
+        @image_file = file
+        self.image = SanitizedFile.new(file)
+      rescue
+        self.image = nil
+      end
+    end
   end
 
   def image_width(style = :original);  image_size[style][:width];  end
   def image_height(style = :original); image_size[style][:height]; end
+
+  def temp_image
+    image.instance_variable_get("@queued_for_write")[:resized]
+  end
 
   def dup
     super.tap do |question|
@@ -69,6 +81,8 @@ class ImageQuestion
   class SanitizedFile < SimpleDelegator
     include ActiveSupport::Inflector
 
+    # Because Paperclip chooses the adapter for uploaded files
+    # by looking at the class name
     def self.name
       "UploadedFile"
     end
