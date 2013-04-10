@@ -37,16 +37,19 @@ GEM
       multi_json (~> 1.0)
     acts-as-taggable-on (2.3.3)
       rails (~> 3.0)
-    anjlab-bootstrap-rails (2.3.1.1)
-      railties (>= 3.0)
-      sass (>= 3.2)
-    arel (3.0.2)
-    bcrypt-ruby (3.0.1)
     better_errors (0.7.2)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
     binding_of_caller (0.7.1)
       debug_inspector (>= 0.0.1)
+    addressable (2.3.3)
+    arel (3.0.2)
+    bcrypt-ruby (3.0.1)
+    bootstrap-sass-rails (2.3.1.1)
+      railties (>= 3.1.0)
+      sass-rails (>= 3.1.0)
+    bootstrap-will_paginate (0.0.9)
+      will_paginate
     builder (3.0.4)
     capybara (2.0.2)
       mime-types (>= 1.16)
@@ -250,10 +253,11 @@ DEPENDENCIES
   active_attr
   activerecord-postgres-hstore
   acts-as-taggable-on
-  anjlab-bootstrap-rails
   bcrypt-ruby (~> 3.0)
   better_errors
   binding_of_caller (>= 0.7.1)
+  bootstrap-sass-rails
+  bootstrap-will_paginate
   capybara (>= 2)
   coffee-rails
   compass (~> 0.13.alpha.0)
