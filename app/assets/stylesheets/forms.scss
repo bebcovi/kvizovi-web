@@ -9,10 +9,6 @@ button {
   @include box-sizing(content-box);
 }
 
-.btn {
-  height: $baseLineHeight;
-}
-
 .controls input[type="file"] {
   cursor: pointer;
   margin-bottom: $baseLineHeight/2;
