@@ -13,7 +13,7 @@ group :assets do
   gem "sass-rails"
   gem "compass", "~> 0.13.alpha.0"
   gem "compass-rails"
-  gem "bootstrap-sass-rails"
+  gem "bootstrap-sass"
   gem "jquery-rails"
   gem "jquery-ui-rails"
   gem "coffee-rails"
