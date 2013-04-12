@@ -1,0 +1,9 @@
+= f.input :associations do
+  - number_of_fields = (params[:action] == "new" ? 4 : question.associations.count)
+  %ol
+    - number_of_fields.times do |n|
+      - common_options = {label: false, input_html: {name: "association_question[associations][]"}, error: false}
+      %li.pair
+        = f.input :associations, {placeholder: "Asocijacija #{n + 1}a", input_html: {value: question.associations.keys[n]}, wrapper_html: {class: "static"}}.deep_merge(common_options)
+        = icon("chevron-right", class: "arrow")
+        = f.input :associations, {placeholder: "Asocijacija #{n + 1}b", input_html: {value: question.associations.values[n]}, wrapper_html: {class: "dynamic"}}.deep_merge(common_options)

@@ -4,4 +4,6 @@ FactoryGirl.define do
     school_id 1
     activated true
   end
+
+  factory :empty_quiz, class: "Quiz"
 end

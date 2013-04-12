@@ -35,7 +35,7 @@ class GamesController < ApplicationController
   def edit
     @quiz = quiz
     @player = current_player
-    @question = current_question.randomize!
+    @question = current_question
     @question_number = game_state.current_question_number
     @player_number = game_state.current_player_number
     @questions_count = game_state.questions_count
@@ -79,7 +79,7 @@ class GamesController < ApplicationController
   end
 
   def current_question
-    Question.find(game_state.current_question_id)
+    QuestionExhibit.exhibit(Question.find(game_state.current_question_id))
   end
 
   def current_player

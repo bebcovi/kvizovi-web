@@ -1,22 +1,22 @@
 require "spec_helper"
 
 describe Quiz do
-  before(:all) do
-    @it = build(:quiz)
+  before do
+    @it = Factory.build(:empty_quiz)
   end
 
   context "validations" do
-    reset_attributes(FactoryGirl.attributes_for(:quiz))
-
     context "#name" do
       it "validates presence" do
-        expect { @it.name = nil }.to invalidate(@it)
+        @it.name = nil
+        expect(@it).to have(1).error_on(:name)
       end
     end
 
     context "#school_id" do
       it "validates presence" do
-        expect { @it.school_id = nil }.to invalidate(@it)
+        @it.school_id = nil
+        expect(@it).to have(1).error_on(:school_id)
       end
     end
   end

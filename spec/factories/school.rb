@@ -14,4 +14,6 @@ FactoryGirl.define do
       email "other@skola.hr"
     end
   end
+
+  factory :empty_school, class: "School"
 end

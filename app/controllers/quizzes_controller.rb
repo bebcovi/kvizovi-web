@@ -1,17 +1,17 @@
 class QuizzesController < ApplicationController
   before_filter :authenticate!
-  before_filter :assign_school
+  before_filter :assign_user
 
   def index
-    @quizzes = @school.quizzes
+    @quizzes = @user.quizzes
   end
 
   def new
-    @quiz = @school.quizzes.new
+    @quiz = @user.quizzes.new
   end
 
   def create
-    @quiz = @school.quizzes.new(params[:quiz])
+    @quiz = @user.quizzes.new(params[:quiz])
 
     if @quiz.valid?
       @quiz.save
@@ -22,11 +22,11 @@ class QuizzesController < ApplicationController
   end
 
   def edit
-    @quiz = @school.quizzes.find(params[:id])
+    @quiz = @user.quizzes.find(params[:id])
   end
 
   def update
-    @quiz = @school.quizzes.find(params[:id])
+    @quiz = @user.quizzes.find(params[:id])
     @quiz.assign_attributes(params[:quiz])
 
     if @quiz.valid?
@@ -38,30 +38,24 @@ class QuizzesController < ApplicationController
   end
 
   def toggle_activation
-    quiz = @school.quizzes.find(params[:id])
+    quiz = @user.quizzes.find(params[:id])
     quiz.toggle!(:activated)
     redirect_to quizzes_path
   end
 
   def delete
-    @quiz = @school.quizzes.find(params[:id])
+    @quiz = @user.quizzes.find(params[:id])
   end
 
   def destroy
-    quiz = @school.quizzes.find(params[:id])
+    quiz = @user.quizzes.find(params[:id])
     quiz.destroy
     redirect_to quizzes_path, notice: flash_success
   end
 
   private
 
-  def assign_school
-    @school = current_user
-  end
-
-  protected
-
-  def sub_layout
-    "quizzes"
+  def assign_user
+    @user = current_user
   end
 end

@@ -1,8 +1,0 @@
-= f.input :content, input_html: {autofocus: current_page?(action: "new"), class: "input-block-level"}
-
-= render partial: "questions/#{@question.category}/fields", locals: {f: f, question: @question}
-
-= f.input :hint, placeholder: %(Npr. "Odgovor piši u nominativu."), hint: "Ovo će se prikazati kao pomoć pri odgovaranju na pitanje."
-= f.input :tag_list, hint: "Tagove odvajajte zarezom."
-
-= hidden_field_tag :category, params[:category]

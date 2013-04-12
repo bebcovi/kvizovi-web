@@ -35,4 +35,6 @@ FactoryGirl.define do
       sequence(:username) { |n| "jon_#{n}" }
     end
   end
+
+  factory :empty_student, class: "Student"
 end

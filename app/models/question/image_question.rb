@@ -3,13 +3,8 @@ require "active_support/inflector/transliterate"
 require "uri"
 
 class ImageQuestion < TextQuestion
-  store :data, accessors: [
-    :image_file_name,
-    :image_content_type,
-    :image_file_size,
-    :image_updated_at,
-    :image_size,
-  ]
+  data_accessor :image_file_name, :image_content_type,
+    :image_file_size, :image_updated_at, :image_size
 
   has_attached_file :image, styles: {resized: "x250>"}, whiny: false
 
@@ -22,34 +17,26 @@ class ImageQuestion < TextQuestion
 
   attr_reader :image_url
   def image_url=(url)
-    if url.present?
-      begin
-        @image_url = url
-        self.image = URI.parse(url)
-      rescue
-        self.image = nil
-      end
-    end
+    begin
+      @image_url = url
+      self.image = URI.parse(url)
+    rescue
+      self.image = nil
+    end if url.present?
   end
 
   attr_reader :image_file
   def image_file=(file)
-    if file.present?
-      begin
-        @image_file = file
-        self.image = SanitizedFile.new(file)
-      rescue
-        self.image = nil
-      end
-    end
+    begin
+      @image_file = file
+      self.image = SanitizedFile.new(file)
+    rescue
+      self.image = nil
+    end if file.present?
   end
 
   def image_width(style = :original);  image_size[style][:width];  end
   def image_height(style = :original); image_size[style][:height]; end
-
-  def temp_image
-    image.instance_variable_get("@queued_for_write")[:resized]
-  end
 
   def dup
     super.tap do |question|
@@ -75,9 +62,7 @@ class ImageQuestion < TextQuestion
       errors.add(:image_url, :invalid)
     end
   end
-end
 
-class ImageQuestion
   class SanitizedFile < SimpleDelegator
     include ActiveSupport::Inflector
 

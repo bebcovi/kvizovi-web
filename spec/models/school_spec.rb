@@ -1,70 +1,74 @@
 require "spec_helper"
 
 describe School do
-  before(:all) do
-    @it = build(:school)
+  before do
+    @it = Factory.build(:empty_school)
   end
 
   context "validations" do
-    reset_attributes(FactoryGirl.attributes_for(:school))
-
     context "#username" do
       it "validates presence" do
-        expect { @it.username = nil }.to invalidate(@it)
+        @it.username = nil
+        expect(@it).to have(1).error_on(:username)
       end
 
       it "validates uniqueness" do
-        expect {
-          create(:school, username: "jon")
-          @it.username = "jon"
-        }.to invalidate(@it)
+        Factory.build(:empty_school, username: "jon").save(validate: false)
+        @it.username = "jon"
+        expect(@it).to have(1).error_on(:username)
       end
     end
 
     context "#password" do
       it "validates presence" do
-        expect { @it.password = nil }.to invalidate(@it)
+        @it.password = nil
+        expect(@it).to have(1).error_on(:password)
       end
     end
 
     context "#email" do
       it "validates presence" do
-        expect { @it.email = nil }.to invalidate(@it)
+        @it.email = nil
+        expect(@it).to have(1).error_on(:email)
       end
 
       it "validates uniqueness" do
-        expect {
-          create(:school, email: "jon.snow@north.com")
-          @it.email = "jon.snow@north.com"
-        }.to invalidate(@it)
+        Factory.create_without_validation(:empty_school, email: "jon@snow.com")
+        @it.email = "jon@snow.com"
+        expect(@it).to have(1).error_on(:email)
       end
     end
 
     context "#place" do
       it "validates presence" do
-        expect { @it.place = nil }.to invalidate(@it)
+        @it.place = nil
+        expect(@it).to have(1).error_on(:place)
       end
     end
 
     context "#region" do
       it "validates presence" do
-        expect { @it.region = nil }.to invalidate(@it)
+        @it.region = nil
+        expect(@it).to have(1).error_on(:region)
       end
     end
 
     context "#level" do
       it "validates presence" do
-        expect { @it.level = nil }.to invalidate(@it)
+        @it.level = nil
+        expect(@it).to have(1).error_on(:level)
       end
 
       it "validates inclusion" do
-        expect { @it.level = "bla" }.to invalidate(@it)
+        @it.level = "bla"
+        expect(@it).to have(1).error_on(:level)
       end
     end
 
     context "#key" do
       it "validates presence" do
-        expect { @it.key = nil }.to invalidate(@it)
+        @it.key = nil
+        expect(@it).to have(1).error_on(:key)
       end
     end
   end

@@ -1,0 +1,7 @@
+= simple_form_for @question, url: [@quiz, @question.becomes(Question)], html: {class: "#{params[:action]} #{@question.category}_question"} do |f|
+
+  = render partial: "fields", locals: {f: f}
+
+  = buttons(f) do |b|
+    = b.cancel_button "Odustani", quiz_questions_path(@quiz)
+    = b.submit_button

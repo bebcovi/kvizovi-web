@@ -7,9 +7,9 @@ class Student < ActiveRecord::Base
   has_secure_password
   attr_accessor :school_key
 
-  validates :username,      presence: true, format: {with: /\A[a-zA-Z0-9_]*\Z/}, length: {minimum: 3}, uniqueness: true
+  validates :username,      presence: true, format: {with: /\A[a-zA-Z0-9_]*\Z/, allow_blank: true}, length: {minimum: 3, allow_blank: true}, uniqueness: true
   validates :password,      presence: true, on: :create
-  validates :grade,         presence: true, format: {with: /\A[0-8][a-z]\Z$/}
+  validates :grade,         presence: true, format: {with: /\A[0-8][a-z]\Z$/, allow_blank: true}
   validates :first_name,    presence: true
   validates :last_name,     presence: true
   validates :gender,        presence: true, inclusion: {in: GENDERS, allow_blank: true}

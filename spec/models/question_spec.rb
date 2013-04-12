@@ -1,16 +1,15 @@
 require "spec_helper"
 
 describe Question do
-  before(:all) do
-    @it = build(:question)
+  before do
+    @it = Factory.build(:empty_question)
   end
 
   context "validations" do
-    reset_attributes(FactoryGirl.build(:question))
-
     context "#content" do
       it "validates presence" do
-        expect { @it.content = nil }.to invalidate(@it)
+        @it.content = nil
+        expect(@it).to have(1).error_on(:content)
       end
     end
   end

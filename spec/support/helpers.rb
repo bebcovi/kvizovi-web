@@ -5,19 +5,12 @@ module Helpers
   extend ActiveSupport::Concern
 
   included do
-    include SpecHelpers
     include CapybaraHelpers
+    include RSpecHelpers
   end
 
   def uploaded_file(filename, content_type)
     Rack::Test::UploadedFile.new(Rails.root.join("spec/fixtures/files/#{filename}"), content_type)
-  end
-
-  def transaction_with_rollback(&block)
-    ActiveRecord::Base.transaction do
-      yield
-      raise ActiveRecord::Rollback
-    end
   end
 
   def create_file(filename, content_type, options = {}, &block)
@@ -34,37 +27,23 @@ module Helpers
       FileUtils.rm(file_path) if File.exists?(file_path)
     end
   end
+end
+
+module RSpecHelpers
+  extend ActiveSupport::Concern
+
 
   module ClassMethods
     def benchmark_examples
       around(:each) { |example| benchmark { example.run } }
     end
-  end
-end
 
-module SpecHelpers
-  extend ActiveSupport::Concern
+    def school!
+      before { request.host = "school.example.com" }
+    end
 
-  def invalidate(object)
-    change{object.valid?}.to(false)
-  end
-
-  def revalidate(object)
-    change{object.valid?}.to(true)
-  end
-
-  module ClassMethods
-    def reset_attributes(attributes)
-      after do
-        metadata = example.metadata
-        until metadata[:description_args].first =~ /^#\w+$/ or metadata[:example_group] == nil
-          metadata = metadata[:example_group]
-        end
-        unless metadata.nil?
-          attribute = metadata[:description_args].first.delete("#").to_sym
-          @it.send("#{attribute}=", attributes[attribute])
-        end
-      end
+    def student!
+      before { request.host = "student.example.com" }
     end
   end
 end

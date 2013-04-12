@@ -13,8 +13,4 @@ class AdminController < ApplicationController
   def admin_school
     @admin_school ||= School.find_by_name("Admin")
   end
-
-  def sub_layout
-    "admin"
-  end
 end

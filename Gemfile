@@ -2,7 +2,7 @@ ruby "2.0.0"
 
 source "https://rubygems.org"
 
-gem "rails", "~> 3.2.12"
+gem "rails", "~> 3.2.13"
 
 # Web servers
 gem "thin",    group: :development
@@ -47,13 +47,12 @@ gem "active_attr"
 
 group :test do
   gem "rspec-rails"
-  gem "capybara", ">= 2"
   gem "factory_girl_rails", ">= 4.2"
-  gem "guard-rspec", ">= 2.4.1"
-  gem "rb-inotify", "~> 0.8.8"
   gem "pry"
   gem "nokogiri"
   gem "cucumber-rails", require: false
+  gem "capybara", ">= 2"
+  gem "capybara-webkit"
   gem "database_cleaner"
 end
 

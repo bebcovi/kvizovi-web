@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe Student do
-  before(:all) do
-    @it = build(:student)
+  before do
+    @it = Factory.build(:empty_student)
   end
 
   describe "#grade=" do
@@ -13,94 +13,99 @@ describe Student do
   end
 
   context "validations" do
-    reset_attributes(FactoryGirl.attributes_for(:student))
-
     context "#username" do
       it "validates presence" do
-        expect { @it.username = nil }.to invalidate(@it)
+        @it.username = nil
+        expect(@it).to have(1).error_on(:username)
       end
 
       it "validates format" do
-        expect { @it.username = "@@@" }.to invalidate(@it)
+        @it.username = "@@@"
+        expect(@it).to have(1).error_on(:username)
       end
 
       it "validates length" do
-        expect { @it.username = "ab" }.to invalidate(@it)
-        expect { @it.username = "abc" }.to revalidate(@it)
+        @it.username = "ab"
+        expect(@it).to have(1).error_on(:username)
       end
 
       it "validates uniqueness" do
-        expect {
-          create(:student, username: "john")
-          @it.username = "john"
-        }.to invalidate(@it)
+        Factory.create_without_validation(:empty_student, username: "john")
+        @it.username = "john"
+        expect(@it).to have(1).error_on(:username)
       end
     end
 
     context "#password" do
       it "validates presence" do
-        expect { @it.password = nil }.to invalidate(@it)
+        @it.password = nil
+        expect(@it).to have(1).error_on(:password)
       end
     end
 
     context "#grade" do
       it "validates presence" do
-        expect { @it.grade = nil }.to invalidate(@it)
+        @it.grade = nil
+        expect(@it).to have(1).error_on(:grade)
       end
 
       it "validates format" do
-        expect { @it.grade = "bla" }.to invalidate(@it)
+        @it.grade = "bla"
+        expect(@it).to have(1).error_on(:grade)
       end
     end
 
     context "#first_name" do
       it "validates presence" do
-        expect { @it.first_name = nil }.to invalidate(@it)
+        @it.first_name = nil
+        expect(@it).to have(1).error_on(:first_name)
       end
     end
 
     context "#last_name" do
       it "validates presence" do
-        expect { @it.last_name = nil }.to invalidate(@it)
+        @it.last_name = nil
+        expect(@it).to have(1).error_on(:last_name)
       end
     end
 
     context "#gender" do
       it "validates presence" do
-        expect { @it.gender = nil }.to invalidate(@it)
+        @it.gender = nil
+        expect(@it).to have(1).error_on(:gender)
       end
 
       it "validates inclusion" do
-        expect { @it.gender = "bla" }.to invalidate(@it)
+        @it.gender = "bla"
+        expect(@it).to have(1).error_on(:gender)
       end
     end
 
     context "#year_of_birth" do
       it "validates presence" do
-        expect { @it.year_of_birth = nil }.to invalidate(@it)
+        @it.year_of_birth = nil
+        expect(@it).to have(1).error_on(:year_of_birth)
       end
 
       it "validates numericality" do
-        expect { @it.year_of_birth = "bla" }.to invalidate(@it)
+        @it.year_of_birth = "bla"
+        expect(@it).to have(1).error_on(:year_of_birth)
       end
     end
 
     context "#school_key" do
-      it "validates presence" do
-        expect {
-          @it.school_id = nil
-          @it.school_key = nil
-        }.to invalidate(@it)
+      before do
+        @it.school_id = nil
       end
 
-      it "validates existence" do
-        @it.school_id = nil
-        @it.school_key = "secret"
-        create(:school, key: "secret")
-        @it.valid?
-        puts @it.errors.full_messages
+      it "validates presence" do
+        @it.school_key = nil
+        expect(@it).to have(1).error_on(:school_key)
+      end
 
-        expect { @it.school_key = "other_secret" }.to invalidate(@it)
+      it "validates inclusion" do
+        @it.school_key = "secret"
+        expect(@it).to have(1).error_on(:school_key)
       end
     end
   end

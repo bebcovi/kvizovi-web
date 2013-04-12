@@ -1,11 +1,16 @@
 class BooleanQuestion < Question
-  store :data, accessors: [:answer]
-  data_value :answer
+  data_accessor :answer
 
   validate :validate_answer
 
-  def true?;  answer == true;  end
-  def false?; answer == false; end
+  alias raw_answer= answer=
+  def answer=(value)
+    self.raw_answer = case value
+                      when String     then {"true" => true, "false" => false}[value]
+                      when TrueClass  then value
+                      when FalseClass then value
+                      end
+  end
 
   def category
     "boolean"
@@ -18,32 +23,6 @@ class BooleanQuestion < Question
       errors.add(:answer, :blank)
     elsif not (answer == true or answer == false)
       errors.add(:answer, :inclusion)
-    end
-  end
-end
-
-class BooleanQuestion
-  class Answer
-    def initialize(value)
-      @value = convert_to_boolean(value)
-    end
-
-    def ==(value)
-      @value == convert_to_boolean(value)
-    end
-
-    def method_missing(name, *args, &block)
-      @value.send(name, *args, &block)
-    end
-
-    private
-
-    def convert_to_boolean(value)
-      if value.is_a?(String)
-        {"true" => true, "false" => false}[value]
-      else
-        value
-      end
     end
   end
 end

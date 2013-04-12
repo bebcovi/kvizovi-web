@@ -3,7 +3,7 @@ Given(/^I'm registered$/) do
   student { @user = FactoryGirl.create(:student, :with_school) }
 end
 
-Given(/^I'm registered with username "(.*?)" and password "(.*?)"$/) do |username, password|
+Given(/^I'm registered with username "(.*)" and password "(.*)"$/) do |username, password|
   school  { @user = FactoryGirl.create(:school,                username: username, password: password) }
   student { @user = FactoryGirl.create(:student, :with_school, username: username, password: password) }
 end

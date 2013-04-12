@@ -2,15 +2,15 @@ require "spec_helper"
 
 describe ExampleQuizzesCreator do
   before do
-    @school = create(:school)
-    @it = ExampleQuizzesCreator.new(@school)
+    @user = Factory.create_without_validation(:empty_school)
+    @it = ExampleQuizzesCreator.new(@user)
   end
 
   describe "#create" do
     it "creates some quizzes with some questions" do
       @it.create
-      expect(@school.quizzes.count).to be > 0
-      @school.quizzes.each do |quiz|
+      expect(@user.quizzes.count).to be > 0
+      @user.quizzes.each do |quiz|
         expect(quiz.questions.count).to be > 0
       end
     end

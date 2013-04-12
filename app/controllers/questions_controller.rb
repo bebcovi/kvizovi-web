@@ -1,7 +1,6 @@
 class QuestionsController < ApplicationController
   before_filter :authenticate!
   before_filter :assign_quiz
-  before_filter :authorize!, only: [:new, :create, :edit, :update, :delete, :destroy]
 
   def index
     @questions = @quiz.questions.search(params[:query])
@@ -12,13 +11,13 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = question_class.new(params[:question])
+    @question = question_class.new
+    @question.assign_attributes(question_params)
 
     if @question.valid?
       @quiz.questions << @question
       redirect_to quiz_questions_path(@quiz), notice: flash_success
     else
-      binding.pry
       render :new
     end
   end
@@ -33,7 +32,7 @@ class QuestionsController < ApplicationController
 
   def update
     @question = @quiz.questions.find(params[:id])
-    @question.assign_attributes(params[:question])
+    @question.assign_attributes(question_params)
 
     if @question.valid?
       @question.save
@@ -52,48 +51,40 @@ class QuestionsController < ApplicationController
     redirect_to quiz_questions_path(@quiz), notice: flash_success
   end
 
-  def copy
-    @question = Question.find(params[:id]).dup
-    @question.school = current_user
-    render :new
-  end
-
-  def download
-    new_question = Question.find(params[:id]).dup
-    @scope.questions << new_question
-    flash[:highlight] = new_question.id
-    redirect_to polymorphic_path([@scope, Question]), notice: flash_success
-  end
-
-  def include
-    @scope.questions << current_user.questions.find(params[:id])
-    redirect_to polymorphic_path([current_user, Question], include: params[:quiz_id]), notice: flash_success(name: @scope.name)
-  end
-
   def remove
-    @scope.questions.delete(current_user.questions.find(params[:id]))
-    redirect_to polymorphic_path([@scope, Question]), notice: flash_success
+    @quiz.questions.delete(Question.find(params[:id]))
+    redirect_to quiz_questions_path(@quiz), notice: flash_success
   end
+
+  # def copy
+  #   @question = Question.find(params[:id]).dup
+  #   @question.school = current_user
+  #   render :new
+  # end
+
+  # def download
+  #   new_question = Question.find(params[:id]).dup
+  #   @scope.questions << new_question
+  #   flash[:highlight] = new_question.id
+  #   redirect_to polymorphic_path([@scope, Question]), notice: flash_success
+  # end
+
+  # def include
+  #   @scope.questions << current_user.questions.find(params[:id])
+  #   redirect_to polymorphic_path([current_user, Question], include: params[:quiz_id]), notice: flash_success(name: @scope.name)
+  # end
 
   private
 
   def assign_quiz
-    @quiz = Quiz.find(params[:quiz_id])
-  end
-
-  def authorize!
-    if not current_user.quizzes.exists?(@quiz)
-      redirect_to root_path, alert: flash_error(:unauthorized)
-    end
+    @quiz = current_user.quizzes.find(params[:quiz_id])
   end
 
   def question_class
     "#{params[:category]}_question".camelize.constantize
   end
 
-  protected
-
-  def sub_layout
-    "questions"
+  def question_params
+    params["#{params[:category]}_question"]
   end
 end

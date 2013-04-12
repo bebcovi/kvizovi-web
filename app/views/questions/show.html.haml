@@ -1,0 +1,23 @@
+- title "Pitanje"
+
+- unless @scope
+  %p.muted Ovo pitanje napravila je #{@question.school}.
+
+= simple_form_for :game, url: "", html: {class: "show question_#{@question.category}"} do |f|
+
+  %h2= smarty_pants @question.content
+
+  = render object: @question, partial: "#{@question.category}_question", locals: {f: f}
+
+  - if @question.hint?
+    %p.hint Uputa: #{@question.hint}
+
+  = buttons do
+    = cancel_button "Natrag", :back
+    - if @scope
+      - if params[:include]
+        = add_file_button "Dodaj kvizu", polymorphic_path([@quiz, @question.becomes(Question)], action: "include"), class: "btn btn-primary", method: :post
+      - else
+        = copy_button "Dupliciraj", polymorphic_path([@scope, @question.becomes(Question)], action: "copy"), class: "btn btn-primary"
+    - else
+      = download_button "Kopiraj kod sebe", polymorphic_path([current_user, @question.becomes(Question)], action: "download"), class: "btn btn-primary", method: :post

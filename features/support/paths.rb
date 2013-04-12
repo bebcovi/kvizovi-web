@@ -11,6 +11,10 @@ module NavigationHelpers
       login_url(subdomain: @user_type)
     when "my profile page"
       profile_url(subdomain: @user_type)
+    when "quizzes page"
+      quizzes_url(subdomain: "school")
+    when "questions page"
+      quiz_questions_url(@quiz, subdomain: "school")
     else raise "Page isn't recognized: #{page}"
     end
   end

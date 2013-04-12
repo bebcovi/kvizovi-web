@@ -6,7 +6,7 @@ When(/^I confirm my email$/) do
   click_on "Zatraži novu lozinku"
 end
 
-When(/^I fill in "(.*?)" with the emailed password$/) do |field|
+When(/^I fill in "(.*)" with the emailed password$/) do |field|
   new_password = Nokogiri::HTML(PasswordSender.deliveries.first.body.to_s).at("strong").text
   fill_in field, with: new_password
 end

@@ -1,0 +1,23 @@
+- title @correct_answer ? "Točan odgovor" : "Netočan odgovor"
+
+- if @correct_answer
+  %h1.text-success
+    = icon("checkmark")
+    %span Točan odgovor!
+
+  %p= ["Bravo! :)", "Svaka čast! :D", "Čestitamo! :)"].sample
+
+- else
+  %h1.text-error
+    = icon("cancel-2")
+    %span= ["Ne baš…", "Pogrešno", "Nažalost, ne…"].sample
+
+  = render partial: "questions/#{@question.category}_question_answer", object: @question, as: :question
+
+= form_tag game_path, method: :delete do
+
+  = buttons do |b|
+    - unless @game_over
+      = b.action_button "Sljedeće pitanje".append_icon("arrow-right"), edit_game_path
+    - else
+      = b.submit_button "Rezultati".append_icon("arrow-right")

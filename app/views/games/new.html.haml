@@ -1,0 +1,30 @@
+- title "Nova igra"
+
+%h1 Zdravo :)
+
+- if @quizzes.any?
+
+  = simple_form_for @game_submission, url: game_path do |f|
+
+    %section.quizzes
+      %p Odaberi kviz:
+      = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
+
+    %section.players
+      %p Igraš li sam ili još s nekim?
+      = f.input :players_count, collection: [["Samo ja", 1], ["Još netko", 2]], as: :radio_buttons, label: false
+
+    %section.login
+      %p Daj drugom igraču da se prijavi:
+      - if @game_submission.errors.has_key?(:players_credentials)
+        = alert_message f.error(:players_credentials), "error", close: false
+      = f.simple_fields_for :players_credentials, index: nil do |p|
+        = p.input :username, input_html: {value: (params[:game_submission][:players_credentials].first[:username] rescue nil)}
+        = p.input :password
+
+    = buttons(f) do |b|
+      = b.button_button raw("Započni kviz#{content_tag :strong, "", class: "name"}!")
+
+- else
+
+  %p.no_items Nema još kvizova za igrati...

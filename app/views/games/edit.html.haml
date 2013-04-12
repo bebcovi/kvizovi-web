@@ -1,0 +1,20 @@
+- title "#{@quiz.name} · #{@question_number}. pitanje"
+
+.timer
+  = icon("stopwatch")
+  %span.time
+
+%h1= @quiz.name
+
+.username{class: "player_#{number(@player_number)}"}= @player.username.prepend_icon("user")
+
+.progress
+  .bar{style: "width: #{progress.chunk_size * progress.number_of_answered_questions}%"}
+
+= simple_form_for :game, url: game_path, method: :put, html: {class: "show question_#{@question.category}"} do |f|
+
+  = render partial: "questions/question", object: @question, locals: {f: f}
+
+  = buttons(f) do |b|
+    = b.cancel_button "Prekini", delete_game_path(interrupted: "true")
+    = b.submit_button "Odgovori"

@@ -1,0 +1,3 @@
+%ul.nav.pull-left
+  %li{class: ("active" if params[:controller] == "quizzes")}= link_to "Kvizovi", quizzes_path
+  %li{class: ("active" if params[:action] == "tour")}= link_to "Vodič", tour_path

@@ -15,11 +15,11 @@ Feature: Quizzes
     And I click on "Spremi"
     Then I should see "Some name"
 
-    When I click on "Izmijeni"
+    When I click on "Izmijeni" under quiz
     And I fill in "Naziv" with "Some other name"
     And I click on "Spremi"
     Then I should see "Some other name"
 
-    When I click on "Izbriši"
+    When I click on "Izbriši" under quiz
     And I click on "Jesam"
     Then I should not see "Some other name"

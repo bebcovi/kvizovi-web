@@ -1,7 +1,0 @@
-%ul
-  - input_collection(f) do |c|
-    - association_question.associations.each do |left, right|
-      %li
-        = c.input(:answer, input_html: {value: left}, label: false, wrapper_html: {class: 'static'})
-        = icon("chevron-right")
-        = c.input(:answer, input_html: {value: right}, label: false, wrapper_html: {class: 'dynamic'})

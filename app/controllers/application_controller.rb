@@ -1,11 +1,62 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :subdomain_view_path
+  before_filter :add_subdomain_view_path
 
   protected
 
-  include Lektire::Authentication::ApplicationControllerMethods
+  def log_in!(user, options = {})
+    if not options[:permanent]
+      cookies.signed[:user_id] = user.id
+      cookies.signed[:user_type] = user.type
+    else
+      cookies.signed.permanent[:user_id] = user.id
+      cookies.signed.permanent[:user_type] = user.type
+    end
+  end
+
+  def log_out!
+    cookies.delete(:user_id)
+    cookies.delete(:user_type)
+  end
+
+  def current_user
+    @current_user ||= user_class.find(cookies.signed[:user_id])
+  end
+  helper_method :current_user
+
+  def user_logged_in?
+    cookies.signed[:user_id].present? and
+    cookies.signed[:user_type].present? and
+    user_class.exists?(cookies.signed[:user_id])
+  end
+  helper_method :user_logged_in?
+
+  def user_class
+    if cookies.signed[:user_type].present?
+      cookies.signed[:user_type].camelize.constantize
+    else
+      request.subdomain.camelize.constantize
+    end
+  end
+
+  def authenticate!
+    if not user_logged_in?
+      set_return_point
+      redirect_to login_path
+    end
+  end
+
+  def set_return_point
+    cookies[:return_to] = {
+      value:   request.fullpath,
+      expires: 5.minutes.from_now,
+    }
+  end
+
+  def return_point
+    cookies.delete(:return_to) || root_path
+  end
 
   def flash_success(*args) flash_message(:success, *args) end
   def flash_error(*args)   flash_message(:error, *args)  end
@@ -35,17 +86,11 @@ class ApplicationController < ActionController::Base
 
   def school?()  request.subdomain == "school"  end
   def student?() request.subdomain == "student" end
-
-  def school(&block)  yield if school?  end
-  def student(&block) yield if student? end
+  helper_method :school?, :student?
 
   private
 
-  def subdomain_view_path
+  def add_subdomain_view_path
     prepend_view_path "app/views/#{request.subdomain}" if request.subdomain.present?
-  end
-
-  def sub_layout
-    "application"
   end
 end

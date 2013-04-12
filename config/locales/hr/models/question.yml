@@ -31,27 +31,27 @@ hr:
 
   simple_form:
     labels:
-      boolean_question: &boolean
-        answer: "Odgovor"
-      choice_question: &choice
-        provided_answers: "Ponuđeni odgovori"
-      association_question: &association
-        associations: "Parovi"
-      image_question: &image
-        image_file: "Slika"
-        image_url: "URL od slike"
-        answer: "Odgovor"
-      text_question: &text
-        answer: "Odgovor"
-      question:
+      question: &question
         content: "Tekst pitanja"
         hint: "Uputa (neobavezno)"
         tag_list: "Tagovi (neobavezno)"
-        <<: *boolean
-        <<: *association
-        <<: *choice
-        <<: *text
-        <<: *image
+      boolean_question:
+        <<: *question
+        answer: "Odgovor"
+      choice_question:
+        <<: *question
+        provided_answers: "Ponuđeni odgovori"
+      association_question:
+        <<: *question
+        associations: "Parovi"
+      image_question:
+        <<: *question
+        image_file: "Slika"
+        image_url: "URL od slike"
+        answer: "Odgovor"
+      text_question:
+        <<: *question
+        answer: "Odgovor"
 
   number:
     human:

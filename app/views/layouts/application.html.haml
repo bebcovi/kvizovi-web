@@ -3,17 +3,17 @@
   %head
     %meta{charset: "utf-8"}
     %meta{:"http-equiv" => "X-UA-Compatibile", content: "IE=edge,chrome=1"}
-    %title Lektire · #{@title}
+    %title Lektire · #{title}
     %meta{name: "robots", content: "noindex"}
     = favicon_link_tag
     = stylesheet_link_tag "application"
     = render partial: "typekit"
 
-  %body{class: "#{params[:controller].split("/").last} #{params[:action]}"}
+  %body{class: "#{params[:controller]} #{params[:action]}"}
     .navbar.navbar-static-top.navbar-inverse
       .navbar-inner
         .container-fluid
-          = link_to "Lektire".prepend_icon("books"), root_url(subdomain: false), class: "brand"
+          = link_to "Lektire".prepend_icon("books"), root_url, class: "brand"
 
           = render partial: "navigation"
 
@@ -27,6 +27,8 @@
 
     .main_content.container-fluid
       = render partial: "flash", locals: {flash: flash}
-      = render partial: "layouts/#{controller.send(:sub_layout)}"
+      = render partial: "breadcrumbs"
+
+      = yield
 
     = javascript_include_tag "application"

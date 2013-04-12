@@ -1,0 +1,19 @@
+- title "#{@quiz.name} · Kraj"
+
+%h1 Rezultati
+
+.game_progress.done
+  - @questions_count.times do
+    %div.done{style: "width: #{100/@questions_count.to_f}%"}
+
+%ol.game_score
+  - @game_review.results.each do |player, score, player_number, rank|
+    %li{class: "player_#{number(player_number)}"}
+      %p
+        %strong.username= player.username.prepend_icon("user")
+        %span.rank Točno si odgovori#{player.male? ? "o" : "la"} na #{score} od #{@game_review.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
+      .progress
+        .bar{style: "width: #{percentage(score, @game_review.total_score)}%"}
+
+= buttons do |b|
+  = b.action_button "Završi", before_game_path

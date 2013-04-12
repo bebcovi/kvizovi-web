@@ -3,12 +3,12 @@ require_relative "../../lib/markdown_rendering"
 module ApplicationHelper
   include MarkdownRendering
 
-  def title(text)
-    @title = text
-  end
-
-  def navigation_pages_for(user)
-    send("#{user.type}_navigation_pages")
+  def title(text = nil)
+    if text
+      @title = text
+    else
+      @title
+    end
   end
 
   def present(object, klass = nil)
@@ -17,16 +17,16 @@ module ApplicationHelper
     yield presenter
   end
 
-  def breadcrumb(items)
+  def breadcrumbs(items)
     content_tag :ol, class: "breadcrumb" do
       items.map.with_index do |(name, path), index|
         if index < items.count - 1
-          content_tag :li do
+          content_tag(:li) do
             link_to(name, path) +
             content_tag(:i, class: "divider") { icon("chevron-right") }
           end
         else
-          content_tag :li, class: "active" do
+          content_tag(:li, class: "active") do
             name
           end
         end
@@ -51,18 +51,6 @@ module ApplicationHelper
 
   def number(n)
     {1 => "one", 2 => "two"}[n]
-  end
-
-  def input_collection(form_builder)
-    f = form_builder.dup.tap do |f|
-      def f.input(attribute_name, options = {})
-        @n = @n.to_i + 1
-        name = "#{object_name}[#{attribute_name}][]"
-        id = name.gsub(/\[([^\]]+)\]/, '_\1').sub(/\[\]$/, "_#{@n}")
-        super(attribute_name, {input_html: {id: id, name: name}, label_html: {for: id}}.deep_merge(options))
-      end
-    end
-    yield f
   end
 
   def percentage(part, total)

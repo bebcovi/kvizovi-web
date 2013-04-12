@@ -2,8 +2,8 @@ require "spec_helper"
 require "active_support/core_ext/numeric/bytes"
 
 describe ImageQuestion do
-  before(:all) do
-    @it = build(:image_question)
+  before do
+    @it = Factory.build(:empty_image_question)
   end
 
   describe "#image_url=" do
@@ -43,36 +43,38 @@ describe ImageQuestion do
   context "callbacks" do
     it "saves sizes" do
       @it.image = uploaded_file("image.jpg", "image/jpeg")
-      transaction_with_rollback { @it.save }
-      @it.image_width.should be_a(Integer)
-      @it.image_height.should be_a(Integer)
-      @it.image_width(:resized).should be_a(Integer)
-      @it.image_height(:resized).should be_a(Integer)
+      @it.save(validate: false)
+      expect(@it.image_width).to be_a(Integer)
+      expect(@it.image_height).to be_a(Integer)
+      expect(@it.image_width(:resized)).to be_a(Integer)
+      expect(@it.image_height(:resized)).to be_a(Integer)
     end
   end
 
   context "validations" do
-    reset_attributes(FactoryGirl.attributes_for(:image_question))
-
     context "#image" do
       it "validates presence" do
-        expect { @it.image = nil }.to invalidate(@it)
+        @it.image = nil
+        expect(@it).to have(1).error_on(:image)
       end
 
       it "validates content type" do
         create_file("video.mp4", "video/mp4") do |not_image|
-          expect { @it.image = not_image }.to invalidate(@it)
+          @it.image = not_image
+          expect(@it).to have(1).error_on(:image_content_type)
         end
       end
 
       it "validates size" do
         create_file("image.jpg", "image/jpeg", size: 2.megabytes) do |image|
-          expect { @it.image = image }.to invalidate(@it)
+          @it.image = image
+          expect(@it).to have(1).error_on(:image_file_size)
         end
       end
 
       it "validates the image URL" do
-        expect { @it.image_url = "invalid url" }.to invalidate(@it)
+        @it.image_url = "invalid url"
+        expect(@it).to have(1).error_on(:image_url)
       end
     end
   end
