@@ -39,7 +39,7 @@ body.games {
 
     .question_number {
       font-weight: $black;
-      &:after { content: '.' }
+      &:after { content: "." }
     }
   }
 
@@ -48,7 +48,7 @@ body.games {
 .game_score {
   @extend %unstyled-list;
 
-  .username:after { content: ':'; }
+  .username:after { content: ":"; }
 
   .rank {
     @include animation(fadeIn 3s linear);

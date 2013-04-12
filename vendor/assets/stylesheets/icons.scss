@@ -1,9 +1,9 @@
-$path: 'icons/icons';
+$path: "icons/icons";
 
-@include font-face('icons', font-files('#{$path}.woff', '#{$path}.ttf', '#{$path}.svg'), '#{$path}.eot');
+@include font-face("icons", font-files("#{$path}.woff", "#{$path}.ttf", "#{$path}.svg"), "#{$path}.eot");
 
 .icon-books, .icon-home, .icon-user, .icon-checkbox, .icon-list, .icon-shuffle, .icon-image, .icon-plus, .icon-remove, .icon-close, .icon-trophy, .icon-exit, .icon-lock, .icon-cog, .icon-search, .icon-stopwatch, .icon-link, .icon-storage, .icon-pencil, .icon-checkmark-circle, .icon-lamp-on, .icon-lamp-off, .icon-chevron-up, .icon-chevron-right, .icon-chevron-down, .icon-chevron-left, .icon-caret-up, .icon-caret-right, .icon-caret-down, .icon-caret-left, .icon-move, .icon-arrow-up-left, .icon-arrow-up, .icon-arrow-up-right, .icon-arrow-right, .icon-arrow-down-right, .icon-arrow-down, .icon-arrow-down-left, .icon-arrow-left, .icon-phone, .icon-calendar, .icon-play, .icon-clipboard, .icon-file, .icon-file-plus, .icon-file-minus, .icon-file-download, .icon-file-upload, .icon-file-check, .icon-file-remove, .icon-copy, .icon-pencil-2, .icon-earth, .icon-key, .icon-cancel-circle, .icon-close-2, .icon-eye, .icon-eye-blocked, .icon-question {
-  font-family: 'icons';
+  font-family: "icons";
   speak: none;
   font-style: normal;
   font-weight: normal;

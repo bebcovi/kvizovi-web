@@ -21,9 +21,9 @@ h1 {
   }
 
   .name:after {
-    content: ' \e028';
+    content: " \e028";
     font-size: 28px;
-    font-family: 'icons';
+    font-family: "icons";
   }
 
   .section {
@@ -67,8 +67,8 @@ table {
 
 .count {
   color: rgba(black, .5);
-  &:before  { content: '('; }
-  &:after   { content: ')'; }
+  &:before  { content: "("; }
+  &:after   { content: ")"; }
 }
 
 .breadcrumb {

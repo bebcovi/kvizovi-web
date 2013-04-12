@@ -1,10 +1,10 @@
 // bootstrap
 
-$sansFontFamily:                      'museo-sans', sans-serif;
+$sansFontFamily:                      "museo-sans", sans-serif;
 $baseFontSize:                        18px;
 $baseLineHeight:                      28px;
 
-$smallFontFamily:                     Verdana, 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$smallFontFamily:                     Verdana, "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 $linkColor:                           hsl(15, 70%, 55%);
 $linkColorHover:                      darken($linkColor, 15%);
