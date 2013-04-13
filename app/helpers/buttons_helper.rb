@@ -16,7 +16,7 @@ module ButtonsHelper
   end
 
   def change_password_button(string, path, options = {})
-    link_to string.prepend_icon("locked"), path, {class: "btn"}.merge(options)
+    link_to string.prepend_icon("lock"), path, {class: "btn"}.merge(options)
   end
 
   def delete_profile_button(string, path, options = {})
@@ -24,7 +24,7 @@ module ButtonsHelper
   end
 
   def edit_button(string, path, options = {})
-    link_to string.prepend_icon("pencil"), path, {class: "edit_item btn"}.merge(options)
+    link_to string.prepend_icon("pencil-2"), path, {class: "edit_item btn"}.merge(options)
   end
 
   def delete_button(string, path, options = {})
@@ -52,7 +52,7 @@ module ButtonsHelper
   end
 
   def remove_file_button(string, path, options = {})
-    link_to string.prepend_icon("file-remove"), path, options
+    link_to string.prepend_icon("file-minus"), path, options
   end
 
   def remove_button(options = {})

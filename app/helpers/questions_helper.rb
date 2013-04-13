@@ -2,10 +2,10 @@ module QuestionsHelper
   def question_icons(category)
     hash = {
       "boolean"     => icon("checkbox"),
-      "choice"      => icon("list-view"),
+      "choice"      => icon("list"),
       "association" => icon("shuffle"),
-      "image"       => icon("picture"),
-      "text"        => icon("pencil-2"),
+      "image"       => icon("image"),
+      "text"        => icon("pencil"),
     }
     hash[category]
   end

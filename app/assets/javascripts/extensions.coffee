@@ -10,7 +10,7 @@ String.prototype.appendIcon   = (name) -> "#{@} #{$.icon(name)}"
 # properties
 
 $.removeButton = $ '<button>',
-  text: '×'
+  html: $.icon("cancel-circle")
   type: 'button'
 
 $.addButton = $ '<a>',
