@@ -18,11 +18,12 @@ body.home {
     }
 
     .lead {
-      font-weight: 300;
+      font-family: $base-font-family;
+      font-weight: nth($base-weight, 3);
     }
 
     .app_role .btn {
-      font-weight: $light;
+      font-weight: nth($base-weight, 3);
       &:first-child { margin-right: .5em; }
     }
   }

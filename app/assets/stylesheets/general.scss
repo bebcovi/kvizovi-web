@@ -1,6 +1,6 @@
 body {
   overflow-y: scroll;
-  font-weight: $light;
+  font-weight: nth($base-weight, 3);
 }
 
 .container-fluid {
@@ -27,13 +27,13 @@ h1 {
   }
 
   .section {
-    font-weight: $light;
+    font-weight: nth($base-weight, 2);
   }
 }
 
 h2 {
   font-size: 34px;
-  font-weight: $light;
+  font-weight: nth($base-weight, 2);
 }
 
 h3 {
@@ -41,7 +41,7 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 20px;
-  font-weight: $regular;
+  font-weight: nth($base-weight, 2);
   color: rgba(black, 1);
 }
 

@@ -38,7 +38,7 @@ body.games {
     }
 
     .question_number {
-      font-weight: $black;
+      font-weight: nth($base-weight, 2);
       &:after { content: "." }
     }
   }
