@@ -8,7 +8,7 @@
   = f.input :password
   = f.input :remember_me, as: :boolean, label: false, inline_label: "Zapamti me"
 
-  = buttons(f) do |b|
-    = b.cancel_button "Odustani", root_url(subdomain: false)
-    = b.submit_button "Prijava"
+  = buttons do
+    = cancel_button "Odustani", root_url(subdomain: false)
+    = submit_button "Prijava"
     %span Nemaš korisnički račun? #{link_to "Registriraj se", new_registration_path}.

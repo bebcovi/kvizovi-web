@@ -10,10 +10,15 @@ class AssociationQuestion < Question
 
   alias raw_associations= associations=
   def associations=(value)
-    self.raw_associations = case value
-                            when Array then Hash[*value]
-                            when Hash  then value
-                            end
+    self.raw_associations =
+      case value
+      when Array then Hash[*value]
+      when Hash  then value
+      end
+  end
+
+  def answer
+    associations
   end
 
   def category

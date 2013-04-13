@@ -38,7 +38,10 @@ Lektire::Application.routes.draw do
   scope constraints: {subdomain: "student"} do
     root to: redirect("/game/new")
 
-    resource :game
+    resource :game do
+      get "feedback"
+      get "next_question"
+    end
   end
 
   ########################

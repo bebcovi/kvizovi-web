@@ -3,4 +3,4 @@
   .input-append{class: ("input-prepend" if params[:filter])}
     = link_to icon("cancel"), request.path, class: "btn", title: "Očisti filter" if params[:query]
     = f.input :query, placeholder: "Traži...", input_html: {class: "input-xlarge", name: "query", value: params[:query]}
-    = f.button :button, icon("search"), name: nil, title: "Traži"
+    = submit_button icon("search"), name: nil, title: "Traži"

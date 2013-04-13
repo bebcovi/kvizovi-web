@@ -9,12 +9,12 @@
 .username{class: "player_#{number(@player_number)}"}= @player.username.prepend_icon("user")
 
 .progress
-  .bar{style: "width: #{progress.chunk_size * progress.number_of_answered_questions}%"}
+  .bar{style: "width: #{game_progress_percentage}%"}
 
-= simple_form_for :game, url: game_path, method: :put, html: {class: "show question_#{@question.category}"} do |f|
+= simple_form_for :game, url: game_path, method: :put, defaults: {input_html: {name: "answer"}}, html: {class: "show question_#{@question.category}"} do |f|
 
-  = render partial: "questions/question", object: @question, locals: {f: f}
+  = render partial: "question", object: @question, locals: {f: f}
 
-  = buttons(f) do |b|
-    = b.cancel_button "Prekini", delete_game_path(interrupted: "true")
-    = b.submit_button "Odgovori"
+  = buttons do
+    = cancel_button "Prekini", delete_game_path(interrupted: "true")
+    = submit_button "Odgovori"

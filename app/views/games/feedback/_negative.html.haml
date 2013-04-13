@@ -1,0 +1,7 @@
+- title "Netočan odgovor"
+
+%h1.text-error
+  = icon("cancel-2")
+  %span= ["Ne baš…", "Pogrešno", "Nažalost, ne…"].sample
+
+= render partial: "games/answer/#{@question.category}", locals: {question: @question}

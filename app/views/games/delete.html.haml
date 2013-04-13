@@ -6,8 +6,6 @@
 
 = form_tag game_path, method: :delete do
 
-  = hidden_field_tag :interrupted, params[:interrupted]
-
-  = buttons do |b|
-    = b.cancel_button "Nisam", edit_game_path
-    = b.submit_button "Jesam"
+  = buttons do
+    = cancel_button "Nisam", edit_game_path
+    = submit_button "Jesam"

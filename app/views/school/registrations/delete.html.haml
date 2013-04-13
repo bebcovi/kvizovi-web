@@ -8,6 +8,6 @@
 
   = f.input :password, input_html: {name: "password"}
 
-  = buttons(f) do |b|
-    = b.cancel_button "Odustani", profile_path
-    = b.submit_button "Potvrdi".prepend_icon("remove"), class: "btn-danger"
+  = buttons do
+    = cancel_button "Odustani", profile_path
+    = submit_button "Potvrdi".prepend_icon("remove"), class: "btn-danger"

@@ -15,7 +15,7 @@ Feature: Questions
     And I click on "Točno/netočno"
     And I fill in "Tekst pitanja" with "Are you a stupidhead?"
     And I choose "Točno"
-    And I click on "Stvori"
+    And I click on "Spremi"
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 
@@ -38,7 +38,7 @@ Feature: Questions
     And I fill in "Ponuđeni odgovor 2" with "Yes"
     And I fill in "Ponuđeni odgovor 3" with "Maybe"
     And I fill in "Ponuđeni odgovor 4" with "Probably not"
-    And I click on "Stvori"
+    And I click on "Spremi"
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 
@@ -61,7 +61,7 @@ Feature: Questions
     And I fill in "Asocijacija 3b" with "Maybe"
     And I fill in "Asocijacija 4a" with "Uhm..."
     And I fill in "Asocijacija 4b" with "Probably not"
-    And I click on "Stvori"
+    And I click on "Spremi"
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 
@@ -78,7 +78,7 @@ Feature: Questions
     And I fill in "Tekst pitanja" with "Are you a stupidhead?"
     And I attach an image
     And I fill in "Odgovor" with "Yes"
-    And I click on "Stvori"
+    And I click on "Spremi"
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 
@@ -95,7 +95,7 @@ Feature: Questions
     And I fill in "Tekst pitanja" with "Are you a stupidhead?"
     And I fill in the image url
     And I fill in "Odgovor" with "Yes"
-    And I click on "Stvori"
+    And I click on "Spremi"
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 
@@ -112,7 +112,7 @@ Feature: Questions
     And I click on "Upiši točan odgovor"
     And I fill in "Tekst pitanja" with "Are you a stupidhead?"
     And I fill in "Odgovor" with "Yes"
-    And I click on "Stvori"
+    And I click on "Spremi"
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 

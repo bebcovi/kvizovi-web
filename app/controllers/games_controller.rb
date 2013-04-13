@@ -1,97 +1,82 @@
 class GamesController < ApplicationController
   before_filter :authenticate!
-
-  before_filter except: [:new, :create] do
-    redirect_to new_game_path if not game_state.game_in_progress?
-  end
+  before_filter :assign_student
 
   def new
-    @game_submission = GameSubmission.new
-    @quizzes = current_user.school.quizzes
+    @game_details = GameDetails.new
+    @quizzes = @student.school.quizzes
   end
 
   def create
-    @game_submission = GameSubmission.new(params[:game_submission].merge(player_class: current_user.class))
-    @game_submission.players << current_user
+    @game_details = GameDetails.new(params[:game_details])
+    @game_details.player_class = Student
+    @game_details.players << @student
 
-    if request.referer.in?([new_game_url, quiz_questions_url(@game_submission.quiz)])
-      cookies[:referer] = request.referer
-    end
-
-    if @game_submission.valid?
-      game_state.initialize!(@game_submission.info)
+    if @game_details.valid?
+      game.initialize!(@game_details.to_h)
       redirect_to edit_game_path
     else
-      @quizzes = current_user.available_quizzes
+      @quizzes = @student.school.quizzes
       render :new
     end
   end
 
-  before_filter only: :edit do
-    game_state.next_question!
-    redirect_to game_path if game_state.current_question_number > game_state.questions_count
-  end
-
   def edit
-    @quiz = quiz
-    @player = current_player
-    @question = current_question
-    @question_number = game_state.current_question_number
-    @player_number = game_state.current_player_number
-    @questions_count = game_state.questions_count
+    @player          = Student.find(game.current_player[:id])
+    @quiz            = Quiz.find(game.quiz[:id])
+    @question        = Question.find(game.current_question[:id])
+    @question_number = game.current_question[:number]
+    @player_number   = game.current_player[:number]
+    @questions_count = game.questions_count
+
+    @question = QuestionExhibit.new(@question)
   end
 
   def update
-    game_state.save_answer!(current_question.answer == params[:game].try(:[], :answer))
+    question = Question.find(game.current_question[:id])
+    question = QuestionExhibit.new(question)
+    game.save_answer!(question.has_answer?(params[:answer]))
     redirect_to feedback_game_path
   end
 
   def feedback
-    @correct_answer = game_state.current_question_answer
-    @game_over = game_state.game_over?
-    @question = current_question
+    @correct_answer = game.current_question[:answer]
+    @game_over = game.over?
+    @question = Question.find(game.current_question[:id])
+  end
+
+  def next_question
+    game.next_question!
+    redirect_to edit_game_path
   end
 
   def show
-    @game_review = GameReview.new(game_state.info.merge(player_class: current_user.class))
-    @quiz = @game_review.quiz
-    @questions_count = @game_review.questions_count
+    @game            = GamePresenter.new(game.to_h, Student)
+    @quiz            = Quiz.find(game.quiz[:id])
+    @questions_count = game.questions_count
   end
 
   def delete
   end
 
   def destroy
-    Game.create_from_info(game_state.info) unless current_user.is_a?(School)
+    game.finalize!
+    PlayedGame.create_from_hash(game.to_h)
 
-    unless params[:interrupted] == "true"
+    if game.finished?
       redirect_to game_path
     else
-      game_state.clean!
-      redirect_to before_game_path
+      redirect_to new_game_path
     end
   end
 
   private
 
-  def game_state
-    GameState.new(cookies)
+  def assign_student
+    @student = current_user
   end
 
-  def current_question
-    QuestionExhibit.exhibit(Question.find(game_state.current_question_id))
+  def game
+    @game_state ||= Game.new(cookies)
   end
-
-  def current_player
-    current_user.class.find(game_state.current_player_id)
-  end
-
-  def quiz
-    Quiz.find(game_state.quiz_id)
-  end
-
-  def before_game_path
-    cookies[:referer] || root_path
-  end
-  helper_method :before_game_path
 end

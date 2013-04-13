@@ -1,4 +1,8 @@
 module ButtonsHelper
+  def submit_button(string, options = {})
+    button_tag string, class: "btn btn-primary", data: {"disable-with" => "Učitavanje..."}
+  end
+
   def back_button(string, path, options = {})
     link_to string.prepend_icon("arrow-left"), path, {class: "go_back"}.merge(options)
   end
@@ -59,37 +63,17 @@ module ButtonsHelper
     link_to string.prepend_icon("cog"), path, options
   end
 
-  def buttons(form_builder)
-    content_tag :div, class: "btn-toolbar" do
-      yield ButtonBuilder.new(form_builder, self)
-    end
+  def next_button(string, path, options = {})
+    link_to string.append_icon("arrow-right"), path, {class: "action btn btn-primary"}.merge(options)
   end
 
-  class ButtonBuilder
-    def initialize(form_builder, template)
-      @form_builder = form_builder
-      @template = template
-    end
+  def action_button(string, path, options = {})
+  end
 
-    def cancel_button(*args)
-      options = args.extract_options!.dup
-      options.reverse_merge!(class: "btn cancel")
-      args << options
-      @template.link_to *args
-    end
-
-    def action_button(*args)
-      options = args.extract_options!.dup
-      options.reverse_merge!(class: "action btn btn-primary")
-      args << options
-      @template.link_to *args
-    end
-
-    def submit_button(*args)
-      options = args.extract_options!.dup
-      options.reverse_merge!(class: "btn btn-primary", data: {"disable-with" => "Učitavanje..."})
-      args << options
-      @form_builder.button :button, *args
+  def buttons(options = {})
+    options[:class] = "btn-toolbar #{options[:class]}"
+    content_tag :div, options do
+      yield
     end
   end
 end

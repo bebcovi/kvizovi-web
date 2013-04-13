@@ -1,0 +1,20 @@
+hr:
+
+  activemodel:
+    errors:
+      models:
+        game_details:
+          attributes:
+            quiz_id:
+              blank: "Nisi izabrao/la kviz."
+            players_count:
+              blank: "Nisi izabrao/la broj igrača."
+            players_credentials:
+              invalid: "Pogrešno korisničko ime ili lozinka."
+
+  simple_form:
+    labels:
+      game_details:
+        players_credentials:
+          username: "Korisničko ime"
+          password: "Lozinka"

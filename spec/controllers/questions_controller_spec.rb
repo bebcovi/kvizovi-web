@@ -66,12 +66,6 @@ describe QuestionsController do
       @question.quizzes << @quiz
     end
 
-    describe "#show" do
-      it "doesn't raise errors" do
-        get :show, quiz_id: @quiz.id, id: @question.id
-      end
-    end
-
     describe "#edit" do
       it "doesn't raise errors" do
         get :edit, quiz_id: @quiz.id, id: @question.id
@@ -108,35 +102,29 @@ describe QuestionsController do
       end
     end
 
-    describe "#delete" do
-      it "doesn't raise errors" do
-        get :delete, quiz_id: @quiz.id, id: @question.id
-      end
-    end
-
-    describe "#destroy" do
-      it "scopes to current quiz" do
-        other_quiz = Factory.create_without_validation(:empty_quiz)
-        expect {
-          delete :destroy, quiz_id: other_quiz.id, id: @question.id
-        }.to raise_error(ActiveRecord::RecordNotFound)
-      end
-
-      it "destroyes the record" do
-        delete :destroy, quiz_id: @quiz.id, id: @question.id
-        expect(@quiz.questions.exists?(@question)).to be_false
-      end
-    end
-
     describe "#remove" do
       it "removes the question from quiz" do
         delete :remove, quiz_id: @quiz.id, id: @question.id
         expect(@quiz.questions.exists?(@question)).to be_false
       end
 
-      it "doesn't delete the record" do
-        delete :remove, quiz_id: @quiz.id, id: @question.id
-        expect(Question.exists?(@question)).to be_true
+      context "when it belongs to some other quizzes as well" do
+        before do
+          quiz = Factory.create_without_validation(:empty_quiz)
+          quiz.questions << @question
+        end
+
+        it "doesn't delete the record" do
+          delete :remove, quiz_id: @quiz.id, id: @question.id
+          expect(Question.exists?(@question)).to be_true
+        end
+      end
+
+      context "when it doesn't belong to any other quizzes" do
+        it "deletes the record" do
+          delete :remove, quiz_id: @quiz.id, id: @question.id
+          expect(Question.exists?(@question)).to be_false
+        end
       end
     end
   end

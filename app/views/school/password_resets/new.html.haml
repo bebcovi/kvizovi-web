@@ -5,6 +5,6 @@
   %p Upišite vašu email adresu:
   = f.input :email, input_html: {name: "email", value: params[:email]}
 
-  = buttons(f) do |b|
-    = b.cancel_button "Odustani", login_path
-    = b.submit_button "Zatraži novu lozinku"
+  = buttons do
+    = cancel_button "Odustani", login_path
+    = submit_button "Zatraži novu lozinku"

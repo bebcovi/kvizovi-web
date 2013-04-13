@@ -1,16 +1,26 @@
-class Game < ActiveRecord::Base
-  serialize :question_answers, ActiveRecord::Coders::Hstore
-  serialize :question_ids, Array
+require_relative "game/commands"
+require_relative "game/reading"
 
-  def self.create_from_info(hash)
-    create(
-      quiz_id: hash[:quiz_id],
-      question_answers: Hash[hash[:question_ids].zip(hash[:question_answers])],
-      question_ids: hash[:question_ids],
-      duration: hash[:duration],
-      interrupted: hash[:interrupted],
-      first_player_id: hash[:player_ids].first,
-      second_player_id: hash[:player_ids].last,
-    )
+class Game
+  def initialize(store)
+    @store = store
+  end
+
+  include Commands
+  include Reading
+
+  def over?
+    question(questions_count - 1)[:answer] != nil
+  end
+  alias finished? over?
+
+  def to_h
+    {
+      players:   players,
+      quiz:      quiz,
+      questions: questions,
+      begin:     begin_time,
+      end:       end_time,
+    }
   end
 end

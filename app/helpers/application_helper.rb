@@ -54,6 +54,6 @@ module ApplicationHelper
   end
 
   def percentage(part, total)
-    (part/total.to_f * 100).round
+    ((part.to_f / total.to_f) * 100).round
   end
 end

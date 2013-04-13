@@ -1,0 +1,2 @@
+class ImageQuestionExhibit < TextQuestionExhibit
+end

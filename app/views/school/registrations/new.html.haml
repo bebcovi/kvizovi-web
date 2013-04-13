@@ -12,6 +12,6 @@
   = f.input :password_confirmation
   = f.input :key, as: :password, hint: "Ovo će vaši učenici koristiti za registraciju".append_icon("arrow-up")
 
-  = buttons(f) do |b|
-    = b.cancel_button "Odustani", login_path
-    = b.submit_button "Registriraj se"
+  = buttons do
+    = cancel_button "Odustani", login_path
+    = submit_button "Registriraj se"

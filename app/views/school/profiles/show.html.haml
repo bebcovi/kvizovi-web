@@ -27,7 +27,7 @@
       %th Tajni ključ
       %td= @user.key
 
-.btn-toolbar.edit_profile
+= buttons class: "edit_profile" do
   .btn-group
     = edit_button "Izmijeni profil", edit_profile_path
     = change_password_button "Izmijeni lozinku", edit_password_path

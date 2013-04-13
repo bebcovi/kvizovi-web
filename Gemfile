@@ -50,10 +50,9 @@ group :test do
   gem "factory_girl_rails", ">= 4.2"
   gem "pry"
   gem "nokogiri"
-  gem "cucumber-rails", require: false
   gem "capybara", ">= 2"
-  gem "capybara-webkit"
-  gem "database_cleaner"
+  gem "cucumber-rails", require: false
+  gem "database_cleaner", require: false
 end
 
 # Development stuff
@@ -62,6 +61,7 @@ group :development do
   gem "pry-rails"
   gem "better_errors"
   gem "binding_of_caller", ">= 0.7.1"
+  gem "rb-inotify", "~> 0.8.8", require: false
 end
 
 group :production do

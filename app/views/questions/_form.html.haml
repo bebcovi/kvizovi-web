@@ -2,6 +2,6 @@
 
   = render partial: "fields", locals: {f: f}
 
-  = buttons(f) do |b|
-    = b.cancel_button "Odustani", quiz_questions_path(@quiz)
-    = b.submit_button
+  = buttons do
+    = cancel_button "Odustani", quiz_questions_path(@quiz)
+    = submit_button "Spremi"

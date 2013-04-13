@@ -4,16 +4,16 @@
 
 .game_progress.done
   - @questions_count.times do
-    %div.done{style: "width: #{100/@questions_count.to_f}%"}
+    %div.done{style: "width: #{100.0 / @questions_count}%"}
 
 %ol.game_score
-  - @game_review.results.each do |player, score, player_number, rank|
+  - @game.results.each do |player, score, score_percentage, player_number, rank|
     %li{class: "player_#{number(player_number)}"}
       %p
         %strong.username= player.username.prepend_icon("user")
-        %span.rank Točno si odgovori#{player.male? ? "o" : "la"} na #{score} od #{@game_review.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
+        %span.rank Točno si odgovori#{player.male? ? "o" : "la"} na #{score} od #{@game.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
       .progress
-        .bar{style: "width: #{percentage(score, @game_review.total_score)}%"}
+        .bar{style: "width: #{score_percentage}%"}
 
-= buttons do |b|
-  = b.action_button "Završi", before_game_path
+= buttons do
+  = action_button "Završi", new_game_path

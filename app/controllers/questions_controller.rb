@@ -22,10 +22,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def show
-    @question = @quiz.questions.find(params[:id])
-  end
-
   def edit
     @question = @quiz.questions.find(params[:id])
   end
@@ -42,17 +38,12 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def delete
-    @question = @quiz.questions.find(params[:id])
-  end
-
-  def destroy
-    @quiz.questions.destroy(params[:id]) if @quiz.questions.exists?(params[:id])
-    redirect_to quiz_questions_path(@quiz), notice: flash_success
-  end
-
   def remove
-    @quiz.questions.delete(Question.find(params[:id]))
+    if Question.exists?(params[:id])
+      question = Question.find(params[:id])
+      @quiz.questions.delete(question)
+      question.destroy if question.quizzes.empty?
+    end
     redirect_to quiz_questions_path(@quiz), notice: flash_success
   end
 

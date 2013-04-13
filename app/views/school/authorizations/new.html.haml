@@ -5,6 +5,6 @@
   = f.input :secret_key, as: :password, input_html: {name: "secret_key", autofocus: (params[:action] == "new")},
     hint: "Ako nemate ključ, možete ga #{link_to "zatražiti", contact_path}."
 
-  = buttons(f) do |b|
-    = b.cancel_button "Odustani", login_path
-    = b.submit_button "Potvrdi"
+  = buttons do
+    = cancel_button "Odustani", login_path
+    = submit_button "Potvrdi"

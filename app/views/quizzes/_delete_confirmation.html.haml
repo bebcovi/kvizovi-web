@@ -4,6 +4,6 @@
 
 = simple_form_for @quiz, method: :delete do |f|
 
-  = buttons(f) do |b|
-    = b.cancel_button "Nisam", quizzes_path
-    = b.submit_button "Jesam"
+  = buttons do
+    = cancel_button "Nisam", quizzes_path
+    = submit_button "Jesam"

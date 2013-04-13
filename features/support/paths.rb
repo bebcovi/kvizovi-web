@@ -15,6 +15,8 @@ module NavigationHelpers
       quizzes_url(subdomain: "school")
     when "questions page"
       quiz_questions_url(@quiz, subdomain: "school")
+    when "page for playing quizzes"
+      new_game_url(subdomain: "student")
     else raise "Page isn't recognized: #{page}"
     end
   end

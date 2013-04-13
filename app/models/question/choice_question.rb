@@ -8,6 +8,10 @@ class ChoiceQuestion < Question
     raw_provided_answers || []
   end
 
+  def answer
+    provided_answers.first
+  end
+
   def category
     "choice"
   end

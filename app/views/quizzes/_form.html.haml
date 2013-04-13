@@ -2,9 +2,9 @@
 
   = f.input :name, input_html: {autofocus: current_page?(action: "new")}
 
-  = buttons(f) do |b|
-    = b.cancel_button "Odustani", quizzes_path
-    = b.submit_button "Spremi"
+  = buttons do
+    = cancel_button "Odustani", quizzes_path
+    = submit_button "Spremi"
 
   - if @quiz.new_record?
     = alert_message "Kviz zasad neće biti vidljiv učenicima. Kasnije ga možete učiniti vidljivim kada bude spreman.", "info", close: false
