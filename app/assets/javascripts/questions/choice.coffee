@@ -48,19 +48,18 @@ App.Questions.choice =
     $template
       .find('input').val('').end()
       .find('div').removeClass('success').end()
-      .find('.help-block, .error-block').remove()
+      .find('.help-block, .error-block, .additional-info').remove()
 
     if $otherOptions.length
       $addButton.insertAfter($otherOptions.last())
     else
       $addButton.insertAfter($firstOption)
 
-    $addButton
-      .on 'click', (event) ->
-        $new = $template.clone()
-        event.preventDefault()
-        updateAttrs $new, $otherOptions.length
-        addOption $new
+    $addButton.on 'click', (event) ->
+      $new = $template.clone()
+      event.preventDefault()
+      updateAttrs $new, $otherOptions.length
+      addOption $new
 
     $form.on 'click', '.close', ->
       $el = $(@).closest('li')
