@@ -13,7 +13,7 @@
 
 = simple_form_for :game, url: game_path, method: :put, defaults: {input_html: {name: "answer"}}, html: {class: "show question_#{@question.category}"} do |f|
 
-  = render partial: "question", object: @question, locals: {f: f}
+  = render "question", {question: @question, f: f}
 
   = buttons do
     = cancel_button "Prekini", delete_game_path(interrupted: "true")

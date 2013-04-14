@@ -16,7 +16,7 @@
   %ol.question_list
     - @questions.each do |question|
       = content_tag_for :li, question, class: ("highlight" if flash[:highlight] == question.id) do
-        = render partial: "questions/question_short", locals: {question: question}
+        = render "questions/question_short", {question: question}
 
 - else
 
