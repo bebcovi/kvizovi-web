@@ -108,23 +108,9 @@ describe QuestionsController do
         expect(@quiz.questions.exists?(@question)).to be_false
       end
 
-      context "when it belongs to some other quizzes as well" do
-        before do
-          quiz = Factory.create_without_validation(:empty_quiz)
-          quiz.questions << @question
-        end
-
-        it "doesn't delete the record" do
-          delete :remove, quiz_id: @quiz.id, id: @question.id
-          expect(Question.exists?(@question)).to be_true
-        end
-      end
-
-      context "when it doesn't belong to any other quizzes" do
-        it "deletes the record" do
-          delete :remove, quiz_id: @quiz.id, id: @question.id
-          expect(Question.exists?(@question)).to be_false
-        end
+      it "destroys the question if it doesn't belong to any more quizzes" do
+        delete :remove, quiz_id: @quiz.id, id: @question.id
+        expect(Question.exists?(@quesion)).to be_false
       end
     end
   end
