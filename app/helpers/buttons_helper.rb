@@ -68,6 +68,7 @@ module ButtonsHelper
   end
 
   def action_button(string, path, options = {})
+    link_to string, path, {class: "action btn"}.merge(options)
   end
 
   def buttons(options = {})

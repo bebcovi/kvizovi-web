@@ -81,6 +81,9 @@ Feature: Game
     And I should not see "1 od 3"
     And I should not see "0 od 3"
 
+    When I click on "Završi"
+    Then I should be on the page for playing quizzes
+
   Scenario: Answering some answers incorrecly
     When I visit the page for playing quizzes
     And I choose "Random questions"
