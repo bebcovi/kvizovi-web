@@ -1,7 +1,7 @@
 class Question < ActiveRecord::Base
   CATEGORIES = %w[boolean choice association image text]
 
-  has_and_belongs_to_many :quizzes, foreign_key: "question_id"
+  belongs_to :quiz
 
   acts_as_taggable
 

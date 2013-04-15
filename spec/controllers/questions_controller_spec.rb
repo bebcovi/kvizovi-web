@@ -11,12 +11,8 @@ describe QuestionsController do
 
   context "collection" do
     describe "#index" do
-      it "assigns quiz's questions" do
-        quiz_question = Factory.create_without_validation(:empty_question)
-        quiz_question.quizzes << @quiz
-        other_questions = Factory.create_without_validation(:empty_question)
+      it "doesn't raise errors" do
         get :index, quiz_id: @quiz.id
-        expect(assigns(:questions)).to eq [quiz_question]
       end
     end
 
@@ -62,8 +58,7 @@ describe QuestionsController do
 
   context "member" do
     before do
-      @question = Factory.create_without_validation(:empty_question)
-      @question.quizzes << @quiz
+      @question = Factory.create_without_validation(:empty_question, quiz: @quiz)
     end
 
     describe "#edit" do
@@ -102,14 +97,9 @@ describe QuestionsController do
       end
     end
 
-    describe "#remove" do
-      it "removes the question from quiz" do
-        delete :remove, quiz_id: @quiz.id, id: @question.id
-        expect(@quiz.questions.exists?(@question)).to be_false
-      end
-
-      it "destroys the question if it doesn't belong to any more quizzes" do
-        delete :remove, quiz_id: @quiz.id, id: @question.id
+    describe "#destroy" do
+      it "destroyes the question" do
+        delete :destroy, quiz_id: @quiz.id, id: @question.id
         expect(Question.exists?(@quesion)).to be_false
       end
     end

@@ -38,12 +38,8 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def remove
-    if Question.exists?(params[:id])
-      question = Question.find(params[:id])
-      @quiz.questions.delete(question)
-      question.destroy if question.quizzes.empty?
-    end
+  def destroy
+    Question.destroy(params[:id]) if Question.exists?(params[:id])
     redirect_to quiz_questions_path(@quiz), notice: flash_success
   end
 

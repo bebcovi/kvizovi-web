@@ -17,7 +17,7 @@ Given(/^that quiz has the following (.*) questions/) do |type, table|
       attributes["image"] = Rack::Test::UploadedFile.new(Rails.root.join("features/support/files/#{attributes["image"]}"), "image/jpeg")
     end
 
-    @quiz.questions << FactoryGirl.create(:"#{type}_question", attributes)
+    FactoryGirl.create(:"#{type}_question", attributes.merge(quiz: @quiz))
   end
 end
 

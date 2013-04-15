@@ -49,12 +49,12 @@ describe GameDetails do
     end
 
     it "adjusts the number of questions according to the number of players" do
-      questions = 4.times.map { Factory.create_without_validation(:empty_question) }
-
-      @quiz.questions = questions.first(4)
+      4.times { Factory.create_without_validation(:empty_question, quiz: @quiz) }
       expect(@it.to_h[:question_ids].count).to eq 4
 
-      @quiz.questions = questions.first(3)
+      @quiz.questions.destroy_all
+
+      3.times { Factory.create_without_validation(:empty_question, quiz: @quiz) }
       expect(@it.to_h[:question_ids].count).to eq 2
     end
   end

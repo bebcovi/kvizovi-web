@@ -7,7 +7,7 @@ describe GamesController do
     @school = Factory.create_without_validation(:empty_school)
     @student = Factory.create_without_validation(:empty_student, school: @school)
     @quiz = Factory.create_without_validation(:empty_quiz, school: @school)
-    @quiz.questions = Array.new(3, Factory.create_without_validation(:empty_question))
+    3.times { Factory.create_without_validation(:empty_question, quiz: @quiz) }
 
     controller.send(:log_in!, @student)
   end

@@ -4,7 +4,7 @@
     -# %li= view_button "Pogledaj", quiz_question_path(@quiz, question)
     %li= edit_button "Izmijeni", edit_quiz_question_path(@quiz, question), class: ""
     -# %li= copy_button "Dupliciraj", copy_quiz_question_path(@quiz, @question)
-    %li= remove_file_button "Ukloni iz kviza", remove_quiz_question_path(@quiz, question), method: :delete
+    %li= remove_file_button "Izbriši", quiz_question_path(@quiz, question), method: :delete
 
 %span.category= question_icons(question.category)
 %span.name= question.content

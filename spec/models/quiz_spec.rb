@@ -20,5 +20,12 @@ describe Quiz do
       end
     end
   end
+
+  it "destroyes its questions upon destruction" do
+    @it.save(validate: false)
+    question = Factory.create_without_validation(:empty_question, quiz: @it)
+    @it.destroy
+    expect(question).not_to satisfy { |q| Question.exists?(q) }
+  end
 end
 

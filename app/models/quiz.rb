@@ -1,6 +1,6 @@
 class Quiz < ActiveRecord::Base
   belongs_to :school
-  has_and_belongs_to_many :questions
+  has_many :questions, dependent: :destroy
   has_many :games
 
   validates :name,      presence: true

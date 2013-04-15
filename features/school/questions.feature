@@ -25,7 +25,7 @@ Feature: Questions
     Then I should be on the questions page
     And I should see "Are you a moron?"
 
-    When I click on "Ukloni iz kviza" under question
+    When I click on "Izbriši" under question
     Then I should be on the questions page
     And I should not see "Are you a moron?"
 
@@ -89,7 +89,7 @@ Feature: Questions
     Then I should be on the questions page
     And I should see "Are you a moron?"
 
-    And I click on "Ukloni iz kviza" under question
+    And I click on "Izbriši" under question
 
     And I click on "Pogodi tko/što je na slici"
     And I fill in "Tekst pitanja" with "Are you a stupidhead?"

@@ -20,11 +20,7 @@ Lektire::Application.routes.draw do
     root to: redirect("/quizzes")
 
     resources :quizzes do
-      resources :questions do
-        member do
-          delete "remove"
-        end
-      end
+      resources :questions
 
       member do
         put "toggle_activation"
