@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   before_filter :assign_quiz
 
   def index
-    @questions = @quiz.questions.search(params[:query])
+    @questions = @quiz.questions.ascending.search(params[:query])
   end
 
   def new

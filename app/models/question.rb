@@ -5,7 +5,8 @@ class Question < ActiveRecord::Base
 
   acts_as_taggable
 
-  scope :search, ->(query) { scoped }
+  scope :search,    ->(query) { scoped }
+  scope :ascending, ->        { order{created_at.asc} }
 
   validates :content, presence: true
 
