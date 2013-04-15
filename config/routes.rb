@@ -41,10 +41,16 @@ Lektire::Application.routes.draw do
   end
 
   ########################
-  # Profile
+  # School & Student
   ########################
   resource :profile
   resource :password
+
+  resources :versions do
+    member do
+      post "revert"
+    end
+  end
 
   ########################
   # Static pages

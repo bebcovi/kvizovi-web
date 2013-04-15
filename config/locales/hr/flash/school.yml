@@ -52,3 +52,6 @@ hr:
           success: "Pitanje je uspješno uklonjeno iz kviza."
         unauthorized:
           error: "Ovaj kviz ne pripada vama – ne možete ga mijenjati."
+      versions:
+        revert:
+          success: "Vraćeno."

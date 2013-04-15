@@ -10,8 +10,7 @@ Feature: Questions
     And I have a quiz
 
   Scenario: Adding, editing, and removing boolean questions
-    When I visit the quizzes page
-    When I click on "Pitanja" under quiz
+    When I visit the questions page
     And I click on "Točno/netočno"
     And I fill in "Tekst pitanja" with "Are you a stupidhead?"
     And I choose "Točno"
@@ -19,19 +18,18 @@ Feature: Questions
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 
-    When I click on "Izmijeni" under question
+    When I click on "Izmijeni" under the question
     And I fill in "Tekst pitanja" with "Are you a moron?"
     And I click on "Spremi"
     Then I should be on the questions page
     And I should see "Are you a moron?"
 
-    When I click on "Izbriši" under question
+    When I click on "Izbriši" under the question
     Then I should be on the questions page
     And I should not see "Are you a moron?"
 
   Scenario: Adding, editing, and removing choice questions
-    When I visit the quizzes page
-    When I click on "Pitanja" under quiz
+    When I visit the questions page
     And I click on "Ponuđeni odgovori"
     And I fill in "Tekst pitanja" with "Are you a stupidhead?"
     And I fill in "Ponuđeni odgovor 1" with "No"
@@ -42,15 +40,14 @@ Feature: Questions
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 
-    When I click on "Izmijeni" under question
+    When I click on "Izmijeni" under the question
     And I fill in "Tekst pitanja" with "Are you a moron?"
     And I click on "Spremi"
     Then I should be on the questions page
     And I should see "Are you a moron?"
 
   Scenario: Adding, editing, and removing association questions
-    When I visit the quizzes page
-    When I click on "Pitanja" under quiz
+    When I visit the questions page
     And I click on "Asocijacija"
     And I fill in "Tekst pitanja" with "Are you a stupidhead?"
     And I fill in "Asocijacija 1a" with "Uhm..."
@@ -65,15 +62,14 @@ Feature: Questions
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 
-    When I click on "Izmijeni" under question
+    When I click on "Izmijeni" under the question
     And I fill in "Tekst pitanja" with "Are you a moron?"
     And I click on "Spremi"
     Then I should be on the questions page
     And I should see "Are you a moron?"
 
   Scenario: Adding, editing, and removing image questions
-    When I visit the quizzes page
-    When I click on "Pitanja" under quiz
+    When I visit the questions page
     And I click on "Pogodi tko/što je na slici"
     And I fill in "Tekst pitanja" with "Are you a stupidhead?"
     And I attach an image
@@ -82,14 +78,14 @@ Feature: Questions
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 
-    When I click on "Izmijeni" under question
+    When I click on "Izmijeni" under the question
     And I fill in "Tekst pitanja" with "Are you a moron?"
     And I fill in the image url
     And I click on "Spremi"
     Then I should be on the questions page
     And I should see "Are you a moron?"
 
-    And I click on "Izbriši" under question
+    And I click on "Izbriši" under the question
 
     And I click on "Pogodi tko/što je na slici"
     And I fill in "Tekst pitanja" with "Are you a stupidhead?"
@@ -99,7 +95,7 @@ Feature: Questions
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 
-    When I click on "Izmijeni" under question
+    When I click on "Izmijeni" under the question
     And I fill in "Tekst pitanja" with "Are you a moron?"
     And I attach an image
     And I click on "Spremi"
@@ -107,8 +103,7 @@ Feature: Questions
     And I should see "Are you a moron?"
 
   Scenario: Adding, editing, and removing text questions
-    When I visit the quizzes page
-    When I click on "Pitanja" under quiz
+    When I visit the questions page
     And I click on "Upiši točan odgovor"
     And I fill in "Tekst pitanja" with "Are you a stupidhead?"
     And I fill in "Odgovor" with "Yes"
@@ -116,8 +111,18 @@ Feature: Questions
     Then I should be on the questions page
     And I should see "Are you a stupidhead?"
 
-    When I click on "Izmijeni" under question
+    When I click on "Izmijeni" under the question
     And I fill in "Tekst pitanja" with "Are you a moron?"
     And I click on "Spremi"
     Then I should be on the questions page
     And I should see "Are you a moron?"
+
+  Scenario: When I delete question, I can undo it
+    Given I have created a question
+    When I visit the questions page
+    And I click on "Izbriši" under the question
+    Then I should see "Vrati"
+
+    When I click on "Vrati"
+    Then I should be on the questions page
+    And I should see my question again

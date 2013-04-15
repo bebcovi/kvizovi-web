@@ -37,6 +37,7 @@ gem "activerecord-postgres-hstore"
 gem "activerecord-postgres-array"
 gem "acts-as-taggable-on"
 gem "squeel"
+gem "paper_trail", ">= 2.7"
 
 # Security
 gem "strong_parameters", ">= 0.2"
