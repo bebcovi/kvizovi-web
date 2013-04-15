@@ -8,7 +8,7 @@ describe Student do
   describe "#grade=" do
     it "removes spaces and dots" do
       @it.grade = "4. b"
-      @it.grade.should eq "4b"
+      expect(@it.grade).to eq "4b"
     end
   end
 

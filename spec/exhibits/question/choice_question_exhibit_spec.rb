@@ -1,5 +1,4 @@
 require "spec_helper"
-require "set"
 
 describe ChoiceQuestionExhibit do
   before do
@@ -9,7 +8,7 @@ describe ChoiceQuestionExhibit do
 
   describe "#provided_answers" do
     it "shuffles the underlying provided answers" do
-      expect(Set.new(@it.provided_answers)).to eq Set.new(@question.provided_answers)
+      expect(@it.provided_answers).to match_array(@question.provided_answers)
       expect(@it.provided_answers.first).not_to eq @question.provided_answers.first
     end
   end

@@ -1,5 +1,4 @@
 require "spec_helper"
-require "set"
 
 describe AssociationQuestionExhibit do
   before do
@@ -9,8 +8,8 @@ describe AssociationQuestionExhibit do
 
   describe "#associations" do
     it "shuffles the underlying associations" do
-      expect(Set.new(@it.associations.keys)).to eq Set.new(@question.associations.keys)
-      expect(Set.new(@it.associations.values)).to eq Set.new(@question.associations.values)
+      expect(@it.associations.keys).to match_array(@question.associations.keys)
+      expect(@it.associations.values).to match_array(@question.associations.values)
       expect(@it.associations).not_to eq @question.associations
     end
   end

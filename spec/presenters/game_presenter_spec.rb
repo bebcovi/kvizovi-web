@@ -21,8 +21,12 @@ describe GamePresenter do
     }
   end
 
+  it "has results" do
+    @it.results
+  end
+
   it "has players" do
-    @it.players.should eq @players
+    expect(@it.players).to eq @players
   end
 
   it "has scores" do
@@ -38,7 +42,9 @@ describe GamePresenter do
   end
 
   it "has ranks" do
-    expect(@it.ranks.all?(&:present?)).to be_true
+    @it.ranks.each do |rank|
+      expect(rank).to be_present
+    end
   end
 
   it "has total score" do
