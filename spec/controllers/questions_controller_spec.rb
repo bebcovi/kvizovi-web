@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe QuestionsController do
   school!
+  enable_paper_trail
 
   before do
     @user = Factory.create_without_validation(:empty_school)
