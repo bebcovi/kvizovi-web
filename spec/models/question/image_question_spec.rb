@@ -8,9 +8,8 @@ describe ImageQuestion do
 
   describe "#image_url=" do
     it "assigns the URL to #image" do
-      expect {
-        @it.image_url = "http://designyoutrust.com/wp-content/uploads2/bla.jpg?q=2"
-      }.to change{@it.image_file_name}.to "bla.jpg"
+      @it.image_url = "http://designyoutrust.com/wp-content/uploads2/bla.jpg?q=2"
+      expect(@it.image).to be_present
     end
 
     it "doesn't raise errors on invalid URLs" do
@@ -26,24 +25,21 @@ describe ImageQuestion do
 
   describe "#image_file=" do
     it "assigns file to #image" do
-      @it.image = nil
-      expect {
-        @it.image_file = uploaded_file("image.jpg", "image/jpeg")
-      }.to change{@it.image_file_name}.to "image.jpg"
+      @it.image_file = uploaded_file("image.jpg", "image/jpeg")
+      expect(@it.image).to be_present
     end
 
     it "removes special characters from filenames" do
-      create_file("image_ščćžđ.jpg", "image/jpeg") do |image|
-        @it.image_file = image
-        expect(@it.image_file_name).to eq "image_scczd.jpg"
-      end
+      @it.image_file = uploaded_file("image.jpg", "image_ščćžđ.jpg", "image/jpeg")
+      expect(@it.image_file_name).to eq "image_scczd.jpg"
     end
   end
 
   context "callbacks" do
     it "saves sizes" do
       @it.image = uploaded_file("image.jpg", "image/jpeg")
-      @it.save(validate: false)
+      @it.stub(:valid?) { true }
+      @it.save!
       expect(@it.image_width).to be_a(Integer)
       expect(@it.image_height).to be_a(Integer)
       expect(@it.image_width(:resized)).to be_a(Integer)
@@ -59,17 +55,13 @@ describe ImageQuestion do
       end
 
       it "validates content type" do
-        create_file("video.mp4", "video/mp4") do |not_image|
-          @it.image = not_image
-          expect(@it).to have(1).error_on(:image_content_type)
-        end
+        @it.image = create_file("video.mp4", "video/mp4")
+        expect(@it).to have(1).error_on(:image_content_type)
       end
 
       it "validates size" do
-        create_file("image.jpg", "image/jpeg", size: 2.megabytes) do |image|
-          @it.image = image
-          expect(@it).to have(1).error_on(:image_file_size)
-        end
+        @it.image = create_file("image.jpg", "image/jpeg", size: 2.megabytes)
+        expect(@it).to have(1).error_on(:image_file_size)
       end
 
       it "validates the image URL" do

@@ -8,7 +8,8 @@ class ImageQuestion < TextQuestion
 
   has_attached_file :image, styles: {resized: "x250>"}, whiny: false
 
-  validates_attachment :image, presence: {if: -> { image_url.blank? and image_file.blank? }},
+  validates_attachment :image,
+    presence: {if: -> { [image_url, image_file].all?(&:blank?) }},
     content_type: {content_type: ["image/jpeg", "image/gif", "image/png"], allow_blank: true},
     size: {in: 0..1.megabyte}
   validate :validate_image_url

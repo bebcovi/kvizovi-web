@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe VersionsController do
-  before { request.host = "school.example.com" }
+  school!
   enable_paper_trail
 
   describe "#revert" do
