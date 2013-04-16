@@ -23,6 +23,7 @@ module Lektire
     config.autoload_paths += [
       "#{config.root}/app/models/question",
       "#{config.root}/app/exhibits/question",
+      "#{config.root}/app/models/concerns",
     ]
 
     # Search for locales recursively

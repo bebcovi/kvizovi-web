@@ -118,7 +118,7 @@ Feature: Questions
     And I should see "Are you a moron?"
 
   Scenario: When I delete question, I can undo it
-    Given I have created a question
+    Given I have created an image question
     When I visit the questions page
     And I click on "Izbriši" under the question
     Then I should see "Vrati"

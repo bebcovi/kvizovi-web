@@ -3,6 +3,7 @@ defaults: &defaults
   encoding: unicode
   pool: 5
   min_messages: warning
+  prepared_statements: false
 
 development:
   <<: *defaults

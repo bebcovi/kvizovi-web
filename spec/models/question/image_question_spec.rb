@@ -6,6 +6,8 @@ describe ImageQuestion do
     @it = Factory.build(:empty_image_question)
   end
 
+  enable_paper_trail
+
   describe "#image_url=" do
     it "assigns the URL to #image" do
       @it.image_url = "http://designyoutrust.com/wp-content/uploads2/bla.jpg?q=2"
@@ -44,6 +46,14 @@ describe ImageQuestion do
       expect(@it.image_height).to be_a(Integer)
       expect(@it.image_width(:resized)).to be_a(Integer)
       expect(@it.image_height(:resized)).to be_a(Integer)
+    end
+
+    it "can revert destroy" do
+      @it = Factory.create(:image_question, image: uploaded_file("image.jpg", "image/jpeg"))
+      @it.destroy
+      @it = @it.versions.last.reify
+      @it.save!
+      expect(@it.image.path).to satisfy { |path| File.exists?(path) }
     end
   end
 

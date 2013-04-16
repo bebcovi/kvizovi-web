@@ -3,6 +3,8 @@ require "active_support/inflector/transliterate"
 require "uri"
 
 class ImageQuestion < TextQuestion
+  include PaperclipUndoable
+
   data_accessor :image_file_name, :image_content_type,
     :image_file_size, :image_updated_at, :image_size
 
