@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
   belongs_to :quiz
 
   acts_as_taggable
-  has_paper_trail
+  has_paper_trail on: [:destroy]
 
   scope :search,    ->(query) { scoped }
   scope :ascending, ->        { order{created_at.asc} }
