@@ -11,6 +11,15 @@ describe Quiz do
         @it.name = nil
         expect(@it).to have(1).error_on(:name)
       end
+
+      it "validates uniqueness inside a school" do
+        quiz = Factory.create_without_validation(:empty_quiz, name: "Foo", school_id: 1)
+        @it.assign_attributes(name: "Foo", school_id: 1)
+        expect(@it).to have(1).error_on(:name)
+
+        quiz.update_column(:school_id, 2)
+        expect(@it).not_to have(1).error_on(:name)
+      end
     end
 
     context "#school_id" do

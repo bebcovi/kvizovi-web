@@ -1,4 +1,13 @@
 hr:
+
+  activerecord:
+    errors:
+      models:
+        quiz:
+          attributes:
+            name:
+              taken: "Već imate kviz s tim imenom."
+
   simple_form:
     labels:
       quiz:

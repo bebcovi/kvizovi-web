@@ -3,7 +3,7 @@ class Quiz < ActiveRecord::Base
   has_many :questions, dependent: :destroy
   has_many :games
 
-  validates :name,      presence: true
+  validates :name,      presence: true, uniqueness: {scope: :school_id}
   validates :school_id, presence: true
 
   default_scope     -> { order{created_at.desc} }
