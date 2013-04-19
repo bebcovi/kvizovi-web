@@ -1,3 +1,5 @@
+require "uri"
+
 class PrepareQuizQuestionsForOneToMany < ActiveRecord::Migration
   class Question < ActiveRecord::Base
     has_and_belongs_to_many :quizzes
@@ -11,26 +13,45 @@ class PrepareQuizQuestionsForOneToMany < ActiveRecord::Migration
     end
   end
 
+  class BooleanQuestion < Question
+  end
+  class AssociationQuestion < Question
+  end
+  class ChoiceQuestion < Question
+  end
+  class ImageQuestion < Question
+    def dup
+      super.tap do |question|
+        question.image = URI.parse(self.image.url)
+      end
+    end
+  end
+  class TextQuestion < Question
+  end
+
   class Quiz < ActiveRecord::Base
     has_many :questions
   end
 
   def up
-    Question.find_each do |question|
-      if question.quizzes.count >= 1
-        if question.quizzes.count > 1
-          question.quizzes[1..-1].each do |quiz|
-            quiz.questions << question.dup
+    [BooleanQuestion, AssociationQuestion, ChoiceQuestion, ImageQuestion, TextQuestion].each do |question_class|
+      question_class.find_each do |question|
+        binding.pry
+        if question.quizzes.count >= 1
+          if question.quizzes.count > 1
+            question.quizzes[1..-1].each do |quiz|
+              quiz.questions << question.dup
+            end
           end
-        end
 
-        question.update_column(:quiz_id, question.quizzes[0].id)
-      else
-        if column_exists?(:questions, :school_id)
-          quiz = Quiz.find_or_create_by_name(name: "Pitanja bez kviza", activated: false, school_id: question.school_id)
-          question.update_column(:quiz_id, quiz.id)
+          question.quizzes[0].questions << question
         else
-          question.destroy
+          if column_exists?(:questions, :school_id)
+            quiz = Quiz.find_or_create_by_name(name: "Pitanja bez kviza", activated: false, school_id: question.school_id)
+            quiz.questions << question
+          else
+            question.destroy
+          end
         end
       end
     end
