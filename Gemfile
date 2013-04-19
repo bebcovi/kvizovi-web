@@ -32,7 +32,6 @@ gem "bootstrap-will_paginate"
 gem "pg"
 gem "paperclip", ">= 3.3"
 gem "paperclip-dropbox", "~> 1.0"
-gem "bcrypt-ruby", "~> 3.0"
 gem "activerecord-postgres-hstore"
 gem "activerecord-postgres-array"
 gem "acts-as-taggable-on"
@@ -42,6 +41,7 @@ gem "paper_trail", ">= 2.7"
 # Security
 gem "strong_parameters", ">= 0.2"
 gem "dotenv", group: [:development, :test]
+gem "bcrypt-ruby", "~> 3.0"
 
 # Other
 gem "active_attr"
