@@ -13,7 +13,7 @@ describe School do
       end
 
       it "validates uniqueness" do
-        Factory.build(:empty_school, username: "jon").save(validate: false)
+        Factory.create_without_validation(:empty_school, username: "jon")
         @it.username = "jon"
         expect(@it).to have(1).error_on(:username)
       end
