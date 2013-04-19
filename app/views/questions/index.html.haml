@@ -9,8 +9,6 @@
     %li= link_to "Pogodi tko/što je na slici".prepend_icon("picture"), new_quiz_question_path(category: "image")
     %li= link_to "Upiši točan odgovor".prepend_icon("pencil-2"),       new_quiz_question_path(category: "text")
 
-= render "tag_filter"
-
 - if @questions.any?
 
   %ol.question_list

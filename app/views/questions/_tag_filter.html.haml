@@ -1,6 +1,0 @@
-= simple_form_for :search, url: request.path, method: "get", defaults: {label: false, wrapper: false, bootstrap_wrapper: false} do |f|
-
-  .input-append{class: ("input-prepend" if params[:filter])}
-    = link_to icon("cancel"), request.path, class: "btn", title: "Očisti filter" if params[:query]
-    = f.input :query, placeholder: "Traži...", input_html: {class: "input-xlarge", name: "query", value: params[:query]}
-    = submit_button icon("search"), name: nil, title: "Traži"
