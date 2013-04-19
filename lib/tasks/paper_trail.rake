@@ -1,12 +1,11 @@
 namespace :paper_trail do
-  ImageQuestion = ::ImageQuestion
-  ImageQuestion.class_eval do
-    def destroy_attached_files
-      super
-    end
-  end
-
   task :remove_old_versions => :environment do
+    ImageQuestion.class_eval do
+      def destroy_attached_files
+        super
+      end
+    end
+
     Version.where{created_at <= 1.week.ago}.each do |version|
       version.destroy
       if version.reify.is_a?(ImageQuestion)
