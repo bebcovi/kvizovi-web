@@ -1,3 +1,5 @@
+require "activerecord-postgres-hstore"
+
 class PlayedGame < ActiveRecord::Base
   serialize :question_answers, ActiveRecord::Coders::Hstore
   serialize :question_ids, Array

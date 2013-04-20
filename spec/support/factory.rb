@@ -1,4 +1,6 @@
-Factory = FactoryGirl
+require "factory_girl"
+
+FactoryGirl.find_definitions
 
 module FactoryGirl
   class Strategy::CreateWithoutValidation < Strategy::Create
@@ -14,3 +16,5 @@ module FactoryGirl
 
   register_strategy(:create_without_validation, Strategy::CreateWithoutValidation)
 end
+
+Factory = FactoryGirl
