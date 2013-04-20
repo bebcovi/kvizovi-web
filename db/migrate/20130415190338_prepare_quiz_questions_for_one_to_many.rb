@@ -36,7 +36,6 @@ class PrepareQuizQuestionsForOneToMany < ActiveRecord::Migration
   def up
     [BooleanQuestion, AssociationQuestion, ChoiceQuestion, ImageQuestion, TextQuestion].each do |question_class|
       question_class.find_each do |question|
-        binding.pry
         if question.quizzes.count >= 1
           if question.quizzes.count > 1
             question.quizzes[1..-1].each do |quiz|
