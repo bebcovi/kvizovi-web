@@ -1,5 +1,6 @@
 require "acts-as-taggable-on"
 require "paper_trail"
+require "squeel"
 
 class Question < ActiveRecord::Base
   CATEGORIES = %w[boolean choice association image text]

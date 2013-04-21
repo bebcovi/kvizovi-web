@@ -1,8 +1,10 @@
 require "active_support/core_ext/numeric/bytes"
 require "active_support/inflector/transliterate"
 require "uri"
+require "paperclip"
 
 class ImageQuestion < TextQuestion
+  include Paperclip::Glue
   include PaperclipUndoable
 
   data_accessor :image_file_name, :image_content_type,

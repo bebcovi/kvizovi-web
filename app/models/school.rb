@@ -1,3 +1,5 @@
+require "squeel"
+
 class School < ActiveRecord::Base
   LEVELS = ["Osnovna", "Srednja"]
   REGIONS = [

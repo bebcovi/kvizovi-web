@@ -1,3 +1,6 @@
+require "paperclip/railtie"
+require "paperclip-dropbox"
+
 Lektire::Application.configure do
   # Use the routes to render HTTP-error pages instead of rendering static ones
   config.exceptions_app = self.routes
