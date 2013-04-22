@@ -2,7 +2,7 @@ class Student < ActiveRecord::Base
   GENDERS = ["Muško", "Žensko"]
 
   belongs_to :school
-  def games; Game.where{(first_player_id == my{id}) | (second_player_id == my{id})}; end
+  def games; PlayedGame.where{(first_player_id == my{id}) | (second_player_id == my{id})}; end
 
   has_secure_password
   attr_accessor :school_key
