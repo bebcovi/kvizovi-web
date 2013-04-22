@@ -1,5 +1,15 @@
 Lektire::Application.routes.draw do
   ########################
+  # Admin
+  ########################
+
+  controller :admin do
+    get "admin", to: :index
+    get "admin/:action"
+    get "admin/school/:id", to: :school, as: "admin_school"
+  end
+
+  ########################
   # Authentication
   ########################
   scope constraints: {subdomain: /school|student/} do
