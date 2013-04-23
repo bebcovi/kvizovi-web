@@ -1,6 +1,12 @@
 require "factory_girl"
 
-FactoryGirl.find_definitions
+module FactoryGirl
+  def self.definitions_loaded?
+    factories.registered?(:school)
+  end
+end
+
+FactoryGirl.find_definitions unless FactoryGirl.definitions_loaded?
 
 module FactoryGirl
   class Strategy::CreateWithoutValidation < Strategy::Create
@@ -17,4 +23,4 @@ module FactoryGirl
   register_strategy(:create_without_validation, Strategy::CreateWithoutValidation)
 end
 
-Factory = FactoryGirl
+Factory = FactoryGirl unless defined?(Factory)

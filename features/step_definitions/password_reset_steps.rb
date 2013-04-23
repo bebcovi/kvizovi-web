@@ -1,12 +1,12 @@
 require "nokogiri"
 
 When(/^I confirm my email$/) do
-  user = FactoryGirl.build(@user_type)
-  fill_in "Email", with: user.email
+  fill_in "Email", with: Factory.attributes_for(@user_type)[:email]
   click_on "Zatraži novu lozinku"
 end
 
-When(/^I fill in "(.*)" with the emailed password$/) do |field|
-  new_password = Nokogiri::HTML(PasswordSender.deliveries.first.body.to_s).at("strong").text
-  fill_in field, with: new_password
+When(/^I fill in my login information with the emailed password$/) do
+  emailed_password = Nokogiri::HTML(PasswordSender.deliveries.first.body.to_s).at("strong").text
+  fill_in "Korisničko ime", with: @user.username
+  fill_in "Lozinka",        with: emailed_password
 end

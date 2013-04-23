@@ -56,9 +56,11 @@ class ImageQuestion < TextQuestion
   private
 
   def assign_image_sizes
-    self.image_size = image.instance_variable_get("@queued_for_write").inject({}) do |hash, (style, file)|
-      geometry = Paperclip::Geometry.from_file(file)
-      hash.update(style => {width: geometry.width.to_i, height: geometry.height.to_i})
+    if image.dirty?
+      self.image_size = image.instance_variable_get("@queued_for_write").inject({}) do |hash, (style, file)|
+        geometry = Paperclip::Geometry.from_file(file)
+        hash.update(style => {width: geometry.width.to_i, height: geometry.height.to_i})
+      end
     end
   end
 

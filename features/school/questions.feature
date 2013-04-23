@@ -1,128 +1,36 @@
 @school
 Feature: Questions
 
-  In order to prepare quizzes for my students
-  As a school I want to be able to create, update and delete questions
-
   Background:
-    Given I'm registered
-    And I'm logged in
+    Given I'm registered and logged in
     And I have a quiz
 
-  Scenario: Adding, editing, and removing boolean questions
-    When I visit the questions page
-    And I click on "Točno/netočno"
-    And I fill in "Tekst pitanja" with "Are you a stupidhead?"
-    And I choose "Točno"
-    And I click on "Spremi"
+  Scenario Outline: A school can create, edit, and destroy questions
+    When I create <question>
     Then I should be on the questions page
-    And I should see "Are you a stupidhead?"
+    And I should see that question
 
-    When I click on "Izmijeni" under the question
-    And I fill in "Tekst pitanja" with "Are you a moron?"
-    And I click on "Spremi"
+    When I update that question
     Then I should be on the questions page
-    And I should see "Are you a moron?"
+    And I should see the updated question
 
-    When I click on "Izbriši" under the question
+    When I delete that question
     Then I should be on the questions page
-    And I should not see "Are you a moron?"
+    And I should not see that question
 
-  Scenario: Adding, editing, and removing choice questions
-    When I visit the questions page
-    And I click on "Ponuđeni odgovori"
-    And I fill in "Tekst pitanja" with "Are you a stupidhead?"
-    And I fill in "Ponuđeni odgovor 1" with "No"
-    And I fill in "Ponuđeni odgovor 2" with "Yes"
-    And I fill in "Ponuđeni odgovor 3" with "Maybe"
-    And I fill in "Ponuđeni odgovor 4" with "Probably not"
-    And I click on "Spremi"
-    Then I should be on the questions page
-    And I should see "Are you a stupidhead?"
+    Examples:
+      | question                          |
+      | a boolean question                |
+      | a choice question                 |
+      | an association question           |
+      | an image question with image url  |
+      | an image question with image file |
+      | a text question                   |
 
-    When I click on "Izmijeni" under the question
-    And I fill in "Tekst pitanja" with "Are you a moron?"
-    And I click on "Spremi"
-    Then I should be on the questions page
-    And I should see "Are you a moron?"
-
-  Scenario: Adding, editing, and removing association questions
-    When I visit the questions page
-    And I click on "Asocijacija"
-    And I fill in "Tekst pitanja" with "Are you a stupidhead?"
-    And I fill in "Asocijacija 1a" with "Uhm..."
-    And I fill in "Asocijacija 1b" with "Yes"
-    And I fill in "Asocijacija 2a" with "Uhm..."
-    And I fill in "Asocijacija 2b" with "No"
-    And I fill in "Asocijacija 3a" with "Uhm..."
-    And I fill in "Asocijacija 3b" with "Maybe"
-    And I fill in "Asocijacija 4a" with "Uhm..."
-    And I fill in "Asocijacija 4b" with "Probably not"
-    And I click on "Spremi"
-    Then I should be on the questions page
-    And I should see "Are you a stupidhead?"
-
-    When I click on "Izmijeni" under the question
-    And I fill in "Tekst pitanja" with "Are you a moron?"
-    And I click on "Spremi"
-    Then I should be on the questions page
-    And I should see "Are you a moron?"
-
-  Scenario: Adding, editing, and removing image questions
-    When I visit the questions page
-    And I click on "Pogodi tko/što je na slici"
-    And I fill in "Tekst pitanja" with "Are you a stupidhead?"
-    And I attach an image
-    And I fill in "Odgovor" with "Yes"
-    And I click on "Spremi"
-    Then I should be on the questions page
-    And I should see "Are you a stupidhead?"
-
-    When I click on "Izmijeni" under the question
-    And I fill in "Tekst pitanja" with "Are you a moron?"
-    And I fill in the image url
-    And I click on "Spremi"
-    Then I should be on the questions page
-    And I should see "Are you a moron?"
-
-    And I click on "Izbriši" under the question
-
-    And I click on "Pogodi tko/što je na slici"
-    And I fill in "Tekst pitanja" with "Are you a stupidhead?"
-    And I fill in the image url
-    And I fill in "Odgovor" with "Yes"
-    And I click on "Spremi"
-    Then I should be on the questions page
-    And I should see "Are you a stupidhead?"
-
-    When I click on "Izmijeni" under the question
-    And I fill in "Tekst pitanja" with "Are you a moron?"
-    And I attach an image
-    And I click on "Spremi"
-    Then I should be on the questions page
-    And I should see "Are you a moron?"
-
-  Scenario: Adding, editing, and removing text questions
-    When I visit the questions page
-    And I click on "Upiši točan odgovor"
-    And I fill in "Tekst pitanja" with "Are you a stupidhead?"
-    And I fill in "Odgovor" with "Yes"
-    And I click on "Spremi"
-    Then I should be on the questions page
-    And I should see "Are you a stupidhead?"
-
-    When I click on "Izmijeni" under the question
-    And I fill in "Tekst pitanja" with "Are you a moron?"
-    And I click on "Spremi"
-    Then I should be on the questions page
-    And I should see "Are you a moron?"
-
-  Scenario: When I delete question, I can undo it
-    Given I have created an image question
-    When I visit the questions page
-    And I click on "Izbriši" under the question
+  Scenario: A school undo a question delete
+    When I create an image question
+    And I delete that question
     Then I should see "Vrati"
 
     When I click on "Vrati"
-    Then I should be on the questions page
-    And I should see my question again
+    Then I should see that question again

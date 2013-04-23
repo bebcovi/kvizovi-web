@@ -1,25 +1,18 @@
 @school
 Feature: Quizzes
 
-  In order to prepare quizzes for my students
-  As a school
-  I want to be able to create, update and delete quizzes
-
   Background:
-    Given I'm registered
-    And I'm logged in
+    Given I'm registered and logged in
 
-  Scenario: Creating, updating and deleting quizzes
-    When I click on "Novi kviz"
-    And I fill in "Naziv" with "Some name"
-    And I click on "Spremi"
-    Then I should see "Some name"
+  Scenario: A school can create, update and delete quizzes
+    When I create a quiz
+    Then I should be on the quizzes page
+    And I should see that quiz
 
-    When I click on "Izmijeni" under quiz
-    And I fill in "Naziv" with "Some other name"
-    And I click on "Spremi"
-    Then I should see "Some other name"
+    When I update that quiz
+    Then I should be on the quizzes page
+    And I should see the updated quiz
 
-    When I click on "Izbriši" under quiz
-    And I click on "Jesam"
-    Then I should not see "Some other name"
+    When I delete that quiz
+    Then I should be on the quizzes page
+    And I should not see that quiz

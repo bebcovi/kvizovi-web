@@ -1,15 +1,16 @@
 Given(/^I'm registered$/) do
-  school  { @user = FactoryGirl.create(:school) }
-  student { @user = FactoryGirl.create(:student, :with_school) }
-end
-
-Given(/^I'm registered with username "(.*)" and password "(.*)"$/) do |username, password|
-  school  { @user = FactoryGirl.create(:school,                username: username, password: password) }
-  student { @user = FactoryGirl.create(:student, :with_school, username: username, password: password) }
+  @user = Factory.create(@user_type)
 end
 
 Given(/^my school is registered$/) do
-  FactoryGirl.create(:school)
+  @school = Factory.create(:school)
+end
+
+Given(/^I'm registered and logged in$/) do
+  steps %Q{
+    When I'm registered
+    And I'm logged in
+  }
 end
 
 When(/^I authorize$/) do
@@ -18,29 +19,36 @@ When(/^I authorize$/) do
 end
 
 When(/^I fill in the registration details$/) do
-  user = FactoryGirl.build(@user_type)
   school do
-    fill_in "Ime škole",       with: user.name
-    fill_in "Mjesto",          with: user.place
-    fill_in "Korisničko ime",  with: user.username
-    fill_in "Lozinka",         with: user.password
-    fill_in "Potvrda lozinke", with: user.password
-    fill_in "Email",           with: user.email
-    fill_in "Tajni ključ",     with: user.key
-    select                           user.level,  from: "Tip škole"
-    select                           user.region, from: "Županija"
+    school = Factory.build(:school)
+    fill_in "Ime škole",       with: school.name
+    fill_in "Mjesto",          with: school.place
+    fill_in "Korisničko ime",  with: school.username
+    fill_in "Lozinka",         with: school.password
+    fill_in "Potvrda lozinke", with: school.password
+    fill_in "Email",           with: school.email
+    fill_in "Tajni ključ",     with: school.key
+    select                           school.level,  from: "Tip škole"
+    select                           school.region, from: "Županija"
   end
   student do
-    fill_in "Ime",               with: user.first_name
-    fill_in "Prezime",           with: user.last_name
-    fill_in "Korisničko ime",    with: user.username
-    fill_in "Lozinka",           with: user.password
-    fill_in "Potvrda lozinke",   with: user.password
-    fill_in "Razred",            with: user.grade
-    fill_in "Tajni ključ škole", with: School.first.key
-    choose                             user.gender
-    select                             user.year_of_birth.to_s, from: "Godina rođenja"
+    student = Factory.build(:student, school: @school)
+    fill_in "Ime",               with: student.first_name
+    fill_in "Prezime",           with: student.last_name
+    fill_in "Korisničko ime",    with: student.username
+    fill_in "Lozinka",           with: student.password
+    fill_in "Potvrda lozinke",   with: student.password
+    fill_in "Razred",            with: student.grade
+    fill_in "Tajni ključ škole", with: student.school.key
+    choose                             student.gender
+    select                             student.year_of_birth.to_s, from: "Godina rođenja"
   end
+end
+
+When(/^I authenticate$/) do
+  fill_in "Korisničko ime", with: @user.username
+  fill_in "Lozinka",        with: @user.password
+  click_on "Prijava"
 end
 
 Then(/^I should not be registered/) do
