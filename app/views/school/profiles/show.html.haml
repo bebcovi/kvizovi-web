@@ -1,35 +1,38 @@
 - title "Profil"
 
-%table.profile_info
-  %colgroup
-    %col.field
-    %col.value
-  %tbody
-    %tr
-      %th Ime škole
-      %td= @user.name
-    %tr
-      %th Korisničko ime
-      %td= @user.username
-    %tr
-      %th Email
-      %td= @user.email
-    %tr
-      %th Tip škole
-      %td= @user.level
-    %tr
-      %th Mjesto
-      %td= @user.place
-    %tr
-      %th Županija
-      %td= @user.region
-    %tr
-      %th Tajni ključ
-      %td= @user.key
+.profile
 
-= buttons class: "edit_profile" do
-  .btn-group
-    = edit_button "Izmijeni profil", edit_profile_path
-    = change_password_button "Izmijeni lozinku", edit_password_path
+  %table.profile-info.table.table-striped
+    %colgroup
+      %col.profile-info-field
+      %col.profile-info-value
+    %tbody
+      %tr
+        %th Ime škole
+        %td= @user.name
+      %tr
+        %th Korisničko ime
+        %td= @user.username
+      %tr
+        %th Email
+        %td= @user.email
+      %tr
+        %th Tip škole
+        %td= @user.level
+      %tr
+        %th Mjesto
+        %td= @user.place
+      %tr
+        %th Županija
+        %td= @user.region
+      %tr
+        %th Tajni ključ
+        %td= @user.key
 
-%p= delete_profile_button "Izbriši korisnički račun", delete_registration_path
+  = buttons class: "profile-edit" do
+    .btn-group
+      = edit_button "Izmijeni profil", edit_profile_path
+      = change_password_button "Izmijeni lozinku", edit_password_path
+
+  %p.profile-delete
+    = delete_profile_button "Izbriši korisnički račun", delete_registration_path

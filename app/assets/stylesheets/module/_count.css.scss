@@ -1,0 +1,5 @@
+.count {
+  color: rgba(black, .5);
+  &:before  { content: "("; }
+  &:after   { content: ")"; }
+}

@@ -1,0 +1,10 @@
+.list-inline-block {
+  @include list-unstyled;
+
+  > * {
+    display: inline-block;
+    float: none;
+    margin-right: $hsu;
+    vertical-align: middle;
+  }
+}

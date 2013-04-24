@@ -1,0 +1,18 @@
+.alert {
+  &.no-close {
+    display: inline-block;
+    margin-bottom: $baseLineHeight/2;
+    padding-right: $baseLineHeight/2;
+
+    .close { display: none; }
+  }
+
+  .container-main > &:first-child {
+    @include border-top-radius(0);
+    margin-top: - $baseLineHeight;
+  }
+}
+
+.alert-error {
+  p { margin: 0; }
+}

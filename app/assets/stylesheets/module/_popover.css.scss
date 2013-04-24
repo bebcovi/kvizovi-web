@@ -1,0 +1,10 @@
+.popover {
+  width: auto;
+}
+
+.popover-title {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 20px;
+  font-weight: nth($base-weight, 2);
+}

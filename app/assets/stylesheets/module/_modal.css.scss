@@ -1,0 +1,43 @@
+.modal {
+}
+
+  .modal-backdrop {
+    background: rgba(black, .5);
+  }
+
+  .modal-header {
+    padding-top: $hsu;
+
+    .close {
+      margin-top: $hsu/2;
+      i {
+        font-size: 24px;
+      }
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 36px;
+      line-height: 1.5 * $bsu;
+
+      i {
+        position: relative;
+        top: 2px;
+        font-size: 32px;
+      }
+    }
+  }
+
+  .modal-body {
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .modal-footer {
+    form,
+    .btn-toolbar,
+    .btn-group {
+      margin: 0;
+    }
+  }

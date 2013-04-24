@@ -1,0 +1,67 @@
+.l-question-display-association {
+  .static,
+  .dynamic,
+  .controls,
+  ul span,
+  ul i {
+    display: inline-block;
+  }
+
+  ul span, i {
+    padding: {
+      top: 8px;
+      bottom: 8px;
+    }
+  }
+
+  ul {
+    margin-bottom: $baseLineHeight;
+    li { margin-bottom: $baseLineHeight/2; }
+    i {
+      color: rgba(black, .2);
+      padding: {
+        left: 1em;
+        right: 1em;
+      }
+    }
+  }
+
+  .dynamic {
+    span {
+      @extend %unselectable;
+      position: relative;
+      cursor: move;
+      padding: {
+        left: 12px;
+        right: 12px;
+      }
+      border: 1px solid darken(white, 20%);
+      border-radius: $baseBorderRadius;
+      background: darken(white, 4%);
+    }
+
+    .hover {
+      color: $linkColor;
+      border-color: rgba($linkColor, .75);
+      background: rgba($linkColor, .1);
+    }
+
+    .original {
+      opacity: .5;
+    }
+  }
+
+  .feedback {
+    ul {
+      @extend %unstyled-list;
+      color: rgba(black, .5);
+    }
+
+    li { margin-bottom: $baseLineHeight/2; }
+
+    i {
+      color: $textColor;
+      font-size: 14px;
+    }
+  }
+}

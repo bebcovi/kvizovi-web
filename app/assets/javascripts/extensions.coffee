@@ -2,21 +2,25 @@ $ = jQuery
 
 # icons
 
-$.icon = (name) -> "<i class='icon-#{name}'></i>"
+$.icon = (name) -> "<i class=\"icon-#{name}\"></i>"
 
 String.prototype.prependIcon  = (name) -> "#{$.icon(name)} #{@}"
 String.prototype.appendIcon   = (name) -> "#{@} #{$.icon(name)}"
 
 # properties
 
-$.removeButton = $ '<button>',
+$.removeButton = $ "<button>",
   html: $.icon("cancel-circle")
-  type: 'button'
+  type: "button"
 
-$.addButton = $ '<a>',
-  html: 'Dodaj'.prependIcon('plus')
-  class: 'add'
-  href: '#'
+$.closeButton = $ "<button>",
+  html: $.icon("close")
+  type: "button"
+
+$.addButton = $ "<a>",
+  html: "Dodaj".prependIcon("plus")
+  class: "add"
+  href: "#"
 
 $.spinnerOptions =
   lines: 13
@@ -24,60 +28,60 @@ $.spinnerOptions =
   width: 3
   radius: 11
   corners: 1
-  color: 'rgba(0,0,0,0.6)'
+  color: "rgba(0,0,0,0.6)"
   trail: 66
-  className: 'spinner'
+  className: "spinner"
   top: 212
 
 # functions
 
 $.modalAjax = (options = {}) ->
-  $('body').spin($.spinnerOptions)
+  $("body").spin($.spinnerOptions)
 
   $.ajax
-    type: options['type'] or 'GET'
-    url: options['url']
-    data: options['data'] or ''
-    dataType: 'html'
-    headers: {'X-noLayout': true}
+    type: options["type"] or "GET"
+    url: options["url"]
+    data: options["data"] or ""
+    dataType: "html"
+    headers: {"X-noLayout": true}
 
     success: (data) ->
       $data         = $(data)
 
-      $removeButton = $.removeButton
+      $closeButton = $.closeButton
         .clone()
-        .addClass('close')
-        .attr('data-dismiss', 'modal')
+        .addClass("close")
+        .attr("data-dismiss", "modal")
 
-      $dataHeader   = $data.filter('h1')
-      $dataFooter   = $data.filter('form')
-      $dataBody     = $data.not('h1, form')
+      $dataHeader   = $data.filter("h1")
+      $dataFooter   = $data.filter("form, .form")
+      $dataBody     = $data.not("h1, form, .form")
 
-      $modal        = $('<div>').addClass('modal')
+      $modal        = $("<div>").addClass("modal")
 
       # loader
 
-      $('body').spin(false)
+      $("body").spin(false)
 
       # modifications
 
-      $dataFooter.find('.cancel')
-        .removeClass('cancel')
-        .attr('data-dismiss', 'modal')
+      $dataFooter.find(".cancel")
+        .removeClass("cancel")
+        .attr("data-dismiss", "modal")
 
       # component insertion
 
-      $modalHeader = $('<div>')
-        .addClass('modal-header')
-        .append($removeButton)
+      $modalHeader = $("<div>")
+        .addClass("modal-header")
+        .append($closeButton)
         .append($dataHeader)
 
-      $modalBody = $('<div>')
-        .addClass('modal-body')
+      $modalBody = $("<div>")
+        .addClass("modal-body")
         .append($dataBody)
 
-      $modalFooter = $('<div>')
-        .addClass('modal-footer')
+      $modalFooter = $("<div>")
+        .addClass("modal-footer")
         .append($dataFooter)
 
       # modal insertion
@@ -90,31 +94,31 @@ $.modalAjax = (options = {}) ->
 
       # required
 
-      if options['required']
-        $removeButton.remove()
-        $modal.on 'hide', -> return false
+      if options["required"]
+        $closeButton.remove()
+        $modal.on "hide", -> return false
 
       # callbacks
 
-      $modal.on 'hidden', ->
+      $modal.on "hidden", ->
         $modal.remove()
 
-      if options['onOpen']
-        options['onOpen']()
+      if options["onOpen"]
+        options["onOpen"]()
 
-      if options['onCancel']
-        $modal.on 'hidden', ->
-          options['onCancel']()
+      if options["onCancel"]
+        $modal.on "hidden", ->
+          options["onCancel"]()
 
-      if options['onSubmit']
-        $modalFooter.find('.btn-primary')
-          .on 'click', options['onSubmit']
+      if options["onSubmit"]
+        $modalFooter.find(".btn-primary")
+          .on "click", options["onSubmit"]
 
-    error: -> location.href options['url']
+    error: -> location.href options["url"]
 
 $.getContent = (title, body) ->
-  $title    = $('<h1>').text(title)
-  $body     = $('<p>').text(body)
+  $title    = $("<h1>").text(title)
+  $body     = $("<p>").text(body)
 
   $content  = $()
 
@@ -124,14 +128,14 @@ $.getContent = (title, body) ->
   $content
 
 $.generateButtons = (labels) ->
-  $result = $('<div>').addClass('form_controls')
+  $result = $("<div>").addClass("form_controls")
 
-  if labels['close']
-    $close = $('<a>', href: '#').text(labels['close'])
+  if labels["close"]
+    $close = $("<a>", href: "#").text(labels["close"])
     $result.append($close)
 
-  if labels['submit']
-    $submit = $('<button>', type: 'button').text(labels['submit'])
+  if labels["submit"]
+    $submit = $("<button>", type: "button").text(labels["submit"])
     $result.append($submit)
 
   $result

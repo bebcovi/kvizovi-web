@@ -1,0 +1,25 @@
+.btn {
+  i {
+    margin: 0;
+  }
+}
+
+.btn-primary,
+.btn-info,
+.btn-success,
+.btn-warning,
+.btn-danger,
+.btn-inverse {
+  font-weight: nth($base-weight, 3);
+}
+
+.btn-toolbar {
+  span {
+    vertical-align: middle;
+    font-size: $baseFontSize;
+
+    form & {
+      margin-left: .5em;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@include keyframes(slide) {
+  0%, 30% { width: auto; }
+  100%    { width: 0% !important; }
+}
+
+.slide {
+  @include animation(slide 3s ease-in-out);
+}

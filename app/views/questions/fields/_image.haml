@@ -3,8 +3,8 @@
   = f.input :image_url, placeholder: %(Npr. "http://www.primjer.hr/neka-slika.jpg")
 
 - if params[:action] == "edit"
-  %img.img-polaroid.preview{src: question.image.url(:resized)}
+  %img.img-polaroid.image-preview{src: question.image.url(:resized)}
 - else
-  %img.img-polaroid.preview.hide
+  %img.img-polaroid.image-preview.hide
 
 = f.input :answer

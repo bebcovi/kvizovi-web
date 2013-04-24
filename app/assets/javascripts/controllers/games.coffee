@@ -1,143 +1,143 @@
-$ = jQuery
+do ($ = jQuery) ->
 
-App.Controllers.games =
+  App.Controllers.games =
 
-  new: ->
+    new: ->
 
-    $form           = $('form')
+      $form           = $("form")
 
-    $sections       = $form.find('section')
+      $sections       = $form.find("section")
 
-    $quizzes        = $sections.filter '.quizzes'
-    $players        = $sections.filter '.players'
-    $login          = $sections.filter '.login'
+      $quizzes        = $sections.filter ".quizzes"
+      $players        = $sections.filter ".players"
+      $login          = $sections.filter ".login"
 
-    $buttons        = $form.find '.btn-toolbar'
-    $button         = $buttons.find 'button'
+      $buttons        = $form.find ".btn-toolbar"
+      $button         = $buttons.find "button"
 
-    $quizzesChecked = $quizzes.find ':checked'
-    $playersChecked = $players.find ':checked'
+      $quizzesChecked = $quizzes.find ":checked"
+      $playersChecked = $players.find ":checked"
 
-    setQuizName     = (name) -> $buttons.find('.name').text(" #{name}")
+      setQuizName     = (name) -> $buttons.find(".name").text(" #{name}")
 
-    setPlural       = -> $button.html $button.html().replace(/(Započni)\b/, '$1te')
-    setSingular     = -> $button.html $button.html().replace(/(Započni)\w+/, '$1')
+      setPlural       = -> $button.html $button.html().replace(/(Započni)\b/, "$1te")
+      setSingular     = -> $button.html $button.html().replace(/(Započni)\w+/, "$1")
 
-    if $quizzesChecked.length
-      $buttons.show()
-      setQuizName $quizzesChecked.next().text()
-      setPlural() if $playersChecked.val() is '2'
+      if $quizzesChecked.length
+        $buttons.removeClass("js-hidden")
+        setQuizName $quizzesChecked.closest("label").text()
+        setPlural() if $playersChecked.val() is "2"
 
-    $quizzes.on 'click', 'input:radio', ->
-      $players.show()
-      setQuizName $(@).next().text()
+      $quizzes.on "click", "input:radio", ->
+        $players.removeClass("js-hidden")
+        setQuizName $(@).closest("label").text()
 
-    $players.on 'click', 'input:radio', ->
-      $buttons.show()
-      switch $(@).val()
-        when '1'
-          $login.hide()
-          setSingular()
-        when '2'
-          $login.show()
-          setPlural()
+      $players.on "click", "input:radio", ->
+        $buttons.removeClass("js-hidden")
+        switch $(@).val()
+          when "1"
+            $login.addClass("js-hidden")
+            setSingular()
+          when "2"
+            $login.removeClass("js-hidden")
+            setPlural()
 
-    $button.on 'click', ->
-      localStorage.removeItem('total')
+      $button.on "click", ->
+        localStorage.removeItem("total")
 
-  create: ->
+    create: ->
 
-    @new()
+      @new()
 
-  edit: ->
+    edit: ->
 
-    $form        = $('form')
+      $form        = $("form")
 
-    $buttons     = $('.btn-toolbar', $form)
+      $buttons     = $(".btn-toolbar", $form)
 
-    $timer       = $('.timer')
-    $time        = $('.time', $timer)
+      $timer       = $(".timer")
+      $time        = $(".timer-time", $timer)
 
-    updateTimer = ->
-      current = moment.duration total
+      updateTimer = ->
+        current = moment.duration total
 
-      min     = current.minutes()
-      sec     = current.seconds()
+        min     = current.minutes()
+        sec     = current.seconds()
 
-      if sec > 9
-        $time.text "#{min}:#{sec}"
+        if sec > 9
+          $time.text "#{min}:#{sec}"
+        else
+          $time.text "#{min}:0#{sec}"
+
+        if min == 0
+          if 5 < sec <= 10
+            $timer.addClass("text-warning")
+          else if sec <= 5
+            $timer
+              .removeClass("text-warning")
+              .addClass("text-error")
+
+      clearStorage = ->
+        localStorage.removeItem "total"
+
+      showFeedback = ->
+        $.modalAjax
+          type: $form.attr("method")
+          url: $form.attr("action")
+          data: $form.serialize()
+          required: true
+          onOpen: clearStorage
+
+      timesUp = showFeedback
+
+      if localStorage["total"]
+        total = localStorage["total"] - 0
       else
-        $time.text "#{min}:0#{sec}"
+        total = 1 * 60 * 1000
+        localStorage["total"] = total
 
-      if min == 0
-        if 5 < sec <= 10
-          $timer.addClass('text-warning')
-        else if sec <= 5
-          $timer
-            .removeClass('text-warning')
-            .addClass('text-error')
+      countdown = do ->
 
-    clearStorage = ->
-      localStorage.removeItem 'total'
+        if total > 0 and localStorage["total"]
+          updateTimer()
 
-    showFeedback = ->
-      $.modalAjax
-        type: $form.attr('method')
-        url: $form.attr('action')
-        data: $form.serialize()
-        required: true
-        onOpen: clearStorage
+          total -= 1000
 
-    timesUp = showFeedback
+          localStorage["total"] = total
+          setTimeout arguments.callee, 1000
 
-    if localStorage['total']
-      total = localStorage['total'] - 0
-    else
-      total = 1 * 60 * 1000
-      localStorage['total'] = total
+        else if total <= 0
+          updateTimer()
+          timesUp()
 
-    countdown = do ->
+      $form.find(".cancel").on "click", (event) ->
+        event.preventDefault()
 
-      if total > 0 and localStorage['total']
-        updateTimer()
+        $quitButton     = $(@)
+        quitButtonText  = $quitButton.text()
 
-        total -= 1000
+        $quitButton
+          .attr("disabled", "disabled")
+          .text("Pričekajte...")
 
-        localStorage['total'] = total
-        setTimeout arguments.callee, 1000
+        $.modalAjax
+          url: @href
+          onCancel: ->
+            $quitButton
+              .removeAttr("disabled")
+              .text(quitButtonText)
+          onSubmit: clearStorage
 
-      else if total <= 0
-        updateTimer()
-        timesUp()
+      $(".navbar").on "click", "a", (event) ->
+        event.preventDefault()
+        href = @href
+        $.modalAjax
+          url: $form.find(".cancel").attr("href")
+          onSubmit: (event) ->
+            event.preventDefault()
+            clearStorage()
+            location.href = href
 
-    $form.find('.cancel').on 'click', (event) ->
-      event.preventDefault()
-
-      $quitButton     = $(@)
-      quitButtonText  = $quitButton.text()
-
-      $quitButton
-        .attr('disabled', 'disabled')
-        .text('Pričekajte...')
-
-      $.modalAjax
-        url: @href
-        onCancel: ->
-          $quitButton
-            .removeAttr('disabled')
-            .text(quitButtonText)
-        onSubmit: clearStorage
-
-    $('.navbar').on 'click', 'a', (event) ->
-      event.preventDefault()
-      href = @href
-      $.modalAjax
-        url: $form.find('.cancel').attr('href')
-        onSubmit: (event) ->
-          event.preventDefault()
-          clearStorage()
-          location.href = href
-
-    $form.on 'submit', (event) ->
-      event.preventDefault()
-      showFeedback()
+      $form.on "submit", (event) ->
+        event.preventDefault()
+        showFeedback()

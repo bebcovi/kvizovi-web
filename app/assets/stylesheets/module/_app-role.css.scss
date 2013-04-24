@@ -1,0 +1,14 @@
+.app-role {
+  margin-bottom: $hsu;
+}
+
+.app-role-btn {
+  font-weight: nth($base-weight, 3);
+  &:first-child {
+    margin-right: .5em;
+  }
+
+  i {
+    font-size: 24px;
+  }
+}

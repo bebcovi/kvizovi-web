@@ -1,0 +1,19 @@
+.question {
+}
+
+  .quiz-username {
+    margin-top: 12px;
+    margin-left: 20px;
+    font-size: $fontSizeLarge;
+  }
+
+  .question-title {
+  }
+
+  .question-number {
+    font-weight: nth($base-weight, 5);
+    &:after { content: "." }
+  }
+
+  .question-hint {
+  }

@@ -4,55 +4,53 @@
   Škole
   %span.count= @schools.count
 
-%table.school_list
-
+%table.table.table-striped
   %colgroup
-    %col.full_name
-    %col.student_count
-    %col.quiz_count
-    %col.last_activity
+    %col.col-25
+    %col.col-25
+    %col.col-25
+    %col
 
   %thead
     %tr
       %th Naziv škole
-      %th.short Broj učenika
-      %th.short Broj kvizova
+      %th.text-center Broj učenika
+      %th.text-center Broj kvizova
       %th Zadnja aktivnost
 
   %tbody
     - @schools.each do |school|
       %tr
         %td= link_to school.name, admin_school_path(school)
-        %td.short= school.students.count
-        %td.short= school.quizzes.activated.count
+        %td.text-center= school.students.count
+        %td.text-center= school.quizzes.activated.count
         %td= activity(school.updated_at, school.quizzes.maximum(:updated_at))
 
 %h2
   Učenici
   %span.count= @students.count
 
-%table.student_list
-
+%table.table.table-striped
   %colgroup
-    %col.full_name
-    %col.username
-    %col.school_name
-    %col.quiz_count
-    %col.last_activity
+    %col.col-20
+    %col.col-20
+    %col.col-20
+    %col.col-20
+    %col
 
   %thead
     %tr
       %th Ime i prezime
-      %th.short Korisničko ime
+      %th.text-center Korisničko ime
       %th Škola
-      %th.short Broj odigranih kvizova
+      %th.text-center Broj odigranih kvizova
       %th Zadnja aktivnost
 
   %tbody
     - @students.each do |student|
       %tr
         %td= student.full_name
-        %td.short= student.username
+        %td.text-center= student.username
         %td= student.school.name
-        %td.short= student.games.count
+        %td.text-center= student.games.count
         %td= activity(student.updated_at, student.games.maximum(:created_at))

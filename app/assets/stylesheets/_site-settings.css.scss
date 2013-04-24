@@ -1,0 +1,15 @@
+// type
+
+$base-font-family:  $sansFontFamily;
+
+$base-weight:       200 300 400 600 700;
+
+// colors
+
+$players:           one hsl(270, 50%, 50%),
+                    two hsl(30, 60%, 50%);
+
+// shortcuts
+
+$bsu:               $baseLineHeight;
+$hsu:               $baseLineHeight / 2;

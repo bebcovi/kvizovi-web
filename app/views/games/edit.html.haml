@@ -2,16 +2,18 @@
 
 .timer
   = icon("stopwatch")
-  %span.time
+  %span.timer-time
 
-%h1= @quiz.name
+%h1.align-middle
+  = @quiz.name
 
-.username{class: "player_#{number(@player_number)}"}= @player.username.prepend_icon("user")
+.question-username.align-middle{class: "player_#{number(@player_number)}"}
+  = @player.username.prepend_icon("user")
 
 .progress
   .bar{style: "width: #{game_progress_percentage}%"}
 
-= simple_form_for :game, url: game_path, method: :put, defaults: {input_html: {name: "answer"}}, html: {class: "show question_#{@question.category}"} do |f|
+= simple_form_for :game, url: game_path, method: :put, defaults: {input_html: {name: "answer"}}, html: {class: "l-question-display-#{@question.category}"} do |f|
 
   = render "question", {question: @question, f: f}
 

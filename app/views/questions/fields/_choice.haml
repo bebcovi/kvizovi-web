@@ -1,7 +1,6 @@
-= f.input :provided_answers do
+= f.input :provided_answers, wrapper_html: {class: "space-half-bottom"} do
   - number_of_fields = (params[:action] == "new" ? 4 : question.provided_answers.count)
-  %ol
-    - number_of_fields.times do |n|
-      - additional_options = {wrapper_html: {class: "success"}, hint: "Ovo će biti točan odgovor."} if n == 0
-      %li= f.input :provided_answers, {label: false, error: false,
-        placeholder: "Ponuđeni odgovor #{n + 1}", input_html: {value: question.provided_answers[n], name: "choice_question[provided_answers][]"}}.deep_merge(additional_options || {})
+  - number_of_fields.times do |n|
+    - additional_options = {wrapper_html: {class: "success"}, hint: "Ovo će biti točan odgovor.", hint_html: {class: "align-middle space-half-left"}} if n == 0
+    .choice-option.list-inline-block.space-half-bottom= f.input :provided_answers, {label: false, error: false,
+      placeholder: "Ponuđeni odgovor #{n + 1}", input_html: {value: question.provided_answers[n], name: "choice_question[provided_answers][]", style: "margin-bottom: 0;"}}.deep_merge(additional_options || {})

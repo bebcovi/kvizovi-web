@@ -11,7 +11,11 @@
 //= require general
 //= require helper
 //
-//= require_tree ./controllers
-//= require_tree ./questions
+//= require controllers/games
+//= require controllers/tour
 //
-//= require lektire
+//= require questions/association
+//= require questions/choice
+//= require questions/image
+//
+//= require init

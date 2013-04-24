@@ -1,0 +1,16 @@
+.dropdown-menu {
+  li > a {
+    font-weight: inherit;
+
+    &.item-danger {
+      @include color-link($btnDangerBackgroundHighlight, white);
+      @include on-interact {
+        background: $btnDangerBackgroundHighlight;
+      }
+    }
+  }
+
+  i {
+    margin-right: $hsu/2;
+  }
+}

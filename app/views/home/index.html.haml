@@ -1,10 +1,15 @@
 - title "Početna"
 
 - content_for :hero_unit do
-  %h1= "Lektire".prepend_icon("books")
-  %p.lead Jednostavna aplikacija za igranje kvizova.
-  .app_role
-    = link_to "Ja sam učenik".prepend_icon("user"), login_url(subdomain: "student"), class: "btn btn-primary btn-large"
-    = link_to "Ja sam škola".append_icon("home"), login_url(subdomain: "school"), class: "btn btn-primary btn-large"
+  %h1.hero-unit-title
+    = "Lektire".prepend_icon("books")
+
+  %p.hero-unit-description.lead
+    Jednostavna aplikacija za igranje kvizova.
+
+  .app-role
+    = link_to "Ja sam učenik".prepend_icon("user"), login_url(subdomain: "student"), class: "btn btn-primary btn-large app-role-btn"
+    = link_to "Ja sam škola".append_icon("home"), login_url(subdomain: "school"), class: "btn btn-primary btn-large app-role-btn"
+
   %p.tour
     %small Prvi puta ste ovdje? Treba li vam #{link_to "vodič", tour_path}?

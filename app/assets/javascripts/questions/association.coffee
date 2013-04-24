@@ -1,126 +1,119 @@
-$ = jQuery
+do ($ = jQuery) ->
 
-App.Questions.association =
+  App.Questions.association =
 
-  show: ($form) ->
+    design: ($form) ->
 
-    $pairs    = $('li', $form)
+      $pairs        = $(".association-pair", $form)
 
-    $static   = $('.static', $pairs)
-    $dynamic  = $('.dynamic', $pairs)
+      $firstPair    = $pairs.first()
+      $otherPairs   = $firstPair.siblings()
+      $template     = $firstPair.clone()
 
-    widths    = []
-    limit     = $form.width() * 2/3
+      $addButton    = $.addButton.clone()
+      $removeButton = $.removeButton.clone()
 
-    swap = ($one, $two) ->
-      $oneParent = $one.parent()
-      $twoParent = $two.parent()
+      updateAttrs   = ($el, i) ->
+        i += 2
+        j = i * 2
 
-      $one.prependTo $twoParent
-      $two.prependTo $oneParent
+        $el.find("input").each (index) ->
 
-      $one.next().attr 'value', $one.text()
-      $two.next().attr 'value', $two.text()
+          $input = $(@)
 
-    $('ul', $form).show()
+          id = $input.attr("id")
+          placeholder = $input.attr("placeholder")
 
-    $pairs.find('input').each ->
-      $el = $('<span>').text $(@).val()
-      $(@).before $el
-      $(@).hide()
+          $input.attr "id",           id.replace(/\d+/, if index is 1 then j else j - 1)
+          $input.attr "placeholder",  placeholder.replace(/\d+/, i)
 
-    $static
-      .css('width', 'auto')
-      .each -> widths.push $(@).width()
+      addPair = ($el) ->
+        $otherPairs = $otherPairs.add $el.insertBefore($addButton)
 
-    maxWidth = Math.max.apply(Math, widths) + 10
-    maxWidth = limit if maxWidth > limit
+      removePair = ($el) ->
+        $otherPairs = $otherPairs.not $el.remove()
 
-    $static.width(maxWidth)
+      filled = ($el) ->
+        result = true
+        $el.find("input").each -> result = result and !!$(@).val()
+        result
 
-    $dynamic.find('span')
-      .draggable
-        addClasses:     false
-        revert:         'invalid'
-        revertDuration: 250
-        helper:         'clone'
-        zIndex:         10
-        start: -> $(@).addClass 'original'
-        stop:  -> $(@).removeClass 'original'
+      $otherPairs.add($template).children(":last-child")
+        .after $removeButton
+          .clone()
+          .addClass("close")
+          .attr("tabindex", -1)
 
-      .droppable
-        addClasses: false
-        hoverClass: 'hover'
-        drop: (e, ui) -> swap($(@), ui.draggable)
+      $template
+        .find("input").val("").end()
+        .find("div").removeClass("field_with_errors").end()
+        .find(".error").remove()
 
-  new: ($form) ->
+      if $otherPairs.length
+        $addButton.insertAfter($otherPairs.last())
+      else
+        $addButton.insertAfter($firstPair)
 
-    $pairs        = $('li', $form)
+      $addButton
+        .on "click", (event) ->
+          $new = $template.clone()
+          event.preventDefault()
+          updateAttrs $new, $otherPairs.length
+          addPair $new
 
-    $firstPair    = $pairs.first()
-    $otherPairs   = $firstPair.siblings()
-    $template     = $firstPair.clone()
+      $form.on "click", ".close", ->
+        $el = $(@).closest(".association-pair")
+        removePair $el
+        $otherPairs.each (i) -> updateAttrs $(@), i
 
-    $addButton    = $.addButton.clone()
-    $removeButton = $.removeButton.clone()
+    display: ($form) ->
 
-    updateAttrs   = ($el, i) ->
-      i += 2
-      j = i * 2
+      $pairs    = $("li", $form)
 
-      $el.find('.static, .dynamic').each (index) ->
+      $static   = $(".static", $pairs)
+      $dynamic  = $(".dynamic", $pairs)
 
-        $input = $(@).find('input')
+      widths    = []
+      limit     = $form.width() * 2/3
 
-        id = $input.attr('id')
-        placeholder = $input.attr('placeholder')
+      swap = ($one, $two) ->
+        $oneParent = $one.parent()
+        $twoParent = $two.parent()
 
-        $input.attr 'id',           id.replace(/\d+/, if index is 1 then j else j - 1)
-        $input.attr 'placeholder',  placeholder.replace(/\d+/, i)
+        $one.prependTo $twoParent
+        $two.prependTo $oneParent
 
-    addPair = ($el) ->
-      $otherPairs = $otherPairs.add $el.insertBefore($addButton)
+        $one.next().attr "value", $one.text()
+        $two.next().attr "value", $two.text()
 
-    removePair = ($el) ->
-      $otherPairs = $otherPairs.not $el.remove()
+      $("ul", $form).show()
 
-    filled = ($el) ->
-      result = true
-      $el.find('input').each -> result = result and !!$(@).val()
-      result
+      $pairs.find("input").each ->
+        $el = $("<span>").text $(@).val()
+        $(@).before $el
+        $(@).hide()
 
-    $otherPairs.add($template).find('.dynamic')
-      .after $removeButton
-        .clone()
-        .addClass('close')
-        .attr('tabindex', -1)
+      $static
+        .css("width", "auto")
+        .each -> widths.push $(@).width()
 
-    $template
-      .find('input').val('').end()
-      .find('div').removeClass('field_with_errors').end()
-      .find('.error').remove()
+      maxWidth = Math.max.apply(Math, widths) + 10
+      maxWidth = limit if maxWidth > limit
 
-    if $otherPairs.length
-      $addButton.insertAfter($otherPairs.last())
-    else
-      $addButton.insertAfter($firstPair)
+      $static.width(maxWidth)
 
-    $addButton
-      .on 'click', (event) ->
-        $new = $template.clone()
-        event.preventDefault()
-        updateAttrs $new, $otherPairs.length
-        addPair $new
+      $dynamic.find("span")
+        .draggable
+          addClasses:     false
+          revert:         "invalid"
+          revertDuration: 250
+          helper:         "clone"
+          zIndex:         10
+          start: -> $(@).addClass "original"
+          stop:  -> $(@).removeClass "original"
 
-    $form.on 'click', '.close', ->
-      $el = $(@).closest('li')
-      removePair $el
-      $otherPairs.each (i) -> updateAttrs $(@), i
+        .droppable
+          addClasses: false
+          hoverClass: "hover"
+          drop: (e, ui) -> swap($(@), ui.draggable)
 
-  edit: ($form) ->
-
-    @new $form
-
-  create: ($form) ->
-
-    @new $form

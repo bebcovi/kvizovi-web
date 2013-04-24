@@ -1,7 +1,7 @@
-$ = jQuery
+do ($ = jQuery) ->
 
-App.Controllers.tour =
+  App.Controllers.tour =
 
-  index: ->
+    index: ->
 
-    $('#skole').find('ol').addClass("no_bullets")
+      $("#skole").find("ol").addClass("no_bullets")

@@ -1,9 +1,0 @@
-body.students {
-}
-
-.student_list {
-  @extend %pretty-list;
-  .username {
-    @extend .count;
-  }
-}

@@ -1,0 +1,15 @@
+.form {
+}
+
+  .form-inline {
+    .controls,
+    ol, ul, li,
+    .btn-toolbar {
+      display: inline-block;
+      margin: 0;
+    }
+
+    .controls {
+      margin-right: 8px;
+    }
+  }

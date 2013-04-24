@@ -10,20 +10,21 @@
       %p Odaberi kviz:
       = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
 
-    %section.players
+    %section.players.js-hidden
       %p Igraš li sam ili još s nekim?
       = f.input :players_count, collection: [["Samo ja", 1], ["Još netko", 2]], as: :radio_buttons, label: false
 
-    %section.login
+    %section.login.js-hidden
       %p Daj drugom igraču da se prijavi:
       = f.error(:player_credentials) if f.error(:player_credentials)
       = f.simple_fields_for :players_credentials, index: nil do |p|
         = p.input :username, input_html: {value: (params[:game_details][:players_credentials].first[:username] rescue nil)}
         = p.input :password
 
-    = buttons do
+    = buttons class: "js-hidden" do
       = submit_button raw("Započni kviz#{content_tag :strong, "", class: "name"}!")
 
 - else
 
-  %p.no_items Nema još kvizova za igrati...
+  %p.no-items
+    Nema još kvizova za igrati...

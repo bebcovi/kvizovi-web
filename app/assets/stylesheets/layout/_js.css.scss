@@ -1,0 +1,22 @@
+.js {
+
+  .association_question {
+    &.show {
+      ul { display: none; }
+    }
+  }
+
+  .image_question {
+    &.new,
+    &.edit,
+    &.create {
+      > .file {
+        div.file,
+        div.url {
+          display: none;
+        }
+      }
+    }
+  }
+
+}

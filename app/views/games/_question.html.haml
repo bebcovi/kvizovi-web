@@ -1,8 +1,8 @@
-%h2
-  %span.question_number{class: "player_#{number(@player_number)}"}= @question_number
+%h2.question-title
+  %span.question-number{class: "player_#{number(@player_number)}"}= @question_number
   = smarty_pants question.content
 
 = render "games/question/#{question.category}", {f: f, question: question}
 
 - if question.hint?
-  %p.hint Uputa: #{question.hint}
+  %p.question-hint Uputa: #{question.hint}

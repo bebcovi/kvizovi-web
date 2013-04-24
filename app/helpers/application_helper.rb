@@ -40,7 +40,7 @@ module ApplicationHelper
 
   def alert_message(string, type, options = {})
     options[:close] = true if options[:close].nil?
-    content_tag :div, raw("#{remove_button(dismiss: "alert")}#{string}"), class: "alert alert-#{type} fade in #{"no-close" unless options[:close]}"
+    content_tag :div, raw("#{remove_button(dismiss: "alert")}#{string}"), class: "alert alert-#{type} fade in #{options[:class]} #{"no-close" unless options[:close]}"
   end
 
   def icon(name, options = {})

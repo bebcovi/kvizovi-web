@@ -1,0 +1,4 @@
+.is-unselectable {
+  @include user-select(none);
+  cursor: default;
+}
