@@ -2,11 +2,11 @@ require "spec_helper"
 require "active_support/core_ext/numeric/bytes"
 
 describe ImageQuestion do
-  before do
-    @it = Factory.build(:empty_image_question)
-  end
+  enable_paper_trail!
 
-  enable_paper_trail
+  before do
+    @it = Factory.build(:image_question)
+  end
 
   describe "#image_url=" do
     it "assigns the URL to #image" do
@@ -40,8 +40,7 @@ describe ImageQuestion do
   context "callbacks" do
     it "saves sizes" do
       @it.image = uploaded_file("image.jpg", "image/jpeg")
-      @it.stub(:valid?) { true }
-      @it.save!
+      @it.save!(validate: false)
       expect(@it.image_width).to be_a(Integer)
       expect(@it.image_height).to be_a(Integer)
       expect(@it.image_width(:resized)).to be_a(Integer)
@@ -52,8 +51,10 @@ describe ImageQuestion do
       @it = Factory.create(:image_question, image: uploaded_file("image.jpg", "image/jpeg"))
       @it.destroy
       @it = @it.versions.last.reify
-      @it.save!
+      @it.save!(validate: false)
       expect(@it.image.path).to satisfy { |path| File.exists?(path) }
+      expect(@it.image_width).to be_present
+      expect(@it.image_height).to be_present
     end
   end
 

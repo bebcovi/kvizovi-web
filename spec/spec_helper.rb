@@ -2,10 +2,9 @@ ENV["RAILS_ENV"] = "test"
 
 require_relative "../config/environment"
 require "rspec/rails"
+require "pry"
 
 Dir[Rails.root.join("spec/support/*.rb")].each &method(:require)
-
-require "pry"
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true

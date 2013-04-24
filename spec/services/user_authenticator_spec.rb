@@ -14,13 +14,12 @@ describe UserAuthenticator do
 
     context "when user is found" do
       before do
-        @user = Factory.create_without_validation(:empty_school, username: "janko")
+        @user = Factory.create(:school, username: "janko")
       end
 
       context "and doesn't match the password" do
         before do
-          @user.assign_attributes(password: "foo")
-          @user.save(validate: false)
+          @user.update_attributes(password: "foo")
         end
 
         it "returns false" do
@@ -30,8 +29,7 @@ describe UserAuthenticator do
 
       context "and matches the password" do
         before do
-          @user.assign_attributes(password: "secret")
-          @user.save(validate: false)
+          @user.update_attributes(password: "secret")
         end
 
         it "returns the user" do

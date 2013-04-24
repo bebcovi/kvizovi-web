@@ -9,14 +9,22 @@ class Question < ActiveRecord::Base
 
   acts_as_taggable
   has_paper_trail on: [:destroy]
+  serialize :data, Hash
 
-  scope :search,    ->(query) { scoped }
-  scope :ascending, ->        { order{created_at.asc} }
+  scope :ascending, -> { order{created_at.asc} }
 
   validates :content, presence: true
 
-  def self.data_accessor(*names)
-    store :data, accessors: names
+  def self.data_accessor(*keys)
+    keys.each do |key|
+      define_method(key) do
+        (data || {})[key]
+      end
+
+      define_method("#{key}=") do |value|
+        self.data = (data || {}).merge(key => value)
+      end
+    end
   end
 
   def dup

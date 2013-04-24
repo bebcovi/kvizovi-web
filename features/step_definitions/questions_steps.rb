@@ -38,7 +38,7 @@ When(/^I create an image question with (.*)$/) do |image_input|
   fill_in "Tekst pitanja", with: "Are you a stupidhead?"
   case image_input
   when "image url"  then fill_in "URL od slike", with: "http://3.bp.blogspot.com/-bnKL0iosAc8/UOmO_a_ujuI/AAAAAAAAmVI/R5aNBx_yx2w/s1600/flbp-girls-women-sexy-9.jpg"
-  when "image file" then attach_file "Slika", Rails.root.join("spec/fixtures/files/image.jpg")
+  when "image file" then attach_file "Slika", Rails.root.join("features/support/fixtures/files/clint_eastwood.jpg")
   end
   fill_in "Odgovor", with: "Yes"
   click_on "Spremi"

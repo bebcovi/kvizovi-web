@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Quiz do
   before do
-    @it = Factory.build(:empty_quiz)
+    @it = Factory.build(:quiz)
   end
 
   context "validations" do
@@ -13,12 +13,9 @@ describe Quiz do
       end
 
       it "validates uniqueness inside a school" do
-        quiz = Factory.create_without_validation(:empty_quiz, name: "Foo", school_id: 1)
+        Factory.create(:quiz, name: "Foo", school_id: 1)
         @it.assign_attributes(name: "Foo", school_id: 1)
         expect(@it).to have(1).error_on(:name)
-
-        quiz.update_column(:school_id, 2)
-        expect(@it).not_to have(1).error_on(:name)
       end
     end
 
@@ -32,9 +29,8 @@ describe Quiz do
 
   it "destroyes its questions upon destruction" do
     @it.save(validate: false)
-    question = Factory.create_without_validation(:empty_question, quiz: @it)
+    @it.questions = [Factory.create(:question)]
     @it.destroy
-    expect(question).not_to satisfy { |q| Question.exists?(q) }
+    expect(@it.questions).to be_empty
   end
 end
-

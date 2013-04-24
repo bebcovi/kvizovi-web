@@ -1,24 +1,22 @@
 require "spec_helper"
 
-describe GamesController do
-  student!
-
+describe GamesController, user: :student do
   before do
-    @school = Factory.create_without_validation(:empty_school)
-    @student = Factory.create_without_validation(:empty_student, school: @school)
-    @quiz = Factory.create_without_validation(:empty_quiz, school: @school)
-    3.times { Factory.create_without_validation(:empty_question, quiz: @quiz) }
+    @school    = Factory.create(:school)
+    @student   = Factory.create(:student, school: @school)
+    @quiz      = Factory.create(:quiz, :activated, school: @school)
+    @questions = Factory.create_list(:question, 3, quiz: @quiz)
 
-    controller.send(:log_in!, @student)
+    login_as(@student)
   end
 
-  let(:game_details) {
+  let(:game_details) do
     {
       quiz_id:      @quiz.id,
-      question_ids: @quiz.question_ids,
-      player_ids:   [@student.id]
+      question_ids: @questions.map(&:id),
+      player_ids:   [@student.id],
     }
-  }
+  end
 
   describe "#new" do
     it "assigns quizzes" do
@@ -46,6 +44,10 @@ describe GamesController do
     end
 
     context "when invalid" do
+      before do
+        GameDetails.any_instance.stub(:valid?) { false }
+      end
+
       it "assigns quizzes" do
         post :create
         expect(assigns(:quizzes)).to eq [@quiz]
@@ -53,84 +55,68 @@ describe GamesController do
     end
   end
 
-  describe "#edit" do
+  context "in game" do
     before do
       controller.send(:game).initialize!(game_details)
     end
 
-    it "doesn't raise errors" do
-      get :edit
-    end
-  end
-
-  describe "#update" do
-    before do
-      controller.send(:game).initialize!(game_details)
+    describe "#edit" do
+      it "doesn't raise errors" do
+        get :edit
+      end
     end
 
-    it "invokes #save_answer!" do
-      controller.send(:game).should_receive(:save_answer!)
-      put :update
+    describe "#update" do
+      it "invokes #save_answer!" do
+        controller.send(:game).should_receive(:save_answer!)
+        put :update
+      end
+
+      it "redirects to feedback" do
+        put :update
+        expect(response).to redirect_to(feedback_game_path)
+      end
     end
 
-    it "redirects to feedback" do
-      put :update
-      expect(response).to redirect_to(feedback_game_path)
-    end
-  end
-
-  describe "#feedback" do
-    before do
-      controller.send(:game).initialize!(game_details)
+    describe "#feedback" do
+      it "doesn't raise errors" do
+        get :feedback
+      end
     end
 
-    it "doesn't raise errors" do
-      get :feedback
-    end
-  end
+    describe "#next_question" do
+      it "invokes #next_question!" do
+        controller.send(:game).should_receive(:next_question!)
+        get :next_question
+      end
 
-  describe "#next_question" do
-    before do
-      controller.send(:game).initialize!(game_details)
-    end
-
-    it "invokes #next_question!" do
-      controller.send(:game).should_receive(:next_question!)
-      get :next_question
+      it "redirects to game" do
+        get :next_question
+        expect(response).to redirect_to(edit_game_path)
+      end
     end
 
-    it "redirects to game" do
-      get :next_question
-      expect(response).to redirect_to(edit_game_path)
-    end
-  end
+    describe "#show" do
+      before do
+        controller.send(:game).finalize!
+      end
 
-  describe "#show" do
-    before do
-      controller.send(:game).initialize!(game_details)
-      controller.send(:game).finalize!
+      it "doesn't raise errors" do
+        get :show
+      end
     end
 
-    it "doesn't raise errors" do
-      get :show
-    end
-  end
-
-  describe "#delete" do
-    it "doesn't raise errors" do
-      get :delete
-    end
-  end
-
-  describe "#destroy" do
-    before do
-      controller.send(:game).initialize!(game_details)
+    describe "#delete" do
+      it "doesn't raise errors" do
+        get :delete
+      end
     end
 
-    it "creates the game" do
-      expect {
+    describe "#destroy" do
+      it "creates the game" do
         delete :destroy
-      }.to change { PlayedGame.count }.by 1
+        expect(PlayedGame.count).to eq 1
+      end
     end
   end
 end

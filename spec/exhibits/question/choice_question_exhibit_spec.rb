@@ -3,6 +3,7 @@ require "spec_helper"
 describe ChoiceQuestionExhibit do
   before do
     @question = Factory.build(:choice_question)
+    @question.provided_answers = ["Foo", "Bar", "Baz"]
     @it = ChoiceQuestionExhibit.new(@question)
   end
 
@@ -14,10 +15,6 @@ describe ChoiceQuestionExhibit do
   end
 
   describe "#has_answer?" do
-    before do
-      @question.provided_answers = ["Foo", "Bar", "Baz"]
-    end
-
     it "compares it to the first provided answer" do
       expect(@it).to have_answer("Foo")
     end

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Student do
   before do
-    @it = Factory.build(:empty_student)
+    @it = Factory.build(:student)
   end
 
   describe "#grade=" do
@@ -30,7 +30,7 @@ describe Student do
       end
 
       it "validates uniqueness" do
-        Factory.create_without_validation(:empty_student, username: "john")
+        Factory.create(:student, username: "john")
         @it.username = "john"
         expect(@it).to have(1).error_on(:username)
       end

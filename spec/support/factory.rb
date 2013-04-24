@@ -1,26 +1,49 @@
 require "factory_girl"
 
 module FactoryGirl
-  def self.definitions_loaded?
-    factories.registered?(:school)
-  end
-end
+  module Strategy
+    class CreateWithoutValidation < Create
+      def result(evaluation)
+        evaluation.object.instance_eval do
+          def valid?(*args)
+            super
+            true
+          end
+        end
 
-FactoryGirl.find_definitions unless FactoryGirl.definitions_loaded?
-
-module FactoryGirl
-  class Strategy::CreateWithoutValidation < Strategy::Create
-    def result(evaluation)
-      evaluation.object.tap do |instance|
-        evaluation.notify(:after_build, instance)
-        evaluation.notify(:before_create, instance)
-        instance.save(validate: false)
-        evaluation.notify(:after_create, instance)
+        super
       end
     end
   end
 
-  register_strategy(:create_without_validation, Strategy::CreateWithoutValidation)
+  register_strategy :create, Strategy::CreateWithoutValidation
+end
+
+FactoryGirl.factories.clear
+FactoryGirl.define do
+  factory :school, aliases: [:user]
+
+  factory :student
+
+  factory :quiz do
+    trait :activated do
+      activated true
+    end
+  end
+
+  factory :boolean_question, aliases: [:question]
+  factory :choice_question
+  factory :association_question
+  factory :image_question
+  factory :text_question
+
+  trait :with_school do
+    school
+  end
+
+  trait :with_quiz do
+    school
+  end
 end
 
 Factory = FactoryGirl unless defined?(Factory)

@@ -1,13 +1,12 @@
 require "spec_helper"
 
-describe QuestionsController do
-  school!
-  enable_paper_trail
+describe QuestionsController, user: :school do
+  enable_paper_trail!
 
   before do
-    @user = Factory.create_without_validation(:empty_school)
-    controller.send(:log_in!, @user)
-    @quiz = Factory.create_without_validation(:empty_quiz, school: @user)
+    @school = Factory.create(:school)
+    @quiz = Factory.create(:quiz, school: @school)
+    login_as(@school)
   end
 
   context "collection" do
@@ -26,10 +25,10 @@ describe QuestionsController do
 
     describe "#create" do
       it "scopes to current quiz" do
-        other_quiz = Factory.create_without_validation(:empty_quiz)
-        expect {
+        other_quiz = Factory.create(:quiz)
+        expect do
           post :create, quiz_id: other_quiz.id, category: "boolean"
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       context "when valid" do
@@ -38,9 +37,7 @@ describe QuestionsController do
         end
 
         it "creates the question" do
-          expect {
-            post :create, quiz_id: @quiz.id, category: "boolean"
-          }.to change { @quiz.questions.count }.by 1
+          post :create, quiz_id: @quiz.id, category: "boolean"
           expect(@quiz.questions.first).to be_a(BooleanQuestion)
         end
       end
@@ -59,7 +56,7 @@ describe QuestionsController do
 
   context "member" do
     before do
-      @question = Factory.create_without_validation(:empty_question, quiz: @quiz)
+      @question = Factory.create(:text_question, quiz: @quiz)
     end
 
     describe "#edit" do
@@ -70,10 +67,10 @@ describe QuestionsController do
 
     describe "#update" do
       it "scopes to current quiz" do
-        other_quiz = Factory.create_without_validation(:empty_quiz)
-        expect {
+        other_quiz = Factory.create(:quiz)
+        expect do
           put :update, quiz_id: other_quiz.id, id: @question.id, category: "boolean"
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       context "when valid" do
@@ -101,7 +98,7 @@ describe QuestionsController do
     describe "#destroy" do
       it "destroyes the question" do
         delete :destroy, quiz_id: @quiz.id, id: @question.id
-        expect(Question.exists?(@quesion)).to be_false
+        expect(Question.exists?(@question)).to be_false
       end
     end
   end

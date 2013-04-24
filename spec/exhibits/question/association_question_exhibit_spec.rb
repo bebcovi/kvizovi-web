@@ -3,6 +3,7 @@ require "spec_helper"
 describe AssociationQuestionExhibit do
   before do
     @question = Factory.build(:association_question)
+    @question.associations = {"Foo" => "Foo", "Bar" => "Bar", "Baz" => "Baz"}
     @it = AssociationQuestionExhibit.new(@question)
   end
 
@@ -15,10 +16,6 @@ describe AssociationQuestionExhibit do
   end
 
   describe "#has_answer?" do
-    before do
-      @question.associations = {"Foo" => "Foo", "Bar" => "Bar", "Baz" => "Baz"}
-    end
-
     it "accepts an array" do
       expect(@it).to have_answer(["Foo", "Foo", "Bar", "Bar", "Baz", "Baz"])
     end

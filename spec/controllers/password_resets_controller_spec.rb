@@ -1,11 +1,9 @@
 require "spec_helper"
 require "nokogiri"
 
-describe PasswordResetsController do
-  school!
-
+describe PasswordResetsController, user: :school do
   before do
-    @user = Factory.create_without_validation(:empty_school, email: "jon.snow@example.com")
+    @user = Factory.create(:school, email: "jon.snow@example.com")
   end
 
   describe "#new" do
@@ -16,11 +14,6 @@ describe PasswordResetsController do
 
   describe "#create" do
     context "when valid" do
-      before do
-        @user.class.any_instance.stub(:valid?) { true }
-        PasswordResetter.any_instance.stub(:reset_password)
-      end
-
       it "resets the password" do
         PasswordResetter.any_instance.should_receive(:reset_password)
         post :create, email: @user.email

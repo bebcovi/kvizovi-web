@@ -1,8 +1,6 @@
 require "spec_helper"
 
-describe SessionsController do
-  before { request.host = "school.example.com" }
-
+describe SessionsController, user: :school do
   describe "#new" do
     it "doesn't raise errors" do
       get :new
@@ -13,7 +11,7 @@ describe SessionsController do
     context "when valid" do
       before do
         Login.any_instance.stub(:valid?) { true }
-        @user = Factory.create_without_validation(:empty_school)
+        @user = Factory.create(:user)
         Login.any_instance.stub(:user) { @user }
       end
 
@@ -36,8 +34,8 @@ describe SessionsController do
 
   describe "#destroy" do
     before do
-      @user = Factory.create_without_validation(:empty_school)
-      controller.send(:log_in!, @user)
+      @user = Factory.create(:user)
+      login_as(@user)
     end
 
     it "logs the user out" do

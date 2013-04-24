@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe TextQuestion do
   before do
-    @it = Factory.build(:empty_text_question)
+    @it = Factory.build(:text_question)
   end
 
   context "validations" do

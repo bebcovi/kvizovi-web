@@ -1,11 +1,9 @@
 require "spec_helper"
 
-describe PasswordsController do
-  school!
-
+describe PasswordsController, user: :school do
   before do
-    @user = Factory.create_without_validation(:empty_school)
-    controller.send(:log_in!, @user)
+    @user = Factory.create(:user)
+    login_as(@user)
   end
 
   describe "#edit" do
@@ -21,7 +19,6 @@ describe PasswordsController do
       end
 
       it "updates the password" do
-        @user.class.any_instance.stub(:valid?) { true }
         post :update, password: {new: "new password"}
         expect(@user.reload.authenticate("new password")).to be_true
       end

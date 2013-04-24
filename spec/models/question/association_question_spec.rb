@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe AssociationQuestion do
   before do
-    @it = Factory.build(:empty_association_question)
+    @it = Factory.build(:association_question)
   end
 
   describe "#associations=" do

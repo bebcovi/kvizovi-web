@@ -1,11 +1,9 @@
 require "spec_helper"
 
-describe ProfilesController do
-  school!
-
+describe ProfilesController, user: :school do
   before do
-    @user = Factory.create_without_validation(:empty_school)
-    controller.send(:log_in!, @user)
+    @user = Factory.create(:school)
+    login_as(@user)
   end
 
   describe "#show" do
@@ -23,19 +21,18 @@ describe ProfilesController do
   describe "#update" do
     context "when valid" do
       before do
-        @user.class.any_instance.stub(:valid?) { true }
+        @user.stub(:valid?) { true }
       end
 
       it "saves the record" do
-        expect {
-          put :update, school: {name: "New name"}
-        }.to change { @user.reload.name }.to "New name"
+        put :update, school: {name: "New name"}
+        expect(@user.reload.name).to eq "New name"
       end
     end
 
     context "when invalid" do
       before do
-        @user.class.any_instance.stub(:valid?) { false }
+        @user.stub(:valid?) { false }
       end
 
       it "doesn't raise errors" do

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe School do
   before do
-    @it = Factory.build(:empty_school)
+    @it = Factory.build(:school)
   end
 
   context "validations" do
@@ -13,7 +13,7 @@ describe School do
       end
 
       it "validates uniqueness" do
-        Factory.create_without_validation(:empty_school, username: "jon")
+        Factory.create(:school, username: "jon")
         @it.username = "jon"
         expect(@it).to have(1).error_on(:username)
       end
@@ -33,7 +33,7 @@ describe School do
       end
 
       it "validates uniqueness" do
-        Factory.create_without_validation(:empty_school, email: "jon@snow.com")
+        Factory.create(:school, email: "jon@snow.com")
         @it.email = "jon@snow.com"
         expect(@it).to have(1).error_on(:email)
       end

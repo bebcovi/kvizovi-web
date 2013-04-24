@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe BooleanQuestion do
   before do
-    @it = Factory.build(:empty_boolean_question)
+    @it = Factory.build(:boolean_question)
   end
 
   describe "#answer=" do

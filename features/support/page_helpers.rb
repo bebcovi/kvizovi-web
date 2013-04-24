@@ -1,4 +1,4 @@
-module NavigationHelpers
+module PageHelpers
   def path_to(page)
     if page.match(/^the /)
       return path_to(page.match(/^the /).post_match)
@@ -22,4 +22,4 @@ module NavigationHelpers
   end
 end
 
-World(NavigationHelpers)
+World(PageHelpers)

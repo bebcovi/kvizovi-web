@@ -9,8 +9,12 @@ describe HomeController do
     end
 
     context "when user is logged in" do
-      it "redirects if user is logged in" do
-        controller.send(:log_in!, Factory.create_without_validation(:empty_school))
+      before do
+        user = Factory.create(:user)
+        login_as(user)
+      end
+
+      it "redirects" do
         get :index
         expect(response).to be_a_redirect
       end

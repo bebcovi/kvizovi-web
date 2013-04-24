@@ -7,7 +7,7 @@ FileUtils.mkdir_p(Rails.root.join("tmp/test"))
 module FileHelpers
   extend ActiveSupport::Concern
 
-  FIXTURES_ROOT = Rails.root.join("spec/fixtures/files")
+  FIXTURES_ROOT = Rails.root.join("spec/support/fixtures/files")
   TMP_ROOT      = Rails.root.join("tmp/test")
 
   def uploaded_file(original_filename, copy_filename = original_filename, content_type)

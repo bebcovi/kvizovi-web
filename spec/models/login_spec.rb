@@ -6,17 +6,15 @@ describe Login do
   end
 
   context "validations" do
-    before do
-      @it.user_class = Student
-    end
-
     it "validates authentication of user and assigns the user" do
-      user = stub
-      UserAuthenticator.any_instance.stub(:authenticate).with("janko", "secret").and_return(user)
+      user = Factory.create(:user, username: "janko", password: "secret")
+      @it.user_class = user.class
+
       expect(@it).to be_valid
       expect(@it.user).to eq user
 
-      UserAuthenticator.any_instance.stub(:authenticate).with("janko", "secret").and_return(false)
+      user.destroy
+
       expect(@it).not_to be_valid
     end
   end

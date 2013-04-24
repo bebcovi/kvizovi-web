@@ -7,13 +7,11 @@ describe Password do
 
   context "validations" do
     before do
-      @it.stub(:user) { stub.as_null_object }
+      @it.user = Factory.build(:school, password: "secret")
     end
 
     context "#old" do
       it "validates that it matches the current one" do
-        @it.unstub(:user)
-        @it.user = Factory.build(:empty_school, password: "secret")
         @it.old = "wrong password"
         expect(@it).to have(1).error_on(:old)
       end

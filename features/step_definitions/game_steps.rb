@@ -24,7 +24,7 @@ Given(/^my school has created a quiz for me$/) do
     ),
     ImageQuestion.create!(
       content: "Who is in the photo?",
-      image: Rack::Test::UploadedFile.new(Rails.root.join("features/support/files/clint_eastwood.jpg"), "image/jpeg"),
+      image: Rack::Test::UploadedFile.new(Rails.root.join("features/support/fixtures/files/clint_eastwood.jpg"), "image/jpeg"),
       answer: "Clint Eastwood",
     ),
     TextQuestion.create!(

@@ -3,9 +3,9 @@ require File.expand_path("../boot", __FILE__)
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
-require "sprockets/railtie"
+require "sprockets/railtie" unless Rails.env.test?
 
-Bundler.require(:assets)
+Bundler.require(:assets) unless Rails.env.test?
 
 if Rails.env.development?
   require "better_errors"
@@ -25,7 +25,6 @@ module Lektire
     config.autoload_paths += [
       "#{config.root}/app/models/question",
       "#{config.root}/app/exhibits/question",
-      "#{config.root}/app/models/concerns",
     ]
 
     # Search for locales recursively

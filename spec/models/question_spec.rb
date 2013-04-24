@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Question do
   before do
-    @it = Factory.build(:empty_question)
+    @it = Factory.build(:question)
   end
 
   context "validations" do

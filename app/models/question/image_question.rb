@@ -5,7 +5,6 @@ require "paperclip"
 
 class ImageQuestion < TextQuestion
   include Paperclip::Glue
-  include PaperclipUndoable
 
   data_accessor :image_file_name, :image_content_type,
     :image_file_size, :image_updated_at, :image_size
@@ -42,6 +41,10 @@ class ImageQuestion < TextQuestion
 
   def image_width(style = :original);  image_size[style][:width];  end
   def image_height(style = :original); image_size[style][:height]; end
+
+  # Don't delete the attachments
+  def destroy_attached_files
+  end
 
   def dup
     super.tap do |question|

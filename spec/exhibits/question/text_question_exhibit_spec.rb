@@ -3,14 +3,11 @@ require "spec_helper"
 describe TextQuestionExhibit do
   before do
     @question = Factory.build(:text_question)
+    @question.answer = "Answer"
     @it = TextQuestionExhibit.new(@question)
   end
 
   describe "#has_answer?" do
-    before do
-      @question.answer = "Answer"
-    end
-
     it "is case insensitive" do
       expect(@it).to have_answer("answer")
     end

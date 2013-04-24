@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe GamePresenter do
   before do
-    @players = 2.times.map { Factory.create_without_validation(:empty_student) }
+    @players = Factory.create_list(:student, 2)
     @it = GamePresenter.new(hash, Student)
   end
 

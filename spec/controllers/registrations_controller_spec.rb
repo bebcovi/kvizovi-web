@@ -1,12 +1,8 @@
 require "spec_helper"
 
-describe RegistrationsController do
-  before { request.host = "school.example.com" }
-
+describe RegistrationsController, user: :school do
   describe "#new" do
-    context "when school" do
-      before { request.host = "school.example.com" }
-
+    context "when school", user: :school do
       it "requires authorization" do
         get :new
         expect(response).to redirect_to(new_authorization_path)
@@ -15,9 +11,7 @@ describe RegistrationsController do
       end
     end
 
-    context "when student" do
-      before { request.host = "student.example.com" }
-
+    context "when student", user: :student do
       it "doesn't require authorization" do
         get :new
         expect(response).to be_a_success
@@ -37,9 +31,7 @@ describe RegistrationsController do
         expect(School.count).to eq 1
       end
 
-      context "when school" do
-        before { request.host = "school.example.com" }
-
+      context "when school", user: :school do
         it "creates example quizzes" do
           ExampleQuizzesCreator.any_instance.should_receive(:create)
           post :create
@@ -65,8 +57,8 @@ describe RegistrationsController do
 
   describe "#delete" do
     before do
-      @user = Factory.create_without_validation(:empty_school)
-      controller.send(:log_in!, @user)
+      @user = Factory.create(:user)
+      login_as(@user)
     end
 
     it "doesn't raise errors" do
@@ -76,13 +68,13 @@ describe RegistrationsController do
 
   describe "#destroy" do
     before do
-      @user = Factory.create_without_validation(:empty_school)
-      controller.send(:log_in!, @user)
+      @user = Factory.create(:user)
+      login_as(@user)
     end
 
     context "when valid" do
       before do
-        @user.class.any_instance.stub(:authenticate) { @user }
+        @user.stub(:authenticate) { @user }
       end
 
       it "destroyes the user" do
@@ -98,7 +90,7 @@ describe RegistrationsController do
 
     context "when invalid" do
       before do
-        @user.class.any_instance.stub(:authenticate) { false }
+        @user.stub(:authenticate) { false }
       end
 
       it "doesn't raise errors" do

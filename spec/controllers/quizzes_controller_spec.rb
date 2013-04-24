@@ -1,18 +1,16 @@
 require "spec_helper"
 
-describe QuizzesController do
-  school!
-
+describe QuizzesController, user: :school do
   before do
-    @user = Factory.create_without_validation(:empty_school)
-    controller.send(:log_in!, @user)
+    @school = Factory.create(:school)
+    login_as(@school)
   end
 
   context "collection" do
     describe "#index" do
       it "assigns school's quizzes" do
-        school_quiz = Factory.create_without_validation(:empty_quiz, school: @user)
-        other_quiz  = Factory.create_without_validation(:empty_quiz)
+        school_quiz = Factory.create(:quiz, school: @school)
+        other_quiz  = Factory.create(:quiz)
         get :index
         expect(assigns(:quizzes)).to eq [school_quiz]
       end
@@ -31,9 +29,8 @@ describe QuizzesController do
         end
 
         it "creates the record" do
-          expect {
-            post :create
-          }.to change { @user.quizzes.count }.by 1
+          post :create
+          expect(@school.quizzes.count).to eq 1
         end
       end
 
@@ -51,7 +48,7 @@ describe QuizzesController do
 
   context "member" do
     before do
-      @quiz = Factory.create_without_validation(:empty_quiz, school: @user)
+      @quiz = Factory.create(:quiz, school: @school)
     end
 
     describe "#edit" do
@@ -62,10 +59,10 @@ describe QuizzesController do
 
     describe "#update" do
       it "scopes to current user" do
-        other_quiz = Factory.create_without_validation(:empty_quiz)
-        expect {
+        other_quiz = Factory.create(:quiz)
+        expect do
           put :update, id: other_quiz.id
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       context "when valid" do
@@ -99,7 +96,7 @@ describe QuizzesController do
 
     describe "#destroy" do
       it "scopes to current user" do
-        other_quiz = Factory.create_without_validation(:empty_quiz)
+        other_quiz = Factory.create(:quiz)
         expect { delete :destroy, id: other_quiz.id }.to raise_error(ActiveRecord::RecordNotFound)
       end
 

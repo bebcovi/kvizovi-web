@@ -4,7 +4,7 @@ class GamesController < ApplicationController
 
   def new
     @game_details = GameDetails.new
-    @quizzes = @student.school.quizzes
+    @quizzes = @student.school.quizzes.activated
   end
 
   def create
@@ -16,7 +16,7 @@ class GamesController < ApplicationController
       game.initialize!(@game_details.to_h)
       redirect_to edit_game_path
     else
-      @quizzes = @student.school.quizzes
+      @quizzes = @student.school.quizzes.activated
       render :new
     end
   end

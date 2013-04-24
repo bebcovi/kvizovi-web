@@ -1,7 +1,10 @@
 require "spec_helper"
 
-describe AuthorizationsController do
-  school!
+describe AuthorizationsController, user: :school do
+  before do
+    user = Factory.create(:user)
+    login_as(user)
+  end
 
   describe "#new" do
     it "doesn't raise errors" do
