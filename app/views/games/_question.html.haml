@@ -1,5 +1,5 @@
 %h2.question-title
-  %span.question-number{class: "player_#{number(@player_number)}"}= @question_number
+  %span.question-number{class: "player-#{number(@player_number)}"}= @question_number
   = smarty_pants question.content
 
 = render "games/question/#{question.category}", {f: f, question: question}

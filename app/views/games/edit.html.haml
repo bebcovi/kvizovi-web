@@ -7,7 +7,7 @@
 %h1.align-middle
   = @quiz.name
 
-.question-username.align-middle{class: "player_#{number(@player_number)}"}
+.question-username.align-middle{class: "player-#{number(@player_number)}"}
   = @player.username.prepend_icon("user")
 
 .progress
