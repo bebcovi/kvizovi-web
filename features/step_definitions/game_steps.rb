@@ -93,11 +93,9 @@ end
 
 def connect(left, right)
   @index ||= 0
-  within("form") do
-    divs = all("li")[@index].all("div")
-    divs.first.fill_in :game_answer, with: left
-    divs.last.fill_in :game_answer, with: right
-  end
+  divs = all(".association-pair")[@index].all("div")
+  divs.first.fill_in :game_answer, with: left
+  divs.last.fill_in :game_answer, with: right
   @index += 1
 end
 
@@ -124,11 +122,11 @@ end
 
 Then(/^(I|we) should get all points$/) do |who|
   total = (who == "I" ? 6 : 3)
-  expect(Nokogiri::HTML(html).at(".player_one").text).to have_content("#{total} od #{total}")
-  expect(Nokogiri::HTML(html).at(".player_two").text).to have_content("#{total} od #{total}") if who == "we"
+  expect(Nokogiri::HTML(html).at(".player-one").text).to have_content("#{total} od #{total}")
+  expect(Nokogiri::HTML(html).at(".player-two").text).to have_content("#{total} od #{total}") if who == "we"
 end
 
 Then(/^(I|we) should not get any points$/) do |who|
-  expect(Nokogiri::HTML(html).at(".player_one").text).to have_content("0 od 6")
-  expect(Nokogiri::HTML(html).at(".player_two").text).to have_content("0 od 6") if who == "we"
+  expect(Nokogiri::HTML(html).at(".player-one").text).to have_content("0 od 6")
+  expect(Nokogiri::HTML(html).at(".player-two").text).to have_content("0 od 6") if who == "we"
 end

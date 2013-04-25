@@ -58,8 +58,10 @@ group :development do
   gem "pry-rails"
   gem "better_errors"
   gem "binding_of_caller", ">= 0.7.1"
-  gem "rb-inotify", "~> 0.8.8"
 end
+
+# For Spring
+gem "rb-inotify", group: [:development, :test]
 
 group :production do
   gem "exception_notification"
