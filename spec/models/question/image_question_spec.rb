@@ -38,13 +38,21 @@ describe ImageQuestion do
   end
 
   context "callbacks" do
-    it "saves sizes" do
+    it "saves image sizes" do
       @it.image = uploaded_file("image.jpg", "image/jpeg")
       @it.save!(validate: false)
       expect(@it.image_width).to be_a(Integer)
       expect(@it.image_height).to be_a(Integer)
       expect(@it.image_width(:resized)).to be_a(Integer)
       expect(@it.image_height(:resized)).to be_a(Integer)
+    end
+
+    it "keeps image sizes on update" do
+      @it.image = uploaded_file("image.jpg", "image/jpeg")
+      @it.save!(validate: false)
+      @it.content = "Content"
+      @it.save!(validate: false)
+      expect(@it.image_width).to be_present
     end
 
     it "can revert destroy" do
@@ -54,7 +62,6 @@ describe ImageQuestion do
       @it.save!(validate: false)
       expect(@it.image.path).to satisfy { |path| File.exists?(path) }
       expect(@it.image_width).to be_present
-      expect(@it.image_height).to be_present
     end
   end
 
