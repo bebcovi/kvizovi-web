@@ -38,25 +38,24 @@ Given(/^my school has created a quiz for me$/) do
   ]
 end
 
-Given(/^another student is registered$/) do
-  @other_student = Factory.create(:other_student, school: @user.school)
-end
-
-When(/^I choose the quiz that my school has created for me$/) do
+When(/^I begin the quiz(?: in single player)?$/) do
+  refresh
   choose @quiz.name
-end
-
-When(/^I choose to play alone$/) do
   choose "Samo ja"
+  click_on "Započni kviz"
 end
 
-When(/^I choose to play with the other student$/) do
+When(/^I begin the quiz in multi player$/) do
+  refresh
+  player = Factory.create(:other_student, school: @user.school)
+  choose @quiz.name
   choose "Još netko"
-  fill_in "Korisničko ime", with: @other_student.username
-  fill_in "Lozinka",        with: @other_student.password
+  fill_in "Korisničko ime", with: player.username
+  fill_in "Lozinka",        with: player.password
+  click_on "Započni kviz"
 end
 
-When(/^(I|we) answer all questions correctly$/) do |_|
+When(/^(?:I|we) answer all questions correctly$/) do
   loop do
     case
     when page.has_content?("Who is the cutest person in the world?")
@@ -102,7 +101,7 @@ def connect(left, right)
   @index += 1
 end
 
-When(/^I answer all questions incorrectly$/) do
+When(/^(?:I|we) answer all questions incorrectly$/) do
   loop do
     click_on "Odgovori"
     expect(page).to satisfy do |page|
@@ -118,33 +117,18 @@ When(/^I answer all questions incorrectly$/) do
   end
 end
 
-When(/^I start the quiz$/) do
-  visit new_game_url(subdomain: @user_type)
-  choose @quiz.name
-  choose "Samo ja"
-  click_on "Započni kviz"
-end
-
-When(/^I interrupt the game$/) do
+When(/^I interrupt it$/) do
   click_on "Prekini"
   click_on "Jesam"
 end
 
-Then(/^(I|we) should see the first question$/) do |_|
-  expect(page).to satisfy do |page|
-    @quiz.questions.pluck(:content).any? { |content| page.has_content?(content) }
-  end
+Then(/^(I|we) should get all points$/) do |who|
+  total = (who == "I" ? 6 : 3)
+  expect(Nokogiri::HTML(html).at(".player_one").text).to have_content("#{total} od #{total}")
+  expect(Nokogiri::HTML(html).at(".player_two").text).to have_content("#{total} od #{total}") if who == "we"
 end
 
-Then(/^I should get all points$/) do
-  expect(Nokogiri::HTML(html).at(".player_one").text).to have_content("6 od 6")
-end
-
-Then(/^we should get all points$/) do
-  expect(Nokogiri::HTML(html).at(".player_one").text).to have_content("3 od 3")
-  expect(Nokogiri::HTML(html).at(".player_two").text).to have_content("3 od 3")
-end
-
-Then(/^I should not get any points$/) do
+Then(/^(I|we) should not get any points$/) do |who|
   expect(Nokogiri::HTML(html).at(".player_one").text).to have_content("0 od 6")
+  expect(Nokogiri::HTML(html).at(".player_two").text).to have_content("0 od 6") if who == "we"
 end

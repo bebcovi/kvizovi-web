@@ -1,10 +1,14 @@
 @school
 Feature: Quizzes
 
+  In order for the application to make sense for me
+  As a school
+  I want to be able to create quizzes
+
   Background:
     Given I'm registered and logged in
 
-  Scenario: A school can create, update and delete quizzes
+  Scenario: Creating, updating, and destroying quizzes
     When I create a quiz
     Then I should be on the quizzes page
     And I should see that quiz

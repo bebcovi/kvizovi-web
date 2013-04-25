@@ -68,12 +68,16 @@ When(/^I delete that question$/) do
   within(@question) { click_on "Izbriši" }
 end
 
+When(/^I click on the undo link$/) do
+  click_on "Vrati"
+end
+
 Then(/^I should be on the questions page$/) do
   expect(current_path).to eq quiz_questions_path(@quiz)
   expect(page.driver.request.request_method).to eq "GET"
 end
 
-Then(/^I should see that question( again)?$/) do |_|
+Then(/^I should see that question(?: again)?$/) do
   expect(page).to have_content("Are you a stupidhead?")
 end
 
@@ -83,4 +87,8 @@ end
 
 Then(/^I should not see that question$/) do
   expect(page).not_to have_content(@question.content)
+end
+
+Then(/^I should see an undo link$/) do
+  expect(page).to have_content("Vrati")
 end

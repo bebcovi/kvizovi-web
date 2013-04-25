@@ -1,4 +1,8 @@
-When(/^I update my name$/) do
+Given(/^I'm on my profile$/) do
+  click_on "Uredi profil"
+end
+
+When(/^I update my profile$/) do
   fill_in "Ime", with: "New name"
   click_on "Spremi"
 end
@@ -10,9 +14,12 @@ When(/^I update my password$/) do
   click_on "Spremi"
 end
 
-When(/^I fill in my login information with the updated password$/) do
+When(/^I log in again with the updated password$/) do
+  click_on "Odjava"
+  visit login_url(subdomain: @user_type)
   fill_in "Korisničko ime", with: @user.username
   fill_in "Lozinka",        with: "new password"
+  click_on "Prijava"
 end
 
 When(/^I confirm my password$/) do
@@ -20,6 +27,6 @@ When(/^I confirm my password$/) do
   click_on "Potvrdi"
 end
 
-Then(/^I should see my new name$/) do
+Then(/^I should see my updated profile$/) do
   expect(page).to have_content("New name")
 end

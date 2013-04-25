@@ -1,37 +1,30 @@
 @student
 Feature: Playing quizzes
 
+  In order for the application to make sense for me
+  As a student
+  I want to be able to play quizzes
+
   Background:
     Given I'm registered and logged in
     And my school has created a quiz for me
 
-  Scenario: A student can play a quiz in single player
-    When I visit the page for playing quizzes
-    When I choose the quiz that my school has created for me
-    And I choose to play alone
-    And I click on "Započni kviz"
-    Then I should see the first question
-
-    When I answer all questions correctly
+  Scenario: Single player
+    When I begin the quiz in single player
+    And I answer all questions correctly
     Then I should get all points
 
-  Scenario: A student can play a quiz in multi player
-    Given another student is registered
-    When I visit the page for playing quizzes
-    When I choose the quiz that my school has created for me
-    And I choose to play with the other student
-    And I click on "Započni kviz"
-    Then we should see the first question
-
-    When we answer all questions correctly
+  Scenario: Multi player
+    When I begin the quiz in multi player
+    And we answer all questions correctly
     Then we should get all points
 
-  Scenario: A student may not get all points
-    When I start the quiz
+  Scenario: Not getting all points
+    When I begin the quiz
     And I answer all questions incorrectly
     Then I should not get any points
 
-  Scenario: A student can abort playing the quiz
-    When I start the quiz
-    And I interrupt the game
+  Scenario: Aborting
+    When I begin the quiz
+    And I interrupt it
     Then I should be on the page for playing quizzes

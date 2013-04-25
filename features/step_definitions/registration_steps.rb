@@ -13,9 +13,16 @@ Given(/^I'm registered and logged in$/) do
   }
 end
 
-When(/^I authorize$/) do
-  fill_in "Tajni ključ aplikacije", with: ENV["SECRET_KEY"]
-  click_on "Potvrdi"
+When(/^I go to the registration page$/) do
+  visit login_url(subdomain: @user_type)
+  school do
+    click_on "Registrirajte se"
+    fill_in "Tajni ključ aplikacije", with: ENV["SECRET_KEY"]
+    click_on "Potvrdi"
+  end
+  student do
+    click_on "Registriraj se"
+  end
 end
 
 When(/^I fill in the registration details$/) do
@@ -43,12 +50,6 @@ When(/^I fill in the registration details$/) do
     choose                             student.gender
     select                             student.year_of_birth.to_s, from: "Godina rođenja"
   end
-end
-
-When(/^I authenticate$/) do
-  fill_in "Korisničko ime", with: @user.username
-  fill_in "Lozinka",        with: @user.password
-  click_on "Prijava"
 end
 
 Then(/^I should not be registered/) do

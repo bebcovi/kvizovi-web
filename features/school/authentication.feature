@@ -1,18 +1,19 @@
 @school
 Feature: Authentication
 
-  Scenario: A school can register
-    When I go to the login page
-    And I click on "Registrirajte se"
-    And I authorize
+  In order to use this website
+  As a school
+  I need some basic authentication-related features
+
+  Scenario: Registering
+    When I go to the registration page
     And I fill in the registration details
     And I click on "Registriraj se"
     Then I should be successfully logged in
 
-  Scenario: A school can log in and log out
+  Scenario: Logging in
     Given I'm registered
-    When I go to the homepage
-    And I click on "Ja sam škola"
+    When I go to the login page
     And I fill in my login information
     And I click on "Prijava"
     Then I should be successfully logged in
@@ -20,17 +21,17 @@ Feature: Authentication
     When I click on "Odjava"
     Then I should be logged out
 
-  Scenario: A school can reset its password
+  Scenario: Resetting password
     Given I'm registered
     When I go to the login page
-    And I click on "Zatražite novu"
-    And I confirm my email
-    And I fill in my login information with the emailed password
-    And I click on "Prijava"
+    And I request for a new password
+    Then I should get the email with my new password
+
+    When I login with the emailed password
     Then I should be successfully logged in
 
-  Scenario: After authentication the school is redirected to the intended page
+  Scenario: Being redirected to the intended page after login
     Given I'm registered
     When I visit my profile page
-    And I authenticate
+    And I login
     Then I should be on my profile page
