@@ -1,0 +1,19 @@
+.additional-info {
+  display: inline-block;
+  margin-left: $baseLineHeight/2;
+  margin-bottom: $baseLineHeight/2;
+  padding: 7px 0;
+  vertical-align: middle;
+
+  &.help {
+    color: darken(white, 40%);
+  }
+
+  .success & {
+    margin-bottom: 0;
+    color: $successText;
+    &:before {
+      content: "\e038"; // checkmark-circle-full
+    }
+  }
+}

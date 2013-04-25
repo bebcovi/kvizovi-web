@@ -2,11 +2,30 @@ $ = jQuery
 
 App.general = ->
 
+  # hints
+
+  $(".help-block").each ->
+    $this   = $(@)
+    hint    = $this.text()
+    icon    = $.icon("question-circle-full")
+    $icon   = $(icon)
+
+    $this.replaceWith($icon)
+
+    $icon
+      .addClass("additional-info help")
+      .attr("title", hint)
+
   # tooltips & popovers
 
   $("a, input[type=\"submit\"], button").filter("[title]").not("[data-content]").tooltip
     animation: false
     placement: "top"
+    container: "body"
+
+  $(".additional-info").tooltip
+    animation: false
+    placement: "right"
     container: "body"
 
   $("input[type=\"text\"][data-content]").popover
