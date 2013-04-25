@@ -1,63 +1,33 @@
 .l-question-display-association {
-  .static,
-  .dynamic,
-  .controls,
-  ul span,
-  ul i {
-    display: inline-block;
-  }
-
-  ul span, i {
-    padding: {
-      top: 8px;
-      bottom: 8px;
-    }
-  }
-
-  ul {
-    margin-bottom: $baseLineHeight;
-    li { margin-bottom: $baseLineHeight/2; }
-    i {
-      color: rgba(black, .2);
-      padding: {
-        left: 1em;
-        right: 1em;
-      }
-    }
-  }
-
-  .dynamic {
+  .association-pair-dynamic {
     span {
-      @extend %unselectable;
+      display: inline-block;
       position: relative;
       cursor: move;
-      padding: {
-        left: 12px;
-        right: 12px;
-      }
+      padding: $hsu;
       border: 1px solid darken(white, 20%);
       border-radius: $baseBorderRadius;
       background: darken(white, 4%);
     }
 
-    .hover {
+    .association-pair-hover {
       color: $linkColor;
       border-color: rgba($linkColor, .75);
-      background: rgba($linkColor, .1);
+      background-color: rgba($linkColor, .1);
     }
+  }
 
-    .original {
-      opacity: .5;
-    }
+  .association-pair-original {
+    opacity: .5;
   }
 
   .feedback {
     ul {
-      @extend %unstyled-list;
+      @include list-unstyled;
       color: rgba(black, .5);
     }
 
-    li { margin-bottom: $baseLineHeight/2; }
+    li { margin-bottom: $hsu; }
 
     i {
       color: $textColor;

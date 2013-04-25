@@ -68,10 +68,10 @@ do ($ = jQuery) ->
 
     display: ($form) ->
 
-      $pairs    = $("li", $form)
+      $pairs    = $(".association-pair", $form)
 
-      $static   = $(".static", $pairs)
-      $dynamic  = $(".dynamic", $pairs)
+      $static   = $(".association-pair-static", $pairs)
+      $dynamic  = $(".association-pair-dynamic", $pairs)
 
       widths    = []
       limit     = $form.width() * 2/3
@@ -86,7 +86,7 @@ do ($ = jQuery) ->
         $one.next().attr "value", $one.text()
         $two.next().attr "value", $two.text()
 
-      $("ul", $form).show()
+      $pairs.removeClass("js-hidden")
 
       $pairs.find("input").each ->
         $el = $("<span>").text $(@).val()
@@ -103,17 +103,18 @@ do ($ = jQuery) ->
       $static.width(maxWidth)
 
       $dynamic.find("span")
+        .addClass("is-unselectable")
+
         .draggable
           addClasses:     false
           revert:         "invalid"
           revertDuration: 250
           helper:         "clone"
           zIndex:         10
-          start: -> $(@).addClass "original"
-          stop:  -> $(@).removeClass "original"
+          start: -> $(@).addClass "association-pair-original"
+          stop:  -> $(@).removeClass "association-pair-original"
 
         .droppable
           addClasses: false
-          hoverClass: "hover"
+          hoverClass: "association-pair-hover"
           drop: (e, ui) -> swap($(@), ui.draggable)
-
