@@ -1,10 +1,10 @@
-- title "Nova igra"
+- title "Novi kviz"
 
 %h1 Zdravo :)
 
 - if @quizzes.any?
 
-  = simple_form_for @game_details, url: game_path do |f|
+  = simple_form_for @game_details, url: prepare_quiz_path do |f|
 
     %section.quizzes
       %p Odaberi kviz:

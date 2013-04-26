@@ -3,6 +3,10 @@ module ButtonsHelper
     button_tag string, class: "btn btn-primary", data: {"disable-with" => "Učitavanje..."}
   end
 
+  def primary_button(string, path, options = {})
+    link_to string, path, {class: "btn btn-primary"}.merge(options)
+  end
+
   def back_button(string, path, options = {})
     link_to string.prepend_icon("arrow-left"), path, {class: "go_back"}.merge(options)
   end

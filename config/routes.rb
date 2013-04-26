@@ -42,11 +42,18 @@ Lektire::Application.routes.draw do
   # Student
   ########################
   scope constraints: {subdomain: "student"} do
-    root to: redirect("/game/new")
+    root to: redirect("/quiz/choose")
 
-    resource :game do
-      get "feedback"
-      get "next_question"
+    resource :quiz, only: [], controller: "quiz" do
+      get    "choose"
+      post   "prepare"
+      get    "play"
+      put    "save_answer"
+      get    "answer_feedback"
+      put    "next_question"
+      get    "results"
+      get    "interrupt"
+      delete "finish"
     end
   end
 

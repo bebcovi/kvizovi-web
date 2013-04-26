@@ -1,27 +1,27 @@
-class GamesController < ApplicationController
+class QuizController < ApplicationController
   before_filter :authenticate!
   before_filter :assign_student
 
-  def new
+  def choose
     @game_details = GameDetails.new
     @quizzes = @student.school.quizzes.activated
   end
 
-  def create
+  def prepare
     @game_details = GameDetails.new(params[:game_details])
     @game_details.player_class = Student
     @game_details.players << @student
 
     if @game_details.valid?
       game.initialize!(@game_details.to_h)
-      redirect_to edit_game_path
+      redirect_to action: :play
     else
       @quizzes = @student.school.quizzes.activated
-      render :new
+      render :choose
     end
   end
 
-  def edit
+  def play
     @player          = Student.find(game.current_player[:id])
     @quiz            = Quiz.find(game.quiz[:id])
     @question        = Question.find(game.current_question[:id])
@@ -32,14 +32,14 @@ class GamesController < ApplicationController
     @question = QuestionExhibit.new(@question)
   end
 
-  def update
+  def save_answer
     question = Question.find(game.current_question[:id])
     question = QuestionExhibit.new(question)
     game.save_answer!(question.has_answer?(params[:answer]))
-    redirect_to feedback_game_path
+    redirect_to action: :answer_feedback
   end
 
-  def feedback
+  def answer_feedback
     @correct_answer = game.current_question[:answer]
     @game_over = game.over?
     @question = Question.find(game.current_question[:id])
@@ -47,26 +47,26 @@ class GamesController < ApplicationController
 
   def next_question
     game.next_question!
-    redirect_to edit_game_path
+    redirect_to action: :play
   end
 
-  def show
+  def results
     @game            = GamePresenter.new(game.to_h, Student)
     @quiz            = Quiz.find(game.quiz[:id])
     @questions_count = game.questions_count
   end
 
-  def delete
+  def interrupt
   end
 
-  def destroy
+  def finish
     game.finalize!
     PlayedGame.create_from_hash(game.to_h)
 
     if game.finished?
-      redirect_to game_path
+      redirect_to action: :results
     else
-      redirect_to new_game_path
+      redirect_to action: :play
     end
   end
 

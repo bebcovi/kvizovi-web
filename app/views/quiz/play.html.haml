@@ -13,10 +13,10 @@
 .progress
   .bar{style: "width: #{game_progress_percentage}%"}
 
-= simple_form_for :game, url: game_path, method: :put, defaults: {input_html: {name: "answer"}}, html: {class: "l-question-display-#{@question.category}"} do |f|
+= simple_form_for :game, url: save_answer_quiz_path, method: :put, defaults: {input_html: {name: "answer"}}, html: {class: "l-question-display-#{@question.category}"} do |f|
 
   = render "question", {question: @question, f: f}
 
   = buttons do
-    = cancel_button "Prekini", delete_game_path(interrupted: "true")
+    = cancel_button "Prekini", interrupt_quiz_path
     = submit_button "Odgovori"

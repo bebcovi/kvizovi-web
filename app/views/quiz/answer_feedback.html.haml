@@ -1,0 +1,7 @@
+= render_feedback
+
+.form
+  - if not @game_over
+    = next_button "Sljedeće pitanje", next_question_quiz_path, method: :put
+  - else
+    = next_button "Rezultati", finish_quiz_path, method: :delete

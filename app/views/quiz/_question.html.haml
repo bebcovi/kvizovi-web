@@ -2,7 +2,7 @@
   %span.question-number{class: "player-#{number(@player_number)}"}= @question_number
   = smarty_pants question.content
 
-= render "games/question/#{question.category}", {f: f, question: question}
+= render "quiz/question/#{question.category}", {f: f, question: question}
 
 - if question.hint?
   %p.question-hint Uputa: #{question.hint}

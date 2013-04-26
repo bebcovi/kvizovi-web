@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe GamesController, user: :student do
+describe QuizController, user: :student do
   before do
     @school    = Factory.create(:school)
     @student   = Factory.create(:student, school: @school)
@@ -25,21 +25,21 @@ describe GamesController, user: :student do
     end
   end
 
-  describe "#create" do
+  describe "#prepare" do
     context "when valid" do
       before do
         GameDetails.any_instance.stub(:valid?) { true }
         GameDetails.any_instance.stub(:to_h) { game_details }
       end
 
-      it "initializes the game" do
+      it "prepares the quiz" do
         controller.send(:game).should_receive(:initialize!)
-        post :create
+        post :prepare
       end
 
-      it "redirects to game" do
-        post :create
-        expect(response).to redirect_to edit_game_path
+      it "redirects to quiz" do
+        post :prepare
+        expect(response).to redirect_to play_quiz_path
       end
     end
 
@@ -49,7 +49,7 @@ describe GamesController, user: :student do
       end
 
       it "assigns quizzes" do
-        post :create
+        post :prepare
         expect(assigns(:quizzes)).to eq [@quiz]
       end
     end
@@ -60,27 +60,27 @@ describe GamesController, user: :student do
       controller.send(:game).initialize!(game_details)
     end
 
-    describe "#edit" do
+    describe "#play" do
       it "doesn't raise errors" do
-        get :edit
+        get :play
       end
     end
 
-    describe "#update" do
+    describe "#save_answer" do
       it "invokes #save_answer!" do
         controller.send(:game).should_receive(:save_answer!)
-        put :update
+        put :save_answer
       end
 
       it "redirects to feedback" do
-        put :update
-        expect(response).to redirect_to(feedback_game_path)
+        put :save_answer
+        expect(response).to redirect_to(answer_feedback_quiz_path)
       end
     end
 
-    describe "#feedback" do
+    describe "#answer_feedback" do
       it "doesn't raise errors" do
-        get :feedback
+        get :answer_feedback
       end
     end
 
@@ -90,31 +90,31 @@ describe GamesController, user: :student do
         get :next_question
       end
 
-      it "redirects to game" do
+      it "redirects to quiz" do
         get :next_question
-        expect(response).to redirect_to(edit_game_path)
+        expect(response).to redirect_to(play_quiz_path)
       end
     end
 
-    describe "#show" do
+    describe "#results" do
       before do
         controller.send(:game).finalize!
       end
 
       it "doesn't raise errors" do
-        get :show
+        get :results
       end
     end
 
-    describe "#delete" do
+    describe "#interrupt" do
       it "doesn't raise errors" do
-        get :delete
+        get :interrupt
       end
     end
 
-    describe "#destroy" do
+    describe "#finish" do
       it "creates the game" do
-        delete :destroy
+        delete :finish
         expect(PlayedGame.count).to eq 1
       end
     end

@@ -1,13 +1,13 @@
-module GamesHelper
+module QuizHelper
   def game_progress_percentage
     percentage(@question_number - 1, @questions_count)
   end
 
   def render_feedback
     if @correct_answer
-      render "games/feedback/positive"
+      render "quiz/feedback/positive"
     else
-      render "games/feedback/negative"
+      render "quiz/feedback/negative"
     end
   end
 end
