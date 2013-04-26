@@ -4,7 +4,7 @@
       display: inline-block;
       position: relative;
       cursor: move;
-      padding: $hsu;
+      padding: $hsu/2 $hsu;
       border: 1px solid darken(white, 20%);
       border-radius: $baseBorderRadius;
       background: darken(white, 4%);
