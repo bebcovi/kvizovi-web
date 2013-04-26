@@ -25,6 +25,10 @@ strong {
   font-weight: nth($base-weight, 4);
 }
 
+q {
+  color: $orange;
+}
+
 form {
   ol, ul {
     @include list-unstyled;

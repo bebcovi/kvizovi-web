@@ -1,4 +1,6 @@
 - if question.true?
-  %p Tvrdnja je bila <strong>točna</strong>.
+  :markdown
+    Tvrdnja <q>#{question.content}</q> je **točna**.
 - else
-  %p Tvrdnja je bila <strong>netočna</strong>.
+  :markdown
+    Tvrdnja <q>#{question.content}</q> je **netočna**.
