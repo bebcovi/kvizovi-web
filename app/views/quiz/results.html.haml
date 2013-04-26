@@ -3,8 +3,7 @@
 %h1 Rezultati
 
 .progress
-  - @quiz_state.questions_count.times do
-    .bar{style: "width: #{100.0 / @quiz_state.questions_count}%"}
+  .bar{style: "width: 100%"}
 
 - @played_quiz.results.each do |player, score, score_percentage, player_number, rank|
   %div{class: "player-#{number(player_number)}"}
