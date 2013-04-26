@@ -11,7 +11,7 @@
 //= require general
 //= require helper
 //
-//= require controllers/games
+//= require controllers/quiz
 //= require controllers/tour
 //
 //= require questions/association

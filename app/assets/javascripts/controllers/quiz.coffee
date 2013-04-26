@@ -1,8 +1,10 @@
 do ($ = jQuery) ->
 
-  App.Controllers.games =
+  App.Controllers.quiz =
 
-    new: ->
+    choose: ->
+
+      console.log "quiz"
 
       $form           = $("form")
 
@@ -26,7 +28,10 @@ do ($ = jQuery) ->
       if $quizzesChecked.length
         $buttons.removeClass("js-hidden")
         setQuizName $quizzesChecked.closest("label").text()
-        setPlural() if $playersChecked.val() is "2"
+        if $playersChecked.val() is "2"
+          $players.removeClass("js-hidden")
+          $login.removeClass("js-hidden")
+          setPlural()
 
       $quizzes.on "click", "input:radio", ->
         $players.removeClass("js-hidden")
@@ -45,11 +50,11 @@ do ($ = jQuery) ->
       $button.on "click", ->
         localStorage.removeItem("total")
 
-    create: ->
+    prepare: ->
 
-      @new()
+      @choose()
 
-    edit: ->
+    play: ->
 
       $form        = $("form")
 
@@ -101,7 +106,7 @@ do ($ = jQuery) ->
         if total > 0 and localStorage["total"]
           updateTimer()
 
-          total -= 1000
+          # total -= 1000
 
           localStorage["total"] = total
           setTimeout arguments.callee, 1000
