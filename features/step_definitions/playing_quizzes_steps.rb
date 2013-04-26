@@ -106,9 +106,9 @@ When(/^(?:I|we) answer all questions incorrectly$/) do
       ["Ne baš…", "Pogrešno", "Nažalost, ne…"].any? { |content| page.has_content?(content) }
     end
 
-    begin
+    if page.has_link?("Sljedeće pitanje")
       click_on "Sljedeće pitanje"
-    rescue Capybara::ElementNotFound
+    else
       click_on "Rezultati"
       break
     end

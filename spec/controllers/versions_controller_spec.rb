@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe VersionsController, user: :school do
-  enable_paper_trail!
+  enable_paper_trail
 
   describe "#revert" do
     before do

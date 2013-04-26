@@ -2,7 +2,7 @@ require "spec_helper"
 require "active_support/core_ext/numeric/bytes"
 
 describe ImageQuestion do
-  enable_paper_trail!
+  enable_paper_trail
 
   before do
     @it = Factory.build(:image_question)

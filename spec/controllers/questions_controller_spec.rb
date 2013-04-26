@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe QuestionsController, user: :school do
-  enable_paper_trail!
+  enable_paper_trail
 
   before do
     @school = Factory.create(:school)
