@@ -107,8 +107,7 @@ $.modalAjax = (options = {}) ->
         options["onOpen"]()
 
       if options["onCancel"]
-        $modal.on "hidden", ->
-          options["onCancel"]()
+        $modal.on "hidden", options["onCancel"]
 
       if options["onSubmit"]
         $modalFooter.find(".btn-primary")
