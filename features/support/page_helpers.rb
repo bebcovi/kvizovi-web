@@ -2,7 +2,11 @@ module PageHelpers
   def path_to(page)
     case page
     when /homepage/
-      root_url
+      case @user_type
+      when "school"  then quizzes_url(subdomain: "school")
+      when "student" then choose_quiz_url(subdomain: "student")
+      when nil       then root_url
+      end
     when /login page/
       login_url(subdomain: @user_type)
     when /my profile page/

@@ -14,12 +14,7 @@
       .navbar-inner
         .container
           = link_to icon("books"), root_url(subdomain: false), class: "brand"
-
           = render "navigation"
-
-          %ul.nav.pull-right
-            = render "contact"
-            = render "log" if user_logged_in?
 
     - if content_for? :hero_unit
       .hero-unit

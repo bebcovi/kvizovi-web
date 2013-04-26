@@ -16,3 +16,6 @@ hr:
       passwords:
         update:
           success: "Tvoja lozinka je uspješno izmijenjena."
+      survey:
+        complete:
+          success: "Tvoji odgovori su zabilježeni. Hvala ti na suradnji."

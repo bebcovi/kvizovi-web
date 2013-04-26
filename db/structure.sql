@@ -173,7 +173,8 @@ CREATE TABLE schools (
     place character varying(255),
     region character varying(255),
     email character varying(255),
-    notified boolean DEFAULT true
+    notified boolean DEFAULT true,
+    completed_survey boolean DEFAULT false
 );
 
 
@@ -211,7 +212,8 @@ CREATE TABLE students (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     gender character varying(255),
-    year_of_birth integer
+    year_of_birth integer,
+    completed_survey boolean DEFAULT false
 );
 
 
@@ -577,3 +579,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130421130148');
 INSERT INTO schema_migrations (version) VALUES ('20130425132651');
 
 INSERT INTO schema_migrations (version) VALUES ('20130426014257');
+
+INSERT INTO schema_migrations (version) VALUES ('20130426145704');
