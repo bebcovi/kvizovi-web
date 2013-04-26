@@ -120,6 +120,10 @@ When(/^I interrupt it$/) do
   click_on "Jesam"
 end
 
+When(/^in the meanwhile the quiz gets deleted$/) do
+  @quiz.destroy
+end
+
 Then(/^(I|we) should get all points$/) do |who|
   total = (who == "I" ? 6 : 3)
   expect(Nokogiri::HTML(html).at(".player-one").text).to have_content("#{total} od #{total}")
@@ -129,4 +133,16 @@ end
 Then(/^(I|we) should not get any points$/) do |who|
   expect(Nokogiri::HTML(html).at(".player-one").text).to have_content("0 od 6")
   expect(Nokogiri::HTML(html).at(".player-two").text).to have_content("0 od 6") if who == "we"
+end
+
+Then(/^I should still be able to play it$/) do
+  loop do
+    click_on "Odgovori"
+    if page.has_link?("Sljedeće pitanje")
+      click_on "Sljedeće pitanje"
+    else
+      click_on "Rezultati"
+      break
+    end
+  end
 end
