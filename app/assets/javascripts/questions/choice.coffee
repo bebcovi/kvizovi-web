@@ -6,7 +6,7 @@ do ($ = jQuery) ->
 
       $options      = $(".choice-option", $form)
       $firstOption  = $options.first()
-      $otherOptions = $firstOption.siblings()
+      $otherOptions = $firstOption.siblings(".choice-option")
       $template     = $firstOption.clone()
 
       $addButton    = $.addButton.clone()

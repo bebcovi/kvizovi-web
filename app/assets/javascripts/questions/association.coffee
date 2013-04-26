@@ -7,7 +7,7 @@ do ($ = jQuery) ->
       $pairs        = $(".association-pair", $form)
 
       $firstPair    = $pairs.first()
-      $otherPairs   = $firstPair.siblings()
+      $otherPairs   = $firstPair.siblings(".association-pair")
       $template     = $firstPair.clone()
 
       $addButton    = $.addButton.clone()
