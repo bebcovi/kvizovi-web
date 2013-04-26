@@ -2,8 +2,8 @@
 
 %h1 Anketa
 
-%p Ako imaš mrvicu vremena, puno bi nam pomog#{current_user.male? ? "ao" : "la"} ako bi ispuni#{current_user.male? ? "o" : "la"} #{link_to "ovu anketu"}. Kada ispuniš, samo potvrdi ispod.
+%p Ako imaš mrvicu vremena, puno bi nam pomog#{current_user.male? ? "ao" : "la"} ako bi ispuni#{current_user.male? ? "o" : "la"} #{link_to "ovu anketu", "https://docs.google.com/forms/d/1CZjRq7UeE7ot9JySTb9usKQ1njdl026al9meLJ57_U8/viewform", target: "_blank"}. Kada ispuniš, samo potvrdi ispod.
 
 = buttons do
-  = primary_button "Ispuni#{current_user.male? ? "o" : "la"} sam anketu", complete_survey_path, method: :post
   = cancel_button "Odustani", :back
+  = primary_button "Ispuni#{current_user.male? ? "o" : "la"} sam anketu", complete_survey_path, method: :post

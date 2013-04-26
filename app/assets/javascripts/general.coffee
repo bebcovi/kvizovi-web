@@ -28,6 +28,11 @@ App.general = ->
     placement: "right"
     container: "body"
 
+  $("[data-toggle=tooltip]")
+    .tooltip
+      animation: false
+    .tooltip("show")
+
   $("input[type=\"text\"][data-content]").popover
     html: true
     trigger: "focus"
