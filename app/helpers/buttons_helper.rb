@@ -71,10 +71,6 @@ module ButtonsHelper
     link_to string.append_icon("arrow-right"), path, {class: "action btn btn-primary"}.merge(options)
   end
 
-  def action_button(string, path, options = {})
-    link_to string, path, {class: "action btn"}.merge(options)
-  end
-
   def buttons(options = {})
     options[:class] = "btn-toolbar #{options[:class]}"
     content_tag :div, options do
