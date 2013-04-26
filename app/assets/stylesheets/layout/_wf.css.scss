@@ -1,8 +1,14 @@
 .wf-loading {
-  *,
-  *:before,
-  *:after {
-    color: transparent !important;
-    text-shadow: none !important;
+  * {
+    &,
+    &:before,
+    &:after {
+      color: transparent !important;
+      text-shadow: none !important;
+    }
+
+    @include input-placeholder {
+      color: transparent !important;
+    }
   }
 }
