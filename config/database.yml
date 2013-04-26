@@ -1,3 +1,9 @@
+<%
+  # http://mislav.uniqpath.com/rails/branching-the-database-along-with-your-code/
+  branch = `git symbolic-ref HEAD 2>/dev/null`.chomp.sub('refs/heads/', '')
+  suffix = `git config --bool branch.#{branch}.database`.chomp == 'true' ? "_#{branch}" : ""
+%>
+
 defaults: &defaults
   adapter: postgresql
   encoding: unicode
@@ -7,7 +13,7 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: lektire_development
+  database: lektire_development<%= suffix %>
 
 test:
   <<: *defaults
