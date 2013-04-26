@@ -9,6 +9,7 @@ do ($ = jQuery) ->
       $otherOptions = $firstOption.siblings(".choice-option")
       $template     = $firstOption.clone()
 
+      $wrapper      = $firstOption.parent()
       $addButton    = $.addButton.clone()
 
       updateAttrs   = ($el, i) ->
@@ -24,7 +25,7 @@ do ($ = jQuery) ->
         $input.attr "placeholder",  placeholder.replace(/\d+/, i)
 
       addOption = ($el) ->
-        $otherOptions = $otherOptions.add $el.insertBefore($addButton)
+        $otherOptions = $otherOptions.add $el.insertAfter($otherOptions.last())
 
       removeOption = ($el) ->
         $otherOptions = $otherOptions.not $el.remove()
@@ -45,10 +46,7 @@ do ($ = jQuery) ->
         .find(".success").removeClass("success").end()
         .find(".help-block, .error-block, .additional-info").remove()
 
-      if $otherOptions.length
-        $addButton.insertAfter($otherOptions.last())
-      else
-        $addButton.insertAfter($firstOption)
+      $addButton.appendTo($wrapper)
 
       $addButton.on "click", (event) ->
         $new = $template.clone()

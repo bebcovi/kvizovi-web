@@ -10,8 +10,8 @@ do ($ = jQuery) ->
       $otherPairs   = $firstPair.siblings(".association-pair")
       $template     = $firstPair.clone()
 
+      $wrapper      = $firstPair.parent()
       $addButton    = $.addButton.clone()
-      $removeButton = $.removeButton.clone()
 
       updateAttrs   = ($el, i) ->
         i += 2
@@ -28,7 +28,7 @@ do ($ = jQuery) ->
           $input.attr "placeholder",  placeholder.replace(/\d+/, i)
 
       addPair = ($el) ->
-        $otherPairs = $otherPairs.add $el.insertBefore($addButton)
+        $otherPairs = $otherPairs.add $el.insertAfter($otherPairs)
 
       removePair = ($el) ->
         $otherPairs = $otherPairs.not $el.remove()
@@ -39,7 +39,7 @@ do ($ = jQuery) ->
         result
 
       $otherPairs.add($template).children(":last-child")
-        .after $removeButton
+        .after $.removeButton
           .clone()
           .addClass("close")
           .attr("tabindex", -1)
@@ -49,10 +49,7 @@ do ($ = jQuery) ->
         .find("div").removeClass("field_with_errors").end()
         .find(".error").remove()
 
-      if $otherPairs.length
-        $addButton.insertAfter($otherPairs.last())
-      else
-        $addButton.insertAfter($firstPair)
+      $addButton.appendTo($wrapper)
 
       $addButton
         .on "click", (event) ->
