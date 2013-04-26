@@ -3,14 +3,14 @@
 %h1 Rezultati
 
 .progress
-  - @questions_count.times do
-    .bar{style: "width: #{100.0 / @questions_count}%"}
+  - @quiz_state.questions_count.times do
+    .bar{style: "width: #{100.0 / @quiz_state.questions_count}%"}
 
-- @game.results.each do |player, score, score_percentage, player_number, rank|
+- @played_quiz.results.each do |player, score, score_percentage, player_number, rank|
   %div{class: "player-#{number(player_number)}"}
     %p
       %b= player.username.prepend_icon("user") + ":"
-      %span.fade-in Točno si odgovori#{player.male? ? "o" : "la"} na #{score} od #{@game.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
+      %span.fade-in Točno si odgovori#{player.male? ? "o" : "la"} na #{score} od #{@played_quiz.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
     .progress
       .bar.slide{style: "width: #{score_percentage}%"}
 

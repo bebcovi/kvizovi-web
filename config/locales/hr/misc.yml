@@ -6,3 +6,8 @@ hr:
   will_paginate:
     previous_label: "← Novije"
     next_label: "Starije →"
+
+  simple_form:
+    labels:
+      play:
+        answer: "Odgovor"

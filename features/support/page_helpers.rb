@@ -12,7 +12,7 @@ module PageHelpers
     when /questions page/
       quiz_questions_url(@quiz, subdomain: "school")
     when /page for playing quizzes/
-      play_quiz_url(subdomain: "student")
+      choose_quiz_url(subdomain: "student")
     else raise "Page isn't recognized: #{page}"
     end
   end

@@ -24,7 +24,6 @@ module Lektire
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += [
       "#{config.root}/app/models/question",
-      "#{config.root}/app/exhibits/question",
     ]
 
     # Search for locales recursively

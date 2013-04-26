@@ -4,7 +4,7 @@
 
 - if @quizzes.any?
 
-  = simple_form_for @game_details, url: prepare_quiz_path do |f|
+  = simple_form_for @quiz_specification, url: prepare_quiz_path do |f|
 
     %section.quizzes
       %p Odaberi kviz:
@@ -12,13 +12,13 @@
 
     %section.players.js-hidden
       %p Igraš li sam ili još s nekim?
-      = f.input :players_count, collection: [["Samo ja", 1], ["Još netko", 2]], as: :radio_buttons, label: false
+      = f.input :students_count, collection: [["Samo ja", 1], ["Još netko", 2]], as: :radio_buttons, label: false
 
     %section.login.js-hidden
       %p Daj drugom igraču da se prijavi:
-      = f.error(:player_credentials) if f.error(:player_credentials)
-      = f.simple_fields_for :players_credentials, index: nil do |p|
-        = p.input :username, input_html: {value: (params[:game_details][:players_credentials].first[:username] rescue nil)}
+      = f.error(:students_credentials) if f.error(:students_credentials)
+      = f.simple_fields_for :students_credentials, index: nil do |p|
+        = p.input :username, input_html: {value: (params[:quiz_specification][:students_credentials].first[:username] if params[:action] == "prepare")}
         = p.input :password
 
     = buttons class: "js-hidden" do

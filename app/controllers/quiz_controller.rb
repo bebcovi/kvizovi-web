@@ -1,19 +1,18 @@
 class QuizController < ApplicationController
   before_filter :authenticate!
-  before_filter :assign_student
+  before_filter :assign_student, :assign_quiz_state
 
   def choose
-    @game_details = GameDetails.new
+    @quiz_specification = QuizSpecification.new
     @quizzes = @student.school.quizzes.activated
   end
 
   def prepare
-    @game_details = GameDetails.new(params[:game_details])
-    @game_details.player_class = Student
-    @game_details.players << @student
+    @quiz_specification = QuizSpecification.new(params[:quiz_specification])
+    @quiz_specification.students << @student
 
-    if @game_details.valid?
-      game.initialize!(@game_details.to_h)
+    if @quiz_specification.valid?
+      quiz_runner.prepare!(@quiz_specification.to_h)
       redirect_to action: :play
     else
       @quizzes = @student.school.quizzes.activated
@@ -22,51 +21,42 @@ class QuizController < ApplicationController
   end
 
   def play
-    @player          = Student.find(game.current_player[:id])
-    @quiz            = Quiz.find(game.quiz[:id])
-    @question        = Question.find(game.current_question[:id])
-    @question_number = game.current_question[:number]
-    @player_number   = game.current_player[:number]
-    @questions_count = game.questions_count
-
-    @question = QuestionExhibit.new(@question)
+    @student  = current_student
+    @quiz     = quiz
+    @question = QuestionShuffling.new(current_question)
   end
 
   def save_answer
-    question = Question.find(game.current_question[:id])
-    question = QuestionExhibit.new(question)
-    game.save_answer!(question.has_answer?(params[:answer]))
+    question = QuestionAnswer.new(current_question)
+    quiz_runner.save_answer!(question.correct_answer?(params[:answer]))
     redirect_to action: :answer_feedback
   end
 
   def answer_feedback
-    @correct_answer = game.current_question[:answer]
-    @game_over = game.over?
-    @question = Question.find(game.current_question[:id])
+    @question = current_question
   end
 
   def next_question
-    game.next_question!
+    quiz_runner.next_question!
     redirect_to action: :play
   end
 
   def results
-    @game            = GamePresenter.new(game.to_h, Student)
-    @quiz            = Quiz.find(game.quiz[:id])
-    @questions_count = game.questions_count
+    @played_quiz = PlayedQuizExhibit.new(PlayedQuiz.find(params[:id]))
+    @quiz        = @played_quiz.quiz
   end
 
   def interrupt
   end
 
   def finish
-    game.finalize!
-    PlayedGame.create_from_hash(game.to_h)
+    quiz_runner.finish!
+    played_quiz = PlayedQuiz.create_from_hash(quiz_state.to_h)
 
-    if game.finished?
-      redirect_to action: :results
+    if quiz_state.finished?
+      redirect_to action: :results, id: played_quiz.id
     else
-      redirect_to action: :play
+      redirect_to action: :choose
     end
   end
 
@@ -76,7 +66,27 @@ class QuizController < ApplicationController
     @student = current_user
   end
 
-  def game
-    @game_state ||= Game.new(cookies)
+  def assign_quiz_state
+    @quiz_state = quiz_state
+  end
+
+  def quiz_state
+    QuizState.new(cookies)
+  end
+
+  def quiz_runner
+    QuizRunner.new(cookies)
+  end
+
+  def quiz
+    Quiz.find(quiz_state.quiz[:id])
+  end
+
+  def current_question
+    Question.find(quiz_state.current_question[:id])
+  end
+
+  def current_student
+    Student.find(quiz_state.current_student[:id])
   end
 end

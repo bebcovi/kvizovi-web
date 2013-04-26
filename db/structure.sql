@@ -43,10 +43,10 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: played_games; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: played_quizzes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE played_games (
+CREATE TABLE played_quizzes (
     id integer NOT NULL,
     quiz_id integer,
     question_answers hstore,
@@ -60,10 +60,10 @@ CREATE TABLE played_games (
 
 
 --
--- Name: played_games_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: played_quizzes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE played_games_id_seq
+CREATE SEQUENCE played_quizzes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -72,10 +72,10 @@ CREATE SEQUENCE played_games_id_seq
 
 
 --
--- Name: played_games_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: played_quizzes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE played_games_id_seq OWNED BY played_games.id;
+ALTER SEQUENCE played_quizzes_id_seq OWNED BY played_quizzes.id;
 
 
 --
@@ -336,7 +336,7 @@ ALTER SEQUENCE versions_id_seq OWNED BY versions.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY played_games ALTER COLUMN id SET DEFAULT nextval('played_games_id_seq'::regclass);
+ALTER TABLE ONLY played_quizzes ALTER COLUMN id SET DEFAULT nextval('played_quizzes_id_seq'::regclass);
 
 
 --
@@ -392,7 +392,7 @@ ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq':
 -- Name: games_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY played_games
+ALTER TABLE ONLY played_quizzes
     ADD CONSTRAINT games_pkey PRIMARY KEY (id);
 
 
@@ -575,3 +575,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130415222943');
 INSERT INTO schema_migrations (version) VALUES ('20130421130148');
 
 INSERT INTO schema_migrations (version) VALUES ('20130425132651');
+
+INSERT INTO schema_migrations (version) VALUES ('20130426014257');

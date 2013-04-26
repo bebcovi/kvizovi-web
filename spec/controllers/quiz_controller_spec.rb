@@ -10,17 +10,17 @@ describe QuizController, user: :student do
     login_as(@student)
   end
 
-  let(:game_details) do
+  let(:quiz_specification) do
     {
       quiz_id:      @quiz.id,
       question_ids: @questions.map(&:id),
-      player_ids:   [@student.id],
+      student_ids:  [@student.id],
     }
   end
 
-  describe "#new" do
+  describe "#choose" do
     it "assigns quizzes" do
-      get :new
+      get :choose
       expect(assigns(:quizzes)).to eq [@quiz]
     end
   end
@@ -28,12 +28,12 @@ describe QuizController, user: :student do
   describe "#prepare" do
     context "when valid" do
       before do
-        GameDetails.any_instance.stub(:valid?) { true }
-        GameDetails.any_instance.stub(:to_h) { game_details }
+        QuizSpecification.any_instance.stub(:valid?) { true }
+        QuizSpecification.any_instance.stub(:to_h) { quiz_specification }
       end
 
       it "prepares the quiz" do
-        controller.send(:game).should_receive(:initialize!)
+        QuizRunner.any_instance.should_receive(:prepare!)
         post :prepare
       end
 
@@ -45,7 +45,7 @@ describe QuizController, user: :student do
 
     context "when invalid" do
       before do
-        GameDetails.any_instance.stub(:valid?) { false }
+        QuizSpecification.any_instance.stub(:valid?) { false }
       end
 
       it "assigns quizzes" do
@@ -57,7 +57,7 @@ describe QuizController, user: :student do
 
   context "in game" do
     before do
-      controller.send(:game).initialize!(game_details)
+      controller.send(:quiz_runner).prepare!(quiz_specification)
     end
 
     describe "#play" do
@@ -68,7 +68,7 @@ describe QuizController, user: :student do
 
     describe "#save_answer" do
       it "invokes #save_answer!" do
-        controller.send(:game).should_receive(:save_answer!)
+        QuizRunner.any_instance.should_receive(:save_answer!)
         put :save_answer
       end
 
@@ -86,7 +86,7 @@ describe QuizController, user: :student do
 
     describe "#next_question" do
       it "invokes #next_question!" do
-        controller.send(:game).should_receive(:next_question!)
+        QuizRunner.any_instance.should_receive(:next_question!)
         get :next_question
       end
 
@@ -98,11 +98,13 @@ describe QuizController, user: :student do
 
     describe "#results" do
       before do
-        controller.send(:game).finalize!
+        controller.send(:quiz_runner).finish!
+        @played_quiz = Factory.create(:played_quiz)
+        @played_quiz.class.any_instance.stub(:quiz)
       end
 
       it "doesn't raise errors" do
-        get :results
+        get :results, id: @played_quiz.id
       end
     end
 
@@ -115,7 +117,7 @@ describe QuizController, user: :student do
     describe "#finish" do
       it "creates the game" do
         delete :finish
-        expect(PlayedGame.count).to eq 1
+        expect(PlayedQuiz.count).to eq 1
       end
     end
   end

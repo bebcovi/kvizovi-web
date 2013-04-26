@@ -1,2 +1,0 @@
-class ImageQuestionExhibit < TextQuestionExhibit
-end
