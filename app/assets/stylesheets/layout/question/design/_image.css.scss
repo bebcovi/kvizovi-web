@@ -14,4 +14,11 @@
     margin-bottom: $baseLineHeight/2;
     max-height: 250px;
   }
+
+  .image_question_image_file,
+  .image_question_image_url {
+    .js & {
+      display: none;
+    }
+  }
 }

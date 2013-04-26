@@ -8,9 +8,9 @@ do ($ = jQuery) ->
       # http://stackoverflow.com/a/4459419/1247274
 
       $fileWrapper = $form.children("div.file")
-      $file        = $fileWrapper.find("div.file").hide()
+      $file        = $fileWrapper.find("div.file")
       $fileInput   = $file.find("input")
-      $url         = $fileWrapper.find("div.url").hide()
+      $url         = $fileWrapper.find("div.url")
       $urlInput    = $url.find("input")
 
       $toggleType  = $("<a>", {href: "#"}).addClass("btn toggle-type")
