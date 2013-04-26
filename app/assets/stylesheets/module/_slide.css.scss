@@ -4,5 +4,5 @@
 }
 
 .slide {
-  @include animation(slide 3s ease-in-out);
+  @include animation(slide 3s ease-out);
 }
