@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+rake db:create
+spring rake db:structure:load
+spring rake db:seed
+spring rake db:test:prepare
