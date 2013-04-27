@@ -28,7 +28,7 @@ end
 
 Then(/^I should be successfully logged in$/) do
   school  { expect(current_path).to eq quizzes_path }
-  student { expect(current_path).to eq new_game_path }
+  student { expect(current_path).to eq choose_quiz_path }
 end
 
 Then(/^I should be logged out$/) do
