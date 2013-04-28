@@ -22,18 +22,19 @@ class QuizPlay
     self
   end
 
-  # TODO: Don't store the answer if it already exists
   def save_answer!(answer)
-    answers = @store[:question_answers].split(",")
-    answers << answer
-    @store[:question_answers] = answers.join(",")
+    unless current_question[:answer] != nil
+      answers = @store[:question_answers].split(",")
+      answers[current_question[:number] - 1] = answer
+      @store[:question_answers] = answers.join(",")
+    end
   end
 
-  # TODO: Raise an exception if it's already on the last question
-  # TODO: Raise an exception if the current question wasn't answered
   def next_question!
-    next_student!
-    @store[:current_question] = Integer(@store[:current_question]) + 1
+    unless current_question[:answer] == nil or current_question == questions.last
+      next_student!
+      @store[:current_question] = Integer(@store[:current_question]) + 1
+    end
   end
 
   def next_student!

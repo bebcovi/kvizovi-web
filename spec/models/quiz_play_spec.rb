@@ -34,19 +34,44 @@ describe QuizPlay do
         end
         expect(@it.questions.map { |q| q[:answer] }).to eq answers
       end
+
+      it "doesn't save the answer if it's already saved" do
+        @it.save_answer!(true)
+        @it.save_answer!(false)
+        expect(@it.current_question[:answer]).to eq true
+      end
     end
 
     describe "#next_question!" do
-      it "changes the student" do
+      it "goes to the next student" do
+        @it.save_answer!(true)
         expect do
           @it.next_question!
         end.to change { @it.current_student[:number] }.by 1
       end
 
       it "goes to the next question" do
+        @it.save_answer!(true)
         expect do
           @it.next_question!
         end.to change { @it.current_question[:number] }.by 1
+      end
+
+      it "doesn't go to the next question if the current question wasn't answered" do
+        expect do
+          @it.next_question!
+        end.not_to change { @it.current_question }
+      end
+
+      it "doesn't go to the next question if it's on the last question" do
+        @it.save_answer!(true)
+        until @it.current_question == @it.questions.last
+          @it.next_question!
+          @it.save_answer!(true)
+        end
+        expect do
+          @it.next_question!
+        end.not_to change { @it.current_question }
       end
     end
 
@@ -72,7 +97,8 @@ describe QuizPlay do
   context "reading" do
     describe "#current_question" do
       it "returns the current question" do
-        expect(@it.current_question).to eq({number: 1, id: 0, answer: nil})
+        @it.save_answer!(true)
+        expect(@it.current_question).to eq({number: 1, id: 0, answer: true})
         @it.next_question!
         expect(@it.current_question).to eq({number: 2, id: 1, answer: nil})
       end

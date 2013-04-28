@@ -59,6 +59,12 @@ describe QuizController, user: :student do
       it "doesn't raise errors" do
         get :play
       end
+
+      it "redirects if the current question was already answered" do
+        QuizPlay.new(cookies).save_answer!(true)
+        get :play
+        expect(response).to redirect_to(next_question_quiz_path)
+      end
     end
 
     describe "#save_answer" do

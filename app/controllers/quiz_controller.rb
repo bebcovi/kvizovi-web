@@ -1,6 +1,7 @@
 class QuizController < ApplicationController
   before_filter :authenticate!
   before_filter :assign_student, :assign_quiz_play
+  before_filter :redirect_if_question_was_already_answered, only: :play
 
   def choose
     @quiz_specification = QuizSpecification.new
@@ -85,5 +86,11 @@ class QuizController < ApplicationController
 
   def quiz_snapshot
     @quiz_snapshot ||= QuizSnapshot.find(@quiz_play.quiz_snapshot[:id])
+  end
+
+  def redirect_if_question_was_already_answered
+    if @quiz_play.current_question[:answer] != nil
+      redirect_to action: :next_question
+    end
   end
 end
