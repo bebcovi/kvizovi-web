@@ -21,8 +21,8 @@ describe AssociationQuestionShuffling do
     end
 
     it "shuffles the underlying associations" do
-      expect(@it.associations.keys).to match_array(@question.associations.keys)
-      expect(@it.associations.values).to match_array(@question.associations.values)
+      expect(@it.associations.map(&:first)).to match_array(@question.associations.map(&:first))
+      expect(@it.associations.map(&:last)).to match_array(@question.associations.map(&:last))
       expect(@it.associations).not_to eq @question.associations
     end
   end

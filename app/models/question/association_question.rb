@@ -3,18 +3,17 @@ class AssociationQuestion < Question
 
   validate :validate_associations
 
-  alias raw_associations associations
   def associations
-    raw_associations || {}
+    super || []
   end
 
-  alias raw_associations= associations=
   def associations=(value)
-    self.raw_associations =
+    super(
       case value
-      when Array then Hash[*value]
-      when Hash  then value
+      when Array then value.in_groups_of(2)
+      when Hash  then value.to_a
       end
+    )
   end
 
   def answer

@@ -16,15 +16,21 @@ class Question < ActiveRecord::Base
   validates :content, presence: true
 
   def self.data_accessor(*keys)
-    keys.each do |key|
-      define_method(key) do
-        (data || {})[key]
+    include Module.new {
+      keys.each do |key|
+        define_method(key) do
+          (data || {})[key]
+        end
+
+        define_method("#{key}=") do |value|
+          self.data = (data || {}).merge(key => value)
+        end
       end
 
-      define_method("#{key}=") do |value|
-        self.data = (data || {}).merge(key => value)
+      def self.to_s
+        "Data(#{keys.join(",")})"
       end
-    end
+    }
   end
 
   def dup

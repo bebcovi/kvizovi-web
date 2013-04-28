@@ -8,8 +8,8 @@ class AssociationQuestionShuffling < BaseExhibit
   def associations
     result = __getobj__.associations.dup
     until result != __getobj__.associations
-      left_side, right_side = result.keys.shuffle, result.values.shuffle
-      result = Hash[left_side.zip(right_side)]
+      left_side, right_side = result.map(&:first), result.map(&:last)
+      result = (left_side.shuffle).zip(right_side.shuffle)
     end
     result
   end

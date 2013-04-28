@@ -32,7 +32,7 @@ describe QuizSnapshot do
 
     association_question = @it.questions.third
     expect(association_question.content).to eq "Association"
-    expect(association_question.associations).to eq({"Foo" => "Foo", "Bar" => "Bar"})
+    expect(association_question.associations).to eq [["Foo", "Foo"], ["Bar", "Bar"]]
 
     text_question = @it.questions.fourth
     expect(text_question.content).to eq "Text"

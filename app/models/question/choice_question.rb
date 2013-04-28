@@ -3,9 +3,8 @@ class ChoiceQuestion < Question
 
   validate :validate_provided_answers
 
-  alias raw_provided_answers provided_answers
   def provided_answers
-    raw_provided_answers || []
+    super || []
   end
 
   def answer

@@ -10,9 +10,9 @@ class AssociationQuestionAnswer < BaseExhibit
   def correct_answer?(value)
     case value
     when Array
-      __getobj__.associations == Hash[*value]
+      __getobj__.associations == value.in_groups_of(2)
     when Hash
-      __getobj__.associations == value
+      __getobj__.associations == value.to_a
     end
   end
 end
