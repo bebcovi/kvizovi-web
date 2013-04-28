@@ -48,14 +48,12 @@ SET default_with_oids = false;
 
 CREATE TABLE played_quizzes (
     id integer NOT NULL,
-    quiz_id integer,
-    question_answers hstore,
-    question_ids text,
-    duration integer,
-    interrupted boolean,
-    first_player_id integer,
-    second_player_id integer,
-    created_at timestamp without time zone
+    created_at timestamp without time zone,
+    quiz_snapshot_id integer,
+    question_answers text,
+    begin_time timestamp without time zone,
+    end_time timestamp without time zone,
+    student_ids character varying(255)
 );
 
 
@@ -112,6 +110,37 @@ CREATE SEQUENCE questions_id_seq
 --
 
 ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
+
+
+--
+-- Name: quiz_snapshots; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE quiz_snapshots (
+    id integer NOT NULL,
+    quiz_attributes text,
+    questions_attributes text,
+    created_at timestamp without time zone
+);
+
+
+--
+-- Name: quiz_snapshots_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE quiz_snapshots_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: quiz_snapshots_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE quiz_snapshots_id_seq OWNED BY quiz_snapshots.id;
 
 
 --
@@ -350,6 +379,13 @@ ALTER TABLE ONLY questions ALTER COLUMN id SET DEFAULT nextval('questions_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY quiz_snapshots ALTER COLUMN id SET DEFAULT nextval('quiz_snapshots_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY quizzes ALTER COLUMN id SET DEFAULT nextval('quizzes_id_seq'::regclass);
 
 
@@ -402,6 +438,14 @@ ALTER TABLE ONLY played_quizzes
 
 ALTER TABLE ONLY questions
     ADD CONSTRAINT questions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: quiz_snapshots_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY quiz_snapshots
+    ADD CONSTRAINT quiz_snapshots_pkey PRIMARY KEY (id);
 
 
 --
@@ -575,3 +619,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130415222943');
 INSERT INTO schema_migrations (version) VALUES ('20130425132651');
 
 INSERT INTO schema_migrations (version) VALUES ('20130426014257');
+
+INSERT INTO schema_migrations (version) VALUES ('20130426130237');
+
+INSERT INTO schema_migrations (version) VALUES ('20130428143023');

@@ -46,7 +46,7 @@ Lektire::Application.routes.draw do
 
     resource :quiz, only: [], controller: "quiz" do
       get    "choose"
-      post   "prepare"
+      post   "start"
       get    "play"
       put    "save_answer"
       get    "answer_feedback"

@@ -10,14 +10,6 @@ describe QuizController, user: :student do
     login_as(@student)
   end
 
-  let(:quiz_specification) do
-    {
-      quiz_id:      @quiz.id,
-      question_ids: @questions.map(&:id),
-      student_ids:  [@student.id],
-    }
-  end
-
   describe "#choose" do
     it "assigns quizzes" do
       get :choose
@@ -25,20 +17,19 @@ describe QuizController, user: :student do
     end
   end
 
-  describe "#prepare" do
+  describe "#start" do
     context "when valid" do
       before do
-        QuizSpecification.any_instance.stub(:valid?) { true }
-        QuizSpecification.any_instance.stub(:to_h) { quiz_specification }
+        @hash = {quiz_specification: {quiz_id: @quiz.id, students_count: 1}}
       end
 
       it "prepares the quiz" do
-        QuizRunner.any_instance.should_receive(:prepare!)
-        post :prepare
+        QuizPlay.any_instance.should_receive(:start!)
+        post :start, @hash
       end
 
       it "redirects to quiz" do
-        post :prepare
+        post :start, @hash
         expect(response).to redirect_to play_quiz_path
       end
     end
@@ -49,7 +40,7 @@ describe QuizController, user: :student do
       end
 
       it "assigns quizzes" do
-        post :prepare
+        post :start
         expect(assigns(:quizzes)).to eq [@quiz]
       end
     end
@@ -57,7 +48,11 @@ describe QuizController, user: :student do
 
   context "in game" do
     before do
-      controller.send(:quiz_runner).prepare!(quiz_specification)
+      QuizPlay.new(cookies).start!(quiz_snapshot, [@student])
+    end
+
+    let(:quiz_snapshot) do
+      QuizSnapshot.capture(stub(quiz: @quiz, students: [@student]))
     end
 
     describe "#play" do
@@ -68,7 +63,7 @@ describe QuizController, user: :student do
 
     describe "#save_answer" do
       it "invokes #save_answer!" do
-        QuizRunner.any_instance.should_receive(:save_answer!)
+        QuizPlay.any_instance.should_receive(:save_answer!)
         put :save_answer
       end
 
@@ -86,7 +81,7 @@ describe QuizController, user: :student do
 
     describe "#next_question" do
       it "invokes #next_question!" do
-        QuizRunner.any_instance.should_receive(:next_question!)
+        QuizPlay.any_instance.should_receive(:next_question!)
         get :next_question
       end
 
@@ -98,9 +93,8 @@ describe QuizController, user: :student do
 
     describe "#results" do
       before do
-        controller.send(:quiz_runner).finish!
-        @played_quiz = Factory.create(:played_quiz)
-        @played_quiz.class.any_instance.stub(:quiz)
+        QuizPlay.new(cookies).finish!
+        @played_quiz = Factory.create(:played_quiz, quiz_snapshot: quiz_snapshot)
       end
 
       it "doesn't raise errors" do

@@ -6,28 +6,11 @@ describe PlayedQuizExhibit do
   end
 
   let(:played_quiz) do
-    PlayedQuiz.build_from_hash(quiz_state.to_h)
-  end
-
-  let(:quiz_state) do
-    store = {}
-    QuizState.new(store).tap do
-      quiz_runner = QuizRunner.new(store)
-      quiz_runner.prepare!(hash)
-      quiz_runner.save_answer!(true);  quiz_runner.next_question!
-      quiz_runner.save_answer!(true);  quiz_runner.next_question!
-      quiz_runner.save_answer!(false); quiz_runner.next_question!
-      quiz_runner.save_answer!(true);  quiz_runner.next_question!
-      quiz_runner.finish!
+    stub.tap do |played_quiz|
+      played_quiz.stub(:questions) { Array.new(4, stub) }
+      played_quiz.stub(:students) { Array.new(2, stub) }
+      played_quiz.stub(:question_answers) { [true, true, false, true] }
     end
-  end
-
-  let(:hash) do
-    {
-      quiz_id:      1,
-      question_ids: (1..4).to_a,
-      student_ids:  Factory.create_list(:student, 2).map(&:id),
-    }
   end
 
   it "has results" do

@@ -1,4 +1,4 @@
-- title "#{@quiz.name} · #{@quiz_state.current_question[:number]}. pitanje"
+- title "#{@quiz.name} · #{@quiz_play.current_question[:number]}. pitanje"
 
 .timer
   = icon("stopwatch")
@@ -7,7 +7,7 @@
 %h1.align-middle
   = @quiz.name
 
-.question-username.align-middle{class: "player-#{number(@quiz_state.current_student[:number])}"}
+.question-username.align-middle{class: "player-#{number(@quiz_play.current_student[:number])}"}
   = @student.username.prepend_icon("user")
 
 .progress

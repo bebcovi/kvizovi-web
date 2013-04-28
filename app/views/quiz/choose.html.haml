@@ -4,7 +4,7 @@
 
 - if @quizzes.any?
 
-  = simple_form_for @quiz_specification, url: prepare_quiz_path do |f|
+  = simple_form_for @quiz_specification, url: start_quiz_path do |f|
 
     %section.quizzes
       %p Odaberi kviz:

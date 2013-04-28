@@ -1,28 +1,26 @@
 require "spec_helper"
 
 describe QuizSnapshot do
-  enable_paper_trail
-
-  before do
-    @quiz = Factory.create(:quiz, name: "Name")
-    @quiz.questions = [
+  it "captures a snapshot of a quiz" do
+    quiz = Factory.create(:quiz, name: "Name")
+    quiz.questions = [
       Factory.create(:boolean_question,     content: "Boolean", answer: true),
       Factory.create(:choice_question,      content: "Choice", provided_answers: ["Foo", "Bar", "Baz"]),
       Factory.create(:association_question, content: "Association", associations: {"Foo" => "Foo", "Bar" => "Bar"}),
       Factory.create(:text_question,        content: "Text", answer: "Answer"),
       Factory.create(:image_question,       content: "Image", image: uploaded_file("image.jpg", "image/jpeg"), answer: "Answer"),
     ]
-  end
+    quiz_specification = stub
+    quiz_specification.stub(:quiz) { quiz }
+    quiz_specification.stub_chain(:students, :count) { 1 }
 
-  it "captures a snapshot of a quiz" do
-    QuizSnapshot.capture(@quiz)
-    @quiz.destroy
-
+    QuizSnapshot.capture(quiz_specification)
+    quiz.destroy
     @it = QuizSnapshot.first # So that nothing is cached
 
     quiz = @it.quiz
     expect(quiz).to be_present
-    expect(quiz.name).to eq "Content"
+    expect(quiz.name).to eq "Name"
 
     boolean_question = @it.questions.first
     expect(boolean_question.content).to eq "Boolean"
@@ -45,5 +43,20 @@ describe QuizSnapshot do
     expect(image_question.answer).to eq "Answer"
     expect(image_question.image.path).to satisfy { |path| File.exists?(path) }
     expect(image_question.image_width).to be_present
+  end
+
+  it "trims the number of questions to be divisible by the number of students" do
+    quiz = Factory.create(:quiz)
+    quiz_specification = stub
+    quiz_specification.stub(:quiz) { quiz }
+    quiz_specification.stub_chain(:students, :count) { 2 }
+
+    quiz.questions = Factory.create_list(:question, 4)
+    @it = QuizSnapshot.capture(quiz_specification)
+    expect(@it.questions.count).to eq 4
+
+    quiz.questions = Factory.create_list(:question, 5)
+    @it = QuizSnapshot.capture(quiz_specification)
+    expect(@it.questions.count).to eq 4
   end
 end

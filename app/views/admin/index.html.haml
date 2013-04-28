@@ -52,5 +52,5 @@
         %td= student.full_name
         %td.text-center= student.username
         %td= student.school.name
-        %td.text-center= student.games.count
-        %td= activity(student.updated_at, student.games.maximum(:created_at))
+        %td.text-center= student.played_quizzes.count
+        %td= activity(student.updated_at, student.played_quizzes.maximum(:created_at))
