@@ -5,13 +5,6 @@ describe Student do
     @it = Factory.build(:student)
   end
 
-  describe "#grade=" do
-    it "removes spaces and dots" do
-      @it.grade = "4. b"
-      expect(@it.grade).to eq "4b"
-    end
-  end
-
   context "validations" do
     context "#username" do
       it "validates presence" do
@@ -107,6 +100,24 @@ describe Student do
         @it.school_key = "secret"
         expect(@it).to have(1).error_on(:school_key)
       end
+    end
+  end
+
+  describe "#grade=" do
+    it "removes spaces and dots" do
+      @it.grade = "4. b"
+      expect(@it.grade).to eq "4b"
+    end
+  end
+
+  describe "#played_quizzes" do
+    it "returns played quizzes" do
+      @it.id = 1
+      played_quiz = Factory.create(:played_quiz, student_ids: [1, 2])
+      not_played_quiz = Factory.create(:played_quiz, student_ids: [2, 3])
+
+      expect(@it.played_quizzes).to include(played_quiz)
+      expect(@it.played_quizzes).not_to include(not_played_quiz)
     end
   end
 end

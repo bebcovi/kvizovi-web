@@ -1,8 +1,10 @@
+require "squeel"
+
 class Student < ActiveRecord::Base
   GENDERS = ["Muško", "Žensko"]
 
   belongs_to :school
-  def played_quizzes; PlayedQuiz.where{player_ids =~ " #{my{id}} "}; end
+  def played_quizzes; PlayedQuiz.where{student_ids =~ "% #{my{id}} %"}; end
 
   has_secure_password
   attr_accessor :school_key
