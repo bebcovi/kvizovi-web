@@ -9,13 +9,13 @@ describe QuizPlay do
   let(:quiz_snapshot) do
     stub.tap do |quiz_snapshot|
       quiz_snapshot.stub(:id)        { 0 }
-      quiz_snapshot.stub(:quiz)      { stub(:id => 0) }
-      quiz_snapshot.stub(:questions) { 10.times.map { |i| stub(:id => i) } }
+      quiz_snapshot.stub(:quiz)      { stub(id: 0) }
+      quiz_snapshot.stub(:questions) { 10.times.map { |i| stub(id: i) } }
     end
   end
 
   let(:students) do
-    3.times.map { |i| stub(:id => i) }
+    3.times.map { |i| stub(id: i) }
   end
 
   context "actions" do

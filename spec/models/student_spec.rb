@@ -109,15 +109,4 @@ describe Student do
       expect(@it.grade).to eq "4b"
     end
   end
-
-  describe "#played_quizzes" do
-    it "returns played quizzes" do
-      @it.id = 1
-      played_quiz = Factory.create(:played_quiz, student_ids: [1, 2])
-      not_played_quiz = Factory.create(:played_quiz, student_ids: [2, 3])
-
-      expect(@it.played_quizzes).to include(played_quiz)
-      expect(@it.played_quizzes).not_to include(not_played_quiz)
-    end
-  end
 end

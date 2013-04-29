@@ -52,8 +52,7 @@ CREATE TABLE played_quizzes (
     quiz_snapshot_id integer,
     question_answers text,
     begin_time timestamp without time zone,
-    end_time timestamp without time zone,
-    student_ids character varying(255)
+    end_time timestamp without time zone
 );
 
 
@@ -74,6 +73,16 @@ CREATE SEQUENCE played_quizzes_id_seq
 --
 
 ALTER SEQUENCE played_quizzes_id_seq OWNED BY played_quizzes.id;
+
+
+--
+-- Name: played_quizzes_students; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE played_quizzes_students (
+    student_id integer,
+    played_quiz_id integer
+);
 
 
 --
@@ -625,3 +634,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130426130237');
 INSERT INTO schema_migrations (version) VALUES ('20130428143023');
 
 INSERT INTO schema_migrations (version) VALUES ('20130428211333');
+
+INSERT INTO schema_migrations (version) VALUES ('20130429123055');

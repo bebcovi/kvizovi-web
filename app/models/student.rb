@@ -4,7 +4,7 @@ class Student < ActiveRecord::Base
   GENDERS = ["Muško", "Žensko"]
 
   belongs_to :school
-  def played_quizzes; PlayedQuiz.where{student_ids =~ "% #{my{id}} %"}; end
+  has_and_belongs_to_many :played_quizzes
 
   has_secure_password
   attr_accessor :school_key
