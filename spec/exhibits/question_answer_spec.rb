@@ -108,6 +108,10 @@ describe TextQuestionAnswer do
       expect(@it.correct_answer?("Anšwer")).to be_true
     end
 
+    it "accepts nil" do
+      expect(@it.correct_answer?(nil)).to be_false
+    end
+
     it "can return false" do
       expect(@it.correct_answer?("Not answer")).to be_false
     end

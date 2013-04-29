@@ -29,13 +29,12 @@ class QuizController < ApplicationController
   end
 
   def save_answer
-    question = QuestionAnswer.new(current_question)
-    @quiz_play.save_answer!(question.correct_answer?(params[:answer]))
+    @quiz_play.save_answer!(params[:answer])
     redirect_to action: :answer_feedback
   end
 
   def answer_feedback
-    @question = current_question
+    @question = QuestionAnswer.new(current_question)
   end
 
   def next_question

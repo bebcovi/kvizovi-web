@@ -10,7 +10,7 @@ describe QuizPlay do
     stub.tap do |quiz_snapshot|
       quiz_snapshot.stub(:id)        { 0 }
       quiz_snapshot.stub(:quiz)      { stub(id: 0) }
-      quiz_snapshot.stub(:questions) { 10.times.map { |i| stub(id: i) } }
+      quiz_snapshot.stub(:questions) { 10.times.map { |i| stub(id: i, category: "boolean") } }
     end
   end
 

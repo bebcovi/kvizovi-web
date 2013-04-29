@@ -5,7 +5,7 @@ module QuizHelper
   end
 
   def render_feedback
-    if @quiz_play.current_question[:answer]
+    if @question.correct_answer?(@quiz_play.current_question[:answer])
       render "quiz/feedback/positive"
     else
       render "quiz/feedback/negative"

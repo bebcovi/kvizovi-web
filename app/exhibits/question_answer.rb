@@ -39,7 +39,11 @@ class TextQuestionAnswer < BaseExhibit
   include ActiveSupport::Inflector
 
   def correct_answer?(value)
-    normalize(__getobj__.answer).casecmp(normalize(value)) == 0
+    if value
+      normalize(__getobj__.answer).casecmp(normalize(value)) == 0
+    else
+      false
+    end
   end
 
   private

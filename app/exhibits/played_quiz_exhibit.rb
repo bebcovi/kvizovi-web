@@ -5,8 +5,8 @@ class PlayedQuizExhibit < BaseExhibit
 
   def scores
     result = Array.new(students.count, 0)
-    question_answers.each_with_index do |answer, index|
-      result[index % students.count] += 1 if answer == true
+    question_answers.each_with_index do |answer, idx|
+      result[idx % students.count] += 1 if QuestionAnswer.new(questions[idx]).correct_answer?(answer)
     end
     result
   end
