@@ -1,0 +1,12 @@
+.played-quiz
+
+  %h1= played_quiz.quiz.name
+
+  %ol.questions
+    - PlayedQuestions(played_quiz) do |question, answer, css_class, idx|
+      - if answer.nil? and played_quiz.question_answers.index(&:nil?) == idx
+        %p.interrupted (Ovdje je učenik odustao od kviza)
+
+      %li{class: css_class}
+        %h2= question.content
+        = render "played_quizzes/answer/#{question.category}", {question: question, answer: answer}

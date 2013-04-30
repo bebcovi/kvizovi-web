@@ -129,7 +129,8 @@ CREATE TABLE quiz_snapshots (
     id integer NOT NULL,
     quiz_attributes text,
     questions_attributes text,
-    created_at timestamp without time zone
+    created_at timestamp without time zone,
+    quiz_id integer
 );
 
 
@@ -625,6 +626,8 @@ INSERT INTO schema_migrations (version) VALUES ('20130415195327');
 
 INSERT INTO schema_migrations (version) VALUES ('20130415222943');
 
+INSERT INTO schema_migrations (version) VALUES ('20130421130148');
+
 INSERT INTO schema_migrations (version) VALUES ('20130425132651');
 
 INSERT INTO schema_migrations (version) VALUES ('20130426014257');
@@ -636,3 +639,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130428143023');
 INSERT INTO schema_migrations (version) VALUES ('20130428211333');
 
 INSERT INTO schema_migrations (version) VALUES ('20130429123055');
+
+INSERT INTO schema_migrations (version) VALUES ('20130430142123');

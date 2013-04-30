@@ -5,6 +5,7 @@
     %ul.dropdown-menu.pull-right
       %li= link_to "Pitanja".prepend_icon("clipboard"), quiz_questions_path(quiz)
       %li= edit_button "Izmijeni", edit_quiz_path(quiz), class: "" # don't apply default classes
+      %li= link_to "Prati", monitor_quiz_path(quiz_id: quiz.id)
       %li= delete_button "Izbriši", delete_quiz_path(quiz), class: "item-danger"
 
   = quiz_presenter.visibility_icon

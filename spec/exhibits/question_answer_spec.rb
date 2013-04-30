@@ -21,7 +21,11 @@ describe AssociationQuestionAnswer do
     end
 
     it "accepts an array" do
-      expect(@it.correct_answer?(["Foo", "Foo", "Bar", "Bar", "Baz", "Baz"])).to be_true
+      expect(@it.correct_answer?([["Foo", "Foo"], ["Bar", "Bar"], ["Baz", "Baz"]])).to be_true
+    end
+
+    it "ignores the order" do
+      expect(@it.correct_answer?([["Bar", "Bar"], ["Foo", "Foo"], ["Baz", "Baz"]])).to be_true
     end
 
     it "accepts a hash" do
@@ -64,10 +68,6 @@ describe BooleanQuestionAnswer do
   describe "#correct_answer?" do
     before do
       @question.answer = true
-    end
-
-    it "accepts a string" do
-      expect(@it.correct_answer?("true")).to be_true
     end
 
     it "accepts a boolean" do

@@ -1,8 +1,9 @@
 require "active_support/inflector/transliterate"
+require "set"
 
 class QuestionAnswer
   def self.new(question)
-    "#{question.class.name}Answer".constantize.new(question)
+    "#{question.category.camelize}QuestionAnswer".constantize.new(question)
   end
 end
 
@@ -10,9 +11,9 @@ class AssociationQuestionAnswer < BaseExhibit
   def correct_answer?(value)
     case value
     when Array
-      __getobj__.associations == value.in_groups_of(2)
+      Set.new(__getobj__.associations) == Set.new(value)
     when Hash
-      __getobj__.associations == value.to_a
+      Set.new(__getobj__.associations) == Set.new(value.to_a)
     end
   end
 end
@@ -25,13 +26,7 @@ end
 
 class BooleanQuestionAnswer < BaseExhibit
   def correct_answer?(value)
-    __getobj__.answer ==
-      case value
-      when String
-        {"true" => true, "false" => false}[value]
-      else
-        value
-      end
+    __getobj__.answer == value
   end
 end
 

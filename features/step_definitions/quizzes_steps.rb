@@ -1,5 +1,16 @@
+require "rack/test"
+
+Given(/^my school has created a quiz for me$/) do
+  @quiz = Factory.create(:quiz, school: @user.school)
+  @quiz.questions = create_questions(6)
+end
+
 Given(/^I have a quiz$/) do
   @quiz = Factory.create(:quiz, school: @user)
+end
+
+When(/^in the meanwhile the quiz gets deleted$/) do
+  @quiz.destroy
 end
 
 When(/^I create a quiz$/) do

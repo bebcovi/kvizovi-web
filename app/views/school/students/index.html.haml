@@ -1,0 +1,15 @@
+- title "Učenici"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Ime i prezime
+      %th Korisničko ime
+      %th Broj odigranih kvizova
+
+  %tbody
+    - @students.each do |student|
+      = content_tag_for :tr, student do
+        %td= student.full_name
+        %td= student.username
+        %td= link_to student.played_quizzes.count, played_quizzes_path(student_id: student.id)

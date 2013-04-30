@@ -1,6 +1,6 @@
 class QuestionShuffling
   def self.new(question)
-    "#{question.class.name}Shuffling".constantize.new(question)
+    "#{question.category.camelize}QuestionShuffling".constantize.new(question)
   end
 end
 

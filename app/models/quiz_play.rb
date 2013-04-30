@@ -1,7 +1,7 @@
 class QuizPlay
-  NO_ANSWER = "ROFLMAO"
+  NO_ANSWER = Question::NO_ANSWER
 
-  def initialize(store)
+  def initialize(store = {})
     @store = store
   end
 
@@ -28,12 +28,7 @@ class QuizPlay
   def save_answer!(answer)
     unless current_question[:answer] != nil
       answers = @store[:question_answers].split("`")
-      answers[current_question[:number] - 1] =
-        if answer.nil? or (answer.is_a?(String) and answer.empty?)
-          NO_ANSWER
-        else
-          answer.to_s
-        end
+      answers[current_question[:number] - 1] = answer_to_string(answer, current_question[:category])
       @store[:question_answers] = answers.join("`")
     end
   end
@@ -126,12 +121,7 @@ class QuizPlay
 
   def question_answers
     @store[:question_answers].split("`").map.with_index do |answer, i|
-      next answer if answer == NO_ANSWER
-      case question_categories[i]
-      when "boolean"     then {"true" => true, "false" => false}[answer]
-      when "association" then answer[2..-3].split(/", "/)
-      else                    answer
-      end
+      string_to_answer(answer, question_categories[i])
     end
   end
 
@@ -140,7 +130,7 @@ class QuizPlay
   end
 
   def question(i)
-    {number: i + 1, id: question_ids[i], answer: question_answers[i]}
+    {number: i + 1, id: question_ids[i], answer: question_answers[i], category: question_categories[i]}
   end
 
   def student_ids
@@ -151,5 +141,27 @@ class QuizPlay
 
   def student(i)
     {number: i + 1, id: student_ids[i]}
+  end
+
+  def answer_to_string(answer, category)
+    case category
+    when "boolean", "choice"
+      answer.nil? ? NO_ANSWER : String(answer)
+    when "association"
+      answer.flatten.join("@")
+    else
+      answer.empty? ? NO_ANSWER : String(answer)
+    end
+  end
+
+  def string_to_answer(answer, category)
+    case category
+    when "boolean"
+      {"true" => true, "false" => false, NO_ANSWER => NO_ANSWER}[answer]
+    when "association"
+      answer.split("@").in_groups_of(2)
+    else
+      answer
+    end
   end
 end

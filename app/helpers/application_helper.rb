@@ -17,20 +17,17 @@ module ApplicationHelper
     yield presenter
   end
 
-  def breadcrumbs(items)
+  def breadcrumbs(*items, last_item)
     content_tag :ol, class: "breadcrumb" do
-      items.map.with_index do |(name, path), index|
-        if index < items.count - 1
-          content_tag(:li) do
-            link_to(name, path) +
-            content_tag(:i, class: "divider") { icon("chevron-right") }
-          end
-        else
-          content_tag(:li, class: "active") do
-            name
-          end
+      items.map do |name, path|
+        content_tag(:li) do
+          link_to(name, path) +
+          content_tag(:i, class: "divider") { icon("chevron-right") }
         end
-      end.join.html_safe
+      end.join.html_safe +
+      content_tag(:li, class: "active") do
+        last_item
+      end
     end
   end
 

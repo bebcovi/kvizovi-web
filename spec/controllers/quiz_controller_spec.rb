@@ -119,6 +119,28 @@ describe QuizController, user: :student do
         delete :finish
         expect(PlayedQuiz.count).to eq 1
       end
+
+      context "quiz is not interrupted" do
+        before do
+          QuizPlay.any_instance.stub(:interrupted?) { false }
+        end
+
+        it "redirects to results" do
+          delete :finish
+          expect(response).to redirect_to(results_quiz_path(id: PlayedQuiz.first.id))
+        end
+      end
+
+      context "quiz is interrupted" do
+        before do
+          QuizPlay.any_instance.stub(:interrupted?) { true }
+        end
+
+        it "redirects to beginning" do
+          delete :finish
+          expect(response).to redirect_to(choose_quiz_path)
+        end
+      end
     end
   end
 end

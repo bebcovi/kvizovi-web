@@ -8,11 +8,11 @@ module PageHelpers
     when /my profile page/
       profile_url(subdomain: @user_type)
     when /quizzes page/
-      quizzes_url(subdomain: "school")
+      quizzes_url(subdomain: @user_type)
     when /questions page/
-      quiz_questions_url(@quiz, subdomain: "school")
+      quiz_questions_url(@quiz, subdomain: @user_type)
     when /page for playing quizzes/
-      choose_quiz_url(subdomain: "student")
+      choose_quiz_url(subdomain: @user_type)
     else raise "Page isn't recognized: #{page}"
     end
   end
