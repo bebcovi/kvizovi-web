@@ -51,6 +51,8 @@ group :test do
   gem "capybara", ">= 2"
   gem "cucumber-rails"
   gem "database_cleaner"
+  gem "vcr"
+  gem "webmock", ">= 1.8", "< 1.10"
 end
 
 # Development stuff
