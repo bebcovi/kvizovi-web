@@ -26,7 +26,7 @@
         %td= student.full_name
         %td.text-center= student.username
         %td.text-center= student.games.count
-        %td= activity(student.updated_at, student.games.maximum(:created_at))
+        %td= activity(student.last_activity)
 
 %h2
   Kvizovi
@@ -42,11 +42,9 @@
     %tr
       %th Naziv kviza
       %th.text-center Broj pitanja
-      %th Zadnja promjena
 
   %tbody
     - @school.quizzes.each do |quiz|
       %tr
         %td= quiz.name
         %td.text-center= quiz.questions.count
-        %td= activity(quiz.updated_at)

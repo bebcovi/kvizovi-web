@@ -33,5 +33,5 @@ Feature: Authentication
   Scenario: Being redirected to the intended page after login
     Given I'm registered
     When I visit my profile page
-    And I login
+    And I log in
     Then I should be on my profile page

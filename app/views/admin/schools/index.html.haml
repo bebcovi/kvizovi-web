@@ -20,11 +20,11 @@
 
   %tbody
     - @schools.each do |school|
-      %tr
+      = content_tag_for :tr, school do
         %td= link_to school.name, admin_school_path(school)
         %td.text-center= school.students.count
         %td.text-center= school.quizzes.activated.count
-        %td= activity(school.updated_at, school.quizzes.maximum(:updated_at))
+        %td= activity(school.last_activity)
 
 %h2
   Učenici
@@ -48,9 +48,9 @@
 
   %tbody
     - @students.each do |student|
-      %tr
+      = content_tag_for :tr, student do
         %td= student.full_name
         %td.text-center= student.username
         %td= student.school.name
         %td.text-center= student.played_quizzes.count
-        %td= activity(student.updated_at, student.played_quizzes.maximum(:created_at))
+        %td= activity(student.last_activity)

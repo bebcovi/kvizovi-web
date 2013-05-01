@@ -1,6 +1,6 @@
 if $load_factories
   FactoryGirl.define do
-    factory :school do
+    factory :school, aliases: [:user] do
       name     "MIOC"
       level    "Srednja"
       username "mioc"

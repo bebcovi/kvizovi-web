@@ -32,6 +32,10 @@ class Student < ActiveRecord::Base
     write_attribute(:grade, value.to_s.delete(" .").downcase)
   end
 
+  def last_activity
+    LastActivity.for(self)
+  end
+
   private
 
   def assign_school

@@ -1,13 +1,4 @@
 Lektire::Application.routes.draw do
-  ########################
-  # Admin
-  ########################
-
-  controller :admin do
-    get "admin", to: :index
-    get "admin/:action"
-    get "admin/school/:id", to: :school, as: "admin_school"
-  end
 
   ########################
   # Authentication
@@ -77,6 +68,13 @@ Lektire::Application.routes.draw do
     get "contact"
   end
 
+  ########################
+  # Admin
+  ########################
+  namespace :admin do
+    resources :schools
+  end
+
   root to: "home#index"
 
   ########################
@@ -92,4 +90,5 @@ Lektire::Application.routes.draw do
   get "login",        to: redirect(                      path: "/")
   get "schools/new",  to: redirect(subdomain: "school",  path: "/registration/new")
   get "students/new", to: redirect(subdomain: "student", path: "/registration/new")
+
 end
