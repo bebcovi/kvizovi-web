@@ -275,7 +275,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   simple_form (>= 2)
-  squeel
+  squeel (>= 1)
   strong_parameters (>= 0.2)
   thin
   uglifier

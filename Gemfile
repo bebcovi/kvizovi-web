@@ -32,7 +32,7 @@ gem "paperclip", ">= 3.3"
 gem "paperclip-dropbox", "~> 1.0"
 gem "activerecord-postgres-hstore"
 gem "acts-as-taggable-on"
-gem "squeel"
+gem "squeel", ">= 1"
 gem "paper_trail", ">= 2.7"
 
 # Security
