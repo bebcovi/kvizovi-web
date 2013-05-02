@@ -1,5 +1,5 @@
 class DeleteAllPlayedGames < ActiveRecord::Migration
-  class PlayedGame < ActiveRecord::Base
+  class PlayedQuiz < ActiveRecord::Base
   end
 
   def up
