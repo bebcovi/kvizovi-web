@@ -5,11 +5,11 @@ module PlayedQuizzesHelper
       question = QuestionAnswer.new(question)
 
       if question.correct_answer?(answer)
-        css_class = "correct"
+        css_class = "text-success"
       elsif answer.nil?
-        css_class = "interrupted"
+        css_class = "text-warning"
       else
-        css_class = "incorrect"
+        css_class = "text-error"
       end
 
       yield [question, answer, css_class, idx]
@@ -24,9 +24,9 @@ module PlayedQuizzesHelper
     unless answer.nil? or answer == Question::NO_ANSWER
       answer.each do |left, right|
         if question.correct_answer?(answer)
-          css_class = "correct"
+          css_class = "text-success"
         elsif not [left, right].in?(question.answer)
-          css_class = "incorrect"
+          css_class = "text-error"
         end
         yield [[left, right], css_class]
       end
@@ -41,9 +41,9 @@ module PlayedQuizzesHelper
     unless answer.nil? or answer == Question::NO_ANSWER
       [["Točno", true], ["Netočno", false]].each do |text, value|
         if question.correct_answer?(value) and answer == value
-          css_class = "correct"
+          css_class = "text-success"
         elsif answer == value
-          css_class = "incorrect"
+          css_class = "text-error"
         end
         yield [text, css_class]
       end
@@ -58,9 +58,9 @@ module PlayedQuizzesHelper
     unless answer.nil? or answer == Question::NO_ANSWER
       QuestionShuffling.new(question).provided_answers.each do |provided_answer|
         if question.correct_answer?(provided_answer) and answer == provided_answer
-          css_class = "correct"
+          css_class = "text-success"
         elsif answer == provided_answer
-          css_class = "incorrect"
+          css_class = "text-error"
         end
         yield [provided_answer, css_class]
       end
@@ -73,12 +73,12 @@ module PlayedQuizzesHelper
 
   def TextAnswer(question, answer, &block)
     if question.correct_answer?(answer)
-      css_class = "correct"
+      css_class = "text-success"
     elsif answer.nil? or answer == Question::NO_ANSWER
-      css_class = "no-answer"
+      css_class = "muted"
       answer = "(Nije odgovoreno)"
     else
-      css_class = "inocorrect"
+      css_class = "text-error"
       additional = "(#{question.answer})"
     end
     yield [answer, css_class, additional]
