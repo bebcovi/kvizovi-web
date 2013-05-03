@@ -4,8 +4,6 @@ do ($ = jQuery) ->
 
     choose: ->
 
-      console.log "quiz"
-
       $form           = $("form")
 
       $sections       = $form.find("section")
