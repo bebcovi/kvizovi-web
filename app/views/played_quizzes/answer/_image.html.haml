@@ -1,7 +1,7 @@
-.image-answer
-  = image_tag question.image.url(:resized), class: "img-polaroid pull-left", style: "width: #{question.image_width(:resized)}px; height: #{question.image_height(:resized)}px; margin-right: 1em;"
-  %p
-    Odgovor:
-    - Answer(question, answer) do |answer, css_class, additional|
-      %span{class: css_class}= answer
-      = additional
+= image_tag question.image.url(:resized), class: "img-polaroid space-bottom", style: "width: #{question.image_width(:resized)}px; height: #{question.image_height(:resized)}px"
+
+%p
+  Odgovor:
+  - Answer(question, answer) do |answer, css_class, additional|
+    %span{class: css_class}= answer
+    = additional

@@ -1,7 +1,5 @@
-.association-answer
-  %ol
-    - Answer(question, answer) do |(left, right), css_class|
-      .association-pair
-        %span{class: "#{css_class} left"}= left
-        = icon("chevron-right", class: "association-pair-arrow")
-        %span{class: "#{css_class} right"}= right
+- Answer(question, answer) do |(left, right), css_class|
+  .space-half-bottom
+    %span{class: "#{css_class} left"}= left
+    = icon("chevron-right", class: "association-pair-arrow")
+    %span{class: "#{css_class} right"}= right

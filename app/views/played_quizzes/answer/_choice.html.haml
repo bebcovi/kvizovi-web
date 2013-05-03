@@ -1,4 +1,3 @@
-.choice-answer
-  %ol
-    - Answer(question, answer) do |provided_answer, css_class|
-      %li{class: css_class}= provided_answer
+%ul
+  - Answer(question, answer) do |provided_answer, css_class|
+    %li{class: css_class}= provided_answer
