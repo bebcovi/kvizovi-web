@@ -11,6 +11,8 @@
 //= require general
 //= require helper
 //
+//= require confirm-leave
+//
 //= require controllers/quiz
 //= require controllers/tour
 //

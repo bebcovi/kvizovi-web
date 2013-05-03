@@ -133,17 +133,6 @@ do ($ = jQuery) ->
               .text(quitButtonText)
           onSubmit: clearStorage
 
-      $(".navbar").on "click", "a", (event) ->
-        event.preventDefault()
-        href = @href
-        unless $(@).hasClass("dropdown-toggle")
-          $.modalAjax
-            url: $form.find(".cancel").attr("href")
-            onSubmit: (event) ->
-              event.preventDefault()
-              clearStorage()
-              location.href = href
-
       $form.on "submit", (event) ->
         event.preventDefault()
         showFeedback()
