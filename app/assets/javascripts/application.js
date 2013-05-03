@@ -6,12 +6,19 @@
 //= require jquery.spin
 //= require moment
 //
-//= require extensions
+//= require app
+//= require icon
+//= require button
+//= require spinner
+//= require modal-ajax
 //
-//= require general
-//= require helper
-//
+//= require additional-info
+//= require tooltip
+//= require popover
+//= require dropdown
+//= require modal
 //= require confirm-leave
+//= require helper
 //
 //= require controllers/quiz
 //= require controllers/tour

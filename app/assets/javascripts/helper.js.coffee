@@ -1,6 +1,4 @@
-$ = jQuery
-
-App.helper = ->
+do ($ = jQuery) ->
 
   # turn off auto-complete in text inputs
 
