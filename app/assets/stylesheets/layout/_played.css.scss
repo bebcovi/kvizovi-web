@@ -1,2 +1,9 @@
 .l-played {
+  margin-bottom: $hsu;
+  padding-bottom: $bsu;
+  border-bottom: 1px solid shade(white, 15%);
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
