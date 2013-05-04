@@ -7,7 +7,7 @@ module PlayedQuizzesHelper
       if question.correct_answer?(answer)
         css_class = "text-success"
       elsif answer.nil?
-        css_class = "text-warning"
+        css_class = "muted"
       else
         css_class = "text-error"
       end
