@@ -1,7 +1,8 @@
-= render_feedback
+.l-feedback.feedback{class: "l-question-#{@question.category}"}
+  = render_feedback
 
-.form
-  - if not @quiz_play.over?
-    = next_button "Sljedeće pitanje", next_question_quiz_path, method: :put
-  - else
-    = next_button "Rezultati", finish_quiz_path, method: :delete
+  .form
+    - if not @quiz_play.over?
+      = next_button "Sljedeće pitanje", next_question_quiz_path, method: :put
+    - else
+      = next_button "Rezultati", finish_quiz_path, method: :delete

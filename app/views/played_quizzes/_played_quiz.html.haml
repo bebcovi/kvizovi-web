@@ -1,8 +1,9 @@
 %h1= played_quiz.quiz.name
 
 - PlayedQuestions(played_quiz) do |question, answer, css_class, idx|
-  - if answer.nil? and played_quiz.question_answers.index(&:nil?) == idx
-    %p.text-error (Ovdje je učenik odustao od kviza)
+  .l-played{class: "l-question-#{question.category}"}
+    - if answer.nil? and played_quiz.question_answers.index(&:nil?) == idx
+      %p.text-error (Ovdje je učenik odustao od kviza)
 
-  %h2.question-title= question.content
-  = render "played_quizzes/answer/#{question.category}", {question: question, answer: answer}
+    %h2.question-title= question.content
+    = render "played_quizzes/answer/#{question.category}", {question: question, answer: answer}
