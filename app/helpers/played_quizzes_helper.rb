@@ -5,14 +5,14 @@ module PlayedQuizzesHelper
       question = QuestionAnswer.new(question)
 
       if question.correct_answer?(answer)
-        css_class = "text-success"
+        feedback = 1
       elsif answer.nil?
-        css_class = "muted"
+        feedback = -1
       else
-        css_class = "text-error"
+        feedback = 0
       end
 
-      yield [question, answer, css_class, idx]
+      yield [question, answer, feedback, idx]
     end
   end
 
@@ -24,11 +24,11 @@ module PlayedQuizzesHelper
     unless answer.nil? or answer == Question::NO_ANSWER
       answer.each do |left, right|
         if question.correct_answer?(answer)
-          css_class = "text-success"
+          feedback = 1
         elsif not [left, right].in?(question.answer)
-          css_class = "text-error"
+          feedback = 0
         end
-        yield [[left, right], css_class]
+        yield [[left, right], feedback]
       end
     else
       QuestionShuffling.new(question).associations.each do |left, right|
@@ -41,11 +41,11 @@ module PlayedQuizzesHelper
     unless answer.nil? or answer == Question::NO_ANSWER
       [["Točno", true], ["Netočno", false]].each do |text, value|
         if question.correct_answer?(value) and answer == value
-          css_class = "text-success"
+          feedback = 1
         elsif answer == value
-          css_class = "text-error"
+          feedback = 0
         end
-        yield [text, css_class]
+        yield [text, feedback]
       end
     else
       ["Točno", "Netočno"].each do |text|
@@ -58,11 +58,11 @@ module PlayedQuizzesHelper
     unless answer.nil? or answer == Question::NO_ANSWER
       QuestionShuffling.new(question).provided_answers.each do |provided_answer|
         if question.correct_answer?(provided_answer) and answer == provided_answer
-          css_class = "text-success"
+          feedback = 1
         elsif answer == provided_answer
-          css_class = "text-error"
+          feedback = 0
         end
-        yield [provided_answer, css_class]
+        yield [provided_answer, feedback]
       end
     else
       QuestionShuffling.new(question).provided_answers.each do |provided_answer|
@@ -73,15 +73,14 @@ module PlayedQuizzesHelper
 
   def TextAnswer(question, answer, &block)
     if question.correct_answer?(answer)
-      css_class = "text-success"
+      feedback = 1
     elsif answer.nil? or answer == Question::NO_ANSWER
-      css_class = "muted"
-      answer = "(Nije odgovoreno)"
+      feedback = -1
+      answer = ""
     else
-      css_class = "text-error"
-      additional = "(#{question.answer})"
+      feedback = 0
     end
-    yield [answer, css_class, additional]
+    yield [answer, feedback]
   end
 
   alias ImageAnswer TextAnswer

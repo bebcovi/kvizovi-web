@@ -1,5 +1,5 @@
-- Answer(question, answer) do |(left, right), css_class|
+- Answer(question, answer) do |(left, right), feedback|
   .space-half-bottom
-    %span{class: "#{css_class} left"}= left
+    %span= left
     = icon("chevron-right", class: "arrow subtle")
-    %span{class: "#{css_class} right"}= right
+    %span= right

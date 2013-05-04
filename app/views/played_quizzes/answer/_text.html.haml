@@ -1,5 +1,3 @@
 %p
-  Odgovor:
-  - Answer(question, answer) do |answer, css_class, additional|
-    %span{class: css_class}= answer
-    = additional
+  - Answer(question, answer) do |answer, feedback|
+    %span= answer
