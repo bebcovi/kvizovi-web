@@ -4,5 +4,5 @@
     - common_options = {label: false, wrapper: false, input_html: {name: "association_question[associations][]", class: "input-xlarge", style: "margin-bottom: 0;"}, error: false}
     .association-pair.list-inline-block.space-half-bottom
       = f.input :associations, {placeholder: "Asocijacija #{n + 1}a", input_html: {value: question.associations.map(&:first)[n]}}.deep_merge(common_options)
-      = icon("chevron-right", class: "arrow")
+      = icon("chevron-right", class: "arrow subtle")
       = f.input :associations, {placeholder: "Asocijacija #{n + 1}b", input_html: {value: question.associations.map(&:last)[n]}}.deep_merge(common_options)

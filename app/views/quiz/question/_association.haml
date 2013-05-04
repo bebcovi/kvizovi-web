@@ -2,5 +2,5 @@
   - question.associations.each do |left, right|
     .association-pair.list-inline-block.space-half-bottom.js-hidden
       = f.input :answer, input_html: {value: left, name: "answer[]"}, label: false, wrapper_html: {class: "association-pair-static"}
-      = icon("chevron-right", class: "association-pair-arrow")
+      = icon("chevron-right", class: "arrow subtle")
       = f.input :answer, input_html: {value: right, name: "answer[]"}, label: false, wrapper_html: {class: "association-pair-dynamic"}
