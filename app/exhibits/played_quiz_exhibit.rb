@@ -33,6 +33,19 @@ class PlayedQuizExhibit < BaseExhibit
     questions.count / students.count
   end
 
+  def played_questions
+    questions.map.with_index do |question, idx|
+      question = QuestionAnswer.new(question)
+      answer = question_answers[idx]
+      status = if question.correct_answer?(answer) then "correct"
+               elsif answer == Question::NO_ANSWER then "unanswered"
+               elsif answer == nil                 then "interrupted"
+               else                                     "incorrect"
+               end
+      [question, answer, status, idx]
+    end
+  end
+
   private
 
   def percentage(part, whole)

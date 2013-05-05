@@ -17,6 +17,11 @@ module ApplicationHelper
     yield presenter
   end
 
+  def exhibit(record, exhibit_class = nil)
+    exhibit_class ||= "#{record.class.name}Exhibit".constantize
+    exhibit_class.new(record, self)
+  end
+
   def breadcrumbs(*items, last_item)
     content_tag :ol, class: "breadcrumb" do
       items.map do |name, path|

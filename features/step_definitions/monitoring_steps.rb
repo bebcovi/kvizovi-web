@@ -18,7 +18,7 @@ When(/^I go to that played quiz$/) do
 end
 
 Then(/^I should see (?:their|his) results$/) do
-  @played_quiz.questions.each do |question|
+  @played_quiz.questions.first(1).each do |question|
     expect(page).to have_content(question.content)
   end
 end

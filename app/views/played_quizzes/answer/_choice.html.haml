@@ -1,3 +1,3 @@
 %ul
-  - Answer(question, answer) do |provided_answer, feedback|
-    %li= provided_answer
+  - Answer(question, answer) do |provided_answer|
+    %li{class: ("question-answer" if provided_answer == answer)}= provided_answer

@@ -3,11 +3,12 @@ require "set"
 
 class QuestionAnswer
   def self.new(question)
-    "#{question.category.camelize}QuestionAnswer".constantize.new(question)
+    decorator_class = "#{question.category.camelize}QuestionAnswer".constantize
+    decorator_class.new(question)
   end
 end
 
-class AssociationQuestionAnswer < BaseExhibit
+class AssociationQuestionAnswer < BaseDecorator
   def correct_answer?(value)
     case value
     when Array
@@ -18,19 +19,19 @@ class AssociationQuestionAnswer < BaseExhibit
   end
 end
 
-class ChoiceQuestionAnswer < BaseExhibit
+class ChoiceQuestionAnswer < BaseDecorator
   def correct_answer?(value)
     __getobj__.provided_answers.first == value
   end
 end
 
-class BooleanQuestionAnswer < BaseExhibit
+class BooleanQuestionAnswer < BaseDecorator
   def correct_answer?(value)
     __getobj__.answer == value
   end
 end
 
-class TextQuestionAnswer < BaseExhibit
+class TextQuestionAnswer < BaseDecorator
   include ActiveSupport::Inflector
 
   def correct_answer?(value)

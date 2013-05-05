@@ -11,4 +11,15 @@ class PlayedQuiz < ActiveRecord::Base
 
   delegate :quiz, :questions, to: :quiz_snapshot
   delegate :name, to: :quiz
+
+  def interrupted?
+    question_answers.any?(&:nil?)
+  end
+
+  def interrupted_on?(idx)
+    question_answers.index(&:nil?) == idx
+  end
+
+  def single_player?; students.count == 1; end
+  def multi_player?;  students.count > 1;  end
 end

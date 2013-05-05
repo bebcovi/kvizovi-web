@@ -2,7 +2,8 @@ require "spec_helper"
 
 describe PlayedQuizExhibit do
   before do
-    @it = PlayedQuizExhibit.new(played_quiz)
+    @context = stub.as_null_object
+    @it = PlayedQuizExhibit.new(played_quiz, @context)
   end
 
   let(:played_quiz) do

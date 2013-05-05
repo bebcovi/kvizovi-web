@@ -25,7 +25,7 @@ class QuizController < ApplicationController
   def play
     @student  = current_student
     @quiz     = quiz
-    @question = QuestionShuffling.new(current_question)
+    @question = current_question
   end
 
   def save_answer
@@ -34,7 +34,7 @@ class QuizController < ApplicationController
   end
 
   def answer_feedback
-    @question = QuestionAnswer.new(current_question)
+    @question = current_question
   end
 
   def next_question
@@ -43,7 +43,7 @@ class QuizController < ApplicationController
   end
 
   def results
-    @played_quiz = PlayedQuizExhibit.new(PlayedQuiz.find(params[:id]))
+    @played_quiz = PlayedQuiz.find(params[:id])
     @quiz        = @played_quiz.quiz
   end
 
