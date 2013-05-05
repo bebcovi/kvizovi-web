@@ -26,7 +26,17 @@ strong {
 }
 
 q {
-  color: $orange;
+  quotes: '"' '"' "'" "'";
+  font-style: italic;
+
+  &:before {
+    content: open-quote;
+    font-style: normal;
+  }
+  &:after {
+    content: close-quote;
+    font-style: normal;
+  }
 }
 
 form {
