@@ -1,0 +1,6 @@
+.text-error
+  = icon("cancel-circle-full")
+  Pogrešan odgovor
+
+.l-feedback.space-half-top{class: "l-question-#{question.category}"}
+  = render "quiz/answer/#{question.category}", {question: question}

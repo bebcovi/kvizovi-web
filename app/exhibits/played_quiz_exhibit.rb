@@ -40,7 +40,7 @@ class PlayedQuizExhibit < BaseExhibit
       status = if question.correct_answer?(answer) then "correct"
                elsif answer == Question::NO_ANSWER then "unanswered"
                elsif answer == nil                 then "interrupted"
-               else                                     "incorrect"
+               else                                     "wrong"
                end
       [question, answer, status, idx]
     end
