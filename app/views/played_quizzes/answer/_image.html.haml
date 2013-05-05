@@ -1,0 +1,5 @@
+= image_tag question.image.url(:resized), class: "img-polaroid space-half-bottom", style: "width: #{question.image_width(:resized)}px; height: #{question.image_height(:resized)}px"
+
+%p
+  - Answer(question, answer) do |answer|
+    %span= answer

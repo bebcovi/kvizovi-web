@@ -1,0 +1,3 @@
+window.App =
+  Controllers: {}
+  Questions: {}

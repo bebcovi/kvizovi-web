@@ -1,6 +1,10 @@
 class QuizSnapshot < ActiveRecord::Base
+  has_one :played_quiz
+
   serialize :quiz_attributes
   serialize :questions_attributes
+
+  validates :quiz_id, presence: true
 
   def self.capture(quiz_specification)
     students_count = quiz_specification.students.count
@@ -9,6 +13,7 @@ class QuizSnapshot < ActiveRecord::Base
     _questions.pop until _questions.count % students_count == 0
 
     create!(
+      quiz_id:              _quiz.id,
       quiz_attributes:      _quiz.attributes,
       questions_attributes: _questions.map(&:attributes),
     )

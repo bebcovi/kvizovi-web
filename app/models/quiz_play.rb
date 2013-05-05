@@ -1,5 +1,7 @@
 class QuizPlay
-  def initialize(store)
+  NO_ANSWER = Question::NO_ANSWER
+
+  def initialize(store = {})
     @store = store
   end
 
@@ -8,11 +10,12 @@ class QuizPlay
   ############
 
   def start!(quiz_snapshot, students)
-    @store[:student_ids]      = students.map(&:id).join(",")
-    @store[:quiz_snapshot_id] = quiz_snapshot.id
-    @store[:quiz_id]          = quiz_snapshot.quiz.id
-    @store[:question_ids]     = quiz_snapshot.questions.map(&:id).join(",")
-    @store[:question_answers] = ""
+    @store[:student_ids]         = students.map(&:id).join(",")
+    @store[:quiz_snapshot_id]    = quiz_snapshot.id
+    @store[:quiz_id]             = quiz_snapshot.quiz.id
+    @store[:question_ids]        = quiz_snapshot.questions.map(&:id).join(",")
+    @store[:question_categories] = quiz_snapshot.questions.map(&:category).join(",")
+    @store[:question_answers]    = ""
 
     @store[:current_student]  = 0
     @store[:current_question] = 0
@@ -24,9 +27,9 @@ class QuizPlay
 
   def save_answer!(answer)
     unless current_question[:answer] != nil
-      answers = @store[:question_answers].split(",")
-      answers[current_question[:number] - 1] = answer
-      @store[:question_answers] = answers.join(",")
+      answers = @store[:question_answers].split("`")
+      answers[current_question[:number] - 1] = answer_to_string(answer, current_question[:category])
+      @store[:question_answers] = answers.join("`")
     end
   end
 
@@ -117,13 +120,17 @@ class QuizPlay
   end
 
   def question_answers
-    @store[:question_answers].split(",").map do |answer|
-      {"true" => true, "false" => false}[answer]
+    @store[:question_answers].split("`").map.with_index do |answer, i|
+      string_to_answer(answer, question_categories[i])
     end
   end
 
+  def question_categories
+    @store[:question_categories].split(",")
+  end
+
   def question(i)
-    {number: i + 1, id: question_ids[i], answer: question_answers[i]}
+    {number: i + 1, id: question_ids[i], answer: question_answers[i], category: question_categories[i]}
   end
 
   def student_ids
@@ -134,5 +141,27 @@ class QuizPlay
 
   def student(i)
     {number: i + 1, id: student_ids[i]}
+  end
+
+  def answer_to_string(answer, category)
+    case category
+    when "boolean", "choice"
+      answer.nil? ? NO_ANSWER : String(answer)
+    when "association"
+      answer.flatten.join("@")
+    else
+      answer.empty? ? NO_ANSWER : String(answer)
+    end
+  end
+
+  def string_to_answer(answer, category)
+    case category
+    when "boolean"
+      {"true" => true, "false" => false, NO_ANSWER => NO_ANSWER}[answer]
+    when "association"
+      answer.split("@").in_groups_of(2)
+    else
+      answer
+    end
   end
 end

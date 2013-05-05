@@ -4,6 +4,7 @@ require "squeel"
 
 class Question < ActiveRecord::Base
   CATEGORIES = %w[boolean choice association image text]
+  NO_ANSWER  = "NO_ANSWER"
 
   belongs_to :quiz
 

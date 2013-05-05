@@ -4,8 +4,6 @@ do ($ = jQuery) ->
 
     choose: ->
 
-      console.log "quiz"
-
       $form           = $("form")
 
       $sections       = $form.find("section")
@@ -132,17 +130,6 @@ do ($ = jQuery) ->
               .removeAttr("disabled")
               .text(quitButtonText)
           onSubmit: clearStorage
-
-      $(".navbar").on "click", "a", (event) ->
-        event.preventDefault()
-        href = @href
-        unless $(@).hasClass("dropdown-toggle")
-          $.modalAjax
-            url: $form.find(".cancel").attr("href")
-            onSubmit: (event) ->
-              event.preventDefault()
-              clearStorage()
-              location.href = href
 
       $form.on "submit", (event) ->
         event.preventDefault()

@@ -47,10 +47,6 @@ class School < ActiveRecord::Base
   def primary?;   level == "Osnovna"; end
   def secondary?; level == "Srednja"; end
 
-  def grades
-    primary? ? (1..8) : (1..4)
-  end
-
   def last_activity
     LastActivity.for(self)
   end

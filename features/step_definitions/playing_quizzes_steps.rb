@@ -1,44 +1,28 @@
 require "rack/test"
 require "nokogiri"
+require "ostruct"
 
-Given(/^my school has created a quiz for me$/) do
-  @quiz = Factory.create(:quiz, school: @user.school)
-
-  @quiz.questions = [
-    ChoiceQuestion.create!(
-      content: "Who is the cutest person in the world?",
-      provided_answers: ["Kina Grannis", "Me", "Jon Lajoie", "Matija"],
-    ),
-    AssociationQuestion.create!(
-      content: "Connect browsers:",
-      associations: {
-        "IE"      => "Terrible as fuck",
-        "Opera"   => "Weird",
-        "Firefox" => "OK",
-        "Chrome"  => "Best",
-      },
-    ),
-    BooleanQuestion.create!(
-      content: "This website is fucking awesome.",
-      answer: true,
-    ),
-    ImageQuestion.create!(
-      content: "Who is in the photo?",
-      image: Rack::Test::UploadedFile.new(Rails.root.join("features/support/fixtures/files/clint_eastwood.jpg"), "image/jpeg"),
-      answer: "Clint Eastwood",
-    ),
-    TextQuestion.create!(
-      content: "What is Mr. Andersen’s hacker name?",
-      answer: "Neo",
-    ),
-    TextQuestion.create!(
-      content: "What was Smith’s name in the real world?",
-      answer: "Bane",
-    ),
-  ]
+Given(/^my students have played a quiz( realistically)?$/) do |questions|
+  @quiz = Factory.create(:quiz, school: @user)
+  @quiz.questions = create_questions(20) if questions
+  Factory.create_list(:student, 2, school: @user)
+  @played_quiz = create_played_quiz(@quiz, @user.students)
 end
 
-When(/^I begin the quiz(?: in single player)?$/) do
+Given(/^my student has played a quiz$/) do
+  @quiz = Factory.create(:quiz, school: @user)
+  Factory.create_list(:student, 1, school: @user)
+  @played_quiz = create_played_quiz(@quiz, @user.students)
+end
+
+def create_played_quiz(quiz, students)
+  quiz_snapshot = QuizSnapshot.capture(OpenStruct.new(students: students, quiz: quiz))
+  played_quiz = Factory.create(:played_quiz, quiz_snapshot: quiz_snapshot)
+  played_quiz.students = students
+  played_quiz
+end
+
+When(/^I begin the quiz in single player$/) do
   refresh
   choose @quiz.name
   choose "Samo ja"
@@ -55,24 +39,26 @@ When(/^I begin the quiz in multi player$/) do
   click_on "Započni kviz"
 end
 
+When(/^I begin the quiz$/) do
+  step "I begin the quiz in single player"
+end
+
 When(/^(?:I|we) answer all questions correctly$/) do
   loop do
     case
-    when page.has_content?("Who is the cutest person in the world?")
-      choose "Kina Grannis"
-    when page.has_content?("Connect browsers:")
-      connect "IE",      "Terrible as fuck"
-      connect "Opera",   "Weird"
-      connect "Firefox", "OK"
-      connect "Chrome",  "Best"
-    when page.has_content?("This website is fucking awesome.")
-      choose "Točno"
+    when page.has_content?("Eliminate the bastard.")
+      choose "Jon Snow"
+    when page.has_content?("Connect Game of Thrones characters:")
+      connect "Sansa Stark",      %("...but I don't want anyone smart, brave or good looking, I want Joffrey!")
+      connect "Tywin Lannister",  %("Attacking Ned Stark in the middle of King Landing was stupid. Lannisters don't do stupid things.")
+      connect "Tyrion Lannister", %("Why is every god so vicious? Why aren't there gods of tits and wine?")
+      connect "Cercei Lannister", %("Everyone except us is our enemy.")
+    when page.has_content?("Stannis Baratheon won the war against King’s Landing.")
+      choose "Netočno"
     when page.has_content?("Who is in the photo?")
       fill_in "Odgovor", with: "Clint Eastwood"
-    when page.has_content?("What is Mr. Andersen’s hacker name?")
-      fill_in "Odgovor", with: "Neo"
-    when page.has_content?("What was Smith’s name in the real world?")
-      fill_in "Odgovor", with: "Bane"
+    when page.has_content?("Which family does Khaleesi belong to?")
+      fill_in "Odgovor", with: "Targaryen"
     else
       raise "Unknown question"
     end
@@ -118,10 +104,6 @@ end
 When(/^I interrupt it$/) do
   click_on "Prekini"
   click_on "Jesam"
-end
-
-When(/^in the meanwhile the quiz gets deleted$/) do
-  @quiz.destroy
 end
 
 Then(/^(I|we) should get all points$/) do |who|

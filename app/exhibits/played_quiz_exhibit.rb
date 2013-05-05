@@ -5,8 +5,8 @@ class PlayedQuizExhibit < BaseExhibit
 
   def scores
     result = Array.new(students.count, 0)
-    question_answers.each_with_index do |answer, index|
-      result[index % students.count] += 1 if answer == true
+    question_answers.each_with_index do |answer, idx|
+      result[idx % students.count] += 1 if QuestionAnswer.new(questions[idx]).correct_answer?(answer)
     end
     result
   end
@@ -31,6 +31,19 @@ class PlayedQuizExhibit < BaseExhibit
 
   def total_score
     questions.count / students.count
+  end
+
+  def played_questions
+    questions.map.with_index do |question, idx|
+      question = QuestionAnswer.new(question)
+      answer = question_answers[idx]
+      status = if question.correct_answer?(answer) then "correct"
+               elsif answer == Question::NO_ANSWER then "unanswered"
+               elsif answer == nil                 then "interrupted"
+               else                                     "incorrect"
+               end
+      [question, answer, status, idx]
+    end
   end
 
   private

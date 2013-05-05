@@ -15,8 +15,5 @@ list       = (question for question of App.Questions)
 regex      = RegExp list.join("|")
 qId        = try formClass.match(regex).join("")
 
-App.helper()
-App.general()
-
 App.Controllers[cId]?[cAction]?()
 App.Questions[qId]?[qAction]?($form)

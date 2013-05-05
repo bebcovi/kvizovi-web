@@ -25,12 +25,11 @@ class QuizController < ApplicationController
   def play
     @student  = current_student
     @quiz     = quiz
-    @question = QuestionShuffling.new(current_question)
+    @question = current_question
   end
 
   def save_answer
-    question = QuestionAnswer.new(current_question)
-    @quiz_play.save_answer!(question.correct_answer?(params[:answer]))
+    @quiz_play.save_answer!(params[:answer])
     redirect_to action: :answer_feedback
   end
 
@@ -44,7 +43,7 @@ class QuizController < ApplicationController
   end
 
   def results
-    @played_quiz = PlayedQuizExhibit.new(PlayedQuiz.find(params[:id]))
+    @played_quiz = PlayedQuiz.find(params[:id])
     @quiz        = @played_quiz.quiz
   end
 

@@ -38,6 +38,7 @@ FactoryGirl.define do
   factory :text_question
 
   factory :played_quiz
+  factory :quiz_snapshot
 
   trait :with_school do
     school

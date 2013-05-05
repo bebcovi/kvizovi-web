@@ -2,14 +2,15 @@ require "spec_helper"
 
 describe PlayedQuizExhibit do
   before do
-    @it = PlayedQuizExhibit.new(played_quiz)
+    @context = stub.as_null_object
+    @it = PlayedQuizExhibit.new(played_quiz, @context)
   end
 
   let(:played_quiz) do
     stub.tap do |played_quiz|
-      played_quiz.stub(:questions) { Array.new(4, stub) }
+      played_quiz.stub(:questions) { Array.new(4, TextQuestion.new(answer: "foo")) }
       played_quiz.stub(:students) { Array.new(2, stub) }
-      played_quiz.stub(:question_answers) { [true, true, false, true] }
+      played_quiz.stub(:question_answers) { ["foo", "foo", "bar", "foo"] }
     end
   end
 

@@ -1,0 +1,15 @@
+- case params[:action]
+- when "index"
+  - if params[:quiz_id]
+    = breadcrumbs(["Odigrani kvizovi", played_quizzes_path], @quiz.name)
+  - elsif params[:student_id]
+    = breadcrumbs(["Odigrani kvizovi", played_quizzes_path], @student.full_name)
+  - else
+    = breadcrumbs("Odigrani kvizovi")
+- when "show"
+  - if params[:quiz_id]
+    = breadcrumbs(["Odigrani kvizovi", played_quizzes_path], [@quiz.name, played_quizzes_path(quiz_id: params[:quiz_id])], "#{@order}.")
+  - elsif params[:student_id]
+    = breadcrumbs(["Odigrani kvizovi", played_quizzes_path], [@student.full_name, played_quizzes_path(student_id: params[:student_id])], "#{@order}.")
+  - else
+    = breadcrumbs(["Odigrani kvizovi", played_quizzes_path], @played_quiz.name)

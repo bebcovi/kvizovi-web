@@ -16,8 +16,9 @@ class PlayedQuizCreator
       end_time:         end_time,
     )
 
-    students = Student.find(@quiz_play.students.map { |q| q[:id] })
+    students = Student.find(@quiz_play.students.map { |s| s[:id] })
     played_quiz.students = students
+
     played_quiz
   end
 end

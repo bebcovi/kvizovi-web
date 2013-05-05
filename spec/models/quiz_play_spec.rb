@@ -10,7 +10,7 @@ describe QuizPlay do
     stub.tap do |quiz_snapshot|
       quiz_snapshot.stub(:id)        { 0 }
       quiz_snapshot.stub(:quiz)      { stub(id: 0) }
-      quiz_snapshot.stub(:questions) { 10.times.map { |i| stub(id: i) } }
+      quiz_snapshot.stub(:questions) { 10.times.map { |i| stub(id: i, category: "boolean") } }
     end
   end
 
@@ -98,9 +98,9 @@ describe QuizPlay do
     describe "#current_question" do
       it "returns the current question" do
         @it.save_answer!(true)
-        expect(@it.current_question).to eq({number: 1, id: 0, answer: true})
+        expect(@it.current_question).to eq({number: 1, id: 0, answer: true, category: "boolean"})
         @it.next_question!
-        expect(@it.current_question).to eq({number: 2, id: 1, answer: nil})
+        expect(@it.current_question).to eq({number: 2, id: 1, answer: nil, category: "boolean"})
       end
     end
 
@@ -174,6 +174,73 @@ describe QuizPlay do
         expect(@it.over?).to be_false
         @it.save_answer!(true)
         expect(@it.over?).to be_true
+      end
+    end
+
+    context "conversions" do
+      context "boolean questions" do
+        before { @it.stub(:question_categories) { ["boolean"] } }
+
+        it "handles strings" do
+          @it.save_answer!("true")
+          expect(@it.current_question[:answer]).to eq true
+        end
+
+        it "handles nils" do
+          @it.save_answer!(nil)
+          expect(@it.current_question[:answer]).to eq Question::NO_ANSWER
+        end
+      end
+
+      context "choice questions" do
+        before { @it.stub(:question_categories) { ["choice"] } }
+
+        it "handles strings" do
+          @it.save_answer!("Foo")
+          expect(@it.current_question[:answer]).to eq "Foo"
+        end
+
+        it "handles nils" do
+          @it.save_answer!(nil)
+          expect(@it.current_question[:answer]).to eq Question::NO_ANSWER
+        end
+      end
+
+      context "association questions" do
+        before { @it.stub(:question_categories) { ["association"] } }
+
+        it "handles arrays" do
+          @it.save_answer!(["Foo", "Foo", "Bar", "Bar"])
+          expect(@it.current_question[:answer]).to eq [["Foo", "Foo"], ["Bar", "Bar"]]
+        end
+      end
+
+      context "image questions" do
+        before { @it.stub(:question_categories) { ["image"] } }
+
+        it "handles strings" do
+          @it.save_answer!("Foo")
+          expect(@it.current_question[:answer]).to eq "Foo"
+        end
+
+        it "handles empty strings" do
+          @it.save_answer!("")
+          expect(@it.current_question[:answer]).to eq Question::NO_ANSWER
+        end
+      end
+
+      context "text questions" do
+        before { @it.stub(:question_categories) { ["text"] } }
+
+        it "handles strings" do
+          @it.save_answer!("Foo")
+          expect(@it.current_question[:answer]).to eq "Foo"
+        end
+
+        it "handles empty strings" do
+          @it.save_answer!("")
+          expect(@it.current_question[:answer]).to eq Question::NO_ANSWER
+        end
       end
     end
   end

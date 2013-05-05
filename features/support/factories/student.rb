@@ -1,21 +1,19 @@
-if $load_factories
-  FactoryGirl.define do
-    factory :student do
-      first_name "Jon"
-      last_name "Snow"
-      grade "2d"
-      gender "Muško"
-      year_of_birth 1991
-      username "jon"
-      password "wildlings"
-      school
+FactoryGirl.define do
+  factory :student do
+    first_name "Jon"
+    last_name "Snow"
+    grade "2d"
+    gender "Muško"
+    year_of_birth 1991
+    sequence(:username) { |n| "jon#{n}" }
+    password "wildlings"
+    school
 
-      factory :other_student do
-        first_name "Dranaerys"
-        last_name "Targaryen"
-        username "khaleesi"
-        password "dragons"
-      end
+    factory :other_student do
+      first_name "Dranaerys"
+      last_name "Targaryen"
+      username "khaleesi"
+      password "dragons"
     end
   end
-end
+end if $load_factories

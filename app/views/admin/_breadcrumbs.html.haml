@@ -1,5 +1,5 @@
 - case params[:action]
 - when "index"
-  = breadcrumbs(["Admin"])
+  = breadcrumbs("Admin")
 - when "school"
-  = breadcrumbs([["Admin", admin_path], @school.name])
+  = breadcrumbs(["Admin", admin_path], @school.name)
