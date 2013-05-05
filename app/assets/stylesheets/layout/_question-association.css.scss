@@ -43,4 +43,12 @@
       opacity: .5;
     }
   }
+
+  &.l-feedback {
+    .l-played & {
+      ul {
+        margin-bottom: 0;
+      }
+    }
+  }
 }

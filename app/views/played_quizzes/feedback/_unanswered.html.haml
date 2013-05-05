@@ -4,4 +4,5 @@
   = icon("cancel-circle-full")
   Pogrešan odgovor
 
-= render "quiz/answer/#{question.category}", {question: question}
+.l-feedback.space-half-top{class: "l-question-#{question.category}"}
+  = render "quiz/answer/#{question.category}", {question: question}

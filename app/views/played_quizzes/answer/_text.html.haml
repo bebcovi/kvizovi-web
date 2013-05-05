@@ -1,3 +1,4 @@
-%p
-  - Answer(question, answer) do |answer|
-    %span= answer
+- Answer(question, answer) do |answer|
+  - unless answer == Question::NO_ANSWER
+    %p
+      %span= answer

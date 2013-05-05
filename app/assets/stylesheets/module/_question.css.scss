@@ -8,6 +8,9 @@
   }
 
   .question-title {
+    .l-played & {
+      margin-top: 0;
+    }
   }
 
   .question-number {
