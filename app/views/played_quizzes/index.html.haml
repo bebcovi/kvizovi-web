@@ -16,3 +16,5 @@
         %td= link_to played_quiz.name, played_quiz_path(played_quiz, params.slice(:quiz_id, :student_id))
         %td= played_quiz.students.to_sentence
         %td= "prije #{time_ago_in_words played_quiz.end_time}"
+
+= will_paginate @played_quizzes

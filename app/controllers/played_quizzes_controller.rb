@@ -3,7 +3,10 @@ class PlayedQuizzesController < ApplicationController
   before_filter :assing_scope
 
   def index
-    @played_quizzes = @scope.played_quizzes.descending.includes(:quiz_snapshot, :students)
+    @played_quizzes = @scope.played_quizzes.
+      descending.
+      includes(:quiz_snapshot, :students).
+      paginate(page: params[:page], per_page: 15)
   end
 
   def show

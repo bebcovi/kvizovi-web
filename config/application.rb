@@ -7,6 +7,9 @@ require "sprockets/railtie" unless Rails.env.test?
 
 Bundler.require(:assets) unless Rails.env.test?
 
+require "will_paginate/railtie"
+require "bootstrap-will_paginate"
+
 if Rails.env.development?
   require "better_errors"
 end
