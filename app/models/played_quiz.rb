@@ -2,7 +2,7 @@ require "squeel"
 
 class PlayedQuiz < ActiveRecord::Base
   belongs_to :quiz_snapshot, dependent: :destroy
-  has_and_belongs_to_many :students
+  has_and_belongs_to_many :students, after_add: :assign_student_order
 
   serialize :question_answers, Array
   serialize :students_order, Array
@@ -23,4 +23,10 @@ class PlayedQuiz < ActiveRecord::Base
 
   def single_player?; students.count == 1; end
   def multi_player?;  students.count > 1;  end
+
+  private
+
+  def assign_student_order(student)
+    update_attributes!(students_order: students_order + [student.id])
+  end
 end

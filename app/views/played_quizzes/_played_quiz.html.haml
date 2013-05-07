@@ -4,14 +4,14 @@
 
 - if played_quiz.has_answers?
 
-  - played_quiz.played_questions.each do |question, answer, status, idx|
+  - played_quiz.played_questions.each do |question, answer, student, status, idx|
     - if played_quiz.interrupted? and played_quiz.interrupted_on?(idx)
       %p.text-warning.space-bottom
         = case played_quiz
         - when :single_player?.to_proc then "(Ovdje je učenik odustao od kviza)"
         - when :multi_player?.to_proc  then "(Ovdje su učenici odustali od kviza)"
 
-    .l-played.space-bottom{class: "l-question-#{question.category} l-#{status}"}
+    .l-played.space-bottom{class: "l-question-#{question.category} l-#{status} l-player-#{number(idx % played_quiz.students.count + 1)}"}
 
       %h2.question-title= question.content
       = render "played_quizzes/answer/#{question.category}", {question: question, answer: answer}

@@ -34,6 +34,7 @@ class PlayedQuizExhibit < BaseExhibit
   end
 
   def played_questions
+    _students = Student.find(students_order)
     questions.map.with_index do |question, idx|
       question = QuestionAnswer.new(question)
       answer = question_answers[idx]
@@ -42,7 +43,7 @@ class PlayedQuizExhibit < BaseExhibit
                elsif answer == nil                 then "interrupted"
                else                                     "wrong"
                end
-      [question, answer, status, idx]
+      [question, answer, _students[idx % _students.count], status, idx]
     end
   end
 
