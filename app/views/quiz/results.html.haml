@@ -5,8 +5,6 @@
 .progress
   .bar{style: "width: 100%"}
 
-- played_quiz = exhibit(@played_quiz)
-
 - played_quiz.results.each do |player, score, score_percentage, player_number, rank|
   %div{class: "player-#{number(player_number)}"}
     %p

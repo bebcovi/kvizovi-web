@@ -1,4 +1,6 @@
-class PlayedQuizExhibit < BaseExhibit
+class PlayedQuizDecorator < Draper::Decorator
+  delegate_all
+
   def results
     students.zip(scores, score_percentages, student_numbers, ranks)
   end

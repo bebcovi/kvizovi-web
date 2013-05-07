@@ -1,4 +1,5 @@
 require "active_support/inflector/transliterate"
+require "delegate"
 
 class QuestionAnswer
   def self.new(question)
@@ -7,7 +8,7 @@ class QuestionAnswer
   end
 end
 
-class AssociationQuestionAnswer < BaseDecorator
+class AssociationQuestionAnswer < SimpleDelegator
   def correct_answer?(value)
     case value
     when Array
@@ -18,19 +19,19 @@ class AssociationQuestionAnswer < BaseDecorator
   end
 end
 
-class ChoiceQuestionAnswer < BaseDecorator
+class ChoiceQuestionAnswer < SimpleDelegator
   def correct_answer?(value)
     __getobj__.provided_answers.first == value
   end
 end
 
-class BooleanQuestionAnswer < BaseDecorator
+class BooleanQuestionAnswer < SimpleDelegator
   def correct_answer?(value)
     __getobj__.answer == value
   end
 end
 
-class TextQuestionAnswer < BaseDecorator
+class TextQuestionAnswer < SimpleDelegator
   include ActiveSupport::Inflector
 
   def correct_answer?(value)

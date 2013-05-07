@@ -1,3 +1,5 @@
+require "delegate"
+
 class QuestionShuffling
   def self.new(question)
     decorator_class = "#{question.category.camelize}QuestionShuffling".constantize
@@ -5,7 +7,7 @@ class QuestionShuffling
   end
 end
 
-class AssociationQuestionShuffling < BaseDecorator
+class AssociationQuestionShuffling < SimpleDelegator
   def associations
     result = __getobj__.associations.dup
     until result != __getobj__.associations
@@ -16,7 +18,7 @@ class AssociationQuestionShuffling < BaseDecorator
   end
 end
 
-class ChoiceQuestionShuffling < BaseDecorator
+class ChoiceQuestionShuffling < SimpleDelegator
   def provided_answers
     result = __getobj__.provided_answers.dup
     until result.first != __getobj__.provided_answers.first
@@ -26,10 +28,10 @@ class ChoiceQuestionShuffling < BaseDecorator
   end
 end
 
-class BooleanQuestionShuffling < BaseDecorator
+class BooleanQuestionShuffling < SimpleDelegator
 end
 
-class TextQuestionShuffling < BaseDecorator
+class TextQuestionShuffling < SimpleDelegator
 end
 
 class ImageQuestionShuffling < TextQuestionShuffling

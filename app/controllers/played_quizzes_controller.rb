@@ -2,6 +2,8 @@ class PlayedQuizzesController < ApplicationController
   before_filter :authenticate!
   before_filter :assing_scope
 
+  decorates_assigned :played_quiz
+
   def index
     @played_quizzes = @scope.played_quizzes.
       descending.

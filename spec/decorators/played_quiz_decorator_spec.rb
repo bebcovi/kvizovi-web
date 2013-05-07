@@ -1,9 +1,9 @@
 require "spec_helper"
 
-describe PlayedQuizExhibit do
+describe PlayedQuizDecorator do
   before do
     @context = stub.as_null_object
-    @it = PlayedQuizExhibit.new(played_quiz, @context)
+    @it = PlayedQuizDecorator.new(played_quiz)
   end
 
   let(:played_quiz) do

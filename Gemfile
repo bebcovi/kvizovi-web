@@ -27,6 +27,7 @@ gem "simple_form", ">= 2"
 gem "redcarpet", ">= 2"
 gem "will_paginate", ">= 3"
 gem "bootstrap-will_paginate"
+gem "draper"
 
 # Database
 gem "pg"

@@ -3,6 +3,8 @@ class QuizController < ApplicationController
   before_filter :assign_student, :assign_quiz_play
   before_filter :redirect_if_question_was_already_answered, only: :play
 
+  decorates_assigned :played_quiz
+
   def choose
     @quiz_specification = QuizSpecification.new
     @quizzes = @student.school.quizzes.activated
