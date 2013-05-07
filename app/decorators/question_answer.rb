@@ -1,5 +1,4 @@
 require "active_support/inflector/transliterate"
-require "set"
 
 class QuestionAnswer
   def self.new(question)
@@ -12,9 +11,9 @@ class AssociationQuestionAnswer < BaseDecorator
   def correct_answer?(value)
     case value
     when Array
-      Set.new(__getobj__.associations) == Set.new(value)
+      Hash[__getobj__.associations] == Hash[value]
     when Hash
-      Set.new(__getobj__.associations) == Set.new(value.to_a)
+      Hash[__getobj__.associations] == value
     end
   end
 end
