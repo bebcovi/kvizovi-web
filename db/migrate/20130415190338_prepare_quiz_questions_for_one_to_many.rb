@@ -1,4 +1,5 @@
 require "uri"
+require "acts-as-taggable-on"
 
 class PrepareQuizQuestionsForOneToMany < ActiveRecord::Migration
   class Question < ActiveRecord::Base
