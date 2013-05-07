@@ -22,17 +22,19 @@ module ApplicationHelper
     exhibit_class.new(record, self)
   end
 
-  def breadcrumbs(*items, last_item)
+  def breadcrumbs(*items)
     content_tag :ol, class: "breadcrumb" do
-      items.map do |name, path|
-        content_tag(:li) do
-          link_to(name, path) +
-          content_tag(:i, class: "divider") { icon("chevron-right") }
+      items.map.with_index do |item, idx|
+        if idx < items.count - 1
+          content_tag(:li) do
+            raw(item) + content_tag(:i, class: "divider") { icon("chevron-right") }
+          end
+        else
+          content_tag(:li, class: "active") do
+            raw(item)
+          end
         end
-      end.join.html_safe +
-      content_tag(:li, class: "active") do
-        last_item
-      end
+      end.join.html_safe
     end
   end
 

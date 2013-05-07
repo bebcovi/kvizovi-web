@@ -1,7 +1,7 @@
 class LastActivity
   def self.for(user)
     time = $redis.get(key(user))
-    Time.parse(time)
+    Time.parse(time) if time
   end
 
   def self.key(user)
@@ -16,6 +16,6 @@ class LastActivity
   end
 
   def self.student_key(student)
-    "last_activity:school:#{school.username}"
+    "last_activity:school:#{student.username}"
   end
 end
