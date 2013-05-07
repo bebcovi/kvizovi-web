@@ -1,8 +1,8 @@
 %p Točni parovi bili su:
 
-.feedback.question_association
-  %ul
-    = list_of question.associations do |key, value|
-      %span= key
-      = icon("chevron-right", class: "arrow subtle")
-      %span= value
+%table.table-condensed
+  - question.associations.each do |key, value|
+    %tr
+      %td= key
+      %td= icon("chevron-right", class: "arrow subtle")
+      %td= value
