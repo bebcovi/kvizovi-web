@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+dropdb lektire_staging
+createdb lektire_staging
+curl -o latest.dump `heroku pgbackups:url`
+pg_restore -d lektire_staging latest.dump
+rm latest.dump
