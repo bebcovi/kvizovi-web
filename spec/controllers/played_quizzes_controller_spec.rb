@@ -8,7 +8,8 @@ describe PlayedQuizzesController, user: :school do
 
   describe "#index" do
     before do
-      @quiz_snapshot = Factory.create(:quiz_snapshot)
+      @quiz = Factory.create(:quiz, school: @school)
+      @quiz_snapshot = Factory.create(:quiz_snapshot, quiz_id: @quiz.id)
       @played_quiz = Factory.create(:played_quiz, quiz_snapshot: @quiz_snapshot)
     end
 
@@ -46,7 +47,8 @@ describe PlayedQuizzesController, user: :school do
 
   describe "#show" do
     before do
-      @quiz_snapshot = Factory.create(:quiz_snapshot)
+      @quiz = Factory.create(:quiz, school: @school)
+      @quiz_snapshot = Factory.create(:quiz_snapshot, quiz_id: @quiz.id)
       @played_quiz = Factory.create(:played_quiz, quiz_snapshot: @quiz_snapshot)
     end
 
@@ -71,6 +73,14 @@ describe PlayedQuizzesController, user: :school do
       it "assigns the order" do
         get :show, id: @played_quiz.id, student_id: @student.id
         expect(assigns(:order)).to eq 1
+      end
+    end
+
+    context "on missing played quiz" do
+      it "redirects back with an error message" do
+        get :show, id: 1
+        expect(response).to redirect_to(played_quizzes_path)
+        expect(flash[:alert]).to be_present
       end
     end
 

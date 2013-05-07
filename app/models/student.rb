@@ -19,6 +19,7 @@ class Student < ActiveRecord::Base
   validates :school_key,    presence: true, inclusion: {in: proc { School.pluck(:key) }, allow_blank: true}, unless: :school_id?
 
   before_create :assign_school, unless: :school_id?
+  before_destroy :destroy_played_quizzes
 
   def type; "student"; end
 
@@ -40,5 +41,9 @@ class Student < ActiveRecord::Base
 
   def assign_school
     self.school ||= School.find_by_key(school_key)
+  end
+
+  def destroy_played_quizzes
+    played_quizzes.destroy_all
   end
 end

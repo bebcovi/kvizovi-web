@@ -55,3 +55,6 @@ hr:
       versions:
         revert:
           success: "Vraćeno."
+      played_quizzes:
+        show:
+          error: "Ovaj odigrani kviz je nedostupan, jer je jedan od igrača izbrisao svoj korisnički račun."

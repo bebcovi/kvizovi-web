@@ -29,6 +29,7 @@ class School < ActiveRecord::Base
   has_many :students,  dependent: :destroy
   has_many :quizzes,   dependent: :destroy
   has_many :questions
+  has_many :played_quizzes, through: :quizzes
 
   has_secure_password
 

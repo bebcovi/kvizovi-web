@@ -52,7 +52,9 @@ CREATE TABLE played_quizzes (
     quiz_snapshot_id integer,
     question_answers text,
     begin_time timestamp without time zone,
-    end_time timestamp without time zone
+    end_time timestamp without time zone,
+    students_order character varying(255),
+    has_answers boolean DEFAULT true
 );
 
 
@@ -538,6 +540,8 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
+SET search_path TO "$user",public;
+
 INSERT INTO schema_migrations (version) VALUES ('20120709164746');
 
 INSERT INTO schema_migrations (version) VALUES ('20120709165237');
@@ -626,18 +630,22 @@ INSERT INTO schema_migrations (version) VALUES ('20130415195327');
 
 INSERT INTO schema_migrations (version) VALUES ('20130415222943');
 
-INSERT INTO schema_migrations (version) VALUES ('20130421130148');
-
 INSERT INTO schema_migrations (version) VALUES ('20130425132651');
 
 INSERT INTO schema_migrations (version) VALUES ('20130426014257');
 
 INSERT INTO schema_migrations (version) VALUES ('20130426130237');
 
-INSERT INTO schema_migrations (version) VALUES ('20130428143023');
-
 INSERT INTO schema_migrations (version) VALUES ('20130428211333');
 
 INSERT INTO schema_migrations (version) VALUES ('20130429123055');
 
 INSERT INTO schema_migrations (version) VALUES ('20130430142123');
+
+INSERT INTO schema_migrations (version) VALUES ('20130507163732');
+
+INSERT INTO schema_migrations (version) VALUES ('20130507165302');
+
+INSERT INTO schema_migrations (version) VALUES ('20130507173307');
+
+INSERT INTO schema_migrations (version) VALUES ('20130507191942');

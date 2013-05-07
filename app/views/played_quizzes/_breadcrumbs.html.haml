@@ -1,15 +1,17 @@
 - case params[:action]
 - when "index"
-  - if params[:quiz_id]
-    = breadcrumbs link_to("Kvizovi", quizzes_path), link_to(@quiz.name, quiz_questions_path(@quiz)), "Odigrani"
-  - elsif params[:student_id]
-    = breadcrumbs link_to("Učenici", students_path), @student.full_name, "Odigrani kvizovi"
-  - else
+  - case @scope
+  - when Quiz
+    = breadcrumbs link_to("Kvizovi", quizzes_path), link_to(@scope.name, quiz_questions_path(@scope)), "Odigrani"
+  - when Student
+    = breadcrumbs link_to("Učenici", students_path), @scope.full_name, "Odigrani kvizovi"
+  - when School
     = breadcrumbs "Odigrani kvizovi"
 - when "show"
-  - if params[:quiz_id]
-    = breadcrumbs link_to("Kvizovi", quizzes_path), link_to(@quiz.name, quiz_questions_path(@quiz)), link_to("Odigrani", played_quizzes_path(params.slice(:quiz_id))), "#{@order}."
-  - elsif params[:student_id]
-    = breadcrumbs link_to("Učenici", students_path), @student.full_name, link_to("Odigrani kvizovi", played_quizzes_path(params.slice(:student_id))), "#{@order}."
-  - else
+  - case @scope
+  - when Quiz
+    = breadcrumbs link_to("Kvizovi", quizzes_path), link_to(@scope.name, quiz_questions_path(@scope)), link_to("Odigrani", played_quizzes_path(params.slice(:quiz_id))), "#{@order}."
+  - when Student
+    = breadcrumbs link_to("Učenici", students_path), @scope.full_name, link_to("Odigrani kvizovi", played_quizzes_path(params.slice(:student_id))), "#{@order}."
+  - when School
     = breadcrumbs link_to("Odigrani kvizovi", played_quizzes_path), @played_quiz.name

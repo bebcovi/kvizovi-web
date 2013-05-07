@@ -5,6 +5,7 @@ class PlayedQuiz < ActiveRecord::Base
   has_and_belongs_to_many :students
 
   serialize :question_answers, Array
+  serialize :students_order, Array
 
   scope :descending, -> { order{created_at.desc} }
   scope :ascending,  -> { order{created_at.asc} }

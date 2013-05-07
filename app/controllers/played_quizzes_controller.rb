@@ -1,27 +1,27 @@
 class PlayedQuizzesController < ApplicationController
   before_filter :authenticate!
+  before_filter :assing_scope
 
   def index
-    if params[:quiz_id]
-      @quiz = Quiz.find(params[:quiz_id])
-      @played_quizzes = @quiz.played_quizzes
-    elsif params[:student_id]
-      @student = Student.find(params[:student_id])
-      @played_quizzes = @student.played_quizzes
-    else
-      @played_quizzes = PlayedQuiz.scoped
-    end
-    @played_quizzes = @played_quizzes.descending.includes(:quiz_snapshot)
+    @played_quizzes = @scope.played_quizzes.descending.includes(:quiz_snapshot, :students)
   end
 
   def show
-    @played_quiz = PlayedQuiz.find(params[:id])
-    if params[:quiz_id]
-      @quiz = Quiz.find(params[:quiz_id])
-      @order = @quiz.played_quizzes.ascending.index { |played_quiz| played_quiz.id = @played_quiz.id } + 1
-    elsif params[:student_id]
-      @student = Student.find(params[:student_id])
-      @order = @student.played_quizzes.ascending.index { |played_quiz| played_quiz.id = @played_quiz.id } + 1
+    if PlayedQuiz.exists?(params[:id])
+      @played_quiz = PlayedQuiz.find(params[:id])
+      @order = @scope.played_quizzes.ascending.index { |played_quiz| played_quiz.id = @played_quiz.id } + 1
+    else
+      redirect_to played_quizzes_path, alert: flash_error
     end
+  end
+
+  private
+
+  def assing_scope
+    @scope = case
+             when params[:student_id] then Student.find(params[:student_id])
+             when params[:quiz_id]    then Quiz.find(params[:quiz_id])
+             else                          current_user
+             end
   end
 end
