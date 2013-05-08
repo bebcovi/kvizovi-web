@@ -7,6 +7,7 @@ end
 
 Given(/^I have a quiz$/) do
   @quiz = Factory.create(:quiz, school: @user)
+  visit quizzes_url(subdomain: @user.type)
 end
 
 When(/^in the meanwhile the quiz gets deleted$/) do
@@ -31,6 +32,10 @@ When(/^I delete that quiz$/) do
   click_on "Jesam"
 end
 
+When(/^I click on the link for (?:de)?activation$/) do
+  within(@quiz) { find(".toggle-activation").click }
+end
+
 Then(/^I should be on the quizzes page$/) do
   expect(current_path).to eq quizzes_path
   expect(page.driver.request.request_method).to eq "GET"
@@ -46,4 +51,12 @@ end
 
 Then(/^I should not see that quiz$/) do
   expect(page).not_to have_content(@quiz.name)
+end
+
+Then(/^the quiz should (not )?be activated$/) do |negative|
+  if negative
+    expect(@quiz.reload.activated?).to be_false
+  else
+    expect(@quiz.reload.activated?).to be_true
+  end
 end

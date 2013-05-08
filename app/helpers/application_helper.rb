@@ -11,12 +11,6 @@ module ApplicationHelper
     end
   end
 
-  def present(object, klass = nil)
-    klass ||= "#{object.class}Presenter".constantize
-    presenter = klass.new(object, self)
-    yield presenter
-  end
-
   def breadcrumbs(*items)
     content_tag :ol, class: "breadcrumb" do
       items.map.with_index do |item, idx|
@@ -54,5 +48,12 @@ module ApplicationHelper
 
   def percentage(part, total)
     ((part.to_f / total.to_f) * 100).round
+  end
+
+  def remote_form_for(*args, &block)
+    simple_form_for *args do |f|
+      hidden_field_tag(:return_to, request.fullpath) +
+      yield(f)
+    end
   end
 end

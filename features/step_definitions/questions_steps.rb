@@ -1,5 +1,4 @@
 When(/^I create a boolean question$/) do
-  visit quizzes_url(subdomain: @user_type)
   within(@quiz) { click_on "Pitanja" }
   click_on "Točno/netočno"
   fill_in "Tekst pitanja", with: "Are you a stupidhead?"

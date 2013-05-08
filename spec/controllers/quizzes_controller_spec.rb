@@ -87,13 +87,6 @@ describe QuizzesController, user: :school do
       end
     end
 
-    describe "#toggle_activation" do
-      it "toggles quiz's activation" do
-        expect { put :toggle_activation, id: @quiz.id }.to change { @quiz.reload.activated? }
-        expect { put :toggle_activation, id: @quiz.id }.to change { @quiz.reload.activated? }
-      end
-    end
-
     describe "#destroy" do
       it "scopes to current user" do
         other_quiz = Factory.create(:quiz)

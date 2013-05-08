@@ -22,16 +22,10 @@ Lektire::Application.routes.draw do
 
     resources :quizzes do
       resources :questions
-
-      member do
-        put "toggle_activation"
-      end
     end
 
     resources :students, only: [:index]
-
     resources :played_quizzes
-    get "played_quizzes", to: "played_quizzes#index", as: :monitor_quiz
   end
 
   ########################
