@@ -64,6 +64,7 @@ end
 group :development do
   gem "pry-rails"
   gem "better_errors"
+  gem "xray-rails"
   gem "binding_of_caller", ">= 0.7.1"
 end
 

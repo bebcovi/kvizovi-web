@@ -13,6 +13,7 @@ require "draper"
 
 if Rails.env.development?
   require "better_errors"
+  require "xray-rails"
 end
 
 module Lektire
