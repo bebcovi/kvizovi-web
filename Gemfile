@@ -11,9 +11,8 @@ gem "unicorn", group: :production
 # Frontend
 group :assets do
   gem "sass-rails"
-  gem "compass", "~> 0.13.alpha"
-  gem "compass-rails"
-  gem "bootstrap-sass"
+  gem "bourbon"
+  gem "bootstrap-sass-rails"
   gem "jquery-rails"
   gem "jquery-ui-rails"
   gem "coffee-rails"

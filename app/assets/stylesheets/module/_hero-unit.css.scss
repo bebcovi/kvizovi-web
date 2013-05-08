@@ -1,10 +1,10 @@
 .hero-unit {
-  @include text-shadow(white 0 1px 0);
-  text-align: center;
-  font-weight: inherit;
+  background-image: image-url("bg-pattern.png");
   border-bottom: 1px solid rgba($linkColor, .5);
   border-radius: 0;
-  background-image: image-url("bg-pattern.png");
+  text-align: center;
+  font-weight: inherit;
+  text-shadow: white 0 1px 0;
 }
 
 .hero-unit-title {
