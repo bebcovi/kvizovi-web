@@ -4,10 +4,6 @@
     %li= edit_button "Izmijeni", edit_quiz_question_path(@quiz, question), class: "" # don't apply default classes
     %li= remove_file_button "Izbriši", quiz_question_path(@quiz, question), method: :delete
 
-%span.space-quart-right
-  = question_icons(question.category)
-
-%span.list-pretty-item-content
-  = question.content
-
+%span.space-quart-right= question_icons(question.category)
+%span.list-pretty-item-content= question.content
 = render "questions/answer/#{question.category}", {question: question, answer: question.answer}

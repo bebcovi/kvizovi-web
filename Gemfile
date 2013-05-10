@@ -38,6 +38,7 @@ gem "acts-as-taggable-on"
 gem "squeel", ">= 1"
 gem "paper_trail", ">= 2.7"
 gem "redis", ">= 3"
+gem "acts_as_list", ">= 0.2"
 
 # Security
 gem "strong_parameters", ">= 0.2"

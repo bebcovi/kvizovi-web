@@ -100,7 +100,8 @@ CREATE TABLE questions (
     updated_at timestamp without time zone NOT NULL,
     data text DEFAULT '--- {}
 '::text,
-    quiz_id integer
+    quiz_id integer,
+    "position" integer
 );
 
 
@@ -649,3 +650,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130507165302');
 INSERT INTO schema_migrations (version) VALUES ('20130507173307');
 
 INSERT INTO schema_migrations (version) VALUES ('20130507191942');
+
+INSERT INTO schema_migrations (version) VALUES ('20130510124042');
+
+INSERT INTO schema_migrations (version) VALUES ('20130510131151');

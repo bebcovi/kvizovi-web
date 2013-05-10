@@ -1,6 +1,7 @@
 require "acts-as-taggable-on"
 require "paper_trail"
 require "squeel"
+require "acts_as_list"
 
 class Question < ActiveRecord::Base
   CATEGORIES = %w[boolean choice association image text]
@@ -10,8 +11,10 @@ class Question < ActiveRecord::Base
 
   acts_as_taggable
   has_paper_trail on: [:destroy]
+  acts_as_list scope: :quiz
   serialize :data, Hash
 
+  default_scope     -> { order{position.asc} }
   scope :ascending, -> { order{created_at.asc} }
 
   validates :content, presence: true

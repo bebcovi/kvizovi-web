@@ -38,6 +38,15 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def edit_order
+    @questions = @quiz.questions
+  end
+
+  def update_order
+    @quiz.update_attributes!(params[:quiz])
+    redirect_to quiz_questions_path(@quiz), notice: flash_success
+  end
+
   def destroy
     @question = Question.find(params[:id])
     @question.destroy

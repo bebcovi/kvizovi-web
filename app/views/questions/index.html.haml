@@ -9,6 +9,8 @@
     %li= link_to "Pogodi tko/što je na slici".prepend_icon("image"),    new_quiz_question_path(category: "image")
     %li= link_to "Upiši točan odgovor".prepend_icon("pencil"),          new_quiz_question_path(category: "text")
 
+= link_to "Izmijeni redoslijed", order_quiz_questions_path(@quiz), class: "btn pull-right"
+
 - if @questions.any?
 
   %ol.list-pretty

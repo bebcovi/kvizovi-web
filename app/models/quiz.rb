@@ -12,6 +12,8 @@ class Quiz < ActiveRecord::Base
   default_scope     -> { order{created_at.desc} }
   scope :activated, -> { where{activated == true} }
 
+  accepts_nested_attributes_for :questions
+
   def to_s
     name
   end

@@ -52,6 +52,34 @@ describe QuestionsController, user: :school do
         end
       end
     end
+
+    describe "#edit_order" do
+      it "doesn't raise errors" do
+        get :edit_order, quiz_id: @quiz.id
+      end
+    end
+
+    describe "#update_order" do
+      before do
+        @quiz.questions = Factory.create_list(:question, 3)
+        @questions = @quiz.questions.all
+        ActiveRecord::Base.any_instance.stub(:run_validations!) { true }
+      end
+
+      it "updates the order of questions" do
+        put :update_order, quiz_id: @quiz.id,
+          quiz: {
+            questions_attributes: {
+              0 => {id: @questions[0].id, position: 1},
+              1 => {id: @questions[1].id, position: 3},
+              2 => {id: @questions[2].id, position: 2},
+            }
+          }
+
+        expect(@quiz.questions(true)).to eq [@questions[0], @questions[2], @questions[1]]
+        expect(@quiz.questions(true).pluck(:position)).to eq [1, 2, 3]
+      end
+    end
   end
 
   context "member" do

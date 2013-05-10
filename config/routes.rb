@@ -21,7 +21,12 @@ Lektire::Application.routes.draw do
     root to: redirect("/quizzes")
 
     resources :quizzes do
-      resources :questions
+      resources :questions do
+        collection do
+          get "order", to: :edit_order
+          put "order", to: :update_order
+        end
+      end
     end
 
     resources :students, only: [:index]

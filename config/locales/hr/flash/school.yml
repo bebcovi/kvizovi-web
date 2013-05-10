@@ -40,6 +40,9 @@ hr:
           success: "Pitanje je uspješno stvoreno."
         update:
           success: "Pitanje je uspješno izmijenjeno."
+        update_order:
+          success: "Redoslijed je uspješno izmijenjen."
+          error: "Neke su pozicije bile jednake, ili su bile izvan granica."
         destroy:
           success: "Pitanje je uspješno izbrisano."
         remove:
