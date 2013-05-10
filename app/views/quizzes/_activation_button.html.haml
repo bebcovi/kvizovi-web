@@ -1,0 +1,6 @@
+= remote_form_for quiz do |f|
+  = f.input :activated, as: :hidden, input_html: {value: !quiz.activated?}
+  - if quiz.activated?
+    = f.button :button, icon("lamp-full"), {class: "btn btn-success toggle-activation space-quart-right", title: "Deaktiviraj"}.merge(defined?(active) ? active : {})
+  - else
+    = f.button :button, icon("lamp"), {class: "btn toggle-activation space-quart-right", title: "Aktiviraj"}.merge(defined?(inactive) ? inactive : {})

@@ -9,3 +9,8 @@ do ($ = jQuery) ->
     animation: false
     placement: "right"
     container: "body"
+
+  $("[data-toggle=tooltip]")
+    .tooltip
+      animation: false
+    .tooltip("show")

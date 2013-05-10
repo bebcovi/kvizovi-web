@@ -6,12 +6,7 @@
     %li= link_to "Prati".prepend_icon("eye"), played_quizzes_path(quiz_id: quiz.id)
     %li= delete_button "Izbriši", delete_quiz_path(quiz), class: "item-danger"
 
-= remote_form_for quiz do |f|
-  = f.input :activated, as: :hidden, input_html: {value: !quiz.activated?}
-  - if quiz.activated?
-    = f.button :button, icon("lamp-full"), class: "btn btn-success toggle-activation space-quart-right", title: "Deaktiviraj"
-  - else
-    = f.button :button, icon("lamp"), class: "btn toggle-activation space-quart-right", title: "Aktiviraj", method: :put
+= render "activation_button", {quiz: quiz}
 
 %span.list-pretty-item-content
   = quiz.name
