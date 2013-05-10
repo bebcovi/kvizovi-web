@@ -13,10 +13,9 @@
 
   %ol.list-pretty
     - @questions.each do |question|
-      = content_tag_for :li, question, class: "list-pretty-item#{" list-pretty-item-highlight" if flash[:highlight] == question.id}" do
         = render "questions/question_short", {question: question}
+      = content_tag_for :li, question, class: "list-pretty-item" do
 
 - else
 
-  %p.no-items
-    = params[:query] ? "Nema pitanja s tim tagovima." : "Ovaj kviz trenutno nema pitanja."
+  %p.no-items Ovaj kviz trenutno nema pitanja

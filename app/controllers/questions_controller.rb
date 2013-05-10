@@ -44,24 +44,6 @@ class QuestionsController < ApplicationController
     redirect_to quiz_questions_path(@quiz), notice: "#{flash_success} #{undo_link}"
   end
 
-  # def copy
-  #   @question = Question.find(params[:id]).dup
-  #   @question.school = current_user
-  #   render :new
-  # end
-
-  # def download
-  #   new_question = Question.find(params[:id]).dup
-  #   @scope.questions << new_question
-  #   flash[:highlight] = new_question.id
-  #   redirect_to polymorphic_path([@scope, Question]), notice: flash_success
-  # end
-
-  # def include
-  #   @scope.questions << current_user.questions.find(params[:id])
-  #   redirect_to polymorphic_path([current_user, Question], include: params[:quiz_id]), notice: flash_success(name: @scope.name)
-  # end
-
   private
 
   def undo_link

@@ -42,16 +42,8 @@ hr:
           success: "Pitanje je uspješno izmijenjeno."
         destroy:
           success: "Pitanje je uspješno izbrisano."
-        include:
-          success: "Pitanje je uspješno dodano u kviz \"%{name}\"."
-        copy:
-          success: "Pitanje je uspješno preuzeto."
-        download:
-          success: "Pitanje je uspješno kopirano kod vas."
         remove:
           success: "Pitanje je uspješno uklonjeno iz kviza."
-        unauthorized:
-          error: "Ovaj kviz ne pripada vama – ne možete ga mijenjati."
       versions:
         revert:
           success: "Vraćeno."
