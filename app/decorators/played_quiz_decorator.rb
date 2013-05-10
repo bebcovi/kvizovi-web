@@ -52,6 +52,10 @@ class PlayedQuizDecorator < Draper::Decorator
   private
 
   def percentage(part, whole)
-    ((part.to_f / whole.to_f) * 100).round
+    unless whole == 0
+      ((part.to_f / whole.to_f) * 100).round
+    else
+      0
+    end
   end
 end

@@ -5,13 +5,7 @@
 .progress
   .bar{style: "width: 100%"}
 
-- played_quiz.results.each do |player, score, score_percentage, player_number, rank|
-  %div{class: "player-#{number(player_number)}"}
-    %p
-      %b= player.username.prepend_icon("user") + ":"
-      %span.fade-in Točno si odgovori#{player.male? ? "o" : "la"} na #{score} od #{played_quiz.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
-    .progress
-      .bar.slide{style: "width: #{score_percentage}%"}
+= render "played_quizzes/played_quiz", {played_quiz: played_quiz}
 
 = buttons do
   = primary_button "Završi", choose_quiz_path, class: "btn btn-primary fade-in"

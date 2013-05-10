@@ -1,5 +1,14 @@
 %h1= played_quiz.quiz.name
 
+- played_quiz.results.each do |student, score, score_percentage, student_number, rank|
+  %div{class: "player-#{number(student_number)}"}
+    %p
+      %b= student.username.prepend_icon("user") + ":"
+      - if params[:controller] == "quiz"
+        %span.fade-in Točno si odgovori#{student.male? ? "o" : "la"} na #{score} od #{played_quiz.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
+    .progress
+      .bar.slide{style: "width: #{score_percentage}%"}
+
 - if played_quiz.has_answers?
 
   - played_quiz.played_questions.each do |question, answer, student, status, idx|
