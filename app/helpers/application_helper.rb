@@ -52,7 +52,7 @@ module ApplicationHelper
 
   def remote_form_for(*args, &block)
     simple_form_for *args do |f|
-      hidden_field_tag(:return_to, request.fullpath) +
+      concat hidden_field_tag(:return_to, request.fullpath)
       yield(f)
     end
   end
