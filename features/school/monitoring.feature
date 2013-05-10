@@ -24,6 +24,14 @@ Feature: Monitoring
     When I click on the played quiz
     Then I should see his results
 
+  Scenario: Monitoring all quizzes
+    Given my students have played a quiz
+    When I go to the page for monitoring quizzes
+    Then I should see that they played that quiz
+
+    When I click on the played quiz
+    Then I should see their results
+
   Scenario: Viewing played quizzes
     Given my students have played a quiz realistically
     When I go to that played quiz

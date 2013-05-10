@@ -8,6 +8,10 @@ When(/^I go to the page for monitoring that student's activity$/) do
   within(@user.students.first) { click_on "#{@user.students.first.played_quizzes.count}" }
 end
 
+When(/^I go to the page for monitoring quizzes$/) do
+  click_on "Odigrani kvizovi"
+end
+
 When(/^I click on the played quiz$/) do
   within(@played_quiz) { click_on @played_quiz.name }
 end
