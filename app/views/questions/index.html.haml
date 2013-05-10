@@ -13,8 +13,8 @@
 
   %ol.list-pretty
     - @questions.each do |question|
-        = render "questions/question_short", {question: question}
       = content_tag_for :li, question, class: "list-pretty-item" do
+        = render "question", {question: question}
 
 - else
 

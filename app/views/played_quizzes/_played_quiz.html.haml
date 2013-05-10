@@ -12,7 +12,7 @@
     .l-played.space-bottom{class: "l-question-#{question.category} l-#{status} l-player-#{number(idx % played_quiz.students.count + 1)}"}
 
       %h2.question-title= question.content
-      = render "played_quizzes/answer/#{question.category}", {question: question, answer: answer}
+      = render "questions/answer/#{question.category}", {question: question, answer: answer}
       = render "played_quizzes/feedback/#{status}", {question: question}
 
 - else
