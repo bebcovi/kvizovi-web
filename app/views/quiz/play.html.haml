@@ -8,7 +8,7 @@
   = @quiz.name
 
 .question-username.align-middle{class: "player-#{number(@quiz_play.current_student[:number])}"}
-  = @student.username.prepend_icon("user")
+  = @student.full_name.prepend_icon("user")
 
 .progress
   .bar{style: "width: #{quiz_progress_percentage}%"}
