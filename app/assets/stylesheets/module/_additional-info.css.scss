@@ -11,6 +11,9 @@
 
   &.help {
     color: darken(white, 40%);
+    .js & {
+      display: inline-block;
+    }
   }
 
   .success & {
