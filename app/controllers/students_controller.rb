@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  before_filter :authenticate!
   before_filter :assign_school
 
   def index

@@ -93,8 +93,13 @@ Lektire::Application.routes.draw do
   ########################
   # Legacy routes
   ########################
-  get "login",        to: redirect(                      path: "/")
-  get "schools/new",  to: redirect(subdomain: "school",  path: "/registration/new")
-  get "students/new", to: redirect(subdomain: "student", path: "/registration/new")
+  get "login",          to: redirect(                      path: "/")
+  get "schools/new",    to: redirect(subdomain: "school",  path: "/registration/new")
+  get "students/new",   to: redirect(subdomain: "student", path: "/registration/new")
+  get "game/new",       to: redirect(subdomain: "student", path: "/quiz/choose")
+  get "schools/:id",    to: redirect(subdomain: "school",  path: "/profile")
+  get "students/:id",   to: redirect(subdomain: "student", path: "/profile")
+  get "students",       to: redirect(subdomain: "school",  path: "/students")
+  get "quizzes/*other", to: redirect { |params, request| {subdomain: "school",  path: "/quizzes/#{params[:other]}"} }
 
 end
