@@ -5,11 +5,11 @@
     %p
       %b= student.full_name.prepend_icon("user") + ":"
       - if params[:controller] == "quiz"
-        %span.fade-in Točno si odgovori#{student.male? ? "o" : "la"} na #{score} od #{played_quiz.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
+        %span Točno si odgovori#{student.male? ? "o" : "la"} na #{score} od #{played_quiz.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
       - else
-        %span.fade-in #{score} od #{played_quiz.total_score}
+        %span #{score} od #{played_quiz.total_score} točnih odgovora.
     .progress
-      .bar.slide{style: "width: #{score_percentage}%"}
+      .bar{style: "width: #{score_percentage}%"}
 
 - if played_quiz.has_answers?
 
