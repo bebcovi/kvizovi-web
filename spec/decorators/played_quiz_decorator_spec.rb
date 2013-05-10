@@ -11,6 +11,7 @@ describe PlayedQuizDecorator do
       played_quiz.stub(:questions) { Array.new(4, TextQuestion.new(answer: "foo")) }
       played_quiz.stub(:students) { Array.new(2, stub) }
       played_quiz.stub(:question_answers) { ["foo", "foo", "bar", "foo"] }
+      played_quiz.stub(:has_answers?) { true }
     end
   end
 

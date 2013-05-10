@@ -24,7 +24,7 @@ class QuizSnapshot < ActiveRecord::Base
   end
 
   def questions
-    @questions ||= questions_attributes.map do |question_attributes|
+    @questions ||= (questions_attributes || []).map do |question_attributes|
       question_attributes["type"].constantize.new(question_attributes, without_protection: true)
     end
   end

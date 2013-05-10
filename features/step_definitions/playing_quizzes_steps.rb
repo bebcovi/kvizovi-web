@@ -4,13 +4,18 @@ require "ostruct"
 
 Given(/^my students have played a quiz( realistically)?$/) do |questions|
   @quiz = Factory.create(:quiz, school: @user)
-  @quiz.questions = create_questions(20) if questions
+  if questions
+    @quiz.questions = create_questions(20)
+  else
+    @quiz.questions = create_questions(2)
+  end
   Factory.create_list(:student, 2, school: @user)
   @played_quiz = create_played_quiz(@quiz, @user.students)
 end
 
 Given(/^my student has played a quiz$/) do
   @quiz = Factory.create(:quiz, school: @user)
+  @quiz.questions = create_questions(1)
   Factory.create_list(:student, 1, school: @user)
   @played_quiz = create_played_quiz(@quiz, @user.students)
 end

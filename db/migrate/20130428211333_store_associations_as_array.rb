@@ -7,14 +7,18 @@ class StoreAssociationsAsArray < ActiveRecord::Migration
   end
 
   def up
-    AssociationQuestion.find_each do |question|
-      question.update_attributes!(data: {associations: question.data[:associations].to_a})
+    handle_single_table_inheritance(Question) do
+      AssociationQuestion.find_each do |question|
+        question.update_attributes!(data: {associations: question.data[:associations].to_a})
+      end
     end
   end
 
   def down
-    AssociationQuestion.find_each do |question|
-      question.update_attributes!(data: {associations: Hash[question.data[:associations]]})
+    handle_single_table_inheritance(Question) do
+      AssociationQuestion.find_each do |question|
+        question.update_attributes!(data: {associations: Hash[question.data[:associations]]})
+      end
     end
   end
 end

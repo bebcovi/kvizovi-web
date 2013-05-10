@@ -6,9 +6,13 @@ class PlayedQuizDecorator < Draper::Decorator
   end
 
   def scores
-    result = Array.new(students.count, 0)
+    result = Array.new(students_count, 0)
     question_answers.each_with_index do |answer, idx|
-      result[idx % students.count] += 1 if QuestionAnswer.new(questions[idx]).correct_answer?(answer)
+      if has_answers?
+        result[idx % students_count] += 1 if QuestionAnswer.new(questions[idx]).correct_answer?(answer)
+      else
+        result[idx % students_count] += 1 if answer
+      end
     end
     result
   end
@@ -32,10 +36,11 @@ class PlayedQuizDecorator < Draper::Decorator
   end
 
   def total_score
-    questions.count / students.count
+    questions_count / students_count
   end
 
   def played_questions
+    raise "This played quiz didn't store answers" unless has_answers?
     _students = Student.find(students_order)
     questions.map.with_index do |question, idx|
       question = QuestionAnswer.new(question)
@@ -45,17 +50,25 @@ class PlayedQuizDecorator < Draper::Decorator
                elsif answer == nil                 then "interrupted"
                else                                     "wrong"
                end
-      [question, answer, _students[idx % _students.count], status, idx]
+      [question, answer, _students[idx % students_count], status, idx]
     end
   end
 
   private
 
   def percentage(part, whole)
-    unless whole == 0
-      ((part.to_f / whole.to_f) * 100).round
-    else
-      0
-    end
+    ((part.to_f / whole.to_f) * 100).round
+  end
+
+  def students_count
+    @students_count ||= students.count
+  end
+
+  def questions_count
+    @questions_count ||= if has_answers?
+                           questions.count
+                         else
+                           question_answers.count
+                         end
   end
 end

@@ -14,15 +14,15 @@ class AssignsPositionsToQuestions < ActiveRecord::Migration
   class ImageQuestion       < TextQuestion; end
 
   def up
-    Question.update_all("type = '#{self.class.name}::' || type")
-    Quiz.find_each do |quiz|
-      position = 0
-      quiz.questions.order("created_at ASC").each do |question|
-        position += 1
-        question.update_attributes(position: position)
+    handle_single_table_inheritance(Question) do
+      Quiz.find_each do |quiz|
+        position = 0
+        quiz.questions.order("created_at ASC").each do |question|
+          position += 1
+          question.update_attributes(position: position)
+        end
       end
     end
-    Question.update_all("type = substring(type from #{self.class.name.length + 3})")
   end
 
   def down

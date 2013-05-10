@@ -14,20 +14,16 @@ class PrepareQuizQuestionsForOneToMany < ActiveRecord::Migration
     end
   end
 
-  class BooleanQuestion < Question
-  end
-  class AssociationQuestion < Question
-  end
-  class ChoiceQuestion < Question
-  end
-  class ImageQuestion < Question
+  class BooleanQuestion      < Question; end
+  class AssociationQuestion  < Question; end
+  class ChoiceQuestion       < Question; end
+  class TextQuestion         < Question; end
+  class ImageQuestion        < TextQuestion
     def dup
       super.tap do |question|
         question.image = URI.parse(self.image.url)
       end
     end
-  end
-  class TextQuestion < Question
   end
 
   class Quiz < ActiveRecord::Base
@@ -35,8 +31,8 @@ class PrepareQuizQuestionsForOneToMany < ActiveRecord::Migration
   end
 
   def up
-    [BooleanQuestion, AssociationQuestion, ChoiceQuestion, ImageQuestion, TextQuestion].each do |question_class|
-      question_class.find_each do |question|
+    handle_single_table_inheritance(Question) do
+      Question.find_each do |question|
         if question.quizzes.count >= 1
           if question.quizzes.count > 1
             question.quizzes[1..-1].each do |quiz|
