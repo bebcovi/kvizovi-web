@@ -6,6 +6,8 @@
       %b= student.username.prepend_icon("user") + ":"
       - if params[:controller] == "quiz"
         %span.fade-in Točno si odgovori#{student.male? ? "o" : "la"} na #{score} od #{played_quiz.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
+      - else
+        %span.fade-in #{score} od #{played_quiz.total_score}
     .progress
       .bar.slide{style: "width: #{score_percentage}%"}
 
