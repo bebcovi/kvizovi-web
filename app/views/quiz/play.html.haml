@@ -10,7 +10,7 @@
 .question-username.align-middle{class: "player-#{number(@quiz_play.current_student[:number])}"}
   = @student.full_name.prepend_icon("user")
 
-.progress
+.progress.progress-small
   .bar{style: "width: #{quiz_progress_percentage}%"}
 
 = simple_form_for :play, url: save_answer_quiz_path, method: :put, defaults: {input_html: {name: "answer"}}, html: {data: {confirm_leave: true}, class: "l-play l-question-#{@question.category}"} do |f|
