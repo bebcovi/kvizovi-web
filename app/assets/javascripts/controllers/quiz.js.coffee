@@ -4,7 +4,7 @@ do ($ = jQuery) ->
 
     choose: ->
 
-      $form           = $("form")
+      $form           = $("form.simple_form")
 
       $sections       = $form.find("section")
 
@@ -54,7 +54,7 @@ do ($ = jQuery) ->
 
     play: ->
 
-      $form        = $("form")
+      $form        = $("form.simple_form")
 
       $buttons     = $(".btn-toolbar", $form)
 

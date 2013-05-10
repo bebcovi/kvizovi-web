@@ -1,5 +1,5 @@
 $body      = $("body")
-$form      = $("form")
+$form      = $("form.simple_form")
 
 bodyClass  = $body.attr "class"
 formClass  = $form.attr "class"
