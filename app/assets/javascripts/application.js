@@ -18,6 +18,7 @@
 //= require dropdown
 //= require modal
 //= require confirm-leave
+//= require reveal
 //= require helper
 //
 //= require controllers/quiz
