@@ -4,7 +4,7 @@ do ($ = jQuery) ->
     event.preventDefault()
     $(@).closest(".modal").modal("hide").remove()
 
-  $(document).on "click", ".delete_item", (event) ->
+  $(document).on "click", ".confirm-delete", (event) ->
     event.preventDefault()
     $.modalAjax
       url: @href
