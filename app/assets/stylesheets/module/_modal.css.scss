@@ -8,6 +8,12 @@
   .modal-header {
     padding-top: $hsu;
 
+    h1 {
+      i {
+        font-size: 44px;
+      }
+    }
+
     .close {
       margin-top: $hsu/2;
       i {

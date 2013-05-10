@@ -1,9 +1,11 @@
 - title "Prekid igre"
 
-%h1 Jeste li sigurni?
+.l-interrupt
+  %h1 Jeste li sigurni?
 
-%p Jeste li sigurni da želite prekinuti igru?
+  %p Jeste li sigurni da želite prekinuti igru?
 
-= buttons do
-  = cancel_button "Nisam", play_quiz_path
-  = primary_button "Jesam", finish_quiz_path, method: :delete
+  .form
+    = buttons do
+      = cancel_button "Nisam", play_quiz_path
+      = primary_button "Jesam", finish_quiz_path, method: :delete
