@@ -84,7 +84,7 @@ end
 
 def connect(left, right)
   @index ||= 0
-  divs = all(".association-pair")[@index].all("div")
+  divs = all(".association-pair")[@index].all("td")
   divs.first.fill_in :play_answer, with: left
   divs.last.fill_in :play_answer, with: right
   @index += 1
