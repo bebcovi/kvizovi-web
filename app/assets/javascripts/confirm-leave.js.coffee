@@ -12,8 +12,10 @@ do ($ = jQuery) ->
       unless $this.closest($form).length or $this.closest(".modal").length or $this.hasClass("dropdown-toggle")
         $.modalAjax
           url: $form.find(".cancel").attr("href")
-          onSubmit: do (href) ->
-            (event) ->
-              event.preventDefault()
-              clearStorage()
-              location.href = href
+          onOpen: do ($this) ->
+            ($modal) ->
+              $btnSubmit    = $modal.find($.rails.linkClickSelector)
+              $newBtnSubmit = $("<button>", type: "button", text: $btnSubmit.text(), class: "btn btn-primary")
+              $btnSubmit.replaceWith($newBtnSubmit)
+              $newBtnSubmit.on "click", do ($this) ->
+                -> location.href = $this[0].href

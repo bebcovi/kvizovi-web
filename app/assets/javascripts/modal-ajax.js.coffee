@@ -70,7 +70,7 @@ do ($ = jQuery) ->
           $modal.remove()
 
         if options["onOpen"]
-          options["onOpen"]()
+          options["onOpen"]($modal)
 
         if options["onCancel"]
           $modal.on "hidden", options["onCancel"]
