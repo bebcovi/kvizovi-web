@@ -5,3 +5,9 @@
     height: $hsu/2;
     border-radius: $hsu/2;
   }
+
+  .progress-primary {
+    .bar {
+      @include gradient-vertical($linkColor, shade($linkColor, 10%));
+    }
+  }
