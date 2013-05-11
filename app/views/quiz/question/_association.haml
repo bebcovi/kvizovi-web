@@ -1,6 +1,6 @@
-%table.table-condensed.space-bottom
-- question.associations.each do |left, right|
-  %tr.association-pair.list-inline-block.space-half-bottom.js-hidden
-    %td= f.input :answer, input_html: {value: left, name: "answer[]"}, label: false, wrapper_html: {class: "association-pair-static"}
-    %td= icon("chevron-right", class: "arrow subtle")
-    %td= f.input :answer, input_html: {value: right, name: "answer[]"}, label: false, wrapper_html: {class: "association-pair-dynamic"}
+%table.table-condensed.js-hidden
+  - question.associations.each do |left, right|
+    %tr.association-pair
+      %td.association-pair-static= f.input_field :answer, label: false, value: left, name: "answer[]", class: "input-xlarge"
+      %td= icon("chevron-right", class: "arrow subtle")
+      %td.association-pair-dynamic= f.input_field :answer, label: false, value: right, name: "answer[]", class: "input-xlarge"

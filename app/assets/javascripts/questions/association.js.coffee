@@ -65,13 +65,11 @@ do ($ = jQuery) ->
 
     play: ($form) ->
 
+      $table    = $("table.js-hidden")
       $pairs    = $(".association-pair", $form)
 
       $static   = $(".association-pair-static", $pairs)
       $dynamic  = $(".association-pair-dynamic", $pairs)
-
-      widths    = []
-      limit     = $form.width() * 2/3
 
       swap = ($one, $two) ->
         $oneParent = $one.parent()
@@ -83,21 +81,12 @@ do ($ = jQuery) ->
         $one.next().attr "value", $one.text()
         $two.next().attr "value", $two.text()
 
-      $pairs.removeClass("js-hidden")
+      $table.removeClass("js-hidden")
 
       $pairs.find("input").each ->
         $el = $("<span>").text $(@).val()
         $(@).before $el
         $(@).hide()
-
-      $static
-        .css("width", "auto")
-        .each -> widths.push $(@).width()
-
-      maxWidth = Math.max.apply(Math, widths) + 10
-      maxWidth = limit if maxWidth > limit
-
-      $static.width(maxWidth)
 
       $dynamic.find("span")
         .addClass("is-unselectable")
