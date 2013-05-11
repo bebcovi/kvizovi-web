@@ -11,7 +11,8 @@ do ($ = jQuery) ->
       headers: {"X-noLayout": true}
 
       success: (data) ->
-        $data         = $(data).children()
+        $data = $(data).children()
+        klass = $(data).filter("div").attr("class") or ""
 
         $closeButton = $.closeButton
           .clone()
@@ -22,7 +23,7 @@ do ($ = jQuery) ->
         $dataFooter   = $data.filter("form, .form")
         $dataBody     = $data.not($dataHeader).not($dataFooter)
 
-        $modal        = $("<div>").addClass("modal")
+        $modal        = $("<div>").addClass("modal #{klass}")
 
         # loader
 
