@@ -1,14 +1,9 @@
 %ul.nav.pull-left
   - if user_logged_in?
-    %li{class: ("active" if params[:controller] == "quizzes")}
-      = link_to "Kvizovi", quizzes_path
-    %li{class: ("active" if params[:controller] == "students")}
-      = link_to "Učenici", students_path
-    %li{class: ("active" if params[:controller] == "played_quizzes")}
-      = link_to "Odigrani kvizovi", played_quizzes_path
-
-    %li{class: ("active" if params[:action] == "tour")}
-      = link_to "Vodič", tour_path
+    %li{class: ("active" if params[:controller] == "quizzes")}= link_to "Kvizovi", quizzes_path
+    %li{class: ("active" if params[:controller] == "students")}= link_to "Učenici", students_path
+    %li{class: ("active" if params[:controller] == "played_quizzes")}= link_to "Odigrani kvizovi", played_quizzes_path
+    %li{class: ("active" if params[:action] == "tour")}= link_to "Vodič", tour_path
 
 %ul.nav.pull-right
   = render "survey" if user_logged_in? and not current_user.completed_survey?

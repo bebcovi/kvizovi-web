@@ -18,7 +18,7 @@
     - @questions.each do |question|
       = content_tag_for :li, question, class: "list-pretty-item" do
         = render "question", {question: question}
-      = content_tag_for :li, question, class: "l-question-#{question.category} list-pretty-item list-pretty-content" do
+      %li{class: "l-question-#{question.category} list-pretty-item list-pretty-content"}
         = render "questions/answer/#{question.category}", {question: question, answer: question.answer}
 
 - else
