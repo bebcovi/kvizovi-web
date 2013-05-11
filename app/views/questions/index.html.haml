@@ -9,7 +9,7 @@
     %li= link_to "Pogodi tko/što je na slici".prepend_icon("image"),    new_quiz_question_path(category: "image")
     %li= link_to "Upiši točan odgovor".prepend_icon("pencil"),          new_quiz_question_path(category: "text")
 
-= link_to "Izmijeni redoslijed", order_quiz_questions_path(@quiz), class: "btn pull-right"
+= link_to "Izmijeni redoslijed".prepend_icon("sort"), order_quiz_questions_path(@quiz), class: "btn pull-right"
 .pull-right= render "quizzes/activation_button", {quiz: @quiz, inactive: {title: "Ovaj kviz je trenutno neaktivan, što znači da ga učenici ne mogu igrati.", data: {toggle: "tooltip", trigger: "manual"}}}
 
 - if @questions.any?
