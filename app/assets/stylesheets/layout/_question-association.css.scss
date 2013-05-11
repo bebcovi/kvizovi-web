@@ -21,6 +21,10 @@
   }
 
   &.l-play {
+    .table-condensed td {
+      padding: $hsu/2;
+    }
+
     .association-pair-dynamic {
       span {
         display: inline-block;
@@ -45,10 +49,8 @@
   }
 
   &.l-feedback {
-    .l-played & {
-      ul {
-        margin-bottom: 0;
-      }
+    .table-condensed td {
+      padding: $hsu/2;
     }
   }
 }
