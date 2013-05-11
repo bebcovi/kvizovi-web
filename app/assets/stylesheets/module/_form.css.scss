@@ -2,14 +2,13 @@
 }
 
   .form-inline {
+    display: inline-block;
+    margin-bottom: 0;
+
     .controls,
     ol, ul, li,
     .btn-toolbar {
       display: inline-block;
       margin: 0;
-    }
-
-    .controls {
-      margin-right: 8px;
     }
   }

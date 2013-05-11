@@ -1,5 +1,6 @@
 require "paperclip/railtie"
 require "paperclip-dropbox"
+require "exception_notification"
 
 Lektire::Application.configure do
   # Use the routes to render HTTP-error pages instead of rendering static ones

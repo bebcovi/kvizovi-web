@@ -1,2 +1,2 @@
-.img-polaroid.pull-left{style: "width: #{question.image_width(:resized)}px; margin-right: 1em;"}= image_tag question.image.url(:resized)
+= image_tag question.image.url(:resized), class: "img-polaroid pull-left", style: "width: #{question.image_width(:resized)}px; height: #{question.image_height(:resized)}px; margin-right: 1em;"
 = f.input :answer

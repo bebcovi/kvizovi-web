@@ -1,13 +1,4 @@
 Lektire::Application.routes.draw do
-  ########################
-  # Admin
-  ########################
-
-  controller :admin do
-    get "admin", to: :index
-    get "admin/:action"
-    get "admin/school/:id", to: :school, as: "admin_school"
-  end
 
   ########################
   # Authentication
@@ -30,12 +21,16 @@ Lektire::Application.routes.draw do
     root to: redirect("/quizzes")
 
     resources :quizzes do
-      resources :questions
-
-      member do
-        put "toggle_activation"
+      resources :questions do
+        collection do
+          get "order", to: :edit_order
+          put "order", to: :update_order
+        end
       end
     end
+
+    resources :students, only: [:index]
+    resources :played_quizzes
   end
 
   ########################
@@ -46,7 +41,7 @@ Lektire::Application.routes.draw do
 
     resource :quiz, only: [], controller: "quiz" do
       get    "choose"
-      post   "prepare"
+      post   "start"
       get    "play"
       put    "save_answer"
       get    "answer_feedback"
@@ -81,6 +76,15 @@ Lektire::Application.routes.draw do
     post "complete"
   end
 
+  ########################
+  # Admin
+  ########################
+  namespace :admin do
+    root to: redirect("/admin/schools")
+
+    resources :schools
+  end
+
   root to: "home#index"
 
   ########################
@@ -93,7 +97,13 @@ Lektire::Application.routes.draw do
   ########################
   # Legacy routes
   ########################
-  get "login",        to: redirect(                      path: "/")
-  get "schools/new",  to: redirect(subdomain: "school",  path: "/registration/new")
-  get "students/new", to: redirect(subdomain: "student", path: "/registration/new")
+  get "login",          to: redirect(                      path: "/")
+  get "schools/new",    to: redirect(subdomain: "school",  path: "/registration/new")
+  get "students/new",   to: redirect(subdomain: "student", path: "/registration/new")
+  get "game/new",       to: redirect(subdomain: "student", path: "/quiz/choose")
+  get "schools/:id",    to: redirect(subdomain: "school",  path: "/profile")
+  get "students/:id",   to: redirect(subdomain: "student", path: "/profile")
+  get "students",       to: redirect(subdomain: "school",  path: "/students")
+  get "quizzes/*other", to: redirect { |params, request| {subdomain: "school",  path: "/quizzes/#{params[:other]}"} }
+
 end

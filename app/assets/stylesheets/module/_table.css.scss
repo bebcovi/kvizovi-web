@@ -5,3 +5,9 @@
     text-align: center;
   }
 }
+
+  .table-no-padding {
+    th, td {
+      padding: 0;
+    }
+  }

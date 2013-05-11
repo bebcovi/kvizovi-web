@@ -1,13 +1,3 @@
-.list-pretty-item-actions.dropdown.dropdown-hover
-  = link_to icon("chevron-left"), "#", class: "dropdown-toggle", data: {toggle: "dropdown"}
-  %ul.dropdown-menu.pull-right
-    -# %li= view_button "Pogledaj", quiz_question_path(@quiz, question)
-    %li= edit_button "Izmijeni", edit_quiz_question_path(@quiz, question), class: "" # don't apply default classes
-    -# %li= copy_button "Dupliciraj", copy_quiz_question_path(@quiz, @question)
-    %li= remove_file_button "Izbriši", quiz_question_path(@quiz, question), method: :delete
-
-%span.space-quart-right
-  = question_icons(question.category)
-
-%span.list-pretty-item-content
-  = question.content
+%span.space-quart-right= question_icons(question.category)
+%span.space-quart-right= f.input :position, label: false, wrapper: false, bootstrap_wrapper: false, input_html: {class: "input-mini"}
+%span.list-pretty-item-content= question.content

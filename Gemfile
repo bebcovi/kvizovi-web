@@ -2,7 +2,7 @@ ruby "2.0.0"
 
 source "https://rubygems.org"
 
-gem "rails", "~> 3.2.13"
+gem "rails", github: "rails/rails", branch: "3-2-stable"
 
 # Web servers
 gem "thin",    group: :development
@@ -11,9 +11,8 @@ gem "unicorn", group: :production
 # Frontend
 group :assets do
   gem "sass-rails"
-  gem "compass", "~> 0.13.alpha"
-  gem "compass-rails"
-  gem "bootstrap-sass"
+  gem "bourbon"
+  gem "bootstrap-sass-rails"
   gem "jquery-rails"
   gem "jquery-ui-rails"
   gem "coffee-rails"
@@ -25,6 +24,9 @@ gem "haml", ">= 4"
 gem "haml-rails"
 gem "simple_form", ">= 2"
 gem "redcarpet", ">= 2"
+gem "will_paginate", ">= 3"
+gem "bootstrap-will_paginate"
+gem "draper"
 
 # Database
 gem "pg"
@@ -32,8 +34,10 @@ gem "paperclip", ">= 3.3"
 gem "paperclip-dropbox", "~> 1.0"
 gem "activerecord-postgres-hstore"
 gem "acts-as-taggable-on"
-gem "squeel"
+gem "squeel", ">= 1"
 gem "paper_trail", ">= 2.7"
+gem "redis", ">= 3"
+gem "acts_as_list", ">= 0.2"
 
 # Security
 gem "strong_parameters", ">= 0.2"
@@ -51,12 +55,16 @@ group :test do
   gem "capybara", ">= 2"
   gem "cucumber-rails"
   gem "database_cleaner"
+  gem "vcr"
+  gem "webmock", ">= 1.8", "< 1.10"
+  gem "timecop"
 end
 
 # Development stuff
 group :development do
   gem "pry-rails"
   gem "better_errors"
+  gem "xray-rails"
   gem "binding_of_caller", ">= 0.7.1"
 end
 

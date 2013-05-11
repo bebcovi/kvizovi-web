@@ -7,7 +7,7 @@ Feature: Questions
 
   Background:
     Given I'm registered and logged in
-      And I have a quiz
+    And I have a quiz
 
   Scenario Outline: Creating, updating and destroying questions
     When I create <question>
@@ -38,3 +38,12 @@ Feature: Questions
 
     When I click on the undo link
     Then I should see that question again
+
+  Scenario: Ordering questions
+    Given my quiz has some questions
+    When I go to the questions page
+    And I click on "Izmijeni redoslijed"
+    And I change the order of my questions
+    And I click on "Spremi"
+    Then I should be on the questions page
+    And the order of questions should be different

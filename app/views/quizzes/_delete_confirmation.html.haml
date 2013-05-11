@@ -1,9 +1,10 @@
-%h1 Jeste li sigurni?
+%div
+  %h1 Jeste li sigurni?
 
-%p Jeste li sigurni da želite izbrisati taj kviz?
+  %p Jeste li sigurni da želite izbrisati taj kviz?
 
-= simple_form_for @quiz, method: :delete do |f|
+  = simple_form_for @quiz, method: :delete do |f|
 
-  = buttons do
-    = cancel_button "Nisam", quizzes_path
-    = submit_button "Jesam"
+    = buttons do
+      = cancel_button "Nisam", quizzes_path
+      = submit_button "Jesam"

@@ -1,7 +1,6 @@
-# Deletes all previous records
-connection = ActiveRecord::Base.connection
-tables = connection.tables.tap { |tables| tables.delete("schema_migrations") }
-tables.each { |table| connection.execute "TRUNCATE #{table}" }
+require "database_cleaner"
+
+DatabaseCleaner.clean_with :truncation
 
 %w[schools students quizzes].each do |table|
   load("#{Rails.root}/db/seeds/#{table}.rb")

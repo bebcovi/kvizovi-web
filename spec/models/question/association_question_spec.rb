@@ -8,12 +8,12 @@ describe AssociationQuestion do
   describe "#associations=" do
     it "accepts a hash" do
       @it.associations = {"Foo" => "Foo", "Bar" => "Bar"}
-      expect(@it.associations).to eq({"Foo" => "Foo", "Bar" => "Bar"})
+      expect(@it.associations).to eq [["Foo", "Foo"], ["Bar", "Bar"]]
     end
 
     it "accepts an array" do
       @it.associations = ["Foo", "Foo", "Bar", "Bar"]
-      expect(@it.associations).to eq({"Foo" => "Foo", "Bar" => "Bar"})
+      expect(@it.associations).to eq [["Foo", "Foo"], ["Bar", "Bar"]]
     end
   end
 

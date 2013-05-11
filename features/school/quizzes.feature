@@ -20,3 +20,14 @@ Feature: Quizzes
     When I delete that quiz
     Then I should be on the quizzes page
     And I should not see that quiz
+
+  Scenario: Activating a quiz
+    Given I have a quiz
+
+    When I click on the link for deactivation
+    Then I should be on the quizzes page
+    And the quiz should not be activated
+
+    When I click on the link for activation
+    Then I should be on the quizzes page
+    And the quiz should be activated

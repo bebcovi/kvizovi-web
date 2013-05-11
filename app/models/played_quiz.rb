@@ -1,54 +1,32 @@
-require "activerecord-postgres-hstore"
+require "squeel"
 
 class PlayedQuiz < ActiveRecord::Base
-  serialize :question_answers, ActiveRecord::Coders::Hstore
-  serialize :question_ids, Array
+  belongs_to :quiz_snapshot, dependent: :destroy
+  has_and_belongs_to_many :students, after_add: :assign_student_order
 
-  def self.build_from_hash(hash)
-    quiz_id          = hash[:quiz][:id]
-    question_ids     = hash[:questions].map { |h| h[:id] }
-    question_answers = hash[:questions].map { |h| h[:answer] }
-    duration         = (hash[:end] - hash[:begin]).to_i
-    player_ids       = hash[:students].map { |h| h[:id] }
+  serialize :question_answers, Array
+  serialize :students_order, Array
 
-    new(
-      quiz_id:          quiz_id,
-      question_answers: Hash[question_ids.zip(question_answers)],
-      question_ids:     question_ids,
-      duration:         duration,
-      interrupted:      question_answers.any?(&:nil?),
-      first_player_id:  player_ids.first,
-      second_player_id: player_ids.last,
-    )
+  scope :descending, -> { order{created_at.desc} }
+  scope :ascending,  -> { order{created_at.asc} }
+
+  delegate :quiz, :questions, to: :quiz_snapshot
+  delegate :name, to: :quiz
+
+  def interrupted?
+    question_answers.any?(&:nil?)
   end
 
-  def self.create_from_hash(hash)
-    record = build_from_hash(hash)
-    record.save!
-    record
+  def interrupted_on?(idx)
+    question_answers.index(&:nil?) == idx
   end
 
-  def students
-    Student.find(student_ids)
-  end
-
-  def quiz
-    Quiz.find(quiz_id)
-  end
-
-  def questions
-    question_answers.map do |_, answer|
-      if answer.is_a?(String)
-        {answer: {"true" => true, "false" => false, "nil" => nil}[answer]}
-      else
-        {answer: answer}
-      end
-    end
-  end
+  def single_player?; students.count == 1; end
+  def multi_player?;  students.count > 1;  end
 
   private
 
-  def student_ids
-    [first_player_id, second_player_id].uniq
+  def assign_student_order(student)
+    update_attributes!(students_order: students_order + [student.id])
   end
 end

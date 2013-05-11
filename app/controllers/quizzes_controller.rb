@@ -31,16 +31,14 @@ class QuizzesController < ApplicationController
 
     if @quiz.valid?
       @quiz.save
-      redirect_to quizzes_path, notice: flash_success
+      if params[:return_to]
+        redirect_to params[:return_to]
+      else
+        redirect_to quizzes_path, notice: flash_success
+      end
     else
       render :edit
     end
-  end
-
-  def toggle_activation
-    quiz = @user.quizzes.find(params[:id])
-    quiz.toggle!(:activated)
-    redirect_to quizzes_path
   end
 
   def delete

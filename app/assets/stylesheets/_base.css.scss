@@ -25,6 +25,20 @@ strong {
   font-weight: nth($base-weight, 4);
 }
 
+q {
+  quotes: '"' '"' "'" "'";
+  font-style: italic;
+
+  &:before {
+    content: open-quote;
+    font-style: normal;
+  }
+  &:after {
+    content: close-quote;
+    font-style: normal;
+  }
+}
+
 form {
   ol, ul {
     @include list-unstyled;

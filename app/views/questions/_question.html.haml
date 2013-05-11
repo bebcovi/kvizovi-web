@@ -1,0 +1,8 @@
+.list-pretty-item-actions.dropdown.dropdown-hover
+  = link_to icon("chevron-left"), "#", class: "dropdown-toggle", data: {toggle: "dropdown"}
+  %ul.dropdown-menu.pull-right
+    %li= edit_button "Izmijeni", edit_quiz_question_path(@quiz, question), class: "" # don't apply default classes
+    %li= remove_file_button "Izbriši", quiz_question_path(@quiz, question), method: :delete
+
+%span.space-quart-right= question_icons(question.category)
+%span.list-pretty-item-content= question.content

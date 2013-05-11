@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :add_subdomain_view_path
+  before_filter :mark_activity, if: :user_logged_in?
 
   protected
 
@@ -92,5 +93,9 @@ class ApplicationController < ActionController::Base
 
   def add_subdomain_view_path
     prepend_view_path "app/views/#{request.subdomain}" if request.subdomain.present?
+  end
+
+  def mark_activity
+    $redis.set("last_activity:school:#{current_user.username}", Time.now)
   end
 end

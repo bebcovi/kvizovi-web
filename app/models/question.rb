@@ -1,30 +1,40 @@
 require "acts-as-taggable-on"
 require "paper_trail"
 require "squeel"
+require "acts_as_list"
 
 class Question < ActiveRecord::Base
   CATEGORIES = %w[boolean choice association image text]
+  NO_ANSWER  = "NO_ANSWER"
 
   belongs_to :quiz
 
   acts_as_taggable
   has_paper_trail on: [:destroy]
+  acts_as_list scope: :quiz
   serialize :data, Hash
 
+  default_scope     -> { order{position.asc} }
   scope :ascending, -> { order{created_at.asc} }
 
   validates :content, presence: true
 
   def self.data_accessor(*keys)
-    keys.each do |key|
-      define_method(key) do
-        (data || {})[key]
+    include Module.new {
+      keys.each do |key|
+        define_method(key) do
+          (data || {})[key]
+        end
+
+        define_method("#{key}=") do |value|
+          self.data = (data || {}).merge(key => value)
+        end
       end
 
-      define_method("#{key}=") do |value|
-        self.data = (data || {}).merge(key => value)
+      def self.to_s
+        "Data(#{keys.join(",")})"
       end
-    end
+    }
   end
 
   def dup

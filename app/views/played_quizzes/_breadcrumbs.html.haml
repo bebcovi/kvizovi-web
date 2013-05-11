@@ -1,0 +1,17 @@
+- case params[:action]
+- when "index"
+  - case @scope
+  - when Quiz
+    = breadcrumbs link_to("Kvizovi", quizzes_path), link_to(@scope.name, quiz_questions_path(@scope)), "Odigrani"
+  - when Student
+    = breadcrumbs link_to("Učenici", students_path), @scope.full_name, "Odigrani kvizovi"
+  - when School
+    = breadcrumbs "Odigrani kvizovi"
+- when "show"
+  - case @scope
+  - when Quiz
+    = breadcrumbs link_to("Kvizovi", quizzes_path), link_to(@scope.name, quiz_questions_path(@scope)), link_to("Odigrani", played_quizzes_path(params.slice(:quiz_id))), "#{@order}."
+  - when Student
+    = breadcrumbs link_to("Učenici", students_path), @scope.full_name, link_to("Odigrani kvizovi", played_quizzes_path(params.slice(:student_id))), "#{@order}."
+  - when School
+    = breadcrumbs link_to("Odigrani kvizovi", played_quizzes_path), @played_quiz.name

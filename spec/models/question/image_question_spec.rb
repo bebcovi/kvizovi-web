@@ -10,7 +10,9 @@ describe ImageQuestion do
 
   describe "#image_url=" do
     it "assigns the URL to #image" do
-      @it.image_url = "http://designyoutrust.com/wp-content/uploads2/bla.jpg?q=2"
+      VCR.use_cassette "url" do
+        @it.image_url = "http://designyoutrust.com/wp-content/uploads2/bla.jpg?q=2"
+      end
       expect(@it.image).to be_present
     end
 

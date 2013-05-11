@@ -24,6 +24,10 @@
 
     > * {
       vertical-align: middle;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -76,7 +80,14 @@
 
       .dropdown-menu {
         top: 0;
-        right: $width;
+        right: 1.5 * $bsu;
         margin: 0;
       }
     }
+
+  .list-pretty-content {
+    height: auto;
+    padding-top: $hsu;
+    padding-bottom: $hsu;
+    line-height: $bsu;
+  }

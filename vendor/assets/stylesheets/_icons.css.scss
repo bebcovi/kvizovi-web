@@ -1,8 +1,6 @@
-$path: "icons/icons";
+@include font-face(icons, "icons/icons", $asset-pipeline: true);
 
-@include font-face("icons", font-files("#{$path}.woff", "#{$path}.ttf", "#{$path}.svg"), "#{$path}.eot");
-
-.icon-books, .icon-home, .icon-user, .icon-checkbox, .icon-list, .icon-shuffle, .icon-image, .icon-plus, .icon-remove, .icon-trophy, .icon-exit, .icon-lock, .icon-cog, .icon-search, .icon-stopwatch, .icon-link, .icon-storage, .icon-pencil, .icon-lamp-full, .icon-lamp, .icon-chevron-up, .icon-chevron-right, .icon-chevron-down, .icon-chevron-left, .icon-caret-up, .icon-caret-right, .icon-caret-down, .icon-caret-left, .icon-move, .icon-phone, .icon-calendar, .icon-video, .icon-clipboard, .icon-file-plus, .icon-file-minus, .icon-file-download, .icon-file-upload, .icon-file-check, .icon-file-remove, .icon-copy, .icon-pencil-2, .icon-earth, .icon-key, .icon-eye, .icon-eye-blocked, .icon-file, .icon-spinner, .icon-fire, .icon-skull, .icon-lab, .icon-warning, .icon-warning-2, .icon-notification, .icon-notification-2, .icon-question-circle, .icon-question-circle-full, .icon-question, .icon-plus-circle, .icon-plus-circle-full, .icon-minus-circle, .icon-minus-circle-full, .icon-info-circle, .icon-info-circle-full, .icon-cancel-circle, .icon-cancel-circle-full, .icon-checkmark-circle, .icon-checkmark-circle-full, .icon-checkmark, .icon-minus, .icon-play-circle, .icon-pause-circle, .icon-stop-circle, .icon-backward-circle, .icon-forward-circle, .icon-play, .icon-pause, .icon-stop, .icon-backward, .icon-forward, .icon-first, .icon-last, .icon-previous, .icon-next, .icon-arrow-up-left, .icon-arrow-up, .icon-arrow-up-right, .icon-arrow-right, .icon-arrow-down-right, .icon-arrow-down, .icon-arrow-down-left, .icon-arrow-left, .icon-circle, .icon-file-empty, .icon-close {
+.icon-books, .icon-home, .icon-user, .icon-checkbox, .icon-list, .icon-shuffle, .icon-image, .icon-plus, .icon-remove, .icon-trophy, .icon-exit, .icon-lock, .icon-cog, .icon-search, .icon-stopwatch, .icon-link, .icon-storage, .icon-pencil, .icon-lamp-full, .icon-lamp, .icon-chevron-up, .icon-chevron-right, .icon-chevron-down, .icon-chevron-left, .icon-caret-up, .icon-caret-right, .icon-caret-down, .icon-caret-left, .icon-move, .icon-phone, .icon-calendar, .icon-video, .icon-clipboard, .icon-file-plus, .icon-file-minus, .icon-file-download, .icon-file-upload, .icon-file-check, .icon-file-remove, .icon-copy, .icon-pencil-2, .icon-earth, .icon-key, .icon-eye, .icon-eye-blocked, .icon-file, .icon-spinner, .icon-fire, .icon-skull, .icon-lab, .icon-warning, .icon-warning-2, .icon-notification, .icon-notification-2, .icon-question-circle, .icon-question-circle-full, .icon-question, .icon-plus-circle, .icon-plus-circle-full, .icon-minus-circle, .icon-minus-circle-full, .icon-info-circle, .icon-info-circle-full, .icon-cancel-circle, .icon-cancel-circle-full, .icon-checkmark-circle, .icon-checkmark-circle-full, .icon-checkmark, .icon-minus, .icon-play-circle, .icon-pause-circle, .icon-stop-circle, .icon-backward-circle, .icon-forward-circle, .icon-play, .icon-pause, .icon-stop, .icon-backward, .icon-forward, .icon-first, .icon-last, .icon-previous, .icon-next, .icon-arrow-up-left, .icon-arrow-up, .icon-arrow-up-right, .icon-arrow-right, .icon-arrow-down-right, .icon-arrow-down, .icon-arrow-down-left, .icon-arrow-left, .icon-circle, .icon-file-empty, .icon-close, .icon-sort {
   font-family: "icons";
   speak: none;
   font-style: normal;
@@ -294,4 +292,7 @@ $path: "icons/icons";
 }
 .icon-close:before {
   content: "\e009";
+}
+.icon-sort:before {
+  content: "\e053";
 }

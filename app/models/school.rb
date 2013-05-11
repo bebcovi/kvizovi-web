@@ -29,6 +29,7 @@ class School < ActiveRecord::Base
   has_many :students,  dependent: :destroy
   has_many :quizzes,   dependent: :destroy
   has_many :questions
+  has_many :played_quizzes, through: :quizzes
 
   has_secure_password
 
@@ -47,7 +48,7 @@ class School < ActiveRecord::Base
   def primary?;   level == "Osnovna"; end
   def secondary?; level == "Srednja"; end
 
-  def grades
-    primary? ? (1..8) : (1..4)
+  def last_activity
+    LastActivity.for(self)
   end
 end

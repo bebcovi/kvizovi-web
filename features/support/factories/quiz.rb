@@ -1,9 +1,7 @@
-if $load_factories
-  FactoryGirl.define do
-    factory :quiz do
-      name "Name"
-      school
-      activated true
-    end
+FactoryGirl.define do
+  factory :quiz do
+    name "Some quiz"
+    school
+    activated true
   end
-end
+end if $load_factories

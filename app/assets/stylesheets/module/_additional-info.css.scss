@@ -5,8 +5,15 @@
   padding: 7px 0;
   vertical-align: middle;
 
+  .js & {
+    display: none;
+  }
+
   &.help {
     color: darken(white, 40%);
+    .js & {
+      display: inline-block;
+    }
   }
 
   .success & {
@@ -14,6 +21,10 @@
     color: $successText;
     &:before {
       content: "\e038"; // checkmark-circle-full
+    }
+
+    .js & {
+      display: inline-block;
     }
   }
 }

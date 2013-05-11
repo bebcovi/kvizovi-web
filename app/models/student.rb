@@ -1,8 +1,10 @@
+require "squeel"
+
 class Student < ActiveRecord::Base
   GENDERS = ["Muško", "Žensko"]
 
   belongs_to :school
-  def games; PlayedGame.where{(first_player_id == my{id}) | (second_player_id == my{id})}; end
+  has_and_belongs_to_many :played_quizzes
 
   has_secure_password
   attr_accessor :school_key
@@ -17,6 +19,7 @@ class Student < ActiveRecord::Base
   validates :school_key,    presence: true, inclusion: {in: proc { School.pluck(:key) }, allow_blank: true}, unless: :school_id?
 
   before_create :assign_school, unless: :school_id?
+  before_destroy :destroy_played_quizzes
 
   def type; "student"; end
 
@@ -30,9 +33,17 @@ class Student < ActiveRecord::Base
     write_attribute(:grade, value.to_s.delete(" .").downcase)
   end
 
+  def last_activity
+    LastActivity.for(self)
+  end
+
   private
 
   def assign_school
     self.school ||= School.find_by_key(school_key)
+  end
+
+  def destroy_played_quizzes
+    played_quizzes.destroy_all
   end
 end

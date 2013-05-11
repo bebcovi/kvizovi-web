@@ -1,0 +1,6 @@
+.text-error
+  = icon("cancel-circle-full")
+  Pogrešan odgovor
+
+.l-feedback.space-half-top.js-hidden.reveal-content{class: "l-question-#{question.category}", data: {reveal: "Točan odgovor..."}}
+  = render "questions/correct_answer/#{question.category}", {question: question}

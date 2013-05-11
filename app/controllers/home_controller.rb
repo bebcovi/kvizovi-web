@@ -8,7 +8,7 @@ class HomeController < ApplicationController
 
   def redirect_if_logged_in
     if user_logged_in?
-      redirect_to root_url(sudomain: current_user.type)
+      redirect_to root_url(subdomain: current_user.type)
     end
   end
 end

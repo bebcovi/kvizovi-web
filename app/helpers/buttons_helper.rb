@@ -12,7 +12,7 @@ module ButtonsHelper
   end
 
   def cancel_button(string, path, options = {})
-    link_to string, path, {class: "btn cancel"}.merge(options)
+    link_to string, path, {class: "btn cancel", data: {dismiss: "modal"}}.merge(options)
   end
 
   def logout_button(string, path, options = {})
@@ -69,10 +69,6 @@ module ButtonsHelper
 
   def next_button(string, path, options = {})
     link_to string.append_icon("arrow-right"), path, {class: "action btn btn-primary"}.merge(options)
-  end
-
-  def action_button(string, path, options = {})
-    link_to string, path, {class: "action btn"}.merge(options)
   end
 
   def buttons(options = {})

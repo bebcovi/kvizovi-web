@@ -1,8 +1,8 @@
 @import
   "config/bootstrap",
 
-  "compass",
-  "bootstrap-custom",
+  "twitter/bootstrap-no-sprites",
+  "bourbon",
   "html5-boilerplate",
   "icons",
 
@@ -19,10 +19,13 @@
   "layout/page/tour",
   "layout/page/updates",
 
-  "layout/question/design/association",
-  "layout/question/design/image",
+  "layout/design",
+  "layout/play",
+  "layout/feedback",
+  "layout/played",
 
-  "layout/question/display/association",
+  "layout/question-association",
+  "layout/question-image",
 
   "module/additional-info",
   "module/alert",
@@ -38,7 +41,6 @@
   "module/count",
   "module/dropdown-menu",
   "module/fade",
-  "module/feedback",
   "module/form",
   "module/grades",
   "module/hero-unit",
@@ -54,10 +56,13 @@
   "module/player",
   "module/popover",
   "module/profile",
+  "module/progress",
   "module/question",
+  "module/reveal",
   "module/slide",
   "module/space",
   "module/spinner",
+  "module/subtle",
   "module/table",
   "module/timer",
   "module/tooltip"

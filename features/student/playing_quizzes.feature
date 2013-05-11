@@ -28,3 +28,8 @@ Feature: Playing quizzes
     When I begin the quiz
     And I interrupt it
     Then I should be on the page for playing quizzes
+
+  Scenario: The quiz gets deleted in the meanwhile
+    When I begin the quiz
+    But in the meanwhile the quiz gets deleted
+    Then I should still be able to play it

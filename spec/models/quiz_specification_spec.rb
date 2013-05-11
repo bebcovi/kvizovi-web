@@ -7,8 +7,7 @@ describe QuizSpecification do
 
   context "validations" do
     context "#quiz_id" do
-      it "validates presence" do
-        @it.quiz_id = nil
+      it "validates presence" do @it.quiz_id = nil
         expect(@it).to have(1).error_on(:quiz_id)
       end
     end
@@ -35,24 +34,6 @@ describe QuizSpecification do
 
         expect(@it).to have(0).errors_on(:students_credentials)
       end
-    end
-  end
-
-  describe "#to_h" do
-    before do
-      @quiz     = Factory.create(:quiz)
-      @students = Factory.create_list(:student, 2)
-
-      @it.quiz_id  = @quiz.id
-      @it.students = @students
-    end
-
-    it "adjusts the number of questions according to the number of students" do
-      @quiz.questions = Factory.create_list(:question, 4)
-      expect(@it.to_h[:question_ids].count).to eq 4
-
-      @quiz.questions = Factory.create_list(:question, 3)
-      expect(@it.to_h[:question_ids].count).to eq 2
     end
   end
 end

@@ -1,12 +1,12 @@
 .navbar-inverse .navbar-inner .brand {
   @include box-sizing(border-box);
-  @include text-shadow(rgba(white, .25) 0 1px 0);
   @include color-link(darken($navbarInverseBackground, 10%), white);
   @include transition(all .2s);
   height: $navbarHeight;
+  text-shadow: rgba(white, .25) 0 1px 0;
 
   @include on-interact {
-    @include text-shadow(rgba(black, .25) 0 -1px 0);
+    text-shadow: rgba(black, .25) 0 -1px 0;
   }
 
   i {

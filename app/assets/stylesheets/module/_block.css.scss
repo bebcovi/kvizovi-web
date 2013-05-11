@@ -1,29 +1,11 @@
 .help-block,
 .error-block {
-  .control-group & {
-    &:first-child {
-      margin-bottom: 0;
-      font-size: $fontSizeSmall;
-    }
-
-    &:nth-child(n+2) {
-      margin-top: - $baseLineHeight/2;
-      font-size: $fontSizeSmall;
-    }
-  }
-
-  .control-group.error {
-
-  }
+  font-size: 13px;
+  font-weight: nth($base-weight, 3);
 }
 
 .help-block {
   color: rgba(black, .5);
-  font-weight: nth($base-weight, 3);
-
-  .control-group.error & {
-    color: rgba(black, .5);
-  }
 }
 
 .error-block {

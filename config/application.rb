@@ -7,8 +7,13 @@ require "sprockets/railtie" unless Rails.env.test?
 
 Bundler.require(:assets) unless Rails.env.test?
 
+require "will_paginate/railtie"
+require "bootstrap-will_paginate"
+require "draper"
+
 if Rails.env.development?
   require "better_errors"
+  require "xray-rails"
 end
 
 module Lektire

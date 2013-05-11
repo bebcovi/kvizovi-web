@@ -40,21 +40,19 @@ hr:
           success: "Pitanje je uspješno stvoreno."
         update:
           success: "Pitanje je uspješno izmijenjeno."
+        update_order:
+          success: "Redoslijed je uspješno izmijenjen."
+          error: "Neke su pozicije bile jednake, ili su bile izvan granica."
         destroy:
           success: "Pitanje je uspješno izbrisano."
-        include:
-          success: "Pitanje je uspješno dodano u kviz \"%{name}\"."
-        copy:
-          success: "Pitanje je uspješno preuzeto."
-        download:
-          success: "Pitanje je uspješno kopirano kod vas."
         remove:
           success: "Pitanje je uspješno uklonjeno iz kviza."
-        unauthorized:
-          error: "Ovaj kviz ne pripada vama – ne možete ga mijenjati."
       versions:
         revert:
           success: "Vraćeno."
       survey:
         complete:
           success: "Vaši odgovori su zabilježeni. Hvala vam na suradnji."
+      played_quizzes:
+        show:
+          error: "Ovaj odigrani kviz je nedostupan, jer je jedan od igrača izbrisao svoj korisnički račun."

@@ -1,6 +1,10 @@
 %ul.nav.pull-left
-  %li{class: ("active" if params[:controller] == "games")}= link_to "Kvizovi", choose_quiz_path
-  %li{class: ("active" if params[:action] == "tour")}= link_to "Vodič", tour_path
+  - if user_logged_in?
+    %li{class: ("active" if params[:controller] == "games")}
+      = link_to "Kvizovi", choose_quiz_path
+
+    %li{class: ("active" if params[:action] == "tour")}
+      = link_to "Vodič", tour_path
 
 %ul.nav.pull-right
   = render "survey" if user_logged_in? and not current_user.completed_survey?

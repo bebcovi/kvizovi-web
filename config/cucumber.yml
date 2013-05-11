@@ -1,1 +1,1 @@
-default: --color --no-source --guess --require features
+default: --guess

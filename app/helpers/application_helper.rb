@@ -11,23 +11,16 @@ module ApplicationHelper
     end
   end
 
-  def present(object, klass = nil)
-    klass ||= "#{object.class}Presenter".constantize
-    presenter = klass.new(object, self)
-    yield presenter
-  end
-
-  def breadcrumbs(items)
+  def breadcrumbs(*items)
     content_tag :ol, class: "breadcrumb" do
-      items.map.with_index do |(name, path), index|
-        if index < items.count - 1
+      items.map.with_index do |item, idx|
+        if idx < items.count - 1
           content_tag(:li) do
-            link_to(name, path) +
-            content_tag(:i, class: "divider") { icon("chevron-right") }
+            raw(item) + content_tag(:i, class: "divider") { icon("chevron-right") }
           end
         else
           content_tag(:li, class: "active") do
-            name
+            raw(item)
           end
         end
       end.join.html_safe
@@ -55,5 +48,12 @@ module ApplicationHelper
 
   def percentage(part, total)
     ((part.to_f / total.to_f) * 100).round
+  end
+
+  def remote_form_for(*args, &block)
+    simple_form_for *args do |f|
+      concat hidden_field_tag(:return_to, request.fullpath)
+      yield(f)
+    end
   end
 end

@@ -1,18 +1,22 @@
 class QuizController < ApplicationController
   before_filter :authenticate!
-  before_filter :assign_student, :assign_quiz_state
+  before_filter :assign_student, :assign_quiz_play
+  before_filter :redirect_if_question_was_already_answered, only: :play
+
+  decorates_assigned :played_quiz
 
   def choose
     @quiz_specification = QuizSpecification.new
     @quizzes = @student.school.quizzes.activated
   end
 
-  def prepare
+  def start
     @quiz_specification = QuizSpecification.new(params[:quiz_specification])
     @quiz_specification.students << @student
 
     if @quiz_specification.valid?
-      quiz_runner.prepare!(@quiz_specification.to_h)
+      quiz_snapshot = QuizSnapshot.capture(@quiz_specification)
+      @quiz_play.start!(quiz_snapshot, @quiz_specification.students)
       redirect_to action: :play
     else
       @quizzes = @student.school.quizzes.activated
@@ -23,12 +27,11 @@ class QuizController < ApplicationController
   def play
     @student  = current_student
     @quiz     = quiz
-    @question = QuestionShuffling.new(current_question)
+    @question = current_question
   end
 
   def save_answer
-    question = QuestionAnswer.new(current_question)
-    quiz_runner.save_answer!(question.correct_answer?(params[:answer]))
+    @quiz_play.save_answer!(params[:answer])
     redirect_to action: :answer_feedback
   end
 
@@ -37,12 +40,12 @@ class QuizController < ApplicationController
   end
 
   def next_question
-    quiz_runner.next_question!
+    @quiz_play.next_question!
     redirect_to action: :play
   end
 
   def results
-    @played_quiz = PlayedQuizExhibit.new(PlayedQuiz.find(params[:id]))
+    @played_quiz = PlayedQuiz.find(params[:id])
     @quiz        = @played_quiz.quiz
   end
 
@@ -50,10 +53,10 @@ class QuizController < ApplicationController
   end
 
   def finish
-    quiz_runner.finish!
-    played_quiz = PlayedQuiz.create_from_hash(quiz_state.to_h)
+    @quiz_play.finish!
+    played_quiz = PlayedQuizCreator.new(@quiz_play).create
 
-    if quiz_state.finished?
+    unless @quiz_play.interrupted?
       redirect_to action: :results, id: played_quiz.id
     else
       redirect_to action: :choose
@@ -66,27 +69,29 @@ class QuizController < ApplicationController
     @student = current_user
   end
 
-  def assign_quiz_state
-    @quiz_state = quiz_state
-  end
-
-  def quiz_state
-    QuizState.new(cookies)
-  end
-
-  def quiz_runner
-    QuizRunner.new(cookies)
-  end
-
-  def quiz
-    Quiz.find(quiz_state.quiz[:id])
-  end
-
-  def current_question
-    Question.find(quiz_state.current_question[:id])
+  def assign_quiz_play
+    @quiz_play = QuizPlay.new(cookies)
   end
 
   def current_student
-    Student.find(quiz_state.current_student[:id])
+    Student.find(@quiz_play.current_student[:id])
+  end
+
+  def quiz
+    quiz_snapshot.quiz
+  end
+
+  def current_question
+    quiz_snapshot.questions[@quiz_play.current_question[:number] - 1]
+  end
+
+  def quiz_snapshot
+    @quiz_snapshot ||= QuizSnapshot.find(@quiz_play.quiz_snapshot[:id])
+  end
+
+  def redirect_if_question_was_already_answered
+    if @quiz_play.current_question[:answer] != nil
+      redirect_to action: :next_question
+    end
   end
 end

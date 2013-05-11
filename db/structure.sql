@@ -48,14 +48,13 @@ SET default_with_oids = false;
 
 CREATE TABLE played_quizzes (
     id integer NOT NULL,
-    quiz_id integer,
-    question_answers hstore,
-    question_ids text,
-    duration integer,
-    interrupted boolean,
-    first_player_id integer,
-    second_player_id integer,
-    created_at timestamp without time zone
+    created_at timestamp without time zone,
+    quiz_snapshot_id integer,
+    question_answers text,
+    begin_time timestamp without time zone,
+    end_time timestamp without time zone,
+    students_order character varying(255),
+    has_answers boolean DEFAULT true
 );
 
 
@@ -79,6 +78,16 @@ ALTER SEQUENCE played_quizzes_id_seq OWNED BY played_quizzes.id;
 
 
 --
+-- Name: played_quizzes_students; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE played_quizzes_students (
+    student_id integer,
+    played_quiz_id integer
+);
+
+
+--
 -- Name: questions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -91,7 +100,8 @@ CREATE TABLE questions (
     updated_at timestamp without time zone NOT NULL,
     data text DEFAULT '--- {}
 '::text,
-    quiz_id integer
+    quiz_id integer,
+    "position" integer
 );
 
 
@@ -112,6 +122,38 @@ CREATE SEQUENCE questions_id_seq
 --
 
 ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
+
+
+--
+-- Name: quiz_snapshots; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE quiz_snapshots (
+    id integer NOT NULL,
+    quiz_attributes text,
+    questions_attributes text,
+    created_at timestamp without time zone,
+    quiz_id integer
+);
+
+
+--
+-- Name: quiz_snapshots_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE quiz_snapshots_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: quiz_snapshots_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE quiz_snapshots_id_seq OWNED BY quiz_snapshots.id;
 
 
 --
@@ -352,6 +394,13 @@ ALTER TABLE ONLY questions ALTER COLUMN id SET DEFAULT nextval('questions_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY quiz_snapshots ALTER COLUMN id SET DEFAULT nextval('quiz_snapshots_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY quizzes ALTER COLUMN id SET DEFAULT nextval('quizzes_id_seq'::regclass);
 
 
@@ -404,6 +453,14 @@ ALTER TABLE ONLY played_quizzes
 
 ALTER TABLE ONLY questions
     ADD CONSTRAINT questions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: quiz_snapshots_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY quiz_snapshots
+    ADD CONSTRAINT quiz_snapshots_pkey PRIMARY KEY (id);
 
 
 --
@@ -485,6 +542,8 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 --
 -- PostgreSQL database dump complete
 --
+
+SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20120709164746');
 
@@ -579,3 +638,23 @@ INSERT INTO schema_migrations (version) VALUES ('20130425132651');
 INSERT INTO schema_migrations (version) VALUES ('20130426014257');
 
 INSERT INTO schema_migrations (version) VALUES ('20130426145704');
+
+INSERT INTO schema_migrations (version) VALUES ('20130426130237');
+
+INSERT INTO schema_migrations (version) VALUES ('20130428211333');
+
+INSERT INTO schema_migrations (version) VALUES ('20130429123055');
+
+INSERT INTO schema_migrations (version) VALUES ('20130430142123');
+
+INSERT INTO schema_migrations (version) VALUES ('20130507163732');
+
+INSERT INTO schema_migrations (version) VALUES ('20130507165302');
+
+INSERT INTO schema_migrations (version) VALUES ('20130507173307');
+
+INSERT INTO schema_migrations (version) VALUES ('20130507191942');
+
+INSERT INTO schema_migrations (version) VALUES ('20130510124042');
+
+INSERT INTO schema_migrations (version) VALUES ('20130510131151');

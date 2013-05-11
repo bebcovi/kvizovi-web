@@ -6,10 +6,10 @@ Before("@student") { @user_type = "student" }
 
 World(Module.new do
   def school(&block)
-    yield if @user_type == "school"
+    yield if @user_type == "school" or (@user && @user.type == "school")
   end
 
   def student(&block)
-    yield if @user_type == "student"
+    yield if @user_type == "student" or (@user && @user.type == "student")
   end
 end)
