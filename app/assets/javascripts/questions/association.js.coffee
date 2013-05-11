@@ -63,7 +63,7 @@ do ($ = jQuery) ->
         removePair $el
         $otherPairs.each (i) -> updateAttrs $(@), i
 
-    display: ($form) ->
+    play: ($form) ->
 
       $pairs    = $(".association-pair", $form)
 

@@ -5,7 +5,7 @@ bodyClass  = $body.attr "class"
 formClass  = $form.attr "class"
 
 cAction    = try bodyClass.match(/index|new|create|edit|show|choose|prepare|play|interupt|results|finish/).join("")
-qAction    = try formClass.match(/design|display/).join("")
+qAction    = try formClass.match(/design|play|feedback|played/).join("")
 
 list       = (controller for controller of App.Controllers)
 regex      = RegExp list.join("|")
