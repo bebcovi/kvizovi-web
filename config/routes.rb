@@ -72,9 +72,7 @@ Lektire::Application.routes.draw do
     get "contact"
   end
 
-  resource :survey, only: [:show], controller: "survey" do
-    post "complete"
-  end
+  resource :survey
 
   ########################
   # Admin

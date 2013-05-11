@@ -1,26 +1,26 @@
 require "spec_helper"
 
-describe SurveyController, user: :school do
+describe SurveysController, user: :school do
   before do
     @user = Factory.create(:user)
     login_as(@user)
   end
 
-  describe "#show" do
+  describe "#new" do
     it "doesn't raise errors" do
-      get :show
+      get :new
     end
   end
 
-  describe "#complete" do
+  describe "#create" do
     it "marks that the user has completed the survey" do
       expect do
-        post :complete
+        post :create
       end.to change { @user.reload.completed_survey? }.from(false).to(true)
     end
 
     it "redirect the user back to the home page" do
-      post :complete
+      post :create
       expect(response).to redirect_to(root_path)
     end
   end

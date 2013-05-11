@@ -1,5 +1,8 @@
-When(/^I complete the survey$/) do
+When(/^I click on the link for survey$/) do
   click_on "Anketa"
+end
+
+When(/^I complete the survey$/) do
   school  { click_on "Ispunio/la sam anketu" }
   student { click_on "Ispuni#{@user.male? ? "o" : "la"} sam anketu" }
 end

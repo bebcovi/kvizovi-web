@@ -1,9 +1,0 @@
-- title "Anketa"
-
-%h1 Anketa
-
-%p Ako imate mrvicu vremena, puno biste nam pomogli ako biste ispunili #{link_to "ovu anketu", "https://docs.google.com/forms/d/1E8SiYiA-OPB0pFOACPq5f8YQNxVDG4wTghmn7xsnAFs/viewform"}. Kada ste ispunili, potvrdite ispod.
-
-= buttons do
-  = cancel_button "Odustani", :back
-  = primary_button "Ispunio/la sam anketu", complete_survey_path, method: :post

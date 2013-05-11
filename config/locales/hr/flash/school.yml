@@ -50,8 +50,8 @@ hr:
       versions:
         revert:
           success: "Vraćeno."
-      survey:
-        complete:
+      surveys:
+        create:
           success: "Vaši odgovori su zabilježeni. Hvala vam na suradnji."
       played_quizzes:
         show:

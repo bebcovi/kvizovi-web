@@ -6,4 +6,4 @@
 
 = buttons do
   = cancel_button "Odustani", :back
-  = primary_button "Ispuni#{current_user.male? ? "o" : "la"} sam anketu", complete_survey_path, method: :post
+  = primary_button "Ispuni#{current_user.male? ? "o" : "la"} sam anketu", survey_path, method: :post
