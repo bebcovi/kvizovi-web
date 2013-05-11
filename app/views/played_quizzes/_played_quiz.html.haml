@@ -1,16 +1,10 @@
-- if params[:controller] == "quiz"
-  %h2= played_quiz.quiz.name
-- else
-  %h1= played_quiz.quiz.name
+%h1= played_quiz.name
 
 - played_quiz.results.each do |student, score, score_percentage, student_number, rank|
   %div{class: "player-#{number(student_number)}"}
     %p
       %b= student.full_name.prepend_icon("user") + ":"
-      - if params[:controller] == "quiz"
-        %span Točno si odgovori#{student.male? ? "o" : "la"} na #{score} od #{played_quiz.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
-      - else
-        %span #{score} od #{played_quiz.total_score} točnih odgovora.
+      %span #{score} od #{played_quiz.total_score} točnih odgovora.
     .progress
       .bar{style: "width: #{score_percentage}%"}
 
