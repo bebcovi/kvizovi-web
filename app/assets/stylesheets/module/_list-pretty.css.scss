@@ -23,8 +23,11 @@
     }
 
     > * {
-      display: inline-block;
       vertical-align: middle;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -81,3 +84,10 @@
         margin: 0;
       }
     }
+
+  .list-pretty-content {
+    height: auto;
+    padding-top: $hsu;
+    padding-bottom: $hsu;
+    line-height: $bsu;
+  }
