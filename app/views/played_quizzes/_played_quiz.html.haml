@@ -1,5 +1,3 @@
-%h1= played_quiz.name
-
 - played_quiz.results.each do |student, score, score_percentage, student_number, rank|
   %div{class: "player-#{number(student_number)}"}
     %p
