@@ -7,6 +7,7 @@
     position: relative;
     top: -1px;
     display: inline-block;
+    margin-left: $hsu/2;
     vertical-align: middle;
 
     @include on-interact {

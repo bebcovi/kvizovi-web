@@ -9,4 +9,8 @@
   .question-answer {
     font-weight: nth($base-weight, 5);
   }
+
+  .label {
+    padding: $hsu/2;
+  }
 }
