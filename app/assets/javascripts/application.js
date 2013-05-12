@@ -13,13 +13,13 @@
 //= require modal-ajax
 //
 //= require additional-info
-//= require tooltip
-//= require popover
-//= require dropdown
-//= require modal
 //= require confirm-leave
-//= require reveal
+//= require dropdown
 //= require helper
+//= require modal
+//= require popover
+//= require reveal
+//= require tooltip
 //
 //= require controllers/quiz
 //= require controllers/tour
