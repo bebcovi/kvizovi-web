@@ -2,6 +2,14 @@
 }
 
   .reveal-toggle {
+    position: absolute;
     display: inline-block;
     vertical-align: middle;
+  }
+
+  .reveal-content {
+    &.is-hidden {
+      height: $bsu;
+      visibility: hidden;
+    }
   }

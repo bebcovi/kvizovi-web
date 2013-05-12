@@ -1,0 +1,19 @@
+// Colors
+// Only give background-color difference to links (and to simplify, we don't qualifty with `a` but [href] attribute)
+@each $type in label, badge {
+  // Important (red)
+  .#{$type}-important:hover  { background-color: $errorText; }
+  .#{$type}-important[href]  { background-color: darken($errorText, 10%); }
+  // Warnings (orange)
+  .#{$type}-warning:hover    { background-color: $orange; }
+  .#{$type}-warning[href]    { background-color: darken($orange, 10%); }
+  // Success (green)
+  .#{$type}-success:hover    { background-color: $successText; }
+  .#{$type}-success[href]    { background-color: darken($successText, 10%); }
+  // Info (turquoise)
+  .#{$type}-info:hover       { background-color: $infoText; }
+  .#{$type}-info[href]       { background-color: darken($infoText, 10%); }
+  // Inverse (black)
+  .#{$type}-inverse:hover    { background-color: $grayDark; }
+  .#{$type}-inverse[href]    { background-color: darken($grayDark, 10%); }
+}

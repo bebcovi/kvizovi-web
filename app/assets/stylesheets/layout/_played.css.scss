@@ -1,36 +1,13 @@
 .l-played {
   position: relative;
-  padding-left: .75 * $bsu;
   padding-bottom: $hsu;
-
-  &:before {
-    display: block;
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: $hsu/2;
-    background-color: shade(white, 25%);
-    border-radius: $bsu;
-    opacity: 0.75;
-  }
-
-  &.l-correct {
-    &:before {
-      background-color: $successText;
-    }
-  }
-
-  &.l-wrong,
-  &.l-interrupt,
-  &.l-unanswered {
-    &:before {
-      background-color: $errorText;
-    }
-  }
 
   .question-title {
     margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .question-answer {
+    font-weight: nth($base-weight, 5);
   }
 }

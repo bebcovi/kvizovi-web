@@ -1,23 +1,30 @@
 - played_quiz.results.each do |student, score, score_percentage, student_number, rank|
-  %div{class: "player-#{number(student_number)}"}
-    %p
+  %div{class: "l-player-#{number(student_number)}"}
+    %p.player-color
       %b= student.full_name.prepend_icon("user") + ":"
       %span #{score} od #{played_quiz.total_score} točnih odgovora.
-    .progress
+    .progress.player-color
       .bar{style: "width: #{score_percentage}%"}
 
 - if played_quiz.has_answers?
 
   - played_quiz.played_questions.each do |question, answer, student, status, idx|
     - if played_quiz.interrupted? and played_quiz.interrupted_on?(idx)
-      %p.text-warning.space-bottom
+      .alert.alert-error
         = case played_quiz
-        - when :single_player?.to_proc then "(Ovdje je učenik odustao od kviza)"
-        - when :multi_player?.to_proc  then "(Ovdje su učenici odustali od kviza)"
+        - when :single_player?.to_proc then "Ovdje je učenik odustao od kviza"
+        - when :multi_player?.to_proc  then "Ovdje su učenici odustali od kviza"
+
+    - else
+      %hr
 
     .l-played.space-bottom{class: "l-question-#{question.category} l-#{status} l-player-#{number(idx % played_quiz.students.count + 1)}"}
 
+      .player-color
+        #{student.full_name.prepend_icon("user")} (#{student.username})
+
       %h2.question-title= question.content
+
       = render "questions/answer/#{question.category}", {question: question, answer: answer}
       = render "played_quizzes/feedback/#{status}", {question: question}
 

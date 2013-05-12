@@ -6,7 +6,7 @@ do ($ = jQuery) ->
   if $content.length
 
     text        = $content.attr(attr)
-    $toggleBtn  = $("<a>", href: "#", text: text, class: "reveal-toggle space-half-top")
+    $toggleBtn  = $("<a>", href: "#", text: text, class: "reveal-toggle btn btn-mini")
 
     $content.each ->
       $this = $(@)
@@ -19,6 +19,6 @@ do ($ = jQuery) ->
             event.preventDefault()
             $btn.hide()
             $this
-              .removeClass("js-hidden")
+              .removeClass("is-hidden")
               .hide()
               .fadeIn("fast")

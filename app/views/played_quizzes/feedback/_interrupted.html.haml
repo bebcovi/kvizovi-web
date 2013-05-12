@@ -1,2 +1,5 @@
-.muted
-  (Nije odgovoreno)
+.space-half-bottom
+  .label Nije odgovoreno
+
+.l-feedback.reveal-content.is-hidden{class: "l-question-#{question.category}", data: {reveal: "Prikaži točan odgovor"}}
+  = render "questions/correct_answer/#{question.category}", {question: question}

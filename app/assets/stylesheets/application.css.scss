@@ -27,12 +27,13 @@
   "layout/question-association",
   "layout/question-image",
 
+  "layout/player",
+
   "module/additional-info",
   "module/alert",
   "module/align-middle",
   "module/app-role",
   "module/block",
-  "module/breadcrumb",
   "module/btn",
   "module/col",
   "module/container",
@@ -46,6 +47,7 @@
   "module/hero-unit",
   "module/hidden",
   "module/icon",
+  "module/labels-badges",
   "module/list-inline-block",
   "module/list-no-bullets",
   "module/list-pretty",
@@ -53,7 +55,6 @@
   "module/modal",
   "module/navbar",
   "module/no-items",
-  "module/player",
   "module/popover",
   "module/profile",
   "module/progress",
@@ -65,4 +66,7 @@
   "module/subtle",
   "module/table",
   "module/timer",
-  "module/tooltip"
+  "module/tooltip",
+
+  "patches/breadcrumb",
+  "patches/labels-badges"

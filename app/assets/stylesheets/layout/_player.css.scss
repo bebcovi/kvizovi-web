@@ -1,0 +1,19 @@
+@each $player in $players {
+  .l-player-#{nth($player, 1)} {
+    $color: nth($player, 2);
+
+    .player-color {
+      color: $color;
+
+      &.label {
+        background-color: $color;
+        color: white;
+        font-weight: nth($base-weight, 3);
+      }
+
+      &.progress .bar {
+        @include gradient-vertical(lighten($color, 10%), $color);
+      }
+    }
+  }
+}
