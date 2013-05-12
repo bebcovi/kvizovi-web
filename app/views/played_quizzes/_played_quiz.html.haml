@@ -18,7 +18,7 @@
     - else
       %hr
 
-    .l-played.space-bottom{class: "l-question-#{question.category} l-#{status} l-player-#{number(idx % played_quiz.students.count + 1)}"}
+    .l-played.space-bottom{class: "l-question-#{question.category} l-#{status} l-player-#{number(idx % played_quiz.students.count + 1)} #{"faded" if status == "interrupted"}"}
 
       .player-color
         #{student.full_name.prepend_icon("user")} (#{student.username})
