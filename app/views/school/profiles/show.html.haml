@@ -2,10 +2,11 @@
 
 .profile
 
-  %table.profile-info.table.table-striped
+  %table.table.table-striped
     %colgroup
-      %col.profile-info-field
-      %col.profile-info-value
+      %col.50
+      %col
+
     %tbody
       %tr
         %th Ime škole
@@ -29,10 +30,9 @@
         %th Tajni ključ
         %td= @user.key
 
-  = buttons class: "profile-edit" do
+  = buttons do
     .btn-group
       = edit_button "Izmijeni profil", edit_profile_path
       = change_password_button "Izmijeni lozinku", edit_password_path
 
-  %p.profile-delete
-    = delete_profile_button "Izbriši korisnički račun", delete_registration_path
+  %p= delete_profile_button "Izbriši korisnički račun", delete_registration_path

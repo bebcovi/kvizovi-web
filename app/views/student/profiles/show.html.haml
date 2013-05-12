@@ -1,9 +1,10 @@
 - title "Profil"
 
-%table.profile_info
+%table.profile_info.table.table-striped
   %colgroup
     %col.field
     %col.value
+
   %tbody
     %tr
       %th Ime i prezime
@@ -24,7 +25,7 @@
       %th Godina rođenja
       %td= @user.year_of_birth.to_s + "."
 
-= buttons class: "edit_profile" do
+= buttons do
   .btn-group
     = edit_button "Izmijeni profil", edit_profile_path
     = change_password_button "Izmijeni lozinku", edit_password_path

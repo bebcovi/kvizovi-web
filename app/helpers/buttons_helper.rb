@@ -1,6 +1,6 @@
 module ButtonsHelper
   def submit_button(string, options = {})
-    button_tag string, class: "btn btn-primary", data: {"disable-with" => "Učitavanje..."}
+    button_tag string, {class: "btn btn-primary", data: {"disable-with" => "Učitavanje..."}}.merge(options)
   end
 
   def primary_button(string, path, options = {})
@@ -24,7 +24,7 @@ module ButtonsHelper
   end
 
   def delete_profile_button(string, path, options = {})
-    link_to string.prepend_icon("remove"), path, {class: "delete_profile"}.merge(options)
+    link_to string.prepend_icon("remove"), path, {class: "btn btn-danger"}.merge(options)
   end
 
   def edit_button(string, path, options = {})
