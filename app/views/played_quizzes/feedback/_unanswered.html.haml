@@ -1,5 +1,5 @@
-.space-half-bottom
+%div
   .label Nije odgovoreno
 
-.l-feedback.reveal-content.is-hidden{class: "l-question-#{question.category}", data: {reveal: "Prikaži točan odgovor"}}
+.l-feedback.reveal-content.is-hidden.space-half-top{class: "l-question-#{question.category}", data: {reveal: "Prikaži točan odgovor"}}
   = render "questions/correct_answer/#{question.category}", {question: question}

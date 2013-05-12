@@ -1,24 +1,25 @@
 do ($ = jQuery) ->
 
-  attr      = "data-reveal"
-  $content  = $("[#{attr}]")
+  $content  = $(".reveal-content")
 
   if $content.length
 
-    text        = $content.attr(attr)
-    $toggleBtn  = $("<a>", href: "#", text: text, class: "reveal-toggle btn btn-mini")
+    text        = $content.attr("data-reveal")
+    $toggleBtn  = $("<a>", href: "#", class: "reveal-toggle is-hidden", title: text, "data-placement": "right")
 
     $content.each ->
       $this = $(@)
       $btn = $toggleBtn.clone()
 
       $btn
-        .insertBefore($this)
+        .appendTo($this.prev())
         .on "click", do ($this, $btn) ->
           (event) ->
             event.preventDefault()
-            $btn.hide()
-            $this
-              .removeClass("is-hidden")
-              .hide()
-              .fadeIn("fast")
+            $btn.toggleClass("is-hidden")
+            $this.toggleClass("is-hidden")
+
+    $(".reveal-toggle").tooltip
+      animation: false
+      placement: "bottom"
+      container: "body"
