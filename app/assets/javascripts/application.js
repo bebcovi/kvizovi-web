@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.droppable
+//= require jquery.ui.sortable
 //= require twitter/bootstrap
 //= require spin
 //= require jquery.spin
@@ -19,6 +20,7 @@
 //= require modal
 //= require popover
 //= require reveal
+//= require sort
 //= require tooltip
 //
 //= require controllers/quiz

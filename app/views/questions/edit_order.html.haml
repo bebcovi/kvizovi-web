@@ -2,10 +2,9 @@
 
 = simple_form_for @quiz, url: order_quiz_questions_path(@quiz) do |f|
 
-  - @questions.each do |question|
-
-    %ol.list-pretty
-      = content_tag_for :li, question do
+  %ol.sort.space-bottom
+    - @questions.each do |question|
+      = content_tag_for :li, question, class: "sort-item" do
         = f.simple_fields_for :questions, question do |q|
           = render "question_short", {question: question, f: q}
 
