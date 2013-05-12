@@ -1,6 +1,6 @@
 do ($ = jQuery) ->
 
-  $("a, input[type=\"submit\"], button").filter("[title]").not("[data-content]").tooltip
+  $("a, input[type=\"submit\"], button, span").filter("[title]").not("[data-content]").tooltip
     animation: false
     placement: "top"
     container: "body"

@@ -10,7 +10,8 @@ do ($ = jQuery) ->
       $otherPairs   = $firstPair.siblings(".association-pair")
       $template     = $firstPair.clone()
 
-      $wrapper      = $firstPair.parent()
+      $wrapper      = $firstPair.closest(".association-wrapper")
+      $container    = $firstPair.parent()
       $addButton    = $.addButton.clone()
 
       updateAttrs   = ($el, i) ->
@@ -28,7 +29,7 @@ do ($ = jQuery) ->
           $input.attr "placeholder",  placeholder.replace(/\d+/, i)
 
       addPair = ($el) ->
-        $otherPairs = $otherPairs.add $el.insertAfter($otherPairs)
+        $otherPairs = $otherPairs.add $el.appendTo($container)
 
       removePair = ($el) ->
         $otherPairs = $otherPairs.not $el.remove()
@@ -38,27 +39,27 @@ do ($ = jQuery) ->
         $el.find("input").each -> result = result and !!$(@).val()
         result
 
-      $otherPairs.add($template).children(":last-child")
-        .after $.removeButton
-          .clone()
-          .addClass("close")
-          .attr("tabindex", -1)
+      $otherPairs.add($template)
+        .find(".association-remove")
+          .append $.removeButton
+            .clone()
+            .addClass("close")
+            .attr("tabindex", -1)
 
       $template
         .find("input").val("").end()
         .find("div").removeClass("field_with_errors").end()
         .find(".error").remove()
 
-      $addButton.appendTo($wrapper)
-
       $addButton
+        .insertAfter($wrapper)
         .on "click", (event) ->
-          $new = $template.clone()
           event.preventDefault()
+          $new = $template.clone()
           updateAttrs $new, $otherPairs.length
           addPair $new
 
-      $form.on "click", ".close", ->
+      $form.on "click", ".association-remove .close", ->
         $el = $(@).closest(".association-pair")
         removePair $el
         $otherPairs.each (i) -> updateAttrs $(@), i

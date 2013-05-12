@@ -45,6 +45,12 @@ form {
   }
 }
 
+input,
+textarea,
+.uneditable-input {
+  width: 25em;
+}
+
 [type="submit"],
 button {
   @include box-sizing(content-box);
@@ -59,11 +65,6 @@ textarea {
   @include input-block-level;
   height: $inputHeight;
   resize: vertical;
-}
-
-input,
-.uneditable-input {
-  width: 25em;
 }
 
 textarea,

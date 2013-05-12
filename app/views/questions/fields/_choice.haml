@@ -1,6 +1,13 @@
 = f.input :provided_answers, wrapper_html: {class: "space-half-bottom"} do
   - number_of_fields = (params[:action] == "new" ? 4 : question.provided_answers.count)
-  - number_of_fields.times do |n|
-    - additional_options = {wrapper_html: {class: "success"}, hint: "Ovo će biti točan odgovor.", hint_html: {class: "additional-info"}} if n == 0
-    .choice-option.list-inline-block.space-half-bottom= f.input :provided_answers, {label: false, error: false,
-      placeholder: "Ponuđeni odgovor #{n + 1}", input_html: {value: question.provided_answers[n], name: "choice_question[provided_answers][]", style: "margin-bottom: 0;"}}.deep_merge(additional_options || {})
+  %table.choice-wrapper.table-condensed.space-half-bottom
+    %tbody
+      - number_of_fields.times do |n|
+        - additional_options = {wrapper_html: {class: "success"}} if n == 0
+        %tr.choice-option
+          %td.choice-field
+            = f.input :provided_answers, {label: false, error: false, placeholder: "Ponuđeni odgovor #{n + 1}", input_html: {value: question.provided_answers[n], name: "choice_question[provided_answers][]", style: "margin-bottom: 0;"}}.deep_merge(additional_options || {})
+          %td.choice-remove
+            - if n == 0
+              %span.choice-correct-icon.text-success{title: "Ovo će biti točan odgovor.", data: {placement: "right"}}
+                = icon("checkmark-circle-full")

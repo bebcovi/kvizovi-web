@@ -9,7 +9,8 @@ do ($ = jQuery) ->
       $otherOptions = $firstOption.siblings(".choice-option")
       $template     = $firstOption.clone()
 
-      $wrapper      = $firstOption.parent()
+      $wrapper      = $firstOption.closest(".choice-wrapper")
+      $container    = $firstOption.parent()
       $addButton    = $.addButton.clone()
 
       updateAttrs   = ($el, i) ->
@@ -25,7 +26,7 @@ do ($ = jQuery) ->
         $input.attr "placeholder",  placeholder.replace(/\d+/, i)
 
       addOption = ($el) ->
-        $otherOptions = $otherOptions.add $el.insertAfter($otherOptions.last())
+        $otherOptions = $otherOptions.add $el.appendTo($container)
 
       removeOption = ($el) ->
         $otherOptions = $otherOptions.not $el.remove()
@@ -36,23 +37,24 @@ do ($ = jQuery) ->
         result
 
       $otherOptions.add($template)
-        .append $.removeButton
-          .clone()
-          .addClass("close")
-          .attr("tabindex", -1)
+        .find(".choice-remove")
+          .append $.removeButton
+            .clone()
+            .addClass("close")
+            .attr("tabindex", -1)
 
       $template
         .find("input").val("").end()
         .find(".success").removeClass("success").end()
-        .find(".help-block, .error-block, .additional-info").remove()
+        .find(".help-block, .error-block, .choice-correct-icon").remove()
 
-      $addButton.appendTo($wrapper)
-
-      $addButton.on "click", (event) ->
-        $new = $template.clone()
-        event.preventDefault()
-        updateAttrs $new, $otherOptions.length
-        addOption $new
+      $addButton
+        .insertAfter($wrapper)
+        .on "click", (event) ->
+          $new = $template.clone()
+          event.preventDefault()
+          updateAttrs $new, $otherOptions.length
+          addOption $new
 
       $form.on "click", ".close", ->
         $el = $(@).closest(".choice-option")

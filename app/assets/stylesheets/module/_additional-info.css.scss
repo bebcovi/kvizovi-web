@@ -15,16 +15,4 @@
       display: inline-block;
     }
   }
-
-  .success & {
-    margin-bottom: 0;
-    color: $successText;
-    &:before {
-      content: "\e038"; // checkmark-circle-full
-    }
-
-    .js & {
-      display: inline-block;
-    }
-  }
 }
