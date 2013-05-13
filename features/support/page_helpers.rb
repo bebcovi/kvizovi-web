@@ -19,6 +19,8 @@ module PageHelpers
       choose_quiz_url(subdomain: @user_type)
     when /activity page/
       admin_schools_url
+    when /survey page/
+      surveys_url(subdomain: @user_type)
     else raise "Page isn't recognized: #{page}"
     end
   end

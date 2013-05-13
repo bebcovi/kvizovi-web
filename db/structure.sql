@@ -215,8 +215,7 @@ CREATE TABLE schools (
     place character varying(255),
     region character varying(255),
     email character varying(255),
-    notified boolean DEFAULT true,
-    completed_survey boolean DEFAULT false
+    notified boolean DEFAULT true
 );
 
 
@@ -254,8 +253,7 @@ CREATE TABLE students (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     gender character varying(255),
-    year_of_birth integer,
-    completed_survey boolean DEFAULT false
+    year_of_birth integer
 );
 
 
@@ -276,6 +274,70 @@ CREATE SEQUENCE students_id_seq
 --
 
 ALTER SEQUENCE students_id_seq OWNED BY students.id;
+
+
+--
+-- Name: survey_fields; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE survey_fields (
+    id integer NOT NULL,
+    question character varying(255),
+    choices text,
+    answer text,
+    category character varying(255),
+    survey_id integer
+);
+
+
+--
+-- Name: survey_fields_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE survey_fields_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: survey_fields_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE survey_fields_id_seq OWNED BY survey_fields.id;
+
+
+--
+-- Name: surveys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE surveys (
+    id integer NOT NULL,
+    user_id integer,
+    user_type character varying(255),
+    created_at timestamp without time zone
+);
+
+
+--
+-- Name: surveys_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE surveys_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: surveys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE surveys_id_seq OWNED BY surveys.id;
 
 
 --
@@ -422,6 +484,20 @@ ALTER TABLE ONLY students ALTER COLUMN id SET DEFAULT nextval('students_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY survey_fields ALTER COLUMN id SET DEFAULT nextval('survey_fields_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY surveys ALTER COLUMN id SET DEFAULT nextval('surveys_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq'::regclass);
 
 
@@ -485,6 +561,22 @@ ALTER TABLE ONLY schools
 
 ALTER TABLE ONLY students
     ADD CONSTRAINT students_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: survey_fields_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY survey_fields
+    ADD CONSTRAINT survey_fields_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: surveys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY surveys
+    ADD CONSTRAINT surveys_pkey PRIMARY KEY (id);
 
 
 --
@@ -658,3 +750,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130507191942');
 INSERT INTO schema_migrations (version) VALUES ('20130510124042');
 
 INSERT INTO schema_migrations (version) VALUES ('20130510131151');
+
+INSERT INTO schema_migrations (version) VALUES ('20130511222413');
+
+INSERT INTO schema_migrations (version) VALUES ('20130513220138');
+
+INSERT INTO schema_migrations (version) VALUES ('20130513221823');

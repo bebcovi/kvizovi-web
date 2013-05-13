@@ -2,8 +2,79 @@
 
 %h1 Anketa
 
-%p Ako imaš mrvicu vremena, puno bi nam pomog#{current_user.male? ? "ao" : "la"} ako bi ispuni#{current_user.male? ? "o" : "la"} #{link_to "ovu anketu", "https://docs.google.com/forms/d/1CZjRq7UeE7ot9JySTb9usKQ1njdl026al9meLJ57_U8/viewform", target: "_blank"}. Kada ispuniš, samo potvrdi ispod.
+%p Ako imaš mrvicu vremena, puno bi nam pomog#{current_user.male? ? "ao" : "la"} ako bi ispuni#{current_user.male? ? "o" : "la"} ovu anketu.
 
-= buttons do
-  = cancel_button "Odustani", :back
-  = primary_button "Ispuni#{current_user.male? ? "o" : "la"} sam anketu", survey_path, method: :post
+= survey_form @survey, defaults: {required: true} do |f|
+
+  = f.choice_question "Spol",
+    choices: ["Muško", "Žensko"]
+
+  = f.choice_question "Vrsta škole",
+    choices: ["Osnovna škola", "Srednja škola"]
+
+  = f.text_question "Naziv škole"
+
+  = f.text_question "Razred", hint: "Uključujući i slovo, npr. 3a."
+
+  = f.range_question "Molimo vas da ocijenite sljedeće aspekte aplikacije:",
+    aspects: ["Obaviještenost o promjenama", "Snalaženje u sučelju", "Izgled aplikacije"],
+    choices: ["Ne sviđa mi se", "Nije baš nešto", "U redu je", "Sviđa mi se", "Jako mi se sviđa"]
+
+  = f.choice_question "Smatrate li ovakav način učenja zanimljivim?",
+    choices: ["Da", "Ne znam", "Ne"]
+
+  = f.choice_question "Smatrate li ovakav način učenja učinkovitim? Odnosno, smatrate li da ste puno naučili u odnosu na uloženi trud?",
+    choices: ["Da", "Ne znam", "Ne"]
+
+  = f.choice_question "Koliko često koristite aplikaciju?",
+    choices: ["Samo jednom", "Jednom mjesečno", "Nekoliko puta mjesečno", "Jednom tjedno", "Nekoliko puta tjedno", "Jednom dnevno", "Više puta dnevno"]
+
+  = f.choice_question "Jeste li imali poteškoće prilikom korištenja aplikacije?",
+    choices: ["Da", "Ne"]
+
+  = f.text_question "Ako da, koje ste poteškoće imali?", required: false, input: :text_area
+
+  = f.range_question "Je li vam aplikacija pomogla kod:",
+    aspects: ["Razumijevanja lektire", "Zainteresiranosti za lektiru", "Osjećaja samouvjerenosti kod pravog ispitivanja na satu"],
+    choices: ["Ne", "Malo", "Dosta", "Da"]
+
+  = f.choice_question "Otkud ste pristupali aplikaciji?", multiple: true, hint: "(Moguće je označiti više odgovora)",
+    choices: ["Od kuće s vlastitog računala", "Od kuće s roditeljskog računala", "Iz školske učionice hrvatskog jezika", "Iz školske knjižnice", "Iz gradske knjižnice", "Od prijatelja"]
+
+  = f.choice_question "Kad ste koristili aplikaciju?", multiple: true, hint: "(Moguće je označiti više odgovora)",
+    choices: ["Prije čitanja lektire koja se testira", "Nakon čitanja lektire koja se testira", "Za vrijeme čitanja lektire koja se testira"]
+
+  = f.choice_question "Nakon pristupa aplikaciji, vaša ocjena iz lektire",
+    choices: ["se poboljšala", "ostala je ista", "se smanjila"]
+
+  = f.choice_question "Na koji vas način profesor ispituje lektiru na satu?",
+    choices: ["Isto kao i u aplikaciji", "Djelomično kao i u aplikaciji", "Posve drugačije nego u aplikaciji"]
+
+  = f.choice_question "U usporedbi s onim što pita profesor, pitanja u aplikaciji su",
+    choices: ["puno lakša", "podjednako laka", "podjednako teška", "puno teža"]
+
+  = f.text_question "Biste li voljeli da se ovakav način učenja organizira i u drugim predmetima? Ako da, u kojim?", input: :text_area
+
+  = f.choice_question "Što mislite o natjecanju u znanju iz lektire s drugim razredima i školama u Hrvatskoj?",
+    choices: ["Dodatno bi me poticalo u čitanju lektira", "Ne bi me dodatno poticalo"]
+
+  = f.choice_question "Ako bi vas dodatno poticalo, na koji način biste se najradije htjeli natjecati?", required: false,
+    choices: ["Pojedinačno", "Kao razred", "Kao škola"]
+
+  = f.range_question "Kako vam se svidjela aplikacija tijekom vremena?",
+    aspects: ["Na početku", "U sredini", "Pri kraju"],
+    choices: ["je bilo interesantno", "je bilo osrednje", "je bilo dosadno"]
+
+  = f.choice_question "Što ste očekivali od aplikacije?",
+    choices: ["Ništa", "Ništa, samo zabavu", "Bolje usvajanje znanja iz lektire", "Bolje usvajanje znanja i povećan interes"]
+
+  = f.choice_question "Što ste dobili od aplikacije?",
+    choices: ["Ništa", "Ništa, samo zabavu", "Bolje usvajanje znanja iz lektire", "Bolje usvajanje znanja i povećan interes"]
+
+  = f.text_question "Što vam se osobito svidjelo u aplikaciji?", required: false, input: :text_area
+
+  = f.text_question "Koju mogućnost biste htjeli da aplikacija u budućnosti ima, a trenutno ju nema?", required: false, input: :text_area
+
+  = buttons do
+    = cancel_button "Odustani", root_path
+    = submit_button "Pošalji"

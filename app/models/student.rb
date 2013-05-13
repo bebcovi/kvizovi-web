@@ -5,6 +5,7 @@ class Student < ActiveRecord::Base
 
   belongs_to :school
   has_and_belongs_to_many :played_quizzes
+  has_one :survey, as: :user
 
   has_secure_password
   attr_accessor :school_key
@@ -35,6 +36,10 @@ class Student < ActiveRecord::Base
 
   def last_activity
     LastActivity.for(self)
+  end
+
+  def completed_survey?
+    survey.present?
   end
 
   private

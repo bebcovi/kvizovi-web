@@ -18,4 +18,5 @@ hr:
           success: "Tvoja lozinka je uspješno izmijenjena."
       surveys:
         create:
-          success: "Tvoji odgovori su zabilježeni. Hvala ti na suradnji."
+          success: "Anketa je uspješno poslana. Hvala na pomoći :)"
+          error: "Neka polja nisu ispravno popunjena."

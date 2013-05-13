@@ -30,6 +30,7 @@ class School < ActiveRecord::Base
   has_many :quizzes,   dependent: :destroy
   has_many :questions
   has_many :played_quizzes, through: :quizzes
+  has_one :survey, as: :user
 
   has_secure_password
 
@@ -50,5 +51,9 @@ class School < ActiveRecord::Base
 
   def last_activity
     LastActivity.for(self)
+  end
+
+  def completed_survey?
+    survey.present?
   end
 end

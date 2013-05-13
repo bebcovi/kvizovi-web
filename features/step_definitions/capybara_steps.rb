@@ -10,7 +10,7 @@ When(/^I click on "(.*)"$/) do |text|
   click_on text
 end
 
-Then(/^I should be on (.*)$/) do |page|
+Then(/^I should (?:still )?be on (.*)$/) do |page|
   expect(current_url).to eq path_to(page)
 end
 
