@@ -1,5 +1,4 @@
 require "rack/test"
-require "nokogiri"
 require "ostruct"
 
 Given(/^my students have played a quiz( realistically)?$/) do |questions|
@@ -113,13 +112,13 @@ end
 
 Then(/^(I|we) should get all points$/) do |who|
   total = (who == "I" ? 6 : 3)
-  expect(Nokogiri::HTML(html).at(".player-one").text).to have_content("#{total} od #{total}")
-  expect(Nokogiri::HTML(html).at(".player-two").text).to have_content("#{total} od #{total}") if who == "we"
+  expect(first(".l-player-one")).to have_content("#{total} od #{total}")
+  expect(first(".l-player-two")).to have_content("#{total} od #{total}") if who == "we"
 end
 
 Then(/^(I|we) should not get any points$/) do |who|
-  expect(Nokogiri::HTML(html).at(".player-one").text).to have_content("0 od 6")
-  expect(Nokogiri::HTML(html).at(".player-two").text).to have_content("0 od 6") if who == "we"
+  expect(first(".l-player-one")).to have_content("0 od 6")
+  expect(first(".l-player-two")).to have_content("0 od 6") if who == "we"
 end
 
 Then(/^I should still be able to play it$/) do
