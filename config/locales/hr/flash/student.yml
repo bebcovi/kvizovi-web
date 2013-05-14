@@ -16,3 +16,7 @@ hr:
       passwords:
         update:
           success: "Tvoja lozinka je uspješno izmijenjena."
+      surveys:
+        create:
+          success: "Anketa je uspješno poslana. Hvala na pomoći :)"
+          error: "Neka polja nisu ispravno popunjena."

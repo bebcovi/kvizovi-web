@@ -72,6 +72,8 @@ Lektire::Application.routes.draw do
     get "contact"
   end
 
+  resources :surveys
+
   ########################
   # Admin
   ########################

@@ -89,6 +89,13 @@ class ApplicationController < ActionController::Base
   def student?() request.subdomain == "student" end
   helper_method :school?, :student?
 
+  def root_path_for(user)
+    case user
+    when Student then choose_quiz_path
+    when School  then quizzes_path
+    end
+  end
+
   private
 
   def add_subdomain_view_path
