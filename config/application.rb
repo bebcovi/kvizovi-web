@@ -12,6 +12,8 @@ require "bootstrap-will_paginate"
 require "draper"
 require "paperclip"
 
+require_relative "initializers/sass"
+
 if Rails.env.development?
   require "better_errors"
   require "xray-rails"
