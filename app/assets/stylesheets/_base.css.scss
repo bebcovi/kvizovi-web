@@ -99,6 +99,10 @@ button {
   font-weight: inherit;
 }
 
+.required {
+  color: $errorText;
+}
+
 label {
   display: inline-block;
   cursor: pointer;
