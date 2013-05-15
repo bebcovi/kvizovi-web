@@ -1,4 +1,7 @@
 Lektire::Application.routes.draw do
+  constraints host: /herokuapp/ do
+    match "(*path)", to: redirect { |params, req| "http://kvizovi.org/#{params[:path]}" }
+  end
 
   ########################
   # Authentication
