@@ -29,6 +29,6 @@
 //= require tooltip
 //= require dropdown
 //= require modal
-//= require helper
+//= require shame
 //
 //= require init
