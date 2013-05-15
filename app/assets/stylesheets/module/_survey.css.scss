@@ -1,5 +1,23 @@
 .new_survey {
-  .help-block {
-    margin-top: - 0.75 * $bsu;
+  .control-group {
+    > label {
+      font-weight: nth($base-weight, 4);
+    }
+  }
+
+  span.required {
+    color: $errorText;
+  }
+
+  ol, ul {
+    + .help-block {
+      margin-top: - 0.75 * $bsu;
+    }
+  }
+
+  input {
+    + .help-block {
+      margin-top: - 0.5 * $bsu;
+    }
   }
 }
