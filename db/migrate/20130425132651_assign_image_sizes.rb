@@ -1,14 +1,29 @@
-require "paperclip"
 require "open-uri"
 
 class AssignImageSizes < ActiveRecord::Migration
   class Question < ActiveRecord::Base
     serialize :data, Hash
+
+    def self.data_accessor(*keys)
+      include Module.new {
+        keys.each do |key|
+          define_method(key) do
+            (data || {})[key]
+          end
+
+          define_method("#{key}=") do |value|
+            self.data = (data || {}).merge(key => value)
+          end
+        end
+      }
+    end
   end
 
   class ImageQuestion < Question
-    include Paperclip::Glue
     has_attached_file :image, styles: {resized: "x250>"}
+
+    data_accessor :image_file_name, :image_content_type,
+      :image_file_size, :image_updated_at, :image_size
   end
 
   def up

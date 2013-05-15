@@ -10,6 +10,7 @@ Bundler.require(:assets) unless Rails.env.test?
 require "will_paginate/railtie"
 require "bootstrap-will_paginate"
 require "draper"
+require "paperclip"
 
 if Rails.env.development?
   require "better_errors"

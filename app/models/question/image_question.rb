@@ -1,11 +1,8 @@
 require "active_support/core_ext/numeric/bytes"
 require "active_support/inflector/transliterate"
 require "uri"
-require "paperclip"
 
 class ImageQuestion < TextQuestion
-  include Paperclip::Glue
-
   data_accessor :image_file_name, :image_content_type,
     :image_file_size, :image_updated_at, :image_size
 
@@ -17,7 +14,7 @@ class ImageQuestion < TextQuestion
     size: {in: 0..1.megabyte}
   validate :validate_image_url
 
-  before_save :assign_image_sizes
+  before_save :assign_image_sizes, if: "image.dirty?"
 
   attr_reader :image_url
   def image_url=(url)
@@ -59,11 +56,9 @@ class ImageQuestion < TextQuestion
   private
 
   def assign_image_sizes
-    if image.dirty?
-      self.image_size = image.instance_variable_get("@queued_for_write").inject({}) do |hash, (style, file)|
-        geometry = Paperclip::Geometry.from_file(file)
-        hash.update(style => {width: geometry.width.to_i, height: geometry.height.to_i})
-      end
+    self.image_size = image.instance_variable_get("@queued_for_write").inject({}) do |hash, (style, file)|
+      geometry = Paperclip::Geometry.from_file(file)
+      hash.update(style => {width: geometry.width.to_i, height: geometry.height.to_i})
     end
   end
 

@@ -1,4 +1,3 @@
-require "paperclip/railtie"
 require "paperclip-dropbox"
 require "exception_notification"
 
