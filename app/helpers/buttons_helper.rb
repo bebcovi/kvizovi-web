@@ -8,7 +8,7 @@ module ButtonsHelper
   end
 
   def back_button(string, path, options = {})
-    link_to string.prepend_icon("arrow-left"), path, {class: "go_back"}.merge(options)
+    link_to string.prepend_icon("arrow-left"), path, {class: "btn btn-primary go_back"}.merge(options)
   end
 
   def cancel_button(string, path, options = {})

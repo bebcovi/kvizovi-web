@@ -6,6 +6,7 @@
   .bar{style: "width: 100%"}
 
 - played_quiz.results.each do |student, score, score_percentage, student_number, rank|
+
   %div{class: "l-player-#{number(student_number)}"}
     %p.player-color
       %b= student.full_name.prepend_icon("user") + ":"
@@ -13,8 +14,7 @@
     .progress.player-color
       .bar{style: "width: #{score_percentage}%"}
 
-= buttons do
-  = primary_button "Završi kviz", choose_quiz_path, class: "btn btn-primary"
+= primary_button "Završi", choose_quiz_path, class: "btn btn-primary"
 
 - played_quiz.played_questions.each do |question, answer, student, status, idx|
 
@@ -29,3 +29,5 @@
 
     = render "questions/answer/#{question.category}", {question: question, answer: answer}
     = render "played_quizzes/feedback/#{status}", {question: question}
+
+= primary_button "Završi", choose_quiz_path, class: "btn btn-primary"
