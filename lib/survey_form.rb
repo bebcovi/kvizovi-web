@@ -80,6 +80,7 @@ module SurveyForm
           f.input(:answer,
             label: label(text, options),
             as: options[:input] == :text_area ? :text : :string,
+            input_html: options[:input] == :text_area ? {rows: 3} : {},
             hint: options[:hint])
         end
       end
