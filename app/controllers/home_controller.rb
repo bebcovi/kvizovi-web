@@ -1,14 +1,8 @@
 class HomeController < ApplicationController
-  before_filter :redirect_if_logged_in
-
-  def index
+  before_filter do
+    redirect_to root_path_for(current_user) if user_logged_in?
   end
 
-  private
-
-  def redirect_if_logged_in
-    if user_logged_in?
-      redirect_to root_url(subdomain: current_user.type)
-    end
+  def index
   end
 end

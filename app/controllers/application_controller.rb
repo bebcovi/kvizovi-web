@@ -91,8 +91,8 @@ class ApplicationController < ActionController::Base
 
   def root_path_for(user)
     case user
-    when Student then choose_quiz_path
-    when School  then quizzes_path
+    when Student then choose_quiz_url(subdomain: "student")
+    when School  then quizzes_url(subdomain: "school")
     end
   end
 
