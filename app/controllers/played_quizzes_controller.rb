@@ -16,7 +16,7 @@ class PlayedQuizzesController < ApplicationController
       @played_quiz = PlayedQuiz.find(params[:id])
       @order = @scope.played_quizzes.ascending.index { |played_quiz| played_quiz.id = @played_quiz.id } + 1
     else
-      redirect_to played_quizzes_path, alert: flash_error
+      redirect_to played_quizzes_path(params.slice(:quiz_id, :student_id)), alert: flash_error
     end
   end
 
