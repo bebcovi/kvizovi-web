@@ -35,7 +35,7 @@ module Lektire
     ]
 
     # Search for locales recursively
-    config.i18n.load_path = Dir[config.root.join("config/locales/**/*.yml")]
+    config.i18n.load_path = Dir[config.root.join("config/locales/**/*.{yml,rb}")]
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
