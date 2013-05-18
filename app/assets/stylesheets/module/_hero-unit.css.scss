@@ -7,14 +7,17 @@
   text-shadow: white 0 1px 0;
 }
 
-.hero-unit-title {
-  font-size: 80px;
+.hero-unit-icon {
+  font-family: "icons";
 
   i {
-    position: relative;
-    top: 4px;
     font-size: 64px;
+    vertical-align: middle;
   }
+}
+
+.hero-unit-title {
+  margin-top: 0;
 }
 
 .hero-unit-description {

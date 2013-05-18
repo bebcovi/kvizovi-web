@@ -1,8 +1,10 @@
 - title "Početna"
 
 - content_for :hero_unit do
-  %h1.hero-unit-title
-    = "Lektire".prepend_icon("books")
+  .hero-unit-icon
+    = icon("newspaper")
+
+  %h1.hero-unit-title Kvizovi
 
   %p.hero-unit-description.lead
     Jednostavna aplikacija za igranje kvizova.
