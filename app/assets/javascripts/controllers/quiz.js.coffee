@@ -99,19 +99,21 @@ do ($ = jQuery) ->
         total = 1 * 60 * 1000
         localStorage["total"] = total
 
-      countdown = do ->
+      if $timer.length
 
-        if total > 0 and localStorage["total"]
-          updateTimer()
+        countdown = do ->
 
-          total -= 1000
+          if total > 0 and localStorage["total"]
+            updateTimer()
 
-          localStorage["total"] = total
-          setTimeout arguments.callee, 1000
+            total -= 1000
 
-        else if total <= 0
-          updateTimer()
-          timesUp()
+            localStorage["total"] = total
+            setTimeout arguments.callee, 1000
+
+          else if total <= 0
+            updateTimer()
+            timesUp()
 
       $form.find(".cancel").on "click", (event) ->
         event.preventDefault()
