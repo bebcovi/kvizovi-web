@@ -6,8 +6,13 @@
     margin-bottom: 0;
   }
 
-  .question-answer {
-    font-weight: nth($base-weight, 5);
+  ul {
+    list-style-type: circle;
+  }
+
+  li.question-answer {
+    font-weight: nth($base-weight, 4);
+    list-style-type: disc;
   }
 
   .label {

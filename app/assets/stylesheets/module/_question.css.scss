@@ -14,7 +14,7 @@
   }
 
   .question-number {
-    font-weight: nth($base-weight, 5);
+    font-weight: nth($base-weight, 4);
     &:after { content: "." }
   }
 
