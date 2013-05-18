@@ -104,7 +104,7 @@ do ($ = jQuery) ->
         if total > 0 and localStorage["total"]
           updateTimer()
 
-          # total -= 1000
+          total -= 1000
 
           localStorage["total"] = total
           setTimeout arguments.callee, 1000
