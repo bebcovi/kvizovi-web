@@ -1,4 +1,4 @@
-= f.input :content, input_html: {autofocus: current_page?(action: "new"), class: "input-block-level"}
+= f.input :content, input_html: {autofocus: current_page?(action: "new"), rows: 1, class: "input-block-level"}
 
 = render "questions/fields/#{@question.category}", {f: f, question: @question}
 

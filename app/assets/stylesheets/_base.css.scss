@@ -63,7 +63,6 @@ button {
 
 textarea {
   @include input-block-level;
-  height: $inputHeight;
   resize: vertical;
 }
 
