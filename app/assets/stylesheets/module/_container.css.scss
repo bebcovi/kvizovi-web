@@ -4,3 +4,12 @@
   padding-left: $hsu;
   padding-right: $hsu;
 }
+
+  .container-main {
+    position: relative;
+    padding-top: $baseLineHeight;
+
+    > .alert-info:first-child {
+      form { margin: 0; }
+    }
+  }
