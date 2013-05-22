@@ -6,7 +6,8 @@ class ImageQuestion < TextQuestion
   data_accessor :image_file_name, :image_content_type,
     :image_file_size, :image_updated_at, :image_size
 
-  has_attached_file :image, styles: {resized: "x250>"}, whiny: false
+  has_attached_file :image, styles: {resized: "x250>"},
+    whiny: false, preserve_files: true
 
   validates_attachment :image,
     presence: {if: -> { [image_url, image_file].all?(&:blank?) }},
@@ -38,10 +39,6 @@ class ImageQuestion < TextQuestion
 
   def image_width(style = :original);  image_size[style][:width];  end
   def image_height(style = :original); image_size[style][:height]; end
-
-  # Don't delete the attachments
-  def destroy_attached_files
-  end
 
   def dup
     super.tap do |question|
