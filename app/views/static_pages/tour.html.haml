@@ -2,11 +2,12 @@
 
 %ul.nav.nav-tabs
   - attrs = {data: {toggle: "tab"}}
-  %li.active= link_to  "Dobrodošli", "#dobrodosli", attrs
-  %li= link_to  "Općenito", "#opcenito", attrs
-  %li= link_to  "Učenici",  "#ucenici",  attrs
-  %li= link_to  "Škole",    "#skole",    attrs
-  %li= link_to  "Kontakt",  "#kontakt",  attrs
+  %li.active= link_to   "Dobrodošli",  "#dobrodosli",   attrs
+  %li= link_to          "Općenito",    "#opcenito",     attrs
+  %li= link_to          "Učenici",     "#ucenici",      attrs
+  %li= link_to          "Škole",       "#skole",        attrs
+  %li= link_to          "Preglednici", "#preglednici",  attrs
+  %li= link_to          "Kontakt",     "#kontakt",      attrs
 
 .tab-content
   #dobrodosli.tab-pane.active
@@ -141,6 +142,12 @@
       U slučajevima kada kviz ima neparan broj pitanja a rješava se u paru, jedno se od tih pitanja neće se prikazati (nasumično odabrano). To je tako zbog raspodjele bodova po učenicima, jer oba učenika moraju imati pravo na jednaki broj bodova.
 
       Nemojte zaboraviti aktivirati kviz kada ga dovršite :) Uvijek provijerite stanje gumba, #{content_tag :button, icon("lamp"), class: "btn btn-mini"} znači da je neaktivan, a #{content_tag :button, icon("lamp-full"), class: "btn btn-mini btn-success"} znači da je aktivan.
+
+  #preglednici.tab-pane
+    :markdown
+      Aplikacija najbolje funkcionira u pregledniku #{link_to "Google Chrome".append_icon("chrome"), "https://www.google.com/intl/hr/chrome/browser/"}, jer se pretežito u njemu razvijala. To je vrlo dobar preglednik i ako ste u mogućnosti koristiti ga, toplo ga preporučujemo.
+
+      Trenutno aplikacija ne funkcionira dobro u pregledniku #{link_to "Internet Explorer".append_icon("IE"), "http://windows.microsoft.com/hr-hr/internet-explorer/download-ie"}, jer je to prilično loš preglednik koji zahtijeva puno truda. Svijesni smo da mnogo škola koristi taj preglednik, nastojit ćemo riješiti taj problem što prije :)
 
   #kontakt.tab-pane
     :markdown
