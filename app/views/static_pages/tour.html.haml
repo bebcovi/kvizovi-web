@@ -3,7 +3,6 @@
 %ul.nav.nav-tabs
   - attrs = {data: {toggle: "tab"}}
   %li.active= link_to   "Dobrodošli",  "#dobrodosli",   attrs
-  %li= link_to          "Općenito",    "#opcenito",     attrs
   %li= link_to          "Učenici",     "#ucenici",      attrs
   %li= link_to          "Škole",       "#skole",        attrs
   %li= link_to          "Preglednici", "#preglednici",  attrs
@@ -18,15 +17,11 @@
 
       ### Zar se nije aplikacija prije zvala "Lektire"?
 
-      Da, Kvizovi su incijalno bili zamišljeni kao aplikacija za lektire, ali shvatili smo da profesore trenutno ništa ne spriječava da koriste aplikaciju i za druge predmete. Bolje je bilo odmah na početku promijeniti naziv, da ne bude kasnije veća gnjavaža :)
+      Da, Kvizovi su incijalno bili zamišljeni kao aplikacija za lektire, ali shvatili smo da profesore trenutno ništa ne spriječava da koriste aplikaciju i za druge predmete.
 
       ### Što Kvizovi nude?
 
-        * jednostavno administracijsko sučelje za profesore
-
-        * grupiranje pitanja u kvizove
-
-        * 5 različitih tipova pitanja:
+        * sučelje za izradu kvizova, koji mogu biti sastavljeni od 5 vrsta pitanja:
 
           - #{icon("checkbox")} **Točno/netočno**: je li tvrdnja točna ili netočna
           - #{icon("list")} **Ponuđeni odgovori**: koji je točan odgovor od ponuđenih
@@ -35,6 +30,8 @@
           - #{icon("pencil")} **Upiši točan odgovor**: koji je odgovor na postavljeno pitanje
 
         * pregledavanje rezultata riješenih kvizova
+
+        * mogućnost učenicima da igraju kviz u 1 ili 2 igrača
 
       ### Košta li to nešto?
 
@@ -46,32 +43,7 @@
 
       ### Što ako nešto ne bude radilo? Ili ako imam neki savjet?
 
-      Kod aplikacija uvijek nešto može poći po zlu, zato smo mi tu da riješimo sve probleme. A ako samo imate neki savjet, slobodno nam se javite, želimo učiniti aplikaciju što boljom i lakšom za korištenje.
-
-      Za prijave grešaka, savjete ili nešto treće, slobodno nas #{contact_link "kontaktirajte"} :) Ako ne volite klikati na kontakt linkove, ovo su naše email adrese:
-
-        * janko.marohnic@gmail.com
-        * matija.marohnic@gmail.com
-
-      Molimo vas da emailove šaljete na obje adrese, hvala :)
-
-  #opcenito.tab-pane
-    :markdown
-      Ovo su neke kratke nasumične upute koje vrijede i za učenike i za škole.
-
-      ### Hrvatska slova
-
-      Jedna od jako bitnih napomena je korištenje hrvatskih znakova (čćžšđ). Možda ste na internetu naviknuti izbjegavati ih, ali ovdje vas ohrabrujemo da ih koristite kako biste izbjegli potencijalne probleme. Npr. "Matos" nije isto što i "Mato**š**", dakle takav se odgovor ne bi vrijedio, iako se mislilo na istu osobu.
-
-      Ako ste škola i baš ne želite koristiti hrvatske znakove, ne morate, ali onda trebate reći svojim učenicima da ih također ne koriste.
-
-      ### Mala i velika slova
-
-      Ne morate se brinuti za mala i velika slova, jer ih aplikacija ne razlikuje, odnosno "Gustave Flaubert" je isto što i "gustave flaubert".
-
-      ### Točka na kraju
-
-      U nekim okolnostima učenicima nije jasno trebaju li staviti točku na kraju odgovora ili ne. Bez brige, točka na kraju odgovora se ignorira, dakle odgovor na pitanje "Koje je boje Juditin crveni prsten?" može biti i "Crvene" i "Crvene." (primjetite točku na kraju), aplikacija oba odgovora uvažava.
+      Ako vam se prilikom korištenja aplikacije dogodila greška, ili imate neki savjet, #{link_to_function "kontaktirajte nas", %($("[href='#kontakt']").click())}.
 
   #ucenici.tab-pane
     :markdown
