@@ -2,15 +2,61 @@
 
 %ul.nav.nav-tabs
   - attrs = {data: {toggle: "tab"}}
-  %li.active= link_to  "Općenito", "#opcenito", attrs
+  %li.active= link_to  "Dobrodošli", "#dobrodosli", attrs
+  %li= link_to  "Općenito", "#opcenito", attrs
   %li= link_to  "Učenici",  "#ucenici",  attrs
   %li= link_to  "Škole",    "#skole",    attrs
   %li= link_to  "Kontakt",  "#kontakt",  attrs
 
 .tab-content
-  #opcenito.tab-pane.active
+  #dobrodosli.tab-pane.active
     :markdown
-      Ove upute se mogu vidjeti bilo kad i bilo gdje tijekom uporabe aplikacije, samo potražite link "Vodič" na vrhu stranice.
+      Dobrodošli u Kvizove! :)
+
+      Kvizovi su jedna mala aplikacija koju razvijaju dva brata pomoću koje profesori mogu stvarati kvizove, a njihovi ih učenici mogu riješavati.
+
+      ### Zar se nije aplikacija prije zvala "Lektire"?
+
+      Da, Kvizovi su incijalno bili zamišljeni kao aplikacija za lektire, ali shvatili smo da profesore trenutno ništa ne spriječava da koriste aplikaciju i za druge predmete. Bolje je bilo odmah na početku promijeniti naziv, da ne bude kasnije veća gnjavaža :)
+
+      ### Što Kvizovi nude?
+
+        * jednostavno administracijsko sučelje za profesore
+
+        * grupiranje pitanja u kvizove
+
+        * 5 različitih tipova pitanja:
+
+          - #{icon("checkbox")} **Točno/netočno**: je li tvrdnja točna ili netočna
+          - #{icon("list")} **Ponuđeni odgovori**: koji je točan odgovor od ponuđenih
+          - #{icon("shuffle")} **Asocijacije**: poveži pojmove iz prvog s pojmovima iz drugog stupca
+          - #{icon("image")} **Pogodi tko/što je na slici**: koji je odgovor na pitanje vezano uz priloženu sliku
+          - #{icon("pencil")} **Upiši točan odgovor**: koji je odgovor na postavljeno pitanje
+
+        * pregledavanje rezultata riješenih kvizova
+
+      ### Košta li to nešto?
+
+      Ne, besplatno je! :)
+
+      ### Za koga su Kvizovi?
+
+      Kvizovi su za profesore koji žele isprobati drugačiji način podučavanja -- interakcija, putem kvizova.
+
+      ### Što ako nešto ne bude radilo? Ili ako imam neki savjet?
+
+      Kod aplikacija uvijek nešto može poći po zlu, zato smo mi tu da riješimo sve probleme. A ako samo imate neki savjet, slobodno nam se javite, želimo učiniti aplikaciju što boljom i lakšom za korištenje.
+
+      Za prijave grešaka, savjete ili nešto treće, slobodno nas #{contact_link "kontaktirajte"} :) Ako ne volite klikati na kontakt linkove, ovo su naše email adrese:
+
+        * janko.marohnic@gmail.com
+        * matija.marohnic@gmail.com
+
+      Molimo vas da emailove šaljete na obje adrese, hvala :)
+
+  #opcenito.tab-pane
+    :markdown
+      Ovo su neke kratke nasumične upute koje vrijede i za učenike i za škole.
 
       ### Hrvatska slova
 
@@ -28,7 +74,7 @@
 
   #ucenici.tab-pane
     :markdown
-      Ako si učenik, na početnoj stranici klikni na #{content_tag :button, "Ja sam učenik".prepend_icon("user"), class: "btn btn-primary"}. Zatim se možeš prijaviti ili, ako nemaš korisnički račun, registrirati se klikom na link desno od #{content_tag :button, "Prijava", class: "btn btn-primary"}.
+      Ako si učenik, na početnoj stranici klikni na #{content_tag :button, "Ja sam učenik".prepend_icon("user"), class: "btn btn-mini btn-primary"}. Zatim se možeš prijaviti ili, ako nemaš korisnički račun, registrirati se klikom na link desno od #{content_tag :button, "Prijava", class: "btn btn-mini btn-primary"}.
 
       ### Registracija
 
@@ -38,23 +84,25 @@
 
       Kada se prijaviš, prvo što te dočeka je popis kvizova koje možeš rješavati. Ako ih nema, to znači da ih tvoja škola nije još objavila, u tom se slučaju samo trebaš strpiti :)
 
-      Nakon što odabereš kviz, pojavit će ti se pitanje želiš li igrati sam ili još s nekim. Ako pored sebe imaš osobu koja bi htjela igrati s tobom i ima korisnički račun na Lektirama, možeš označiti da želiš igrati još s nekim, zatim daj osobi da upiše svoje korisničko ime i lozinku 
+      Nakon što odabereš kviz, pojavit će ti se pitanje želiš li igrati sam ili još s nekim. Ako pored sebe imaš osobu koja bi htjela igrati s tobom i ima korisnički račun na Lektirama, možeš označiti da želiš igrati još s nekim, zatim daj osobi da upiše svoje korisničko ime i lozinku.
 
       Nakon toga možeš početi!
 
-      Dobit ćeš niz pitanja na koje odgovori najbolje što znaš. Ako rješavaš kviz još s nekim, na svakom pitanju se izmjenjujete, prvo si ti na redu, pa tvoj prijatelj ili prijateljica. Vidjet ćete tko je na redu po korisničkom imenu koje će se nalaziti pored glavnog naslova i po boji (npr. #{content_tag :span, "pero".prepend_icon("user"), class: "player_one"} ili #{content_tag :span, "ana".prepend_icon("user"), class: "player_two"}).
+      Dobit ćeš niz pitanja na koje odgovori najbolje što znaš. Ako rješavaš kviz još s nekim, na svakom pitanju se izmjenjujete, prvo si ti na redu, pa tvoj prijatelj ili prijateljica. Vidjet ćete tko je na redu po korisničkom imenu koje će se nalaziti pored glavnog naslova i po boji rednog broja pitanja (npr. #{content_tag :span, "pero".prepend_icon("user"), class: "player-color-one"} ili #{content_tag :span, "ana".prepend_icon("user"), class: "player-color-two"}).
 
-      Plava linija ispod glavnog naslova pokazuje koliko još otprilike imaš do kraja kviza.
+      Tanka narančasta linija ispod glavnog naslova pokazuje koliko još otprilike imaš do kraja kviza:
 
-      Budi oprezan. Za svako pitanje imaš **1 minutu**, odbrojavanje možeš vidjeti gore u sredini, pored #{icon("stopwatch")}. Ako ti istekne vrijeme prije nego što si kliknuo #{content_tag :button, "Odgovori", class: "btn btn-primary"}, što god da si označio ili napisao, vrijedi se ;) Dakle nije problem ako si sve obavio, ali nisi stigao kliknuti gumb.
+      #{content_tag :div, content_tag(:div, "", class: "bar", style: "width: 75%;"), class: "progress progress-small progress-primary"}
 
-      Kada odgovoriš na posljednje pitanje, zbrajaju se bodovi koje si osvojio i prikaže ti se rezultat.
+      Budi oprezan. Za svako pitanje imaš **1 minutu**, odbrojavanje možeš vidjeti gore u sredini, pored #{icon("stopwatch")}. Ako ti istekne vrijeme prije nego što si kliknuo #{content_tag :button, "Odgovori", class: "btn btn-mini btn-primary"}, što god da si označio ili napisao, vrijedi se ;) Dakle nije problem ako si sve obavio, ali nisi stigao kliknuti gumb.
+
+      Kada odgovoriš na posljednje pitanje, zbrajaju se bodovi koje si osvojio i prikazuje ti se rezultat.
 
       **Zapamti**: nije bitno tko pobijedi, bitno je da se zabaviš ;)
 
   #skole.tab-pane
     :markdown
-      Ako ste škola, na početnoj stranici kliknite #{content_tag :button, "Ja sam škola".prepend_icon("home"), class: "btn btn-primary"}. Zatim se možete prijaviti ili, ako nemate korisnički račun, registrirati se klikom na link desno od #{content_tag :button, "Prijava", class: "btn btn-primary"}.
+      Ako ste škola, na početnoj stranici kliknite #{content_tag :button, "Ja sam škola".prepend_icon("home"), class: "btn btn-mini btn-primary"}. Zatim se možete prijaviti ili, ako nemate korisnički račun, registrirati se klikom na link desno od #{content_tag :button, "Prijava", class: "btn btn-mini btn-primary"}.
 
       ### Registracija
 
@@ -70,33 +118,29 @@
 
       Na početku će vas dočekati kviz "Antigona", možete ga pregledati kao primjer kako bi gotovi kviz mogao izgledati.
 
-      Kada stvarate novi kviz, prvo mu trebate dati naziv (obično tema kviza, npr. "Srednji vijek") i odrediti za koje razrede je namijenjen (to ćete sve kasnije moći izmjenjivati, naravno). Ne brinite se, kviz na početku neće biti vidljiv učenicima, odnosno bit će **deaktiviran**, kasnije ga možete učiniti vidljivim klikom na #{content_tag :button, icon("lamp-off"), class: "btn"} lijevo od naziva kviza.
+      Kada stvarate novi kviz, trebate mu dati naziv (obično tema kviza, npr. "Srednji vijek"). Ne brinite se, kviz na početku neće biti vidljiv učenicima, odnosno bit će **deaktiviran**, kasnije ga možete učiniti vidljivim klikom na #{content_tag :button, icon("lamp"), class: "btn btn-mini"} lijevo od naziva kviza. Nakon što je aktiviran, kviz će bit vidljiv **svim** vašim učenicima. Inače, prije smo dali školama mogućnost da označe za koje razrede žele učiniti kviz vidljivim, ali to je uzrokovalo više problema nego što je riješavalo, a uostalom nema ničeg lošeg u tome ako učenik riješava kviz s više godine ;)
 
       ### Pitanja
 
-      Prelaskom miša preko #{icon("chevron-left")}, koji se nalazi s desne strane svakog pitanja, otvorit će se padajući izbornik gdje možete vidjeti što se sve može raditi s pitanjem. Obratite pozornost da ono što možete raditi s pitanjima ovisi o tome gdje nalazite na stranici.
+      Do pitanja u kvizu možete doći tako da u padajućem izborniku kviza kliknete na #{icon("clipboard")}.
 
-      Pitanja se mogu stvarati neovisno o kvizovima, pa se kasnije mogu dodavati u kvizove, a mogu se i stvarati unutar kviza, što ih automatski pridružuje tom kvizu.
+      Kada ste došli do liste pitanja, prelaskom miša preko #{icon("chevron-left")}, koji se nalazi s desne strane svakog pitanja, otvorit će se padajući izbornik gdje možete vidjeti što se sve može raditi s pitanjem.
 
-      Možete stvarati nova pitanja klikom na #{content_tag :button, "Novo pitanje".prepend_icon("plus").append_icon("caret-down"), class: "btn btn-primary"}, ili pridruživati postojeća klikom na #{content_tag :button, icon("file-add"), class: "btn"}. Postoji 5 različitih tipova pitanja:
+      Možete stvarati nova pitanja klikom na #{content_tag :button, "Novo pitanje".prepend_icon("plus").append_icon("caret-down"), class: "btn btn-mini btn-primary"}, mijenjati im redoslijed klikom na #{content_tag :button, "Izmijeni redoslijed".prepend_icon("sort"), class: "btn btn-mini"} itd.
+
+      Postoji 5 različitih tipova pitanja:
 
       1. #{icon("checkbox")} **Točno/netočno**: je li tvrdnja točna ili netočna
-      1. #{icon("list-view")} **Ponuđeni odgovori**: koji je točan odgovor od ponuđenih
+      1. #{icon("list")} **Ponuđeni odgovori**: koji je točan odgovor od ponuđenih
       1. #{icon("shuffle")} **Asocijacije**: poveži pojmove iz prvog s pojmovima iz drugog stupca
-      1. #{icon("picture")} **Pogodi tko/što je na slici**: koji je odgovor na pitanje vezano uz priloženu sliku
-      1. #{icon("pencil-2")} **Upiši točan odgovor**: koji je odgovor na postavljeno pitanje
+      1. #{icon("image")} **Pogodi tko/što je na slici**: koji je odgovor na pitanje vezano uz priloženu sliku
+      1. #{icon("pencil")} **Upiši točan odgovor**: koji je odgovor na postavljeno pitanje
 
       Ohrabrujemo vas da dodajete tagove pitanjima pri stvaranju, jer ćete ih kasnije moći pretraživati.
 
-      Ako želite napraviti pitanje koje je slično pitanju koje ste već napravili, možete postojeće pitanje jednostavno duplicirati klikom na #{icon("copy")}.
-
-      Moguće je pogledati pitanja koja su sastavile druge škole klikom na #{icon("file")}, te ih kopirati kod sebe klikom na #{icon("file-download")}.
-
-      Nakon što sastavite kviz, možete ga testirati klikom na #{content_tag :button, icon("play"), class: "btn btn-info"} kako biste dobili osjećaj kako će on izgledati vašim učenicima.
-
       U slučajevima kada kviz ima neparan broj pitanja a rješava se u paru, jedno se od tih pitanja neće se prikazati (nasumično odabrano). To je tako zbog raspodjele bodova po učenicima, jer oba učenika moraju imati pravo na jednaki broj bodova.
 
-      Nemojte zaboraviti aktivirati kviz kada ga dovršite :) Uvijek provijerite stanje gumba, #{content_tag :button, icon("lamp-off"), class: "btn"} znači da je neaktivan, a #{content_tag :button, icon("lamp-on"), class: "btn btn-success"} znači da je aktivan.
+      Nemojte zaboraviti aktivirati kviz kada ga dovršite :) Uvijek provijerite stanje gumba, #{content_tag :button, icon("lamp"), class: "btn btn-mini"} znači da je neaktivan, a #{content_tag :button, icon("lamp-full"), class: "btn btn-mini btn-success"} znači da je aktivan.
 
   #kontakt.tab-pane
     :markdown
