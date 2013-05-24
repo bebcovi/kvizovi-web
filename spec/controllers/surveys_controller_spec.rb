@@ -21,7 +21,7 @@ describe SurveysController, user: :school do
 
     it "redirect the user back to the home page" do
       post :create
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(controller.send(:root_path_for, @user))
     end
   end
 end
