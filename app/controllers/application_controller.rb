@@ -3,22 +3,20 @@ class ApplicationController < ActionController::Base
 
   before_filter :add_subdomain_view_path
   before_filter :mark_activity, if: :user_logged_in?
+  before_filter :make_cookies_global, if: :user_logged_in?
 
   protected
 
-  def log_in!(user, options = {})
-    if not options[:permanent]
-      cookies.signed[:user_id] = user.id
-      cookies.signed[:user_type] = user.type
-    else
-      cookies.signed.permanent[:user_id] = user.id
-      cookies.signed.permanent[:user_type] = user.type
+  def log_in!(user)
+    {user_id: user.id, user_type: user.type}.each do |key, value|
+      cookies.signed.permanent[key] = {value: value, domain: :all}
     end
   end
 
   def log_out!
-    cookies.delete(:user_id)
-    cookies.delete(:user_type)
+    [:user_id, :user_type].each do |key|
+      cookies.delete(key, domain: :all)
+    end
   end
 
   def current_user
@@ -104,5 +102,12 @@ class ApplicationController < ActionController::Base
 
   def mark_activity
     $redis.set("last_activity:school:#{current_user.username}", Time.now)
+  end
+
+  def make_cookies_global
+    [:user_id, :user_type].each do |key|
+      value = cookies.delete(key)
+      cookies.permanent[key] = {value: value, domain: :all}
+    end
   end
 end

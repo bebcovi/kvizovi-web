@@ -5,16 +5,11 @@ class Login
 
   attribute :username,    type: String
   attribute :password,    type: String
-  attribute :remember_me, type: Integer
 
   attr_accessor :user_class
   attr_accessor :user
 
   validate :validate_authentication_of_user
-
-  def remember_me?
-    remember_me == 1
-  end
 
   private
 
