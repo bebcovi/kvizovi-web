@@ -10,6 +10,10 @@ module CapybaraHelpers
   def refresh
     visit current_url
   end
+
+  def ensure_on(url)
+    visit url unless current_url == url
+  end
 end
 
 World(CapybaraHelpers)

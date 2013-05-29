@@ -17,6 +17,9 @@ hr:
       password_resets:
         create:
           success: "Nova lozinka je poslana na vaš email."
+          error: "Potvrda nije uspjela. Lozinka nije promijenjena."
+        confirm:
+          success: "Potvrda za novu lozinku vam je poslana emailom."
           error: "Škola s tom email adresom nije nađena."
       profiles:
         update:

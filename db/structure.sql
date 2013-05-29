@@ -215,7 +215,8 @@ CREATE TABLE schools (
     place character varying(255),
     region character varying(255),
     email character varying(255),
-    notified boolean DEFAULT true
+    notified boolean DEFAULT true,
+    password_reset_confirmation_id character varying(255)
 );
 
 
@@ -756,3 +757,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130511222413');
 INSERT INTO schema_migrations (version) VALUES ('20130513220138');
 
 INSERT INTO schema_migrations (version) VALUES ('20130513221823');
+
+INSERT INTO schema_migrations (version) VALUES ('20130528223724');

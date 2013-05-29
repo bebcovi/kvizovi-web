@@ -21,15 +21,6 @@ Feature: Authentication
     When I click on "Odjava"
     Then I should be logged out
 
-  Scenario: Resetting password
-    Given I'm registered
-    When I go to the login page
-    And I request for a new password
-    Then I should get the email with my new password
-
-    When I login with the emailed password
-    Then I should be successfully logged in
-
   Scenario: Being redirected to the intended page after login
     Given I'm registered
     When I visit my profile page

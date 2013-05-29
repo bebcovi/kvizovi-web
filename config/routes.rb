@@ -14,7 +14,10 @@ Lektire::Application.routes.draw do
     end
     resource :registration
     resource :authorization
-    resource :password_reset
+    resource :password_reset do
+      post "confirm"
+      get "create", as: :create
+    end
   end
 
   ########################
