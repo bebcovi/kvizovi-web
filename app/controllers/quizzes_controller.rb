@@ -1,9 +1,11 @@
 class QuizzesController < ApplicationController
   before_filter :authenticate!
   before_filter :assign_user
+  before_filter :authorize_user!, only: [:edit, :update, :delete, :destroy]
 
   def index
-    @quizzes = @user.quizzes
+    @quizzes = params[:scope].blank? ? @user.quizzes : Quiz.order_by_school
+    @quizzes = @quizzes.includes(:school).descending.paginate(per_page: 15, page: params[:page])
   end
 
   def new
@@ -55,5 +57,11 @@ class QuizzesController < ApplicationController
 
   def assign_user
     @user = current_user
+  end
+
+  def authorize_user!
+    if not @user.quizzes.exists?(params[:id])
+      redirect_to :back, alert: flash_error("unauthorized")
+    end
   end
 end

@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_filter :authenticate!
   before_filter :assign_quiz
+  before_filter :authorize_user!, except: [:index, :download_location, :download]
 
   def index
     @questions = @quiz.questions.ascending
@@ -47,6 +48,17 @@ class QuestionsController < ApplicationController
     redirect_to quiz_questions_path(@quiz), notice: flash_success
   end
 
+  def download_location
+    @question = @quiz.questions.find(params[:id])
+  end
+
+  def download
+    question = @quiz.questions.find(params[:id]).dup
+    destination_quiz = current_user.quizzes.find(params[:location])
+    destination_quiz.questions << question
+    redirect_to quiz_questions_path(@quiz), notice: flash_success(quiz_name: @quiz.name)
+  end
+
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
@@ -60,7 +72,13 @@ class QuestionsController < ApplicationController
   end
 
   def assign_quiz
-    @quiz = current_user.quizzes.find(params[:quiz_id])
+    @quiz = Quiz.find(params[:quiz_id])
+  end
+
+  def authorize_user!
+    if @quiz.school != current_user
+      redirect_to :back, alert: flash_error("unauthorized")
+    end
   end
 
   def question_class

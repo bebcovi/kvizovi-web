@@ -24,13 +24,6 @@ describe QuestionsController, user: :school do
     end
 
     describe "#create" do
-      it "scopes to current quiz" do
-        other_quiz = Factory.create(:quiz)
-        expect do
-          post :create, quiz_id: other_quiz.id, category: "boolean"
-        end.to raise_error(ActiveRecord::RecordNotFound)
-      end
-
       context "when valid" do
         before do
           BooleanQuestion.any_instance.stub(:valid?) { true }
@@ -94,13 +87,6 @@ describe QuestionsController, user: :school do
     end
 
     describe "#update" do
-      it "scopes to current quiz" do
-        other_quiz = Factory.create(:quiz)
-        expect do
-          put :update, quiz_id: other_quiz.id, id: @question.id, category: "boolean"
-        end.to raise_error(ActiveRecord::RecordNotFound)
-      end
-
       context "when valid" do
         before do
           @question.class.any_instance.stub(:valid?) { true }
@@ -120,6 +106,24 @@ describe QuestionsController, user: :school do
         it "doesn't raise errors" do
           put :update, quiz_id: @quiz.id, id: @question.id, category: "boolean"
         end
+      end
+    end
+
+    describe "#download_location" do
+      it "doesn't raise errors" do
+        get :download_location, quiz_id: @quiz.id, id: @question.id
+      end
+    end
+
+    describe "#download" do
+      before do
+        Question.any_instance.stub(:run_validations!) { true }
+      end
+
+      it "downloads the question to another quiz" do
+        expect do
+          post :download, quiz_id: @quiz.id, id: @question.id, location: @quiz.id
+        end.to change { @quiz.questions.count }.by 1
       end
     end
 

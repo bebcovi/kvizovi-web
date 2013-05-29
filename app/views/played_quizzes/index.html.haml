@@ -17,4 +17,4 @@
         %td= played_quiz.students.map { |student| "#{student} (#{student.grade})" }.to_sentence
         %td= "prije #{time_ago_in_words played_quiz.end_time}"
 
-= will_paginate @played_quizzes
+= will_paginate @played_quizzes, previous_label: "← Novije", next_label: "Starije →"

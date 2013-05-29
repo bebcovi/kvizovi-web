@@ -7,6 +7,7 @@ Feature: Quizzes
 
   Background:
     Given I'm registered and logged in
+    And I'm on the quizzes page
 
   Scenario: Creating, updating, and destroying quizzes
     When I create a quiz
@@ -31,3 +32,19 @@ Feature: Quizzes
     When I click on the link for activation
     Then I should be on the quizzes page
     And the quiz should be activated
+
+  Scenario: Accessing quizzes from other schools
+    Given I have a quiz
+    And another school is registered
+    And that school also has a quiz
+
+    When I visit the quizzes page
+    Then I shouldn't see the other school's quiz
+
+    When I click on "Svi kvizovi"
+    Then I should see the other school's quiz
+    And I should see my quiz
+
+    When I click on the other school's quiz
+    And I choose to download a question to my quiz
+    Then that question should be downloaded to my quiz

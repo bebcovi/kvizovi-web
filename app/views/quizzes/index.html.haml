@@ -3,12 +3,18 @@
 .space-bottom
   = add_button "Novi kviz", new_quiz_path
 
+  %ul.nav.nav-pills.pull-right
+    %li{class: ("active" if params[:scope].blank?)}= link_to "Moji kvizovi", scope: nil
+    %li{class: ("active" if params[:scope] == "all")}= link_to "Svi kvizovi", scope: "all"
+
 - if @quizzes.any?
 
   %ol.list-pretty
     - @quizzes.each do |quiz|
       = content_tag_for :li, quiz, class: "list-pretty-item" do
         = render quiz
+
+  = will_paginate(@quizzes, params: params.slice(:scope))
 
 - else
 

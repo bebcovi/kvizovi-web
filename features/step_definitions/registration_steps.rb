@@ -13,6 +13,10 @@ Given(/^I'm registered and logged in$/) do
   }
 end
 
+Given(/^another school is registered$/) do
+  @other_school = Factory.create(:school)
+end
+
 When(/^I go to the registration page$/) do
   visit login_url(subdomain: @user_type)
   school do

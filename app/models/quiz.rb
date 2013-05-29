@@ -9,8 +9,9 @@ class Quiz < ActiveRecord::Base
   validates :name,      presence: true, uniqueness: {scope: :school_id}
   validates :school_id, presence: true
 
-  default_scope     -> { order{created_at.desc} }
-  scope :activated, -> { where{activated == true} }
+  scope :activated,       -> { where{activated == true} }
+  scope :descending,      -> { order{created_at.desc} }
+  scope :order_by_school, -> { order{school.name.asc} }
 
   accepts_nested_attributes_for :questions
 

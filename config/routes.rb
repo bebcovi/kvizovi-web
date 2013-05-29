@@ -32,6 +32,10 @@ Lektire::Application.routes.draw do
           get "order", to: :edit_order
           put "order", to: :update_order
         end
+        member do
+          post "download"
+          get "download", to: :download_location
+        end
       end
     end
 

@@ -1,3 +1,7 @@
+Given(/^I'm on the (.*)$/) do |page|
+  ensure_on path_to(page)
+end
+
 When(/^I visit (.*)$/) do |page|
   visit path_to(page)
 end
