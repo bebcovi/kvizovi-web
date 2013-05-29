@@ -34,7 +34,6 @@ hr:
       question: &question
         content: "Tekst pitanja"
         hint: "Uputa (neobavezno)"
-        tag_list: "Tagovi (neobavezno)"
       boolean_question:
         <<: *question
         answer: "Odgovor"

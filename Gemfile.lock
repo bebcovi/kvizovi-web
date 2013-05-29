@@ -56,8 +56,6 @@ GEM
       activerecord (>= 3.1)
       pg-hstore (>= 1.1.5)
       rake
-    acts-as-taggable-on (2.4.0)
-      rails (~> 3.0)
     acts_as_list (0.2.0)
       activerecord (>= 3.0)
     addressable (2.3.4)
@@ -261,7 +259,6 @@ PLATFORMS
 DEPENDENCIES
   active_attr
   activerecord-postgres-hstore
-  acts-as-taggable-on
   acts_as_list (>= 0.2)
   bcrypt-ruby (~> 3.0)
   better_errors

@@ -1,4 +1,3 @@
-require "acts-as-taggable-on"
 require "paper_trail"
 require "squeel"
 require "acts_as_list"
@@ -9,7 +8,6 @@ class Question < ActiveRecord::Base
 
   belongs_to :quiz
 
-  acts_as_taggable
   has_paper_trail on: [:destroy]
   acts_as_list scope: :quiz
   serialize :data, Hash
@@ -35,11 +33,5 @@ class Question < ActiveRecord::Base
         "Data(#{keys.join(",")})"
       end
     }
-  end
-
-  def dup
-    super.tap do |question|
-      question.tag_list = self.tag_list
-    end
   end
 end

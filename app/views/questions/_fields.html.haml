@@ -3,6 +3,5 @@
 = render "questions/fields/#{@question.category}", {f: f, question: @question}
 
 = f.input :hint, placeholder: %(Npr. "Odgovor piši u nominativu."), hint: "Ovo će se prikazati kao pomoć pri odgovaranju na pitanje.", hint_html: {class: "additional-info"}
-= f.input :tag_list, hint: "Tagove odvajajte zarezom.", hint_html: {class: "additional-info"}
 
 = hidden_field_tag :category, params[:category] || @question.category
