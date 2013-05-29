@@ -70,9 +70,9 @@ end
 
 Then(/^the quiz should (not )?be activated$/) do |negative|
   if negative
-    expect(@quiz.reload.activated?).to be_false
+    expect(@quiz.reload).not_to be_activated
   else
-    expect(@quiz.reload.activated?).to be_true
+    expect(@quiz.reload).to be_activated
   end
 end
 

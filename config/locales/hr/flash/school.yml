@@ -34,10 +34,6 @@ hr:
           success: "Kviz je uspješno izmijenjen."
         destroy:
           success: "Kviz je uspješno izbrisan."
-        activate:
-          success: "Kviz \"%{name}\" je aktiviran."
-        deactivate:
-          success: "Kviz \"%{name}\" je deaktiviran."
         unauthorized:
           error: "Ovaj kviz ne pripada vama."
       questions:
@@ -52,8 +48,6 @@ hr:
           success: "Pitanje je uspješno spremljeno u kviz \"%{quiz_name}\"."
         destroy:
           success: "Pitanje je uspješno izbrisano."
-        remove:
-          success: "Pitanje je uspješno uklonjeno iz kviza."
         unauthorized:
           error: "Ovaj kviz ne pripada vama."
       versions:
