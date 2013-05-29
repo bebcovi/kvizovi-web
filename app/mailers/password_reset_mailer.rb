@@ -1,5 +1,5 @@
 class PasswordResetMailer < ActionMailer::Base
-  default from: "Lektire <#{ENV["SENDGRID_USERNAME"]}>"
+  default from: "Kvizovi <#{ENV["SENDGRID_USERNAME"]}>"
 
   def mail(*)
     prepend_view_path "app/views/#{@user.type}"
