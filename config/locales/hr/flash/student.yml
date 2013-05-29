@@ -15,7 +15,7 @@ hr:
           success: "Nova lozinka je poslana na email učenika. Hvala :)"
           error: "Potvrda nije uspjela. Lozinka nije promijenjena."
         confirm:
-          success: "Potvrda za novu lozinku ti je poslana emailom."
+          success: "Potvrda za novu lozinku je poslana na email od tvojeg profesora. Čim to potvrdi, doći će ti nova lozinka na email."
           error: "Ili učenik s tim korisničkim imenom nije nađen, ili nisi popunio/la sva polja."
       profiles:
         update:
