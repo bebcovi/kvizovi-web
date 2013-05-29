@@ -29,6 +29,27 @@ describe PasswordResetsController, user: :school do
         post :confirm, email: @user.email
         expect(flash[:notice]).to be_present
       end
+
+      context "when student", user: :student do
+        before do
+          @user = Factory.create(:student, school: @user)
+        end
+
+        it "finds by username" do
+          PasswordResetService.any_instance.should_receive(:generate_confirmation_id)
+          post :confirm, username: @user.username, email: "janko@example.com"
+        end
+
+        it "sends the email to student's school" do
+          post :confirm, username: @user.username, email: "janko@example.com"
+          expect(ActionMailer::Base.deliveries.first.to).to include(@user.school.email)
+        end
+
+        it "requires the email address" do
+          PasswordResetService.any_instance.should_not_receive(:generate_confirmation_id)
+          post :confirm, username: @user.username
+        end
+      end
     end
 
     context "when invalid" do
@@ -58,6 +79,22 @@ describe PasswordResetsController, user: :school do
         post :create, email: @user.email, confirmation_id: "foo"
         expect(ActionMailer::Base.deliveries).to have(1).item
         expect(ActionMailer::Base.deliveries.first.to).to eq [@user.email]
+      end
+
+      context "when student", user: :student do
+        before do
+          @user = Factory.create(:student, school: @user)
+        end
+
+        it "finds by username" do
+          PasswordResetService.any_instance.should_receive(:reset_password)
+          post :create, username: @user.username, email: "janko@example.com"
+        end
+
+        it "sends the new password to the student" do
+          post :create, username: @user.username, email: "janko@example.com"
+          expect(ActionMailer::Base.deliveries.last.to).to include("janko@example.com")
+        end
       end
     end
 

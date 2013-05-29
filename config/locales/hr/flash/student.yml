@@ -10,6 +10,13 @@ hr:
         destroy:
           success: "Tvoj korisnički račun je uspješno izbrisan."
           error: "Lozinka nije ispravna."
+      password_resets:
+        create:
+          success: "Nova lozinka je poslana na email učenika. Hvala :)"
+          error: "Potvrda nije uspjela. Lozinka nije promijenjena."
+        confirm:
+          success: "Potvrda za novu lozinku ti je poslana emailom."
+          error: "Ili učenik s tim korisničkim imenom nije nađen, ili nisi popunio/la sva polja."
       profiles:
         update:
           success: "Tvoj profil je uspješno izmijenjen."

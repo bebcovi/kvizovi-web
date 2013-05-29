@@ -1,13 +1,21 @@
 class PasswordResetMailer < ActionMailer::Base
   default from: "Lektire <#{ENV["SENDGRID_USERNAME"]}>"
 
-  def new_password(user)
-    @user = user
-    mail(subject: "Nova lozinka", to: @user.email)
+  def mail(*)
+    prepend_view_path "app/views/#{@user.type}"
+    super
   end
 
-  def confirmation(user)
+  def new_password(user, email)
     @user = user
-    mail(subject: "Potvrda za novu lozinku", to: @user.email)
+    to = email
+    mail(subject: "Nova lozinka", to: to)
+  end
+
+  def confirmation(user, email)
+    @user = user
+    @email = email
+    to = @user.is_a?(School) ? @user.email : @user.school.email
+    mail(subject: "Potvrda za novu lozinku", to: to)
   end
 end

@@ -11,5 +11,9 @@ hr:
 
   simple_form:
     labels:
+      defaults:
+        username: "Korisničko ime"
+        password: "Lozinka"
+        email: "Email"
       play:
         answer: "Odgovor"
