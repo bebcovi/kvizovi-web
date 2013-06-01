@@ -10,6 +10,6 @@
 
 %span.list-pretty-item-content
   = quiz.name
-  %span.count= quiz.questions.count
+  %span.badge.badge-info= quiz.questions.count
   - if params[:scope].present?
-    %span.school= quiz.school.name
+    %span.school.muted (#{quiz.school.name})
