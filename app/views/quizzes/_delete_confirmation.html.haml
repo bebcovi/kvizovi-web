@@ -1,10 +1,11 @@
-%div
-  %h1 Jeste li sigurni?
+= simple_form_for @quiz, method: :delete, html: {class: "modal"} do |f|
+  .modal-header
+    %h1 Jeste li sigurni?
 
-  %p Jeste li sigurni da želite izbrisati taj kviz?
+  .modal-body
+    %p Jeste li sigurni da želite izbrisati taj kviz?
 
-  = simple_form_for @quiz, method: :delete do |f|
-
+  .modal-footer
     = buttons do
       = cancel_button "Nisam", quizzes_path
       = submit_button "Jesam"

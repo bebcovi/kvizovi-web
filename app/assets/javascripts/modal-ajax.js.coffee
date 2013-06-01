@@ -11,19 +11,12 @@ do ($ = jQuery) ->
       headers: {"X-noLayout": true}
 
       success: (data) ->
-        $data = $(data).children()
-        klass = $(data).filter("div").attr("class") or ""
+        $data   = $(data).children()
+        $modal  = $data.parent()
 
-        $closeButton = $.closeButton
-          .clone()
-          .addClass("close")
-          .attr("data-dismiss", "modal")
-
-        $dataHeader   = $data.filter("h1")
-        $dataFooter   = $data.filter("form, .form")
-        $dataBody     = $data.not($dataHeader).not($dataFooter)
-
-        $modal        = $("<div>").addClass("modal #{klass}")
+        $header = $data.filter(".modal-header")
+        $body   = $data.filter(".modal-body")
+        $footer = $data.filter(".modal-footer")
 
         # loader
 
@@ -31,30 +24,11 @@ do ($ = jQuery) ->
 
         # modifications
 
-        $dataFooter.find(".cancel")
+        $footer.find(".cancel")
           .removeClass("cancel")
           .attr("data-dismiss", "modal")
 
-        # component insertion
-
-        $modalHeader = $("<div>")
-          .addClass("modal-header")
-          .append($closeButton)
-          .append($dataHeader)
-
-        $modalBody = $("<div>")
-          .addClass("modal-body")
-          .append($dataBody)
-
-        $modalFooter = $("<div>")
-          .addClass("modal-footer")
-          .append($dataFooter)
-
-        # modal insertion
-
-        $modal.append($modalHeader)
-        $modal.append($modalBody)   if $dataBody.length
-        $modal.append($modalFooter) if $dataFooter.length
+        # init
 
         $modal.modal()
 
@@ -76,7 +50,12 @@ do ($ = jQuery) ->
           $modal.on "hidden", options["onCancel"]
 
         if options["onSubmit"]
-          $modalFooter.find(".btn-primary")
+          $footer.find(".btn-primary")
             .on "click", options["onSubmit"]
 
       error: -> location.href options["url"]
+
+  $("[data-modal]").on "click", (event) ->
+    event.preventDefault()
+    $.modalAjax
+      url: @href

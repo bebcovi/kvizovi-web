@@ -60,7 +60,7 @@ module ButtonsHelper
   end
 
   def remove_button(options = {})
-    content_tag :button, "×", type: "button", class: "close", data: {dismiss: options[:dismiss]}
+    content_tag :button, icon("close"), type: "button", class: "close", data: {dismiss: options[:dismiss]}
   end
 
   def settings_button(string, path, options = {})

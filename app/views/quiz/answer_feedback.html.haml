@@ -1,7 +1,7 @@
-.l-feedback.feedback{class: "l-question-#{@question.category}"}
+.modal.l-feedback.feedback{class: "l-question-#{@question.category}"}
   = render_feedback
 
-  .form
+  .modal-footer
     - if not @quiz_play.over?
       = next_button "Sljedeće pitanje", next_question_quiz_path, method: :put
     - else

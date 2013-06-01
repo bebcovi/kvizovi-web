@@ -1,11 +1,13 @@
 - title "Prekid igre"
 
-.l-interrupt
-  %h1 Jeste li sigurni?
+.modal.l-interrupt
+  .modal-header
+    %h1 Jeste li sigurni?
 
-  %p Jeste li sigurni da želite prekinuti igru?
+  .modal-body
+    %p Jeste li sigurni da želite prekinuti igru?
 
-  .form
+  .modal-footer
     = buttons do
       = cancel_button "Nisam", play_quiz_path
       = primary_button "Jesam", finish_quiz_path, method: :delete
