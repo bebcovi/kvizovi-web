@@ -7,12 +7,21 @@ Feature: Password reset
 
   Background:
     Given I'm registered
-    And I forgot my password
+
+  Scenario: Email request
+    Given I didn't provide my email during registration
+    When I log in
+    Then I should be given a text field for putting my email
+
+    When I fill in my email
+    And I click on "Spremi"
+    Then I should not see the text field anymore
 
   Scenario: Resetting password
+    Given I have forgot my password
     When I request a new password
-    Then my school should get an email with the confirmation for resetting my password
+    Then I should get an email with the confirmation for resetting my password
 
-    When my school visits the confirmation URL
+    When I visit the confirmation URL
     Then I should get an email with my new password
     And I should be able to login with that password

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :add_subdomain_view_path
   before_filter :mark_activity, if: :user_logged_in?
   after_filter :delete_old_cookies, if: :user_logged_in?
+  before_filter :force_filling_email, if: :user_logged_in?
 
   protected
 
@@ -109,6 +110,12 @@ class ApplicationController < ActionController::Base
       [:user_id, :user_type].each do |key|
         cookies.delete(key)
       end
+    end
+  end
+
+  def force_filling_email
+    if current_user.email.blank?
+      redirect_to new_email_path unless params[:controller] == "emails"
     end
   end
 end

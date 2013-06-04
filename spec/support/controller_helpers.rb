@@ -13,4 +13,10 @@ RSpec.configure do |config|
   config.before(:each, type: :controller) do
     request.host = [example.metadata[:user], "example.com"].compact.join(".")
   end
+  config.before(:each, type: :controller) do
+    controller.stub(:force_filling_email)
+  end
+  config.before(:each, type: :request) do
+    ApplicationController.any_instance.stub(:force_filling_email)
+  end
 end

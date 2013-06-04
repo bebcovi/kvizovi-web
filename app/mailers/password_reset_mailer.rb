@@ -6,16 +6,13 @@ class PasswordResetMailer < ActionMailer::Base
     super
   end
 
-  def new_password(user, email)
+  def new_password(user)
     @user = user
-    to = email
-    mail(subject: "Nova lozinka", to: to)
+    mail(subject: "Nova lozinka", to: @user.email)
   end
 
-  def confirmation(user, email)
+  def confirmation(user)
     @user = user
-    @email = email
-    to = @user.is_a?(School) ? @user.email : @user.school.email
-    mail(subject: "Potvrda za novu lozinku", to: to)
+    mail(subject: "Potvrda za novu lozinku", to: @user.email)
   end
 end

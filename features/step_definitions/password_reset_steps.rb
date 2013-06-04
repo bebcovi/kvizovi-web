@@ -1,38 +1,38 @@
 require "uri"
 require "nokogiri"
 
-Given(/^I forgot my password$/) do
+Given(/^I didn't provide my email during registration$/) do
+  @user.update_column(:email, nil)
+end
+
+Given(/^I have forgot my password$/) do
 end
 
 When(/^I request a new password$/) do
   ensure_on login_url(subdomain: @user.type)
   click_on "Zatražite novu"
-  school do
-    fill_in "Email", with: @user.email
-  end
-  student do
-    fill_in "Korisničko ime", with: @user.username
-    fill_in "Email",          with: "student@example.com"
-  end
+  fill_in "Email", with: @user.email
   click_on "Zatraži novu lozinku"
 end
 
-When(/^(?:I|my school) visit(?:s)? the confirmation URL$/) do
+When(/^I visit the confirmation URL$/) do
   confirmation_url = URI.extract(ActionMailer::Base.deliveries.last.body.to_s, ["http"]).first
   visit confirmation_url
 end
 
-Then(/^(?:I|my school) should get an email with the confirmation for resetting my password$/) do
+When(/^I fill in my email$/) do
+  fill_in "Email", with: "student@example.com"
+end
+
+Then(/^I should get an email with the confirmation for resetting my password$/) do
   expect(ActionMailer::Base.deliveries).to have(1).item
-  school  { expect(ActionMailer::Base.deliveries.last.to).to include(@user.email) }
-  student { expect(ActionMailer::Base.deliveries.last.to).to include(@user.school.email) }
+  expect(ActionMailer::Base.deliveries.last.to).to include(@user.email)
   expect(ActionMailer::Base.deliveries.last.body.to_s).to match(uri_regexp)
 end
 
 Then(/^I should get an email with my new password$/) do
   expect(ActionMailer::Base.deliveries).to have(2).items
-  school  { expect(ActionMailer::Base.deliveries.last.to).to include(@user.email) }
-  student { expect(ActionMailer::Base.deliveries.last.to).to include("student@example.com") }
+  expect(ActionMailer::Base.deliveries.last.to).to include(@user.email)
   expect(ActionMailer::Base.deliveries.last.body.to_s).to match(/lozinka/i)
 end
 
@@ -45,10 +45,12 @@ Then(/^I should be able to login with that password$/) do
   expect(current_path).to be_in [quizzes_path, choose_quiz_path]
 end
 
-Then(/^my school should get an email with the confirmation for resetting my password$/) do
-  expect(ActionMailer::Base.deliveries).to have(1).item
-  expect(ActionMailer::Base.deliveries.last.to).to include(@user.school.email)
-  expect(ActionMailer::Base.deliveries.last.body.to_s).to match(uri_regexp)
+Then(/^I should be given a text field for putting my email$/) do
+  expect(page).to have_css("input##{@user.type}_email")
+end
+
+Then(/^I should not see the text field anymore$/) do
+  expect(page).not_to have_css("input##{@user.type}_email")
 end
 
 def uri_regexp

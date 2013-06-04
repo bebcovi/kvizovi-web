@@ -12,11 +12,11 @@ hr:
           error: "Lozinka nije ispravna."
       password_resets:
         create:
-          success: "Nova lozinka je poslana na email učenika. Hvala :)"
-          error: "Potvrda nije uspjela. Lozinka nije promijenjena."
+          success: "Nova lozinka je poslana na tvoj email."
+          error: "Potvrda nije uspjela, lozinka nije promijenjena. Javi nam se na kontakt."
         confirm:
-          success: "Potvrda za novu lozinku je poslana na email od tvojeg profesora. Čim to potvrdi, doći će ti nova lozinka na email."
-          error: "Ili učenik s tim korisničkim imenom nije nađen, ili nisi popunio/la sva polja."
+          success: "Potvrda za novu lozinku ti je poslana emailom."
+          error: "Učenik s tom email adresom nije nađen."
       profiles:
         update:
           success: "Tvoj profil je uspješno izmijenjen."

@@ -49,6 +49,7 @@ When(/^I fill in the registration details$/) do
     fill_in "Korisničko ime",    with: student.username
     fill_in "Lozinka",           with: student.password
     fill_in "Potvrda lozinke",   with: student.password
+    fill_in "Email",             with: student.email
     fill_in "Razred",            with: student.grade
     fill_in "Tajni ključ škole", with: student.school.key
     choose                             student.gender

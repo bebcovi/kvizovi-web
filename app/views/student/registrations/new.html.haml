@@ -6,6 +6,7 @@
   = f.input :last_name
   = f.input :gender, collection: Student::GENDERS, as: :radio_buttons
   = f.input :year_of_birth, collection: (30.years.ago.year..Time.now.year).to_a.reverse, prompt: "Izaberite..."
+  = f.input :email
   = f.input :username
   = f.input :password
   = f.input :password_confirmation

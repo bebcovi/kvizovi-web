@@ -18,6 +18,7 @@ class Student < ActiveRecord::Base
   validates :gender,        presence: true, inclusion: {in: GENDERS, allow_blank: true}
   validates :year_of_birth, presence: true, numericality: {only_integer: true, allow_blank: true}
   validates :school_key,    presence: true, inclusion: {in: proc { School.pluck(:key) }, allow_blank: true}, unless: :school_id?
+  validates :email,         presence: true, uniqueness: true
 
   before_create :assign_school, unless: :school_id?
   before_destroy :destroy_played_quizzes

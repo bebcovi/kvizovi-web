@@ -19,6 +19,8 @@ hr:
               not_a_number: "Mora biti broj"
             school_key:
               inclusion: "Ne postoji škola s tim ključem."
+            email:
+              taken: "Već postoji učenik s ovom email adresom."
 
   simple_form:
     labels:

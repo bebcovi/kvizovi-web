@@ -101,6 +101,19 @@ describe Student do
         expect(@it).to have(1).error_on(:school_key)
       end
     end
+
+    context "#email" do
+      it "validates presence" do
+        @it.email = nil
+        expect(@it).to have(1).error_on(:email)
+      end
+
+      it "validates uniqueness" do
+        Factory.create(:student, email: "student@example.com")
+        @it.email = "student@example.com"
+        expect(@it).to have(1).error_on(:email)
+      end
+    end
   end
 
   describe "#grade=" do

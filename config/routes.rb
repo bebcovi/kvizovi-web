@@ -74,6 +74,8 @@ Lektire::Application.routes.draw do
     end
   end
 
+  resource :email
+
   ########################
   # Static pages
   ########################

@@ -1,0 +1,10 @@
+- title "Email"
+
+%p Zaboravili smo te tražiti prije, ali sada nam treba tvoja email adresa. (Koristit ćemo je npr. da ti pomognemo povratiti lozinku u slučaju da si je zaboravi#{@user.male? ? "o" : "la"}.)
+
+= simple_form_for @user, url: email_path, method: "post" do |f|
+
+  = f.input :email
+
+  = buttons do
+    = submit_button "Spremi"

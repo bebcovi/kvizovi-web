@@ -1,7 +1,7 @@
 %p Poštovani,
 
-%p Vaš učenik (#{@user.username}) je napravio zahtjev za novu lozinku. Molimo posjetite ovaj link: #{link_to create_password_reset_url(username: @user.username, email: @email, confirmation_id: @user.password_reset_confirmation_id, subdomain: @user.type), create_password_reset_url(username: @user.username, email: @email, confirmation_id: @user.password_reset_confirmation_id, subdomain: @user.type)}
+%p Napravi#{@user.male? ? "o" : "la"} si zahtjev za novu lozinku. Molimo posjeti ovaj link: #{link_to create_password_reset_url(email: @user.email, confirmation_id: @user.password_reset_confirmation_id, subdomain: @user.type), create_password_reset_url(email: @user.email, confirmation_id: @user.password_reset_confirmation_id, subdomain: @user.type)}.
 
-%p Kontak email tog učenika je #{mail_to @email}. Ukoliko vjerujete da autor ovog emaila nije učenik za kojeg se predstavlja, slobodno ignorirajte ovaj email.
+%p Ukoliko nisi napravi#{@user.male? ? "o" : "la"} ovaj zahtjev, slobodno ignoriraj ovaj email.
 
 %p Lijepi pozdrav,<br>Janko &amp; Matija.

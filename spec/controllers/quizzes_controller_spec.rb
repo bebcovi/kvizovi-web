@@ -58,13 +58,6 @@ describe QuizzesController, user: :school do
     end
 
     describe "#update" do
-      it "scopes to current user" do
-        other_quiz = Factory.create(:quiz)
-        expect do
-          put :update, id: other_quiz.id
-        end.to raise_error(ActiveRecord::RecordNotFound)
-      end
-
       context "when valid" do
         before do
           Quiz.any_instance.stub(:valid?) { true }
@@ -88,11 +81,6 @@ describe QuizzesController, user: :school do
     end
 
     describe "#destroy" do
-      it "scopes to current user" do
-        other_quiz = Factory.create(:quiz)
-        expect { delete :destroy, id: other_quiz.id }.to raise_error(ActiveRecord::RecordNotFound)
-      end
-
       it "destroyes the record" do
         delete :destroy, id: @quiz.id
         expect(Quiz.exists?(@quiz)).to be_false

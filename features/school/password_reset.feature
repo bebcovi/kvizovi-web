@@ -7,9 +7,9 @@ Feature: Password reset
 
   Background:
     Given I'm registered
-    And I forgot my password
 
   Scenario: Resetting password
+    Given I have forgot my password
     When I request a new password
     Then I should get an email with the confirmation for resetting my password
 
