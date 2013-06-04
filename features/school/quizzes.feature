@@ -41,9 +41,9 @@ Feature: Quizzes
     When I visit the quizzes page
     Then I shouldn't see the other school's quiz
 
-    When I click on "Svi kvizovi"
+    When I click on "Ostali kvizovi"
     Then I should see the other school's quiz
-    And I should see my quiz
+    And I shouldn't see my quiz
 
     When I click on the other school's quiz
     And I choose to download a question to my quiz

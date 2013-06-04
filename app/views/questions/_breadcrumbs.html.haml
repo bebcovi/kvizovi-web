@@ -3,7 +3,7 @@
   - if @quiz.school == current_user
     = breadcrumbs link_to("Kvizovi", quizzes_path), @quiz.name
   - else
-    = breadcrumbs link_to("Kvizovi", quizzes_path(scope: "all")), "#{@quiz.name} (#{@quiz.school.name})"
+    = breadcrumbs link_to("Kvizovi", quizzes_path(scope: "other")), "#{@quiz.name} (#{@quiz.school.name})"
 - else
   = breadcrumbs link_to("Kvizovi", quizzes_path), link_to(@quiz.name, quiz_questions_path(@quiz)), @title
 

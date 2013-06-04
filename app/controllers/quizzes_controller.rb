@@ -4,7 +4,7 @@ class QuizzesController < ApplicationController
   before_filter :authorize_user!, only: [:edit, :update, :delete, :destroy]
 
   def index
-    @quizzes = params[:scope].blank? ? @user.quizzes : Quiz.order_by_school
+    @quizzes = params[:scope].blank? ? @user.quizzes : Quiz.not_owned_by(@user).order_by_school
     @quizzes = @quizzes.includes(:school).descending.paginate(per_page: 15, page: params[:page])
   end
 

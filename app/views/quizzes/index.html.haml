@@ -5,7 +5,7 @@
 
   %ul.nav.nav-pills.pull-right
     %li{class: ("active" if params[:scope].blank?)}= link_to "Moji kvizovi", scope: nil
-    %li{class: ("active" if params[:scope] == "all")}= link_to "Svi kvizovi", scope: "all"
+    %li{class: ("active" if params[:scope] == "other")}= link_to "Ostali kvizovi", scope: "other"
 
 - if @quizzes.any?
 
