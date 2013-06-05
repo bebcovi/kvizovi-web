@@ -75,6 +75,7 @@ Lektire::Application.routes.draw do
   end
 
   resource :email
+  resources :surveys
 
   ########################
   # Static pages
@@ -84,8 +85,6 @@ Lektire::Application.routes.draw do
     get "contact"
     get "blog"
   end
-
-  resources :surveys
 
   ########################
   # Admin
@@ -97,7 +96,9 @@ Lektire::Application.routes.draw do
   end
   resources :posts
 
+
   root to: "home#index"
+
 
   ########################
   # Error pages
