@@ -1,2 +1,7 @@
+%ul.nav.pull-left
+
 %ul.nav.pull-right
-  = render "contact"
+  = active_content_tag :li, params[:action] == "tour" do
+    = link_to "Vodič", tour_path
+  = active_content_tag :li, params[:action] == "contact" do
+    = link_to "Kontakt", contact_path

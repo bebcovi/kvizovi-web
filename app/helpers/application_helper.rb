@@ -56,4 +56,8 @@ module ApplicationHelper
       yield(f)
     end
   end
+
+  def active_content_tag(tag_name, active, options = {}, &block)
+    content_tag tag_name, {class: ("active" if active)}.merge(options), &block
+  end
 end

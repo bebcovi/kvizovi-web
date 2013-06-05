@@ -1,3 +1,0 @@
-%li{class: ("active" if params[:controller] == "surveys")}
-  - tooltip_attrs = {toggle: "tooltip", title: "Pomognite nam u testiranju :)", placement: "bottom", trigger: "manual"}
-  = link_to "Anketa", new_survey_path, data: (tooltip_attrs unless params[:controller] == "surveys")
