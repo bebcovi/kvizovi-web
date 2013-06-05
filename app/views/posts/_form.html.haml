@@ -1,0 +1,8 @@
+= simple_form_for @post do |f|
+
+  = f.input :title
+  = f.input :body
+
+  = buttons do
+    = cancel_button "Odustani", blog_path
+    = submit_button "Spremi"

@@ -1,0 +1,6 @@
+hr:
+  simple_form:
+    labels:
+      post:
+        title: "Naslov"
+        body: "Sadržaj"

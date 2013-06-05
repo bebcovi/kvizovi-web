@@ -27,3 +27,6 @@ hr:
         create:
           success: "Anketa je uspješno poslana. Hvala na pomoći :)"
           error: "Neka polja nisu ispravno popunjena."
+      posts:
+        unauthorized:
+          error: "Nemate ovlasti za mijenjati blog postove."

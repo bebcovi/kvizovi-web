@@ -1,14 +1,15 @@
-Given(/^I'm registered$/) do
+Given(/^I'm registered( as an admin)?$/) do |admin|
   @user = Factory.create(@user_type)
+  @user.update_column(:admin, true) if admin
 end
 
 Given(/^my school is registered$/) do
   @school = Factory.create(:school)
 end
 
-Given(/^I'm registered and logged in$/) do
+Given(/^I'm registered and logged in( as an admin)?$/) do |admin|
   steps %Q{
-    When I'm registered
+    Given I'm registered#{admin}
     And I'm logged in
   }
 end

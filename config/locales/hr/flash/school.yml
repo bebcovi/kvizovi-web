@@ -60,3 +60,12 @@ hr:
       played_quizzes:
         show:
           error: "Ovaj odigrani kviz je nedostupan, jer je jedan od igrača izbrisao svoj korisnički račun."
+      posts:
+        unauthorized:
+          error: "Nemate ovlasti za mijenjati blog postove."
+        create:
+          success: "Blog post je uspješno stvoren."
+        update:
+          success: "Blog post je uspješno izmijenjen."
+        destroy:
+          success: "Blog post je uspješno izbrisan."

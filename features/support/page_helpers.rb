@@ -21,6 +21,8 @@ module PageHelpers
       admin_schools_url
     when /survey page/
       surveys_url(subdomain: @user_type)
+    when /blog page/
+      blog_url(subdomain: @user_type)
     else raise "Page isn't recognized: #{page}"
     end
   end

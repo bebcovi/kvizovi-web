@@ -31,6 +31,8 @@ class School < ActiveRecord::Base
   has_many :questions
   has_many :played_quizzes, through: :quizzes
   has_one :survey, as: :user
+  has_many :readings, as: :user, dependent: :destroy
+  has_many :read_posts, through: :readings, source: :post
 
   has_secure_password
 
@@ -55,5 +57,9 @@ class School < ActiveRecord::Base
 
   def completed_survey?
     survey.present?
+  end
+
+  def unread_posts
+    Post.not_in(read_posts)
   end
 end

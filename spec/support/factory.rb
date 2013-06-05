@@ -40,12 +40,18 @@ FactoryGirl.define do
   factory :played_quiz
   factory :quiz_snapshot
 
+  factory :post
+
   trait :with_school do
     school
   end
 
   trait :with_quiz do
     school
+  end
+
+  trait :admin do
+    admin true
   end
 end
 

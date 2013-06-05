@@ -60,4 +60,8 @@ module ApplicationHelper
   def active_content_tag(tag_name, active, options = {}, &block)
     content_tag tag_name, {class: ("active" if active)}.merge(options), &block
   end
+
+  def current_user_admin?
+    user_logged_in? && current_user.admin?
+  end
 end

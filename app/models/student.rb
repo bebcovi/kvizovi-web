@@ -6,6 +6,8 @@ class Student < ActiveRecord::Base
   belongs_to :school
   has_and_belongs_to_many :played_quizzes
   has_one :survey, as: :user
+  has_many :readings, as: :user, dependent: :destroy
+  has_many :read_posts, through: :readings, source: :post
 
   has_secure_password
   attr_accessor :school_key
@@ -41,6 +43,14 @@ class Student < ActiveRecord::Base
 
   def completed_survey?
     survey.present?
+  end
+
+  def unread_posts
+    Post.not_in(read_posts)
+  end
+
+  def admin?
+    false
   end
 
   private

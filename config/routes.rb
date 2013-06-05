@@ -82,6 +82,7 @@ Lektire::Application.routes.draw do
   controller :static_pages do
     get "tour"
     get "contact"
+    get "blog"
   end
 
   resources :surveys
@@ -94,6 +95,7 @@ Lektire::Application.routes.draw do
 
     resources :schools
   end
+  resources :posts
 
   root to: "home#index"
 

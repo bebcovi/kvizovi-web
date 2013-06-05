@@ -7,6 +7,9 @@
     = link_to "Odigrani kvizovi", played_quizzes_path
 
 %ul.nav.pull-right
+  = active_content_tag :li, params[:controller] == "blog" do
+    = link_to "Blog", blog_path
+    = content_tag :span, current_user.unread_posts.count, class: "badge badge-info" if current_user.unread_posts.any?
   - unless current_user.completed_survey?
     = active_content_tag :li, params[:controller] == "surveys" do
       = link_to "Anketa", new_survey_path, data: ({toggle: "tooltip", title: "Pomognite nam u testiranju :)", placement: "bottom", trigger: "manual"} unless params[:controller] == "surveys")

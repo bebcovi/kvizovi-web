@@ -88,6 +88,39 @@ CREATE TABLE played_quizzes_students (
 
 
 --
+-- Name: posts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE posts (
+    id integer NOT NULL,
+    title character varying(255),
+    body text,
+    "position" integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE posts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
+
+
+--
 -- Name: questions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -191,6 +224,37 @@ ALTER SEQUENCE quizzes_id_seq OWNED BY quizzes.id;
 
 
 --
+-- Name: readings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE readings (
+    id integer NOT NULL,
+    user_id integer,
+    user_type integer,
+    post_id integer
+);
+
+
+--
+-- Name: readings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE readings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: readings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE readings_id_seq OWNED BY readings.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -216,7 +280,8 @@ CREATE TABLE schools (
     region character varying(255),
     email character varying(255),
     notified boolean DEFAULT true,
-    password_reset_confirmation_id character varying(255)
+    password_reset_confirmation_id character varying(255),
+    admin boolean DEFAULT false
 );
 
 
@@ -388,6 +453,13 @@ ALTER TABLE ONLY played_quizzes ALTER COLUMN id SET DEFAULT nextval('played_quiz
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY questions ALTER COLUMN id SET DEFAULT nextval('questions_id_seq'::regclass);
 
 
@@ -403,6 +475,13 @@ ALTER TABLE ONLY quiz_snapshots ALTER COLUMN id SET DEFAULT nextval('quiz_snapsh
 --
 
 ALTER TABLE ONLY quizzes ALTER COLUMN id SET DEFAULT nextval('quizzes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY readings ALTER COLUMN id SET DEFAULT nextval('readings_id_seq'::regclass);
 
 
 --
@@ -449,6 +528,14 @@ ALTER TABLE ONLY played_quizzes
 
 
 --
+-- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY posts
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -470,6 +557,14 @@ ALTER TABLE ONLY quiz_snapshots
 
 ALTER TABLE ONLY quizzes
     ADD CONSTRAINT quizzes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: readings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY readings
+    ADD CONSTRAINT readings_pkey PRIMARY KEY (id);
 
 
 --
@@ -659,3 +754,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130529003303');
 INSERT INTO schema_migrations (version) VALUES ('20130529093316');
 
 INSERT INTO schema_migrations (version) VALUES ('20130604173444');
+
+INSERT INTO schema_migrations (version) VALUES ('20130604194303');
+
+INSERT INTO schema_migrations (version) VALUES ('20130604222432');
+
+INSERT INTO schema_migrations (version) VALUES ('20130605083739');
