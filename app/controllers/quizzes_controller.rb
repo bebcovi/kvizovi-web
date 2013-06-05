@@ -1,7 +1,7 @@
 class QuizzesController < ApplicationController
   before_filter :authenticate!
   before_filter :assign_user
-  before_filter :authorize_user!, only: [:edit, :update, :delete, :destroy]
+  before_filter :authorize!, only: [:edit, :update, :delete, :destroy]
 
   def index
     @quizzes = params[:scope].blank? ? @user.quizzes : Quiz.not_owned_by(@user).order_by_school
@@ -59,7 +59,7 @@ class QuizzesController < ApplicationController
     @user = current_user
   end
 
-  def authorize_user!
+  def authorize!
     if not @user.quizzes.exists?(params[:id])
       redirect_to :back, alert: flash_error("unauthorized")
     end

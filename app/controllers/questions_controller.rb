@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_filter :authenticate!
   before_filter :assign_quiz
-  before_filter :authorize_user!, except: [:index, :download_location, :download]
+  before_filter :authorize!, except: [:index, :download_location, :download]
 
   def index
     @questions = @quiz.questions.ascending
@@ -75,7 +75,7 @@ class QuestionsController < ApplicationController
     @quiz = Quiz.find(params[:quiz_id])
   end
 
-  def authorize_user!
+  def authorize!
     if @quiz.school != current_user
       redirect_to :back, alert: flash_error("unauthorized")
     end
