@@ -281,7 +281,8 @@ CREATE TABLE schools (
     email character varying(255),
     notified boolean DEFAULT true,
     password_reset_confirmation_id character varying(255),
-    admin boolean DEFAULT false
+    admin boolean DEFAULT false,
+    completed_survey boolean DEFAULT false
 );
 
 
@@ -321,7 +322,8 @@ CREATE TABLE students (
     gender character varying(255),
     year_of_birth integer,
     password_reset_confirmation_id character varying(255),
-    email character varying(255)
+    email character varying(255),
+    completed_survey boolean DEFAULT false
 );
 
 
@@ -383,8 +385,6 @@ ALTER SEQUENCE survey_fields_id_seq OWNED BY survey_fields.id;
 
 CREATE TABLE surveys (
     id integer NOT NULL,
-    user_id integer,
-    user_type character varying(255),
     created_at timestamp without time zone
 );
 
@@ -760,3 +760,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130604194303');
 INSERT INTO schema_migrations (version) VALUES ('20130604222432');
 
 INSERT INTO schema_migrations (version) VALUES ('20130605083739');
+
+INSERT INTO schema_migrations (version) VALUES ('20130605102955');
+
+INSERT INTO schema_migrations (version) VALUES ('20130605103112');
+
+INSERT INTO schema_migrations (version) VALUES ('20130605103450');
