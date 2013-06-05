@@ -39,4 +39,9 @@ Lektire::Application.configure do
   config.action_mailer.delivery_method = :letter_opener
 
   config.action_mailer.default_url_options = {host: "lvh.me:3000"}
+
+  # Caching configuration
+  config.action_controller.perform_caching = true
+  config.cache_store = :memory_store
+  config.action_view.cache_template_loading = false
 end

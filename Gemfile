@@ -27,6 +27,7 @@ gem "redcarpet", ">= 2"
 gem "will_paginate", ">= 3"
 gem "bootstrap-will_paginate"
 gem "draper"
+gem "cache_digests"
 
 # Database
 gem "pg"

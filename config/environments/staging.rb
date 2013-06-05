@@ -67,12 +67,10 @@ Lektire::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.paperclip_defaults = {
-    storage: :dropbox,
-    dropbox_credentials: "#{Rails.root}/config/dropbox.yml",
-    dropbox_options: {
-      path: ->(style) { "#{ENV["DROPBOX_DIR"]}/#{id}_#{image.original_filename}" }
-    }
-  }
   config.action_mailer.delivery_method = :smtp
+
+  # Caching configuration
+  config.action_controller.perform_caching = true
+  config.cache_store = :memory_store
+  config.action_view.cache_template_loading = true
 end
