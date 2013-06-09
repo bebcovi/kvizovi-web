@@ -1,5 +1,16 @@
 require "capybara"
 require "capybara/cucumber"
+require "capybara/poltergeist"
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, js_errors: false)
+end
+
+Capybara.javascript_driver = :poltergeist
+
+Before("@javascript") do |scenario|
+  host! "lvh.me:#{Capybara.current_session.server.port}"
+end
 
 Capybara.add_selector :record do
   xpath { |record| XPath.css("#" + ActionController::RecordIdentifier.dom_id(record)) }

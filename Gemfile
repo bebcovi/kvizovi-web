@@ -58,6 +58,7 @@ group :test do
   gem "vcr"
   gem "webmock", ">= 1.8", "< 1.10"
   gem "timecop"
+  gem "poltergeist", ">= 1.3"
 end
 
 # Development stuff

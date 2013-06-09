@@ -3,9 +3,9 @@ require File.expand_path("../boot", __FILE__)
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
-require "sprockets/railtie" unless Rails.env.test?
+require "sprockets/railtie"
 
-Bundler.require(:assets) unless Rails.env.test?
+Bundler.require(:assets)
 
 require "will_paginate/railtie"
 require "bootstrap-will_paginate"
