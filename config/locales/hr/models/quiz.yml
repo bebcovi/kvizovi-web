@@ -12,4 +12,8 @@ hr:
     labels:
       quiz:
         name: "Naziv"
+        category: "Predmet"
         activated: "Vidljiv"
+    placeholders:
+      quiz:
+        category: "Npr. Hrvatski jezik, Kemija..."

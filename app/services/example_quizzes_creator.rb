@@ -44,7 +44,7 @@ class ExampleQuizzesCreator
         answer: "Edip",
       )
 
-      quiz = @school.quizzes.create!(name: "Antigona")
+      quiz = @school.quizzes.create!(name: "Antigona", category: "Hrvatski jezik")
       quiz.questions = questions
     end
   end

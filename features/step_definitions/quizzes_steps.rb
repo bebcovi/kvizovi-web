@@ -29,6 +29,7 @@ end
 When(/^I create a quiz$/) do
   click_on "Novi kviz"
   fill_in "Naziv", with: "Name"
+  fill_in "Predmet", with: "Hrvatski jezik"
   click_on "Spremi"
   @quiz = @user.quizzes.last
 end

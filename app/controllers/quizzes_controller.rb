@@ -10,6 +10,8 @@ class QuizzesController < ApplicationController
 
   def new
     @quiz = @user.quizzes.new
+    @last_category = @user.quizzes.last_category
+    @existing_categories = Quiz.existing_categories
   end
 
   def create
@@ -25,6 +27,7 @@ class QuizzesController < ApplicationController
 
   def edit
     @quiz = @user.quizzes.find(params[:id])
+    @existing_categories = Quiz.existing_categories
   end
 
   def update
