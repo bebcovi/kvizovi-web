@@ -9,6 +9,7 @@ class PlayedQuizzesController < ApplicationController
       descending.
       includes(:quiz_snapshot, :students).
       paginate(page: params[:page], per_page: 15)
+    @played_quizzes = PaginationDecorator.decorate(@played_quizzes)
   end
 
   def show
