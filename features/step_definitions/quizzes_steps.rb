@@ -1,8 +1,15 @@
 require "rack/test"
 
-Given(/^my school has created a quiz for me$/) do
+Given(/^(?:my|our) school has created a quiz for (?:me|us)$/) do
   @quiz = Factory.create(:quiz, school: @user.school)
   @quiz.questions = create_questions(6)
+  refresh
+end
+
+Given(/^that school has created a quiz$/) do
+  @quiz = Factory.create(:quiz, school: @other_school)
+  @quiz.questions = create_questions(1)
+  refresh
 end
 
 Given(/^I have a quiz$/) do

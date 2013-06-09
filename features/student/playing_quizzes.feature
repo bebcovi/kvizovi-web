@@ -7,29 +7,40 @@ Feature: Playing quizzes
 
   Background:
     Given I'm registered and logged in
-    And my school has created a quiz for me
 
   Scenario: Single player
+    Given my school has created a quiz for me
     When I begin the quiz in single player
     And I answer all questions correctly
     Then I should get all points
 
   Scenario: Multi player
-    When I begin the quiz in multi player
+    Given our school has created a quiz for us
+    When we begin the quiz in multi player
     And we answer all questions correctly
     Then we should get all points
 
   Scenario: Not getting all points
+    Given my school has created a quiz for me
     When I begin the quiz
     And I answer all questions incorrectly
     Then I should not get any points
 
   Scenario: Aborting
+    Given my school has created a quiz for me
     When I begin the quiz
     And I interrupt it
     Then I should be on the page for playing quizzes
 
   Scenario: The quiz gets deleted in the meanwhile
+    Given my school has created a quiz for me
     When I begin the quiz
     But in the meanwhile the quiz gets deleted
     Then I should still be able to play it
+
+  @javascript
+  Scenario: Playing quizzes from other schools
+    Given there is another school registered
+    And that school has created a quiz
+    Then I should see it in the list of available quizzes
+    And I should be able to play it

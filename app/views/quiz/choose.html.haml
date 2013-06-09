@@ -2,29 +2,37 @@
 
 %h1 Zdravo :)
 
-- if @quizzes.any?
+= simple_form_for @quiz_specification, url: start_quiz_path do |f|
 
-  = simple_form_for @quiz_specification, url: start_quiz_path do |f|
+  %section.quizzes
+    %p Odaberi kviz:
 
-    %section.quizzes
-      %p Odaberi kviz:
-      = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
+    %div.taggable
+      %ul.nav.nav-tabs
+        %li.active= link_to "Moja škola", "#my", data: {toggle: "tab"}
+        %li= link_to "Druge škole", "#other", data: {toggle: "tab"}
+      %div.tab-content
+        %div.tab-pane.active#my
+          - if @quizzes.any?
+            = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
+          - else
+            %p Vaša škola još nije napravila kvizove.
+        %div.tab-pane#other
+          - if @other_quizzes.any?
+            = f.input :quiz_id, collection: @other_quizzes, as: :radio_buttons, label: false
+          - else
+            %p Druge škole još nisu napravile kvizove.
 
-    %section.players.js-hidden
-      %p Igraš li sam ili još s nekim?
-      = f.input :students_count, collection: [["Samo ja", 1], ["Još netko", 2]], as: :radio_buttons, label: false
+  %section.players.js-hidden
+    %p Igraš li sam ili još s nekim?
+    = f.input :students_count, collection: [["Samo ja", 1], ["Još netko", 2]], as: :radio_buttons, label: false
 
-    %section.login.js-hidden
-      %p Daj drugom igraču da se prijavi:
-      = f.error(:students_credentials) if f.error(:students_credentials)
-      = f.simple_fields_for :students_credentials, index: nil do |p|
-        = p.input :username, input_html: {value: (params[:quiz_specification][:students_credentials].first[:username] if params[:action] == "prepare")}
-        = p.input :password
+  %section.login.js-hidden
+    %p Daj drugom igraču da se prijavi:
+    = f.error(:students_credentials) if f.error(:students_credentials)
+    = f.simple_fields_for :students_credentials, index: nil do |p|
+      = p.input :username, input_html: {value: (params[:quiz_specification][:students_credentials].first[:username] if params[:action] == "prepare")}
+      = p.input :password
 
-    = buttons class: "js-hidden" do
-      = submit_button raw("Započni kviz#{content_tag :strong, "", class: "name"}!")
-
-- else
-
-  %p.no-items
-    Nema još kvizova za igrati...
+  = buttons class: "js-hidden" do
+    = submit_button raw("Započni kviz#{content_tag :strong, "", class: "name"}!")

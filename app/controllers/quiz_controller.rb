@@ -8,6 +8,7 @@ class QuizController < ApplicationController
   def choose
     @quiz_specification = QuizSpecification.new
     @quizzes = @student.school.quizzes.activated
+    @other_quizzes = Quiz.not_owned_by(@student.school).activated
   end
 
   def start

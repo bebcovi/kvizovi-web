@@ -27,14 +27,12 @@ def create_played_quiz(quiz, students)
 end
 
 When(/^I begin the quiz in single player$/) do
-  refresh
   choose @quiz.name
   choose "Samo ja"
   click_on "Započni kviz"
 end
 
-When(/^I begin the quiz in multi player$/) do
-  refresh
+When(/^we begin the quiz in multi player$/) do
   player = Factory.create(:other_student, school: @user.school)
   choose @quiz.name
   choose "Još netko"
@@ -122,6 +120,26 @@ Then(/^(I|we) should not get any points$/) do |who|
 end
 
 Then(/^I should still be able to play it$/) do
+  loop do
+    click_on "Odgovori"
+    if page.has_link?("Sljedeće pitanje")
+      click_on "Sljedeće pitanje"
+    else
+      click_on "Rezultati"
+      break
+    end
+  end
+end
+
+Then(/^I should see it in the list of available quizzes$/) do
+  click_on "Druge škole"
+  expect(find("#other")).to have_content(@quiz.name)
+end
+
+Then(/^I should be able to play it$/) do
+  steps %Q{
+    When I begin the quiz
+  }
   loop do
     click_on "Odgovori"
     if page.has_link?("Sljedeće pitanje")

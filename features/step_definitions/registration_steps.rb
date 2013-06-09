@@ -7,6 +7,10 @@ Given(/^my school is registered$/) do
   @school = Factory.create(:school)
 end
 
+Given(/^there is another school registered$/) do
+  @other_school = Factory.create(:school)
+end
+
 Given(/^I'm registered and logged in( as an admin)?$/) do |admin|
   steps %Q{
     Given I'm registered#{admin}
