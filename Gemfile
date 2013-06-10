@@ -35,7 +35,6 @@ gem "paperclip", ">= 3.3"
 gem "paperclip-dropbox", "~> 1.0"
 gem "activerecord-postgres-hstore"
 gem "squeel", ">= 1"
-gem "paper_trail", ">= 2.7"
 gem "redis", ">= 3"
 gem "acts_as_list", ">= 0.2"
 

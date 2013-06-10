@@ -31,14 +31,6 @@ Feature: Questions
       | an image question with image file |
       | a text question                   |
 
-  Scenario: Undoing question delete
-    When I create an image question
-    And I delete that question
-    Then I should see an undo link
-
-    When I click on the undo link
-    Then I should see that question again
-
   Scenario: Ordering questions
     Given my quiz has some questions
     When I go to the questions page

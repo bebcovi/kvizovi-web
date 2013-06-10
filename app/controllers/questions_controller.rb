@@ -62,14 +62,10 @@ class QuestionsController < ApplicationController
   def destroy
     @question = @quiz.questions.find(params[:id])
     @question.destroy
-    redirect_to quiz_questions_path(@quiz), notice: "#{flash_success} #{undo_link}"
+    redirect_to quiz_questions_path(@quiz), notice: flash_success
   end
 
   private
-
-  def undo_link
-    view_context.link_to "Vrati", revert_version_path(@question.versions.scoped.last), method: :post
-  end
 
   def assign_quiz
     @quiz = Quiz.find(params[:quiz_id])

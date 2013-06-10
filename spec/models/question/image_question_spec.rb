@@ -2,8 +2,6 @@ require "spec_helper"
 require "active_support/core_ext/numeric/bytes"
 
 describe ImageQuestion do
-  enable_paper_trail
-
   before do
     @it = Factory.build(:image_question)
   end
@@ -54,15 +52,6 @@ describe ImageQuestion do
       @it.save!(validate: false)
       @it.content = "Content"
       @it.save!(validate: false)
-      expect(@it.image_width).to be_present
-    end
-
-    it "can revert destroy" do
-      @it = Factory.create(:image_question, image: uploaded_file("image.jpg", "image/jpeg"))
-      @it.destroy
-      @it = @it.versions.last.reify
-      @it.save!(validate: false)
-      expect(@it.image.path).to satisfy { |path| File.exists?(path) }
       expect(@it.image_width).to be_present
     end
   end

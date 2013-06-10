@@ -159,9 +159,6 @@ GEM
     mime-types (1.23)
     multi_json (1.7.3)
     nokogiri (1.5.9)
-    paper_trail (2.7.1)
-      activerecord (~> 3.0)
-      railties (~> 3.0)
     paperclip (3.4.1)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -293,7 +290,6 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   nokogiri
-  paper_trail (>= 2.7)
   paperclip (>= 3.3)
   paperclip-dropbox (~> 1.0)
   pg

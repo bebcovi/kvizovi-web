@@ -1,4 +1,3 @@
-require "paper_trail"
 require "squeel"
 require "acts_as_list"
 
@@ -8,7 +7,6 @@ class Question < ActiveRecord::Base
 
   belongs_to :quiz
 
-  has_paper_trail on: [:destroy]
   acts_as_list scope: :quiz
   serialize :data, Hash
 
