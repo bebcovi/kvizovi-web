@@ -18,6 +18,7 @@ require_relative "initializers/sass"
 if Rails.env.development?
   require "better_errors"
   require "xray-rails"
+  require "pry-rails"
 end
 
 module Lektire
