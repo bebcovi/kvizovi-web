@@ -1,7 +1,3 @@
-Given(/^I'm on my profile$/) do
-  click_on "Uredi profil"
-end
-
 When(/^I update my profile$/) do
   fill_in "Ime", with: "New name"
   click_on "Spremi"
@@ -16,7 +12,7 @@ end
 
 When(/^I log in again with the updated password$/) do
   click_on "Odjava"
-  visit login_url(subdomain: @user_type)
+  visit login_url
   fill_in "Korisničko ime", with: @user.username
   fill_in "Lozinka",        with: "new password"
   click_on "Prijava"

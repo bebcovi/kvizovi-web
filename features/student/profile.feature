@@ -7,7 +7,7 @@ Feature: Profile
 
   Background:
     Given I'm registered and logged in
-    Given I'm on my profile
+    And I'm on my profile
 
   Scenario: Updating profile
     When I click on "Izmijeni profil"

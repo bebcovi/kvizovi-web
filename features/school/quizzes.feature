@@ -35,7 +35,7 @@ Feature: Quizzes
 
   Scenario: Accessing quizzes from other schools
     Given I have a quiz
-    And another school is registered
+    And there is another school registered
     And that school also has a quiz
 
     When I visit the quizzes page

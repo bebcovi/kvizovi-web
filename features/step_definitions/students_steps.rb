@@ -1,8 +1,9 @@
 Given(/^I have some students$/) do
-  Factory.create_list(:student, 3, school: @user)
+  FactoryGirl.create_list(:student, 3, school: @user)
 end
 
 When(/^I go to the page for viewing students$/) do
+  ensure_on quizzes_url
   click_on "Učenici"
 end
 

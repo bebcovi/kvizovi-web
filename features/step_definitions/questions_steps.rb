@@ -1,10 +1,11 @@
 Given(/^my quiz has some questions$/) do
-  Factory.create(:question, quiz: @quiz, content: "Question 1")
-  Factory.create(:question, quiz: @quiz, content: "Question 2")
-  Factory.create(:question, quiz: @quiz, content: "Question 3")
+  FactoryGirl.create(:question, quiz: @quiz, content: "Question 1")
+  FactoryGirl.create(:question, quiz: @quiz, content: "Question 2")
+  FactoryGirl.create(:question, quiz: @quiz, content: "Question 3")
 end
 
 When(/^I create a boolean question$/) do
+  ensure_on quizzes_url
   within(@quiz) { click_on "Pitanja" }
   click_on "Točno/netočno"
   fill_in "Tekst pitanja", with: "Are you a stupidhead?"
@@ -14,7 +15,7 @@ When(/^I create a boolean question$/) do
 end
 
 When(/^I create a choice question$/) do
-  visit quiz_questions_url(@quiz, subdomain: @user_type)
+  visit quiz_questions_url(@quiz)
   click_on "Ponuđeni odgovori"
   fill_in "Tekst pitanja",      with: "Are you a stupidhead?"
   fill_in "Ponuđeni odgovor 1", with: "No"
@@ -26,7 +27,7 @@ When(/^I create a choice question$/) do
 end
 
 When(/^I create an association question$/) do
-  visit quiz_questions_url(@quiz, subdomain: @user_type)
+  visit quiz_questions_url(@quiz)
   click_on "Asocijacija"
   fill_in "Tekst pitanja",  with: "Are you a stupidhead?"
   fill_in("Asocijacija 1a", with: "Uhm..."); fill_in("Asocijacija 1b", with: "Yes")
@@ -38,12 +39,12 @@ When(/^I create an association question$/) do
 end
 
 When(/^I create an image question with (.*)$/) do |image_input|
-  visit quiz_questions_url(@quiz, subdomain: @user_type)
+  visit quiz_questions_url(@quiz)
   click_on "Pogodi tko/što je na slici"
   fill_in "Tekst pitanja", with: "Are you a stupidhead?"
   case image_input
   when "image url"  then fill_in "URL od slike", with: "http://3.bp.blogspot.com/-bnKL0iosAc8/UOmO_a_ujuI/AAAAAAAAmVI/R5aNBx_yx2w/s1600/flbp-girls-women-sexy-9.jpg"
-  when "image file" then attach_file "Slika", Rails.root.join("features/support/fixtures/files/clint_eastwood.jpg")
+  when "image file" then attach_file "Slika", file_path("robb.jpg")
   end
   fill_in "Odgovor", with: "Yes"
   click_on "Spremi"
@@ -55,7 +56,7 @@ When(/^I create an image question$/) do
 end
 
 When(/^I create a text question$/) do
-  visit quiz_questions_url(@quiz, subdomain: @user_type)
+  visit quiz_questions_url(@quiz)
   click_on "Upiši točan odgovor"
   fill_in "Tekst pitanja", with: "Are you a stupidhead?"
   fill_in "Odgovor", with: "Yes"
@@ -73,10 +74,6 @@ When(/^I delete that question$/) do
   within(@question) { click_on "Izbriši" }
 end
 
-When(/^I click on the undo link$/) do
-  click_on "Vrati"
-end
-
 When(/^I change the order of my questions$/) do
   fill_in "quiz_questions_attributes_0_position", with: "1"
   fill_in "quiz_questions_attributes_1_position", with: "3"
@@ -88,7 +85,7 @@ Then(/^I should be on the questions page$/) do
   expect(page.driver.request.request_method).to eq "GET"
 end
 
-Then(/^I should see that question(?: again)?$/) do
+Then(/^I should see that question$/) do
   expect(page).to have_content("Are you a stupidhead?")
 end
 
@@ -100,53 +97,8 @@ Then(/^I should not see that question$/) do
   expect(page).not_to have_content(@question.content)
 end
 
-Then(/^I should see an undo link$/) do
-  expect(page).to have_content("Vrati")
-end
-
 Then(/^the order of questions should be different$/) do
-  expect(all(".boolean_question").to_a.first).to have_content("Question 1")
-  expect(all(".boolean_question").to_a.second).to have_content("Question 3")
-  expect(all(".boolean_question").to_a.third).to have_content("Question 2")
-end
-
-def create_questions(number)
-  question_creations = [
-    proc do
-      ChoiceQuestion.create!(
-        content: "Eliminate the bastard.",
-        provided_answers: ["Jon Snow", "Robb Stark", "Bran Stark", "Ned Stark"],
-      )
-    end, proc do
-      AssociationQuestion.create!(
-        content: "Connect Game of Thrones characters:",
-        associations: {
-          "Sansa Stark"      => %("...but I don't want anyone smart, brave or good looking, I want Joffrey!"),
-          "Tywin Lannister"  => %("Attacking Ned Stark in the middle of King Landing was stupid. Lannisters don't do stupid things."),
-          "Tyrion Lannister" => %("Why is every god so vicious? Why aren't there gods of tits and wine?"),
-          "Cercei Lannister" => %("Everyone except us is our enemy."),
-        },
-      )
-    end, proc do
-      BooleanQuestion.create!(
-        content: "Stannis Baratheon won the war against King's Landing.",
-        answer: false,
-      )
-    end, proc do
-      ImageQuestion.create!(
-        content: "Who is in the photo?",
-        image: Rack::Test::UploadedFile.new(Rails.root.join("features/support/fixtures/files/clint_eastwood.jpg"), "image/jpeg"),
-        answer: "Clint Eastwood",
-      )
-    end, proc do
-      TextQuestion.create!(
-        content: "Which family does Khaleesi belong to?",
-        answer: "Targaryen",
-      )
-    end,
-  ]
-
-  number.times.map do |idx|
-    question_creations[idx % 5].call
-  end
+  expect(all(".boolean_question").to_a[0]).to have_content("Question 1")
+  expect(all(".boolean_question").to_a[1]).to have_content("Question 3")
+  expect(all(".boolean_question").to_a[2]).to have_content("Question 2")
 end

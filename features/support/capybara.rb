@@ -9,7 +9,7 @@ end
 Capybara.javascript_driver = :poltergeist
 
 Before("@javascript") do |scenario|
-  host! "lvh.me:#{Capybara.current_session.server.port}"
+  host! "#{@user_type}.lvh.me:#{Capybara.current_session.server.port}"
 end
 
 Capybara.add_selector :record do

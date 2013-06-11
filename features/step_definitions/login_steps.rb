@@ -1,18 +1,10 @@
 Given(/^I'm logged in$/) do
-  visit login_url(subdomain: @user_type)
-  fill_in "Korisničko ime", with: @user.username
-  fill_in "Lozinka",        with: @user.password
-  click_on "Prijava"
-end
-
-When(/^I go to the login page/) do
-  visit root_url unless current_url == root_url
-  school  { click_on "Ja sam škola" }
-  student { click_on "Ja sam učenik" }
+  page.cookies.signed.permanent[:user_id] = @user.id
+  page.cookies.signed.permanent[:user_type] = @user.type
 end
 
 When(/^I log in$/) do
-  step "I go to the login page" unless current_path == login_path
+  ensure_on login_url
   fill_in "Korisničko ime", with: @user.username
   fill_in "Lozinka",        with: @user.password
   click_on "Prijava"
@@ -28,11 +20,9 @@ When(/^I fill in my login information$/) do
 end
 
 Then(/^I should be successfully logged in$/) do
-  school  { expect(current_path).to eq quizzes_path }
-  student { expect(current_path).to eq choose_quiz_path }
+  expect(current_url).to eq url_to("homepage")
 end
 
 Then(/^I should be logged out$/) do
-  expect(page).to have_content("Ja sam škola")
-  expect(page).to have_content("Ja sam učenik")
+  expect(current_url).to eq root_url(subdomain: false)
 end

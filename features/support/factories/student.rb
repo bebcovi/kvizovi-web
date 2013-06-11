@@ -9,12 +9,5 @@ FactoryGirl.define do
     password "wildlings"
     sequence(:email) { |n| "jon.snow#{n}@example.com" }
     school
-
-    factory :other_student do
-      first_name "Dranaerys"
-      last_name "Targaryen"
-      username "khaleesi"
-      password "dragons"
-    end
   end
-end if $load_factories
+end rescue nil

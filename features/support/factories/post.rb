@@ -3,4 +3,4 @@ FactoryGirl.define do
     title "Post title"
     body "Post body"
   end
-end if $load_factories
+end rescue nil

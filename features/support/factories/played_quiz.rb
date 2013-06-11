@@ -22,4 +22,4 @@ FactoryGirl.define do
       end
     end
   end
-end if $load_factories
+end rescue nil

@@ -1,7 +1,7 @@
 require "timecop"
 
 Given(/^a user is registered and had some activity on the site$/) do
-  @user = Factory.create(:user)
+  @user = FactoryGirl.create(:school)
   Timecop.freeze(30.minutes.ago) { browse_site }
 end
 

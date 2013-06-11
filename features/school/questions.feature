@@ -1,9 +1,9 @@
 @school
 Feature: Questions
 
-  In order for the application to make sense for me
+  In order to create quizzes for my students
   As a school
-  I want to be able to create questions in my quizzes
+  I want to be able to create questions for those quizzes
 
   Background:
     Given I'm registered and logged in

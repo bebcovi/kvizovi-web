@@ -1,14 +1,9 @@
 Given(/^there is a new blog post$/) do
-  @post = Factory.create(:post)
-  refresh
-end
-
-When(/^I visit the blog$/) do
-  click_on "Blog"
+  @post = FactoryGirl.create(:post)
 end
 
 When(/^I leave the blog$/) do
-  visit root_url(subdomain: @user.type)
+  visit url_to("homepage")
 end
 
 When(/^I create a new blog post$/) do

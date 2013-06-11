@@ -1,7 +1,5 @@
 require "factory_girl"
 
-puts "Loaded"
-
 FactoryGirl.factories.clear
 FactoryGirl.define do
   factory :school

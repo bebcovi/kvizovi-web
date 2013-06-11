@@ -1,25 +1,23 @@
 require "rack/test"
 
-Given(/^(?:my|our) school has created a quiz for (?:me|us)$/) do
-  @quiz = Factory.create(:quiz, school: @user.school)
-  @quiz.questions = create_questions(6)
-  refresh
+Given(/^(?:my|our) school has created a quiz for (?:me|us)( with all types of questions)?$/) do |all_types|
+  @quiz = FactoryGirl.create(:quiz, school: @user.school)
+  @quiz.questions = create_questions(all_types ? 6 : 1)
 end
 
 Given(/^that school has created a quiz$/) do
-  @quiz = Factory.create(:quiz, school: @other_school)
+  @quiz = FactoryGirl.create(:quiz, school: @other_school)
   @quiz.questions = create_questions(1)
-  refresh
 end
 
 Given(/^I have a quiz$/) do
-  @quiz = Factory.create(:quiz, school: @user)
+  @quiz = FactoryGirl.create(:quiz, school: @user)
   visit quizzes_url(subdomain: @user.type)
 end
 
 Given(/^that school(?: also)? has a quiz$/) do
-  @other_quiz = Factory.create(:quiz, name: "Other quiz", school: @other_school)
-  @question = Factory.create(:question, quiz: @other_quiz)
+  @other_quiz = FactoryGirl.create(:quiz, name: "Other quiz", school: @other_school)
+  @question = FactoryGirl.create(:question, quiz: @other_quiz)
 end
 
 When(/^in the meanwhile the quiz gets deleted$/) do

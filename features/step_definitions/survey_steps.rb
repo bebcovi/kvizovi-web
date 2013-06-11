@@ -1,11 +1,7 @@
-When(/^I click on the link for survey$/) do
-  click_on "Anketa"
-end
-
 When(/^I fill in the survey$/) do
   divs = all("div.survey_fields_answer")
 
-  school do
+  if school?
     within(divs[0])  { choose "Žensko" }
     within(divs[1])  { choose "Srednja škola" }
     within(divs[2])  { fill_in "Naziv škole", with: "XV. Gimnazija" }
@@ -26,9 +22,7 @@ When(/^I fill in the survey$/) do
     within(divs[17]) { choose "Djelomično bila od pomoći" }
     within(divs[18]) { choose "svi su pokazali podjednako znanje." }
     within(divs[19]) { (0..2).each { |n| choose "survey_fields_attributes_19_answer_#{n}_answer_jako_mi_se_svia" } }
-  end
-
-  student do
+  else
     within(divs[0])  { choose "Muško" }
     within(divs[1])  { choose "Srednja škola" }
     within(divs[2])  { fill_in "Naziv škole", with: "XV. Gimnazija" }
@@ -52,8 +46,4 @@ When(/^I fill in the survey$/) do
     within(divs[20]) { choose "Ništa, samo zabavu" }
     within(divs[21]) { choose "Ništa, samo zabavu" }
   end
-end
-
-Then(/^I should not see the link for the survey(?: anymore)?$/) do
-  expect(page).not_to have_link("Anketa")
 end

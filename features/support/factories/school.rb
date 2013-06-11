@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :school, aliases: [:user] do
+  factory :school do
     name     "MIOC"
     level    "Srednja"
     sequence(:username) { |n| "mioc#{n}" }
@@ -9,4 +9,4 @@ FactoryGirl.define do
     place    "Zagreb"
     region   "Grad Zagreb"
   end
-end if $load_factories
+end rescue nil

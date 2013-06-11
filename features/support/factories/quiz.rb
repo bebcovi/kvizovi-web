@@ -5,4 +5,4 @@ FactoryGirl.define do
     school
     activated true
   end
-end if $load_factories
+end rescue nil

@@ -54,4 +54,6 @@ Lektire::Application.configure do
   config.action_controller.perform_caching = true
   config.cache_store = :memory_store
   config.action_view.cache_template_loading = false
+
+  config.log_level = :error
 end
