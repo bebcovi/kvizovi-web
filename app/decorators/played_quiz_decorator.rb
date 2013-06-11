@@ -65,10 +65,6 @@ class PlayedQuizDecorator < Draper::Decorator
   end
 
   def questions_count
-    @questions_count ||= if has_answers?
-                           questions.count
-                         else
-                           question_answers.count
-                         end
+    @questions_count ||= has_answers? ? questions.count : question_answers.count
   end
 end

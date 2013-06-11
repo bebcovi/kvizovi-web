@@ -9,15 +9,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def log_in!(user)
-    {user_id: user.id, user_type: user.type}.each do |key, value|
-      cookies.signed.permanent[key] = {value: value, domain: :all}
-    end
+    cookies.signed.permanent[:user_id]   = {value: user.id, domain: :all}
+    cookies.signed.permanent[:user_type] = {value: user.type, domain: :all}
   end
 
   def log_out!
-    [:user_id, :user_type].each do |key|
-      cookies.delete(key, domain: :all)
-    end
+    cookies.delete(:user_id, domain: :all)
+    cookies.delete(:user_type, domain: :all)
   end
 
   def current_user
@@ -51,11 +49,12 @@ class ApplicationController < ActionController::Base
     cookies[:return_to] = {
       value:   request.fullpath,
       expires: 5.minutes.from_now,
+      domain:  :all,
     }
   end
 
   def return_point
-    cookies.delete(:return_to) || root_path
+    cookies.delete(:return_to, domain: :all) || root_path
   end
 
   def flash_success(*args) flash_message(:success, *args) end
@@ -84,10 +83,6 @@ class ApplicationController < ActionController::Base
     super
   end
 
-  def school?()  request.subdomain == "school"  end
-  def student?() request.subdomain == "student" end
-  helper_method :school?, :student?
-
   def root_path_for(user)
     case user
     when Student then choose_quiz_url(subdomain: "student")
@@ -107,9 +102,8 @@ class ApplicationController < ActionController::Base
 
   def delete_old_cookies
     unless cookies.instance_variable_get("@set_cookies").present?
-      [:user_id, :user_type].each do |key|
-        cookies.delete(key)
-      end
+      cookies.delete(:user_id)
+      cookies.delete(:user_type)
     end
   end
 

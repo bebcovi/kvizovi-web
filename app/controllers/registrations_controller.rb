@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_filter :authorize, if: :school?, only: :new
+  before_filter :authorize, only: :new
   before_filter :authenticate!, only: [:delete, :destroy]
 
   def new
@@ -39,22 +39,20 @@ class RegistrationsController < ApplicationController
   private
 
   def authorize
-    if not flash[:authorized]
-      redirect_to new_authorization_path
+    if request.subdomain == "school"
+      if not flash[:authorized]
+        redirect_to new_authorization_path
+      end
     end
   end
 
   def perform_callbacks(user)
-    case
-    when school?  then ExampleQuizzesCreator.new(user).create
-    when student? then
+    if user.is_a?(School)
+      ExampleQuizzesCreator.new(user).create
     end
   end
 
   def user_params
-    case
-    when school?  then params[:school]
-    when student? then params[:student]
-    end
+    params[request.subdomain]
   end
 end

@@ -24,9 +24,6 @@ class ProfilesController < ApplicationController
   private
 
   def user_params
-    case
-    when school?  then params[:school]
-    when student? then params[:student]
-    end
+    params[@user.type]
   end
 end
