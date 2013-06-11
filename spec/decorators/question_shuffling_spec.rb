@@ -11,7 +11,7 @@ end
 
 describe AssociationQuestionShuffling do
   before do
-    @question = Factory.build(:association_question)
+    @question = FactoryGirl.build(:association_question)
     @it = AssociationQuestionShuffling.new(@question)
   end
 
@@ -30,7 +30,7 @@ end
 
 describe ChoiceQuestionShuffling do
   before do
-    @question = Factory.build(:choice_question)
+    @question = FactoryGirl.build(:choice_question)
     @it = ChoiceQuestionShuffling.new(@question)
   end
 
@@ -48,21 +48,21 @@ end
 
 describe BooleanQuestionShuffling do
   before do
-    @question = Factory.build(:boolean_question)
+    @question = FactoryGirl.build(:boolean_question)
     @it = BooleanQuestionShuffling.new(@question)
   end
 end
 
 describe TextQuestionShuffling do
   before do
-    @question = Factory.build(:text_question)
+    @question = FactoryGirl.build(:text_question)
     @it = TextQuestionShuffling.new(@question)
   end
 end
 
 describe ImageQuestionShuffling do
   before do
-    @question = Factory.build(:image_question)
+    @question = FactoryGirl.build(:image_question)
     @it = ImageQuestionShuffling.new(@question)
   end
 

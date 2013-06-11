@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Student do
   before do
-    @it = Factory.build(:student)
+    @it = FactoryGirl.build(:student)
   end
 
   context "validations" do
@@ -23,7 +23,7 @@ describe Student do
       end
 
       it "validates uniqueness" do
-        Factory.create(:student, username: "john")
+        FactoryGirl.build(:student, username: "john").save(validate: false)
         @it.username = "john"
         expect(@it).to have(1).error_on(:username)
       end
@@ -109,7 +109,7 @@ describe Student do
       end
 
       it "validates uniqueness" do
-        Factory.create(:student, email: "student@example.com")
+        FactoryGirl.build(:student, email: "student@example.com").save(validate: false)
         @it.email = "student@example.com"
         expect(@it).to have(1).error_on(:email)
       end

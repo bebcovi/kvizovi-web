@@ -7,7 +7,7 @@ describe Login do
 
   context "validations" do
     it "validates authentication of user and assigns the user" do
-      user = Factory.create(:user, username: "janko", password: "secret")
+      user = FactoryGirl.create(:school, username: "janko", password: "secret")
       @it.user_class = user.class
 
       expect(@it).to be_valid

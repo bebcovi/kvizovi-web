@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe PostsController, user: :school do
   before do
-    @user = Factory.create(:school, :admin)
+    @user = FactoryGirl.create(:school, admin: true)
     login_as(@user)
   end
 
@@ -16,9 +16,8 @@ describe PostsController, user: :school do
     describe "#create" do
       context "when valid" do
         it "creates a post" do
-          expect do
-            post :create, post: {title: "Title", body: "Body"}
-          end.to change { Post.count }.by 1
+          post :create, post: {title: "Title", body: "Body"}
+          expect(Post.count).to eq 1
         end
       end
 
@@ -32,7 +31,7 @@ describe PostsController, user: :school do
 
   context "member" do
     before do
-      @post = Factory.create(:post)
+      @post = FactoryGirl.create(:post)
     end
 
     describe "#edit" do
@@ -43,9 +42,7 @@ describe PostsController, user: :school do
 
     describe "#update" do
       context "when valid" do
-        before do
-          Post.any_instance.stub(:valid?) { true }
-        end
+        before { valid!(Post) }
 
         it "updates the post" do
           expect do
@@ -55,6 +52,8 @@ describe PostsController, user: :school do
       end
 
       context "when invalid" do
+        before { invalid!(Post) }
+
         it "doesn't raise errors" do
           put :update, id: @post.id, post: {title: nil}
         end

@@ -2,17 +2,16 @@ require "spec_helper"
 
 describe PlayedQuizDecorator do
   before do
-    @context = stub.as_null_object
     @it = PlayedQuizDecorator.new(played_quiz)
   end
 
   let(:played_quiz) do
-    stub.tap do |played_quiz|
-      played_quiz.stub(:questions) { Array.new(4, TextQuestion.new(answer: "foo")) }
-      played_quiz.stub(:students) { Array.new(2, stub) }
-      played_quiz.stub(:question_answers) { ["foo", "foo", "bar", "foo"] }
-      played_quiz.stub(:has_answers?) { true }
-    end
+    stub(
+      questions:        FactoryGirl.build_list(:boolean_question, 4, answer: false),
+      students:         FactoryGirl.build_list(:student, 2),
+      question_answers: [false, false, true, false],
+      has_answers?:     true,
+    )
   end
 
   it "has results" do

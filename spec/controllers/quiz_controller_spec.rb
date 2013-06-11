@@ -2,10 +2,10 @@ require "spec_helper"
 
 describe QuizController, user: :student do
   before do
-    @school    = Factory.create(:school)
-    @student   = Factory.create(:student, school: @school)
-    @quiz      = Factory.create(:quiz, :activated, school: @school)
-    @questions = Factory.create_list(:question, 3, quiz: @quiz)
+    @school    = FactoryGirl.create(:school)
+    @student   = FactoryGirl.create(:student, school: @school)
+    @quiz      = FactoryGirl.create(:quiz, activated: true, school: @school)
+    @questions = FactoryGirl.create_list(:question, 3, quiz: @quiz)
 
     login_as(@student)
   end
@@ -19,25 +19,19 @@ describe QuizController, user: :student do
 
   describe "#start" do
     context "when valid" do
-      before do
-        @hash = {quiz_specification: {quiz_id: @quiz.id, students_count: 1}}
-      end
-
       it "prepares the quiz" do
         QuizPlay.any_instance.should_receive(:start!)
-        post :start, @hash
+        post :start, quiz_specification: {quiz_id: @quiz.id, students_count: 1}
       end
 
       it "redirects to quiz" do
-        post :start, @hash
+        post :start, quiz_specification: {quiz_id: @quiz.id, students_count: 1}
         expect(response).to redirect_to play_quiz_path
       end
     end
 
     context "when invalid" do
-      before do
-        QuizSpecification.any_instance.stub(:valid?) { false }
-      end
+      before { invalid!(QuizSpecification) }
 
       it "assigns quizzes" do
         post :start
@@ -100,7 +94,7 @@ describe QuizController, user: :student do
     describe "#results" do
       before do
         QuizPlay.new(cookies).finish!
-        @played_quiz = Factory.create(:played_quiz, quiz_snapshot: quiz_snapshot)
+        @played_quiz = FactoryGirl.create(:played_quiz, quiz_snapshot: quiz_snapshot)
       end
 
       it "doesn't raise errors" do
@@ -121,9 +115,7 @@ describe QuizController, user: :student do
       end
 
       context "quiz is not interrupted" do
-        before do
-          QuizPlay.any_instance.stub(:interrupted?) { false }
-        end
+        before { QuizPlay.any_instance.stub(:interrupted?) { false } }
 
         it "redirects to results" do
           delete :finish
@@ -132,9 +124,7 @@ describe QuizController, user: :student do
       end
 
       context "quiz is interrupted" do
-        before do
-          QuizPlay.any_instance.stub(:interrupted?) { true }
-        end
+        before { QuizPlay.any_instance.stub(:interrupted?) { true } }
 
         it "redirects to beginning" do
           delete :finish

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe ProfilesController, user: :school do
   before do
-    @user = Factory.create(:school)
+    @user = FactoryGirl.create(:school)
     login_as(@user)
   end
 
@@ -20,9 +20,7 @@ describe ProfilesController, user: :school do
 
   describe "#update" do
     context "when valid" do
-      before do
-        @user.stub(:valid?) { true }
-      end
+      before { valid!(@user.class) }
 
       it "saves the record" do
         put :update, school: {name: "New name"}
@@ -31,9 +29,7 @@ describe ProfilesController, user: :school do
     end
 
     context "when invalid" do
-      before do
-        @user.stub(:valid?) { false }
-      end
+      before { invalid!(@user.class) }
 
       it "doesn't raise errors" do
         put :update

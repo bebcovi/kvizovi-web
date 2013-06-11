@@ -2,8 +2,8 @@ require "spec_helper"
 
 describe AuthorizationsController, user: :school do
   before do
-    user = Factory.create(:user)
-    login_as(user)
+    @user = FactoryGirl.create(:school)
+    login_as(@user)
   end
 
   describe "#new" do

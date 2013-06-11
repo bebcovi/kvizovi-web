@@ -2,17 +2,18 @@ require "spec_helper"
 
 describe QuizSnapshot do
   it "captures a snapshot of a quiz" do
-    quiz = Factory.create(:quiz, name: "Name")
+    quiz = FactoryGirl.create(:quiz, name: "Name")
     quiz.questions = [
-      Factory.create(:boolean_question,     content: "Boolean", answer: true),
-      Factory.create(:choice_question,      content: "Choice", provided_answers: ["Foo", "Bar", "Baz"]),
-      Factory.create(:association_question, content: "Association", associations: {"Foo" => "Foo", "Bar" => "Bar"}),
-      Factory.create(:text_question,        content: "Text", answer: "Answer"),
-      Factory.create(:image_question,       content: "Image", image: uploaded_file("image.jpg", "image/jpeg"), answer: "Answer"),
+      FactoryGirl.create(:boolean_question,     content: "Boolean", answer: true),
+      FactoryGirl.create(:choice_question,      content: "Choice", provided_answers: ["Foo", "Bar", "Baz"]),
+      FactoryGirl.create(:association_question, content: "Association", associations: {"Foo" => "Foo", "Bar" => "Bar"}),
+      FactoryGirl.create(:text_question,        content: "Text", answer: "Answer"),
+      FactoryGirl.create(:image_question,       content: "Image", image: uploaded_file("image.jpg", "image/jpeg"), answer: "Answer"),
     ]
-    quiz_specification = stub
-    quiz_specification.stub(:quiz) { quiz }
-    quiz_specification.stub_chain(:students, :count) { 1 }
+    quiz_specification = stub(
+      quiz: quiz,
+      students: [stub],
+    )
 
     QuizSnapshot.capture(quiz_specification)
     quiz.destroy
@@ -46,16 +47,17 @@ describe QuizSnapshot do
   end
 
   it "trims the number of questions to be divisible by the number of students" do
-    quiz = Factory.create(:quiz)
-    quiz_specification = stub
-    quiz_specification.stub(:quiz) { quiz }
-    quiz_specification.stub_chain(:students, :count) { 2 }
+    quiz = FactoryGirl.create(:quiz)
+    quiz_specification = stub(
+      quiz: quiz,
+      students: [stub, stub],
+    )
 
-    quiz.questions = Factory.create_list(:question, 4)
+    quiz.questions = FactoryGirl.create_list(:question, 4)
     @it = QuizSnapshot.capture(quiz_specification)
     expect(@it.questions.count).to eq 4
 
-    quiz.questions = Factory.create_list(:question, 5)
+    quiz.questions = FactoryGirl.create_list(:question, 5)
     @it = QuizSnapshot.capture(quiz_specification)
     expect(@it.questions.count).to eq 4
   end

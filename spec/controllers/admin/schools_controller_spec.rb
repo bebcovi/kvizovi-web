@@ -9,7 +9,7 @@ describe Admin::SchoolsController do
 
   describe "#show" do
     before do
-      @school = Factory.create(:school)
+      @school = FactoryGirl.create(:school)
     end
 
     it "doesn't raise errors" do

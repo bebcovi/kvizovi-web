@@ -10,9 +10,8 @@ describe SessionsController, user: :school do
   describe "#create" do
     context "when valid" do
       before do
-        Login.any_instance.stub(:valid?) { true }
-        @user = Factory.create(:user)
-        Login.any_instance.stub(:user) { @user }
+        valid!(Login)
+        Login.any_instance.stub(:user) { FactoryGirl.create(:school) }
       end
 
       it "logs in the user" do
@@ -22,9 +21,7 @@ describe SessionsController, user: :school do
     end
 
     context "when invalid" do
-      before do
-        Login.any_instance.stub(:valid?) { false }
-      end
+      before { invalid!(Login) }
 
       it "doesn't raise errors" do
         post :create
@@ -34,7 +31,7 @@ describe SessionsController, user: :school do
 
   describe "#destroy" do
     before do
-      @user = Factory.create(:user)
+      @user = FactoryGirl.create(:school)
       login_as(@user)
     end
 

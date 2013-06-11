@@ -7,7 +7,7 @@ describe RegistrationsController, user: :school do
         get :new
         expect(response).to redirect_to(new_authorization_path)
         get :new, {}, {}, {authorized: true}
-        expect(response).not_to be_a_redirect
+        expect(response).to be_a_success
       end
     end
 
@@ -22,7 +22,7 @@ describe RegistrationsController, user: :school do
   describe "#create" do
     context "when valid" do
       before do
-        School.any_instance.stub(:valid?) { true }
+        valid!(School)
         ExampleQuizzesCreator.any_instance.stub(:create)
       end
 
@@ -45,9 +45,7 @@ describe RegistrationsController, user: :school do
     end
 
     context "when invalid" do
-      before do
-        School.any_instance.stub(:valid?) { false }
-      end
+      before { invalid!(School) }
 
       it "doesn't raise errors" do
         post :create
@@ -57,7 +55,7 @@ describe RegistrationsController, user: :school do
 
   describe "#delete" do
     before do
-      @user = Factory.create(:user)
+      @user = FactoryGirl.create(:school)
       login_as(@user)
     end
 
@@ -68,16 +66,14 @@ describe RegistrationsController, user: :school do
 
   describe "#destroy" do
     before do
-      @user = Factory.create(:user)
+      @user = FactoryGirl.create(:school)
       login_as(@user)
     end
 
     context "when valid" do
-      before do
-        @user.stub(:authenticate) { @user }
-      end
+      before { @user.class.any_instance.stub(:authenticate) { @user } }
 
-      it "destroyes the user" do
+      it "destroys the user" do
         delete :destroy
         expect(@user.class.exists?(@user)).to be_false
       end
@@ -89,9 +85,7 @@ describe RegistrationsController, user: :school do
     end
 
     context "when invalid" do
-      before do
-        @user.stub(:authenticate) { false }
-      end
+      before { @user.class.any_instance.stub(:authenticate) { false } }
 
       it "doesn't raise errors" do
         delete :destroy

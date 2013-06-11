@@ -2,20 +2,20 @@ require "spec_helper"
 
 describe PlayedQuizzesController, user: :school do
   before do
-    @school = Factory.create(:school)
+    @school = FactoryGirl.create(:school)
     login_as(@school)
   end
 
-  describe "#index" do
-    before do
-      @quiz = Factory.create(:quiz, school: @school)
-      @quiz_snapshot = Factory.create(:quiz_snapshot, quiz_id: @quiz.id)
-      @played_quiz = Factory.create(:played_quiz, quiz_snapshot: @quiz_snapshot)
-    end
+  before do
+    @quiz = FactoryGirl.create(:quiz, school: @school)
+    @quiz_snapshot = FactoryGirl.create(:quiz_snapshot, quiz_id: @quiz.id)
+    @played_quiz = FactoryGirl.create(:played_quiz, quiz_snapshot: @quiz_snapshot)
+  end
 
+  describe "#index" do
     context "on quiz" do
       before do
-        @quiz = Factory.create(:quiz)
+        @quiz = FactoryGirl.create(:quiz)
         @quiz_snapshot.update_attributes(quiz_id: @quiz.id)
       end
 
@@ -27,7 +27,7 @@ describe PlayedQuizzesController, user: :school do
 
     context "on student" do
       before do
-        @student = Factory.create(:student)
+        @student = FactoryGirl.create(:student)
         @played_quiz.students << @student
       end
 
@@ -46,15 +46,9 @@ describe PlayedQuizzesController, user: :school do
   end
 
   describe "#show" do
-    before do
-      @quiz = Factory.create(:quiz, school: @school)
-      @quiz_snapshot = Factory.create(:quiz_snapshot, quiz_id: @quiz.id)
-      @played_quiz = Factory.create(:played_quiz, quiz_snapshot: @quiz_snapshot)
-    end
-
     context "on quiz" do
       before do
-        @quiz = Factory.create(:quiz)
+        @quiz = FactoryGirl.create(:quiz)
         @quiz_snapshot.update_attributes(quiz_id: @quiz.id)
       end
 
@@ -66,7 +60,7 @@ describe PlayedQuizzesController, user: :school do
 
     context "on student" do
       before do
-        @student = Factory.create(:student)
+        @student = FactoryGirl.create(:student)
         @played_quiz.students << @student
       end
 
@@ -78,7 +72,7 @@ describe PlayedQuizzesController, user: :school do
 
     context "on missing played quiz" do
       it "redirects back with an error message" do
-        get :show, id: 1
+        get :show, id: @played_quiz.id + 1
         expect(response).to redirect_to(played_quizzes_path)
         expect(flash[:alert]).to be_present
       end

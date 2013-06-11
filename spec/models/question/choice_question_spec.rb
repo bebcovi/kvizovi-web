@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe ChoiceQuestion do
   before do
-    @it = Factory.build(:choice_question)
+    @it = FactoryGirl.build(:choice_question)
   end
 
   context "validations" do

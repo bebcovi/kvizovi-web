@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Post do
   before do
-    @it = Factory.build(:post)
+    @it = FactoryGirl.build(:post)
   end
 
   context "validations" do

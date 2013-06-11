@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe ExampleQuizzesCreator do
   before do
-    @school = Factory.create(:school)
+    @school = FactoryGirl.create(:school)
     @it = ExampleQuizzesCreator.new(@school)
   end
 

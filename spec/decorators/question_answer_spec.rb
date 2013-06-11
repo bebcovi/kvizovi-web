@@ -11,7 +11,7 @@ end
 
 describe AssociationQuestionAnswer do
   before do
-    @question = Factory.build(:association_question)
+    @question = FactoryGirl.build(:association_question)
     @it = AssociationQuestionAnswer.new(@question)
   end
 
@@ -40,7 +40,7 @@ end
 
 describe ChoiceQuestionAnswer do
   before do
-    @question = Factory.build(:choice_question)
+    @question = FactoryGirl.build(:choice_question)
     @it = ChoiceQuestionAnswer.new(@question)
   end
 
@@ -61,7 +61,7 @@ end
 
 describe BooleanQuestionAnswer do
   before do
-    @question = Factory.build(:boolean_question)
+    @question = FactoryGirl.build(:boolean_question)
     @it = BooleanQuestionAnswer.new(@question)
   end
 
@@ -82,7 +82,7 @@ end
 
 describe TextQuestionAnswer do
   before do
-    @question = Factory.build(:text_question)
+    @question = FactoryGirl.build(:text_question)
     @it = TextQuestionAnswer.new(@question)
   end
 
@@ -120,7 +120,7 @@ end
 
 describe ImageQuestionAnswer do
   before do
-    @question = Factory.build(:text_question)
+    @question = FactoryGirl.build(:text_question)
     @it = ImageQuestionAnswer.new(@question)
   end
 

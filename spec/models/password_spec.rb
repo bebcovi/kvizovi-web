@@ -7,7 +7,7 @@ describe Password do
 
   context "validations" do
     before do
-      @it.user = Factory.build(:school, password: "secret")
+      @it.user = FactoryGirl.build(:school, password: "secret")
     end
 
     context "#old" do

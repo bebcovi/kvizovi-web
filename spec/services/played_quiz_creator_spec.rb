@@ -11,7 +11,7 @@ describe PlayedQuizCreator do
       questions:     [{answer: "foo"}],
       begin_time:    1.minute.ago,
       end_time:      Time.now,
-      students:      Factory.create_list(:student, 2),
+      students:      FactoryGirl.create_list(:student, 2),
     )
   end
 

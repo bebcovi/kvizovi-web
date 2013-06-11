@@ -3,7 +3,7 @@ require "active_support/core_ext/numeric/bytes"
 
 describe ImageQuestion do
   before do
-    @it = Factory.build(:image_question)
+    @it = FactoryGirl.build(:image_question)
   end
 
   describe "#image_url=" do
@@ -15,8 +15,10 @@ describe ImageQuestion do
     end
 
     it "doesn't raise errors on invalid URLs" do
-      expect { @it.image_url = "bla"            }.not_to raise_error
-      expect { @it.image_url = "http://bla.bla" }.not_to raise_error
+      VCR.use_cassette "url" do
+        expect { @it.image_url = "bla"            }.not_to raise_error
+        expect { @it.image_url = "http://bla.bla" }.not_to raise_error
+      end
     end
 
     it "deassigns image on invalid URL" do

@@ -2,9 +2,9 @@ require "spec_helper"
 
 describe QuestionsController, user: :school do
   before do
-    @school = Factory.create(:school)
-    @quiz = Factory.create(:quiz, school: @school)
+    @school = FactoryGirl.create(:school)
     login_as(@school)
+    @quiz = FactoryGirl.create(:quiz, school: @school)
   end
 
   context "collection" do
@@ -23,9 +23,7 @@ describe QuestionsController, user: :school do
 
     describe "#create" do
       context "when valid" do
-        before do
-          BooleanQuestion.any_instance.stub(:valid?) { true }
-        end
+        before { valid!(BooleanQuestion) }
 
         it "creates the question" do
           post :create, quiz_id: @quiz.id, category: "boolean"
@@ -34,9 +32,7 @@ describe QuestionsController, user: :school do
       end
 
       context "when invalid" do
-        before do
-          BooleanQuestion.any_instance.stub(:valid?) { false }
-        end
+        before { invalid!(BooleanQuestion) }
 
         it "doesn't raise errors" do
           post :create, quiz_id: @quiz.id, category: "boolean"
@@ -52,9 +48,8 @@ describe QuestionsController, user: :school do
 
     describe "#update_order" do
       before do
-        @quiz.questions = Factory.create_list(:question, 3)
+        @quiz.questions = FactoryGirl.create_list(:question, 3)
         @questions = @quiz.questions.all
-        ActiveRecord::Base.any_instance.stub(:run_validations!) { true }
       end
 
       it "updates the order of questions" do
@@ -66,16 +61,17 @@ describe QuestionsController, user: :school do
               2 => {id: @questions[2].id, position: 2},
             }
           }
+        @quiz.questions.reload
 
-        expect(@quiz.questions(true)).to eq [@questions[0], @questions[2], @questions[1]]
-        expect(@quiz.questions(true).pluck(:position)).to eq [1, 2, 3]
+        expect(@quiz.questions).to eq [@questions[0], @questions[2], @questions[1]]
+        expect(@quiz.questions.pluck(:position)).to eq [1, 2, 3]
       end
     end
   end
 
   context "member" do
     before do
-      @question = Factory.create(:text_question, quiz: @quiz)
+      @question = FactoryGirl.create(:question, quiz: @quiz)
     end
 
     describe "#edit" do
@@ -86,23 +82,19 @@ describe QuestionsController, user: :school do
 
     describe "#update" do
       context "when valid" do
-        before do
-          @question.class.any_instance.stub(:valid?) { true }
-        end
+        before { valid!(@question.class) }
 
         it "updates the record" do
-          put :update, quiz_id: @quiz.id, id: @question.id, boolean_question: {content: "New content"}, category: "boolean"
+          put :update, quiz_id: @quiz.id, id: @question.id, :"#{@question.category}_question" => {content: "New content"}, category: @question.category
           expect(@question.reload.content).to eq "New content"
         end
       end
 
       context "when not valid" do
-        before do
-          @question.class.any_instance.stub(:valid?) { false }
-        end
+        before { invalid!(@question.class) }
 
         it "doesn't raise errors" do
-          put :update, quiz_id: @quiz.id, id: @question.id, category: "boolean"
+          put :update, quiz_id: @quiz.id, id: @question.id, category: @question.category
         end
       end
     end
@@ -114,14 +106,10 @@ describe QuestionsController, user: :school do
     end
 
     describe "#download" do
-      before do
-        Question.any_instance.stub(:run_validations!) { true }
-      end
-
       it "downloads the question to another quiz" do
         expect do
           post :download, quiz_id: @quiz.id, id: @question.id, location: @quiz.id
-        end.to change { @quiz.questions.count }.by 1
+        end.to change{@quiz.questions.count}.by 1
       end
     end
 

@@ -2,8 +2,8 @@ require "spec_helper"
 
 describe "Router" do
   before do
-    @school = Factory.create(:school, username: "Username")
-    @student = Factory.create(:student, username: "Username")
+    @school = FactoryGirl.create(:school, username: "Username")
+    @student = FactoryGirl.create(:student, username: "Username")
   end
 
   def login_as(user)

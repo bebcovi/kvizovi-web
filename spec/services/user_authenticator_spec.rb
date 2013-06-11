@@ -14,7 +14,7 @@ describe UserAuthenticator do
 
     context "when user is found" do
       before do
-        @user = Factory.create(:school, username: "janko")
+        @user = FactoryGirl.create(:school, username: "janko")
       end
 
       context "and doesn't match the password" do

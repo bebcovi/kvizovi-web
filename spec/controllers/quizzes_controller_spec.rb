@@ -2,15 +2,15 @@ require "spec_helper"
 
 describe QuizzesController, user: :school do
   before do
-    @school = Factory.create(:school)
+    @school = FactoryGirl.create(:school)
     login_as(@school)
   end
 
   context "collection" do
     describe "#index" do
       it "assigns school's quizzes" do
-        school_quiz = Factory.create(:quiz, school: @school)
-        other_quiz  = Factory.create(:quiz)
+        school_quiz = FactoryGirl.create(:quiz, school: @school)
+        other_quiz  = FactoryGirl.create(:quiz)
         get :index
         expect(assigns(:quizzes)).to eq [school_quiz]
       end
@@ -24,9 +24,7 @@ describe QuizzesController, user: :school do
 
     describe "#create" do
       context "when valid" do
-        before do
-          Quiz.any_instance.stub(:valid?) { true }
-        end
+        before { valid!(Quiz) }
 
         it "creates the record" do
           post :create
@@ -35,9 +33,7 @@ describe QuizzesController, user: :school do
       end
 
       context "when invalid" do
-        before do
-          Quiz.any_instance.stub(:valid?) { false }
-        end
+        before { invalid!(Quiz) }
 
         it "doesn't raise errors" do
           post :create
@@ -48,7 +44,7 @@ describe QuizzesController, user: :school do
 
   context "member" do
     before do
-      @quiz = Factory.create(:quiz, school: @school)
+      @quiz = FactoryGirl.create(:quiz, school: @school)
     end
 
     describe "#edit" do
@@ -59,9 +55,7 @@ describe QuizzesController, user: :school do
 
     describe "#update" do
       context "when valid" do
-        before do
-          Quiz.any_instance.stub(:valid?) { true }
-        end
+        before { valid!(Quiz) }
 
         it "updates the record" do
           put :update, id: @quiz.id, quiz: {name: "New name"}
@@ -70,9 +64,7 @@ describe QuizzesController, user: :school do
       end
 
       context "when invalid" do
-        before do
-          Quiz.any_instance.stub(:valid?) { false }
-        end
+        before { invalid!(Quiz) }
 
         it "doesn't raise erorrs" do
           put :update, id: @quiz.id

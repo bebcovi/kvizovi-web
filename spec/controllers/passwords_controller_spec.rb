@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe PasswordsController, user: :school do
   before do
-    @user = Factory.create(:user)
+    @user = FactoryGirl.create(:school)
     login_as(@user)
   end
 
@@ -14,9 +14,7 @@ describe PasswordsController, user: :school do
 
   describe "#update" do
     context "when valid" do
-      before do
-        Password.any_instance.stub(:valid?) { true }
-      end
+      before { valid!(Password) }
 
       it "updates the password" do
         post :update, password: {new: "new password"}
@@ -25,9 +23,7 @@ describe PasswordsController, user: :school do
     end
 
     context "when invalid" do
-      before do
-        Password.any_instance.stub(:valid?) { false }
-      end
+      before { invalid!(Password) }
 
       it "doesn't raise errors" do
         post :update

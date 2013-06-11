@@ -7,7 +7,8 @@ describe QuizSpecification do
 
   context "validations" do
     context "#quiz_id" do
-      it "validates presence" do @it.quiz_id = nil
+      it "validates presence" do
+        @it.quiz_id = nil
         expect(@it).to have(1).error_on(:quiz_id)
       end
     end
@@ -25,8 +26,8 @@ describe QuizSpecification do
 
         expect(@it).to have(1).error_on(:students_credentials)
 
-        Factory.create(:student, username: "janko", password: "secret")
-        Factory.create(:student, username: "matija", password: "secret")
+        FactoryGirl.create(:student, username: "janko", password: "secret")
+        FactoryGirl.create(:student, username: "matija", password: "secret")
         @it.students_credentials = [
           {username: "janko",  password: "secret"},
           {username: "matija", password: "secret"},

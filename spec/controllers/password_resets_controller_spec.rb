@@ -3,7 +3,7 @@ require "nokogiri"
 
 describe PasswordResetsController, user: :school do
   before do
-    @user = Factory.create(:school, email: "jon.snow@example.com")
+    @user = FactoryGirl.create(:school, email: "jon.snow@example.com")
   end
 
   describe "#new" do
