@@ -51,4 +51,10 @@ describe "Router" do
     request_via_redirect(:get, "")
     expect(request.host).to eq "kvizovi.org"
   end
+
+  it "redirects www domains to normal domains" do
+    host! "www.example.com"
+    request_via_redirect(:get, "")
+    expect(request.host).to eq "example.com"
+  end
 end

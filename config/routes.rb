@@ -4,6 +4,10 @@ Lektire::Application.routes.draw do
     match "(*path)", to: redirect(host: "kvizovi.org")
   end
 
+  constraints subdomain: /www/ do
+    match "(*path)", to: redirect(subdomain: false)
+  end
+
   ########################
   # Authentication
   ########################
