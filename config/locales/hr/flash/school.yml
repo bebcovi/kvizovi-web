@@ -57,9 +57,6 @@ hr:
         create:
           success: "Anketa je uspješno poslana. Hvala na pomoći :)"
           error: "Neka polja nisu ispravno popunjena."
-      played_quizzes:
-        show:
-          error: "Ovaj odigrani kviz je nedostupan, jer je jedan od igrača izbrisao svoj korisnički račun."
       posts:
         unauthorized:
           error: "Nemate ovlasti za mijenjati blog postove."

@@ -8,10 +8,14 @@ class PlayedQuiz < ActiveRecord::Base
   serialize :students_order, Array
 
   scope :descending, -> { order{created_at.desc} }
-  scope :ascending,  -> { order{created_at.asc} }
+  scope :ascending,  -> { order{created_at.asc}  }
 
   delegate :quiz, :questions, to: :quiz_snapshot
   delegate :name, to: :quiz
+
+  def self.position(played_quiz)
+    all.index { |r| r.id == played_quiz.id } + 1
+  end
 
   def interrupted?
     question_answers.any?(&:nil?)

@@ -52,9 +52,9 @@ describe PlayedQuizzesController, user: :school do
         @quiz_snapshot.update_attributes(quiz_id: @quiz.id)
       end
 
-      it "assigns the order" do
+      it "assigns the position" do
         get :show, id: @played_quiz.id, quiz_id: @quiz.id
-        expect(assigns(:order)).to eq 1
+        expect(assigns(:position)).to eq 1
       end
     end
 
@@ -64,17 +64,9 @@ describe PlayedQuizzesController, user: :school do
         @played_quiz.students << @student
       end
 
-      it "assigns the order" do
+      it "assigns the position" do
         get :show, id: @played_quiz.id, student_id: @student.id
-        expect(assigns(:order)).to eq 1
-      end
-    end
-
-    context "on missing played quiz" do
-      it "redirects back with an error message" do
-        get :show, id: @played_quiz.id + 1
-        expect(response).to redirect_to(played_quizzes_path)
-        expect(flash[:alert]).to be_present
+        expect(assigns(:position)).to eq 1
       end
     end
 

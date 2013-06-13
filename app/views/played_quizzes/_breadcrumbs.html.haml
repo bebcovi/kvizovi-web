@@ -10,8 +10,8 @@
 - when "show"
   - case @scope
   - when Quiz
-    = breadcrumbs link_to("Kvizovi", quizzes_path), link_to(@scope.name, quiz_questions_path(@scope)), link_to("Odigrani", played_quizzes_path(params.slice(:quiz_id))), "#{@order}."
+    = breadcrumbs link_to("Kvizovi", quizzes_path), link_to(@scope.name, quiz_questions_path(@scope)), link_to("Odigrani", played_quizzes_path(params.slice(:quiz_id))), "#{@position}."
   - when Student
-    = breadcrumbs link_to("Učenici", students_path), @scope.full_name, link_to("Odigrani kvizovi", played_quizzes_path(params.slice(:student_id))), "#{@order}."
+    = breadcrumbs link_to("Učenici", students_path), @scope.full_name, link_to("Odigrani kvizovi", played_quizzes_path(params.slice(:student_id))), "#{@position}."
   - when School
     = breadcrumbs link_to("Odigrani kvizovi", played_quizzes_path), @played_quiz.name
