@@ -310,7 +310,8 @@ CREATE TABLE schools (
     notified boolean DEFAULT true,
     password_reset_confirmation_id character varying(255),
     admin boolean DEFAULT false,
-    completed_survey boolean DEFAULT false
+    completed_survey boolean DEFAULT false,
+    last_activity timestamp without time zone
 );
 
 
@@ -351,7 +352,8 @@ CREATE TABLE students (
     year_of_birth integer,
     password_reset_confirmation_id character varying(255),
     email character varying(255),
-    completed_survey boolean DEFAULT false
+    completed_survey boolean DEFAULT false,
+    last_activity timestamp without time zone
 );
 
 
@@ -819,3 +821,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130611214403');
 INSERT INTO schema_migrations (version) VALUES ('20130613144605');
 
 INSERT INTO schema_migrations (version) VALUES ('20130613161732');
+
+INSERT INTO schema_migrations (version) VALUES ('20130613163748');
