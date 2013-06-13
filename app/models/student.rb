@@ -36,7 +36,7 @@ class Student < ActiveRecord::Base
   end
 
   def last_activity
-    LastActivity.for(self)
+    LastActivity.for(self).read
   end
 
   def unread_posts

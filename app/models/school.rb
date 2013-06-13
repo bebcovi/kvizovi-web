@@ -50,7 +50,7 @@ class School < ActiveRecord::Base
   def secondary?; level == "Srednja"; end
 
   def last_activity
-    LastActivity.for(self)
+    LastActivity.for(self).read
   end
 
   def unread_posts

@@ -1,21 +1,24 @@
 class LastActivity
   def self.for(user)
-    time = $redis.get(key(user))
+    new(user)
+  end
+
+  def initialize(user)
+    @user = user
+  end
+
+  def read
+    time = $redis.get(key)
     Time.parse(time) if time
   end
 
-  def self.key(user)
-    case user
-    when School  then school_key(user)
-    when Student then student_key(user)
-    end
+  def save(time)
+    $redis.set(key, time)
   end
 
-  def self.school_key(school)
-    "last_activity:school:#{school.username}"
-  end
+  private
 
-  def self.student_key(student)
-    "last_activity:school:#{student.username}"
+  def key
+    "last_activity:#{@user.type}:#{@user.username}"
   end
 end

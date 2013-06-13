@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :add_subdomain_view_path
-  before_filter :mark_activity, if: :user_logged_in?
+  before_filter :save_activity, if: :user_logged_in?
   after_filter :delete_old_cookies, if: :user_logged_in?
   before_filter :force_filling_email, if: :user_logged_in?
 
@@ -97,8 +97,8 @@ class ApplicationController < ActionController::Base
     prepend_view_path "app/views/#{request.subdomain}" if request.subdomain.present?
   end
 
-  def mark_activity
-    $redis.set("last_activity:school:#{current_user.username}", Time.now)
+  def save_activity
+    LastActivity.for(current_user).save(Time.now)
   end
 
   def delete_old_cookies
