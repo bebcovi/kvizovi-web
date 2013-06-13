@@ -2,8 +2,8 @@ require "factory_girl"
 
 FactoryGirl.factories.clear
 FactoryGirl.define do
-  factory :school
-  factory :student
+  factory :school, traits: [:password]
+  factory :student, traits: [:password]
 
   factory :quiz
 
@@ -20,4 +20,5 @@ FactoryGirl.define do
 
   trait(:with_school) { school }
   trait(:with_quiz)   { quiz }
+  trait(:password)    { password_digest "foo" }
 end

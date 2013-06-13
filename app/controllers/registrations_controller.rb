@@ -53,6 +53,18 @@ class RegistrationsController < ApplicationController
   end
 
   def user_params
-    params[request.subdomain]
+    params.require(request.subdomain).permit(*user_attributes)
+  end
+
+  def user_attributes
+    send("#{request.subdomain}_attributes")
+  end
+
+  def student_attributes
+    [:first_name, :last_name, :gender, :year_of_birth, :email, :username, :password, :password_confirmation, :grade, :school_key]
+  end
+
+  def school_attributes
+    [:name, :level, :place, :region, :email, :username, :password, :password_confirmation, :key]
   end
 end

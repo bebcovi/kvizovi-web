@@ -24,6 +24,18 @@ class ProfilesController < ApplicationController
   private
 
   def user_params
-    params[@user.type]
+    params.require(@user.type).permit(*user_attributes)
+  end
+
+  def user_attributes
+    send("#{current_user.type}_attributes")
+  end
+
+  def student_attributes
+    [:first_name, :last_name, :gender, :year_of_birth, :grade, :username, :email]
+  end
+
+  def school_attributes
+    [:name, :username, :email, :level, :place, :region, :key]
   end
 end

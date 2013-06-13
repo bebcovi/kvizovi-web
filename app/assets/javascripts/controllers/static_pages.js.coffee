@@ -1,7 +1,7 @@
 do ($ = jQuery) ->
 
-  App.Controllers.tour =
+  App.Controllers.static_pages =
 
-    index: ->
+    tour: ->
 
       $("#skole").find("ol").addClass("no_bullets")

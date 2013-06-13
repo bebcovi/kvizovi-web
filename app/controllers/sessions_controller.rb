@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @login = Login.new(params[:login])
+    @login = Login.new(login_params)
     @login.user_class = user_class
 
     if @login.valid?
@@ -19,5 +19,11 @@ class SessionsController < ApplicationController
   def destroy
     log_out!
     redirect_to root_url(subdomain: false)
+  end
+
+  private
+
+  def login_params
+    params.require(:login).permit(:username, :password)
   end
 end

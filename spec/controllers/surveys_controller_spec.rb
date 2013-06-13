@@ -15,12 +15,12 @@ describe SurveysController, user: :school do
   describe "#create" do
     it "marks that the user has completed the survey" do
       expect do
-        post :create
+        post :create, survey: {fields_attributes: {}}
       end.to change{@user.reload.completed_survey?}.to(true)
     end
 
     it "redirect the user back to the home page" do
-      post :create
+        post :create, survey: {fields_attributes: {}}
       expect(response).to redirect_to(controller.send(:root_path_for, @user))
     end
   end

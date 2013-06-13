@@ -27,19 +27,19 @@ describe RegistrationsController, user: :school do
       end
 
       it "creates the user" do
-        post :create
-        expect(School.count).to eq 1
+        post :create, school: {password: "foo"}
+        expect(School.first.password_digest).to be_present
       end
 
       context "when school", user: :school do
         it "creates example quizzes" do
           ExampleQuizzesCreator.any_instance.should_receive(:create)
-          post :create
+          post :create, school: {password: "foo"}
         end
       end
 
       it "logs the user in" do
-        post :create
+        post :create, school: {password: "foo"}
         expect(cookies[:user_id]).not_to be_nil
       end
     end
@@ -48,7 +48,7 @@ describe RegistrationsController, user: :school do
       before { invalid!(School) }
 
       it "doesn't raise errors" do
-        post :create
+        post :create, school: {password: nil}
       end
     end
   end

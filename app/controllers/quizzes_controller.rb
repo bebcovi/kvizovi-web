@@ -4,7 +4,7 @@ class QuizzesController < ApplicationController
   before_filter :authorize!, only: [:edit, :update, :delete, :destroy]
 
   def index
-    @quizzes = params[:scope].blank? ? @user.quizzes : Quiz.not_owned_by(@user).order_by_school
+    @quizzes = params[:scope].blank? ? @user.quizzes : Quiz.not_owned_by(@user)
     @quizzes = @quizzes.includes(:school).descending.paginate(per_page: 15, page: params[:page])
   end
 
@@ -15,7 +15,7 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    @quiz = @user.quizzes.new(params[:quiz])
+    @quiz = @user.quizzes.new(quiz_params)
 
     if @quiz.valid?
       @quiz.save
@@ -32,7 +32,7 @@ class QuizzesController < ApplicationController
 
   def update
     @quiz = @user.quizzes.find(params[:id])
-    @quiz.assign_attributes(params[:quiz])
+    @quiz.assign_attributes(quiz_params)
 
     if @quiz.valid?
       @quiz.save
@@ -66,5 +66,9 @@ class QuizzesController < ApplicationController
     if not @user.quizzes.exists?(params[:id])
       redirect_to :back, alert: flash_error("unauthorized")
     end
+  end
+
+  def quiz_params
+    params.require(:quiz).permit!
   end
 end

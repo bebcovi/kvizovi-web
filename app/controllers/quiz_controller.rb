@@ -12,7 +12,7 @@ class QuizController < ApplicationController
   end
 
   def start
-    @quiz_specification = QuizSpecification.new(params[:quiz_specification])
+    @quiz_specification = QuizSpecification.new(quiz_specification_params)
     @quiz_specification.students << @student
 
     if @quiz_specification.valid?
@@ -94,5 +94,9 @@ class QuizController < ApplicationController
     if @quiz_play.current_question[:answer] != nil
       redirect_to action: :next_question
     end
+  end
+
+  def quiz_specification_params
+    params.require(:quiz_specification).permit!
   end
 end

@@ -23,7 +23,7 @@ describe ProfilesController, user: :school do
       before { valid!(@user.class) }
 
       it "saves the record" do
-        put :update, school: {name: "New name"}
+        put :update, @user.type => {name: "New name"}
         expect(@user.reload.name).to eq "New name"
       end
     end
@@ -32,7 +32,7 @@ describe ProfilesController, user: :school do
       before { invalid!(@user.class) }
 
       it "doesn't raise errors" do
-        put :update
+        put :update, @user.type => {name: nil}
       end
     end
   end

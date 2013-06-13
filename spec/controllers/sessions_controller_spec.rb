@@ -15,7 +15,7 @@ describe SessionsController, user: :school do
       end
 
       it "logs in the user" do
-        post :create
+        post :create, login: {username: "foo"}
         expect(cookies[:user_id]).to be_present
       end
     end
@@ -24,7 +24,7 @@ describe SessionsController, user: :school do
       before { invalid!(Login) }
 
       it "doesn't raise errors" do
-        post :create
+        post :create, login: {username: nil}
       end
     end
   end

@@ -10,7 +10,7 @@ class PasswordsController < ApplicationController
     @password.user = current_user
 
     if @password.valid?
-      current_user.update_attributes(password: @password.new)
+      current_user.update_attributes(password: @password.new, password_confirmation: @password.new)
       redirect_to profile_path, notice: flash_success
     else
       render :edit

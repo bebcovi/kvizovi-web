@@ -26,7 +26,7 @@ describe EmailsController, user: :student do
       before { invalid!(@user.class) }
 
       it "doesn't raise errors" do
-        post :create
+        post :create, @user.type => {email: nil}
       end
     end
   end

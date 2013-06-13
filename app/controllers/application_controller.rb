@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def return_point
-    cookies.delete(:return_to, domain: :all) || root_path
+    cookies.delete(:return_to, domain: :all) || root_path_for(current_user)
   end
 
   def flash_success(*args) flash_message(:success, *args) end
@@ -89,6 +89,7 @@ class ApplicationController < ActionController::Base
     when School  then quizzes_url(subdomain: "school")
     end
   end
+  helper_method :root_path_for
 
   private
 

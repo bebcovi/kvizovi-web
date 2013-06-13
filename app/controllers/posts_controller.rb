@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new
-    @post.assign_attributes(params[:post])
+    @post.assign_attributes(post_params)
 
     if @post.valid?
       @post.save
@@ -24,7 +24,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.assign_attributes(params[:post])
+    @post.assign_attributes(post_params)
 
     if @post.valid?
       @post.save
@@ -49,5 +49,9 @@ class PostsController < ApplicationController
     if not current_user.admin?
       redirect_to root_path_for(current_user), alert: flash("unauthorized")
     end
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body)
   end
 end

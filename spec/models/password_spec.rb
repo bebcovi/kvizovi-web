@@ -26,7 +26,7 @@ describe Password do
       it "validates confirmation" do
         @it.new = "secret"
         @it.new_confirmation = "wrong confirmation"
-        expect(@it).to have(1).error_on(:new)
+        expect(@it).to have(1).error_on(:new_confirmation)
       end
     end
   end

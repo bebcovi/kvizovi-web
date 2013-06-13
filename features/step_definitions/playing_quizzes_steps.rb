@@ -10,14 +10,14 @@ Given(/^my student(s)? (?:have|has) played a quiz( realistically)?$/) do |multip
 end
 
 When(/^I begin the quiz(?: in single player)?$/) do
-  ensure_on(choose_quiz_url)
+  visit choose_quiz_url unless page.has_content?(@quiz.name)
   choose @quiz.name
   choose "Samo ja"
   click_on "Započni kviz"
 end
 
 When(/^we begin the quiz in multi player$/) do
-  ensure_on(choose_quiz_url)
+  visit choose_quiz_url unless page.has_content?(@quiz.name)
   other_student = FactoryGirl.create(:student, school: @user.school)
   choose @quiz.name
   choose "Još netko"
@@ -90,7 +90,7 @@ Then(/^I should still be able to play it$/) do
 end
 
 Then(/^I should see that quiz in the list of available quizzes$/) do
-  ensure_on(choose_quiz_url)
+  visit choose_quiz_url
   click_on "Druge škole"
   expect(find("#other")).to have_content(@quiz.name)
 end

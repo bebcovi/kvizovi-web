@@ -20,12 +20,12 @@ class QuizSnapshot < ActiveRecord::Base
   end
 
   def quiz
-    @quiz ||= Quiz.new(quiz_attributes, without_protection: true)
+    @quiz ||= Quiz.new(quiz_attributes)
   end
 
   def questions
     @questions ||= (questions_attributes || []).map do |question_attributes|
-      question_attributes["type"].constantize.new(question_attributes, without_protection: true)
+      question_attributes["type"].constantize.new(question_attributes)
     end
   end
 end

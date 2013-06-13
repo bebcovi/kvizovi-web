@@ -7,7 +7,7 @@ class PasswordResetService
 
   def reset_password
     new_password = generate_random_string
-    @user.update_attributes(password: new_password)
+    @user.update_attributes(password: new_password, password_confirmation: new_password)
     new_password
   end
 

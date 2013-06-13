@@ -12,7 +12,7 @@ class Quiz < ActiveRecord::Base
 
   scope :activated,       ->         { where{activated == true} }
   scope :descending,      ->         { order{created_at.desc} }
-  scope :order_by_school, ->         { order{school.name.asc} }
+  scope :order_by_school, ->         { joins{school}.order{school.name.asc} }
   scope :not_owned_by,    ->(school) { where{school_id != school.id} }
 
   accepts_nested_attributes_for :questions

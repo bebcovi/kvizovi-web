@@ -1,11 +1,10 @@
 When(/^I go to the page for monitoring that quiz$/) do
-  ensure_on quizzes_url
+  visit quizzes_url unless page.has_content?(@quiz.name)
   within(@quiz) { click_on "Prati" }
 end
 
 When(/^I go to the page for monitoring that student's activity$/) do
-  ensure_on quizzes_url
-  click_on "Učenici"
+  visit students_url
   student = @user.students.first
   within(student) { click_on student.played_quizzes.count }
 end

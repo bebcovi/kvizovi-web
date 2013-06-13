@@ -23,7 +23,7 @@ describe PostsController, user: :school do
 
       context "when invalid" do
         it "doesn't raise errors" do
-          post :create, post: {}
+          post :create, post: {title: nil}
         end
       end
     end

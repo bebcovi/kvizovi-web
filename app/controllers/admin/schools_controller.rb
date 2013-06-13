@@ -1,7 +1,7 @@
 class Admin::SchoolsController < ApplicationController
   def index
-    @schools = School.scoped
-    @students = Student.scoped.includes(:school)
+    @schools = School.all
+    @students = Student.includes(:school)
   end
 
   def show

@@ -27,8 +27,8 @@ describe QuizzesController, user: :school do
         before { valid!(Quiz) }
 
         it "creates the record" do
-          post :create
-          expect(@school.quizzes.count).to eq 1
+          post :create, quiz: {name: "Foo"}
+          expect(@school.quizzes.first.name).to eq "Foo"
         end
       end
 
@@ -36,7 +36,7 @@ describe QuizzesController, user: :school do
         before { invalid!(Quiz) }
 
         it "doesn't raise errors" do
-          post :create
+          post :create, quiz: {name: nil}
         end
       end
     end
@@ -67,7 +67,7 @@ describe QuizzesController, user: :school do
         before { invalid!(Quiz) }
 
         it "doesn't raise erorrs" do
-          put :update, id: @quiz.id
+          put :update, id: @quiz.id, quiz: {name: nil}
         end
       end
     end

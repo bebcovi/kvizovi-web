@@ -7,7 +7,7 @@ class SurveysController < ApplicationController
 
   def create
     @survey = Survey.new
-    @survey.assign_attributes(params[:survey])
+    @survey.assign_attributes(survey_params)
 
     if @survey.valid?
       @survey.save
@@ -17,5 +17,11 @@ class SurveysController < ApplicationController
       set_flash_error
       render :new
     end
+  end
+
+  private
+
+  def survey_params
+    params.require(:survey).permit!
   end
 end

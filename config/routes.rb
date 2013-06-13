@@ -1,12 +1,14 @@
 Lektire::Application.routes.draw do
 
   constraints host: /herokuapp/ do
-    match "(*path)", to: redirect(host: "kvizovi.org")
+    get "(*path)", to: redirect(host: "kvizovi.org")
   end
 
   constraints subdomain: /www/ do
-    match "(*path)", to: redirect(subdomain: false)
+    get "(*path)", to: redirect(subdomain: false)
   end
+
+  root to: "home#index"
 
   ########################
   # Authentication
@@ -15,7 +17,7 @@ Lektire::Application.routes.draw do
     controller :sessions do
       get   "login",  to: :new
       post  "login",  to: :create
-      match "logout", to: :destroy
+      match "logout", to: :destroy, via: [:get, :delete]
     end
     resource :registration
     resource :authorization
@@ -29,13 +31,11 @@ Lektire::Application.routes.draw do
   # School
   ########################
   scope constraints: {subdomain: "school"} do
-    root to: redirect("/quizzes")
-
     resources :quizzes do
       resources :questions do
         collection do
           get "order", to: :edit_order
-          put "order", to: :update_order
+          patch "order", to: :update_order
         end
         member do
           post "download"
@@ -52,8 +52,6 @@ Lektire::Application.routes.draw do
   # Student
   ########################
   scope constraints: {subdomain: "student"} do
-    root to: redirect("/quiz/choose")
-
     resource :quiz, only: [], controller: "quiz" do
       get    "choose"
       post   "start"
@@ -100,10 +98,6 @@ Lektire::Application.routes.draw do
     resources :schools
   end
   resources :posts
-
-
-  root to: "home#index"
-
 
   ########################
   # Error pages

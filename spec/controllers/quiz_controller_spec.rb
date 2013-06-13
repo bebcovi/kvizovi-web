@@ -34,7 +34,7 @@ describe QuizController, user: :student do
       before { invalid!(QuizSpecification) }
 
       it "assigns quizzes" do
-        post :start
+        post :start, quiz_specification: {quiz_id: nil}
         expect(assigns(:quizzes)).to eq [@quiz]
       end
     end

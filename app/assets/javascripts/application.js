@@ -2,6 +2,8 @@
 //= require jquery_ujs
 //= require jquery.ui.droppable
 //= require jquery.ui.sortable
+//= require turbolinks
+//= require jquery.turbolinks
 //= require twitter/bootstrap
 //= require spin
 //= require jquery.spin
@@ -18,7 +20,7 @@
 //= require sort
 //
 //= require controllers/quiz
-//= require controllers/tour
+//= require controllers/static_pages
 //
 //= require questions/association
 //= require questions/choice

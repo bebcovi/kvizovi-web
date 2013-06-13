@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   before_filter :authorize!, except: [:index, :download_location, :download]
 
   def index
-    @questions = @quiz.questions.ascending
+    @questions = @quiz.questions
   end
 
   def new
@@ -44,7 +44,7 @@ class QuestionsController < ApplicationController
   end
 
   def update_order
-    @quiz.update_attributes!(params[:quiz])
+    @quiz.update_attributes!(quiz_params)
     redirect_to quiz_questions_path(@quiz), notice: flash_success
   end
 
@@ -82,6 +82,10 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params["#{params[:category]}_question"]
+    params.require("#{params[:category]}_question").permit!
+  end
+
+  def quiz_params
+    params.require(:quiz).permit!
   end
 end

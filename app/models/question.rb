@@ -11,7 +11,6 @@ class Question < ActiveRecord::Base
   serialize :data, Hash
 
   default_scope     -> { order{position.asc} }
-  scope :ascending, -> { order{created_at.asc} }
 
   validates :content, presence: true
 

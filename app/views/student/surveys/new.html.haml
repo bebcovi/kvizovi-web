@@ -76,5 +76,5 @@
   = f.text_question "Koju mogućnost biste htjeli da aplikacija u budućnosti ima, a trenutno ju nema?", required: false, input: :text_area
 
   = buttons do
-    = cancel_button "Odustani", root_path
+    = cancel_button "Odustani", root_path_for(current_user)
     = submit_button "Pošalji"

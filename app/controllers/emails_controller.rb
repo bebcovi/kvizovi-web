@@ -23,6 +23,6 @@ class EmailsController < ApplicationController
   end
 
   def user_params
-    params[@user.type]
+    params.require(@user.type).permit(:email)
   end
 end

@@ -26,7 +26,7 @@ describe PasswordsController, user: :school do
       before { invalid!(Password) }
 
       it "doesn't raise errors" do
-        post :update
+        post :update, password: {new: nil}
       end
     end
   end

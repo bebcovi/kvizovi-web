@@ -1,6 +1,8 @@
 Given(/^I'm logged in$/) do
-  page.cookies.signed.permanent[:user_id] = @user.id
-  page.cookies.signed.permanent[:user_type] = @user.type
+  visit login_url
+  fill_in "Korisničko ime", with: @user.username
+  fill_in "Lozinka",        with: @user.password
+  click_on "Prijava"
 end
 
 When(/^I log in$/) do
