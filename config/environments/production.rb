@@ -74,12 +74,6 @@ Lektire::Application.configure do
     }
   }
 
-  # Email exceptions
-  config.middleware.use ExceptionNotifier,
-    sender_address: "Lektire <#{ENV["SENDGRID_USERNAME"]}>",
-    exception_recipients: ["janko.marohnic@gmail.com"],
-    ignore_exceptions: []
-
   # ActionMailer configuration
   config.action_mailer.smtp_settings = {
     address:        'smtp.sendgrid.net',
@@ -92,11 +86,19 @@ Lektire::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = {host: "kvizovi.org"}
 
+  # Email exceptions
+  config.middleware.use ExceptionNotification::Rack,
+    email: {
+      sender_address: "Lektire <#{ENV["SENDGRID_USERNAME"]}>",
+      exception_recipients: ["janko.marohnic@gmail.com"],
+      ignore_exceptions: [],
+    }
+
   # Caching configuration
   config.action_controller.perform_caching = true
   config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"].split(","), {
     username: ENV["MEMCACHIER_USERNAME"],
-    password: ENV["MEMCACHIER_PASSWORD"]
+    password: ENV["MEMCACHIER_PASSWORD"],
   }
   config.action_view.cache_template_loading = true
 end

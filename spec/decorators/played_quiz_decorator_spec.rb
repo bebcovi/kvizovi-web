@@ -6,7 +6,7 @@ describe PlayedQuizDecorator do
   end
 
   let(:played_quiz) do
-    stub(
+    double(
       questions:        FactoryGirl.build_list(:boolean_question, 4, answer: false),
       students:         FactoryGirl.build_list(:student, 2),
       question_answers: [false, false, true, false],

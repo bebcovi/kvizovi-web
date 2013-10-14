@@ -25,7 +25,7 @@ describe BooleanQuestion do
       end
 
       it "validates inclusion" do
-        @it.answer = stub
+        @it.answer = double
         expect(@it).to have(1).error_on(:answer)
       end
     end

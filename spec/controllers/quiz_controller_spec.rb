@@ -46,7 +46,7 @@ describe QuizController, user: :student do
     end
 
     let(:quiz_snapshot) do
-      QuizSnapshot.capture(stub(quiz: @quiz, students: [@student]))
+      QuizSnapshot.capture(double(quiz: @quiz, students: [@student]))
     end
 
     describe "#play" do

@@ -24,6 +24,8 @@ hr:
           attributes:
             image_content_type:
               invalid: "Datoteka koju ste priložili nije slika (mora završavati sa \".jpg\", \".png\" ili \".gif\", a ne npr. sa \".html\")."
+            image:
+              in_between: "Slika ne smije biti veća od 1 MB."
             image_file_size:
               in_between: "Slika ne smije biti veća od 1 MB."
             image_url:

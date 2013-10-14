@@ -7,15 +7,15 @@ describe QuizPlay do
   end
 
   let(:quiz_snapshot) do
-    stub(
+    double(
       id:        0,
-      quiz:      stub(id: 0),
-      questions: 10.times.map { |i| stub(id: i, category: "boolean") },
+      quiz:      double(id: 0),
+      questions: 10.times.map { |i| double(id: i, category: "boolean") },
     )
   end
 
   let(:students) do
-    3.times.map { |i| stub(id: i) }
+    3.times.map { |i| double(id: i) }
   end
 
   context "actions" do

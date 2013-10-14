@@ -10,9 +10,9 @@ describe QuizSnapshot do
       FactoryGirl.create(:text_question,        content: "Text", answer: "Answer"),
       FactoryGirl.create(:image_question,       content: "Image", image: uploaded_file("image.jpg", "image/jpeg"), answer: "Answer"),
     ]
-    quiz_specification = stub(
+    quiz_specification = double(
       quiz: quiz,
-      students: [stub],
+      students: [double],
     )
 
     QuizSnapshot.capture(quiz_specification)
@@ -48,9 +48,9 @@ describe QuizSnapshot do
 
   it "trims the number of questions to be divisible by the number of students" do
     quiz = FactoryGirl.create(:quiz)
-    quiz_specification = stub(
+    quiz_specification = double(
       quiz: quiz,
-      students: [stub, stub],
+      students: [double, double],
     )
 
     quiz.questions = FactoryGirl.create_list(:question, 4)

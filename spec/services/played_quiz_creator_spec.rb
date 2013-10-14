@@ -6,7 +6,7 @@ describe PlayedQuizCreator do
   end
 
   let(:quiz_play) do
-    stub(
+    double(
       quiz_snapshot: {id: 1},
       questions:     [{answer: "foo"}],
       begin_time:    1.minute.ago,
