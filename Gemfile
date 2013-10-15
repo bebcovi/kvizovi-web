@@ -12,7 +12,7 @@ gem "unicorn", group: :production
 group :assets do
   gem "sass-rails", ">= 4.0.0"
   gem "bourbon"
-  gem "bootstrap-sass-rails"
+  gem "bootstrap-sass-rails", "< 3"
   gem "jquery-rails"
   gem "jquery-ui-rails"
   gem "turbolinks", ">= 1.3"
