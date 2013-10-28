@@ -71,12 +71,6 @@ Lektire::Application.routes.draw do
   resource :profile
   resource :password
 
-  resources :versions do
-    member do
-      post "revert"
-    end
-  end
-
   resource :email
   resources :surveys
 
