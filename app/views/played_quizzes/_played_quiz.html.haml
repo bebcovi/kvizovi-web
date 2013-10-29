@@ -28,8 +28,8 @@
 
       %h2.question-title= question.content
 
-      = render "questions/answer/#{question.category}", {question: question, answer: answer}
-      = render "played_quizzes/feedback/#{status}", {question: question}
+      = render "questions/answer/#{question.category}", question: question, answer: answer
+      = render "played_quizzes/feedback/#{status}", question: question
 
   = back_button "Natrag", played_quizzes_path(params.slice(:quiz_id, :student_id))
 

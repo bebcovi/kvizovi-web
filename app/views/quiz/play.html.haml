@@ -16,7 +16,7 @@
 
   = simple_form_for :play, url: save_answer_quiz_path, method: :put, defaults: {input_html: {name: "answer"}}, html: {data: {confirm_leave: true}, class: "l-play l-question-#{@question.category}"} do |f|
 
-    = render "question", {question: QuestionShuffling.new(@question), f: f}
+    = render "question", question: QuestionShuffling.new(@question), f: f
 
     = buttons do
       = cancel_button "Prekini", interrupt_quiz_path

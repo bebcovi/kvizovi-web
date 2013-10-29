@@ -27,7 +27,7 @@
 
     %h2.question-title= question.content
 
-    = render "questions/answer/#{question.category}", {question: question, answer: answer}
-    = render "played_quizzes/feedback/#{status}", {question: question}
+    = render "questions/answer/#{question.category}", question: question, answer: answer
+    = render "played_quizzes/feedback/#{status}", question: question
 
 = primary_button "Završi", choose_quiz_path, class: "btn btn-primary"

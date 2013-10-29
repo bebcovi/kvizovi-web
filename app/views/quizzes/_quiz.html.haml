@@ -6,7 +6,7 @@
     %li= link_to "Prati".prepend_icon("eye"), played_quizzes_path(quiz_id: quiz.id) if quiz.school == current_user
     %li= delete_button "Izbriši", delete_quiz_path(quiz), class: "item-danger confirm-delete" if quiz.school == current_user
 
-= render "activation_button", {quiz: quiz}
+= render "activation_button", quiz: quiz
 
 %span.list-pretty-item-content
   = quiz.name

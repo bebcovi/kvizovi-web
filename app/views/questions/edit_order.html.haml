@@ -6,7 +6,7 @@
     - @questions.each do |question|
       = content_tag_for :li, question, class: "sort-item" do
         = f.simple_fields_for :questions, question do |q|
-          = render "question_short", {question: question, f: q}
+          = render "question_short", question: question, f: q
 
   = buttons do
     = cancel_button "Odustani", quiz_questions_path(@quiz)

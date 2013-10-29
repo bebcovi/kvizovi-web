@@ -1,6 +1,6 @@
 = f.input :content, input_html: {autofocus: current_page?(action: "new"), rows: 1, class: "input-block-level"}
 
-= render "questions/fields/#{@question.category}", {f: f, question: @question}
+= render "questions/fields/#{@question.category}", f: f, question: @question
 
 = f.input :hint, placeholder: %(Npr. "Odgovor piši u nominativu."), hint: "Ovo će se prikazati kao pomoć pri odgovaranju na pitanje.", hint_html: {class: "additional-info"}
 
