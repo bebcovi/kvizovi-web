@@ -19,6 +19,7 @@ if Rails.env.development?
   require "better_errors"
   require "xray-rails"
   require "pry-rails"
+  require "jasminerice"
 end
 
 module Lektire

@@ -46,6 +46,10 @@ gem "bcrypt-ruby", "~> 3.0.0"
 # Other
 gem "active_attr", ">= 0.8.1"
 
+group :development, :test do
+  gem "jasminerice", github: "bradphelan/jasminerice"
+end
+
 group :test do
   gem "rspec-rails", ">= 2.14"
   gem "factory_girl", ">= 4.2"
