@@ -6,8 +6,9 @@
     %title Kvizovi · #{title}
     %meta{name: "robots", content: "noindex"}
     = favicon_link_tag
-    = stylesheet_link_tag "application"
     = render "javascript"
+    = stylesheet_link_tag    "application", :"data-turbolinks-track" => true, media: "all"
+    = javascript_include_tag "application", :"data-turbolinks-track" => true
 
   %body{class: "l-page-#{params[:controller]} l-page-#{params[:controller]}-#{params[:action]}"}
     .navbar.navbar-static-top.navbar-inverse
@@ -25,5 +26,3 @@
       = render "breadcrumbs"
 
       = yield
-
-    = javascript_include_tag "application"
