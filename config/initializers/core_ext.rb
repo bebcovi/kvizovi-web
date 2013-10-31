@@ -7,3 +7,14 @@ class String
     "#{self} <i class=\"icon-#{name}\"></i>".html_safe
   end
 end
+
+class Hash
+  def merge_class!(css_class)
+    self[:class] = [css_class, self[:class]].reject(&:blank?).join(" ")
+    self
+  end
+
+  def merge_class(css_class)
+    dup.merge_class!(css_class)
+  end
+end

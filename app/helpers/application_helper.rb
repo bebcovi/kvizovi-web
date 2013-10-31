@@ -32,14 +32,15 @@ module ApplicationHelper
   end
 
   def alert_message(string, type, options = {})
-    options[:close] = true if options[:close].nil?
-    content_tag :div, raw("#{remove_button(dismiss: "alert")}#{string}"), class: "alert alert-#{type} fade in #{options[:class]} #{"no-close" unless options[:close]}"
+    options.reverse_merge!(close: true)
+    options.merge_class!("alert alert-#{type} fade in")
+    options.merge_class!("no-close") unless options[:close]
+
+    content_tag :div, remove_button(dismiss: "alert") + string, options
   end
 
   def icon(name, options = {})
-    klass = "icon-#{name}"
-    klass += " #{options[:class]}" if options[:class]
-    content_tag :i, "", {class: klass}.merge(options.except(:class))
+    content_tag :i, "", options.merge_class("icon-#{name}")
   end
 
   def number(n)
@@ -58,7 +59,8 @@ module ApplicationHelper
   end
 
   def active_content_tag(tag_name, active, options = {}, &block)
-    content_tag tag_name, {class: ("active" if active)}.merge(options), &block
+    css_class = "active" if active
+    content_tag tag_name, options.merge_class(css_class), &block
   end
 
   def current_user_admin?
