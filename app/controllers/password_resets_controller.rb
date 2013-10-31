@@ -6,7 +6,7 @@ class PasswordResetsController < ApplicationController
     if user = user_class.find_by_email(params[:email])
       PasswordResetService.new(user).generate_confirmation_id
       PasswordResetMailer.confirmation(user).deliver
-      redirect_to login_path, notice: flash_success
+      redirect_to login_path, success: flash_success
     else
       set_flash_error
       render :new
@@ -19,9 +19,9 @@ class PasswordResetsController < ApplicationController
 
       PasswordResetService.new(user).reset_password
       PasswordResetMailer.new_password(user).deliver
-      redirect_to login_path, notice: flash_success
+      redirect_to login_path, success: flash_success
     else
-      redirect_to login_path, alert: flash_error
+      redirect_to login_path, error: flash_error
     end
   end
 end

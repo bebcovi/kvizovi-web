@@ -1,3 +1,2 @@
 - flash.each do |name, message|
-
-    = alert_message(message, {alert: "error", notice: "success"}[name])
+  = alert_message(message, name)

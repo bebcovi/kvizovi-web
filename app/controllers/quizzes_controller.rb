@@ -19,7 +19,7 @@ class QuizzesController < ApplicationController
 
     if @quiz.valid?
       @quiz.save
-      redirect_to quizzes_path, notice: flash_success
+      redirect_to quizzes_path, success: flash_success
     else
       render :new
     end
@@ -39,7 +39,7 @@ class QuizzesController < ApplicationController
       if params[:return_to]
         redirect_to params[:return_to]
       else
-        redirect_to quizzes_path, notice: flash_success
+        redirect_to quizzes_path, success: flash_success
       end
     else
       render :edit
@@ -53,7 +53,7 @@ class QuizzesController < ApplicationController
   def destroy
     quiz = @user.quizzes.find(params[:id])
     quiz.destroy
-    redirect_to quizzes_path, notice: flash_success
+    redirect_to quizzes_path, success: flash_success
   end
 
   private
@@ -64,7 +64,7 @@ class QuizzesController < ApplicationController
 
   def authorize!
     if not @user.quizzes.exists?(params[:id])
-      redirect_to :back, alert: flash_error("unauthorized")
+      redirect_to :back, error: flash_error("unauthorized")
     end
   end
 

@@ -12,7 +12,7 @@ class SurveysController < ApplicationController
     if @survey.valid?
       @survey.save
       current_user.update_column(:completed_survey, true)
-      redirect_to root_path_for(current_user), notice: flash_success
+      redirect_to root_path_for(current_user), success: flash_success
     else
       set_flash_error
       render :new

@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
     if @post.valid?
       @post.save
-      redirect_to blog_path, notice: flash_success
+      redirect_to blog_path, success: flash_success
     else
       render :new
     end
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
 
     if @post.valid?
       @post.save
-      redirect_to blog_path, notice: flash_success
+      redirect_to blog_path, success: flash_success
     else
       render :edit
     end
@@ -40,14 +40,14 @@ class PostsController < ApplicationController
 
   def destroy
     Post.destroy(params[:id])
-    redirect_to blog_path, notice: flash_success
+    redirect_to blog_path, success: flash_success
   end
 
   private
 
   def authorize!
     if not current_user.admin?
-      redirect_to root_path_for(current_user), alert: flash("unauthorized")
+      redirect_to root_path_for(current_user), error: flash("unauthorized")
     end
   end
 

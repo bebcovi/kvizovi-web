@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   after_filter :delete_old_cookies, if: :user_logged_in?
   before_filter :force_filling_email, if: :user_logged_in?
 
+  add_flash_types :success, :error
+
   protected
 
   def log_in!(user)
@@ -73,7 +75,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_flash_error(*args)
-    flash.now[:alert] = flash_error(*args)
+    flash.now[:error] = flash_error(*args)
   end
 
   def render(*args)

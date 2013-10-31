@@ -13,7 +13,7 @@ class RegistrationsController < ApplicationController
       @user.save
       perform_callbacks(@user)
       log_in!(@user)
-      redirect_to root_path_for(current_user), notice: flash_success
+      redirect_to root_path_for(current_user), success: flash_success
     else
       render :new
     end
@@ -29,7 +29,7 @@ class RegistrationsController < ApplicationController
     if @user.authenticate(params[:password])
       @user.destroy
       log_out!
-      redirect_to root_url(subdomain: false), notice: flash_success
+      redirect_to root_url(subdomain: false), success: flash_success
     else
       set_flash_error
       render :delete

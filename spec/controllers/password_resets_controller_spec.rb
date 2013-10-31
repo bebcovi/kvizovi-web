@@ -27,7 +27,7 @@ describe PasswordResetsController, user: :school do
 
       it "assigns a flash message" do
         post :confirm, email: @user.email
-        expect(flash[:notice]).to be_present
+        expect(flash[:success]).to be_present
       end
     end
 

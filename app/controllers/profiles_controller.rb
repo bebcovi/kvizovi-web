@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
 
     if @user.valid?
       @user.save
-      redirect_to profile_path, notice: flash_success
+      redirect_to profile_path, success: flash_success
     else
       render :edit
     end

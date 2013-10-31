@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
 
     if @question.valid?
       @quiz.questions << @question
-      redirect_to quiz_questions_path(@quiz), notice: flash_success
+      redirect_to quiz_questions_path(@quiz), success: flash_success
     else
       render :new
     end
@@ -33,7 +33,7 @@ class QuestionsController < ApplicationController
 
     if @question.valid?
       @question.save
-      redirect_to quiz_questions_path(@quiz), notice: flash_success
+      redirect_to quiz_questions_path(@quiz), success: flash_success
     else
       render :edit
     end
@@ -45,7 +45,7 @@ class QuestionsController < ApplicationController
 
   def update_order
     @quiz.update_attributes!(quiz_params)
-    redirect_to quiz_questions_path(@quiz), notice: flash_success
+    redirect_to quiz_questions_path(@quiz), success: flash_success
   end
 
   def download_location
@@ -56,13 +56,13 @@ class QuestionsController < ApplicationController
     question = @quiz.questions.find(params[:id]).dup
     destination_quiz = current_user.quizzes.find(params[:location])
     destination_quiz.questions << question
-    redirect_to quiz_questions_path(@quiz), notice: flash_success(quiz_name: @quiz.name)
+    redirect_to quiz_questions_path(@quiz), success: flash_success(quiz_name: @quiz.name)
   end
 
   def destroy
     @question = @quiz.questions.find(params[:id])
     @question.destroy
-    redirect_to quiz_questions_path(@quiz), notice: flash_success
+    redirect_to quiz_questions_path(@quiz), success: flash_success
   end
 
   private
@@ -73,7 +73,7 @@ class QuestionsController < ApplicationController
 
   def authorize!
     if @quiz.school != current_user
-      redirect_to :back, alert: flash_error("unauthorized")
+      redirect_to :back, error: flash_error("unauthorized")
     end
   end
 
