@@ -3,10 +3,7 @@ ruby "2.0.0"
 source "https://rubygems.org"
 
 gem "rails", ">= 4.0.0"
-
-# Web servers
-gem "thin",    group: :development
-gem "unicorn", group: :production
+gem "pg"
 
 # Frontend
 group :assets do
@@ -32,7 +29,6 @@ gem "draper"
 gem "cache_digests", ">= 0.3"
 
 # Database
-gem "pg"
 gem "paperclip", ">= 3.5.1"
 gem "paperclip-dropbox", ">= 1.1.6"
 gem "squeel", ">= 1.1.1"
@@ -40,17 +36,13 @@ gem "redis", ">= 3"
 gem "acts_as_list", ">= 0.3"
 
 # Security
-gem "dotenv", group: [:development, :test]
 gem "bcrypt-ruby", "~> 3.0.0"
 
 # Other
 gem "active_attr", ">= 0.8.1"
 
-group :development, :test do
-  gem "jasminerice", github: "bradphelan/jasminerice"
-end
-
 group :test do
+  gem "jasminerice", github: "bradphelan/jasminerice"
   gem "rspec-rails", ">= 2.14"
   gem "factory_girl", ">= 4.2"
   gem "pry"
@@ -64,8 +56,9 @@ group :test do
   gem "poltergeist", ">= 1.4.1"
 end
 
-# Development stuff
 group :development do
+  gem "thin"
+  gem "dotenv"
   gem "pry-rails", ">= 0.3.2"
   gem "better_errors", ">= 1.0.1"
   gem "binding_of_caller", ">= 0.7.2"
@@ -73,5 +66,6 @@ group :development do
 end
 
 group :production do
+  gem "unicorn"
   gem "exception_notification", ">= 4.0.1"
 end
