@@ -1,5 +1,6 @@
 class AssociationQuestion < Question
-  data_accessor :associations
+  store :data,
+    accessors: [:associations]
 
   validate :validate_associations
 

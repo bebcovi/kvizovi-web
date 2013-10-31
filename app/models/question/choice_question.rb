@@ -1,5 +1,6 @@
 class ChoiceQuestion < Question
-  data_accessor :provided_answers
+  store :data,
+    accessors: [:provided_answers]
 
   validate :validate_provided_answers
 

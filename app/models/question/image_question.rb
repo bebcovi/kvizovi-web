@@ -3,8 +3,9 @@ require "active_support/inflector/transliterate"
 require "uri"
 
 class ImageQuestion < TextQuestion
-  data_accessor :image_file_name, :image_content_type,
-    :image_file_size, :image_updated_at, :image_size
+  store :data,
+    accessors: [:image_file_name, :image_content_type,
+                :image_file_size, :image_updated_at, :image_size]
 
   has_attached_file :image, styles: {resized: "x250>"},
     whiny: false, preserve_files: true
