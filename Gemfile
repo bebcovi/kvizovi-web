@@ -25,7 +25,7 @@ end
 gem "haml", ">= 4"
 gem "haml-rails"
 gem "simple_form", ">= 3.0.0"
-gem "redcarpet", ">= 2"
+gem "redcarpet", ">= 3"
 gem "will_paginate", ">= 3.0.5"
 gem "bootstrap-will_paginate", ">= 0.0.10"
 gem "draper"
