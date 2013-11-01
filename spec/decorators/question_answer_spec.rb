@@ -117,14 +117,3 @@ describe TextQuestionAnswer do
     end
   end
 end
-
-describe ImageQuestionAnswer do
-  before do
-    @question = FactoryGirl.build(:text_question)
-    @it = ImageQuestionAnswer.new(@question)
-  end
-
-  it "inherits from TextQuestionAnswer" do
-    expect(@it).to be_a(TextQuestionAnswer)
-  end
-end

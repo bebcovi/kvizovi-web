@@ -3,6 +3,11 @@ hr:
   activerecord:
     errors:
       models:
+        question:
+          attributes:
+            image:
+              download: "Dani URL ne postoji."
+              processing: "Dani URL ne pokazuje na sliku (mora završavati sa \".jpg\", \".png\" ili sl)."
         boolean_question:
           attributes:
             answer:
@@ -18,45 +23,21 @@ hr:
             provided_answers:
               blank: "Mora postojati barem jedan ponuđeni odgovor."
               invalid: "Neki ponuđeni odgovori su prazni."
-        text_question:
-          attributes:
-        image_question:
-          attributes:
-            image_content_type:
-              invalid: "Datoteka koju ste priložili nije slika (mora završavati sa \".jpg\", \".png\" ili \".gif\", a ne npr. sa \".html\")."
-            image:
-              in_between: "Slika ne smije biti veća od 1 MB."
-            image_file_size:
-              in_between: "Slika ne smije biti veća od 1 MB."
-            image_url:
-              invalid: "Nije validna URL adresa."
 
   simple_form:
     labels:
-      question: &question
+      question:
         content: "Tekst pitanja"
+        image: "Slika"
+        remote_image_url: "URL od slike"
         hint: "Uputa (neobavezno)"
-      boolean_question:
-        <<: *question
         answer: "Odgovor"
-      choice_question:
-        <<: *question
         provided_answers: "Ponuđeni odgovori"
-      association_question:
-        <<: *question
         associations: "Parovi"
-      image_question:
-        <<: *question
-        image_file: "Slika"
-        image_url: "URL od slike"
-        answer: "Odgovor"
-      text_question:
-        <<: *question
-        answer: "Odgovor"
-
-  number:
-    human:
-      storage_units:
-        format: ""
-        units:
-          byte: ""
+    placeholders:
+      question:
+        remote_image_url: "Npr. \"http://www.primjer.hr/neka-slika.jpg\""
+        hint: "Npr. \"Odgovor piši u nominativu.\""
+    hints:
+      question:
+        hint: "Ovo će se prikazati kao pomoć pri odgovaranju na pitanje."

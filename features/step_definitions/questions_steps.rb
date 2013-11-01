@@ -9,6 +9,7 @@ When(/^I create a boolean question$/) do
   within(@quiz) { click_on "Pitanja" }
   click_on "Točno/netočno"
   fill_in "Tekst pitanja", with: "Are you a stupidhead?"
+  fill_in "URL od slike", with: "http://3.bp.blogspot.com/-bnKL0iosAc8/UOmO_a_ujuI/AAAAAAAAmVI/R5aNBx_yx2w/s1600/flbp-girls-women-sexy-9.jpg"
   choose "Točno"
   click_on "Spremi"
   @question = @quiz.questions.last
@@ -18,6 +19,7 @@ When(/^I create a choice question$/) do
   ensure_on quiz_questions_url(@quiz)
   click_on "Ponuđeni odgovori"
   fill_in "Tekst pitanja",      with: "Are you a stupidhead?"
+  attach_file "Slika", file_path("robb.jpg")
   fill_in "Ponuđeni odgovor 1", with: "No"
   fill_in "Ponuđeni odgovor 2", with: "Yes"
   fill_in "Ponuđeni odgovor 3", with: "Maybe"
@@ -34,19 +36,6 @@ When(/^I create an association question$/) do
   fill_in("Asocijacija 2a", with: "Uhm..."); fill_in("Asocijacija 2b", with: "No")
   fill_in("Asocijacija 3a", with: "Uhm..."); fill_in("Asocijacija 3b", with: "Maybe")
   fill_in("Asocijacija 4a", with: "Uhm..."); fill_in("Asocijacija 4b", with: "Probably not")
-  click_on "Spremi"
-  @question = @quiz.questions.last
-end
-
-When(/^I create an image question with (.*)$/) do |image_input|
-  ensure_on quiz_questions_url(@quiz)
-  click_on "Pogodi tko/što je na slici"
-  fill_in "Tekst pitanja", with: "Are you a stupidhead?"
-  case image_input
-  when "image url"  then fill_in "URL od slike", with: "http://3.bp.blogspot.com/-bnKL0iosAc8/UOmO_a_ujuI/AAAAAAAAmVI/R5aNBx_yx2w/s1600/flbp-girls-women-sexy-9.jpg"
-  when "image file" then attach_file "Slika", file_path("robb.jpg")
-  end
-  fill_in "Odgovor", with: "Yes"
   click_on "Spremi"
   @question = @quiz.questions.last
 end

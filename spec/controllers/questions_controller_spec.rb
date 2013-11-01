@@ -26,7 +26,7 @@ describe QuestionsController, user: :school do
         before { valid!(BooleanQuestion) }
 
         it "creates the question" do
-          post :create, quiz_id: @quiz.id, category: "boolean", boolean_question: {content: "Foo"}
+          post :create, quiz_id: @quiz.id, category: "boolean", question: {content: "Foo"}
           expect(@quiz.questions.first).to be_a(BooleanQuestion)
         end
       end
@@ -35,7 +35,7 @@ describe QuestionsController, user: :school do
         before { invalid!(BooleanQuestion) }
 
         it "doesn't raise errors" do
-          post :create, quiz_id: @quiz.id, category: "boolean", boolean_question: {content: nil}
+          post :create, quiz_id: @quiz.id, category: "boolean", question: {content: nil}
         end
       end
     end
@@ -85,7 +85,7 @@ describe QuestionsController, user: :school do
         before { valid!(@question.class) }
 
         it "updates the record" do
-          put :update, quiz_id: @quiz.id, id: @question.id, category: @question.category, :"#{@question.category}_question" => {content: "New content"}
+          put :update, quiz_id: @quiz.id, id: @question.id, category: @question.category, question: {content: "New content"}
           expect(@question.reload.content).to eq "New content"
         end
       end
@@ -94,7 +94,7 @@ describe QuestionsController, user: :school do
         before { invalid!(@question.class) }
 
         it "doesn't raise errors" do
-          put :update, quiz_id: @quiz.id, id: @question.id, category: @question.category, :"#{@question.category}_question" => {content: nil}
+          put :update, quiz_id: @quiz.id, id: @question.id, category: @question.category, question: {content: nil}
         end
       end
     end

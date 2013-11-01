@@ -33,6 +33,3 @@ end
 
 class TextQuestionShuffling < SimpleDelegator
 end
-
-class ImageQuestionShuffling < TextQuestionShuffling
-end

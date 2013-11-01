@@ -215,20 +215,6 @@ describe QuizPlay do
         end
       end
 
-      context "image questions" do
-        before { @it.stub(:question_categories) { ["image"] } }
-
-        it "handles strings" do
-          @it.save_answer!("Foo")
-          expect(@it.current_question[:answer]).to eq "Foo"
-        end
-
-        it "handles empty strings" do
-          @it.save_answer!("")
-          expect(@it.current_question[:answer]).to eq Question::NO_ANSWER
-        end
-      end
-
       context "text questions" do
         before { @it.stub(:question_categories) { ["text"] } }
 

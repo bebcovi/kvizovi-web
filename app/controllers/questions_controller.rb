@@ -82,7 +82,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require("#{params[:category]}_question").permit!
+    params.require(:question).permit!
   end
 
   def quiz_params

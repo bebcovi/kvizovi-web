@@ -10,7 +10,6 @@ FactoryGirl.define do
   factory :boolean_question, aliases: [:question]
   factory :choice_question
   factory :association_question
-  factory :image_question
   factory :text_question
 
   factory :played_quiz

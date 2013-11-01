@@ -25,10 +25,4 @@ FactoryGirl.define do
     content "Which family does Khaleesi belong to?"
     answer "Targaryen"
   end
-
-  factory :image_question do
-    content "Who is in the photo?"
-    answer "Robb Stark"
-    image Rack::Test::UploadedFile.new(Rails.root.join("features/support/fixtures/files/robb.jpg"), "image/jpeg")
-  end
 end rescue nil

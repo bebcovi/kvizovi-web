@@ -1,4 +1,3 @@
-require "paperclip-dropbox"
 require "exception_notification"
 
 Lektire::Application.configure do
@@ -64,15 +63,6 @@ Lektire::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-
-  # Use Dropbox storage for Paperclip
-  config.paperclip_defaults = {
-    storage: :dropbox,
-    dropbox_credentials: "#{Rails.root}/config/dropbox.yml",
-    dropbox_options: {
-      path: ->(style) { "#{ENV["DROPBOX_DIR"]}/#{id}_#{image.original_filename}" }
-    }
-  }
 
   # ActionMailer configuration
   config.action_mailer.smtp_settings = {

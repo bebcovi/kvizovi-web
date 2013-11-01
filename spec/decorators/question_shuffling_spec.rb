@@ -59,14 +59,3 @@ describe TextQuestionShuffling do
     @it = TextQuestionShuffling.new(@question)
   end
 end
-
-describe ImageQuestionShuffling do
-  before do
-    @question = FactoryGirl.build(:image_question)
-    @it = ImageQuestionShuffling.new(@question)
-  end
-
-  it "inherits from TextQuestionShuffling" do
-    expect(@it).to be_a(TextQuestionShuffling)
-  end
-end

@@ -1,7 +1,17 @@
 = f.input :content, input_html: {autofocus: current_page?(action: "new"), rows: 1, class: "input-block-level"}
 
+= f.input :image, label: false do
+  = f.input :image, as: :file, wrapper: false, error: false
+  = f.input :remote_image_url, wrapper: false
+  = f.hidden_field :image_cache
+
+- if params[:action] == "edit"
+  %img.img-polaroid.image-preview{src: @question.image.url(:resized)}
+- else
+  %img.img-polaroid.image-preview.hide
+
 = render "questions/fields/#{@question.category}", f: f, question: @question
 
-= f.input :hint, placeholder: %(Npr. "Odgovor piši u nominativu."), hint: "Ovo će se prikazati kao pomoć pri odgovaranju na pitanje.", hint_html: {class: "additional-info"}
+= f.input :hint, hint_html: {class: "additional-info"}
 
 = hidden_field_tag :category, params[:category] || @question.category

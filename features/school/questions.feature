@@ -27,8 +27,6 @@ Feature: Questions
       | a boolean question                |
       | a choice question                 |
       | an association question           |
-      | an image question with image url  |
-      | an image question with image file |
       | a text question                   |
 
   Scenario: Ordering questions

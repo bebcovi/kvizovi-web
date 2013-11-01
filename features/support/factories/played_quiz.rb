@@ -13,7 +13,7 @@ FactoryGirl.define do
           wrong_answer = question.answer.map(&:first).zip(question.answer.map(&:last).reverse)
         when ChoiceQuestion
           wrong_answer = question.provided_answers[1..-1].sample
-        when ImageQuestion, TextQuestion
+        when TextQuestion
           wrong_answer = question.answer.reverse
         end
         answer = [wrong_answer, question.answer, Question::NO_ANSWER, nil][categories[question.category]]

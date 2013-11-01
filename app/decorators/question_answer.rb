@@ -48,6 +48,3 @@ class TextQuestionAnswer < SimpleDelegator
     transliterate(value.strip.chomp("."))
   end
 end
-
-class ImageQuestionAnswer < TextQuestionAnswer
-end

@@ -22,6 +22,4 @@ module PlayedQuizzesHelper
   def TextAnswer(question, answer, &block)
     yield answer
   end
-
-  alias ImageAnswer TextAnswer
 end

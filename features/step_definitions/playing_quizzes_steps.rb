@@ -40,8 +40,6 @@ When(/^(?:I|we) answer all questions correctly$/) do
       )
     when page.has_content?("Stannis Baratheon won the war against King’s Landing.")
       choose "Netočno"
-    when page.has_content?("Who is in the photo?")
-      fill_in "Odgovor", with: "Robb Stark"
     when page.has_content?("Which family does Khaleesi belong to?")
       fill_in "Odgovor", with: "Targaryen"
     else

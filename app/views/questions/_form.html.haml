@@ -1,4 +1,4 @@
-= simple_form_for @question, url: [@quiz, @question.becomes(Question)], html: {class: "l-design l-question-#{@question.category} #{params[:action]}"} do |f|
+= simple_form_for @question, as: :question, url: [@quiz, @question.becomes(Question)], html: {class: "l-design l-question-#{@question.category} #{params[:action]}"} do |f|
 
   = render "fields", f: f
 

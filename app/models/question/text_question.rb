@@ -1,6 +1,5 @@
 class TextQuestion < Question
-  store :data,
-    accessors: [:answer]
+  store :data, accessors: [:answer]
 
   validate :validate_answer
 

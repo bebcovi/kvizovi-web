@@ -40,10 +40,6 @@ Lektire::Application.configure do
     end
   end
 
-  config.paperclip_defaults = {
-    path: ":rails_root/tmp/test/:id/:basename_:style.:extension",
-  }
-
   config.action_mailer.default_url_options = {host: "example.com"}
 
   # Caching configuration

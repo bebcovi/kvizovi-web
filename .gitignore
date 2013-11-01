@@ -3,8 +3,8 @@ log/*.log
 .sass-cache/
 
 public/assets/
-public/system/
 bin/
+public/uploads/
 tmp/
 
 doc/*.lyx~

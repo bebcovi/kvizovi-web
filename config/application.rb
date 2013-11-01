@@ -10,8 +10,8 @@ Bundler.require(:assets)
 require "will_paginate/railtie"
 require "bootstrap-will_paginate"
 require "draper"
-require "paperclip"
 require "cache_digests"
+require "carrierwave"
 
 require_relative "initializers/sass"
 

@@ -29,8 +29,10 @@ gem "draper", ">= 1.3"
 gem "cache_digests", ">= 0.3"
 
 # Database
-gem "paperclip", ">= 3.5.1"
-gem "paperclip-dropbox", ">= 1.1.6"
+gem "carrierwave", ">= 0.9"
+gem "mini_magick", ">= 3.6"
+gem "fog", ">= 1.17.0"
+gem "unf"
 gem "squeel", ">= 1.1.1"
 gem "redis", ">= 3"
 gem "acts_as_list", ">= 0.3"

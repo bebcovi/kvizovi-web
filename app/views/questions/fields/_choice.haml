@@ -6,7 +6,7 @@
         - additional_options = {wrapper_html: {class: "success"}} if n == 0
         %tr.choice-option
           %td.choice-field
-            = f.input :provided_answers, {label: false, error: false, placeholder: "Ponuđeni odgovor #{n + 1}", input_html: {value: question.provided_answers[n], name: "choice_question[provided_answers][]", style: "margin-bottom: 0;"}}.deep_merge(additional_options || {})
+            = f.input :provided_answers, {label: false, error: false, placeholder: "Ponuđeni odgovor #{n + 1}", input_html: {value: question.provided_answers[n], name: "question[provided_answers][]", style: "margin-bottom: 0;"}}.deep_merge(additional_options || {})
           %td.choice-remove
             - if n == 0
               %span.choice-correct-icon.text-success{title: "Ovo će biti točan odgovor.", data: {placement: "right"}}

@@ -8,7 +8,6 @@ describe QuizSnapshot do
       FactoryGirl.create(:choice_question,      content: "Choice", provided_answers: ["Foo", "Bar", "Baz"]),
       FactoryGirl.create(:association_question, content: "Association", associations: {"Foo" => "Foo", "Bar" => "Bar"}),
       FactoryGirl.create(:text_question,        content: "Text", answer: "Answer"),
-      FactoryGirl.create(:image_question,       content: "Image", image: uploaded_file("image.jpg", "image/jpeg"), answer: "Answer"),
     ]
     quiz_specification = double(
       quiz: quiz,
@@ -38,12 +37,6 @@ describe QuizSnapshot do
     text_question = @it.questions.fourth
     expect(text_question.content).to eq "Text"
     expect(text_question.answer).to eq "Answer"
-
-    image_question = @it.questions.fifth
-    expect(image_question.content).to eq "Image"
-    expect(image_question.answer).to eq "Answer"
-    expect(image_question.image.path).to satisfy { |path| File.exists?(path) }
-    expect(image_question.image_width).to be_present
   end
 
   it "trims the number of questions to be divisible by the number of students" do

@@ -33,12 +33,6 @@ class ExampleQuizzesCreator
         },
       )
 
-      questions << ImageQuestion.create!(
-        content: %(Koji je ovo lik iz "Antigone"?),
-        image_file: Rack::Test::UploadedFile.new("#{Rails.root}/db/seeds/files/antigona.jpg", "image/jpeg"),
-        answer: "Antigona",
-      )
-
       questions << TextQuestion.create!(
         content: %(Tko je Antigonin i Izmenin otac?),
         answer: "Edip",

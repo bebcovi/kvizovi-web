@@ -4,7 +4,6 @@ module QuestionsHelper
       "boolean"     => icon("checkbox"),
       "choice"      => icon("list"),
       "association" => icon("shuffle"),
-      "image"       => icon("image"),
       "text"        => icon("pencil"),
     }
     hash[category]

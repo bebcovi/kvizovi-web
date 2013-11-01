@@ -28,6 +28,7 @@
 
       %h2.question-title= question.content
 
+      = image_tag question.image.url(:resized), class: "img-polaroid space-half-bottom", style: "width: 300px" if question.image?
       = render "questions/answer/#{question.category}", question: question, answer: answer
       = render "played_quizzes/feedback/#{status}", question: question
 

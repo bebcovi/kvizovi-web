@@ -161,7 +161,8 @@ CREATE TABLE questions (
     data text DEFAULT '--- {}
 '::text,
     quiz_id integer,
-    "position" integer
+    "position" integer,
+    image character varying(255)
 );
 
 
@@ -823,3 +824,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130613144605');
 INSERT INTO schema_migrations (version) VALUES ('20130613161732');
 
 INSERT INTO schema_migrations (version) VALUES ('20130613163748');
+
+INSERT INTO schema_migrations (version) VALUES ('20131031231517');
+
+INSERT INTO schema_migrations (version) VALUES ('20131031232457');
+
+INSERT INTO schema_migrations (version) VALUES ('20131101083735');

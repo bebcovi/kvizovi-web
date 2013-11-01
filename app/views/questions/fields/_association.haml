@@ -3,7 +3,7 @@
   %table.association-wrapper.table-condensed.space-half-bottom
     %tbody
       - number_of_fields.times do |n|
-        - common_options = {label: false, name: "association_question[associations][]", class: "span5", style: "margin-bottom: 0;", error: false}
+        - common_options = {label: false, name: "question[associations][]", class: "span5", style: "margin-bottom: 0;", error: false}
         %tr.association-pair
           %td.association-field
             = f.input_field :associations, {placeholder: "Asocijacija #{n + 1}a", value: question.associations.map(&:first)[n]}.deep_merge(common_options)
