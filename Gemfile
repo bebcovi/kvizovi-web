@@ -60,6 +60,7 @@ end
 
 group :development do
   gem "thin"
+  gem "quiet_assets", ">= 1.0.2"
   gem "dotenv"
   gem "pry-rails", ">= 0.3.2"
   gem "better_errors", ">= 1.0.1"
