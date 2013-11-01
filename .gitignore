@@ -12,4 +12,3 @@ doc/*.pdf
 *-backup*
 
 .env
-.rspec
