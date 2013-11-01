@@ -79,7 +79,7 @@ Lektire::Application.configure do
   # Email exceptions
   config.middleware.use ExceptionNotification::Rack,
     email: {
-      sender_address: "Lektire <#{ENV["SENDGRID_USERNAME"]}>",
+      sender_address: "Kvizovi <#{ENV["SENDGRID_USERNAME"]}>",
       exception_recipients: ["janko.marohnic@gmail.com"],
       ignore_exceptions: [],
     }
