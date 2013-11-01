@@ -32,19 +32,3 @@ Feature: Quizzes
     When I click on the link for activation
     Then I should be on the quizzes page
     And the quiz should be activated
-
-  Scenario: Accessing quizzes from other schools
-    Given I have a quiz
-    And there is another school registered
-    And that school also has a quiz
-
-    When I visit the quizzes page
-    Then I shouldn't see the other school's quiz
-
-    When I click on "Ostali kvizovi"
-    Then I should see the other school's quiz
-    And I shouldn't see my quiz
-
-    When I click on the other school's quiz
-    And I choose to download a question to my quiz
-    Then that question should be downloaded to my quiz

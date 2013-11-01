@@ -34,8 +34,6 @@ hr:
           success: "Kviz je uspješno izmijenjen."
         destroy:
           success: "Kviz je uspješno izbrisan."
-        unauthorized:
-          error: "Ovaj kviz ne pripada vama."
       questions:
         create:
           success: "Pitanje je uspješno stvoreno."
@@ -44,12 +42,8 @@ hr:
         update_order:
           success: "Redoslijed je uspješno izmijenjen."
           error: "Neke su pozicije bile jednake, ili su bile izvan granica."
-        download:
-          success: "Pitanje je uspješno spremljeno u kviz \"%{quiz_name}\"."
         destroy:
           success: "Pitanje je uspješno izbrisano."
-        unauthorized:
-          error: "Ovaj kviz ne pripada vama."
       versions:
         revert:
           success: "Vraćeno."

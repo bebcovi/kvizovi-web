@@ -15,11 +15,6 @@ Given(/^I have a quiz$/) do
   visit quizzes_url(subdomain: @user.type)
 end
 
-Given(/^that school(?: also)? has a quiz$/) do
-  @other_quiz = FactoryGirl.create(:quiz, name: "Other quiz", school: @other_school)
-  @question = FactoryGirl.create(:question, quiz: @other_quiz)
-end
-
 When(/^in the meanwhile the quiz gets deleted$/) do
   @quiz.destroy
 end
@@ -47,16 +42,6 @@ When(/^I click on the link for (?:de)?activation$/) do
   within(@quiz) { find(".toggle-activation").click }
 end
 
-When(/^I click on the other school's quiz$/) do
-  within(@other_quiz) { click_on "Pitanja" }
-end
-
-When(/^I choose to download a question to my quiz$/) do
-  within(@question) { click_on "Preuzmi" }
-  choose @quiz.name
-  click_on "Preuzmi"
-end
-
 Then(/^I should be on the quizzes page$/) do
   expect(current_path).to eq quizzes_path
   expect(page.driver.request.request_method).to eq "GET"
@@ -80,19 +65,4 @@ Then(/^the quiz should (not )?be activated$/) do |negative|
   else
     expect(@quiz.reload).to be_activated
   end
-end
-
-Then(/^I should(n't)? see (the other school's|my) quiz$/) do |negation, owner|
-  quiz = owner == "my" ? @quiz : @other_quiz
-  if negation.present?
-    expect(page).not_to have_content(quiz.name)
-  else
-    expect(page).to have_content(quiz.name)
-  end
-end
-
-Then(/^that question should be downloaded to my quiz$/) do
-  visit quizzes_url(subdomain: @user.type)
-  within(@quiz) { click_on "Pitanja" }
-  expect(page).to have_content(@question.content)
 end

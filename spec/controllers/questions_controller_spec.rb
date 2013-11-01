@@ -99,20 +99,6 @@ describe QuestionsController, user: :school do
       end
     end
 
-    describe "#download_location" do
-      it "doesn't raise errors" do
-        get :download_location, quiz_id: @quiz.id, id: @question.id
-      end
-    end
-
-    describe "#download" do
-      it "downloads the question to another quiz" do
-        expect do
-          post :download, quiz_id: @quiz.id, id: @question.id, location: @quiz.id
-        end.to change{@quiz.questions.count}.by 1
-      end
-    end
-
     describe "#destroy" do
       it "destroyes the question" do
         delete :destroy, quiz_id: @quiz.id, id: @question.id

@@ -3,7 +3,6 @@
   %ul.dropdown-menu.pull-right
     %li= edit_button "Izmijeni", edit_quiz_question_path(@quiz, question), class: "" if @quiz.school == current_user
     %li= remove_file_button "Izbriši", quiz_question_path(@quiz, question), method: :delete if @quiz.school == current_user
-    %li= link_to "Preuzmi".prepend_icon("file-download"), download_quiz_question_path(@quiz, question), data: {modal: true}
 
 %span.space-quart-right= question_icons(question.category)
 %span.list-pretty-item-content= question.content
