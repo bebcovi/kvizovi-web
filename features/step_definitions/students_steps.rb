@@ -3,7 +3,7 @@ Given(/^I have some students$/) do
 end
 
 When(/^I go to the page for viewing students$/) do
-  ensure_on quizzes_url
+  ensure_on account_quizzes_path
   click_on "Učenici"
 end
 

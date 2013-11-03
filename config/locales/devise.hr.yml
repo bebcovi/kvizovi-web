@@ -1,0 +1,55 @@
+hr:
+  devise:
+    confirmations:
+      confirmed: "Vaš korisnički račun je uspješno potvrđen."
+      confirmed_and_signed_in: "Vaš korisnički račun je uspješno potvrđen. Sada ste prijavljeni."
+      send_instructions: "Poslan vam je email sa linkom za potvrdu korisničkog računa."
+      send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes."
+    failure:
+      already_authenticated: "Već ste prijavljeni."
+      inactive: "Vaš korisnički račun još nije aktiviran."
+      invalid: "Pogrešno korisničko ime ili lozinka."
+      invalid_token: "Pogrešna potvrdna šifra."
+      locked: "Your account is locked."
+      not_found_in_database: "Pogrešno korisničko ime ili lozinka."
+      timeout: "Your session expired. Please sign in again to continue."
+      unauthenticated: "Morate se prijaviti prije nego nastavite."
+      unconfirmed: "Morate potvrditi svoj korisnički račun prije nego nastavite."
+    mailer:
+      confirmation_instructions:
+        subject: "Potvrda korisničkog računa"
+      reset_password_instructions:
+        subject: "Promjena lozinke"
+      unlock_instructions:
+        subject: "Unlock Instructions"
+    omniauth_callbacks:
+      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
+      success: "Successfully authenticated from %{kind} account."
+    passwords:
+      no_token: "Ne možete pristupiti ovoj stranici ako niste došli do nje iz emaila za promjenu lozinke. Ako dolazite iz tog emaila, molimo vas da provjerite jeste li upisali puni URL."
+      send_instructions: "Poslan vam je email s uputama kako promijeniti lozinku."
+      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
+      updated: "Vaša lozinka je uspješno promijenjena, i prijavljeni ste."
+      updated_not_active: "Vaša lozinka je uspješno promijenjena."
+    registrations:
+      destroyed: "Vaš korisnički račun je uspješno izbrisan. Hvala što ste probali aplikaciju :)"
+      signed_up: "Uspješno ste registrirani. Dobrodošli!"
+      signed_up_but_inactive: "Uspješno ste registrirani, međutim, nismo vas mogli prijaviti jer vaš korisnički račun nije još aktiviran."
+      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
+      signed_up_but_unconfirmed: "Poruka s potvrdnim linkom je poslana na vaš email. Molimo, posjetite taj link da aktivirate svoj korisnički račun."
+      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
+      updated: "You updated your account successfully."
+    sessions:
+      signed_in: ""
+      signed_out: ""
+    unlocks:
+      send_instructions: "You will receive an email with instructions about how to unlock your account in a few minutes."
+      send_paranoid_instructions: "If your account exists, you will receive an email with instructions about how to unlock it in a few minutes."
+      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+  errors:
+    messages:
+      already_confirmed: "was already confirmed, please try signing in"
+      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
+      expired: "has expired, please request a new one"
+      not_found: "Nije pronađena"
+      not_locked: "was not locked"

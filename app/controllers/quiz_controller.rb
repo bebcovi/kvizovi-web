@@ -1,5 +1,5 @@
 class QuizController < ApplicationController
-  before_filter :authenticate!
+  before_filter :authenticate_user!
   before_filter :assign_student, :assign_quiz_play
   before_filter :redirect_if_question_was_already_answered, only: :play
 
@@ -26,7 +26,7 @@ class QuizController < ApplicationController
   end
 
   def play
-    @student  = current_student
+    @student  = current_player
     @quiz     = quiz
     @question = current_question
   end
@@ -74,7 +74,7 @@ class QuizController < ApplicationController
     @quiz_play = QuizPlay.new(cookies)
   end
 
-  def current_student
+  def current_player
     Student.find(@quiz_play.current_student[:id])
   end
 

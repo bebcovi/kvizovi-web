@@ -1,16 +1,16 @@
 When(/^I go to the page for monitoring that quiz$/) do
-  visit quizzes_url unless page.has_content?(@quiz.name)
+  visit account_quizzes_path unless page.has_content?(@quiz.name)
   within(@quiz) { click_on "Prati" }
 end
 
 When(/^I go to the page for monitoring that student's activity$/) do
-  visit students_url
+  visit account_students_path
   student = @user.students.first
   within(student) { click_on student.played_quizzes.count }
 end
 
 When(/^I go to the page for monitoring quizzes$/) do
-  ensure_on quizzes_url
+  ensure_on account_quizzes_path
   click_on "Odigrani kvizovi"
 end
 
@@ -19,7 +19,7 @@ When(/^I click on the played quiz$/) do
 end
 
 When(/^I go to that played quiz$/) do
-  visit played_quiz_url(@played_quiz)
+  visit played_quiz_path(@played_quiz)
 end
 
 Then(/^I should see (?:their|his) results$/) do

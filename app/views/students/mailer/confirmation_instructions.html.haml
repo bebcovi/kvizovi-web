@@ -1,0 +1,5 @@
+%p Dobrodoš#{@resource.male? ? "ao" : "la"}!
+
+%p Možeš potvrditi svoj korisnički račun slijedeći link ispod:
+
+%p= link_to confirmation_url(@resource, :confirmation_token => @token), confirmation_url(@resource, :confirmation_token => @token)

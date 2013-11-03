@@ -11,3 +11,5 @@ FactoryGirl.define do
     region   "Grad Zagreb"
   end
 end rescue nil
+
+School.skip_callback(:create, :after, :create_example_quizzes)

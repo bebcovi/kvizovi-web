@@ -12,7 +12,7 @@ end
 
 When(/^I log in again with the updated password$/) do
   click_on "Odjava"
-  visit login_url
+  visit send("new_#{@user_type}_session_path")
   fill_in "Korisničko ime", with: @user.username
   fill_in "Lozinka",        with: "new password"
   click_on "Prijava"

@@ -11,7 +11,7 @@ class School < ActiveRecord::Base
     "Karlovačka županija",
     "Koprivničko-križevačka županija",
     "Krapinsko-zagorska županija",
-    "Ličko-@senjska županija",
+    "Ličko-senjska županija",
     "Međimurska županija",
     "Osječko-baranjska županija",
     "Požeško-slavonska županija",
@@ -33,14 +33,15 @@ class School < ActiveRecord::Base
   has_many :readings, as: :user, dependent: :destroy
   has_many :read_posts, through: :readings, source: :post
 
-  has_secure_password
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   validates :username, presence: true, uniqueness: true
-  validates :email,    presence: true, uniqueness: true
   validates :place,    presence: true
   validates :region,   presence: true, inclusion: {in: REGIONS, allow_blank: true}
   validates :level,    presence: true, inclusion: {in: LEVELS, allow_blank: true}
   validates :key,      presence: true
+
+  after_create :create_example_quizzes
 
   def type; "school"; end
 
@@ -55,5 +56,11 @@ class School < ActiveRecord::Base
 
   def unread_posts
     Post.not_in(read_posts)
+  end
+
+  private
+
+  def create_example_quizzes
+    ExampleQuizzesCreator.new(self).create
   end
 end

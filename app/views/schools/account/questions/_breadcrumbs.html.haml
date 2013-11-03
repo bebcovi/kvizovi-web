@@ -1,0 +1,6 @@
+- case params[:action]
+- when "index"
+  = breadcrumbs link_to("Kvizovi", account_quizzes_path), @quiz.name
+- else
+  = breadcrumbs link_to("Kvizovi", account_quizzes_path), link_to(@quiz.name, account_quiz_questions_path(@quiz)), @title
+

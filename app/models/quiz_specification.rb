@@ -33,6 +33,7 @@ class QuizSpecification
   end
 
   def authenticate(attrs)
-    UserAuthenticator.new(Student).authenticate(attrs[:username], attrs[:password])
+    student = Student.find_by(username: attrs[:username])
+    student.try(:authenticate, attrs[:password])
   end
 end

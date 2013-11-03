@@ -1,5 +1,5 @@
 class SurveysController < ApplicationController
-  before_filter :authenticate!
+  before_filter :authenticate_user!
 
   def new
     @survey = Survey.new
@@ -12,7 +12,7 @@ class SurveysController < ApplicationController
     if @survey.valid?
       @survey.save
       current_user.update_column(:completed_survey, true)
-      redirect_to root_path_for(current_user), success: flash_success
+      redirect_to account_path, success: flash_success
     else
       set_flash_error
       render :new

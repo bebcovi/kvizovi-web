@@ -19,14 +19,8 @@ Given(/^I'm registered and logged in( as an admin)?$/) do |admin|
 end
 
 When(/^I go to the registration page$/) do
-  visit login_url
-  if school?
-    click_on "Registrirajte se"
-    fill_in "Tajni ključ aplikacije", with: ENV["SECRET_KEY"]
-    click_on "Potvrdi"
-  else
-    click_on "Registriraj se"
-  end
+  visit send("new_#{@user_type}_session_path")
+  click_on "Registrirajte se"
 end
 
 When(/^I fill in the registration details$/) do

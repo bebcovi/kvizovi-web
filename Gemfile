@@ -37,10 +37,8 @@ gem "squeel", ">= 1.1.1"
 gem "redis", ">= 3"
 gem "acts_as_list", ">= 0.3"
 
-# Security
-gem "bcrypt-ruby", "~> 3.0.0"
-
 # Other
+gem "devise", ">= 3.1.1"
 gem "active_attr", ">= 0.8.1"
 
 group :test do
@@ -66,6 +64,7 @@ group :development do
   gem "better_errors", ">= 1.0.1"
   gem "binding_of_caller", ">= 0.7.2"
   gem "xray-rails", ">= 0.1.5"
+  gem "letter_opener", ">= 1.1.2"
 end
 
 group :production do

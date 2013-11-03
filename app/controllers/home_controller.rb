@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
-  before_filter do
-    redirect_to root_path_for(current_user) if user_logged_in?
-  end
+  before_filter { redirect_to account_path if user_logged_in? }
 
   def index
   end

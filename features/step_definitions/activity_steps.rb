@@ -14,7 +14,7 @@ Then(/^I should see the time of his last activity$/) do
 end
 
 Then(/^the time of his last activity should change$/) do
-  visit admin_schools_url
+  visit admin_schools_path
   expect(page).to have_content("prije 15 minuta")
 end
 

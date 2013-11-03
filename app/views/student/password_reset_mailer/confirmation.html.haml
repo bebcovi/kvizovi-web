@@ -1,7 +1,0 @@
-%p Poštovani,
-
-%p Napravi#{@user.male? ? "o" : "la"} si zahtjev za novu lozinku. Molimo posjeti ovaj link: #{link_to create_password_reset_url(email: @user.email, confirmation_id: @user.password_reset_confirmation_id, subdomain: @user.type), create_password_reset_url(email: @user.email, confirmation_id: @user.password_reset_confirmation_id, subdomain: @user.type)}.
-
-%p Ukoliko nisi napravi#{@user.male? ? "o" : "la"} ovaj zahtjev, slobodno ignoriraj ovaj email.
-
-%p Lijepi pozdrav,<br>Janko &amp; Matija.

@@ -1,0 +1,7 @@
+= simple_form_for @question, as: :question, url: [:account, @quiz, @question.becomes(Question)], html: {class: "l-design l-question-#{@question.category} #{params[:action]}"} do |f|
+
+  = render partial: "fields", locals: {f: f}
+
+  = buttons do
+    = cancel_button "Odustani", account_quiz_questions_path(@quiz)
+    = submit_button "Spremi"

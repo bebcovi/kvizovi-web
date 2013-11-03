@@ -19,5 +19,7 @@ FactoryGirl.define do
 
   trait(:with_school) { school }
   trait(:with_quiz)   { quiz }
-  trait(:password)    { password_digest "foo" }
+  trait(:password)    { encrypted_password "foo" }
 end
+
+School.skip_callback(:create, :after, :create_example_quizzes)

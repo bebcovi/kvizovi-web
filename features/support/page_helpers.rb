@@ -1,19 +1,15 @@
 module PageHelpers
-  def url_to(page)
+  def path_to(page)
     case page
-    when /homepage/
-      if    school?  then quizzes_url
-      elsif student? then choose_quiz_url
-      else                root_url
-      end
-    when /login page/               then login_url
-    when /profile( page)?/          then profile_url
-    when /quizzes page/             then quizzes_url
-    when /questions page/           then quiz_questions_url(@quiz)
-    when /page for playing quizzes/ then choose_quiz_url
-    when /activity page/            then admin_schools_url
-    when /survey page/              then surveys_url
-    when /blog( page)?/             then blog_url
+    when /homepage/                 then account_path
+    when /login page/               then send("new_#{@user_type}_session_path")
+    when /profile( page)?/          then account_profile_path
+    when /quizzes page/             then account_quizzes_path
+    when /questions page/           then account_quiz_questions_path(@quiz)
+    when /page for playing quizzes/ then choose_quiz_path
+    when /activity page/            then admin_schools_path
+    when /survey page/              then surveys_path
+    when /blog( page)?/             then blog_path
     else
       raise "Page isn't recognized: #{page}"
     end

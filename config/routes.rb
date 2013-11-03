@@ -4,33 +4,12 @@ Lektire::Application.routes.draw do
     get "(*path)", to: redirect(host: "kvizovi.org")
   end
 
-  constraints subdomain: /www/ do
-    get "(*path)", to: redirect(subdomain: false)
-  end
-
   root to: "home#index"
 
-  ########################
-  # Authentication
-  ########################
-  scope constraints: {subdomain: /school|student/} do
-    controller :sessions do
-      get   "login",  to: :new
-      post  "login",  to: :create
-      match "logout", to: :destroy, via: [:get, :delete]
-    end
-    resource :registration
-    resource :authorization
-    resource :password_reset do
-      post "confirm"
-      get "create", as: :create
-    end
-  end
+  devise_for :schools
+  devise_for :students
 
-  ########################
-  # School
-  ########################
-  scope constraints: {subdomain: "school"} do
+  namespace :account do
     resources :quizzes do
       resources :questions do
         collection do
@@ -40,35 +19,29 @@ Lektire::Application.routes.draw do
       end
     end
 
-    resources :students, only: [:index]
-    resources :played_quizzes
+    resources :students
+    resource  :profile
   end
+  get "account", to: "account#dashboard"
+
+  resources :played_quizzes
 
   ########################
   # Student
   ########################
-  scope constraints: {subdomain: "student"} do
-    resource :quiz, only: [], controller: "quiz" do
-      get    "choose"
-      post   "start"
-      get    "play"
-      put    "save_answer"
-      get    "answer_feedback"
-      put    "next_question"
-      get    "results"
-      get    "interrupt"
-      delete "finish"
-    end
+  resource :quiz, only: [], controller: "quiz" do
+    get    "choose"
+    post   "start"
+    get    "play"
+    put    "save_answer"
+    get    "answer_feedback"
+    put    "next_question"
+    get    "results"
+    get    "interrupt"
+    delete "finish"
   end
 
-  ########################
-  # School & Student
-  ########################
-  resource :profile
-  resource :password
-
-  resource :email
-  resources :surveys
+  resources :surveys, only: [:new, :create]
 
   ########################
   # Static pages
@@ -95,17 +68,5 @@ Lektire::Application.routes.draw do
   controller :errors do
     get ":code", to: :show, constraints: {code: /\d+/}
   end
-
-  ########################
-  # Legacy routes
-  ########################
-  get "login",           to: redirect(                      path: "/")
-  get "schools/new",     to: redirect(subdomain: "school",  path: "/registration/new")
-  get "students/new",    to: redirect(subdomain: "student", path: "/registration/new")
-  get "game/new",        to: redirect(subdomain: "student", path: "/quiz/choose")
-  get "schools/:id",     to: redirect(subdomain: "school",  path: "/profile")
-  get "students/:id",    to: redirect(subdomain: "student", path: "/profile")
-  get "students",        to: redirect(subdomain: "school",  path: "/students")
-  get "quizzes(*other)", to: redirect(subdomain: "school")
 
 end

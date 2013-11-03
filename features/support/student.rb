@@ -1,6 +1,5 @@
 Before("@student") do
   @user_type = "student"
-  host! "student.#{host}"
 end
 
 module StudentHelpers

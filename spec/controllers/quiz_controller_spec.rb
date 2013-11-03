@@ -7,7 +7,7 @@ describe QuizController, user: :student do
     @quiz      = FactoryGirl.create(:quiz, activated: true, school: @school)
     @questions = FactoryGirl.create_list(:question, 3, quiz: @quiz)
 
-    login_as(@student)
+    sign_in(@student)
   end
 
   describe "#choose" do

@@ -12,6 +12,7 @@ require "bootstrap-will_paginate"
 require "draper"
 require "cache_digests"
 require "carrierwave"
+require "devise"
 
 require_relative "initializers/sass"
 
@@ -21,6 +22,7 @@ if Rails.env.development?
   require "xray-rails"
   require "pry-rails"
   require "jasminerice"
+  require "letter_opener"
 end
 
 module Lektire

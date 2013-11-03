@@ -19,11 +19,11 @@ end
 
 module CapybaraHelpers
   def refresh
-    visit current_url
+    visit current_path
   end
 
-  def ensure_on(url)
-    visit url unless current_url == url
+  def ensure_on(path)
+    visit path unless current_path == path
   end
 end
 

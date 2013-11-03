@@ -1,0 +1,33 @@
+- title "Profil"
+
+%table.profile_info.table.table-striped
+  %colgroup
+    %col.field
+    %col.value
+
+  %tbody
+    %tr
+      %th Ime i prezime
+      %td= @user.full_name
+    %tr
+      %th Korisničko ime
+      %td= @user.username
+    %tr
+      %th Škola
+      %td= @user.school.name
+    %tr
+      %th Razred
+      %td= @user.grade
+    %tr
+      %th Spol
+      %td= @user.gender
+    %tr
+      %th Godina rođenja
+      %td= @user.year_of_birth.to_s + "."
+
+= buttons do
+  .btn-group
+    = edit_button "Izmijeni profil", edit_account_profile_path
+    = change_password_button "Izmijeni lozinku", new_student_password_path
+
+%p= delete_profile_button "Izbriši korisnički račun", student_registration_path, method: :delete

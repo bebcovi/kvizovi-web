@@ -1,12 +1,12 @@
 Given(/^I'm logged in$/) do
-  visit login_url
+  visit send("new_#{@user_type}_session_path")
   fill_in "Korisničko ime", with: @user.username
   fill_in "Lozinka",        with: @user.password
   click_on "Prijava"
 end
 
 When(/^I log in$/) do
-  ensure_on login_url
+  ensure_on send("new_#{@user_type}_session_path")
   fill_in "Korisničko ime", with: @user.username
   fill_in "Lozinka",        with: @user.password
   click_on "Prijava"
@@ -22,9 +22,9 @@ When(/^I fill in my login information$/) do
 end
 
 Then(/^I should be successfully logged in$/) do
-  expect(current_url).to eq url_to("homepage")
+  expect(current_path).to eq path_to("homepage")
 end
 
 Then(/^I should be logged out$/) do
-  expect(current_url).to eq root_url(subdomain: false)
+  expect(current_path).to eq root_path
 end

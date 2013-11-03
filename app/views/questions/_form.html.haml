@@ -1,7 +1,0 @@
-= simple_form_for @question, as: :question, url: [@quiz, @question.becomes(Question)], html: {class: "l-design l-question-#{@question.category} #{params[:action]}"} do |f|
-
-  = render "fields", f: f
-
-  = buttons do
-    = cancel_button "Odustani", quiz_questions_path(@quiz)
-    = submit_button "Spremi"

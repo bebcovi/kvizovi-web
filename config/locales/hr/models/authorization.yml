@@ -1,5 +1,0 @@
-hr:
-  simple_form:
-    labels:
-      authorization:
-        secret_key: "Tajni ključ aplikacije"

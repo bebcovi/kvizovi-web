@@ -1,62 +1,38 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  protect_from_forgery with: :exception
 
-  before_filter :add_subdomain_view_path
+  before_filter :add_user_view_path, if: :user_logged_in?
   before_filter :save_activity, if: :user_logged_in?
-  after_filter :delete_old_cookies, if: :user_logged_in?
   before_filter :force_filling_email, if: :user_logged_in?
 
-  add_flash_types :success, :error
+  add_flash_types :success, :error, :warning
+
+  def render(*args)
+    options = args.extract_options!
+    options.update(layout: false) if request.headers["X-noLayout"]
+    args << options
+    super
+  end
 
   protected
 
-  def log_in!(user)
-    cookies.signed.permanent[:user_id]   = {value: user.id, domain: :all}
-    cookies.signed.permanent[:user_type] = {value: user.type, domain: :all}
-  end
-
-  def log_out!
-    cookies.delete(:user_id, domain: :all)
-    cookies.delete(:user_type, domain: :all)
-  end
-
   def current_user
-    @current_user ||= user_class.find(cookies.signed[:user_id])
+    case
+    when school_signed_in?  then current_school
+    when student_signed_in? then current_student
+    end
   end
   helper_method :current_user
 
   def user_logged_in?
-    cookies.signed[:user_id].present? and
-    cookies.signed[:user_type].present? and
-    user_class.exists?(cookies.signed[:user_id])
+    school_signed_in? or student_signed_in?
   end
   helper_method :user_logged_in?
 
-  def user_class
-    if cookies.signed[:user_type].present?
-      cookies.signed[:user_type].camelize.constantize
-    else
-      request.subdomain.camelize.constantize
-    end
-  end
-
-  def authenticate!
+  def authenticate_user!
     if not user_logged_in?
-      set_return_point
-      redirect_to login_path
+      redirect_to root_path, warning: "Niste prijavljeni."
     end
-  end
-
-  def set_return_point
-    cookies[:return_to] = {
-      value:   request.fullpath,
-      expires: 5.minutes.from_now,
-      domain:  :all,
-    }
-  end
-
-  def return_point
-    cookies.delete(:return_to, domain: :all) || root_path_for(current_user)
   end
 
   def flash_success(*args) flash_message(:success, *args) end
@@ -68,7 +44,7 @@ class ApplicationController < ActionController::Base
     controller = params[:controller]
 
     path = "flash"
-    path << ".#{request.subdomain}" if request.subdomain
+    path << ".#{current_user.type}" if user_logged_in?
     path << ".#{controller}.#{action}.#{type}"
 
     t(path, options)
@@ -78,41 +54,39 @@ class ApplicationController < ActionController::Base
     flash.now[:error] = flash_error(*args)
   end
 
-  def render(*args)
-    options = args.extract_options!
-    options.update(layout: false) if request.headers["X-noLayout"]
-    args << options
-    super
+  def after_sign_in_path_for(resource_or_scope)
+    account_path
   end
 
-  def root_path_for(user)
-    case user
-    when Student then choose_quiz_url(subdomain: "student")
-    when School  then quizzes_url(subdomain: "school")
-    end
-  end
-  helper_method :root_path_for
-
-  private
-
-  def add_subdomain_view_path
-    prepend_view_path "app/views/#{request.subdomain}" if request.subdomain.present?
+  def add_user_view_path
+    prepend_view_path "app/views/#{current_user.type.pluralize}" unless devise_controller?
   end
 
   def save_activity
     LastActivity.for(current_user).save(Time.now)
   end
 
-  def delete_old_cookies
-    unless cookies.instance_variable_get("@set_cookies").present?
-      cookies.delete(:user_id)
-      cookies.delete(:user_type)
+  def force_filling_email
+    if current_user.email.blank? and params[:controller] != "account/profiles"
+      redirect_to edit_account_profile_path, warning: "Od sada nadalje nam treba tvoja email adresa, pa molimo da je ispuniš ispod."
     end
   end
 
-  def force_filling_email
-    if current_user.email.blank?
-      redirect_to new_email_path unless params[:controller] == "emails"
+  def devise_parameter_sanitizer
+    DeviseParameterSanitizer.new(resource_class, resource_name, params)
+  end
+
+  class DeviseParameterSanitizer < Devise::ParameterSanitizer
+    def sign_in
+      default_params.permit!
+    end
+
+    def sign_up
+      default_params.permit!
+    end
+
+    def account_update
+      default_params.permit!
     end
   end
 end

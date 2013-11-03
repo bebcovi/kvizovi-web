@@ -1,13 +1,13 @@
 Given(/^I'm on (?:the|my) (.*)$/) do |page|
-  ensure_on url_to(page)
+  ensure_on path_to(page)
 end
 
 When(/^I visit (.*)$/) do |page|
-  visit url_to(page)
+  visit path_to(page)
 end
 
 When(/^I go to (.*)$/) do |page|
-  visit url_to(page)
+  visit path_to(page)
 end
 
 When(/^I click on "(.*)"$/) do |text|
@@ -15,7 +15,7 @@ When(/^I click on "(.*)"$/) do |text|
 end
 
 Then(/^I should (?:still )?be on (.*)$/) do |page|
-  expect(current_url).to eq url_to(page)
+  expect(current_path).to eq path_to(page)
 end
 
 Then(/^I should( not)? see "(.*)"$/) do |negative, content|

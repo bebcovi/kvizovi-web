@@ -300,7 +300,7 @@ CREATE TABLE schools (
     id integer NOT NULL,
     name character varying(255),
     username character varying(255),
-    password_digest character varying(255),
+    encrypted_password character varying(255),
     level character varying(255),
     key character varying(255),
     created_at timestamp without time zone NOT NULL,
@@ -309,10 +309,16 @@ CREATE TABLE schools (
     region character varying(255),
     email character varying(255),
     notified boolean DEFAULT true,
-    password_reset_confirmation_id character varying(255),
     admin boolean DEFAULT false,
     completed_survey boolean DEFAULT false,
-    last_activity timestamp without time zone
+    last_activity timestamp without time zone,
+    reset_password_token character varying(255),
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    confirmation_token character varying(255),
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
+    unconfirmed_email character varying(255)
 );
 
 
@@ -344,17 +350,23 @@ CREATE TABLE students (
     first_name character varying(255),
     last_name character varying(255),
     username character varying(255),
-    password_digest character varying(255),
+    encrypted_password character varying(255),
     school_id integer,
     grade character varying(2),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     gender character varying(255),
     year_of_birth integer,
-    password_reset_confirmation_id character varying(255),
     email character varying(255),
     completed_survey boolean DEFAULT false,
-    last_activity timestamp without time zone
+    last_activity timestamp without time zone,
+    reset_password_token character varying(255),
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    confirmation_token character varying(255),
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
+    unconfirmed_email character varying(255)
 );
 
 
@@ -830,3 +842,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131031231517');
 INSERT INTO schema_migrations (version) VALUES ('20131031232457');
 
 INSERT INTO schema_migrations (version) VALUES ('20131101083735');
+
+INSERT INTO schema_migrations (version) VALUES ('20131101163648');

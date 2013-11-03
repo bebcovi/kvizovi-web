@@ -3,7 +3,7 @@ require "spec_helper"
 describe PlayedQuizzesController, user: :school do
   before do
     @school = FactoryGirl.create(:school)
-    login_as(@school)
+    sign_in(@school)
   end
 
   before do

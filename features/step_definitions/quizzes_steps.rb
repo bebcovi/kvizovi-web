@@ -12,7 +12,7 @@ end
 
 Given(/^I have a quiz$/) do
   @quiz = FactoryGirl.create(:quiz, school: @user)
-  visit quizzes_url(subdomain: @user.type)
+  visit account_quizzes_path
 end
 
 When(/^in the meanwhile the quiz gets deleted$/) do
@@ -43,7 +43,7 @@ When(/^I click on the link for (?:de)?activation$/) do
 end
 
 Then(/^I should be on the quizzes page$/) do
-  expect(current_path).to eq quizzes_path
+  expect(current_path).to eq account_quizzes_path
   expect(page.driver.request.request_method).to eq "GET"
 end
 

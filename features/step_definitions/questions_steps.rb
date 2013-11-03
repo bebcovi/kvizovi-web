@@ -5,7 +5,7 @@ Given(/^my quiz has some questions$/) do
 end
 
 When(/^I create a boolean question$/) do
-  visit quizzes_url unless page.has_content?(@quiz)
+  visit account_quizzes_path unless page.has_content?(@quiz)
   within(@quiz) { click_on "Pitanja" }
   click_on "Točno/netočno"
   fill_in "Tekst pitanja", with: "Are you a stupidhead?"
@@ -16,7 +16,7 @@ When(/^I create a boolean question$/) do
 end
 
 When(/^I create a choice question$/) do
-  ensure_on quiz_questions_url(@quiz)
+  ensure_on account_quiz_questions_path(@quiz)
   click_on "Ponuđeni odgovori"
   fill_in "Tekst pitanja",      with: "Are you a stupidhead?"
   attach_file "Slika", file_path("robb.jpg")
@@ -29,7 +29,7 @@ When(/^I create a choice question$/) do
 end
 
 When(/^I create an association question$/) do
-  ensure_on quiz_questions_url(@quiz)
+  ensure_on account_quiz_questions_path(@quiz)
   click_on "Asocijacija"
   fill_in "Tekst pitanja",  with: "Are you a stupidhead?"
   fill_in("Asocijacija 1a", with: "Uhm..."); fill_in("Asocijacija 1b", with: "Yes")
@@ -41,7 +41,7 @@ When(/^I create an association question$/) do
 end
 
 When(/^I create a text question$/) do
-  ensure_on quiz_questions_url(@quiz)
+  ensure_on account_quiz_questions_path(@quiz)
   click_on "Upiši točan odgovor"
   fill_in "Tekst pitanja", with: "Are you a stupidhead?"
   fill_in "Odgovor", with: "Yes"
@@ -66,7 +66,7 @@ When(/^I change the order of my questions$/) do
 end
 
 Then(/^I should be on the questions page$/) do
-  expect(current_path).to eq quiz_questions_path(@quiz)
+  expect(current_path).to eq account_quiz_questions_path(@quiz)
   expect(page.driver.request.request_method).to eq "GET"
 end
 

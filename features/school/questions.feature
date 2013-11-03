@@ -23,11 +23,11 @@ Feature: Questions
     And I should not see that question
 
     Examples:
-      | question                          |
-      | a boolean question                |
-      | a choice question                 |
-      | an association question           |
-      | a text question                   |
+      | question                |
+      | a boolean question      |
+      | a choice question       |
+      | an association question |
+      | a text question         |
 
   Scenario: Ordering questions
     Given my quiz has some questions

@@ -12,7 +12,7 @@ describe HomeController do
     context "when user is logged in" do
       before do
         @user = FactoryGirl.create(:school)
-        login_as(@user)
+        sign_in(@user)
       end
 
       it "redirects" do

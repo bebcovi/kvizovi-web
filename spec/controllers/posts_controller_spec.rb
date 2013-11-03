@@ -3,7 +3,7 @@ require "spec_helper"
 describe PostsController, user: :school do
   before do
     @user = FactoryGirl.create(:school, admin: true)
-    login_as(@user)
+    sign_in(@user)
   end
 
   context "collection" do

@@ -1,0 +1,13 @@
+- title "Brisanje korisničkog računa"
+
+%h1 Jeste li sigurni?
+
+%p Ovime ćete trajno izbrisati svoj korisnički račun. Ako ste potpuno sigurni da to želite napraviti, upišite svoju lozinku:
+
+= simple_form_for :school, url: school_registration_path, method: :delete do |f|
+
+  = f.input :password, input_html: {name: "password"}
+
+  = buttons do
+    = cancel_button "Odustani", admin_profile_path
+    = submit_button "Potvrdi".prepend_icon("remove"), class: "btn btn-danger"

@@ -3,7 +3,7 @@ Given(/^there is a new blog post$/) do
 end
 
 When(/^I leave the blog$/) do
-  visit url_to("homepage")
+  visit path_to("homepage")
 end
 
 When(/^I create a new blog post$/) do

@@ -8,7 +8,7 @@ class Student < ActiveRecord::Base
   has_many :readings, as: :user, dependent: :destroy
   has_many :read_posts, through: :readings, source: :post
 
-  has_secure_password
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   attr_accessor :school_key
 
   validates :username,      presence: true, format: {with: /\A[a-zA-Z0-9_]*\Z/, allow_blank: true}, length: {minimum: 3, allow_blank: true}, uniqueness: true
@@ -18,7 +18,6 @@ class Student < ActiveRecord::Base
   validates :gender,        presence: true, inclusion: {in: GENDERS, allow_blank: true}
   validates :year_of_birth, presence: true, numericality: {only_integer: true, allow_blank: true}
   validates :school_key,    presence: true, inclusion: {in: proc { School.pluck(:key) }, allow_blank: true}, unless: :school_id?
-  validates :email,         presence: true, uniqueness: true
 
   before_create :assign_school, unless: :school_id?
   before_destroy :destroy_played_quizzes
@@ -45,6 +44,10 @@ class Student < ActiveRecord::Base
 
   def admin?
     false
+  end
+
+  def authenticate(password)
+    BCrypt::Password.new(encrypted_password) == password && self
   end
 
   private

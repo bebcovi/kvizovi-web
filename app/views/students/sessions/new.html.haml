@@ -1,0 +1,15 @@
+- title "Prijava"
+
+%h1 Prijava učenika
+
+= simple_form_for resource, url: student_session_path do |f|
+
+  = f.input :username, input_html: {autofocus: params[:action] == "new"}
+  = f.input :password,
+    hint: "Zaboravili ste lozinku? #{link_to "Zatražite novu", new_student_password_path}."
+  = f.hidden_field :remember_me, value: true
+
+  = buttons do
+    = cancel_button "Odustani", root_url
+    = submit_button "Prijava"
+    %span Nemate korisnički račun? #{link_to "Registrirajte se", new_student_registration_path}.

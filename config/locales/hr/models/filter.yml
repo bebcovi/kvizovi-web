@@ -1,5 +1,0 @@
-hr:
-  simple_form:
-    labels:
-      filter:
-        tags: "Tagovi"

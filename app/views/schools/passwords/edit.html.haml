@@ -1,0 +1,11 @@
+- title "Izmjena lozinke"
+
+= simple_form_for resource, url: password_path(resource_name), method: :put do |f|
+
+  = f.hidden_field :reset_password_token
+
+  = f.input :password, label: "Nova lozinka"
+  = f.input :password_confirmation, label: "Potvrda nove lozinke"
+
+  = buttons do
+    = submit_button "Spremi"

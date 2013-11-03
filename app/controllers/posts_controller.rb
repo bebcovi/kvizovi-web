@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :authenticate!
+  before_filter :authenticate_user!
   before_filter :authorize!
 
   def new
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
 
   def authorize!
     if not current_user.admin?
-      redirect_to root_path_for(current_user), error: flash("unauthorized")
+      redirect_to account_path, error: flash("unauthorized")
     end
   end
 

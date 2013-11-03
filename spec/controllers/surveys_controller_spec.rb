@@ -3,7 +3,7 @@ require "spec_helper"
 describe SurveysController, user: :school do
   before do
     @user = FactoryGirl.create(:school)
-    login_as(@user)
+    sign_in(@user)
   end
 
   describe "#new" do
@@ -20,8 +20,8 @@ describe SurveysController, user: :school do
     end
 
     it "redirect the user back to the home page" do
-        post :create, survey: {fields_attributes: {}}
-      expect(response).to redirect_to(controller.send(:root_path_for, @user))
+      post :create, survey: {fields_attributes: {}}
+      expect(response).to redirect_to(account_path)
     end
   end
 end
