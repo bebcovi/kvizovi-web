@@ -5,11 +5,11 @@ class PlayedQuizzesController < ApplicationController
   decorates_assigned :played_quiz
 
   def index
-    @played_quizzes = @scope.played_quizzes.
-      descending.
-      includes(:quiz_snapshot, :students).
-      paginate(page: params[:page], per_page: 15)
-    @played_quizzes = PaginationDecorator.decorate(@played_quizzes)
+    @played_quizzes = @scope.played_quizzes
+      .descending
+      .includes(:quiz_snapshot, :students)
+      .paginate(page: params[:page], per_page: 15)
+      .decorate
   end
 
   def show
