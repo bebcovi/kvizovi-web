@@ -67,11 +67,6 @@ describe Student do
         @it.gender = nil
         expect(@it).to have(1).error_on(:gender)
       end
-
-      it "validates inclusion" do
-        @it.gender = "bla"
-        expect(@it).to have(1).error_on(:gender)
-      end
     end
 
     context "#year_of_birth" do

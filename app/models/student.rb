@@ -1,8 +1,6 @@
 require "squeel"
 
 class Student < ActiveRecord::Base
-  GENDERS = ["Muško", "Žensko"]
-
   belongs_to :school
   has_and_belongs_to_many :played_quizzes
   has_many :readings, as: :user, dependent: :destroy
@@ -15,7 +13,7 @@ class Student < ActiveRecord::Base
   validates :grade,         presence: true, format: {with: /\A[0-8][a-z]\Z/, allow_blank: true}
   validates :first_name,    presence: true
   validates :last_name,     presence: true
-  validates :gender,        presence: true, inclusion: {in: GENDERS, allow_blank: true}
+  validates :gender,        presence: true
   validates :year_of_birth, presence: true, numericality: {only_integer: true, allow_blank: true}
   validates :school_key,    presence: true, inclusion: {in: proc { School.pluck(:key) }, allow_blank: true}, unless: :school_id?
 

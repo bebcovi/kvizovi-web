@@ -58,11 +58,6 @@ describe School do
         @it.level = nil
         expect(@it).to have(1).error_on(:level)
       end
-
-      it "validates inclusion" do
-        @it.level = "bla"
-        expect(@it).to have(1).error_on(:level)
-      end
     end
 
     context "#key" do
