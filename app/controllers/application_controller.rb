@@ -35,25 +35,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def flash_success(*args) flash_message(:success, *args) end
-  def flash_error(*args)   flash_message(:error, *args)  end
-
-  def flash_message(type, *args)
-    options = args.extract_options!
-    action = args.first || params[:action]
-    controller = params[:controller]
-
-    path = "flash"
-    path << ".#{current_user.type}" if user_logged_in?
-    path << ".#{controller}.#{action}.#{type}"
-
-    t(path, options)
-  end
-
-  def set_flash_error(*args)
-    flash.now[:error] = flash_error(*args)
-  end
-
   def after_sign_in_path_for(resource_or_scope)
     account_path
   end

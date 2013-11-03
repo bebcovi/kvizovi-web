@@ -25,13 +25,13 @@ Feature: Blog
     Then I should see the admin links
 
     When I create a new blog post
-    Then I should be on the blog page
+    Then I should be on the posts page
     And I should see the new blog post
 
     When I update the blog post
-    Then I should be on the blog page
+    Then I should be on the posts page
     And I should see the updated blog post
 
     When I delete the blog post
-    Then I should be on the blog page
+    Then I should be on the posts page
     And I shouldn't see the blog post

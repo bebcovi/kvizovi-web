@@ -14,10 +14,4 @@ describe StaticPagesController do
       get :contact
     end
   end
-
-  describe "#blog" do
-    it "doesn't raise errors" do
-      get :blog
-    end
-  end
 end

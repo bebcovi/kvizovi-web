@@ -1,41 +1,17 @@
-class Account::ProfilesController < ApplicationController
+class Account::ProfilesController < InheritedResources::Base
   before_filter :authenticate_user!
-
-  def show
-    @user = current_user
-  end
-
-  def edit
-    @user = current_user
-  end
-
-  def update
-    @user = current_user
-    @user.assign_attributes(user_params)
-
-    if @user.valid?
-      @user.save
-      redirect_to account_profile_path, success: flash_success
-    else
-      render :edit
-    end
-  end
 
   private
 
-  def user_params
-    params.require(@user.type).permit(*user_attributes)
+  def resource
+    @user ||= current_user
   end
 
-  def user_attributes
-    send("#{current_user.type}_attributes")
+  def resource_instance_name
+    resource.type
   end
 
-  def student_attributes
-    [:first_name, :last_name, :gender, :year_of_birth, :grade, :username, :email]
-  end
-
-  def school_attributes
-    [:name, :username, :email, :level, :place, :region, :key]
+  def permitted_params
+    params.permit!
   end
 end

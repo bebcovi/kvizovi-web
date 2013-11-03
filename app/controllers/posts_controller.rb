@@ -1,57 +1,25 @@
-class PostsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :authorize!
+class PostsController < InheritedResources::Base
+  actions :all, except: [:show]
+  before_filter :authorize!, except: :index
 
-  def new
-    @post = Post.new
-  end
-
-  def create
-    @post = Post.new
-    @post.assign_attributes(post_params)
-
-    if @post.valid?
-      @post.save
-      redirect_to blog_path, success: flash_success
-    else
-      render :new
-    end
-  end
-
-  def edit
-    @post = Post.find(params[:id])
-  end
-
-  def update
-    @post = Post.find(params[:id])
-    @post.assign_attributes(post_params)
-
-    if @post.valid?
-      @post.save
-      redirect_to blog_path, success: flash_success
-    else
-      render :edit
-    end
-  end
-
-  def delete
-    @post = Post.find(params[:id])
-  end
-
-  def destroy
-    Post.destroy(params[:id])
-    redirect_to blog_path, success: flash_success
+  def index
+    PostService.new(current_user.unread_posts).mark_as_read(current_user) if user_logged_in?
+    super
   end
 
   private
 
+  def collection
+    @posts ||= end_of_association_chain.paginate(page: params[:page], per_page: 3)
+  end
+
   def authorize!
-    if not current_user.admin?
-      redirect_to account_path, error: flash("unauthorized")
+    if not (user_logged_in? and current_user.admin?)
+      redirect_to root_path, error: "Nemate ovlasti da izmjenjujete blog postove."
     end
   end
 
-  def post_params
-    params.require(:post).permit(:title, :body)
+  def permitted_params
+    params.permit!
   end
 end

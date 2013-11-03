@@ -228,8 +228,7 @@ CREATE TABLE quizzes (
     school_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    shuffle_questions boolean DEFAULT false,
-    category character varying(255)
+    shuffle_questions boolean DEFAULT false
 );
 
 
@@ -844,3 +843,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131031232457');
 INSERT INTO schema_migrations (version) VALUES ('20131101083735');
 
 INSERT INTO schema_migrations (version) VALUES ('20131101163648');
+
+INSERT INTO schema_migrations (version) VALUES ('20131103165731');

@@ -10,6 +10,8 @@ hr:
     next_label: "Prethodna →"
 
   simple_form:
+    error_notification:
+      default_message: "Neka polja nisu ispravno popunjena."
     labels:
       defaults:
         username: "Korisničko ime"
@@ -17,3 +19,9 @@ hr:
         email: "Email"
       play:
         answer: "Odgovor"
+
+  helpers:
+    submit:
+      create: "Stvori"
+      update: "Spremi"
+      submit: "Spremi"

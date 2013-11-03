@@ -2,7 +2,6 @@
 
 = add_button "Novi post", new_post_path if current_user_admin?
 
-- @posts.each do |post|
-  = render "post", post: post
+= render @posts
 
 = will_paginate(@posts)

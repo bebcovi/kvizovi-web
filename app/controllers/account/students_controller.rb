@@ -1,14 +1,10 @@
-class Account::StudentsController < ApplicationController
+class Account::StudentsController < InheritedResources::Base
+  actions :all, except: [:show]
   before_filter :authenticate_user!
-  before_filter :assign_school
-
-  def index
-    @students = @school.students
-  end
 
   private
 
-  def assign_school
-    @school = current_user
+  def begin_of_association_chain
+    current_user
   end
 end

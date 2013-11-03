@@ -13,6 +13,7 @@ require "draper"
 require "cache_digests"
 require "carrierwave"
 require "devise"
+require "inherited_resources"
 
 require_relative "initializers/sass"
 

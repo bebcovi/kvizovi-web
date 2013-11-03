@@ -10,6 +10,7 @@ module PageHelpers
     when /activity page/            then admin_schools_path
     when /survey page/              then surveys_path
     when /blog( page)?/             then blog_path
+    when /posts page/               then posts_path
     else
       raise "Page isn't recognized: #{page}"
     end

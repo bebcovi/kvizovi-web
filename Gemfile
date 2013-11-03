@@ -40,6 +40,7 @@ gem "acts_as_list", ">= 0.3"
 # Other
 gem "devise", ">= 3.1.1"
 gem "active_attr", ">= 0.8.1"
+gem "inherited_resources", ">= 1.4.1"
 
 group :test do
   gem "jasminerice", github: "bradphelan/jasminerice"

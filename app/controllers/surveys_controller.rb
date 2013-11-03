@@ -1,27 +1,18 @@
-class SurveysController < ApplicationController
+class SurveysController < InheritedResources::Base
   before_filter :authenticate_user!
 
-  def new
-    @survey = Survey.new
-  end
-
   def create
-    @survey = Survey.new
-    @survey.assign_attributes(survey_params)
-
-    if @survey.valid?
-      @survey.save
-      current_user.update_column(:completed_survey, true)
-      redirect_to account_path, success: flash_success
-    else
-      set_flash_error
-      render :new
+    super do |success, failure|
+      success.html do
+        current_user.update_column(:completed_survey, true)
+        redirect_to account_path, success: "Anketa je uspješno poslana. Hvala na pomoći :)"
+      end
     end
   end
 
   private
 
-  def survey_params
-    params.require(:survey).permit!
+  def permitted_params
+    params.permit!
   end
 end

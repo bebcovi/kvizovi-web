@@ -1,7 +1,6 @@
 = simple_form_for [:account, @quiz] do |f|
 
   = f.input :name, input_html: {autofocus: current_page?(action: "new")}
-  = f.input :category, input_html: {value: (@quiz.category || @last_category), data: {provide: "typeahead", source: @existing_categories.to_json}}
 
   = buttons do
     = cancel_button "Odustani", account_quizzes_path

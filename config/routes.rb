@@ -49,8 +49,8 @@ Lektire::Application.routes.draw do
   controller :static_pages do
     get "tour"
     get "contact"
-    get "blog"
   end
+  get "blog", to: "posts#index"
 
   ########################
   # Admin

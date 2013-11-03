@@ -21,7 +21,6 @@ end
 
 When(/^I delete the blog post$/) do
   click_on "Izbriši"
-  click_on "Jesam"
 end
 
 Then(/^I should see that I have an unread blog post$/) do

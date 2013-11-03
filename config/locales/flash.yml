@@ -1,0 +1,30 @@
+hr:
+  flash:
+    posts:
+      create:
+        success: "Blog post je uspješno stvoren."
+      update:
+        success: "Blog post je uspješno izmijenjen."
+      destroy:
+        success: "Blog post je uspješno izbrisan."
+    surveys:
+      create:
+        success: "Anketa je uspješno poslana. Hvala na pomoći :)"
+        error: "Neka polja nisu ispravno popunjena."
+    account/profiles:
+      update:
+        success: "Vaš profil je uspješno izmijenjen."
+    account/quizzes:
+      create:
+        success: "Kviz je uspješno stvoren."
+      update:
+        success: "Kviz je uspješno izmijenjen."
+      destroy:
+        success: "Kviz je uspješno izbrisan."
+    account/questions:
+      create:
+        success: "Pitanje je uspješno stvoreno."
+      update:
+        success: "Pitanje je uspješno izmijenjeno."
+      destroy:
+        success: "Pitanje je uspješno izbrisano."

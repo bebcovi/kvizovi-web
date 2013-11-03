@@ -7,4 +7,4 @@
 
   = buttons do
     = edit_button "Izmijeni", edit_post_path(post)
-    = delete_button "Izbriši", delete_post_path(post)
+    = delete_button "Izbriši", post_path(post), method: :delete

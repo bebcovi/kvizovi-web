@@ -25,12 +25,5 @@ describe Quiz do
         expect(@it).to have(1).error_on(:school_id)
       end
     end
-
-    context "#category" do
-      it "validates presence" do
-        @it.category = nil
-        expect(@it).to have(1).error_on(:category)
-      end
-    end
   end
 end
