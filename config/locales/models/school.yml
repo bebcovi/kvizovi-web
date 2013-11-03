@@ -21,6 +21,7 @@ hr:
         username: "Korisničko ime"
         password: "Lozinka"
         password_confirmation: "Potvrda lozinke"
+        current_password: "Trenutna lozinka"
         email: "Email"
         name: "Ime škole"
         level: "Tip škole"

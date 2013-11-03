@@ -1,0 +1,11 @@
+- title "Izmjena lozinke"
+
+= simple_form_for resource, url: registration_path(resource_name) do |f|
+
+  = f.input :current_password
+  = f.input :password, label: "Nova lozinka"
+  = f.input :password_confirmation, label: "Potvrda nove lozinke"
+
+  = buttons do
+    = submit_button "Spremi"
+    = cancel_button "Odustani", account_profile_path

@@ -19,7 +19,7 @@ hr:
       confirmation_instructions:
         subject: "Potvrda korisničkog računa"
       reset_password_instructions:
-        subject: "Promjena lozinke"
+        subject: "Potvrda za promjenu lozinke"
       unlock_instructions:
         subject: "Unlock Instructions"
     omniauth_callbacks:

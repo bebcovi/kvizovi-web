@@ -2,18 +2,23 @@ require "spec_helper"
 
 describe Admin::SchoolsController do
   describe "#index" do
-    it "doesn't raise errors" do
+    before do
       get :index
+    end
+
+    it "renders the template" do
+      expect(response).to be_a_success
     end
   end
 
   describe "#show" do
     before do
-      @school = FactoryGirl.create(:school)
+      @school = create(:school)
+      get :show, id: @school.id
     end
 
-    it "doesn't raise errors" do
-      get :show, id: @school.id
+    it "renders the template" do
+      expect(response).to be_a_success
     end
   end
 end

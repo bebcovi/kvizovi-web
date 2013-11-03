@@ -1,33 +1,29 @@
 require "spec_helper"
 
 describe AssociationQuestion do
-  before do
-    @it = FactoryGirl.build(:association_question)
-  end
+  subject { described_class.new }
 
   describe "#associations=" do
     it "accepts a hash" do
-      @it.associations = {"Foo" => "Foo", "Bar" => "Bar"}
-      expect(@it.associations).to eq [["Foo", "Foo"], ["Bar", "Bar"]]
+      subject.associations = {"Foo" => "Foo", "Bar" => "Bar"}
+      expect(subject.associations).to eq [["Foo", "Foo"], ["Bar", "Bar"]]
     end
 
     it "accepts an array" do
-      @it.associations = ["Foo", "Foo", "Bar", "Bar"]
-      expect(@it.associations).to eq [["Foo", "Foo"], ["Bar", "Bar"]]
+      subject.associations = ["Foo", "Foo", "Bar", "Bar"]
+      expect(subject.associations).to eq [["Foo", "Foo"], ["Bar", "Bar"]]
     end
   end
 
-  context "validations" do
-    context "#associations" do
-      it "validates presence" do
-        @it.associations = {}
-        expect(@it).to have(1).error_on(:associations)
-      end
+  context "#associations" do
+    it "must be present" do
+      subject.associations = {}
+      expect(subject).to have(1).error_on(:associations)
+    end
 
-      it "validates that the both sides of a pair is present" do
-        @it.associations = {"Foo" => ""}
-        expect(@it).to have(1).error_on(:associations)
-      end
+    it "must have pairs with both sides present" do
+      subject.associations = {"Foo" => ""}
+      expect(subject).to have(1).error_on(:associations)
     end
   end
 end

@@ -8,7 +8,8 @@ class School < ActiveRecord::Base
   has_many :readings, as: :user, dependent: :destroy
   has_many :read_posts, through: :readings, source: :post
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  devise :registerable, :validatable, :database_authenticatable, :rememberable,
+    :recoverable, :confirmable
 
   validates :username, presence: true, uniqueness: true
   validates :place,    presence: true

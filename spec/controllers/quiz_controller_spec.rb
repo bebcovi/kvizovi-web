@@ -1,136 +1,194 @@
 require "spec_helper"
 
-describe QuizController, user: :student do
+describe QuizController do
   before do
-    @school    = FactoryGirl.create(:school)
-    @student   = FactoryGirl.create(:student, school: @school)
-    @quiz      = FactoryGirl.create(:quiz, activated: true, school: @school)
-    @questions = FactoryGirl.create_list(:question, 3, quiz: @quiz)
+    login_as(:student)
 
-    sign_in(@student)
+    @school    = create(:school)
+    @student   = current_user
+    @quiz      = create(:quiz, school: @school)
+    @questions = create_list(:question, 3, quiz: @quiz)
+
+    @student.update(school: @school)
+  end
+
+  let(:quiz_snapshot) do
+    QuizSnapshot.capture(double(quiz: @quiz, students: [@student]))
+  end
+
+  def start_quiz
+    controller.send(:quiz_play).start!(quiz_snapshot, [@student])
+  end
+
+  def finish_quiz
+    controller.send(:quiz_play).finish!
   end
 
   describe "#choose" do
-    it "assigns quizzes" do
+    before do
       get :choose
+    end
+
+    it "assigns quizzes" do
       expect(assigns(:quizzes)).to eq [@quiz]
     end
   end
 
   describe "#start" do
+    before do
+      controller.send(:quiz_play).stub(:start!)
+    end
+
     context "when valid" do
-      it "prepares the quiz" do
-        QuizPlay.any_instance.should_receive(:start!)
+      before do
         post :start, quiz_specification: {quiz_id: @quiz.id, students_count: 1}
       end
 
+      it "prepares the quiz" do
+        expect(controller.send(:quiz_play)).to have_received(:start!)
+      end
+
       it "redirects to quiz" do
-        post :start, quiz_specification: {quiz_id: @quiz.id, students_count: 1}
         expect(response).to redirect_to play_quiz_path
       end
     end
 
     context "when invalid" do
-      before { invalid!(QuizSpecification) }
+      before do
+        post :start, quiz_specification: {quiz_id: nil}
+      end
 
       it "assigns quizzes" do
-        post :start, quiz_specification: {quiz_id: nil}
         expect(assigns(:quizzes)).to eq [@quiz]
       end
     end
   end
 
-  context "in game" do
-    before do
-      QuizPlay.new(cookies).start!(quiz_snapshot, [@student])
-    end
+  describe "#play" do
+    before { start_quiz }
 
-    let(:quiz_snapshot) do
-      QuizSnapshot.capture(double(quiz: @quiz, students: [@student]))
-    end
-
-    describe "#play" do
-      it "doesn't raise errors" do
+    context "when the current question isn't answered" do
+      before do
         get :play
       end
 
-      it "redirects if the current question was already answered" do
-        QuizPlay.new(cookies).save_answer!(true)
+      it "renders the template" do
+        expect(response).to be_a_success
+      end
+    end
+
+    context "when the current question is already answered" do
+      before do
+        controller.send(:quiz_play).save_answer!(true)
         get :play
+      end
+
+      it "redirects to the next question" do
         expect(response).to redirect_to(next_question_quiz_path)
       end
     end
+  end
 
-    describe "#save_answer" do
-      it "invokes #save_answer!" do
-        QuizPlay.any_instance.should_receive(:save_answer!)
-        put :save_answer
-      end
+  describe "#save_answer" do
+    before { start_quiz }
 
-      it "redirects to feedback" do
-        put :save_answer
-        expect(response).to redirect_to(answer_feedback_quiz_path)
-      end
+    before do
+      controller.send(:quiz_play).stub(:save_answer!)
+      put :save_answer
     end
 
-    describe "#answer_feedback" do
-      it "doesn't raise errors" do
-        get :answer_feedback
-      end
+    it "invokes #save_answer!" do
+      expect(controller.send(:quiz_play)).to have_received(:save_answer!)
     end
 
-    describe "#next_question" do
-      it "invokes #next_question!" do
-        QuizPlay.any_instance.should_receive(:next_question!)
-        get :next_question
-      end
+    it "redirects to feedback" do
+      expect(response).to redirect_to(answer_feedback_quiz_path)
+    end
+  end
 
-      it "redirects to quiz" do
-        get :next_question
-        expect(response).to redirect_to(play_quiz_path)
-      end
+  describe "#answer_feedback" do
+    before { start_quiz }
+
+    before do
+      get :answer_feedback
     end
 
-    describe "#results" do
+    it "renders the template" do
+      expect(response).to be_a_success
+    end
+  end
+
+  describe "#next_question" do
+    before { start_quiz }
+
+    before do
+      controller.send(:quiz_play).stub(:next_question!)
+      get :next_question
+    end
+
+    it "invokes #next_question!" do
+      expect(controller.send(:quiz_play)).to have_received(:next_question!)
+    end
+
+    it "redirects to quiz" do
+      expect(response).to redirect_to(play_quiz_path)
+    end
+  end
+
+  describe "#results" do
+    before { start_quiz }
+    before { finish_quiz }
+
+    before do
+      @played_quiz = create(:played_quiz, quiz_snapshot: quiz_snapshot)
+      get :results, id: @played_quiz.id
+    end
+
+    it "renders the template" do
+      expect(response).to be_a_success
+    end
+  end
+
+  describe "#interrupt" do
+    before { start_quiz }
+
+    before do
+      get :interrupt
+    end
+
+    it "renders the template" do
+      expect(response).to be_a_success
+    end
+  end
+
+  describe "#finish" do
+    before { start_quiz }
+
+    context "when the quiz was played to the end" do
       before do
-        QuizPlay.new(cookies).finish!
-        @played_quiz = FactoryGirl.create(:played_quiz, quiz_snapshot: quiz_snapshot)
-      end
-
-      it "doesn't raise errors" do
-        get :results, id: @played_quiz.id
-      end
-    end
-
-    describe "#interrupt" do
-      it "doesn't raise errors" do
-        get :interrupt
-      end
-    end
-
-    describe "#finish" do
-      it "creates the game" do
+        controller.send(:quiz_play).stub(:interrupted?) { false }
         delete :finish
-        expect(PlayedQuiz.count).to eq 1
       end
 
-      context "quiz is not interrupted" do
-        before { QuizPlay.any_instance.stub(:interrupted?) { false } }
+      it "redirects to results" do
+        expect(response).to redirect_to(results_quiz_path(id: PlayedQuiz.last.id))
+      end
+    end
 
-        it "redirects to results" do
-          delete :finish
-          expect(response).to redirect_to(results_quiz_path(id: PlayedQuiz.first.id))
-        end
+    context "when the quiz was interrupted" do
+      before do
+        controller.send(:quiz_play).stub(:interrupted?) { true }
+        delete :finish
       end
 
-      context "quiz is interrupted" do
-        before { QuizPlay.any_instance.stub(:interrupted?) { true } }
-
-        it "redirects to beginning" do
-          delete :finish
-          expect(response).to redirect_to(choose_quiz_path)
-        end
+      it "redirects to beginning" do
+        expect(response).to redirect_to(choose_quiz_path)
       end
+    end
+
+    it "creates the game" do
+      delete :finish
+      expect(PlayedQuiz.count).to eq 1
     end
   end
 end

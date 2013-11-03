@@ -3,21 +3,23 @@ require "spec_helper"
 describe HomeController do
   describe "#index" do
     context "when user is not logged in" do
-      it "renders the template" do
+      before do
         get :index
+      end
+
+      it "renders the template" do
         expect(response).to be_a_success
       end
     end
 
     context "when user is logged in" do
       before do
-        @user = FactoryGirl.create(:school)
-        sign_in(@user)
+        login_as(:school)
+        get :index
       end
 
-      it "redirects" do
-        get :index
-        expect(response).to be_a_redirect
+      it "redirects to the account" do
+        expect(response).to redirect_to(account_path)
       end
     end
   end

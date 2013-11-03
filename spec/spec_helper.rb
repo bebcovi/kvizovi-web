@@ -13,4 +13,10 @@ RSpec.configure do |config|
   config.before do
     ActionMailer::Base.deliveries.clear
   end
+
+  config.include FactoryGirl::Syntax::Methods
+
+  config.include Helpers::Generic
+  config.include Helpers::Controller,  type: :controller
+  config.include Helpers::Integration, type: :feature
 end

@@ -6,7 +6,8 @@ class Student < ActiveRecord::Base
   has_many :readings, as: :user, dependent: :destroy
   has_many :read_posts, through: :readings, source: :post
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  devise :registerable, :validatable, :database_authenticatable, :rememberable,
+    :recoverable, :confirmable
   attr_accessor :school_key
 
   validates :username,      presence: true, format: {with: /\A[a-zA-Z0-9_]*\Z/, allow_blank: true}, length: {minimum: 3, allow_blank: true}, uniqueness: true

@@ -1,29 +1,18 @@
 require "spec_helper"
 
 describe Quiz do
-  before do
-    @it = FactoryGirl.build(:quiz)
-  end
+  subject { described_class.new }
 
-  context "validations" do
-    context "#name" do
-      it "validates presence" do
-        @it.name = nil
-        expect(@it).to have(1).error_on(:name)
-      end
-
-      it "validates uniqueness inside a school" do
-        FactoryGirl.build(:quiz, name: "Foo", school_id: 1).save(validate: false)
-        @it.assign_attributes(name: "Foo", school_id: 1)
-        expect(@it).to have(1).error_on(:name)
-      end
+  context "#name" do
+    it "must be present" do
+      subject.name = nil
+      expect(subject).to have(1).error_on(:name)
     end
 
-    context "#school_id" do
-      it "validates presence" do
-        @it.school_id = nil
-        expect(@it).to have(1).error_on(:school_id)
-      end
+    it "must be unique inside a school" do
+      create(:quiz, name: "Foo", school_id: 1)
+      subject.assign_attributes(name: "Foo", school_id: 1)
+      expect(subject).to have(1).error_on(:name)
     end
   end
 end

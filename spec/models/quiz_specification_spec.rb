@@ -1,40 +1,39 @@
 require "spec_helper"
 
 describe QuizSpecification do
-  before do
-    @it = QuizSpecification.new
+  subject { described_class.new }
+
+  context "#quiz_id" do
+    it "must be present" do
+      subject.quiz_id = nil
+      expect(subject).to have(1).error_on(:quiz_id)
+    end
   end
 
-  context "validations" do
-    context "#quiz_id" do
-      it "validates presence" do
-        @it.quiz_id = nil
-        expect(@it).to have(1).error_on(:quiz_id)
-      end
+  context "#students_count" do
+    it "must be present" do
+      subject.students_count = nil
+      expect(subject).to have(1).error_on(:students_count)
+    end
+  end
+
+  context "#students_credentials" do
+    let(:students) { create_list(:student, 2) }
+
+    before do
+      subject.students_count = students.count
     end
 
-    context "#students_count" do
-      it "validates presence" do
-        @it.students_count = nil
-        expect(@it).to have(1).error_on(:students_count)
+    it "must belongs to registered students" do
+      subject.students_credentials = students.map do |student|
+        {username: "foo", password: "bar"}
       end
-    end
+      expect(subject).to have(1).error_on(:students_credentials)
 
-    context "#students_credentials" do
-      it "validates authenticity" do
-        @it.students_count = 2
-
-        expect(@it).to have(1).error_on(:students_credentials)
-
-        FactoryGirl.create(:student, username: "janko", password: "secret")
-        FactoryGirl.create(:student, username: "matija", password: "secret")
-        @it.students_credentials = [
-          {username: "janko",  password: "secret"},
-          {username: "matija", password: "secret"},
-        ]
-
-        expect(@it).to have(0).errors_on(:students_credentials)
+      subject.students_credentials = students.map do |student|
+        {username: student.username, password: student.password}
       end
+      expect(subject).to have(0).errors_on(:students_credentials)
     end
   end
 end

@@ -1,70 +1,66 @@
 require "spec_helper"
 
 describe School do
-  before do
-    @it = FactoryGirl.build(:school)
+  subject { described_class.new }
+
+  describe "#username" do
+    it "must be present" do
+      subject.username = nil
+      expect(subject).to have(1).error_on(:username)
+    end
+
+    it "must be unique" do
+      create(:school, username: "jon")
+      subject.username = "jon"
+      expect(subject).to have(1).error_on(:username)
+    end
   end
 
-  context "validations" do
-    context "#username" do
-      it "validates presence" do
-        @it.username = nil
-        expect(@it).to have(1).error_on(:username)
-      end
+  describe "#password" do
+    it "must be present" do
+      subject.password = nil
+      expect(subject).to have(1).error_on(:password)
+    end
+  end
 
-      it "validates uniqueness" do
-        FactoryGirl.build(:school, username: "jon").save(validate: false)
-        @it.username = "jon"
-        expect(@it).to have(1).error_on(:username)
-      end
+  describe "#email" do
+    it "must be present" do
+      subject.email = nil
+      expect(subject).to have(1).error_on(:email)
     end
 
-    context "#password" do
-      it "validates presence" do
-        @it.password = nil
-        expect(@it).to have(1).error_on(:password)
-      end
+    it "must be unique" do
+      create(:school, email: "jon@snow.com")
+      subject.email = "jon@snow.com"
+      expect(subject).to have(1).error_on(:email)
     end
+  end
 
-    context "#email" do
-      it "validates presence" do
-        @it.email = nil
-        expect(@it).to have(1).error_on(:email)
-      end
-
-      it "validates uniqueness" do
-        FactoryGirl.build(:school, email: "jon@snow.com").save(validate: false)
-        @it.email = "jon@snow.com"
-        expect(@it).to have(1).error_on(:email)
-      end
+  describe "#place" do
+    it "must be present" do
+      subject.place = nil
+      expect(subject).to have(1).error_on(:place)
     end
+  end
 
-    context "#place" do
-      it "validates presence" do
-        @it.place = nil
-        expect(@it).to have(1).error_on(:place)
-      end
+  describe "#region" do
+    it "must be present" do
+      subject.region = nil
+      expect(subject).to have(1).error_on(:region)
     end
+  end
 
-    context "#region" do
-      it "validates presence" do
-        @it.region = nil
-        expect(@it).to have(1).error_on(:region)
-      end
+  describe "#level" do
+    it "must be present" do
+      subject.level = nil
+      expect(subject).to have(1).error_on(:level)
     end
+  end
 
-    context "#level" do
-      it "validates presence" do
-        @it.level = nil
-        expect(@it).to have(1).error_on(:level)
-      end
-    end
-
-    context "#key" do
-      it "validates presence" do
-        @it.key = nil
-        expect(@it).to have(1).error_on(:key)
-      end
+  describe "#key" do
+    it "must be present" do
+      subject.key = nil
+      expect(subject).to have(1).error_on(:key)
     end
   end
 end

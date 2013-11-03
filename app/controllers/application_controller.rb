@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
 
   def add_user_view_path
-    prepend_view_path "app/views/#{current_user.type.pluralize}" unless devise_controller?
+    prepend_view_path "app/views/#{current_user.type.pluralize}"
   end
 
   def save_activity

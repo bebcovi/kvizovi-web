@@ -4,8 +4,6 @@ class QuizSnapshot < ActiveRecord::Base
   serialize :quiz_attributes
   serialize :questions_attributes
 
-  validates :quiz_id, presence: true
-
   def self.capture(quiz_specification)
     students_count = quiz_specification.students.count
     _quiz          = quiz_specification.quiz

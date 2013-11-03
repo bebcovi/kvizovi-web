@@ -12,9 +12,10 @@
     %tr
       %th Korisničko ime
       %td= @user.username
-    %tr
-      %th Škola
-      %td= @user.school.name
+    - if @user.school
+      %tr
+        %th Škola
+        %td= @user.school.name
     %tr
       %th Razred
       %td= @user.grade
@@ -28,6 +29,6 @@
 = buttons do
   .btn-group
     = edit_button "Izmijeni profil", edit_account_profile_path
-    = change_password_button "Izmijeni lozinku", new_student_password_path
+    = change_password_button "Izmijeni lozinku", edit_student_registration_path
 
 %p= delete_profile_button "Izbriši korisnički račun", student_registration_path, method: :delete

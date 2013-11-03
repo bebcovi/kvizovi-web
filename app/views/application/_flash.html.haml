@@ -1,2 +1,3 @@
 - flash.each do |name, message|
-  = alert_message(message, name)
+  - type = {notice: :success, alert: :error}.fetch(name, name)
+  = alert_message(message, type)

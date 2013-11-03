@@ -49,12 +49,6 @@ group :test do
   gem "pry"
   gem "nokogiri"
   gem "capybara", ">= 2"
-  gem "cucumber-rails", ">= 1.4"
-  gem "database_cleaner", ">= 1.2"
-  gem "vcr", ">= 2.6"
-  gem "webmock", ">= 1.8.0", "< 1.14"
-  gem "timecop"
-  gem "poltergeist", ">= 1.4.1"
 end
 
 group :development do

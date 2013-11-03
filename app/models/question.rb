@@ -13,5 +13,4 @@ class Question < ActiveRecord::Base
   default_scope -> { order{position.asc} }
 
   validates :content, presence: true
-  validates :image,   download: true, processing: true
 end

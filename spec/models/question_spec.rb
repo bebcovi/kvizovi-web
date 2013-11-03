@@ -1,16 +1,12 @@
 require "spec_helper"
 
 describe Question do
-  before do
-    @it = Question.new
-  end
+  subject { described_class.new }
 
-  context "validations" do
-    context "#content" do
-      it "validates presence" do
-        @it.content = nil
-        expect(@it).to have(1).error_on(:content)
-      end
+  describe "#content" do
+    it "must be present" do
+      subject.content = nil
+      expect(subject).to have(1).error_on(:content)
     end
   end
 end

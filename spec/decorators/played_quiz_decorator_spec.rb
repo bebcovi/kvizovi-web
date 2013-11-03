@@ -1,42 +1,40 @@
 require "spec_helper"
 
 describe PlayedQuizDecorator do
-  before do
-    @it = PlayedQuizDecorator.new(played_quiz)
-  end
+  subject { described_class.new(played_quiz) }
 
   let(:played_quiz) do
     double(
-      questions:        FactoryGirl.build_list(:boolean_question, 4, answer: false),
-      students:         FactoryGirl.build_list(:student, 2),
+      questions:        build_list(:boolean_question, 4, answer: false),
+      students:         build_list(:student, 2),
       question_answers: [false, false, true, false],
       has_answers?:     true,
     )
   end
 
   it "has results" do
-    @it.results
+    subject.results
   end
 
   it "has scores" do
-    expect(@it.scores).to eq [1, 2]
+    expect(subject.scores).to eq [1, 2]
   end
 
   it "has score percentages" do
-    expect(@it.score_percentages).to eq [50, 100]
+    expect(subject.score_percentages).to eq [50, 100]
   end
 
   it "has student numbers" do
-    expect(@it.student_numbers).to eq [1, 2]
+    expect(subject.student_numbers).to eq [1, 2]
   end
 
   it "has ranks" do
-    @it.ranks.each do |rank|
+    subject.ranks.each do |rank|
       expect(rank).to be_present
     end
   end
 
   it "has total score" do
-    expect(@it.total_score).to eq 2
+    expect(subject.total_score).to eq 2
   end
 end

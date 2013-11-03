@@ -1,57 +1,46 @@
 require "spec_helper"
 
 describe QuizSnapshot do
-  it "captures a snapshot of a quiz" do
-    quiz = FactoryGirl.create(:quiz, name: "Name")
-    quiz.questions = [
-      FactoryGirl.create(:boolean_question,     content: "Boolean", answer: true),
-      FactoryGirl.create(:choice_question,      content: "Choice", provided_answers: ["Foo", "Bar", "Baz"]),
-      FactoryGirl.create(:association_question, content: "Association", associations: {"Foo" => "Foo", "Bar" => "Bar"}),
-      FactoryGirl.create(:text_question,        content: "Text", answer: "Answer"),
-    ]
-    quiz_specification = double(
-      quiz: quiz,
-      students: [double],
-    )
+  subject { described_class.capture(quiz_specification) }
+  let(:quiz_specification) { double(quiz: quiz, students: students) }
+  let(:quiz) { create(:quiz) }
+  let(:students) { [double] }
 
-    QuizSnapshot.capture(quiz_specification)
-    quiz.destroy
-    @it = QuizSnapshot.first # So that nothing is cached
+  describe ".capture" do
+    let(:students) { [double, double] }
 
-    quiz = @it.quiz
-    expect(quiz).to be_present
-    expect(quiz.name).to eq "Name"
+    it "trims the number of questions to be divisible by the number of students" do
+      quiz.questions = create_list(:question, 4)
+      subject = described_class.capture(quiz_specification)
+      expect(subject.questions.count).to eq 4
 
-    boolean_question = @it.questions.first
-    expect(boolean_question.content).to eq "Boolean"
-    expect(boolean_question.answer).to eq true
-
-    choice_question = @it.questions.second
-    expect(choice_question.content).to eq "Choice"
-    expect(choice_question.provided_answers).to eq ["Foo", "Bar", "Baz"]
-
-    association_question = @it.questions.third
-    expect(association_question.content).to eq "Association"
-    expect(association_question.associations).to eq [["Foo", "Foo"], ["Bar", "Bar"]]
-
-    text_question = @it.questions.fourth
-    expect(text_question.content).to eq "Text"
-    expect(text_question.answer).to eq "Answer"
+      quiz.questions = create_list(:question, 5)
+      subject = described_class.capture(quiz_specification)
+      expect(subject.questions.count).to eq 4
+    end
   end
 
-  it "trims the number of questions to be divisible by the number of students" do
-    quiz = FactoryGirl.create(:quiz)
-    quiz_specification = double(
-      quiz: quiz,
-      students: [double, double],
-    )
+  describe "#quiz" do
+    let(:quiz) { create(:quiz, name: "Quiz", activated: true) }
 
-    quiz.questions = FactoryGirl.create_list(:question, 4)
-    @it = QuizSnapshot.capture(quiz_specification)
-    expect(@it.questions.count).to eq 4
+    it "instantiates the quiz from the attributes" do
+      quiz = subject.quiz
 
-    quiz.questions = FactoryGirl.create_list(:question, 5)
-    @it = QuizSnapshot.capture(quiz_specification)
-    expect(@it.questions.count).to eq 4
+      expect(quiz).to be_a(Quiz)
+      expect(quiz.name).to eq "Quiz"
+      expect(quiz.activated).to eq true
+    end
+  end
+
+  describe "#questions" do
+    before { quiz.questions << create(:boolean_question, content: "Content", answer: true) }
+
+    it "instantiates the questions from the attributes" do
+      question = subject.questions.first
+
+      expect(question).to be_a(BooleanQuestion)
+      expect(question.content).to eq "Content"
+      expect(question.answer).to eq true
+    end
   end
 end

@@ -6,8 +6,7 @@ class Quiz < ActiveRecord::Base
   has_many :snapshots, class_name: "QuizSnapshot"
   has_many :played_quizzes, through: :snapshots
 
-  validates :name,      presence: true, uniqueness: {scope: :school_id}
-  validates :school_id, presence: true
+  validates :name, presence: true, uniqueness: {scope: :school_id}
 
   scope :activated,    ->         { where{activated == true} }
   scope :not_owned_by, ->(school) { where{school_id != school.id} }

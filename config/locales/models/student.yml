@@ -28,6 +28,7 @@ hr:
         username: "Korisničko ime"
         password: "Lozinka"
         password_confirmation: "Potvrda lozinke"
+        current_password: "Trenutna lozinka"
         first_name: "Ime"
         last_name: "Prezime"
         grade: "Razred"

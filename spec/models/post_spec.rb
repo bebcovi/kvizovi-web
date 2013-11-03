@@ -1,23 +1,19 @@
 require "spec_helper"
 
 describe Post do
-  before do
-    @it = FactoryGirl.build(:post)
+  subject { described_class.new }
+
+  describe "#title" do
+    it "must be present" do
+      subject.title = nil
+      expect(subject).to have(1).error_on(:title)
+    end
   end
 
-  context "validations" do
-    context "#title" do
-      it "validates presence" do
-        @it.title = nil
-        expect(@it).to have(1).error_on(:title)
-      end
-    end
-
-    context "#body" do
-      it "validates presence" do
-        @it.body = nil
-        expect(@it).to have(1).error_on(:body)
-      end
+  describe "#body" do
+    it "must be present" do
+      subject.body = nil
+      expect(subject).to have(1).error_on(:body)
     end
   end
 end

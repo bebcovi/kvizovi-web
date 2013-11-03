@@ -57,7 +57,11 @@ class PlayedQuizDecorator < Draper::Decorator
   private
 
   def percentage(part, whole)
-    ((part.to_f / whole.to_f) * 100).round
+    unless part.zero? and whole.zero?
+      ((part.to_f / whole.to_f) * 100).round
+    else
+      0
+    end
   end
 
   def students_count

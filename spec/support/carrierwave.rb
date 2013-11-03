@@ -13,7 +13,7 @@ CarrierWave::Uploader::Base.descendants.each do |uploader_class|
 end
 
 RSpec.configure do |config|
-  config.after(:suite) do
+  config.after do
     FileUtils.rm_rf Rails.root.join("tmp/uploads")
   end
 end

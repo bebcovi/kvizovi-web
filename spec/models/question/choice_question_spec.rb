@@ -1,21 +1,17 @@
 require "spec_helper"
 
 describe ChoiceQuestion do
-  before do
-    @it = FactoryGirl.build(:choice_question)
-  end
+  subject { described_class.new }
 
-  context "validations" do
-    context "#provided_answers" do
-      it "validates presence" do
-        @it.provided_answers = []
-        expect(@it).to have(1).error_on(:provided_answers)
-      end
+  context "#provided_answers" do
+    it "must be present" do
+      subject.provided_answers = []
+      expect(subject).to have(1).error_on(:provided_answers)
+    end
 
-      it "validates that each provided answer is present" do
-        @it.provided_answers = ["Foo", "Bar", ""]
-        expect(@it).to have(1).error_on(:provided_answers)
-      end
+    it "must have each provided answer present" do
+      subject.provided_answers = ["Foo", "Bar", ""]
+      expect(subject).to have(1).error_on(:provided_answers)
     end
   end
 end

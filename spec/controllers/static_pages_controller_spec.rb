@@ -4,14 +4,22 @@ describe StaticPagesController do
   render_views
 
   describe "#tour" do
-    it "doesn't raise errors" do
+    before do
       get :tour
+    end
+
+    it "renders the template" do
+      expect(response).to be_a_success
     end
   end
 
   describe "#contact" do
-    it "doesn't raise errors" do
+    before do
       get :contact
+    end
+
+    it "renders the template" do
+      expect(response).to be_a_success
     end
   end
 end
