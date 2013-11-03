@@ -1,6 +1,6 @@
 class PlayedQuizzesController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :assing_scope
+  before_action :authenticate_user!
+  before_action :assing_scope
 
   decorates_assigned :played_quiz
 

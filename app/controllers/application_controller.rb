@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  before_filter :add_user_view_path, if: :user_logged_in?
-  before_filter :save_activity, if: :user_logged_in?
-  before_filter :force_filling_email, if: :user_logged_in?
+  before_action :add_user_view_path, if: :user_logged_in?
+  before_action :save_activity, if: :user_logged_in?
+  before_action :force_filling_email, if: :user_logged_in?
 
   add_flash_types :success, :error, :warning
 

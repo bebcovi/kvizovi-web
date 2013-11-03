@@ -1,6 +1,6 @@
 class Account::QuizzesController < InheritedResources::Base
   actions :all, except: [:show]
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   private
 

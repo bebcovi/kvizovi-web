@@ -1,6 +1,6 @@
 class PostsController < InheritedResources::Base
   actions :all, except: [:show]
-  before_filter :authorize!, except: :index
+  before_action :authorize!, except: :index
 
   def index
     PostService.new(current_user.unread_posts).mark_as_read(current_user) if user_logged_in?

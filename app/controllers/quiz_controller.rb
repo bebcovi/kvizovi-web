@@ -1,7 +1,7 @@
 class QuizController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :assign_student, :assign_quiz_play
-  before_filter :redirect_if_question_was_already_answered, only: :play
+  before_action :authenticate_user!
+  before_action :assign_student, :assign_quiz_play
+  before_action :redirect_if_question_was_already_answered, only: :play
 
   decorates_assigned :played_quiz
 

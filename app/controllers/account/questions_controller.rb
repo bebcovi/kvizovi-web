@@ -1,7 +1,7 @@
 class Account::QuestionsController < InheritedResources::Base
   belongs_to :quiz
   actions :all, except: [:show]
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def edit_order
     @questions = collection
