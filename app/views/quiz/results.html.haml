@@ -14,7 +14,7 @@
     .progress.player-color
       .bar{style: "width: #{score_percentage}%"}
 
-= primary_button "Završi", choose_quiz_path, class: "btn btn-primary"
+= primary_button "Završi", choose_quiz_path
 
 - played_quiz.played_questions.each do |question, answer, student, status, idx|
 
@@ -30,4 +30,4 @@
     = render "questions/answer/#{question.category}", question: question, answer: answer
     = render "played_quizzes/feedback/#{status}", question: question
 
-= primary_button "Završi", choose_quiz_path, class: "btn btn-primary"
+= primary_button "Završi", choose_quiz_path

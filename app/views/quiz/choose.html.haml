@@ -5,23 +5,11 @@
 = simple_form_for @quiz_specification, url: start_quiz_path do |f|
 
   %section.quizzes
-    %p Odaberi kviz:
-
-    %div.taggable
-      %ul.nav.nav-tabs
-        %li.active= link_to "Moja škola", "#my", data: {toggle: "tab"}
-        %li= link_to "Druge škole", "#other", data: {toggle: "tab"}
-      %div.tab-content
-        %div.tab-pane.active#my
-          - if @quizzes.any?
-            = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
-          - else
-            %p Vaša škola još nije napravila kvizove.
-        %div.tab-pane#other
-          - if @other_quizzes.any?
-            = f.input :quiz_id, collection: @other_quizzes, as: :radio_buttons, label: false
-          - else
-            %p Druge škole još nisu napravile kvizove.
+    - if @quizzes.any?
+      %p Odaberi kviz:
+      = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
+    - else
+      %p Vaša škola još nije napravila kvizove.
 
   %section.players.js-hidden
     %p Igraš li sam ili još s nekim?

@@ -1,6 +1,6 @@
 %h2.question-title
   %span.question-number.player-color
-    = @quiz_play.current_question[:number]
+    = quiz_play.current_question[:number]
   = smarty_pants question.content
 
 = image_tag question.image.url(:resized), class: "img-polaroid pull-left", style: "width: 300px; margin-right: 1em;" if question.image?

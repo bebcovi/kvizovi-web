@@ -2,15 +2,13 @@
 
 = f.input :image, label: false do
   = f.input :image, as: :file, wrapper: false, error: false
-  = f.input :remote_image_url, wrapper: false
+  = f.input :remote_image_url, wrapper: false, error: false
   = f.hidden_field :image_cache
 
-- if params[:action] == "edit"
+- if @question.image?
   %img.img-polaroid.image-preview{src: @question.image.url(:resized)}
-- else
-  %img.img-polaroid.image-preview.hide
 
-= render partial: "account/questions/fields/#{@question.category}", locals: {f: f, question: @question}
+= render "account/questions/fields/#{@question.category}", f: f, question: @question
 
 = f.input :hint, hint_html: {class: "additional-info"}
 

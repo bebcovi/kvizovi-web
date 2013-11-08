@@ -2,7 +2,7 @@
   = render_feedback
 
   .modal-footer
-    - if not @quiz_play.over?
+    - if not quiz_play.over?
       = next_button "Sljedeće pitanje", next_question_quiz_path, method: :put
     - else
       = next_button "Rezultati", finish_quiz_path, method: :delete

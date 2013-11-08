@@ -6,8 +6,8 @@ hr:
         question:
           attributes:
             image:
+              processing: "Datoteka nije slika. Ukoliko ste upisivali URL, on mora završavati s \".jpg\", \".png\" ili sl."
               download: "Dani URL ne postoji."
-              processing: "Dani URL ne pokazuje na sliku (mora završavati sa \".jpg\", \".png\" ili sl)."
         boolean_question:
           attributes:
             answer:

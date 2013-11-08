@@ -1,6 +1,6 @@
 = remote_form_for [:account, quiz], html: {class: "form-inline"} do |f|
-  = f.input :activated, as: :hidden, input_html: {value: !quiz.activated?}
+  = f.hidden_field :activated, value: !quiz.activated?
   - if quiz.activated?
-    = f.button :button, icon("lamp-full"), {class: "btn btn-success toggle-activation space-quart-right", title: "Deaktiviraj"}.merge(defined?(active) ? active : {})
+    = f.button :button, icon("lamp-full"), class: "btn btn-success toggle-activation space-quart-right", title: "Deaktiviraj"
   - else
-    = f.button :button, icon("lamp"), {class: "btn toggle-activation space-quart-right", title: "Aktiviraj"}
+    = f.button :button, icon("lamp"), class: "btn toggle-activation space-quart-right", title: "Aktiviraj"

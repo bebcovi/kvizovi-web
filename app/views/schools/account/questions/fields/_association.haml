@@ -1,14 +1,20 @@
 = f.input :associations, wrapper_html: {class: "space-half-bottom"} do
-  - number_of_fields = (params[:action] == "new" ? 4 : question.associations.count)
   %table.association-wrapper.table-condensed.space-half-bottom
     %tbody
-      - number_of_fields.times do |n|
-        - common_options = {label: false, name: "question[associations][]", class: "span5", style: "margin-bottom: 0;", error: false}
+      - number_of_fields(question.associations).times do |n|
         %tr.association-pair
           %td.association-field
-            = f.input_field :associations, {placeholder: "Asocijacija #{n + 1}a", value: question.associations.map(&:first)[n]}.deep_merge(common_options)
+            = f.input_field :associations, label: false, error: false,
+              placeholder: "Asocijacija #{n + 1}a",
+              value: question.associations.map(&:first)[n],
+              name: "question[associations][]",
+              class: "span5", style: "margin-bottom: 0"
           %td.association-icon
             = icon("chevron-right", class: "arrow subtle")
           %td.association-field
-            = f.input_field :associations, {placeholder: "Asocijacija #{n + 1}b", value: question.associations.map(&:last)[n]}.deep_merge(common_options)
+            = f.input_field :associations, label: false, error: false,
+              placeholder: "Asocijacija #{n + 1}b",
+              value: question.associations.map(&:second)[n],
+              name: "question[associations][]",
+              class: "span5", style: "margin-bottom: 0"
           %td.association-remove

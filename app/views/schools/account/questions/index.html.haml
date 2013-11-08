@@ -9,8 +9,8 @@
       %li= link_to "Asocijacija".prepend_icon("shuffle"),        new_account_quiz_question_path(category: "association")
       %li= link_to "Upiši točan odgovor".prepend_icon("pencil"), new_account_quiz_question_path(category: "text")
 
-  = link_to "Izmijeni redoslijed".prepend_icon("sort"), order_account_quiz_questions_path(@quiz), class: "btn pull-right"
-  .pull-right= render partial: "account/quizzes/activation_button", locals: {quiz: @quiz}
+  = button "Izmijeni redoslijed".prepend_icon("sort"), order_account_quiz_questions_path(@quiz), class: "pull-right"
+  .pull-right= render "account/quizzes/activation_button", quiz: @quiz
 
 - unless @quiz.activated?
   .alert.alert-warning
@@ -22,9 +22,6 @@
     - @questions.each do |question|
       = content_tag_for :li, question, class: "list-pretty-item" do
         = render "question", question: question
-      %li{class: "l-question-#{question.category} list-pretty-item list-pretty-content"}
-        = image_tag question.image.url(:resized), class: "img-polaroid space-half-bottom", style: "width: 300px" if question.image?
-        = render "questions/answer/#{question.category}", question: question, answer: question.answer
 
 - else
 

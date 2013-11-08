@@ -1,5 +1,5 @@
 %ul.nav.pull-left
-  = active_content_tag :li, params[:controller] == "quizzes" do
+  = active_content_tag :li, params[:controller].in?(["quizzes", "questions"]) do
     = link_to "Kvizovi", account_quizzes_path
   = active_content_tag :li, params[:controller] == "students" do
     = link_to "Učenici", account_students_path

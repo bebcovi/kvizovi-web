@@ -73,6 +73,7 @@ class QuizController < ApplicationController
   def quiz_play
     @quiz_play ||= QuizPlay.new(cookies)
   end
+  helper_method :quiz_play
 
   def current_player
     Student.find(quiz_play.current_student[:id])

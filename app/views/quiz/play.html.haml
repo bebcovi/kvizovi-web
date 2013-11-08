@@ -1,6 +1,6 @@
-- title "#{@quiz.name} · #{@quiz_play.current_question[:number]}. pitanje"
+- title "#{@quiz.name} · #{quiz_play.current_question[:number]}. pitanje"
 
-%div{class: "l-player-#{number(@quiz_play.current_student[:number])}"}
+%div{class: "l-player-#{number(quiz_play.current_student[:number])}"}
   .timer
     = icon("stopwatch")
     %span.timer-time

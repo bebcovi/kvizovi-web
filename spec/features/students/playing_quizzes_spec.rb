@@ -135,19 +135,4 @@ feature "Playing quizzes" do
       click_on "Rezultati"
     }.not_to raise_error
   end
-
-  scenario "Quizzes from other schools" do
-    other_school = create(:school)
-    other_school.quizzes << quiz
-
-    click_on "Kvizovi"
-    click_on "Druge škole"
-    expect(find("#other")).to have_content(quiz.name)
-
-    begin_single_player
-    answers { answer_question_correctly }
-    click_on "Rezultati"
-
-    expect(first(".l-player-one")).to have_content("4 od 4")
-  end
 end

@@ -69,7 +69,7 @@ feature "Authentication" do
   end
 
   scenario "Email requirement" do
-    student = register(:student)
+    student = register(:student, school: create(:school))
     student.update_column(:email, nil)
     login(student)
 

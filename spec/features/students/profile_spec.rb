@@ -1,7 +1,7 @@
 require "spec_helper"
 
 feature "Profile" do
-  let!(:student) { register(:student) }
+  let!(:student) { register(:student, school: create(:school)) }
 
   background do
     login(student)

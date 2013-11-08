@@ -1,13 +1,16 @@
 = f.input :provided_answers, wrapper_html: {class: "space-half-bottom"} do
-  - number_of_fields = (params[:action] == "new" ? 4 : question.provided_answers.count)
   %table.choice-wrapper.table-condensed.space-half-bottom
     %tbody
-      - number_of_fields.times do |n|
-        - additional_options = {wrapper_html: {class: "success"}} if n == 0
+      - number_of_fields(question.provided_answers).times do |n|
         %tr.choice-option
           %td.choice-field
-            = f.input :provided_answers, {label: false, error: false, placeholder: "Ponuđeni odgovor #{n + 1}", input_html: {value: question.provided_answers[n], name: "question[provided_answers][]", style: "margin-bottom: 0;"}}.deep_merge(additional_options || {})
+            = f.input :provided_answers, label: false, error: false,
+              placeholder: "Ponuđeni odgovor #{n + 1}",
+              input_html: {value: question.provided_answers[n],
+                           name: "question[provided_answers][]",
+                           style: "margin-bottom: 0;"},
+              wrapper_html: {class: ("success" if n.zero?)}
           %td.choice-remove
-            - if n == 0
-              %span.choice-correct-icon.text-success{title: "Ovo će biti točan odgovor.", data: {placement: "right"}}
+            - if n.zero?
+              %span.text-success{title: "Ovo će biti točan odgovor.", data: {placement: "right"}}
                 = icon("checkmark-circle-full")

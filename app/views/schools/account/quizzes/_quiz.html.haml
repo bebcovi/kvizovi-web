@@ -6,7 +6,7 @@
     %li= link_to "Prati".prepend_icon("eye"), played_quizzes_path(quiz_id: quiz.id)
     %li= delete_button "Izbriši", account_quiz_path(quiz), method: :delete, class: "item-danger confirm-delete"
 
-= render partial: "activation_button", locals: {quiz: quiz}
+= render "activation_button", quiz: quiz
 
 %span.list-pretty-item-content
   = quiz.name

@@ -10,25 +10,25 @@
     %tbody
       %tr
         %th Ime škole
-        %td= @user.name
+        %td= current_user.name
       %tr
         %th Korisničko ime
-        %td= @user.username
+        %td= current_user.username
       %tr
         %th Email
-        %td= @user.email
+        %td= current_user.email
       %tr
         %th Tip škole
-        %td= @user.level
+        %td= current_user.level
       %tr
         %th Mjesto
-        %td= @user.place
+        %td= current_user.place
       %tr
         %th Županija
-        %td= @user.region
+        %td= current_user.region
       %tr
         %th Tajni ključ
-        %td= @user.key
+        %td= current_user.key
 
   = buttons do
     .btn-group

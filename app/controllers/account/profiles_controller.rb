@@ -4,7 +4,7 @@ class Account::ProfilesController < InheritedResources::Base
   private
 
   def resource
-    @user ||= current_user
+    current_user
   end
 
   def resource_instance_name

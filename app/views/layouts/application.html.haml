@@ -16,7 +16,7 @@
       .navbar-inner
         .container
           = link_to icon("newspaper"), root_path, class: "brand"
-          = user_logged_in? ? render("user_navigation") : render("navigation")
+          = render "navigation"
 
     - if content_for? :hero_unit
       .hero-unit

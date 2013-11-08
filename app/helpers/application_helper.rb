@@ -13,17 +13,9 @@ module ApplicationHelper
 
   def breadcrumbs(*items)
     content_tag :ol, class: "breadcrumb" do
-      items.map.with_index do |item, idx|
-        if idx < items.count - 1
-          content_tag(:li) do
-            raw(item) + content_tag(:i, class: "divider") { icon("chevron-right") }
-          end
-        else
-          content_tag(:li, class: "active") do
-            raw(item)
-          end
-        end
-      end.join.html_safe
+      items.inject(raw("")) do |crumbs, item|
+        crumbs << content_tag(:li, class: ("active" if item == items.last)) { raw(item) }
+      end
     end
   end
 
