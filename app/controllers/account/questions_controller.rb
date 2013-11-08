@@ -1,6 +1,7 @@
 class Account::QuestionsController < InheritedResources::Base
   belongs_to :quiz
   actions :all, except: [:show]
+  respond_to :html, :js
   before_action :authenticate_user!
 
   def edit_order

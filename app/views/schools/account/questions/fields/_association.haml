@@ -1,8 +1,8 @@
 = f.input :associations, wrapper_html: {class: "space-half-bottom"} do
-  %table.association-wrapper.table-condensed.space-half-bottom
-    %tbody
+  %table.table-condensed.space-half-bottom
+    %tbody.association-wrapper
       - number_of_fields(question.associations).times do |n|
-        %tr.association-pair
+        %tr.association-option
           %td.association-field
             = f.input_field :associations, label: false, error: false,
               placeholder: "Asocijacija #{n + 1}a",

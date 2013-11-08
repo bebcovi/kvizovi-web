@@ -1,12 +1,11 @@
-.list-pretty-item-actions.dropdown.dropdown-hover
-  = link_to icon("chevron-left"), "#", class: "dropdown-toggle", data: {toggle: "dropdown"}
-  %ul.dropdown-menu.pull-right
-    %li= edit_button "Izmijeni", edit_account_quiz_question_path(@quiz, question)
-    %li= delete_button "Izbriši", account_quiz_question_path(@quiz, question)
+= content_tag_for :li, question, class: "list-pretty-item" do
+  .pull-right
+    = edit_button "", edit_account_quiz_question_path(@quiz, question), title: "Izmijeni"
+    = delete_button "", account_quiz_question_path(@quiz, question), remote: true, title: "Izbriši"
 
-%span.space-quart-right= question_icons(question.category)
-%span.list-pretty-item-content= question.content
+  %span.space-quart-right= question_icons(question.category)
+  %span.list-pretty-item-content= question.content
 
-%li{class: "l-question-#{question.category} list-pretty-item list-pretty-content"}
-  = image_tag question.image.url(:resized), class: "img-polaroid space-half-bottom", style: "width: 300px" if question.image?
-  = render "questions/answer/#{question.category}", question: question, answer: question.answer
+  %li{class: "l-question-#{question.category} list-pretty-item list-pretty-content"}
+    = image_tag question.image.url(:resized), class: "img-polaroid space-half-bottom", style: "width: 300px" if question.image?
+    = render "questions/answer/#{question.category}", question: question, answer: question.answer

@@ -1,6 +1,6 @@
 = f.input :provided_answers, wrapper_html: {class: "space-half-bottom"} do
-  %table.choice-wrapper.table-condensed.space-half-bottom
-    %tbody
+  %table.table-condensed.space-half-bottom
+    %tbody.choice-wrapper
       - number_of_fields(question.provided_answers).times do |n|
         %tr.choice-option
           %td.choice-field
