@@ -33,6 +33,6 @@
   = buttons do
     .btn-group
       = edit_button "Izmijeni profil", edit_account_profile_path
-      = change_password_button "Izmijeni lozinku", edit_school_registration_path
+      = button "Izmijeni lozinku".prepend_icon("lock"), edit_school_registration_path
 
-  %p= delete_profile_button "Izbriši korisnički račun", school_registration_path, method: :delete
+  %p= delete_button "Izbriši korisnički račun", school_registration_path

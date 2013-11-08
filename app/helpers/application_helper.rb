@@ -62,8 +62,4 @@ module ApplicationHelper
     css_class = "active" if active
     content_tag tag_name, options.merge_class(css_class), &block
   end
-
-  def current_user_admin?
-    user_logged_in? && current_user.admin?
-  end
 end
