@@ -1,0 +1,13 @@
+<% if @quiz.persisted? %>
+  $(".no-items").remove()
+  $("#quizzes").prepend("<%= j render(@quiz) %>")
+  $("#new_quiz").remove()
+  $(".add").show()
+<% else %>
+  if ($("#new_quiz").find(".error-block").length)
+    var errorBlock = $("#new_quiz").find(".error-block")
+  else
+    var errorBlock = $("<span>", {class: "error-block"}).appendTo("#new_quiz")
+
+  errorBlock.text("<%= @quiz.errors.full_messages.first %>")
+<% end %>

@@ -1,16 +1,11 @@
 - title "Uređivanje kvizova"
 
 .space-bottom
-  = add_button "Novi kviz", new_account_quiz_path
+  = add_button "Novi kviz", new_account_quiz_path, remote: true
 
-- if @quizzes.any?
-
-  %ol.list-pretty
-    - @quizzes.each do |quiz|
-      = content_tag_for :li, quiz, class: "list-pretty-item" do
-        = render quiz
-
-- else
-
-  %p.no-items
-    Trenutno nemate nikakvih kvizova.
+%ol.list-pretty#quizzes
+  - if @quizzes.any?
+    = render @quizzes
+  - else
+    %p.no-items
+      Trenutno nemate kvizova.

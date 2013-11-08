@@ -49,6 +49,7 @@ group :test do
   gem "pry"
   gem "nokogiri"
   gem "capybara", ">= 2"
+  gem "poltergeist"
 end
 
 group :development do

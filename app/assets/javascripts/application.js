@@ -13,9 +13,7 @@
 //= require icon
 //= require button
 //= require spinner
-//= require modal-ajax
 //
-//= require confirm-leave
 //= require reveal
 //= require sort
 //
@@ -30,7 +28,6 @@
 //= require popover
 //= require tooltip
 //= require dropdown
-//= require modal
 //= require shame
 //
 //= require init

@@ -43,13 +43,6 @@ module ApplicationHelper
     ((part.to_f / total.to_f) * 100).round
   end
 
-  def remote_form_for(*args, &block)
-    simple_form_for *args do |f|
-      concat hidden_field_tag(:return_to, request.fullpath)
-      yield(f)
-    end
-  end
-
   def active_content_tag(tag_name, active, options = {}, &block)
     css_class = "active" if active
     content_tag tag_name, options.merge_class(css_class), &block

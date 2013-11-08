@@ -1,3 +1,9 @@
 - title @quiz.name
 
-= render "form"
+= simple_form_for [:account, @quiz] do |f|
+
+  = f.input :name
+
+  = buttons do
+    = submit_button "Spremi"
+    = cancel_button "Odustani", account_quizzes_path

@@ -9,7 +9,9 @@ hr:
               taken: "Već imate kviz s tim imenom."
 
   simple_form:
-    labels:
+    lables:
       quiz:
         name: "Naziv"
-        activated: "Vidljiv"
+    placeholders:
+      quiz:
+        name: "Naziv"

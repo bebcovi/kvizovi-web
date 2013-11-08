@@ -4,7 +4,7 @@ module ButtonsHelper
   end
 
   def submit_button(string, options = {})
-    button_tag string, options.merge_class("btn btn-primary").deep_merge(data: {:"disable-with" => "Učitavanje..."})
+    button_tag string, options.merge_class("btn btn-primary")
   end
 
   def back_button(string, path, options = {})
@@ -24,7 +24,7 @@ module ButtonsHelper
   end
 
   def add_button(string, path, options = {})
-    primary_button string.prepend_icon("plus"), path, options
+    primary_button string.prepend_icon("plus"), path, options.merge_class("add")
   end
 
   def remove_button(options = {})

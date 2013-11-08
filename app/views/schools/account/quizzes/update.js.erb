@@ -1,0 +1,4 @@
+$("#edit_quiz_<%= @quiz.id %>").replaceWith("<%= j render("activation_button", quiz: @quiz) %>")
+<% if @quiz.activated? %>
+  $(".alert-warning").remove()
+<% end %>

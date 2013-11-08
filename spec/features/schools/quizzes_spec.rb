@@ -8,33 +8,41 @@ feature "Quizzes" do
     login(school)
   end
 
-  scenario "Creating, updating and destroying" do
+  scenario "Creating, updating and destroying", js: true do
     visit account_quizzes_path
     click_on "Novi kviz"
 
     fill_in "Naziv", with: "Kviz"
     submit
 
-    expect(page).to have_content("Kviz")
+    expect(page).to have_css(".quiz")
+    expect(page).not_to have_content("Trenutno nemate kvizova")
 
     click_on "Izmijeni"
-
-    fill_in "Naziv", with: "Drugi kviz"
     submit
 
-    expect(page).to have_content("Drugi kviz")
+    expect(page).to have_css(".quiz")
 
     click_on "Izbriši"
 
-    expect(page).to have_no_content("Drugi kviz")
+    expect(page).not_to have_css(".quiz")
   end
 
-  scenario "Activating" do
+  scenario "Activating", js: true do
     school.quizzes << quiz
 
     visit account_quizzes_path
 
-    expect { find(".toggle-activation").click }.to change{quiz.reload.activated?}
-    expect { find(".toggle-activation").click }.to change{quiz.reload.activated?}
+    find(".toggle-activation").click
+    expect(page).to have_css(".icon-lamp")
+    find(".toggle-activation").click
+    expect(page).to have_css(".icon-lamp-full")
+
+    visit account_quiz_questions_path(quiz)
+
+    find(".toggle-activation").click
+    expect(page).to have_css(".icon-lamp")
+    find(".toggle-activation").click
+    expect(page).to have_css(".icon-lamp-full")
   end
 end
