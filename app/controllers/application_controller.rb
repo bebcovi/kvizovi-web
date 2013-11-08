@@ -7,13 +7,6 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :success, :error, :warning
 
-  def render(*args)
-    options = args.extract_options!
-    options.update(layout: false) if request.headers["X-noLayout"]
-    args << options
-    super
-  end
-
   protected
 
   def current_user
