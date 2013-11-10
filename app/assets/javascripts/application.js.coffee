@@ -17,6 +17,7 @@
 #= require ./add_or_remove_options
 #= require ./additional-info
 #= require ./image_upload
+#= require ./shame
 
 jQuery ->
   $(".btn[title]").tooltip()

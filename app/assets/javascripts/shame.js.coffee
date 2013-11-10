@@ -1,19 +1,14 @@
-do ($ = jQuery) ->
+jQuery ->
 
   # turn off auto-complete in text inputs
 
   $('[type="text"], [type="url"]').attr 'autocomplete', 'off'
 
-  # remove the .btn class
+  # surround labels of SimpleForm boolean inputs with <li> elements
 
-  $('.alert-info').find('.close').removeClass('btn')
+  $("label.radio").removeClass("radio").wrap("<li class='radio'>")
+  $("label.checkbox").removeClass("checkbox").wrap("<li class='checkbox'>")
 
   # center table cells in survey forms
 
-  $form = $(".new_survey")
-
-  if $form.length
-
-    $table = $form.find(".survey_fields_answer").find("table")
-
-    $table.find("td").not(":first-of-type").addClass("text-center")
+  $(".survey_fields_answer td").not(":first-of-type").addClass("text-center")
