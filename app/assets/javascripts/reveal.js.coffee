@@ -1,25 +1,23 @@
-do ($ = jQuery) ->
+jQuery ->
 
-  $content  = $(".reveal-content")
+ $(".reveal-content").each ->
+   new ContentReveal(@).enable()
 
-  if $content.length
+class @ContentReveal
 
-    text        = $content.attr("data-reveal")
-    $toggleBtn  = $("<a>", href: "#", class: "reveal-toggle is-hidden", title: text, "data-placement": "right")
+  constructor: (container) ->
+    @container = $(container)
 
-    $content.each ->
-      $this = $(@)
-      $btn = $toggleBtn.clone()
+  enable: ->
+    @toggleButton()
+      .appendTo(@container.prev())
+      .on "click", @toggleVisibility
+      .tooltip(placement: "bottom", container: "body")
 
-      $btn
-        .appendTo($this.prev())
-        .on "click", do ($this, $btn) ->
-          (event) ->
-            event.preventDefault()
-            $btn.toggleClass("is-hidden")
-            $this.toggleClass("is-hidden")
+  toggleVisibility: (event) =>
+    event.preventDefault()
+    $(event.target).toggleClass("is-hidden")
+    @container.toggleClass("is-hidden")
 
-    $(".reveal-toggle").tooltip
-      animation: false
-      placement: "bottom"
-      container: "body"
+  toggleButton: ->
+    $("<a>", href: "#", class: "reveal-toggle is-hidden", title: @container.attr("title"))
