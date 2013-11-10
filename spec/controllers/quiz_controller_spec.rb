@@ -36,7 +36,7 @@ describe QuizController do
 
   describe "#start" do
     before do
-      controller.send(:quiz_play).stub(:start!)
+      allow(controller.send(:quiz_play)).to receive(:start!)
     end
 
     context "when valid" do
@@ -93,7 +93,7 @@ describe QuizController do
     before { start_quiz }
 
     before do
-      controller.send(:quiz_play).stub(:save_answer!)
+      allow(controller.send(:quiz_play)).to receive(:save_answer!)
       put :save_answer
     end
 
@@ -122,7 +122,7 @@ describe QuizController do
     before { start_quiz }
 
     before do
-      controller.send(:quiz_play).stub(:next_question!)
+      allow(controller.send(:quiz_play)).to receive(:next_question!)
       get :next_question
     end
 
@@ -166,7 +166,7 @@ describe QuizController do
 
     context "when the quiz was played to the end" do
       before do
-        controller.send(:quiz_play).stub(:interrupted?) { false }
+        allow(controller.send(:quiz_play)).to receive(:interrupted?).and_return(false)
         delete :finish
       end
 
@@ -177,7 +177,7 @@ describe QuizController do
 
     context "when the quiz was interrupted" do
       before do
-        controller.send(:quiz_play).stub(:interrupted?) { true }
+        allow(controller.send(:quiz_play)).to receive(:interrupted?).and_return(true)
         delete :finish
       end
 

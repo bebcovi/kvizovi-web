@@ -44,11 +44,12 @@ gem "inherited_resources", ">= 1.4.1"
 
 group :test do
   gem "jasminerice", github: "bradphelan/jasminerice"
-  gem "rspec-rails", ">= 2.14"
+  gem "rspec-rails", ">= 3.0.0.beta1"
+  gem "rspec-collection_matchers", ">= 0.0.2"
   gem "factory_girl", ">= 4.2"
   gem "pry"
   gem "nokogiri"
-  gem "capybara", ">= 2"
+  gem "capybara", github: "jnicklas/capybara"
   gem "poltergeist"
 end
 

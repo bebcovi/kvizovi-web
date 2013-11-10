@@ -152,7 +152,7 @@ describe QuizPlay do
           subject.next_question!
         end
         subject.finish!
-        expect(subject.interrupted?).to be_true
+        expect(subject.interrupted?).to be true
       end
 
       it "returns false if the last question was answered" do
@@ -162,7 +162,7 @@ describe QuizPlay do
           subject.save_answer!(true)
         end
         subject.finish!
-        expect(subject.interrupted?).to be_false
+        expect(subject.interrupted?).to be false
       end
     end
 
@@ -172,15 +172,15 @@ describe QuizPlay do
           subject.save_answer!(true)
           subject.next_question!
         end
-        expect(subject.over?).to be_false
+        expect(subject.over?).to be false
         subject.save_answer!(true)
-        expect(subject.over?).to be_true
+        expect(subject.over?).to be true
       end
     end
 
     context "conversions" do
       context "boolean questions" do
-        before { subject.stub(:question_categories) { ["boolean"] } }
+        before { allow(subject).to receive(:question_categories).and_return(["boolean"]) }
 
         it "handles strings" do
           subject.save_answer!("true")
@@ -194,7 +194,7 @@ describe QuizPlay do
       end
 
       context "choice questions" do
-        before { subject.stub(:question_categories) { ["choice"] } }
+        before { allow(subject).to receive(:question_categories).and_return(["choice"]) }
 
         it "handles strings" do
           subject.save_answer!("Foo")
@@ -208,7 +208,7 @@ describe QuizPlay do
       end
 
       context "association questions" do
-        before { subject.stub(:question_categories) { ["association"] } }
+        before { allow(subject).to receive(:question_categories).and_return(["association"]) }
 
         it "handles arrays" do
           subject.save_answer!(["Foo", "Foo", "Bar", "Bar"])
@@ -217,7 +217,7 @@ describe QuizPlay do
       end
 
       context "text questions" do
-        before { subject.stub(:question_categories) { ["text"] } }
+        before { allow(subject).to receive(:question_categories).and_return(["text"]) }
 
         it "handles strings" do
           subject.save_answer!("Foo")
