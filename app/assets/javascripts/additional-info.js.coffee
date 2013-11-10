@@ -1,13 +1,12 @@
-do ($ = jQuery) ->
+#= require ./utils/icon
+
+jQuery ->
 
   $(".additional-info").each ->
-    $this   = $(@)
-    hint    = $this.text()
-    icon    = $.icon("question-circle-full")
-    $icon   = $(icon)
+    icon   = $.icon("question-circle-full")
+    hint    = $(@).text()
 
-    $this.replaceWith($icon)
-
-    $icon
+    $(@).replaceWith $(icon)
       .addClass("additional-info help")
       .attr("title", hint)
+      .tooltip(placement: "right")
