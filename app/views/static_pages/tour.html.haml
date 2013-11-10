@@ -1,12 +1,11 @@
 - title "Vodič"
 
 %ul.nav.nav-tabs
-  - attrs = {data: {toggle: "tab"}}
-  %li.active= link_to   "Dobrodošli",  "#dobrodosli",   attrs
-  %li= link_to          "Učenici",     "#ucenici",      attrs
-  %li= link_to          "Škole",       "#skole",        attrs
-  %li= link_to          "Preglednici", "#preglednici",  attrs
-  %li= link_to          "Kontakt",     "#kontakt",      attrs
+  %li.active= link_to "Dobrodošli",  "#dobrodosli",  data: {toggle: "tab"}
+  %li= link_to        "Učenici",     "#ucenici",     data: {toggle: "tab"}
+  %li= link_to        "Škole",       "#skole",       data: {toggle: "tab"}
+  %li= link_to        "Preglednici", "#preglednici", data: {toggle: "tab"}
+  %li= link_to        "Kontakt",     "#kontakt",     data: {toggle: "tab"}
 
 .tab-content
   #dobrodosli.tab-pane.active

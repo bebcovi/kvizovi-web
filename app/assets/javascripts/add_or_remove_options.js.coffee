@@ -1,3 +1,5 @@
+#= require ./utils/icon
+
 jQuery ->
   new OptionsManager("choice").enable(add: "Dodaj ponuđeni odgovor")
   new OptionsManager("association").enable(add: "Dodaj asocijaciju")
@@ -8,7 +10,7 @@ class @OptionsManager
     @wrapper = $(".#{@name}-wrapper")
 
   enable: (options = {}) ->
-    @addButton = $("<a href='#'><i class='icon-plus'></i> #{options["add"] || "Dodaj"}</a>")
+    @addButton = $("<a href='#'>#{$.icon("plus")} #{options["add"] || "Dodaj"}</a>")
     @addButton.on "click", @addOption
     @wrapper.closest(".control-group").append(@addButton)
 

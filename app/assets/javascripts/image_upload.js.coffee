@@ -1,4 +1,4 @@
-#= require utils/icon
+#= require ./utils/icon
 #= require twitter/bootstrap/tooltip
 
 jQuery ->

@@ -12,9 +12,10 @@
   = button "Izmijeni redoslijed".prepend_icon("sort"), order_account_quiz_questions_path(@quiz), class: "pull-right"
   .pull-right= render "account/quizzes/activation_button", quiz: @quiz
 
-- unless @quiz.activated?
+- if not @quiz.activated?
   .alert.alert-warning
-    Ovaj je kviz trenutno neaktivan, učenici ga neće moći igrati dok ga ne aktivirate.
+    Ovaj kviz je trenutno neaktivan, što znači da ga učenici ne vide.
+    Kada ste dovršili kviz, aktivirajte ga klikom na lampicu gore (#{icon("lamp")}).
 
 - if @questions.any?
 

@@ -1,3 +1,0 @@
-window.App =
-  Controllers: {}
-  Questions: {}
