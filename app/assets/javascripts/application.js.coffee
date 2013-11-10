@@ -2,7 +2,6 @@
 #= require jquery_ujs
 #
 #= require jquery.ui.droppable
-#= require jquery.ui.sortable
 #
 #= require turbolinks
 #= require jquery.turbolinks
@@ -18,6 +17,7 @@
 #= require ./additional-info
 #= require ./image_upload
 #= require ./shame
+#= require ./sorting
 
 jQuery ->
   $(".btn[title]").tooltip()

@@ -108,22 +108,19 @@ feature "Questions" do
   end
 
   scenario "Changing the order", js: true do
-    quiz.questions = [
-      create(:boolean_question, content: "Question 1"),
-      create(:boolean_question, content: "Question 2"),
-      create(:boolean_question, content: "Question 3"),
+    questions = [
+      create(:boolean_question, quiz: quiz),
+      create(:choice_question, quiz: quiz),
+      create(:association_question, quiz: quiz),
     ]
 
     visit account_quiz_questions_path(quiz)
     click_on "Izmijeni redoslijed"
 
-    fill_in "quiz_questions_attributes_0_position", with: "1", visible: false
-    fill_in "quiz_questions_attributes_1_position", with: "3", visible: false
-    fill_in "quiz_questions_attributes_2_position", with: "2", visible: false
+    find(questions.second).drag_to find(questions.first)
     submit
 
-    expect(all(".boolean_question")[0]).to have_content("Question 1")
-    expect(all(".boolean_question")[1]).to have_content("Question 3")
-    expect(all(".boolean_question")[2]).to have_content("Question 2")
+    expect(questions.second.content).to appear_before questions.first.content
+    expect(questions.first.content).to appear_before questions.third.content
   end
 end
