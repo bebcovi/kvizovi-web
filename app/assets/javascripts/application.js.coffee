@@ -18,5 +18,5 @@
 #= require ./additional-info
 #= require ./image_upload
 
-$.extend $.fn.tooltip.defaults,
-  animation: false
+jQuery ->
+  $(".btn[title]").tooltip()

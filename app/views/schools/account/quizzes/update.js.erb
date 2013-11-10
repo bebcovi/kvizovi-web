@@ -1,4 +1,5 @@
 $("#edit_quiz_<%= @quiz.id %>").replaceWith("<%= j render("activation_button", quiz: @quiz) %>")
+$(".btn[title]").tooltip()
 <% if @quiz.activated? %>
   $(".alert-warning").remove()
 <% end %>
