@@ -8,9 +8,6 @@
 #
 #= require twitter/bootstrap
 #
-#= require spin
-#= require jquery.spin
-#
 #= require moment
 #
 #= require ./add_or_remove_options
