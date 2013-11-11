@@ -1,22 +1,20 @@
 - title "Praćenje kvizova"
 
 %table.table.table-striped
+
   %colgroup
     %col.col-33
     %col.col-33
     %col
+
   %thead
     %tr
       %th Ime kviza
       %th Igrači
       %th Rezultat
       %th Odigrano
+
   %tbody
-    - @played_quizzes.each do |played_quiz|
-      = content_tag_for :tr, played_quiz do
-        %td= link_to played_quiz.name, played_quiz_path(played_quiz, params.slice(:quiz_id, :student_id))
-        %td= played_quiz.students.map { |student| "#{student} (#{student.grade})" }.join(", ")
-        %td= played_quiz.score_percentages.map { |n| "#{n}%" }.join(", ")
-        %td= "prije #{time_ago_in_words played_quiz.end_time}"
+    = render collection: @played_quizzes, partial: "played_quiz_short", as: :played_quiz
 
 = will_paginate @played_quizzes, previous_label: "← Novije", next_label: "Starije →"
