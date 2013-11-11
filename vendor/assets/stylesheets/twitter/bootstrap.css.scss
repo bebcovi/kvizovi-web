@@ -6,12 +6,12 @@
 
 // Reset
 @import "twitter/bootstrap/normalize";
-@import "twitter/bootstrap/print";
+// @import "twitter/bootstrap/print";
 
 // Core CSS
 @import "twitter/bootstrap/scaffolding";
 @import "twitter/bootstrap/type";
-@import "twitter/bootstrap/code";
+// @import "twitter/bootstrap/code";
 @import "twitter/bootstrap/grid";
 @import "twitter/bootstrap/tables";
 @import "twitter/bootstrap/forms";
@@ -44,7 +44,7 @@
 @import "twitter/bootstrap/modals";
 @import "twitter/bootstrap/tooltip";
 @import "twitter/bootstrap/popovers";
-@import "twitter/bootstrap/carousel";
+// @import "twitter/bootstrap/carousel";
 
 // Utility classes
 @import "twitter/bootstrap/utilities";
