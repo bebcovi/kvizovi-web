@@ -1,0 +1,10 @@
+@import "addons/font-family";
+
+$color-primary:                       hsl(15, 70%, 55%);
+
+$font-family-base:                    "source-sans-pro", $helvetica;
+
+$font-size-base:                      18px;
+$line-height-base:                    28px/$font-size-base;
+
+$link-color:                          $color-primary;

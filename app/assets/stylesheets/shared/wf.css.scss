@@ -1,0 +1,16 @@
+@import "css3/placeholder";
+
+.wf-loading {
+  * {
+    &,
+    &:before,
+    &:after {
+      color: transparent !important;
+      text-shadow: none !important;
+    }
+
+    @include placeholder {
+      color: transparent !important;
+    }
+  }
+}

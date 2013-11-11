@@ -1,0 +1,9 @@
+@import "globals/mixins";
+
+// A handy class for situations when all
+// you want to do is bleed that element
+// and don't feel like making up a class name.
+
+.is-bleeding {
+  @include bleed;
+}
