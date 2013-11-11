@@ -3,6 +3,11 @@ class Account::QuizzesController < InheritedResources::Base
   respond_to :html, :js
   before_action :authenticate_user!
 
+  def index
+    @quiz = build_resource
+    super
+  end
+
   private
 
   def begin_of_association_chain

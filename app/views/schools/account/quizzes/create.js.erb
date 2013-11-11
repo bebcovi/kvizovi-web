@@ -1,9 +1,9 @@
 <% if @quiz.persisted? %>
   $(".no-items").remove()
   $("#quizzes").prepend("<%= j render(@quiz) %>")
-  $("#new_quiz").remove()
-  $(".add").show()
   $(".btn[title]").tooltip()
+  $(".error-block").remove()
+  $("#new_quiz").find("[type='text']").val("").blur()
 <% else %>
   if ($("#new_quiz").find(".error-block").length)
     var errorBlock = $("#new_quiz").find(".error-block")

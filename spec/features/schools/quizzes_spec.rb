@@ -10,7 +10,6 @@ feature "Quizzes" do
 
   scenario "Creating, updating and destroying", js: true do
     visit account_quizzes_path
-    click_on "Novi kviz"
 
     fill_in "Naziv", with: "Kviz"
     submit
