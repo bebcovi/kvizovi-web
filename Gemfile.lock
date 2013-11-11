@@ -156,6 +156,8 @@ GEM
       subexec (~> 0.2.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
+    momentjs-rails (2.2.1)
+      railties (>= 3.1)
     multi_json (1.8.2)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
@@ -311,6 +313,7 @@ DEPENDENCIES
   jquery-ui-rails
   letter_opener (>= 1.1.2)
   mini_magick (>= 3.6)
+  momentjs-rails (>= 2.2.1)
   nokogiri
   pg
   poltergeist

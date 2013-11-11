@@ -1,4 +1,4 @@
-%table.table-condensed.js-hidden
+%table.table-condensed
   - question.associations.each do |left, right|
     %tr.association-pair
       %td.association-pair-static= f.input_field :answer, label: false, value: left, name: "answer[]", class: "input-xlarge"

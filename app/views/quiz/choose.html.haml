@@ -11,16 +11,16 @@
     - else
       %p Vaša škola još nije napravila kvizove.
 
-  %section.players.js-hidden
+  %section.players
     %p Igraš li sam ili još s nekim?
     = f.input :students_count, collection: [["Samo ja", 1], ["Još netko", 2]], as: :radio_buttons, label: false
 
-  %section.login.js-hidden
+  %section.login
     %p Daj drugom igraču da se prijavi:
     = f.error(:students_credentials) if f.error(:students_credentials)
     = f.simple_fields_for :students_credentials, index: nil do |p|
       = p.input :username, input_html: {value: (params[:quiz_specification][:students_credentials].first[:username] if params[:action] == "prepare")}
       = p.input :password
 
-  = buttons class: "js-hidden" do
-    = submit_button raw("Započni kviz#{content_tag :strong, "", class: "name"}!")
+  = buttons do
+    = submit_button "Započni kviz!"
