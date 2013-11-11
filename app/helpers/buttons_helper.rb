@@ -20,7 +20,7 @@ module ButtonsHelper
   end
 
   def edit_button(text, path, options = {})
-    button text.prepend_icon("pencil-2"), path, options
+    button text.prepend_icon("pencil2"), path, options
   end
 
   def add_button(text, path, options = {})
