@@ -62,6 +62,7 @@ group :development do
   gem "binding_of_caller", ">= 0.7.2"
   gem "xray-rails", ">= 0.1.5"
   gem "letter_opener", ">= 1.1.2"
+  gem "database_cleaner"
 end
 
 group :production do
