@@ -1,4 +1,7 @@
+@import "css3/hidpi-media-query";
 @import "globals/variables";
+
+// type
 
 @mixin link-color($color1, $color2: $color1) {
   color: $color1;
@@ -15,6 +18,19 @@
     line-height: ($line-height * $line-height-computed) / $font-size;
   } @else {
     line-height: ceil($font-size / $line-height-computed) * ($line-height-computed / $font-size);
+  }
+}
+
+// patterns
+
+@mixin subtle-pattern($pattern, $size, $fallback: #fff) {
+  background-color: $fallback;
+  background-image: image-url("patterns/#{$pattern}/#{$pattern}.png");
+  background-repeat: repeat;
+  background-size: $size;
+
+  @include hidpi {
+    background-image: image-url("patterns/#{$pattern}/#{$pattern}_@2X.png");
   }
 }
 

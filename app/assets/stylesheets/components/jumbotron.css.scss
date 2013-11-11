@@ -1,6 +1,10 @@
 @import "twitter/bootstrap/variables";
+@import "globals/mixins";
 
 .jumbotron {
+  @include subtle-pattern("lightpaperfibers", 500px 300px);
+  border-bottom: 2px solid rgba($brand-primary, .15);
+  color: rgba(#000, .75);
 }
 
   .jumbotron-btn {
