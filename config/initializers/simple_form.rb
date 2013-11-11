@@ -119,7 +119,7 @@ SimpleForm.setup do |config|
   config.collection_value_methods = [:id]
 
   # You can wrap a collection of radio/check boxes in a pre-defined tag, defaulting to none.
-  config.collection_wrapper_tag = :ol
+  config.collection_wrapper_tag = :ul
 
   # You can define the class to use on all collection wrappers. Defaulting to none.
   # config.collection_wrapper_class = nil
