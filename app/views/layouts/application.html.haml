@@ -12,10 +12,18 @@
     = csrf_meta_tag
 
   %body{class: "l-page-#{params[:controller]} l-page-#{params[:controller]}-#{params[:action]}"}
-    .navbar.navbar-static-top.navbar-inverse
-      .navbar-inner
-        .container
-          = link_to icon("newspaper"), root_path, class: "brand"
+    .navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          %button.navbar-toggle{type: "button", data: {toggle: "collapse", target: ".navbar-collapse"}}
+            %span.sr-only Promijeni navigaciju
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+
+          = link_to icon("books"), root_path, class: "navbar-brand"
+
+        .collapse.navbar-collapse
           = render "navigation"
 
     - if content_for? :jumbotron

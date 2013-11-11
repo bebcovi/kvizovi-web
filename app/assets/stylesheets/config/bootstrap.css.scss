@@ -1,8 +1,40 @@
 @import "addons/font-family";
 
-$font-family-base:                    "source-sans-pro", $helvetica;
+// Brand colors
+// -------------------------
 
-$font-size-base:                      18px;
-$line-height-base:                    28px/$font-size-base;
+$brand-primary:                             hsl(15, 70%, 55%);
 
-$brand-primary:                       hsl(15, 70%, 55%);
+// Typography
+// -------------------------
+
+$font-family-base:                          "source-sans-pro", $helvetica;
+
+$font-size-base:                            18px;
+$line-height-base:                          28px/$font-size-base;
+
+// Navbar
+// -------------------------
+
+// Inverted navbar
+
+// Reset inverted navbar basics
+$navbar-inverse-color:                      #fff;
+$navbar-inverse-bg:                         shade($brand-primary, 15%);
+$navbar-inverse-border:                     darken($navbar-inverse-bg, 10%);
+
+// Inverted navbar links
+$navbar-inverse-link-color:                 rgba(#fff, .75);
+$navbar-inverse-link-hover-color:           #fff;
+$navbar-inverse-link-hover-bg:              transparent;
+$navbar-inverse-link-disabled-color:        rgba(#fff, .4);
+
+// Inverted navbar toggle
+$navbar-inverse-toggle-hover-bg:            rgba(#fff, .35);
+$navbar-inverse-toggle-icon-bar-bg:         #fff;
+$navbar-inverse-toggle-border-color:        $navbar-inverse-toggle-hover-bg;
+
+// Forms
+// -------------------------
+
+$input-border-focus:             $brand-primary;

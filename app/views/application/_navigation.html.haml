@@ -1,6 +1,6 @@
-%ul.nav.pull-left
+%ul.nav.navbar-nav.navbar-left
 
-%ul.nav.pull-right
+%ul.nav.navbar-nav.navbar-right
   = active_content_tag :li, params[:action] == "tour" do
     = link_to "Vodič", tour_path
   = active_content_tag :li, params[:action] == "contact" do

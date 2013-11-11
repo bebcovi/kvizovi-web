@@ -1,3 +1,7 @@
+@import "config/bootstrap";
+@import "twitter/bootstrap/variables";
+
 body {
+  padding-top: $navbar-height;
   overflow-y: scroll;
 }
