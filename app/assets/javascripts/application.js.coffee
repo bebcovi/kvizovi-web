@@ -17,5 +17,8 @@
 
 $.fn.isEmpty = -> @.length == 0
 
+$.extend $.fn.tooltip.Constructor.DEFAULTS,
+  animation: false
+
 jQuery ->
   $(".btn[title]").tooltip()
