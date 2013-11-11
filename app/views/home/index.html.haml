@@ -1,17 +1,15 @@
 - title "Početna"
 
-- content_for :hero_unit do
-  .hero-unit-icon
-    = icon("books")
+- content_for :jumbotron do
+  .text-center
+    %h1
+      = icon("books")
+      Kvizovi
 
-  %h1.hero-unit-title Kvizovi
+    %p Jednostavna aplikacija za igranje kvizova.
 
-  %p.hero-unit-description.lead
-    Jednostavna aplikacija za igranje kvizova.
-
-  .app-role
-    = primary_button "Ja sam učenik".prepend_icon("user"), new_student_session_path, class: "btn-large app-role-btn"
-    = primary_button "Ja sam škola".append_icon("home"), new_school_session_path, class: "btn-large app-role-btn"
-
-  %p.tour
-    %small Prvi puta ste ovdje? Treba li vam #{link_to "vodič", tour_path}?
+    .row
+      .jumbotron-btn.student.col-xs-12.col-sm-offset-2.col-sm-4
+        = primary_button "Ja sam učenik".prepend_icon("user"), new_student_session_path, class: "btn-lg"
+      .jumbotron-btn.school.col-xs-12.col-sm-4
+        = primary_button "Ja sam škola".append_icon("home"), new_school_session_path, class: "btn-lg"

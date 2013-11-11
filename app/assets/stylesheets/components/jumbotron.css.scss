@@ -1,0 +1,16 @@
+@import "twitter/bootstrap/variables";
+
+.jumbotron {
+}
+
+  .jumbotron-btn {
+    @media (min-width: $screen-sm-min) {
+      &.student {
+        text-align: right;
+      }
+
+      &.school {
+        text-align: left;
+      }
+    }
+  }
