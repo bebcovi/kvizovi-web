@@ -14,7 +14,7 @@
   - played_quiz.played_questions.each do |question, answer, student, status, idx|
 
     - if played_quiz.interrupted? and played_quiz.interrupted_on?(idx)
-      .alert.alert-error
+      .alert.alert-danger
         = case played_quiz
         - when :single_player?.to_proc then "Ovdje je učenik odustao od kviza"
         - when :multi_player?.to_proc  then "Ovdje su učenici odustali od kviza"
