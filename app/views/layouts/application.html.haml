@@ -11,7 +11,7 @@
     = javascript_include_tag "application", :"data-turbolinks-track" => true
     = csrf_meta_tag
 
-  %body{class: "l-page-#{params[:controller]} l-page-#{params[:controller]}-#{params[:action]}"}
+  %body{class: "#{params[:controller]} #{params[:controller]}-#{params[:action]}"}
     .navbar.navbar-inverse.navbar-fixed-top
       .container
         .navbar-header
