@@ -1,19 +1,11 @@
-@import "addons/position";
 @import "globals/variables";
 
 main {
-  @include position(relative);
-
   > .alert {
-    @include position(absolute, 0px 0px 0 0px);
-    margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: $sub;
     padding-top: $suh/3;
     padding-bottom: $suh/3;
-    border-radius: 0;
-
-    @media (min-width: $screen-sm-min) {
-      border-bottom-left-radius: $alert-border-radius;
-      border-bottom-right-radius: $alert-border-radius;
-    }
+    background-image: none;
   }
 }
