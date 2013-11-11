@@ -35,6 +35,7 @@
       #{$type}-#{$dir}: $suh;
     }
 
+    .#{$letter}-#{$dir}-qt,
     .#{$letter}-#{$dir}-1qt {
       #{$type}-#{$dir}: $suh/2;
     }
