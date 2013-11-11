@@ -1,0 +1,15 @@
+@import "addons/position";
+@import "globals/variables";
+
+main {
+  @include position(relative);
+
+  > .alert {
+    @include position(absolute, 0px 0px 0 0px);
+    margin-bottom: 0;
+    padding-top: $suh/3;
+    padding-bottom: $suh/3;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
