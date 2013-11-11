@@ -1,71 +1,73 @@
-for category in ["choice", "association"]
+describe "OptionsManager", ->
 
-  describe "OptionsManager for #{category}", do (category) -> ->
+  for category in ["choice", "association"]
 
-    beforeEach do (category) -> ->
-      loadFixtures("#{category}_form")
+    context "for #{category}", do (category) -> ->
 
-      @it = new OptionsManager(category)
-      @it.enable()
+      beforeEach do (category) -> ->
+        loadFixtures("questions/#{category}_form")
 
-      @addButton = $("a").last()
-      @removeButtons = $(".close")
-      @options = -> $(".#{category}-option")
+        @it = new OptionsManager(category)
+        @it.enable()
 
-    describe "#enable", ->
+        @addButton = $("a").last()
+        @removeButtons = $(".close")
+        @options = -> $(".#{category}-option")
 
-      it "adds the \"add\" button", ->
-        expect(@addButton).toExist()
+      describe "#enable", ->
 
-      it "adds \"remove\" buttons to all options but first", ->
-        @options().slice(1).each (_, option) ->
-          expect(option).toContain(".close")
-        expect(@options().first()).not.toContain("close")
+        it "adds the \"add\" button", ->
+          expect(@addButton).toExist()
 
-    describe "#addOption", ->
+        it "adds \"remove\" buttons to all options but first", ->
+          @options().slice(1).each (_, option) ->
+            expect(option).toContain(".close")
+          expect(@options().first()).not.toContain("close")
 
-      it "prevents default event", ->
-        spyOnEvent(@addButton, "click")
-        @addButton.click()
-        expect("click").toHaveBeenPreventedOn(@addButton)
+      describe "#addOption", ->
 
-      it "adds a new option", ->
-        previousLength = @options().length
-        @addButton.click()
-        expect(@options()).toHaveLength(previousLength + 1)
+        it "prevents default event", ->
+          spyOnEvent(@addButton, "click")
+          @addButton.click()
+          expect("click").toHaveBeenPreventedOn(@addButton)
 
-      it "removes the \"success\" class from the added option", ->
-        @addButton.click()
-        expect(@options().last()).not.toHaveClass("success")
+        it "adds a new option", ->
+          previousLength = @options().length
+          @addButton.click()
+          expect(@options()).toHaveLength(previousLength + 1)
 
-      it "removes input values", ->
-        @addButton.click()
-        @options().last().find("input").each (_, input) =>
-          expect(input).toHaveValue("")
+        it "removes the \"success\" class from the added option", ->
+          @addButton.click()
+          expect(@options().last()).not.toHaveClass("success")
 
-      it "adds the remove button", ->
-        @addButton.click()
-        expect(@options().last()).toContain(".close")
+        it "removes input values", ->
+          @addButton.click()
+          @options().last().find("input").each (_, input) =>
+            expect(input).toHaveValue("")
 
-      it "updates the placeholder", ->
-        @addButton.click()
-        @options().last().find("input").each (_, input) =>
-          expect(input.placeholder).toMatch(@options().length)
+        it "adds the remove button", ->
+          @addButton.click()
+          expect(@options().last()).toContain(".close")
 
-    describe "#removeOption", ->
+        it "updates the placeholder", ->
+          @addButton.click()
+          @options().last().find("input").each (_, input) =>
+            expect(input.placeholder).toMatch(@options().length)
 
-      it "prevents default behaviour", ->
-        removeButton = @removeButtons.first()
-        spyOnEvent(removeButton, "click")
-        removeButton.click()
-        expect("click").toHaveBeenPreventedOn(removeButton)
+      describe "#removeOption", ->
 
-      it "removes the option", ->
-        previousLength = @options().length
-        @removeButtons.first().click()
-        expect(@options()).toHaveLength(previousLength - 1)
+        it "prevents default behaviour", ->
+          removeButton = @removeButtons.first()
+          spyOnEvent(removeButton, "click")
+          removeButton.click()
+          expect("click").toHaveBeenPreventedOn(removeButton)
 
-      it "updates the placeholders", ->
-        $(@removeButtons[-2]).click()
-        @options().last().find("input").each (_, input) =>
-          expect(input.placeholder).toMatch(@options().length)
+        it "removes the option", ->
+          previousLength = @options().length
+          @removeButtons.first().click()
+          expect(@options()).toHaveLength(previousLength - 1)
+
+        it "updates the placeholders", ->
+          $(@removeButtons[-2]).click()
+          @options().last().find("input").each (_, input) =>
+            expect(input.placeholder).toMatch(@options().length)
