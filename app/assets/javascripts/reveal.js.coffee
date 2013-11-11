@@ -4,23 +4,23 @@ jQuery ->
 
 class @ContentReveal
 
-  constructor: (container) ->
-    @container = $(container)
+  constructor: (content) ->
+    @content = $(content)
 
   enable: ->
-    return if @container.isEmpty()
+    return if @content.isEmpty()
 
-    @container.hide()
+    @content.hide()
 
     @showButton()
-      .appendTo(@container.prev())
-      .on "click", @showContent
-      .tooltip(placement: "bottom", container: "body")
+      .appendTo(@content.prev())
+      .on("click", @showContent)
+      .tooltip(placement: "right", container: "body")
 
   showContent: (event) =>
     event.preventDefault()
-    @container.show()
+    @content.show()
     $(event.target).hide()
 
   showButton: ->
-    $("<a>", href: "#", class: "reveal-toggle is-hidden", title: @container.attr("title"))
+    $("<a>", href: "#", class: "reveal-toggle", title: @content.attr("data-reveal"))

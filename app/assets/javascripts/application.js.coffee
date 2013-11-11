@@ -16,6 +16,7 @@
 #= require ./image_upload
 #= require ./shame
 #= require ./sorting
+#= require ./reveal
 
 $.fn.isEmpty = -> @.length == 0
 
