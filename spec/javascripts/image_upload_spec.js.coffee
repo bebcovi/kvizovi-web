@@ -1,5 +1,3 @@
-#= require image_upload
-
 describe "ImageUpload", ->
 
   beforeEach ->

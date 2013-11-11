@@ -3,10 +3,10 @@
 jQuery ->
 
   $(".additional-info").each ->
-    icon   = $.icon("question-circle-full")
-    hint    = $(@).text()
+    icon = $.icon("question-circle-full")
+    info = $(@).text()
 
     $(@).replaceWith $(icon)
       .addClass("additional-info help")
-      .attr("title", hint)
+      .attr("title", info)
       .tooltip(placement: "right")

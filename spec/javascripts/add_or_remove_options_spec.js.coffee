@@ -1,5 +1,3 @@
-#= require add_or_remove_options
-
 for category in ["choice", "association"]
 
   describe "OptionsManager for #{category}", do (category) -> ->

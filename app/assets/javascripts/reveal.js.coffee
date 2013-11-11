@@ -1,7 +1,6 @@
 jQuery ->
 
- $(".reveal-content").each ->
-   new ContentReveal(@).enable()
+  new ContentReveal(".reveal-content").enable()
 
 class @ContentReveal
 
@@ -9,15 +8,19 @@ class @ContentReveal
     @container = $(container)
 
   enable: ->
-    @toggleButton()
+    return if @container.isEmpty()
+
+    @container.hide()
+
+    @showButton()
       .appendTo(@container.prev())
-      .on "click", @toggleVisibility
+      .on "click", @showContent
       .tooltip(placement: "bottom", container: "body")
 
-  toggleVisibility: (event) =>
+  showContent: (event) =>
     event.preventDefault()
-    $(event.target).toggleClass("is-hidden")
-    @container.toggleClass("is-hidden")
+    @container.show()
+    $(event.target).hide()
 
-  toggleButton: ->
+  showButton: ->
     $("<a>", href: "#", class: "reveal-toggle is-hidden", title: @container.attr("title"))

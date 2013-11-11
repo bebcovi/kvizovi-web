@@ -3,5 +3,5 @@
     = icon("cancel-circle-full")
     Pogrešan odgovor
 
-.l-feedback.reveal-content.is-hidden.space-half-top{class: "l-question-#{question.category}", data: {reveal: "Prikaži točan odgovor"}}
+.l-feedback.reveal-content.space-half-top{class: "l-question-#{question.category}", data: {reveal: "Prikaži točan odgovor"}}
   = render "questions/correct_answer/#{question.category}", question: question

@@ -9,12 +9,15 @@
 #= require twitter/bootstrap
 #
 #= require moment
+#= require_self
 #
 #= require ./add_or_remove_options
 #= require ./additional-info
 #= require ./image_upload
 #= require ./shame
 #= require ./sorting
+
+$.fn.isEmpty = -> @.length == 0
 
 jQuery ->
   $(".btn[title]").tooltip()

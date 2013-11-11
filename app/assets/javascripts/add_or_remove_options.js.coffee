@@ -10,6 +10,8 @@ class @OptionsManager
     @wrapper = $(".#{@name}-wrapper")
 
   enable: (options = {}) ->
+    return if @wrapper.isEmpty()
+
     @addButton = $("<a href='#'>#{$.icon("plus")} #{options["add"] || "Dodaj"}</a>")
     @addButton.on "click", @addOption
     @wrapper.closest(".control-group").append(@addButton)

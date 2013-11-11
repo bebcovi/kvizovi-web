@@ -6,8 +6,8 @@ jQuery ->
 
   # surround labels of SimpleForm boolean inputs with <li> elements
 
-  $("label.radio").removeClass("radio").wrap("<li class='radio'>")
-  $("label.checkbox").removeClass("checkbox").wrap("<li class='checkbox'>")
+  $("label.radio").removeAttr("class").wrap("<li class='radio'>")
+  $("label.checkbox").removeAttr("class").wrap("<li class='checkbox'>")
 
   # center table cells in survey forms
 

@@ -23,6 +23,8 @@ class @ImageUpload
     $(".toggle-type").tooltip()
 
   enhance: ->
+    return if @wrapper.isEmpty()
+
     if @isUrlActive() then @file.hide() else @url.hide()
     @file.on "change", @updatePreview
     @url.on "change", @updatePreview

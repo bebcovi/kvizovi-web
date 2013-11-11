@@ -1,4 +1,7 @@
-#= require jquery
+#= require application
+#
+#= stub turbolinks
+#= stub jquery.turbolinks
 #
 #= require_self
 #
