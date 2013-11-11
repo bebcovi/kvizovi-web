@@ -1,6 +1,7 @@
 jQuery ->
 
-  new ContentReveal(".reveal-content").enable()
+  $(".reveal-content").each ->
+    new ContentReveal(@).enable()
 
 class @ContentReveal
 
