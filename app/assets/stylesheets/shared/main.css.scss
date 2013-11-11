@@ -9,7 +9,11 @@ main {
     margin-bottom: 0;
     padding-top: $suh/3;
     padding-bottom: $suh/3;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-radius: 0;
+
+    @media (min-width: $screen-sm-min) {
+      border-bottom-left-radius: $alert-border-radius;
+      border-bottom-right-radius: $alert-border-radius;
+    }
   }
 }
