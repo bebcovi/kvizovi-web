@@ -1,0 +1,24 @@
+@import "addons/position";
+
+.navbar {
+  i {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .icon-cog {
+    @include position(relative, -1px 0 0 0);
+  }
+
+  .dropdown-menu {
+    i {
+      @include position(relative, -3px 0 0 0);
+    }
+  }
+}
+
+  .navbar-brand {
+    i {
+      @include position(relative, -4px 0 0 0);
+    }
+  }
