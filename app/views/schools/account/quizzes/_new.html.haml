@@ -1,4 +1,9 @@
 = simple_form_for [:account, @quiz], remote: true, html: {class: "form-inline"} do |f|
 
-  = f.input_field :name, class: "input-large"
-  = submit_button "Napravi kviz".prepend_icon("plus")
+  .form-group
+    .row
+      .col-sm-8.col-md-6.col-lg-5
+        .input-group
+          = f.input_field :name, class: "form-control"
+          %span.input-group-btn
+            = submit_button "Napravi kviz".prepend_icon("plus")
