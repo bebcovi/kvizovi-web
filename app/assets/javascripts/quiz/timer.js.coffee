@@ -3,14 +3,36 @@
 
 jQuery ->
 
+  countdownCache = new CountdownCache(docCookies)
+
   countdown = new Countdown(
     onChange: (timeRemaining) ->
       new Timer(".timer").update(timeRemaining)
+      countdownCache.set(timeRemaining)
     onExpire: ->
       $("[type='submit']").click()
   )
 
-  countdown.start(60) unless $(".timer").isEmpty()
+  unless $(".timer").isEmpty()
+    countdown.start(countdownCache.get() || 60)
+    $("[type='submit']").on "click", -> countdownCache.clear()
+  else
+    countdownCache.clear()
+
+class CountdownCache
+
+  constructor: (@store) ->
+
+  set: (value) ->
+    @store.setItem(@key, value)
+
+  get: ->
+    @store.getItem(@key)
+
+  clear: ->
+    @store.removeItem(@key)
+
+  key: "timeRemaining"
 
 class @Timer
 
