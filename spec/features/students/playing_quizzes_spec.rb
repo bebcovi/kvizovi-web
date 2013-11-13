@@ -1,21 +1,16 @@
 require "spec_helper"
 
 feature "Playing quizzes" do
-  let!(:student)      { register(:student, school: school) }
-  let(:school)        { create(:school) }
-  let(:quiz)          { create(:quiz, questions: create_questions(4)) }
-
-  def create_questions(number)
-    number.times.map do |idx|
-      create(:"#{Question::CATEGORIES[idx % 4]}_question")
-    end
-  end
+  let!(:student)  { register(:student, school: school) }
+  let(:school)    { create(:school) }
+  let(:quiz)      { create(:quiz, questions: questions) }
+  let(:questions) { Question::CATEGORIES.map { |category| create(:"#{category}_question") } }
 
   def answers(&block)
     loop do
       block.call
 
-      if page.has_link?("Sljedeće pitanje")
+      if find(".modal-footer .btn").text =~ /Sljedeće pitanje/
         click_on "Sljedeće pitanje"
       else
         break
@@ -23,28 +18,28 @@ feature "Playing quizzes" do
     end
   end
 
-  def connect(hash)
-    hash.each_with_index do |(left, right), index|
+  def connect(mappings)
+    mappings.each_with_index do |(right, left), index|
       divs = all(".association-pair")[index].all("td")
-      divs.first.fill_in :play_answer, with: left
-      divs.last.fill_in :play_answer, with: right
+      divs.first.fill_in :play_answer, with: left, visible: false
+      divs.last.fill_in :play_answer, with: right, visible: false
     end
   end
 
   def answer_question_correctly
-    case
-    when page.has_content?("Eliminate the bastard.")
+    case first(".question-title").text
+    when /Eliminate the bastard\./
       choose "Jon Snow"
-    when page.has_content?("Connect Game of Thrones characters:")
+    when /Connect Game of Thrones characters:/
       connect(
-        "Sansa Stark"      => %("...but I don't want anyone smart, brave or good looking, I want Joffrey!"),
-        "Tywin Lannister"  => %("Attacking Ned Stark in the middle of King Landing was stupid. Lannisters don't do stupid things."),
-        "Tyrion Lannister" => %("Why is every god so vicious? Why aren't there gods of tits and wine?"),
-        "Cercei Lannister" => %("Everyone except us is our enemy."),
+        %("...but I don't want anyone smart, brave or good looking, I want Joffrey!")                         => "Sansa Stark",
+        %("Attacking Ned Stark in the middle of King Landing was stupid. Lannisters don't do stupid things.") => "Tywin Lannister",
+        %("Why is every god so vicious? Why aren't there gods of tits and wine?")                             => "Tyrion Lannister",
+        %("Everyone except us is our enemy.")                                                                 => "Cercei Lannister",
       )
-    when page.has_content?("Stannis Baratheon won the war against King’s Landing.")
+    when /Stannis Baratheon won the war against King’s Landing\./
       choose "Netočno"
-    when page.has_content?("Which family does Khaleesi belong to?")
+    when /Which family does Khaleesi belong to\?/
       fill_in "Odgovor", with: "Targaryen"
     else
       raise "Unknown question"
@@ -73,11 +68,11 @@ feature "Playing quizzes" do
     click_on "Započni kviz"
   end
 
-  before do
+  background do
     login(student)
   end
 
-  scenario "Single player" do
+  scenario "Single player", js: true do
     school.quizzes << quiz
 
     click_on "Kvizovi"
@@ -88,7 +83,7 @@ feature "Playing quizzes" do
     expect(first(".l-player-one")).to have_content("4 od 4")
   end
 
-  scenario "Multi player" do
+  scenario "Multi player", js: true do
     school.quizzes << quiz
     school.students << (other_student = create(:student))
 
@@ -101,7 +96,7 @@ feature "Playing quizzes" do
     expect(first(".l-player-two")).to have_content("2 od 2")
   end
 
-  scenario "Not getting all points" do
+  scenario "Not getting all points", js: true do
     school.quizzes << quiz
 
     click_on "Kvizovi"
@@ -112,7 +107,7 @@ feature "Playing quizzes" do
     expect(first(".l-player-one")).to have_content("0 od 4")
   end
 
-  scenario "Aborting" do
+  scenario "Aborting", js: true do
     school.quizzes << quiz
 
     click_on "Kvizovi"
@@ -123,7 +118,7 @@ feature "Playing quizzes" do
     expect(current_path).to eq choose_quiz_path
   end
 
-  scenario "Quiz gets deleted in the meanwhile" do
+  scenario "Quiz gets deleted in the meanwhile", js: true do
     school.quizzes << quiz
 
     click_on "Kvizovi"

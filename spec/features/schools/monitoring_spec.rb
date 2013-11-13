@@ -21,7 +21,7 @@ feature "Monitoring" do
     end
   end
 
-  before do
+  background do
     login(school)
   end
 

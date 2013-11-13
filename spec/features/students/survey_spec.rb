@@ -3,7 +3,7 @@ require "spec_helper"
 feature "Survey" do
   let!(:student) { register(:student) }
 
-  before do
+  background do
     login(student)
   end
 

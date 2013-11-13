@@ -4,7 +4,7 @@ feature "Students" do
   let!(:school) { register(:school) }
   let(:student) { create(:student) }
 
-  before do
+  background do
     login(school)
   end
 

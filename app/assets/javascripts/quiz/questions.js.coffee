@@ -1,3 +1,4 @@
+#= require jquery.ui.draggable
 #= require jquery.ui.droppable
 
 jQuery ->
