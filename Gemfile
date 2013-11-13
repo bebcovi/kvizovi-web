@@ -52,6 +52,7 @@ group :test do
   gem "nokogiri"
   gem "capybara", github: "jnicklas/capybara"
   gem "poltergeist"
+  gem "selenium-webdriver"
 end
 
 group :development do
