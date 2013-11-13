@@ -31,6 +31,7 @@ class CountdownCache
 
   clear: ->
     @store.removeItem(@key)
+    null
 
   key: "timeRemaining"
 
