@@ -17,10 +17,10 @@
     Ovaj kviz je trenutno neaktivan, što znači da ga učenici ne vide.
     Kada ste dovršili kviz, aktivirajte ga klikom na lampicu gore (#{icon("lamp")}).
 
-- if @questions.any?
+- if questions.any?
 
   %ol.list-pretty
-    = render partial: "question", collection: @questions
+    = render partial: "question", collection: questions
 
 - else
 

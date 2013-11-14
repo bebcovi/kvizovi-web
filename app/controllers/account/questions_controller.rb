@@ -1,8 +1,12 @@
 class Account::QuestionsController < InheritedResources::Base
+  respond_to :html, :js
+
   belongs_to :quiz
   actions :all, except: [:show]
-  respond_to :html, :js
+  decorates_assigned :question, :questions, with: QuestionDecorator
+
   before_action :authenticate_user!
+
 
   def edit_order
     @questions = collection
