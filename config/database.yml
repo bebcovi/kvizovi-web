@@ -7,7 +7,8 @@
 defaults: &defaults
   adapter: postgresql
   encoding: unicode
-  pool: 5
+  pool: <%= ENV["DB_POOL"] || 5 %>
+  reaping_frequency: <%= ENV["DP_REAP_FREQ"] || 10 %>
 
 development:
   <<: *defaults
