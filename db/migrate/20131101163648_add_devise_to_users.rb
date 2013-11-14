@@ -17,8 +17,9 @@ class AddDeviseToUsers < ActiveRecord::Migration
         t.datetime :confirmed_at
         t.datetime :confirmation_sent_at
         t.string   :unconfirmed_email
-        t.remove   :password_reset_confirmation_id
       end
+
+      remove_column users_table, :password_reset_confirmation_id, :integer
     end
   end
 end

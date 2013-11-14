@@ -22,10 +22,10 @@ class MigrateFromPaperclipToCarrierwave < ActiveRecord::Migration
 
   def change
     if Rails.env.production? or Rails.env.staging?
-      handle_sti(ImageQuestion) do
+      handle_sti(Question) do
         ImageQuestion.find_each do |question|
           url = "https://dl.dropboxusercontent.com/u/16783504/lektire/#{question.id}_#{question.image_file_name}"
-          image = Tempfile.new(question.image_file_name)
+          image = Tempfile.new(question.image_file_name, encoding: "ascii-8bit")
           image.write open(url).read
           question.update(image: image)
         end
