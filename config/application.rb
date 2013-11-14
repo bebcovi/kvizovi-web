@@ -25,6 +25,10 @@ if Rails.env.development?
   require "letter_opener"
 end
 
+if Rails.env.production?
+  require "newrelic_rpm"
+end
+
 module Lektire
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

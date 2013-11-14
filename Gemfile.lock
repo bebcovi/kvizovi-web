@@ -170,6 +170,7 @@ GEM
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
+    newrelic_rpm (3.6.8.168)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     orm_adapter (0.4.0)
@@ -327,6 +328,7 @@ DEPENDENCIES
   letter_opener (>= 1.1.2)
   mini_magick (>= 3.6)
   momentjs-rails (>= 2.2.1)
+  newrelic_rpm
   nokogiri
   pg
   poltergeist

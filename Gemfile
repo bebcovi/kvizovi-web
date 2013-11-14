@@ -70,4 +70,5 @@ end
 group :production do
   gem "unicorn"
   gem "exception_notification", ">= 4.0.1"
+  gem "newrelic_rpm"
 end
