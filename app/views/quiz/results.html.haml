@@ -1,26 +1,26 @@
-- title "#{@quiz.name} · Kraj"
+- title "#{quiz.name} · Kraj"
 
 %h1 Rezultati
 
 .progress.progress-small.progress-primary
   .bar{style: "width: 100%"}
 
-- played_quiz.results.each do |student, score, score_percentage, student_number, rank|
+- @played_quiz.results.each do |student, score, score_percentage, student_number, rank|
 
   %div{class: "l-player-#{number(student_number)}"}
     %p.player-color
       %b= student.full_name.prepend_icon("user") + ":"
-      %span Točno si odgovori#{student.male? ? "o" : "la"} na #{score} od #{played_quiz.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
+      %span Točno si odgovori#{student.male? ? "o" : "la"} na #{score} od #{@played_quiz.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
     .progress.player-color
       .bar{style: "width: #{score_percentage}%"}
 
 = primary_button "Završi", choose_quiz_path
 
-- played_quiz.played_questions.each do |question, answer, student, status, idx|
+- @played_quiz.played_questions.each do |question, answer, student, status, idx|
 
   %hr
 
-  .l-played.space-bottom{class: "l-question-#{question.category} l-#{status} l-player-#{number(idx % played_quiz.students.count + 1)}"}
+  .l-played.space-bottom{class: "l-question-#{question.category} l-#{status} l-player-#{number(idx % @played_quiz.students.count + 1)}"}
 
     .player-color
       #{student.full_name.prepend_icon("user")} (#{student.username})

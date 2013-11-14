@@ -29,8 +29,8 @@ describe QuizController do
       get :choose
     end
 
-    it "assigns quizzes" do
-      expect(assigns(:quizzes)).to eq [@quiz]
+    it "renders the template" do
+      expect(response).to be_a_success
     end
   end
 
@@ -58,8 +58,8 @@ describe QuizController do
         post :start, quiz_specification: {quiz_id: nil}
       end
 
-      it "assigns quizzes" do
-        expect(assigns(:quizzes)).to eq [@quiz]
+      it "renders the template" do
+        expect(response).to be_a_success
       end
     end
   end
@@ -67,25 +67,12 @@ describe QuizController do
   describe "#play" do
     before { start_quiz }
 
-    context "when the current question isn't answered" do
-      before do
-        get :play
-      end
-
-      it "renders the template" do
-        expect(response).to be_a_success
-      end
+    before do
+      get :play
     end
 
-    context "when the current question is already answered" do
-      before do
-        controller.send(:quiz_play).save_answer!(true)
-        get :play
-      end
-
-      it "redirects to the next question" do
-        expect(response).to redirect_to(next_question_quiz_path)
-      end
+    it "renders the template" do
+      expect(response).to be_a_success
     end
   end
 

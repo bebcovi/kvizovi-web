@@ -5,9 +5,9 @@
 = simple_form_for @quiz_specification, url: start_quiz_path do |f|
 
   %section.quizzes
-    - if @quizzes.any?
+    - if quizzes.any?
       %p Odaberi kviz:
-      = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
+      = f.input :quiz_id, collection: quizzes, as: :radio_buttons, label: false
     - else
       %p Vaša škola još nije napravila kvizove.
 
