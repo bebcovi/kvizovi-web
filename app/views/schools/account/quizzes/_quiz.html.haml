@@ -3,7 +3,7 @@
     = button icon("clipboard"), account_quiz_questions_path(quiz), title: "Pitanja"
     = edit_button "", edit_account_quiz_path(quiz), title: "Izmijeni"
     = button icon("eye"), played_quizzes_path(quiz_id: quiz.id), title: "Prati"
-    = delete_button "", account_quiz_path(quiz), remote: true, title: "Izbriši"
+    = delete_button "", account_quiz_path(quiz), remote: true, title: "Izbriši", data: {confirm: "Jeste li sigurni da želite izbrisati ovaj kviz?"}
 
   = render "activation_button", quiz: quiz
 

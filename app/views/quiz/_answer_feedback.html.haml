@@ -1,0 +1,27 @@
+.modal.l-feedback.feedback{class: "l-question-#{@question.category}"}
+
+  - if @question.correct_answer?(@quiz_play.current_question[:answer])
+
+    .modal-header
+      %h1.feedback-title.text-success
+        = icon("checkmark-circle-full")
+        %span Točan odgovor!
+
+    .modal-body
+      %p= ["Bravo! :)", "Svaka čast! :D", "Čestitamo! :)"].sample
+
+  - else
+
+    .modal-header
+      %h1.feedback-title.text-error
+        = icon("cancel-circle-full")
+        = ["Ne baš…", "Pogrešno", "Nažalost, ne…"].sample
+
+    .modal-body
+      = render "questions/correct_answer/#{@question.category}", question: @question
+
+  .modal-footer
+    - if not quiz_play.over?
+      = next_button "Sljedeće pitanje", next_question_quiz_path, method: :put
+    - else
+      = next_button "Rezultati", finish_quiz_path, method: :delete

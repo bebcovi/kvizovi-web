@@ -1,0 +1,15 @@
+<div class="modal hide">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h4>Jeste li sigurni?</h4>
+  </div>
+
+  <div class="modal-body">
+    <%= @message %>
+  </div>
+
+  <div class="modal-footer">
+    <button data-dismiss="modal" type="button" class="btn">Nisam</button>
+    <button data-dismiss="modal" type="button" class="btn btn-primary confirm">Jesam</button>
+  </div>
+</div>

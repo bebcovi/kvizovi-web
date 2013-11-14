@@ -20,7 +20,6 @@ require_relative "initializers/sass"
 if Rails.env.development?
   require "quiet_assets"
   require "better_errors"
-  require "xray-rails"
   require "pry-rails"
   require "jasminerice"
   require "letter_opener"

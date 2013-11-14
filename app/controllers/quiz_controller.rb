@@ -33,11 +33,7 @@ class QuizController < ApplicationController
 
   def save_answer
     quiz_play.save_answer!(params[:answer])
-    redirect_to action: :answer_feedback
-  end
-
-  def answer_feedback
-    @question = current_question
+    @question = QuestionAnswer.new(current_question)
   end
 
   def next_question
@@ -48,9 +44,6 @@ class QuizController < ApplicationController
   def results
     @played_quiz = PlayedQuiz.find(params[:id])
     @quiz        = @played_quiz.quiz
-  end
-
-  def interrupt
   end
 
   def finish

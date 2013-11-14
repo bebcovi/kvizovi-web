@@ -94,23 +94,11 @@ describe QuizController do
 
     before do
       allow(controller.send(:quiz_play)).to receive(:save_answer!)
-      put :save_answer
+      put :save_answer, format: :js
     end
 
     it "invokes #save_answer!" do
       expect(controller.send(:quiz_play)).to have_received(:save_answer!)
-    end
-
-    it "redirects to feedback" do
-      expect(response).to redirect_to(answer_feedback_quiz_path)
-    end
-  end
-
-  describe "#answer_feedback" do
-    before { start_quiz }
-
-    before do
-      get :answer_feedback
     end
 
     it "renders the template" do
@@ -142,18 +130,6 @@ describe QuizController do
     before do
       @played_quiz = create(:played_quiz, quiz_snapshot: quiz_snapshot)
       get :results, id: @played_quiz.id
-    end
-
-    it "renders the template" do
-      expect(response).to be_a_success
-    end
-  end
-
-  describe "#interrupt" do
-    before { start_quiz }
-
-    before do
-      get :interrupt
     end
 
     it "renders the template" do

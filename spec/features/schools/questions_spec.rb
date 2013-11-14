@@ -26,6 +26,7 @@ feature "Questions" do
     expect(page).to have_css(".boolean_question")
 
     click_on "Izbriši"
+    click_on "Jesam"
 
     expect(page).to have_no_css(".boolean_question")
   end
@@ -53,6 +54,7 @@ feature "Questions" do
     expect(page).to have_css(".choice_question")
 
     click_on "Izbriši"
+    click_on "Jesam"
 
     expect(page).to have_no_css(".choice_question")
   end
@@ -80,6 +82,7 @@ feature "Questions" do
     expect(page).to have_css(".association_question")
 
     click_on "Izbriši"
+    click_on "Jesam"
 
     expect(page).to have_no_css(".association_question")
   end
@@ -103,6 +106,7 @@ feature "Questions" do
     expect(page).to have_css(".text_question")
 
     click_on "Izbriši"
+    click_on "Jesam"
 
     expect(page).to have_no_css(".text_question")
   end

@@ -23,6 +23,7 @@ feature "Quizzes" do
     expect(page).to have_css(".quiz")
 
     click_on "Izbriši"
+    click_on "Jesam"
 
     expect(page).not_to have_css(".quiz")
   end

@@ -46,12 +46,12 @@ feature "Playing quizzes" do
     end
 
     click_on "Odgovori"
-    expect(page.title).to match "Točan odgovor"
+    expect(find(".modal")).to have_css(".text-success")
   end
 
   def answer_question_incorrectly
     click_on "Odgovori"
-    expect(page.title).to match "Netočan odgovor"
+    expect(find(".modal")).to have_css(".text-error")
   end
 
   def begin_single_player

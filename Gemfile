@@ -17,6 +17,7 @@ group :assets do
   gem "coffee-rails", ">= 4.0.0"
   gem "uglifier", ">= 1.3.0"
   gem "momentjs-rails", ">= 2.2.1"
+  gem "eco", ">= 1"
 end
 
 # Views
@@ -62,7 +63,6 @@ group :development do
   gem "pry-rails", ">= 0.3.2"
   gem "better_errors", ">= 1.0.1"
   gem "binding_of_caller", ">= 0.7.2"
-  gem "xray-rails", ">= 0.1.5"
   gem "letter_opener", ">= 1.1.2"
   gem "database_cleaner"
 end

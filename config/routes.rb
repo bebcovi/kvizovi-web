@@ -34,10 +34,8 @@ Lektire::Application.routes.draw do
     post   "start"
     get    "play"
     put    "save_answer"
-    get    "answer_feedback"
     match  "next_question", via: [:put, :get]
     get    "results"
-    get    "interrupt"
     delete "finish"
   end
 

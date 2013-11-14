@@ -1,39 +1,38 @@
 module ButtonsHelper
-  def primary_button(string, path, options = {})
-    button string, path, options.merge_class("btn-primary")
+  def primary_button(text, path, options = {})
+    button text, path, options.merge_class("btn-primary")
   end
 
-  def submit_button(string, options = {})
-    button_tag string, options.merge_class("btn btn-primary")
+  def submit_button(text, options = {})
+    button_tag text, options.merge_class("btn btn-primary")
   end
 
-  def back_button(string, path, options = {})
-    primary_button string.prepend_icon("arrow-left"), path, options
+  def back_button(text, path, options = {})
+    primary_button text.prepend_icon("arrow-left"), path, options
   end
 
-  def cancel_button(string, path, options = {})
-    button string, path, options.deep_merge(data: {dismiss: "modal"})
+  def cancel_button(text, path, options = {})
+    button text, path, options.deep_merge(data: {dismiss: "modal"})
   end
 
-  def delete_button(string, path, options = {})
-    button string.prepend_icon("remove"), path, options.merge_class("btn-danger").deep_merge(method: :delete)
+  def delete_button(text, path, options = {})
+    button text.prepend_icon("remove"), path, options.merge_class("btn-danger").deep_merge(method: :delete)
   end
 
-  def edit_button(string, path, options = {})
-    button string.prepend_icon("pencil-2"), path, options
+  def edit_button(text, path, options = {})
+    button text.prepend_icon("pencil-2"), path, options
   end
 
-  def add_button(string, path, options = {})
-    primary_button string.prepend_icon("plus"), path, options.merge_class("add")
+  def add_button(text, path, options = {})
+    primary_button text.prepend_icon("plus"), path, options.merge_class("add")
   end
 
-  def remove_button(options = {})
-    options[:data] = {dismiss: options.delete(:dismiss)} if options[:dismiss]
-    content_tag :button, icon("close"), options.merge_class("close").deep_merge(type: "button")
+  def dismiss_button(object, options = {})
+    content_tag :button, "×", options.deep_merge(type: "button", data: {dismiss: object})
   end
 
-  def next_button(string, path, options = {})
-    primary_button string.append_icon("arrow-right"), path, options
+  def next_button(text, path, options = {})
+    primary_button text.append_icon("arrow-right"), path, options
   end
 
   def button(*args)

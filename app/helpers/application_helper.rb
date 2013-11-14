@@ -28,7 +28,7 @@ module ApplicationHelper
     options.merge_class!("alert alert-#{type} fade in")
     options.merge_class!("no-close") unless options[:close]
 
-    content_tag :div, remove_button(dismiss: "alert") + string, options
+    content_tag :div, dismiss_button("alert", class: "close") + string, options
   end
 
   def icon(name, options = {})

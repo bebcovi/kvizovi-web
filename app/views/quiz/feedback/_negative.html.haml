@@ -1,9 +1,0 @@
-- title "Netočan odgovor"
-
-.modal-header
-  %h1.feedback-title.text-error
-    = icon("cancel-circle-full")
-    = ["Ne baš…", "Pogrešno", "Nažalost, ne…"].sample
-
-.modal-body
-  = render "questions/correct_answer/#{@question.category}", question: @question

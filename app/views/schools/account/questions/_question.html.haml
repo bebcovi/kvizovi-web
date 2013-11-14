@@ -1,7 +1,7 @@
 = content_tag_for :li, question, class: "list-pretty-item" do
   .pull-right
     = edit_button "", edit_account_quiz_question_path(@quiz, question), title: "Izmijeni"
-    = delete_button "", account_quiz_question_path(@quiz, question), remote: true, title: "Izbriši"
+    = delete_button "", account_quiz_question_path(@quiz, question), title: "Izbriši", remote: true, data: {confirm: "Jeste li sigurni da želite izbrisati ovo pitanje?"}
 
   %span.space-quart-right= question_icons(question.category)
   %span.list-pretty-item-content= question.content
