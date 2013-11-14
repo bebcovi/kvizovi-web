@@ -7,5 +7,5 @@
   %span.list-pretty-item-content= question.content
 
   %li{class: "l-question-#{question.category} list-pretty-item list-pretty-content"}
-    = image_tag question.image.url(:resized), class: "img-polaroid space-half-bottom", style: "width: 300px" if question.image?
+    = image_tag question.image.url(:small), class: "img-polaroid space-half-bottom" if question.image?
     = render "questions/answer/#{question.category}", question: question, answer: question.answer

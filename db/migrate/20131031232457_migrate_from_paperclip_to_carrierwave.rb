@@ -10,6 +10,10 @@ class MigrateFromPaperclipToCarrierwave < ActiveRecord::Migration
     version :resized do
       resize_to_limit 300, nil
     end
+
+    version :small do
+      resize_to_limit nil, 150
+    end
   end
 
   class Question < ActiveRecord::Base
