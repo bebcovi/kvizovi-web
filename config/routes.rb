@@ -52,9 +52,8 @@ Lektire::Application.routes.draw do
   ########################
   # Admin
   ########################
+  get "admin", to: "admin/schools#index"
   namespace :admin do
-    root to: redirect("/admin/schools")
-
     resources :schools
   end
   resources :posts
