@@ -22,7 +22,6 @@ Lektire::Application.routes.draw do
     resources :students
     resource  :profile
   end
-  get "account", to: "account#dashboard"
 
   resources :played_quizzes
 

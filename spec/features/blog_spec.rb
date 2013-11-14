@@ -15,7 +15,7 @@ feature "Blog" do
     expect(page).to have_content(blog_post.title)
     expect(page).not_to have_content("Novi post")
 
-    visit account_path
+    visit account_quizzes_path
 
     expect(find(".navbar-inner")).not_to have_css(".badge")
   end

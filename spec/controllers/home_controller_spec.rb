@@ -19,7 +19,7 @@ describe HomeController do
       end
 
       it "redirects to the account" do
-        expect(response).to redirect_to(account_path)
+        expect(response).to redirect_to(account_quizzes_path)
       end
     end
   end

@@ -50,6 +50,14 @@ class ApplicationController < ActionController::Base
     DeviseParameterSanitizer.new(resource_class, resource_name, params)
   end
 
+  def account_path
+    case
+    when school_signed_in?  then account_quizzes_path
+    when student_signed_in? then choose_quiz_path
+    end
+  end
+  helper_method :account_path
+
   class DeviseParameterSanitizer < Devise::ParameterSanitizer
     def sign_in
       default_params.permit!

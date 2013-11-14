@@ -48,7 +48,9 @@ module Helpers
     extend ActiveSupport::Concern
 
     def register(type, attributes = {})
-      CapybaraUser.new(create(type, attributes), self)
+      user = create(type, attributes)
+      user.update(school: create(:school)) if user.is_a?(Student) and not user.school
+      get_user(user)
     end
 
     def login(user)
