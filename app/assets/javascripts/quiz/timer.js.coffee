@@ -55,7 +55,7 @@ class @Timer
     @container.addClass("text-warning")
 
   turnRed: ->
-    @container.removeClass("text-warning").addClass("text-danger")
+    @container.removeClass("text-warning").addClass("text-error")
 
 class @Countdown
 

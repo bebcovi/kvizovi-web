@@ -19,7 +19,7 @@ describe "Timer", ->
 
     it "turns red when then time remaining is critical", ->
       @it.update(3)
-      expect($(".timer")).toHaveClass("text-danger")
+      expect($(".timer")).toHaveClass("text-error")
 
   describe "#write", ->
 
@@ -40,7 +40,7 @@ describe "Timer", ->
       @it.turnOrange()
       @it.turnRed()
 
-      expect($(".timer")).toHaveAttr("class", "timer text-danger")
+      expect($(".timer")).toHaveAttr("class", "timer text-error")
 
 describe "Countdown", ->
 
