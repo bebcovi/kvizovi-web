@@ -5,10 +5,11 @@ feature "Profile" do
 
   background do
     login(school)
+    navbar.find(".dropdown-toggle").click
+    click_on "Uredi profil"
   end
 
   scenario "Changing info" do
-    click_on "Uredi profil"
     click_on "Izmijeni profil"
 
     submit
@@ -17,7 +18,6 @@ feature "Profile" do
   end
 
   scenario "Changing password" do
-    click_on "Uredi profil"
     click_on "Izmijeni lozinku"
 
     fill_in "Trenutna lozinka",     with: school.password
@@ -28,9 +28,9 @@ feature "Profile" do
     expect(page).to have_css(".alert-success")
   end
 
-  scenario "Deleting account" do
-    click_on "Uredi profil"
+  scenario "Deleting account", js: true do
     click_on "Izbriši korisnički račun"
+    click_on "Jesam"
 
     expect(page).to have_css(".alert")
     expect(school).to be_logged_out

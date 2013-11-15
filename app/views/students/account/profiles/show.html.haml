@@ -30,4 +30,4 @@
     = edit_button "Izmijeni profil", edit_account_profile_path
     = button "Izmijeni lozinku".prepend_icon("lock"), edit_student_registration_path
 
-%p= delete_button "Izbriši korisnički račun", student_registration_path, confirm: "Jesi li apsolutno sigur#{current_user.male? ? "an" : "la"} da želiš izbrisati svoj korisnički račun?"
+%p= delete_button "Izbriši korisnički račun", student_registration_path, data: {confirm: "Jesi li apsolutno sigur#{current_user.male? ? "an" : "la"} da želiš izbrisati svoj korisnički račun?"}

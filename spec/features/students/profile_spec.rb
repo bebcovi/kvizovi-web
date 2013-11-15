@@ -5,6 +5,7 @@ feature "Profile" do
 
   background do
     login(student)
+    navbar.find(".dropdown-toggle").click
     click_on "Uredi profil"
   end
 
@@ -27,8 +28,9 @@ feature "Profile" do
     expect(page).to have_css(".alert-success")
   end
 
-  scenario "Deleting account" do
+  scenario "Deleting account", js: true do
     click_on "Izbriši korisnički račun"
+    click_on "Jesam"
 
     expect(page).to have_css(".alert")
     expect(student).to be_logged_out
