@@ -1,14 +1,14 @@
 <% if @quiz.persisted? %>
-  $(".no-items").remove()
-  $("#quizzes").prepend("<%= j render(@quiz) %>")
+  $("#quizzes").find(".no-items").remove()
+  $("#quiz-list").prepend("<%= j render(@quiz) %>")
   $(".btn[title]").tooltip()
-  $(".error-block").remove()
+  $(".help-block").remove()
   $("#new_quiz").find("[type='text']").val("").blur()
 <% else %>
-  if ($("#new_quiz").find(".error-block").length)
-    var errorBlock = $("#new_quiz").find(".error-block")
+  if ($("#new_quiz").find(".help-block").length)
+    var errorBlock = $("#new_quiz").find(".help-block")
   else
-    var errorBlock = $("<span>", {class: "error-block"}).appendTo("#new_quiz")
+    var errorBlock = $("<span>", {class: "help-block"}).appendTo("#new_quiz")
 
   errorBlock.text("<%= @quiz.errors.full_messages.first %>")
 <% end %>
