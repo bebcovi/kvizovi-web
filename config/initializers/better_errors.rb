@@ -1,3 +1,5 @@
-require "better_errors"
+if Rails.env.development?
+  require "better_errors"
 
-BetterErrors.use_pry!
+  BetterErrors.use_pry!
+end
