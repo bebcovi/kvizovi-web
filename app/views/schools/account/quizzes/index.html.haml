@@ -4,8 +4,8 @@
   = render "new"
 
 #quizzes
-  - if @quizzes.any?
-    .list-group
-      = render @quizzes
-  - else
-    .well Trenutno nemate kvizova.
+  #quiz-list.list-group
+    = render @quizzes if @quizzes.any?
+
+  - if @quizzes.empty?
+    .no-items.well Trenutno nemate kvizova.

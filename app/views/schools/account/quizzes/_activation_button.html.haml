@@ -1,6 +1,6 @@
 = simple_form_for [:account, quiz], remote: true, html: {class: "form-inline"} do |f|
   = f.hidden_field :activated, value: !quiz.activated?
   - if quiz.activated?
-    = f.button :button, icon("lamp-full"), class: "btn-success toggle-activation space-quart-right", title: "Aktivan"
+    = f.button :button, icon("lamp-full"), class: "btn-sm btn-success toggle-activation", title: "Aktivan"
   - else
-    = f.button :button, icon("lamp"), class: "toggle-activation space-quart-right", title: "Neaktivan"
+    = f.button :button, icon("lamp"), class: "btn-sm btn-default toggle-activation", title: "Neaktivan"
