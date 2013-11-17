@@ -13,7 +13,6 @@ feature "Questions" do
     visit account_quiz_questions_path(quiz)
     click_on "Novo pitanje"
     click_on "Točno/netočno"
-    attach_file "Slika", photo_path
     fill_in "Tekst pitanja", with: "Stannis Baratheon won the war against King's Landing."
     choose "Netočno"
     submit
@@ -36,7 +35,6 @@ feature "Questions" do
     click_on "Novo pitanje"
     click_on "Ponuđeni odgovori"
 
-    attach_file "Slika", photo_path
     fill_in "Tekst pitanja", with: "Eliminate the bastard."
     fill_in "Ponuđeni odgovor 1", with: "Jon Snow"
     fill_in "Ponuđeni odgovor 2", with: "Robb Stark"
@@ -64,7 +62,6 @@ feature "Questions" do
     click_on "Novo pitanje"
     click_on "Asocijacija"
 
-    attach_file "Slika", photo_path
     fill_in "Tekst pitanja", with: "Connect Game of Thrones characters with their phrases."
     fill_in "Asocijacija 1a", with: "Sansa Stark";      fill_in "Asocijacija 1b", with: %("...but I don't want anyone smart, brave or good looking, I want Joffrey!")
     fill_in "Asocijacija 2a", with: "Tywin Lannister";  fill_in "Asocijacija 2b", with: %("Attacking Ned Stark in the middle of King Landing was stupid. Lannisters don't do stupid things.")
@@ -92,8 +89,6 @@ feature "Questions" do
     click_on "Novo pitanje"
     click_on "Upiši točan odgovor"
 
-    find(".toggle-type").click
-    fill_in "URL od slike", with: "http://3.bp.blogspot.com/-bnKL0iosAc8/UOmO_a_ujuI/AAAAAAAAmVI/R5aNBx_yx2w/s1600/flbp-girls-women-sexy-9.jpg"
     fill_in "Tekst pitanja", with: "Which family does Khaleesi belong to?"
     fill_in "Odgovor", with: "Targaryen"
     submit
@@ -109,6 +104,25 @@ feature "Questions" do
     click_on "Jesam"
 
     expect(page).to have_no_css(".text_question")
+  end
+
+  scenario "Attaching image", js: true do
+    visit new_account_quiz_question_path(quiz, category: "boolean")
+
+    fill_in "Tekst pitanja", with: "Stannis Baratheon won the war against King's Landing."
+    choose "Točno"
+
+    attach_file "Slika", photo_path
+    submit
+
+    expect(find("img")[:src]).to match File.basename(photo_path, ".jpg")
+
+    click_on "Izmijeni"
+    find(".toggle-type").click
+    execute_script %($("input[type='url']").val("#{photo_url}").trigger("keyup"))
+    submit
+
+    expect(find("img")[:src]).to match File.basename(photo_url, ".jpg")
   end
 
   scenario "Changing the order", js: true do

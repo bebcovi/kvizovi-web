@@ -17,6 +17,10 @@ module Helpers
       Rails.root.join(FIXTURES_PATH, "files/photo.jpg")
     end
 
+    def photo_url
+      "http://3.bp.blogspot.com/-bnKL0iosAc8/UOmO_a_ujuI/AAAAAAAAmVI/R5aNBx_yx2w/s1600/flbp-girls-women-sexy-9.jpg"
+    end
+
     def sent_emails
       ActionMailer::Base.deliveries
     end
