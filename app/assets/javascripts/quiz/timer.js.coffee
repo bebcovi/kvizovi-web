@@ -15,11 +15,13 @@ jQuery ->
 
   unless $(".timer").isEmpty()
     countdown.start(countdownCache.get() || 60)
-    $("[type='submit']").on "click", -> countdownCache.clear()
+    $("[type='submit']").on "click", =>
+      countdown.stop()
+      countdownCache.clear()
   else
     countdownCache.clear()
 
-class CountdownCache
+class @CountdownCache
 
   constructor: (@store) ->
 
@@ -83,8 +85,11 @@ class @Countdown
   change: ->
     @options.onChange(@timeRemaining) if @options.onChange
 
-  expire: ->
+  stop: ->
     clearInterval(@intervalId)
+
+  expire: ->
+    @stop()
     @options.onExpire() if @options.onExpire
 
   hasEnded: ->
