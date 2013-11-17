@@ -9,7 +9,7 @@ class LastActivity
 
   def read
     time = $redis.get(key)
-    Time.parse(time) if time
+    Time.parse(time) if time.present?
   end
 
   def save(time)
