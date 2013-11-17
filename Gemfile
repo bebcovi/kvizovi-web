@@ -71,4 +71,5 @@ group :production do
   gem "puma"
   gem "exception_notification", ">= 4.0.1"
   gem "newrelic_rpm"
+  gem "rails_12factor"
 end
