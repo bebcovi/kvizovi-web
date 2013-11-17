@@ -14,13 +14,13 @@ require "cache_digests"
 require "carrierwave"
 require "devise"
 require "inherited_resources"
+require "pry-rails"
 
 require_relative "initializers/sass"
 
 if Rails.env.development?
   require "quiet_assets"
   require "better_errors"
-  require "pry-rails"
   require "jasminerice"
   require "letter_opener"
 end
