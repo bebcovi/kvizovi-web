@@ -14,7 +14,7 @@ module ApplicationHelper
   def breadcrumbs(*items)
     content_tag :ol, class: "breadcrumb" do
       items.inject(raw("")) do |crumbs, item|
-        crumbs << content_tag(:li, class: ("active" if item == items.last)) { raw(item) }
+        crumbs << content_tag(:li, class: ("active" if item == items.last)) { raw(item) } + "\n"
       end
     end
   end
