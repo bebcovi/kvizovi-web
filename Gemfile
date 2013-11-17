@@ -44,6 +44,10 @@ gem "devise", ">= 3.1.1"
 gem "active_attr", ">= 0.8.1"
 gem "inherited_resources", ">= 1.4.1"
 
+# Development
+gem "pry-rails", ">= 0.3.2"
+gem "dotenv"
+
 group :test do
   gem "jasminerice", github: "bradphelan/jasminerice"
   gem "rspec-rails", ">= 3.0.0.beta1"
@@ -59,8 +63,6 @@ end
 group :development do
   gem "thin"
   gem "quiet_assets", ">= 1.0.2"
-  gem "dotenv"
-  gem "pry-rails", ">= 0.3.2"
   gem "better_errors", ">= 1.0.1"
   gem "binding_of_caller", ">= 0.7.2"
   gem "letter_opener", ">= 1.1.2"
