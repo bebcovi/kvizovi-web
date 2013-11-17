@@ -86,9 +86,5 @@ Lektire::Application.configure do
 
   # Caching configuration
   config.action_controller.perform_caching = true
-  config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"].split(","), {
-    username: ENV["MEMCACHIER_USERNAME"],
-    password: ENV["MEMCACHIER_PASSWORD"],
-  }
   config.action_view.cache_template_loading = true
 end
