@@ -7,7 +7,7 @@ class PlayedQuizzesController < ApplicationController
   def index
     @played_quizzes = @scope.played_quizzes
       .descending
-      .includes(:quiz_snapshot, :students)
+      .includes(:quiz_snapshot, :players)
       .paginate(page: params[:page], per_page: 15)
       .decorate
   end

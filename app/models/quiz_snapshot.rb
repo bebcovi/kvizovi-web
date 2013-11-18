@@ -4,16 +4,11 @@ class QuizSnapshot < ActiveRecord::Base
   serialize :quiz_attributes
   serialize :questions_attributes
 
-  def self.capture(quiz_specification)
-    students_count = quiz_specification.students.count
-    _quiz          = quiz_specification.quiz
-    _questions     = _quiz.questions.to_a
-    _questions.pop until _questions.count % students_count == 0
-
+  def self.capture(quiz)
     create!(
-      quiz_id:              _quiz.id,
-      quiz_attributes:      _quiz.attributes,
-      questions_attributes: _questions.map(&:attributes),
+      quiz_id:              quiz.id,
+      quiz_attributes:      quiz.attributes,
+      questions_attributes: quiz.questions.map(&:attributes),
     )
   end
 
@@ -22,8 +17,9 @@ class QuizSnapshot < ActiveRecord::Base
   end
 
   def questions
-    @questions ||= (questions_attributes || []).map do |question_attributes|
-      question_attributes["type"].constantize.new(question_attributes)
+    @questions ||= Array(questions_attributes).map do |question_attributes|
+      question_class = question_attributes["type"].constantize
+      question_class.new(question_attributes)
     end
   end
 end

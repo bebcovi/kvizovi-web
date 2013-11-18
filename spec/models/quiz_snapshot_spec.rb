@@ -1,24 +1,8 @@
 require "spec_helper"
 
 describe QuizSnapshot do
-  subject { described_class.capture(quiz_specification) }
-  let(:quiz_specification) { double(quiz: quiz, students: students) }
+  subject { described_class.capture(quiz) }
   let(:quiz) { create(:quiz) }
-  let(:students) { [double] }
-
-  describe ".capture" do
-    let(:students) { [double, double] }
-
-    it "trims the number of questions to be divisible by the number of students" do
-      quiz.questions = create_list(:question, 4)
-      subject = described_class.capture(quiz_specification)
-      expect(subject.questions.count).to eq 4
-
-      quiz.questions = create_list(:question, 5)
-      subject = described_class.capture(quiz_specification)
-      expect(subject.questions.count).to eq 4
-    end
-  end
 
   describe "#quiz" do
     let(:quiz) { create(:quiz, name: "Quiz", activated: true) }

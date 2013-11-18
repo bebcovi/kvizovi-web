@@ -1,27 +1,19 @@
-- title "#{quiz.name} · #{quiz_play.current_question[:number]}. pitanje"
+- title "#{game.quiz.name} · #{game.current_question_number}. pitanje"
 
-%div{class: "l-player-#{number(quiz_play.current_student[:number])}"}
-  .timer
-    = icon("stopwatch")
-    %span.timer-time
+%div{class: "l-player-#{number(game.current_player)}"}
+  = render "timer"
+  = render "name"
+  = render "player"
+  = render "progress_bar"
 
-  %h1.align-middle
-    = quiz.name
+  = simple_form_for :play, url: save_answer_quiz_path, method: :put, remote: true, defaults: {input_html: {name: "answer"}}, html: {class: "l-play l-question-#{game.current_question.category}"} do |f|
 
-  .question-username.align-middle.player-color
-    = current_player.full_name.prepend_icon("user")
-
-  .progress.progress-small.progress-primary
-    .bar{style: "width: #{quiz_progress_percentage}%"}
-
-  = simple_form_for :play, url: save_answer_quiz_path, method: :put, remote: true, defaults: {input_html: {name: "answer"}}, html: {class: "l-play l-question-#{current_question.category}"} do |f|
-
-    = render "question", question: QuestionShuffling.new(current_question), f: f
+    = render "question", question: QuestionShuffling.new(game.current_question), f: f
 
     = buttons do
       = cancel_button "Prekini", finish_quiz_path, method: :delete, data: {confirm: "Jeste li sigurni da želite prekinuti igranje kviza?"}
       = submit_button "Odgovori"
 
-- if quiz_play.current_question[:answer] != nil
+- if game.current_question_answer != nil
   :coffee
     $("#{j render("answer_feedback")}").modal(keyboard: false, backdrop: "static")

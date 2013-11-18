@@ -40,7 +40,11 @@ module ApplicationHelper
   end
 
   def percentage(part, total)
-    ((part.to_f / total.to_f) * 100).round
+    unless total.zero?
+      ((part.to_f / total.to_f) * 100).round
+    else
+      0
+    end
   end
 
   def active_content_tag(tag_name, active, options = {}, &block)

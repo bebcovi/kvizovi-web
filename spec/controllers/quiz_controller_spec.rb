@@ -12,16 +12,21 @@ describe QuizController do
     @student.update(school: @school)
   end
 
-  let(:quiz_snapshot) do
-    QuizSnapshot.capture(double(quiz: @quiz, students: [@student]))
+  def game
+    controller.send(:game)
   end
 
   def start_quiz
-    controller.send(:quiz_play).start!(quiz_snapshot, [@student])
+    game.start!(@quiz, [@student])
   end
 
   def finish_quiz
-    controller.send(:quiz_play).finish!
+    loop do
+      game.save_answer!("foo")
+      break if game.current_question == game.questions.last
+      game.next_question!
+    end
+    game.finish!
   end
 
   describe "#choose" do
@@ -36,16 +41,16 @@ describe QuizController do
 
   describe "#start" do
     before do
-      allow(controller.send(:quiz_play)).to receive(:start!)
+      allow(game).to receive(:start!)
     end
 
     context "when valid" do
       before do
-        post :start, quiz_specification: {quiz_id: @quiz.id, students_count: 1}
+        post :start, game_specification: {quiz_id: @quiz.id, players_count: 1}
       end
 
       it "prepares the quiz" do
-        expect(controller.send(:quiz_play)).to have_received(:start!)
+        expect(game).to have_received(:start!)
       end
 
       it "redirects to quiz" do
@@ -55,7 +60,7 @@ describe QuizController do
 
     context "when invalid" do
       before do
-        post :start, quiz_specification: {quiz_id: nil}
+        post :start, game_specification: {quiz_id: nil}
       end
 
       it "renders the template" do
@@ -80,12 +85,12 @@ describe QuizController do
     before { start_quiz }
 
     before do
-      allow(controller.send(:quiz_play)).to receive(:save_answer!)
+      allow(game).to receive(:save_answer!)
       put :save_answer, format: :js
     end
 
     it "invokes #save_answer!" do
-      expect(controller.send(:quiz_play)).to have_received(:save_answer!)
+      expect(game).to have_received(:save_answer!)
     end
 
     it "renders the template" do
@@ -97,12 +102,12 @@ describe QuizController do
     before { start_quiz }
 
     before do
-      allow(controller.send(:quiz_play)).to receive(:next_question!)
+      allow(game).to receive(:next_question!)
       get :next_question
     end
 
     it "invokes #next_question!" do
-      expect(controller.send(:quiz_play)).to have_received(:next_question!)
+      expect(game).to have_received(:next_question!)
     end
 
     it "redirects to quiz" do
@@ -115,8 +120,7 @@ describe QuizController do
     before { finish_quiz }
 
     before do
-      @played_quiz = create(:played_quiz, quiz_snapshot: quiz_snapshot)
-      get :results, id: @played_quiz.id
+      get :results
     end
 
     it "renders the template" do
@@ -129,29 +133,24 @@ describe QuizController do
 
     context "when the quiz was played to the end" do
       before do
-        allow(controller.send(:quiz_play)).to receive(:interrupted?).and_return(false)
+        allow(game).to receive(:interrupted?).and_return(false)
         delete :finish
       end
 
       it "redirects to results" do
-        expect(response).to redirect_to(results_quiz_path(id: PlayedQuiz.last.id))
+        expect(response).to redirect_to(results_quiz_path)
       end
     end
 
     context "when the quiz was interrupted" do
       before do
-        allow(controller.send(:quiz_play)).to receive(:interrupted?).and_return(true)
+        allow(game).to receive(:interrupted?).and_return(true)
         delete :finish
       end
 
       it "redirects to beginning" do
         expect(response).to redirect_to(choose_quiz_path)
       end
-    end
-
-    it "creates the game" do
-      delete :finish
-      expect(PlayedQuiz.count).to eq 1
     end
   end
 end

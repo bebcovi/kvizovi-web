@@ -3,7 +3,6 @@ require "acts_as_list"
 
 class Question < ActiveRecord::Base
   CATEGORIES = %w[boolean choice association text]
-  NO_ANSWER  = "NO_ANSWER"
 
   belongs_to :quiz
 

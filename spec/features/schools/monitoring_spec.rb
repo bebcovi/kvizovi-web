@@ -8,11 +8,11 @@ feature "Monitoring" do
     school.quizzes << quiz
     quiz.questions = create_questions(options[:full] ? 20 : 0)
     school.students << create_list(:student, 2)
-    quiz_snapshot = QuizSnapshot.capture(double(students: school.students, quiz: quiz))
-    played_quiz = create(:played_quiz, quiz_snapshot: quiz_snapshot)
-    played_quiz.students << school.students
 
-    played_quiz
+    create(:played_quiz,
+      quiz_snapshot: QuizSnapshot.capture(quiz),
+      players:       school.students,
+    )
   end
 
   def create_questions(number)
@@ -36,7 +36,7 @@ feature "Monitoring" do
   scenario "Viewing a student" do
     played_quiz = create_played_quiz
     click_on "Učenici"
-    within(played_quiz.students.first) { click_on "1" }
+    within(played_quiz.players.first) { click_on "1" }
 
     expect(page).to have_content(played_quiz.quiz.name)
   end

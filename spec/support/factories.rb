@@ -75,7 +75,7 @@ FactoryGirl.define do
         when TextQuestion
           wrong_answer = question.answer.reverse
         end
-        answer = [wrong_answer, question.answer, Question::NO_ANSWER, nil][categories[question.category]]
+        answer = [wrong_answer, question.answer, question.answer, nil][categories[question.category]]
         categories[question.category] += 1
         answer
       end

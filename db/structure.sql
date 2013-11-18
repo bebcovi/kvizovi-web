@@ -53,8 +53,8 @@ CREATE TABLE played_quizzes (
     question_answers text,
     begin_time timestamp without time zone,
     end_time timestamp without time zone,
-    students_order character varying(255),
-    has_answers boolean DEFAULT true
+    has_answers boolean DEFAULT true,
+    interrupted boolean DEFAULT false
 );
 
 
@@ -78,13 +78,34 @@ ALTER SEQUENCE played_quizzes_id_seq OWNED BY played_quizzes.id;
 
 
 --
--- Name: played_quizzes_students; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: playings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE played_quizzes_students (
-    student_id integer,
-    played_quiz_id integer
+CREATE TABLE playings (
+    player_id integer,
+    played_quiz_id integer,
+    "position" integer,
+    id integer NOT NULL
 );
+
+
+--
+-- Name: playings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE playings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: playings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE playings_id_seq OWNED BY playings.id;
 
 
 --
@@ -128,8 +149,8 @@ CREATE TABLE questions (
     content text,
     hint character varying(255),
     type character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     data text DEFAULT '--- {}
 '::text,
     quiz_id integer,
@@ -198,8 +219,8 @@ CREATE TABLE quizzes (
     name character varying(255),
     activated boolean DEFAULT false,
     school_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     shuffle_questions boolean DEFAULT false
 );
 
@@ -230,8 +251,28 @@ ALTER SEQUENCE quizzes_id_seq OWNED BY quizzes.id;
 CREATE TABLE readings (
     user_id integer,
     user_type integer,
-    post_id integer
+    post_id integer,
+    id integer NOT NULL
 );
+
+
+--
+-- Name: readings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE readings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: readings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE readings_id_seq OWNED BY readings.id;
 
 
 --
@@ -254,8 +295,8 @@ CREATE TABLE schools (
     encrypted_password character varying(255),
     level character varying(255),
     key character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     place character varying(255),
     region character varying(255),
     email character varying(255),
@@ -304,8 +345,8 @@ CREATE TABLE students (
     encrypted_password character varying(255),
     school_id integer,
     grade character varying(2),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     gender character varying(255),
     year_of_birth integer,
     email character varying(255),
@@ -447,6 +488,13 @@ ALTER TABLE ONLY played_quizzes ALTER COLUMN id SET DEFAULT nextval('played_quiz
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY playings ALTER COLUMN id SET DEFAULT nextval('playings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
 
 
@@ -469,6 +517,13 @@ ALTER TABLE ONLY quiz_snapshots ALTER COLUMN id SET DEFAULT nextval('quiz_snapsh
 --
 
 ALTER TABLE ONLY quizzes ALTER COLUMN id SET DEFAULT nextval('quizzes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY readings ALTER COLUMN id SET DEFAULT nextval('readings_id_seq'::regclass);
 
 
 --
@@ -515,6 +570,14 @@ ALTER TABLE ONLY played_quizzes
 
 
 --
+-- Name: playings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY playings
+    ADD CONSTRAINT playings_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -544,6 +607,14 @@ ALTER TABLE ONLY quiz_snapshots
 
 ALTER TABLE ONLY quizzes
     ADD CONSTRAINT quizzes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: readings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY readings
+    ADD CONSTRAINT readings_pkey PRIMARY KEY (id);
 
 
 --
@@ -769,3 +840,11 @@ INSERT INTO schema_migrations (version) VALUES ('20131103165731');
 INSERT INTO schema_migrations (version) VALUES ('20131114192301');
 
 INSERT INTO schema_migrations (version) VALUES ('20131117022724');
+
+INSERT INTO schema_migrations (version) VALUES ('20131118223640');
+
+INSERT INTO schema_migrations (version) VALUES ('20131118231304');
+
+INSERT INTO schema_migrations (version) VALUES ('20131119003335');
+
+INSERT INTO schema_migrations (version) VALUES ('20131119130746');

@@ -5,36 +5,66 @@ describe PlayedQuizDecorator do
 
   let(:played_quiz) do
     double(
-      questions:        build_list(:boolean_question, 4, answer: false),
-      students:         build_list(:student, 2),
-      question_answers: [false, false, true, false],
-      has_answers?:     true,
+      questions: questions,
+      players: players,
+      question_answers: answers,
+      has_answers?: true,
     )
   end
+  let(:players)   { create_list(:student, 2) }
+  let(:questions) { create_list(:boolean_question, 4, answer: false) }
+  let(:answers)   { [false, true, false, nil] }
 
-  it "has results" do
-    subject.results
-  end
+  describe "#results" do
+    it "returns players" do
+      expect(subject.results.map(&:first)).to eq players
+    end
 
-  it "has scores" do
-    expect(subject.scores).to eq [1, 2]
-  end
-
-  it "has score percentages" do
-    expect(subject.score_percentages).to eq [50, 100]
-  end
-
-  it "has student numbers" do
-    expect(subject.student_numbers).to eq [1, 2]
-  end
-
-  it "has ranks" do
-    subject.ranks.each do |rank|
-      expect(rank).to be_present
+    it "returns scores" do
+      expect(subject.results.map(&:second)).to eq subject.scores
     end
   end
 
-  it "has total score" do
-    expect(subject.total_score).to eq 2
+  describe "#scores" do
+    it "returns players' scores" do
+      expect(subject.scores).to eq [2, 0]
+    end
+
+    it "returns proper scores when played quiz doesn't have answers" do
+      allow(played_quiz).to receive(:has_answers?).and_return(false)
+      expect(subject.scores).to eq [0, 1]
+    end
+  end
+
+  describe "#total_score" do
+    it "returns the total score" do
+      expect(subject.total_score).to eq 2
+      allow(played_quiz).to receive(:has_answers?).and_return(false)
+      expect(subject.total_score).to eq 2
+    end
+  end
+
+  describe "#played_questions" do
+    it "returns questions" do
+      expect(subject.played_questions.map(&:first)).to eq subject.questions
+    end
+
+    it "returns answers" do
+      expect(subject.played_questions.map(&:second)).to eq answers
+    end
+
+    it "returns players" do
+      expect(subject.played_questions.map(&:third)).to eq [players.first, players.second, players.first, players.second]
+    end
+
+    it "returns status" do
+      expect(subject.played_questions.map(&:fourth)).to eq ["correct", "wrong", "correct", "unanswered"]
+    end
+
+    it "returns empty array when played quiz doesn't have answers" do
+      allow(played_quiz).to receive(:has_answers?).and_return(false)
+      allow(played_quiz).to receive(:questions).and_return(nil)
+      expect(subject.played_questions).to eq []
+    end
   end
 end

@@ -4,6 +4,10 @@ feature "Questions" do
   let!(:school) { register(:school) }
   let(:quiz) { create(:quiz) }
 
+  def image_preview
+    find(".image-preview")
+  end
+
   background do
     login(school)
     school.quizzes << quiz
