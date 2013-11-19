@@ -2,7 +2,7 @@ class PlayedQuizDecorator < Draper::Decorator
   delegate_all
 
   def results
-    players.zip(scores)
+    players.zip(scores, ranks)
   end
 
   def scores
@@ -15,6 +15,16 @@ class PlayedQuizDecorator < Draper::Decorator
       end
     end
     scores
+  end
+
+  def ranks
+    scores.map do |score|
+      case h.percentage score, total_score
+      when 0...30  then "znalac-malac"
+      when 30...70 then "ekspert"
+      when 70..100 then "super-ekspert"
+      end
+    end
   end
 
   def total_score

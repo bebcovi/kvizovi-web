@@ -15,6 +15,10 @@ describe PlayedQuizDecorator do
   let(:questions) { create_list(:boolean_question, 4, answer: false) }
   let(:answers)   { [false, true, false, nil] }
 
+  before do
+    allow(subject).to receive(:h).and_return(double.as_null_object)
+  end
+
   describe "#results" do
     it "returns players" do
       expect(subject.results.map(&:first)).to eq players
