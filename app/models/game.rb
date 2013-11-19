@@ -82,7 +82,7 @@ class Game
     played_quiz = PlayedQuiz.create!(
       begin_time:    Time.now,
       quiz_snapshot: QuizSnapshot.capture(quiz),
-      players:       players,
+      players:       players.shuffle,
     )
 
     @store[:played_quiz_id] = played_quiz.id
