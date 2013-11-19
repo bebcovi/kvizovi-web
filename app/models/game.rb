@@ -43,17 +43,17 @@ class Game
   end
 
   def current_question_answered?
-    played_quiz.question_answers.count == current_question_number + 1
+    played_quiz.question_answers.count == current_question_number
   end
 
   delegate :quiz, :questions, :players, to: :played_quiz
 
   def current_question
-    questions[current_question_number]
+    questions[current_question_number - 1]
   end
 
   def current_question_number
-    @state.current_question
+    @state.current_question + 1
   end
 
   def current_question_answer
@@ -61,11 +61,11 @@ class Game
   end
 
   def current_player
-    players[current_player_number]
+    players[current_player_number - 1]
   end
 
   def current_player_number
-    @state.current_player
+    @state.current_player + 1
   end
 
   def results
