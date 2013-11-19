@@ -1,9 +1,5 @@
 Lektire::Application.routes.draw do
 
-  constraints host: /herokuapp/ do
-    get "(*path)", to: redirect(host: "kvizovi.org")
-  end
-
   root to: "home#index"
 
   devise_for :schools
