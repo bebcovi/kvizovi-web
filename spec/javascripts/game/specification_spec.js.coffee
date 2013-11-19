@@ -1,9 +1,9 @@
-describe "QuizSpecification", ->
+describe "GameSpecification", ->
 
   beforeEach ->
-    loadFixtures("quiz/specification")
+    loadFixtures("game/specification")
 
-    @it = new QuizSpecification("#new_quiz_specification")
+    @it = new GameSpecification("#new_game_specification")
     @it.activate()
 
     @quizzes = $(".quizzes")

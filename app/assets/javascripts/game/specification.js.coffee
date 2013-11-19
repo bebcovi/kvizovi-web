@@ -1,8 +1,8 @@
 jQuery ->
 
-  new QuizSpecification("#new_quiz_specification").activate()
+  new GameSpecification("#new_game_specification").activate()
 
-class @QuizSpecification
+class @GameSpecification
 
   constructor: (wrapper) ->
     @wrapper = $(wrapper)
@@ -16,16 +16,16 @@ class @QuizSpecification
 
     @quizzes.show()
 
-    @players.hide()
+    @players.hide() if @quizzes.find(":checked").isEmpty()
     @quizzes.on "change", => @players.show()
 
-    @login.hide()
+    @login.hide() unless @players.find(":checked").val() == "2"
     @players.on "change", (event) =>
       switch event.target.value
         when "1" then @login.hide()
         when "2" then @login.show()
 
-    @buttons.hide()
+    @buttons.hide() if @players.find(":checked").isEmpty()
     @quizzes.on "change", (event) =>
       quizName = $(event.target).closest("label").text().trim()
       @buttons.find("[type='submit']")

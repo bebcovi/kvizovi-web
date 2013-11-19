@@ -11,10 +11,3 @@ hr:
               blank: "Nisi izabrao/la broj igrača."
             players_credentials:
               invalid: "Pogrešno korisničko ime ili lozinka."
-
-  simple_form:
-    labels:
-      game_specification:
-        players_credentials:
-          username: "Korisničko ime"
-          password: "Lozinka"
