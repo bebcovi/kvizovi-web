@@ -18,7 +18,6 @@ group :assets do
   gem "uglifier", ">= 1.3.0"
   gem "momentjs-rails", ">= 2.2.1"
   gem "eco", ">= 1"
-  gem "font_assets" # fuck you, Firefox
 end
 
 # Views
