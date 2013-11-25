@@ -3,7 +3,7 @@
 
 jQuery ->
 
-  unless $(".timer").isEmpty()
+  if $(".timer").length > 0
     new AssociationQuestion("table").enhance()
 
 class @AssociationQuestion

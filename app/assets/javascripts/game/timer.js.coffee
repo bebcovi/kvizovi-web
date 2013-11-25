@@ -13,7 +13,7 @@ jQuery ->
       $("[type='submit']").click()
   )
 
-  unless $(".timer").isEmpty()
+  if $(".timer").length > 0
     countdown.start(countdownCache.get() || 60)
     $("[type='submit']").on "click", =>
       countdown.stop()

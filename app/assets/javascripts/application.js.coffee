@@ -4,13 +4,11 @@
 #= require turbolinks
 #= require jquery.turbolinks
 #
-#= require twitter/bootstrap
+#= require twitter/bootstrap/alert
+#= require twitter/bootstrap/dropdown
 #
 #= require_self
 #
 #= require_directory .
 
-$.fn.isEmpty = -> @.length == 0
-
-jQuery ->
-  $(".btn[title]").tooltip()
+$.icon = (name) -> "<i class=\"icon-#{name}\"></i>"

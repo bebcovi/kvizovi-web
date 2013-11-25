@@ -4,11 +4,7 @@
   = f.input :image, as: :file, wrapper: false, error: false
   = f.input :remote_image_url, wrapper: false, error: false
   = f.hidden_field :image_cache
-
-- if @question.image?
   = image_tag @question.image.url(:medium), class: "img-polaroid image-preview"
-- else
-  = image_tag nil, class: "img-polaroid image-preview hide"
 
 = render "account/questions/fields/#{@question.category}", f: f, question: @question
 

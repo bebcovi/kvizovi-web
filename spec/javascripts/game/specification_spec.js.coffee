@@ -3,53 +3,44 @@ describe "GameSpecification", ->
   beforeEach ->
     loadFixtures("game/specification")
 
-    @it = new GameSpecification("#new_game_specification")
-    @it.activate()
+    @subject = new GameSpecification("#new_game_specification")
+    @subject.stepenize()
 
     @quizzes = $(".quizzes")
     @players = $(".players")
     @login   = $(".login")
     @buttons = $(".btn-toolbar")
 
-  describe "#activate", ->
+    @chooseQuiz = ->
+      @quizzes.find("[type='radio']").click()
 
-    it "hides everything but quizzes", ->
+    @choosePlayers = (number) ->
+      @players.find("[type='radio'][value='#{number}']").click()
+
+  describe "#stepenize", ->
+
+    it "always shows quizzes", ->
       expect(@quizzes).toBeVisible()
+
+    it "shows players when a quiz is selected", ->
       expect(@players).toBeHidden()
+      @chooseQuiz()
+      expect(@players).toBeVisible()
+
+    it "shows login when multiplayer is selected", ->
+      @chooseQuiz()
       expect(@login).toBeHidden()
+      @choosePlayers(1)
+      expect(@login).toBeHidden()
+      @choosePlayers(2)
+      expect(@login).toBeVisible()
+
+    it "shows buttons when players are selected", ->
+      @chooseQuiz()
       expect(@buttons).toBeHidden()
+      @choosePlayers(1)
+      expect(@buttons).toBeVisible()
 
-    context "when quiz is chosen", ->
-
-      beforeEach ->
-        @quizzes.find("input[type='radio']").first().click()
-
-      it "shows players", ->
-        expect(@players).toBeVisible()
-
-      it "adds the name of the quiz to the button", ->
-        expect(@buttons.find("[type='submit']")).toHaveText("Započni kviz Antigona!")
-
-    context "when single player is chosen", ->
-
-      beforeEach ->
-        @quizzes.find("input[type='radio']").click()
-        @players.find("input[type='radio']").first().click()
-
-      it "doesn't show login", ->
-        expect(@login).toBeHidden()
-
-      it "shows the begin button", ->
-        expect(@buttons).toBeVisible()
-
-    context "when multi player is chosen", ->
-
-      beforeEach ->
-        @quizzes.find("input[type='radio']").click()
-        @players.find("input[type='radio']").last().click()
-
-      it "shows login", ->
-        expect(@login).toBeVisible()
-
-      it "shows the begin button", ->
-        expect(@buttons).toBeVisible()
+    it "assigns the name of the quiz to the \"start\" button", ->
+      @chooseQuiz()
+      expect(@buttons.find("[type='submit']")).toHaveText("Započni kviz Antigona!")

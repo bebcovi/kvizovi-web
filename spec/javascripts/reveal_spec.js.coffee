@@ -1,23 +1,29 @@
-describe "ContentReveal", ->
+describe "Content", ->
 
   beforeEach ->
     loadFixtures("reveal")
 
-    @it = new ContentReveal(".reveal-content")
-    @it.enable()
+    @subject = new Content(".reveal-content")
+    @subject.hide()
 
     @content = $(".reveal-content")
     @button  = $(".reveal-toggle")
 
-  describe "#enable", ->
+  describe "#hide", ->
 
     it "hides the content", ->
       expect(@content).toBeHidden()
 
-    it "shows the content on button click", ->
-      @button.click()
+    it "creates the \"show\" button", ->
+      expect(@button).toExist()
+
+  describe "#reveal", ->
+
+    beforeEach ->
+      @subject.reveal()
+
+    it "it shows the content", ->
       expect(@content).toBeVisible()
 
-    it "hides the button on button click", ->
-      @button.click()
+    it "hides the button", ->
       expect(@button).toBeHidden()
