@@ -1,5 +1,9 @@
 Lektire::Application.routes.draw do
 
+  constraints subdomain: "www" do
+    get "(*path)", to: redirect(subdomain: false)
+  end
+
   root to: "home#index"
 
   devise_for :schools
