@@ -126,13 +126,13 @@ GEM
       nokogiri (~> 1.5)
       ruby-hmac
     formatador (0.2.4)
-    haml (4.0.3)
+    haml (4.0.4)
       tilt
-    haml-rails (0.4)
-      actionpack (>= 3.1, < 4.1)
-      activesupport (>= 3.1, < 4.1)
-      haml (>= 3.1, < 4.1)
-      railties (>= 3.1, < 4.1)
+    haml-rails (0.5.1)
+      actionpack (~> 4.0.0)
+      activesupport (~> 4.0.0)
+      haml (>= 3.1, < 5.0)
+      railties (~> 4.0.0)
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -320,7 +320,7 @@ DEPENDENCIES
   factory_girl (>= 4.2)
   fog (>= 1.17.0)
   haml (>= 4)
-  haml-rails
+  haml-rails (>= 0.5.1)
   inherited_resources (>= 1.4.1)
   jasminerice!
   jquery-rails

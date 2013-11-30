@@ -22,8 +22,8 @@ end
 
 # Views
 gem "haml", ">= 4"
-gem "haml-rails"
 gem "simple_form", ">= 3.0.0"
+gem "haml-rails", ">= 0.5.1"
 gem "redcarpet", ">= 3"
 gem "will_paginate", ">= 3.0.5"
 gem "bootstrap-will_paginate", ">= 0.0.10"
