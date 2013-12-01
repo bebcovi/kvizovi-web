@@ -12,3 +12,5 @@
 #= require_directory .
 
 $.icon = (name) -> "<i class=\"icon-#{name}\"></i>"
+
+@App = {}

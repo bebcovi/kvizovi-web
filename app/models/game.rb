@@ -72,11 +72,11 @@ class Game
     played_quiz.decorate
   end
 
-  private
-
   def played_quiz
     @played_quiz ||= PlayedQuiz.find(@store[:played_quiz_id])
   end
+
+  private
 
   def prepare_quiz!(quiz, players)
     played_quiz = PlayedQuiz.create!(

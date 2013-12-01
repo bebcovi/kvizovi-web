@@ -3,10 +3,9 @@
 
 jQuery ->
 
-  if $(".timer").length > 0
-    new AssociationQuestion("table").enhance()
+  new App.AssociationQuestion(".l-play table").enhance()
 
-class @AssociationQuestion
+class App.AssociationQuestion
 
   constructor: (container) ->
     @container = $(container)

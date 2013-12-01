@@ -2,7 +2,7 @@ describe "AssociationQuestion", ->
 
   beforeEach ->
     loadFixtures("questions/association")
-    @it = new AssociationQuestion("table")
+    @it = new App.AssociationQuestion("table")
 
   describe "#enhance", ->
 

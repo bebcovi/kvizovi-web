@@ -1,9 +1,9 @@
 jQuery ->
 
-  new OptionList(".choice-wrapper",      add: "Dodaj ponuđeni odgovor")
-  new OptionList(".association-wrapper", add: "Dodaj asocijaciju")
+  new App.OptionList(".choice-wrapper",      add: "Dodaj ponuđeni odgovor")
+  new App.OptionList(".association-wrapper", add: "Dodaj asocijaciju")
 
-class OptionList
+class App.OptionList
 
   constructor: (wrapper, params = {}) ->
     @wrapper = $(wrapper)
@@ -51,5 +51,3 @@ class OptionList
         .on "click", (event) =>
           event.preventDefault()
           @value.trigger("option:remove", @value)
-
-@OptionList = OptionList

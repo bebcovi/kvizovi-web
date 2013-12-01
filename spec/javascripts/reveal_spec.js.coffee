@@ -3,7 +3,7 @@ describe "Content", ->
   beforeEach ->
     loadFixtures("reveal")
 
-    @subject = new Content(".reveal-content")
+    @subject = new App.Content(".reveal-content")
     @subject.hide()
 
     @content = $(".reveal-content")

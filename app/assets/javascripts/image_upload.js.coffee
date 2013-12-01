@@ -2,9 +2,9 @@
 
 jQuery ->
 
-  new ImageUpload(".question_image").enhance()
+  new App.ImageUpload(".question_image").enhance()
 
-class ImageUpload
+class App.ImageUpload
 
   constructor: (wrapper) ->
     @wrapper = $(wrapper)
@@ -82,7 +82,7 @@ class ImageUpload
     constructor: (value) ->
       @value = $(value)
       @originalUrl = @value.attr("src")
-      @value.hide() if not @originalUrl
+      @value.hide() unless @originalUrl
 
     update: (input) ->
       @reset() if not input.value
@@ -108,5 +108,3 @@ class ImageUpload
     set: (url) ->
       @value.attr("src", url)
       if url then @value.show() else @value.hide()
-
-@ImageUpload = ImageUpload

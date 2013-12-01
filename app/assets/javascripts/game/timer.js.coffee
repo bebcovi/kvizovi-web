@@ -3,45 +3,24 @@
 
 jQuery ->
 
-  countdownCache = new CountdownCache(docCookies)
-
-  countdown = new Countdown(
-    onChange: (timeRemaining) ->
-      new Timer(".timer").update(timeRemaining)
-      countdownCache.set(timeRemaining)
-    onExpire: ->
-      $("[type='submit']").click()
-  )
-
   if $(".timer").length > 0
-    countdown.start(countdownCache.get() || 60)
+
+    timer = new App.Timer(".timer")
+
+    App.Countdown.start timer.value(),
+      onChange: (timeRemaining) =>
+        timer.update(timeRemaining)
+        $("[type='submit']").click() if timeRemaining == 0
+
     $("[type='submit']").on "click", =>
-      countdown.stop()
-      countdownCache.clear()
-  else
-    countdownCache.clear()
+      App.Countdown.stop()
 
-class @CountdownCache
+class App.Timer
 
-  constructor: (@store) ->
-
-  set: (value) ->
-    @store.setItem(@key, value)
-
-  get: ->
-    @store.getItem(@key)
-
-  clear: ->
-    @store.removeItem(@key)
-    null
-
-  key: "timeRemaining"
-
-class @Timer
-
-  constructor: (container) ->
+  constructor: (container, @cache) ->
     @container = $(container)
     @time      = @container.find(".timer-time")
+    @cache     = new @Cache(@container.data("signature"))
 
   update: (timeRemaining) ->
     @write(timeRemaining)
@@ -52,6 +31,10 @@ class @Timer
 
   write: (timeRemaining) ->
     @time.text moment.unix(timeRemaining).format("m:ss")
+    @cache.write(timeRemaining)
+
+  value: ->
+    @cache.read() || Number(@time.data("value"))
 
   turnOrange: ->
     @container.addClass("text-warning")
@@ -59,38 +42,50 @@ class @Timer
   turnRed: ->
     @container.removeClass("text-warning").addClass("text-error")
 
-class @Countdown
+  Cache: class
 
-  constructor: (@options = {}) ->
+    constructor: (@signature) ->
 
-  start: (seconds) ->
-    @setTime(seconds)
+    read: ->
+      value = Number(docCookies.getItem("timeRemaining"))
+      value if docCookies.getItem("signature") == @signature
 
-    @change()
+    write: (value) ->
+      docCookies.setItem("timeRemaining", value)
+      docCookies.setItem("signature", @signature)
+
+class App.Countdown
+
+  @start: (seconds, @options = {}) ->
+    @reset(seconds)
 
     @intervalId = setInterval =>
-      if @hasEnded()
-        @expire()
+      unless @hasEnded()
+        @tick()
       else
-        @decrement()
+        @stop()
     , 1000
 
-  setTime: (seconds) ->
+  @reset: (seconds) ->
+    @stop() if @isRunning()
+    @setTime(seconds)
+
+  @setTime: (seconds) ->
     @timeRemaining = seconds
+    @changed()
 
-  decrement: ->
+  @tick: ->
     @timeRemaining -= 1
-    @change()
+    @changed()
 
-  change: ->
+  @changed: ->
     @options.onChange(@timeRemaining) if @options.onChange
 
-  stop: ->
+  @stop: ->
     clearInterval(@intervalId)
 
-  expire: ->
-    @stop()
-    @options.onExpire() if @options.onExpire
+  @isRunning: ->
+    !!@intervalId
 
-  hasEnded: ->
-    @timeRemaining <= 0
+  @hasEnded: ->
+    @timeRemaining == 0

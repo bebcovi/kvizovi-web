@@ -1,9 +1,9 @@
 jQuery ->
 
   $(".reveal-content").each ->
-    new Content(@).hide()
+    new App.Content(@).hide()
 
-class Content
+class App.Content
 
   constructor: (content) ->
     @content = $(content)
@@ -27,5 +27,3 @@ class Content
     @revealButton.on "click", (event) =>
       event.preventDefault()
       @reveal()
-
-@Content = Content

@@ -1,8 +1,8 @@
 jQuery ->
 
-  new GameSpecification("#new_game_specification").stepenize()
+  new App.GameSpecification("#new_game_specification").stepenize()
 
-class GameSpecification
+class App.GameSpecification
 
   constructor: (wrapper) ->
     @wrapper = $(wrapper)
@@ -56,5 +56,3 @@ class GameSpecification
     setQuiz: (name) ->
       @value.find("[type='submit']")
         .html("Započni kviz <strong>#{name}</strong>!")
-
-@GameSpecification = GameSpecification

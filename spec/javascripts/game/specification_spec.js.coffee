@@ -3,7 +3,7 @@ describe "GameSpecification", ->
   beforeEach ->
     loadFixtures("game/specification")
 
-    @subject = new GameSpecification("#new_game_specification")
+    @subject = new App.GameSpecification("#new_game_specification")
     @subject.stepenize()
 
     @quizzes = $(".quizzes")

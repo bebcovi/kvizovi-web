@@ -6,7 +6,7 @@ specs = (category) ->
       loadFixtures("questions/#{category}_form")
       @wrapper = $(".#{category}-wrapper")
 
-      @subject = new OptionList(@wrapper)
+      @subject = new App.OptionList(@wrapper)
 
       @addButton = @wrapper.closest(".control-group").children("a")
       @options   = -> @wrapper.find(".#{category}-option")
@@ -95,24 +95,24 @@ specs = (category) ->
 
     describe "Option", ->
 
-      OptionList.Option = OptionList.prototype.Option
+      App.OptionList.Option = App.OptionList.prototype.Option
 
       beforeEach ->
         @option  = @options().first()
-        @subject = new OptionList.Option(@option, 1)
+        @subject = new App.OptionList.Option(@option, 1)
 
       describe "#constructor", ->
 
         it "adds the \"remove\" button", ->
-          new OptionList.Option(@option)
+          new App.OptionList.Option(@option)
           expect(@option).toContain(".close")
 
         it "updates the placeholder", ->
-          new OptionList.Option(@option, 1)
+          new App.OptionList.Option(@option, 1)
           @option.find("input").each (_, input) =>
             expect(input.placeholder).toMatch(/1/)
 
-          new OptionList.Option(@option, 10)
+          new App.OptionList.Option(@option, 10)
           @option.find("input").each (_, input) =>
             expect(input.placeholder).toMatch(/10/)
 
