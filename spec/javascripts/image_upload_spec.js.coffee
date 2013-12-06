@@ -86,8 +86,8 @@ describe "ImageUpload", ->
         @subject.toggle()
         expect(@subject.fields).toBeVisible()
 
-      # FIXME: InvalidStateError is raised when we try to assign a value
-      # to a file field (in general). Not sure how to get past that.
+      # Assigning value to a file manually throws InvalidStateError, for
+      # security reasons. There doesn't seem to be any way around this.
       it "clears the input value", ->
         # @subject.fields.find("input")[0].val("foobar")
         @subject.toggle()
