@@ -14,6 +14,7 @@ class Game
   def save_answer!(answer)
     unless current_question_answered?
       played_quiz.question_answers << answer
+      played_quiz.end_time = Time.now
       played_quiz.save
     end
   end
@@ -26,8 +27,9 @@ class Game
   end
 
   def finish!
-    played_quiz.update(end_time: Time.now)
-    played_quiz.update(interrupted: true) if interrupted?
+    played_quiz.end_time = Time.now
+    played_quiz.interrupted = true if interrupted?
+    played_quiz.save
   end
 
   def interrupted?
@@ -81,6 +83,7 @@ class Game
   def prepare_quiz!(quiz, players)
     played_quiz = PlayedQuiz.create!(
       begin_time:    Time.now,
+      end_time:      Time.now,
       quiz_snapshot: QuizSnapshot.capture(quiz),
       players:       players.shuffle,
     )
