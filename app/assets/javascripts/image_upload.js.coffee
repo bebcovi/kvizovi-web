@@ -2,7 +2,7 @@
 
 jQuery ->
 
-  new App.ImageUpload(".question_image").enhance()
+  new App.ImageUpload(".image_upload").enhance()
 
 class App.ImageUpload
 

@@ -1,10 +1,6 @@
 = f.input :content, input_html: {autofocus: current_page?(action: "new"), rows: 1, class: "input-block-level"}
 
-= f.input :image, label: false, bootstrap_wrapper: false do
-  = f.input :image, as: :file, wrapper: false, error: false
-  = f.input :remote_image_url, wrapper: false, error: false
-  = f.hidden_field :image_cache
-  = image_tag @question.image.url(:medium), class: "img-polaroid image-preview"
+= image_field(f, :image)
 
 = render "account/questions/fields/#{@question.category}", f: f, question: @question
 
