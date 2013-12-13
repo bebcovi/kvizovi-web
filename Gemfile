@@ -38,6 +38,7 @@ gem "unf"
 gem "squeel", ">= 1.1.1"
 gem "redis", ">= 3"
 gem "acts_as_list", ">= 0.3"
+gem "pg_search", ">= 0.7.2"
 
 # Other
 gem "devise", ">= 3.1.1"

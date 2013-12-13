@@ -79,7 +79,7 @@ feature "Authentication" do
     fill_in "Email", with: "janko@janko.hr"
     submit
 
-    visit choose_quiz_path
-    expect(current_path).to eq choose_quiz_path
+    visit quizzes_path
+    expect(current_path).to eq quizzes_path
   end
 end

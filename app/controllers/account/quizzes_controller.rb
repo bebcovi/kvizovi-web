@@ -5,12 +5,11 @@ class Account::QuizzesController < InheritedResources::Base
 
   actions :all, except: [:show]
 
-  def index
-    @quiz = build_resource
-    super
-  end
-
   private
+
+  def resource_url
+    account_quiz_questions_path(@quiz)
+  end
 
   def begin_of_association_chain
     current_user

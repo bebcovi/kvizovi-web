@@ -5,6 +5,6 @@
 = render "progress_bar"
 
 = render "played_quizzes/score", played_quiz: @played_quiz
-= primary_button "Završi", choose_quiz_path
+= primary_button "Završi", quiz_path(game.quiz)
 = render "played_quizzes/answers", played_quiz: @played_quiz
-= primary_button "Završi", choose_quiz_path
+= primary_button "Završi", quiz_path(game.quiz)

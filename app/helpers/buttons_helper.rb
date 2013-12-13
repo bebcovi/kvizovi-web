@@ -16,7 +16,7 @@ module ButtonsHelper
   end
 
   def cancel_button(text, path, options = {})
-    default_button text, path, {data: {dismiss: "modal"}}.deep_merge(options)
+    default_button text, path, {data: {dismiss: "modal"}, class: "btn-default"}.deep_merge(options)
   end
 
   def delete_button(text, path, options = {})

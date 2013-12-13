@@ -1,0 +1,10 @@
+- title @quiz.name
+
+= back_button "Natrag", quizzes_path
+
+.quiz
+  = image_tag @quiz.image.url(:medium)
+  %p= @quiz.name
+  %p= @quiz.school.name
+
+= primary_button "Započni kviz!", start_quiz_path(@quiz), method: :post

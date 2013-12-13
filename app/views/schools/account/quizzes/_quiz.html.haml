@@ -4,6 +4,7 @@
       .col-xs-6
         .pull-left.m-right-hl
           = render "activation_button", quiz: quiz
+          = image_tag quiz.image.url(:small), size: "80x80"
 
         .m-top-qt
           = quiz.name

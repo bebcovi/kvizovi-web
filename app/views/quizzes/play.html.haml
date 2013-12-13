@@ -1,7 +1,8 @@
 - title "#{game.quiz.name} · #{game.current_question_number}. pitanje"
 
 %div{class: "l-player-#{number(game.current_player_number)}"}
-  = render "timer"
+
+  = render "timer" if game.quiz.time < 5
   = render "name"
   = render "player"
   = render "progress_bar"

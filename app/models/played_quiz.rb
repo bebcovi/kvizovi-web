@@ -7,9 +7,12 @@ class PlayedQuiz < ActiveRecord::Base
 
   serialize :question_answers, Array
 
-  scope :descending,      -> { order{created_at.desc} }
-  scope :ascending,       -> { order{created_at.asc}  }
-  scope :not_interrupted, -> { where{interrupted == false} }
+  scope :descending,      ->         { order{created_at.desc} }
+  scope :ascending,       ->         { order{created_at.asc}  }
+  scope :not_interrupted, ->         { where{interrupted == false} }
+  scope :relevant_to,     ->(school) { joins{players}.
+                                       where{players.id.in school.student_ids}.
+                                       uniq }
 
   delegate :quiz, :questions, to: :quiz_snapshot
   delegate :name, to: :quiz
