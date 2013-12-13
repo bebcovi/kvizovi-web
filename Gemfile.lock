@@ -183,6 +183,8 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
+    pry-theme (1.0.1)
+      json
     puma (2.7.1)
       rack (>= 1.1, < 2.0)
     quiet_assets (1.0.2)
@@ -330,6 +332,7 @@ DEPENDENCIES
   poltergeist
   pry
   pry-rails (>= 0.3.2)
+  pry-theme
   puma
   quiet_assets (>= 1.0.2)
   rails (>= 4.0.1)
