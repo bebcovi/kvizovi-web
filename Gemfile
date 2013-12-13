@@ -55,7 +55,7 @@ group :test do
   gem "factory_girl", ">= 4.2"
   gem "pry"
   gem "nokogiri"
-  gem "capybara", github: "jnicklas/capybara"
+  gem "capybara", ">= 2.2.0"
   gem "poltergeist"
   gem "selenium-webdriver"
 end
