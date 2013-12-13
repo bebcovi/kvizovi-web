@@ -1,4 +1,4 @@
-Lektire::Application.routes.draw do
+Kvizovi::Application.routes.draw do
 
   constraints subdomain: "www" do
     get "(*path)", to: redirect(subdomain: false)

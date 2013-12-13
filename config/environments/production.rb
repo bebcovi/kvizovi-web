@@ -1,6 +1,6 @@
 require "exception_notification"
 
-Lektire::Application.configure do
+Kvizovi::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Use the routes to render HTTP-error pages instead of rendering static ones

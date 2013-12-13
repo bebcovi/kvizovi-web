@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Lektire::Application.load_tasks
+Kvizovi::Application.load_tasks
