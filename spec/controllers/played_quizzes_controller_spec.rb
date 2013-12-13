@@ -1,18 +1,21 @@
 require "spec_helper"
 
 describe PlayedQuizzesController do
+  let(:quiz_snapshot) { create(:quiz_snapshot, quiz_id: quiz.id) }
+  let(:quiz)          { create(:quiz, school: current_user) }
+  let(:student)       { create(:student, school: current_user) }
+
   before { login_as(:school) }
 
   before do
-    @quiz = create(:quiz, school: current_user)
-    @quiz_snapshot = create(:quiz_snapshot, quiz_id: @quiz.id)
-    @played_quiz = create(:played_quiz, quiz_snapshot: @quiz_snapshot)
+    @played_quiz = create(:played_quiz, quiz_snapshot: quiz_snapshot)
+    create(:playing, played_quiz: @played_quiz, player: student)
   end
 
   describe "#index" do
     context "on quiz" do
       before do
-        get :index, quiz_id: @quiz.id
+        get :index, quiz_id: quiz.id
       end
 
       it "assigns played quizzes" do
@@ -22,10 +25,7 @@ describe PlayedQuizzesController do
 
     context "on student" do
       before do
-        @student = create(:student)
-        @played_quiz.players << @student
-
-        get :index, student_id: @student.id
+        get :index, student_id: student.id
       end
 
       it "assigns played quizzes" do
@@ -47,7 +47,7 @@ describe PlayedQuizzesController do
   describe "#show" do
     context "on quiz" do
       before do
-        get :show, id: @played_quiz.id, quiz_id: @quiz.id
+        get :show, id: @played_quiz.id, quiz_id: quiz.id
       end
 
       it "assigns the position" do
@@ -57,10 +57,7 @@ describe PlayedQuizzesController do
 
     context "on student" do
       before do
-        @student = create(:student)
-        @played_quiz.players << @student
-
-        get :show, id: @played_quiz.id, student_id: @student.id
+        get :show, id: @played_quiz.id, student_id: student.id
       end
 
       it "assigns the position" do

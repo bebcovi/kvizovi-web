@@ -11,16 +11,20 @@ feature "Quizzes" do
   scenario "Creating, updating and destroying", js: true do
     visit account_quizzes_path
 
-    fill_in "Naziv", with: "Kviz"
+    click_on "Novi kviz"
+    fill_in "Naziv", with: "Novi kviz"
+    attach_file "Slika", photo_path
     submit
 
-    expect(page).to have_css(".quiz")
-    expect(page).not_to have_content("Trenutno nemate kvizova")
+    expect(current_path).to eq account_quiz_questions_path(Quiz.last)
+    expect(page).to have_content("Novi kviz")
 
     click_on "Izmijeni"
+    fill_in "Naziv", with: "Izmijenjeni kviz"
     submit
 
-    expect(page).to have_css(".quiz")
+    expect(current_path).to eq account_quiz_questions_path(Quiz.last)
+    expect(page).to have_content("Izmijenjeni kviz")
 
     click_on "Izbriši"
     click_on "Jesam"

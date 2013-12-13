@@ -176,6 +176,10 @@ GEM
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
+    pg_search (0.7.2)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     poltergeist (1.5.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -344,6 +348,7 @@ DEPENDENCIES
   newrelic_rpm
   nokogiri
   pg
+  pg_search (>= 0.7.2)
   poltergeist
   pry (>= 0.9.12.5)
   pry-debugger

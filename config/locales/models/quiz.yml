@@ -12,6 +12,12 @@ hr:
     labels:
       quiz:
         name: "Naziv"
+        image: "Slika"
+        remote_image_url: "URL od slike"
+        time: "Vrijeme po pitanju"
     placeholders:
       quiz:
         name: "Naziv"
+    hints:
+      quiz:
+        private: "Privatnim kvizovima može se pristupiti samo direktnim linkom."

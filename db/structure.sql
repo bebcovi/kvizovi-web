@@ -37,6 +37,34 @@ CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
 
 
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
+--
+-- Name: unaccent; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION unaccent; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -55,7 +83,7 @@ CREATE TABLE played_quizzes (
     begin_time timestamp without time zone,
     end_time timestamp without time zone,
     has_answers boolean DEFAULT true,
-    interrupted boolean DEFAULT false
+    interrupted boolean DEFAULT true
 );
 
 
@@ -222,7 +250,10 @@ CREATE TABLE quizzes (
     school_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    shuffle_questions boolean DEFAULT false
+    shuffle_questions boolean DEFAULT false,
+    image character varying(255),
+    private boolean DEFAULT false,
+    "time" integer DEFAULT 5
 );
 
 
@@ -849,5 +880,15 @@ INSERT INTO schema_migrations (version) VALUES ('20131118231304');
 INSERT INTO schema_migrations (version) VALUES ('20131119003335');
 
 INSERT INTO schema_migrations (version) VALUES ('20131119130746');
+
+INSERT INTO schema_migrations (version) VALUES ('20131206160423');
+
+INSERT INTO schema_migrations (version) VALUES ('20131209000704');
+
+INSERT INTO schema_migrations (version) VALUES ('20131211004056');
+
+INSERT INTO schema_migrations (version) VALUES ('20131212000531');
+
+INSERT INTO schema_migrations (version) VALUES ('20131212221735');
 
 INSERT INTO schema_migrations (version) VALUES ('20140320103450');

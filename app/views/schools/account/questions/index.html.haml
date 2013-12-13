@@ -1,5 +1,10 @@
 - title @quiz.name
 
+%h1= @quiz.name
+
+= edit_button "", edit_account_quiz_path(@quiz), title: "Izmijeni"
+= delete_button "", account_quiz_path(@quiz), title: "Izbriši", data: {confirm: "Jeste li sigurni da želite izbrisati ovaj kviz?"}
+
 .clearfix.m-bottom
   .dropdown.pull-left
     = add_button "Novo pitanje".append_icon("caret-down"), "#", class: "btn btn-primary dropdown-toggle", data: {toggle: "dropdown"}
@@ -17,7 +22,7 @@
 
 - if not @quiz.activated?
   .alert.alert-warning
-    Ovaj kviz je trenutno neaktivan, što znači da ga učenici ne vide.
+    Ovaj kviz je trenutno neaktivan, što znači da mu učenici neće moći pristupiti.
     Kada ste dovršili kviz, aktivirajte ga klikom na lampicu gore (#{icon("lamp")}).
 
 - if questions.any?

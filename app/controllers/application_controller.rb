@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
   def account_path
     case
     when school_signed_in?  then account_quizzes_path
-    when student_signed_in? then choose_quiz_path
+    when student_signed_in? then quizzes_path
     end
   end
   helper_method :account_path

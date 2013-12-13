@@ -1,12 +1,3 @@
 - title @quiz.name
 
-.row
-  .col-sm-8
-
-    = simple_form_for [:account, @quiz] do |f|
-
-      = f.input :name
-
-      = buttons do
-        = cancel_button "Odustani", account_quizzes_path, class: "btn-default"
-        = submit_button "Spremi"
+= render "form"
