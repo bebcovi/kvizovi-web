@@ -1,6 +1,6 @@
 class PlayedQuizzesController < ApplicationController
   before_action :authenticate_user!
-  before_action :assing_scope
+  before_action :assign_scope
 
   decorates_assigned :played_quiz
 
@@ -19,7 +19,7 @@ class PlayedQuizzesController < ApplicationController
 
   private
 
-  def assing_scope
+  def assign_scope
     @scope = case
              when params[:student_id] then Student.find(params[:student_id])
              when params[:quiz_id]    then Quiz.find(params[:quiz_id])

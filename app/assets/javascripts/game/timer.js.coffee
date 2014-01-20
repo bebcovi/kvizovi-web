@@ -54,9 +54,9 @@ class App.Timer
       docCookies.setItem("timeRemaining", value)
       docCookies.setItem("signature", @signature)
 
-class App.Countdown
+App.Countdown = {
 
-  @start: (seconds, @options = {}) ->
+  start: (seconds, @options = {}) ->
     @reset(seconds)
 
     @intervalId = setInterval =>
@@ -66,26 +66,28 @@ class App.Countdown
         @stop()
     , 1000
 
-  @reset: (seconds) ->
+  reset: (seconds) ->
     @stop() if @isRunning()
     @setTime(seconds)
 
-  @setTime: (seconds) ->
+  setTime: (seconds) ->
     @timeRemaining = seconds
     @changed()
 
-  @tick: ->
+  tick: ->
     @timeRemaining -= 1
     @changed()
 
-  @changed: ->
+  changed: ->
     @options.onChange(@timeRemaining) if @options.onChange
 
-  @stop: ->
+  stop: ->
     clearInterval(@intervalId)
 
-  @isRunning: ->
+  isRunning: ->
     !!@intervalId
 
-  @hasEnded: ->
+  hasEnded: ->
     @timeRemaining == 0
+
+}
