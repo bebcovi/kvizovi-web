@@ -45,6 +45,7 @@ gem "active_attr", ">= 0.8.1"
 gem "inherited_resources", ">= 1.4.1"
 
 # Development
+gem "pry", ">= 0.9.12.5"
 gem "pry-rails", ">= 0.3.2"
 gem "pry-theme"
 gem "dotenv"
@@ -54,7 +55,6 @@ group :test do
   gem "rspec-rails", ">= 3.0.0.beta1"
   gem "rspec-collection_matchers", ">= 0.0.2"
   gem "factory_girl", ">= 4.2"
-  gem "pry"
   gem "nokogiri"
   gem "capybara", ">= 2.2.0"
   gem "poltergeist"
@@ -62,6 +62,7 @@ group :test do
 end
 
 group :development do
+  gem "spring"
   gem "thin"
   gem "quiet_assets", ">= 1.0.2"
   gem "better_errors", ">= 1.0.1"
