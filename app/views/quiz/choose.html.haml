@@ -18,9 +18,13 @@
   %section.login
     %p Daj drugom igraču da se prijavi:
     = f.error(:players_credentials) if f.error(:players_credentials)
-    = f.simple_fields_for :players_credentials, index: nil do |p|
-      = p.input :username, input_html: {value: (params[:game_specification][:players_credentials].first[:username] if params[:action] == "start")}
-      = p.input :password
+    = f.simple_fields_for :players_credentials, index: nil, class: "form-inline" do |p|
+      .row
+        .col-sm-6
+          = p.input :username, input_html: {value: (params[:game_specification][:players_credentials].first[:username] if params[:action] == "start")}
+      .row
+        .col-sm-6
+          = p.input :password
 
   = buttons do
     = submit_button "Započni kviz!"

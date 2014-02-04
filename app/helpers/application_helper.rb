@@ -14,7 +14,7 @@ module ApplicationHelper
   def breadcrumbs(*items)
     content_tag :ol, class: "breadcrumb" do
       items.inject(raw("")) do |crumbs, item|
-        crumbs << content_tag(:li, class: ("active" if item == items.last)) { raw(item) }
+        crumbs << content_tag(:li, class: ("active" if item == items.last)) { raw(item) } + "\n"
       end
     end
   end
@@ -57,7 +57,7 @@ module ApplicationHelper
       f.input(:"#{attribute}", as: :file, wrapper: false, error: false) +
       f.input(:"remote_#{attribute}_url", wrapper: false, error: false) +
       f.hidden_field(:"#{attribute}_cache") +
-      image_tag(f.object.send(attribute).url(:medium), class: "img-polaroid image-preview")
+      image_tag(f.object.send(attribute).url(:medium), class: "img-thumbnail image-preview")
     end
   end
 end

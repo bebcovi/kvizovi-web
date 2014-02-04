@@ -1,4 +1,4 @@
-ruby "2.0.0"
+ruby "2.1.0"
 
 source "https://rubygems.org"
 
@@ -9,7 +9,7 @@ gem "pg"
 group :assets do
   gem "sass-rails", ">= 4.0.0"
   gem "bourbon"
-  gem "bootstrap-sass-rails", "< 3"
+  gem "bootstrap-sass"
   gem "jquery-rails"
   gem "jquery-ui-rails"
   gem "turbolinks", ">= 1.3.1"

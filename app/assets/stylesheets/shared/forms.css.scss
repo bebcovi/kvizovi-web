@@ -1,0 +1,16 @@
+@import "config/bootstrap";
+@import "bootstrap/variables";
+
+label {
+  .required {
+    font-weight: 300;
+    color: $brand-danger;
+  }
+}
+
+.radio_buttons,
+.check_boxes {
+  ol, ul {
+    padding-left: 0;
+  }
+}

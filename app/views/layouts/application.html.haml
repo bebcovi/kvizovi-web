@@ -3,7 +3,8 @@
   %head
     %meta{charset: "utf-8"}
     %meta{:"http-equiv" => "X-UA-Compatibile", content: "IE=edge,chrome=1"}
-    %title Kvizovi · #{title}
+    %title #{title} · Kvizovi
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
     %meta{name: "robots", content: "noindex"}
     = favicon_link_tag "/favicon.ico"
     = render "javascript"
@@ -11,18 +12,27 @@
     = javascript_include_tag "application", :"data-turbolinks-track" => true
     = csrf_meta_tag
 
-  %body{class: "l-page-#{params[:controller]} l-page-#{params[:controller]}-#{params[:action]}"}
-    .navbar.navbar-static-top.navbar-inverse
-      .navbar-inner
-        .container
-          = link_to icon("newspaper"), root_path, class: "brand"
+  %body{class: "#{params[:controller]} #{params[:controller]}-#{params[:action]}"}
+    .navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          %button.navbar-toggle{type: "button", data: {toggle: "collapse", target: ".navbar-collapse"}}
+            %span.sr-only Promijeni navigaciju
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+
+          = link_to icon("books"), root_path, class: "navbar-brand"
+
+        .collapse.navbar-collapse
           = render "navigation"
 
-    - if content_for? :hero_unit
-      .hero-unit
-        = content_for :hero_unit
+    - if content_for? :jumbotron
+      .jumbotron
+        .container
+          = content_for :jumbotron
 
-    .container.container-main
+    %main.container
       = render "flash", flash: flash
       = render "breadcrumbs"
 

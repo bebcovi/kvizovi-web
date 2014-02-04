@@ -1,0 +1,20 @@
+@import "config/bootstrap";
+@import "bootstrap/variables";
+@import "addons/position";
+
+.question {
+  .btn {
+    font-family: "icomoon", $font-family-base;
+  }
+}
+
+  .question-type-icon {
+    @include position(relative, 1px 0 0 0);
+  }
+
+  .question-content {
+    background-color: rgba(#000, .025);
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }

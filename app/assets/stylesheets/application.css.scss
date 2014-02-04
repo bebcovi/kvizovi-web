@@ -1,73 +1,19 @@
-@import
-  "config/bootstrap",
+//= require bootstrap
 
-  "html5-boilerplate",
-  "twitter/bootstrap-no-sprites",
-  "bourbon",
-  "icons",
+//= require icomoon
 
-  "site-settings",
-  "mixins",
-  "functions",
+//= require shared/base
+//= require shared/wf
+//= require shared/main
+//= require shared/forms
 
-  "base",
-  "states",
+//= require components/bleed
+//= require components/jumbotron
+//= require components/list
+//= require components/navigation
+//= require components/page-header
+//= require components/question-list
+//= require components/quiz-list
+//= require components/space
 
-  "layout/wf",
-  "layout/js",
-
-  "layout/page/tour",
-  "layout/page/updates",
-
-  "layout/design",
-  "layout/play",
-  "layout/feedback",
-  "layout/played",
-
-  "layout/question-association",
-  "layout/question-image",
-
-  "layout/player",
-
-  "module/additional-info",
-  "module/alert",
-  "module/align-middle",
-  "module/app-role",
-  "module/block",
-  "module/btn",
-  "module/col",
-  "module/container",
-  "module/control-group",
-  "module/count",
-  "module/dropdown-menu",
-  "module/fade",
-  "module/faded",
-  "module/form",
-  "module/grades",
-  "module/hero-unit",
-  "module/hidden",
-  "module/icon",
-  "module/labels-badges",
-  "module/list-inline-block",
-  "module/list-no-bullets",
-  "module/list-pretty",
-  "module/list-unstyled",
-  "module/modal",
-  "module/muted",
-  "module/navbar",
-  "module/no-items",
-  "module/popover",
-  "module/progress",
-  "module/question",
-  "module/reveal",
-  "module/slide",
-  "module/sort",
-  "module/space",
-  "module/subtle",
-  "module/survey",
-  "module/table",
-  "module/timer",
-  "module/tooltip",
-
-  "patches/breadcrumb",
-  "patches/labels-badges"
+//= require sections/survey

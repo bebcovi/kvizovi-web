@@ -1,7 +1,7 @@
 - title @quiz.name
 
-.clearfix
-  .dropdown.pull-left.space-bottom
+.clearfix.m-bottom
+  .dropdown.pull-left
     = add_button "Novo pitanje".append_icon("caret-down"), "#", class: "btn btn-primary dropdown-toggle", data: {toggle: "dropdown"}
     %ul.dropdown-menu
       %li= link_to "Točno/netočno".prepend_icon("checkbox"),     new_account_quiz_question_path(category: "boolean")
@@ -9,8 +9,11 @@
       %li= link_to "Asocijacija".prepend_icon("shuffle"),        new_account_quiz_question_path(category: "association")
       %li= link_to "Upiši točan odgovor".prepend_icon("pencil"), new_account_quiz_question_path(category: "text")
 
-  = button "Izmijeni redoslijed".prepend_icon("sort"), order_account_quiz_questions_path(@quiz), class: "pull-right"
-  .pull-right= render "account/quizzes/activation_button", quiz: @quiz
+  .pull-right
+    .pull-left.m-right-hl
+      = render "account/quizzes/activation_button", quiz: @quiz
+    .pull-left
+      = button "Izmijeni redoslijed".prepend_icon("sort"), order_account_quiz_questions_path(@quiz), class: "btn-sm btn-default"
 
 - if not @quiz.activated?
   .alert.alert-warning
@@ -19,7 +22,7 @@
 
 - if questions.any?
 
-  %ol.list-pretty
+  #question-list.list-group
     = render partial: "question", collection: questions
 
 - else

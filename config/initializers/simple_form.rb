@@ -46,41 +46,31 @@ SimpleForm.setup do |config|
     b.use :error, :wrap_with => { :tag => :span, :class => :error }
   end
 
-  config.wrappers :bootstrap, :tag => 'div', :class => 'control-group', :error_class => 'error' do |b|
+  config.wrappers :bootstrap, :tag => 'div', :class => 'form-group', :error_class => 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
-    b.wrapper :bootstrap_wrapper, :tag => 'div', :class => 'controls' do |ba|
-      ba.use :input
-      ba.use :error, :wrap_with => { :tag => 'p', :class => 'error-block' }
-      ba.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
-    end
+    b.use :input
+    b.use :error, :wrap_with => { :tag => 'p', :class => 'help-block' }
+    b.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
   end
 
-  config.wrappers :prepend, :tag => 'div', :class => "control-group", :error_class => 'error' do |b|
+  config.wrappers :prepend, :tag => 'div', :class => "form-group", :error_class => 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
-    b.wrapper :tag => 'div', :class => 'controls' do |input|
-      input.wrapper :tag => 'div', :class => 'input-prepend' do |prepend|
-        prepend.use :input
-      end
-      input.use :error, :wrap_with => { :tag => 'p', :class => 'error-block' }
-      input.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
-    end
+    b.use :input
+    b.use :error, :wrap_with => { :tag => 'p', :class => 'help-block' }
+    b.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
   end
 
-  config.wrappers :append, :tag => 'div', :class => "control-group", :error_class => 'error' do |b|
+  config.wrappers :append, :tag => 'div', :class => "form-group", :error_class => 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
-    b.wrapper :tag => 'div', :class => 'controls' do |input|
-      input.wrapper :tag => 'div', :class => 'input-append' do |append|
-        append.use :input
-      end
-      input.use :error, :wrap_with => { :tag => 'p', :class => 'error-block' }
-      input.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
-    end
+    b.use :input
+    b.use :error, :wrap_with => { :tag => 'p', :class => 'help-block' }
+    b.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
   end
 
   # Wrappers for forms and inputs using the Twitter Bootstrap toolkit.
@@ -107,7 +97,7 @@ SimpleForm.setup do |config|
   config.error_notification_tag = :div
 
   # CSS class to add for error notification helper.
-  config.error_notification_class = 'alert alert-error'
+  config.error_notification_class = 'alert alert-danger'
 
   # ID to add for error notification helper.
   # config.error_notification_id = nil
@@ -136,7 +126,7 @@ SimpleForm.setup do |config|
   config.label_text = lambda { |label, required| label }
 
   # You can define the class to use on all labels. Default is nil.
-  config.label_class = 'control-label'
+  # config.label_class = 'control-label'
 
   # You can define the class to use on all forms. Default is simple_form.
   # config.form_class = :simple_form
@@ -176,4 +166,12 @@ SimpleForm.setup do |config|
 
   # Cache SimpleForm inputs discovery
   # config.cache_discovery = !Rails.env.development?
+end
+
+%w[date_time_input numeric_input password_input string_input text_input collection_select_input].each do |input_name|
+  SimpleForm::Inputs.const_get(input_name.camelize).class_eval do
+    def input_html_classes
+      super + ["form-control"]
+    end
+  end
 end

@@ -2,13 +2,13 @@
 
   %hr
 
-  .l-played.space-bottom{class: "l-question-#{question.category} l-#{status} l-player-#{number(idx % played_quiz.players.count + 1)}"}
+  .l-played.m-bottom{class: "l-question-#{question.category} l-#{status} l-player-#{number(idx % played_quiz.players.count + 1)}"}
 
     .player-color
       #{player.full_name.prepend_icon("user")} (#{player.username})
 
     %h2.question-title= question.content
 
-    = image_tag question.image.url(:small), class: "img-polaroid space-half-bottom" if question.image?
+    = image_tag question.image.url(:small), class: "img-thumbnail m-bottom-hl" if question.image?
     = render "questions/answer/#{question.category}", question: question, answer: answer
     = render "played_quizzes/feedback/#{status}", question: question

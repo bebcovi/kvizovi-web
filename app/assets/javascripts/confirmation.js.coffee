@@ -1,5 +1,5 @@
 #= require ./templates/confirmation
-#= require twitter/bootstrap/modal
+#= require bootstrap/modal
 
 $.rails.allowAction = ($link) ->
   if $link.attr("data-confirm")

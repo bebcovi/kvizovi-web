@@ -1,0 +1,28 @@
+@import "bootstrap/variables";
+@import "globals/mixins";
+@import "addons/position";
+
+.jumbotron {
+  @include subtle-pattern("lightpaperfibers", 500px 300px);
+  padding-bottom: $sub * 3;
+  border-bottom: 2px solid rgba($brand-primary, .15);
+  color: rgba(#000, .75);
+
+  h1 {
+    i {
+      @include position(relative, 5px 0 0 0);
+    }
+  }
+}
+
+  .jumbotron-btn {
+    @media (min-width: $screen-sm-min) {
+      &.student {
+        text-align: right;
+      }
+
+      &.school {
+        text-align: left;
+      }
+    }
+  }

@@ -1,11 +1,11 @@
 - title "Uređivanje kvizova"
 
-.space-bottom
+.m-bottom
   = render "new"
 
-%ol.list-pretty#quizzes
-  - if @quizzes.any?
-    = render @quizzes
-  - else
-    %p.no-items
-      Trenutno nemate kvizova.
+#quizzes
+  #quiz-list.list-group
+    = render @quizzes if @quizzes.any?
+
+  - if @quizzes.empty?
+    .no-items.well Trenutno nemate kvizova.

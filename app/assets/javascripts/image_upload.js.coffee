@@ -1,4 +1,4 @@
-#= require twitter/bootstrap/tooltip
+#= require bootstrap/tooltip
 
 jQuery ->
 

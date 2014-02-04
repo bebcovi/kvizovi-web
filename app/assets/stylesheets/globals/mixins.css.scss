@@ -1,0 +1,65 @@
+@import "css3/hidpi-media-query";
+@import "globals/variables";
+
+// type
+
+@mixin link-color($color1, $color2: $color1) {
+  color: $color1;
+  #{$interact} {
+    color: $color2;
+  }
+}
+
+@mixin font-size($font-size, $line-height: false) {
+  font-size: $font-size;
+  font-size: ($font-size / $font-size-computed) * 1rem;
+
+  @if $line-height {
+    line-height: ($line-height * $line-height-computed) / $font-size;
+  } @else {
+    line-height: ceil($font-size / $line-height-computed) * ($line-height-computed / $font-size);
+  }
+}
+
+// patterns
+
+@mixin subtle-pattern($pattern, $size, $fallback: #fff) {
+  background-color: $fallback;
+  background-image: image-url("patterns/#{$pattern}/#{$pattern}.png");
+  background-repeat: repeat;
+  background-size: $size;
+
+  @include hidpi {
+    background-image: image-url("patterns/#{$pattern}/#{$pattern}_@2X.png");
+  }
+}
+
+// Bleeding is usually used on elements which backgrounds
+// you want to stretch all the way to the edges
+// of the containing element which has padding.
+
+// Demo: http://codepen.io/silvenon/pen/mKEFd
+
+@mixin bleed($side: both, $amount: $grid-gutter-width) {
+  @if $side == left {
+    margin-left:  - $amount;
+    padding-left:   $amount;
+  }
+  @if $side == right {
+    margin-right: - $amount;
+    padding-right:  $amount;
+  }
+  @if $side == both {
+    margin-left:  - $amount;
+    margin-right: - $amount;
+    padding-left:   $amount;
+    padding-right:  $amount;
+  }
+}
+
+@mixin no-bleed {
+  margin-left:    0;
+  margin-right:   0;
+  padding-left:   0;
+  padding-right:  0;
+}

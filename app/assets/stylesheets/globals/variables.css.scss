@@ -1,0 +1,26 @@
+@import "config/bootstrap";
+@import "bootstrap/variables";
+
+// shortcuts
+
+$interact:  "&:hover, &:focus";
+$sub:       $line-height-computed;
+$suh:       $sub / 2;
+
+// social colors
+
+$color-facebook:        #3b5998;
+$color-twitter:         #00aced;
+$color-google-plus:     #da2713;
+$color-vimeo:           #1bb7ea;
+$color-youtube:         #e14d40;
+$color-github:          #000000;
+$color-gmail:           #d72c2c;
+$color-linked-in:       #0274b3;
+$color-instagram:       #624e45;
+$color-vine:            #00a478;
+$color-dribbble:        #df4c85;
+$color-behance:         #000000;
+$color-flickr-blue:     #1e65d9;
+$color-flickr-pink:     #fc1486;
+$color-soundcloud:      #ff631c;

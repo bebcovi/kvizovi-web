@@ -1,0 +1,11 @@
+@import "globals/variables";
+
+main {
+  > .alert {
+    margin-top: 0;
+    margin-bottom: $sub;
+    padding-top: $suh/3;
+    padding-bottom: $suh/3;
+    background-image: none;
+  }
+}
