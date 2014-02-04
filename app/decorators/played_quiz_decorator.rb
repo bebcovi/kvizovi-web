@@ -2,32 +2,24 @@ class PlayedQuizDecorator < Draper::Decorator
   delegate_all
 
   def results
-    students.zip(scores, score_percentages, student_numbers, ranks)
+    players.zip(scores, ranks)
   end
 
   def scores
-    result = Array.new(students_count, 0)
-    question_answers.each_with_index do |answer, idx|
+    scores = Array.new(players.count, 0)
+    question_answers.each.with_index do |answer, idx|
       if has_answers?
-        result[idx % students_count] += 1 if QuestionAnswer.new(questions[idx]).correct_answer?(answer)
+        scores[idx % players.count] += 1 if QuestionAnswer.new(questions[idx]).correct_answer?(answer)
       else
-        result[idx % students_count] += 1 if answer
+        scores[idx % players.count] += 1 if answer
       end
     end
-    result
-  end
-
-  def score_percentages
-    scores.map { |score| percentage(score, total_score) }
-  end
-
-  def student_numbers
-    (1..students.count).to_a
+    scores
   end
 
   def ranks
-    score_percentages.map do |score_percentage|
-      case score_percentage
+    scores.map do |score|
+      case h.percentage score, total_score
       when 0...30  then "znalac-malac"
       when 30...70 then "ekspert"
       when 70..100 then "super-ekspert"
@@ -36,39 +28,33 @@ class PlayedQuizDecorator < Draper::Decorator
   end
 
   def total_score
-    questions_count / students_count
+    questions_count / players.count
   end
 
   def played_questions
-    raise "This played quiz didn't store answers" unless has_answers?
-    _students = Student.find(students_order)
-    questions.map.with_index do |question, idx|
-      question = QuestionAnswer.new(question)
+    Array(questions).map.with_index do |question, idx|
       answer = question_answers[idx]
-      status = if question.correct_answer?(answer) then "correct"
-               elsif answer == Question::NO_ANSWER then "unanswered"
-               elsif answer == nil                 then "interrupted"
-               else                                     "wrong"
-               end
-      [question, answer, _students[idx % students_count], status, idx]
+      status = get_status(question, answer)
+      player = players[idx % players.count]
+
+      [question, answer, player, status]
     end
   end
 
   private
 
-  def percentage(part, whole)
-    unless part.zero? and whole.zero?
-      ((part.to_f / whole.to_f) * 100).round
+  def get_status(question, answer)
+    case
+    when QuestionAnswer.new(question).correct_answer?(answer)
+      "correct"
+    when answer.nil?
+      "unanswered"
     else
-      0
+      "wrong"
     end
   end
 
-  def students_count
-    @students_count ||= students.count
-  end
-
   def questions_count
-    @questions_count ||= has_answers? ? questions.count : question_answers.count
+    has_answers? ? questions.count : question_answers.count
   end
 end

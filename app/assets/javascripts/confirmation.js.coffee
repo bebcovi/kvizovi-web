@@ -1,10 +1,11 @@
 #= require ./templates/confirmation
+#= require bootstrap/modal
 
 $.rails.allowAction = ($link) ->
   if $link.attr("data-confirm")
-    new Confirmation($link.attr("data-confirm")).show(
-      onConfirm: => $.rails.confirmed($link)
-    )
+    $(JST["templates/confirmation"] message: $link.attr("data-confirm"))
+      .modal()
+      .on "click", ".confirm", => $.rails.confirmed($link)
     false
   else
     true
@@ -12,12 +13,3 @@ $.rails.allowAction = ($link) ->
 $.rails.confirmed = ($link) ->
   $link.removeAttr("data-confirm")
   $link.trigger("click.rails")
-
-class @Confirmation
-
-  constructor: (@message) ->
-
-  show: (@options) ->
-    $(JST["templates/confirmation"](message: @message))
-      .modal()
-      .on "click", ".confirm", => @options.onConfirm()

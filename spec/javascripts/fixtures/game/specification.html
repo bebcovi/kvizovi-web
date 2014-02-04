@@ -1,0 +1,65 @@
+<form accept-charset="UTF-8" action="/quiz/start" class="simple_form new_game_specification" id="new_game_specification" method="post" novalidate="novalidate">
+  <section class="quizzes">
+    <p>Odaberi kviz:</p>
+
+    <div class="control-group radio_buttons required game_specification_quiz_id">
+      <div class="controls">
+        <ul>
+          <li class="radio">
+            <label>
+              <input class="radio_buttons required" id="game_specification_quiz_id_1" name="game_specification[quiz_id]" type="radio" value="1">
+              Antigona
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="players">
+    <p>Igraš li sam ili još s nekim?</p>
+
+    <div class="control-group radio_buttons required game_specification_students_count">
+      <div class="controls">
+        <ul>
+          <li class="radio">
+            <label>
+              <input class="radio_buttons required" id="game_specification_students_count_1" name="game_specification[students_count]" type="radio" value="1">
+              Samo ja
+            </label>
+          </li>
+          <li class="radio">
+            <label class="">
+              <input class="radio_buttons required" id="game_specification_students_count_2" name="game_specification[students_count]" type="radio" value="2">
+              Još netko
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="login">
+    <p>Daj drugom igraču da se prijavi:</p>
+
+    <div class="control-group string required game_specification_students_credentials_username">
+      <label class="string required control-label" for="game_specification_students_credentials__username">Korisničko ime</label>
+      <div class="controls">
+        <input class="string required" id="game_specification_students_credentials__username" name="game_specification[students_credentials][][username]" type="text" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="control-group password required game_specification_students_credentials_password">
+      <label class="password required control-label" for="game_specification_students_credentials__password">Lozinka</label>
+      <div class="controls">
+        <input class="password required" id="game_specification_students_credentials__password" name="game_specification[students_credentials][][password]" type="password">
+      </div>
+    </div>
+  </section>
+
+  <div class="btn-toolbar">
+    <button class="btn btn-primary" data-disable-with="Učitavanje..." name="button" type="submit">
+      Započni kviz!
+    </button>
+  </div>
+</form>

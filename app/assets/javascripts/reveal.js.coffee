@@ -1,27 +1,29 @@
 jQuery ->
 
   $(".reveal-content").each ->
-    new ContentReveal(@).enable()
+    new App.Content(@).hide()
 
-class @ContentReveal
+class App.Content
 
   constructor: (content) ->
     @content = $(content)
 
-  enable: ->
-    return if @content.isEmpty()
-
+  hide: ->
     @content.hide()
-
-    @showButton()
+    @createRevealButton()
       .appendTo(@content.prev())
-      .on("click", @showContent)
       .tooltip(placement: "right", container: "body")
 
-  showContent: (event) =>
-    event.preventDefault()
+  reveal: ->
     @content.show()
-    $(event.target).hide()
+    @revealButton.hide()
 
-  showButton: ->
-    $("<a>", href: "#", class: "reveal-toggle", title: @content.attr("data-reveal"))
+  createRevealButton: ->
+    @revealButton = $ "<a>",
+      href: "#"
+      class: "reveal-toggle"
+      title: @content.attr("data-reveal")
+
+    @revealButton.on "click", (event) =>
+      event.preventDefault()
+      @reveal()

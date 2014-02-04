@@ -2,7 +2,7 @@ describe "AssociationQuestion", ->
 
   beforeEach ->
     loadFixtures("questions/association")
-    @it = new AssociationQuestion("table")
+    @it = new App.AssociationQuestion("table")
 
   describe "#enhance", ->
 
@@ -15,7 +15,7 @@ describe "AssociationQuestion", ->
 
   describe "#swap", ->
 
-    it "swaps to elements", ->
+    it "swaps two elements", ->
       $one = $("table span").slice(0, 1)
       $oneText = $one.text()
       $two = $("table span").slice(1, 2)

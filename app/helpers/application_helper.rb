@@ -40,11 +40,24 @@ module ApplicationHelper
   end
 
   def percentage(part, total)
-    ((part.to_f / total.to_f) * 100).round
+    unless total.zero?
+      ((part.to_f / total.to_f) * 100).round
+    else
+      0
+    end
   end
 
   def active_content_tag(tag_name, active, options = {}, &block)
     css_class = "active" if active
     content_tag tag_name, options.merge_class(css_class), &block
+  end
+
+  def image_field(f, attribute)
+    f.input :"#{attribute}", label: false, bootstrap_wrapper: false, wrapper_html: {class: "image_upload"} do
+      f.input(:"#{attribute}", as: :file, wrapper: false, error: false) +
+      f.input(:"remote_#{attribute}_url", wrapper: false, error: false) +
+      f.hidden_field(:"#{attribute}_cache") +
+      image_tag(f.object.send(attribute).url(:medium), class: "img-thumbnail image-preview")
+    end
   end
 end

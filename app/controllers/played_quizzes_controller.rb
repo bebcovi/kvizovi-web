@@ -1,13 +1,13 @@
 class PlayedQuizzesController < ApplicationController
   before_action :authenticate_user!
-  before_action :assing_scope
+  before_action :assign_scope
 
   decorates_assigned :played_quiz
 
   def index
     @played_quizzes = @scope.played_quizzes
-      .descending
-      .includes(:quiz_snapshot, :students)
+      .not_interrupted.descending
+      .includes(:quiz_snapshot, :players)
       .paginate(page: params[:page], per_page: 15)
       .decorate
   end
@@ -19,7 +19,7 @@ class PlayedQuizzesController < ApplicationController
 
   private
 
-  def assing_scope
+  def assign_scope
     @scope = case
              when params[:student_id] then Student.find(params[:student_id])
              when params[:quiz_id]    then Quiz.find(params[:quiz_id])

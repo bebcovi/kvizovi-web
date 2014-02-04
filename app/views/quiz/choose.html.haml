@@ -2,26 +2,26 @@
 
 %h1 Zdravo :)
 
-= simple_form_for @quiz_specification, url: start_quiz_path do |f|
+= simple_form_for @game_specification, url: start_quiz_path do |f|
 
   %section.quizzes
-    - if quizzes.any?
+    - if @quizzes.any?
       %p Odaberi kviz:
-      = f.input :quiz_id, collection: quizzes, as: :radio_buttons, label: false
+      = f.input :quiz_id, collection: @quizzes, as: :radio_buttons, label: false
     - else
       %p Vaša škola još nije napravila kvizove.
 
   %section.players
     %p Igraš li sam ili još s nekim?
-    = f.input :students_count, collection: [["Samo ja", 1], ["Još netko", 2]], as: :radio_buttons, label: false
+    = f.input :players_count, collection: [["Samo ja", 1], ["Još netko", 2]], as: :radio_buttons, label: false
 
   %section.login
     %p Daj drugom igraču da se prijavi:
-    = f.error(:students_credentials) if f.error(:students_credentials)
-    = f.simple_fields_for :students_credentials, index: nil, class: "form-inline" do |p|
+    = f.error(:players_credentials) if f.error(:players_credentials)
+    = f.simple_fields_for :players_credentials, index: nil, class: "form-inline" do |p|
       .row
         .col-sm-6
-          = p.input :username, input_html: {value: (params[:quiz_specification][:students_credentials].first[:username] if params[:action] == "prepare")}
+          = p.input :username, input_html: {value: (params[:game_specification][:players_credentials].first[:username] if params[:action] == "start")}
       .row
         .col-sm-6
           = p.input :password

@@ -1,70 +1,110 @@
-#= require ./utils/icon
 #= require bootstrap/tooltip
 
 jQuery ->
 
-  new ImageUpload(".question_image").enhance()
+  new App.ImageUpload(".image_upload").enhance()
 
-class @ImageUpload
+class App.ImageUpload
 
   constructor: (wrapper) ->
     @wrapper = $(wrapper)
 
-    $("label.file").before @toggleButton()
-      .attr("title", "Na računalu")
-      .html($.icon("storage"))
-    @file = @wrapper.children().slice(0, 3)
-
-    $("label.url").before @toggleButton()
-      .attr("title", "Na internetu")
-      .html($.icon("link"))
-    @url = @wrapper.children().slice(3, 6)
-
-    @imagePreview = $(".image-preview")
-    @existingSrc = @imagePreview.attr("src")
-
-    $(".toggle-type").tooltip()
+    $elements = @wrapper.children()
+    @file = new @FileUpload($elements.slice(0, 2))
+    @url  = new @UrlUpload($elements.slice(2, 4))
 
   enhance: ->
-    return if @wrapper.isEmpty()
+    @preview = new @ImagePreview(@wrapper.find(".image-preview"))
 
-    if @isUrlActive() then @file.hide() else @url.hide()
-    @file.on "change", @updatePreview
-    @url.on "keyup", @updatePreview
+    if @url.isActive() then @file.toggle() else @url.toggle()
 
-  updatePreview: (event) =>
-    input = event.target
-
-    if input.value
-      @imagePreview.show()
-    else
-      if @existingSrc
-        @imagePreview
-          .attr("src", @existingSrc)
-          .show()
-      else
-        @imagePreview.hide()
-
-    switch input.type
-      when "file"
-        reader = new FileReader
-        reader.onload = (event) =>
-          imageURL = event.target.result
-          @previewImage imageURL
-        reader.readAsDataURL input.files[0]
-      when "url"
-        imageURL = input.value
-        @previewImage imageURL
-
-  previewImage: (url) ->
-    $(".image-preview").attr("src", url).show()
-
-  isUrlActive: ->
-    @url.find("input").val()
-
-  toggleButton: ->
-    $("<a href='#' class='btn toggle-type'>")
+    $(".toggle-type")
+      .tooltip()
       .on "click", (event) =>
         event.preventDefault()
-        @file.toggle().find("input").val("").trigger("change")
-        @url.toggle().find("input").val("").trigger("keyup")
+        @switchType()
+
+    @file.onUpdate (input) => @preview.update(input)
+    @url.onUpdate  (input) => @preview.update(input)
+
+  switchType: ->
+    @file.toggle()
+    @url.toggle()
+    @preview.reset()
+
+  FileUpload: class
+
+    constructor: (@fields) ->
+      @fields.filter("label").before @toggleButton()
+      @fields = @fields.add @fields.filter("label").prev()
+
+    toggle: ->
+      @fields.toggle()
+        .find("input").val("")
+
+    onUpdate: (callback) ->
+      @fields.find("input").on "change", (event) =>
+        callback(event.target)
+
+    toggleButton: ->
+      $ "<a>",
+        href: "#"
+        class: "btn toggle-type"
+        title: "Na računalu"
+        html: $.icon("storage")
+
+  UrlUpload: class
+
+    constructor: (@fields) ->
+      @fields.filter("label").before @toggleButton()
+      @fields = @fields.add @fields.filter("label").prev()
+
+    toggle: ->
+      @fields.toggle()
+        .find("input").val("")
+
+    onUpdate: (callback) ->
+      @fields.find("input").on "keyup change", (event) =>
+        callback(event.target)
+
+    isActive: ->
+      @fields.find("input").val() != ""
+
+    toggleButton: ->
+      $ "<a>",
+        href: "#"
+        class: "btn toggle-type"
+        title: "Na internetu"
+        html: $.icon("link")
+
+  ImagePreview: class
+
+    constructor: (value) ->
+      @value = $(value)
+      @originalUrl = @value.attr("src")
+      @value.hide() unless @originalUrl
+
+    update: (input) ->
+      @reset() if not input.value
+
+      switch input.type
+        when "file" then @updateFromFile(input)
+        when "url"  then @updateFromUrl(input)
+
+    updateFromFile: (input) ->
+      reader = new FileReader
+      reader.onload = (event) =>
+        url = event.target.result
+        @set url
+      reader.readAsDataURL input.files[0]
+
+    updateFromUrl: (input) ->
+      url = input.value
+      @set url
+
+    reset: ->
+      @set @originalUrl
+
+    set: (url) ->
+      @value.attr("src", url)
+      if url then @value.show() else @value.hide()

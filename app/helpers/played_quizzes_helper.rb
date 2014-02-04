@@ -4,7 +4,7 @@ module PlayedQuizzesHelper
   end
 
   def AssociationAnswer(question, answer, &block)
-    if answer != nil and answer != Question::NO_ANSWER
+    if not answer.nil?
       answer.each(&block)
     else
       QuestionShuffling.new(question).associations.each(&block)

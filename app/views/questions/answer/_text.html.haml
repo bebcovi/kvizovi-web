@@ -1,4 +1,4 @@
 - Answer(question, answer) do |answer|
-  - unless answer == Question::NO_ANSWER
+  - unless answer.nil?
     %p
       %span= answer

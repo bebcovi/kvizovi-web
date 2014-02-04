@@ -8,8 +8,7 @@ class Quiz < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: {scope: :school_id}
 
-  scope :activated,    ->         { where{activated == true} }
-  scope :not_owned_by, ->(school) { where{school_id != school.id} }
+  scope :activated, -> { where{activated == true} }
 
   accepts_nested_attributes_for :questions
 

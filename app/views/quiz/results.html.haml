@@ -1,33 +1,10 @@
-- title "#{quiz.name} · Kraj"
+- title "#{game.quiz.name} · Kraj"
 
 %h1 Rezultati
 
-.progress.progress-small.progress-primary
-  .bar{style: "width: 100%"}
+= render "progress_bar"
 
-- @played_quiz.results.each do |student, score, score_percentage, student_number, rank|
-
-  %div{class: "l-player-#{number(student_number)}"}
-    %p.player-color
-      %b= student.full_name.prepend_icon("user") + ":"
-      %span Točno si odgovori#{student.male? ? "o" : "la"} na #{score} od #{@played_quiz.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
-    .progress.player-color
-      .bar{style: "width: #{score_percentage}%"}
-
+= render "played_quizzes/score", played_quiz: @played_quiz
 = primary_button "Završi", choose_quiz_path
-
-- @played_quiz.played_questions.each do |question, answer, student, status, idx|
-
-  %hr
-
-  .l-played.space-bottom{class: "l-question-#{question.category} l-#{status} l-player-#{number(idx % @played_quiz.students.count + 1)}"}
-
-    .player-color
-      #{student.full_name.prepend_icon("user")} (#{student.username})
-
-    %h2.question-title= question.content
-
-    = render "questions/answer/#{question.category}", question: question, answer: answer
-    = render "played_quizzes/feedback/#{status}", question: question
-
+= render "played_quizzes/answers", played_quiz: @played_quiz
 = primary_button "Završi", choose_quiz_path

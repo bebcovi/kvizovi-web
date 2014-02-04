@@ -1,7 +1,7 @@
-Lektire::Application.routes.draw do
+Kvizovi::Application.routes.draw do
 
-  constraints host: /herokuapp/ do
-    get "(*path)", to: redirect(host: "kvizovi.org")
+  constraints subdomain: "www" do
+    get "(*path)", to: redirect(subdomain: false)
   end
 
   root to: "home#index"

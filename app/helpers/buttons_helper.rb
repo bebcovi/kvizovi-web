@@ -8,7 +8,7 @@ module ButtonsHelper
   end
 
   def submit_button(text, options = {})
-    button_tag text, options.merge_class("btn btn-primary")
+    button_tag text, {data: {:"disable-with" => "Učitavanje..."}}.deep_merge(options.merge_class("btn btn-primary"))
   end
 
   def back_button(text, path, options = {})
@@ -16,11 +16,11 @@ module ButtonsHelper
   end
 
   def cancel_button(text, path, options = {})
-    default_button text, path, options.deep_merge(data: {dismiss: "modal"})
+    default_button text, path, {data: {dismiss: "modal"}}.deep_merge(options)
   end
 
   def delete_button(text, path, options = {})
-    button text.prepend_icon("remove"), path, options.merge_class("btn-danger").deep_merge(method: :delete)
+    button text.prepend_icon("remove"), path, {method: :delete}.deep_merge(options.merge_class("btn-danger"))
   end
 
   def edit_button(text, path, options = {})
@@ -32,7 +32,7 @@ module ButtonsHelper
   end
 
   def dismiss_button(object, options = {})
-    content_tag :button, "×", options.deep_merge(type: "button", data: {dismiss: object})
+    content_tag :button, "×", {type: "button", data: {dismiss: object}}.deep_merge(options)
   end
 
   def next_button(text, path, options = {})

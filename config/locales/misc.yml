@@ -16,6 +16,7 @@ hr:
       defaults:
         username: "Korisničko ime"
         password: "Lozinka"
+        password_confirmation: "Potvrda lozinke"
         email: "Email"
       play:
         answer: "Odgovor"

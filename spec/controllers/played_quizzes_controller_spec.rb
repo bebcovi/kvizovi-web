@@ -23,7 +23,7 @@ describe PlayedQuizzesController do
     context "on student" do
       before do
         @student = create(:student)
-        @played_quiz.students << @student
+        @played_quiz.players << @student
 
         get :index, student_id: @student.id
       end
@@ -58,7 +58,7 @@ describe PlayedQuizzesController do
     context "on student" do
       before do
         @student = create(:student)
-        @played_quiz.students << @student
+        @played_quiz.players << @student
 
         get :show, id: @played_quiz.id, student_id: @student.id
       end

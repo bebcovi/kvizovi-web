@@ -2,35 +2,19 @@ require "squeel"
 
 class PlayedQuiz < ActiveRecord::Base
   belongs_to :quiz_snapshot, dependent: :destroy
-  has_and_belongs_to_many :students, after_add: :assign_student_order
+  has_many :playings, -> { order{position.asc} }
+  has_many :players, through: :playings
 
   serialize :question_answers, Array
-  serialize :students_order, Array
 
-  scope :descending, -> { order{created_at.desc} }
-  scope :ascending,  -> { order{created_at.asc}  }
+  scope :descending,      -> { order{created_at.desc} }
+  scope :ascending,       -> { order{created_at.asc}  }
+  scope :not_interrupted, -> { where{interrupted == false} }
 
   delegate :quiz, :questions, to: :quiz_snapshot
   delegate :name, to: :quiz
 
   def self.position(played_quiz)
     all.index { |r| r.id == played_quiz.id } + 1
-  end
-
-  def interrupted?
-    question_answers.any?(&:nil?)
-  end
-
-  def interrupted_on?(idx)
-    question_answers.index(&:nil?) == idx
-  end
-
-  def single_player?; students.count == 1; end
-  def multi_player?;  students.count > 1;  end
-
-  private
-
-  def assign_student_order(student)
-    update_attributes!(students_order: students_order + [student.id])
   end
 end
