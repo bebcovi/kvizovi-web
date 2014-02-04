@@ -4,12 +4,12 @@
 #= require turbolinks
 #= require jquery.turbolinks
 #
-#= require twitter/bootstrap/transition
-#= require twitter/bootstrap/alert
-#= require twitter/bootstrap/dropdown
-#= require twitter/bootstrap/modal
-#= require twitter/bootstrap/tooltip
-#= require twitter/bootstrap/popover
+#= require bootstrap/transition
+#= require bootstrap/alert
+#= require bootstrap/dropdown
+#= require bootstrap/modal
+#= require bootstrap/tooltip
+#= require bootstrap/popover
 #
 #= require_self
 #
