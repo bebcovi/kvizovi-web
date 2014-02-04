@@ -167,3 +167,11 @@ SimpleForm.setup do |config|
   # Cache SimpleForm inputs discovery
   # config.cache_discovery = !Rails.env.development?
 end
+
+%w[date_time_input numeric_input password_input string_input text_input].each do |input_name|
+  SimpleForm::Inputs.const_get(input_name.camelize).class_eval do
+    def input_html_classes
+      super + ["form-control"]
+    end
+  end
+end

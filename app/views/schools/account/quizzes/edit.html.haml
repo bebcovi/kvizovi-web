@@ -5,7 +5,7 @@
 
     = simple_form_for [:account, @quiz] do |f|
 
-      = f.input :name, input_html: {class: "form-control"}
+      = f.input :name
 
       = buttons do
         = cancel_button "Odustani", account_quizzes_path, class: "btn-default"
