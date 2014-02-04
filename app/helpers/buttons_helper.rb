@@ -1,4 +1,8 @@
 module ButtonsHelper
+  def default_button(text, path, options = {})
+    button text, path, options.merge_class("btn-default")
+  end
+
   def primary_button(text, path, options = {})
     button text, path, options.merge_class("btn-primary")
   end
@@ -12,7 +16,7 @@ module ButtonsHelper
   end
 
   def cancel_button(text, path, options = {})
-    button text, path, options.deep_merge(data: {dismiss: "modal"})
+    default_button text, path, options.deep_merge(data: {dismiss: "modal"})
   end
 
   def delete_button(text, path, options = {})
@@ -20,7 +24,7 @@ module ButtonsHelper
   end
 
   def edit_button(text, path, options = {})
-    button text.prepend_icon("pencil2"), path, options
+    default_button text.prepend_icon("pencil2"), path, options
   end
 
   def add_button(text, path, options = {})
