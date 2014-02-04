@@ -6,9 +6,9 @@
   = f.hidden_field :image_cache
 
 - if @question.image?
-  = image_tag @question.image.url(:medium), class: "img-polaroid image-preview"
+  = image_tag @question.image.url(:medium), class: "img-thumbnail image-preview"
 - else
-  = image_tag nil, class: "img-polaroid image-preview hide"
+  = image_tag nil, class: "img-thumbnail image-preview hide"
 
 = render "account/questions/fields/#{@question.category}", f: f, question: @question
 
