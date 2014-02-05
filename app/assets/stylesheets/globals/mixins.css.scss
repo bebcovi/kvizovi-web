@@ -10,15 +10,9 @@
   }
 }
 
-@mixin font-size($font-size, $line-height: false) {
+@mixin font-size($font-size, $line-height: 1) {
   font-size: $font-size;
-  font-size: ($font-size / $font-size-computed) * 1rem;
-
-  @if $line-height {
-    line-height: ($line-height * $line-height-computed) / $font-size;
-  } @else {
-    line-height: ceil($font-size / $line-height-computed) * ($line-height-computed / $font-size);
-  }
+  line-height: ($line-height * $sub) / $font-size
 }
 
 // patterns

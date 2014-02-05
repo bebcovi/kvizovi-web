@@ -48,6 +48,7 @@ gem "inherited_resources", ">= 1.4.1"
 gem "pry", ">= 0.9.12.5"
 gem "pry-rails", ">= 0.3.2"
 gem "pry-theme"
+gem "bond"
 gem "dotenv"
 
 group :test do

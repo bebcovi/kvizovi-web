@@ -1,0 +1,42 @@
+@import "addons/position";
+@import "addons/prefixer";
+@import "css3/transform";
+@import "css3/transition";
+@import "config/bootstrap";
+@import "bootstrap/variables";
+@import "globals/variables";
+@import "globals/mixins";
+
+.contact {
+}
+
+  .contact-toggle {
+    @include position(fixed, 50% 0 0 -5px);
+    @include transform-origin(top left);
+    @include transform(rotate(-90deg));
+    @include transition(.2s);
+    @include font-size(13px);
+    padding: 3px $suh 0px $sub * 1.5;
+    border: none;
+    background-color: $brand-primary;
+    color: white;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    #{$interact} {
+      left: 0px;
+    }
+
+    i {
+      @include position(absolute, 10px 0 0 10px);
+    }
+  }
+
+#contact {
+  .modal-header {
+    h1, h2, h3, h4, h5, h6 {
+      margin-bottom: 0;
+    }
+  }
+}
