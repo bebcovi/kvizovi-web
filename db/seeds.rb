@@ -12,7 +12,8 @@ School.create!(
   level: "Srednja",
   place: "Zagreb",
   region: "Grad Zagreb",
-  key: "mioc"
+  key: "mioc",
+  completed_survey: true,
 )
 
 Student.create!(
@@ -27,4 +28,5 @@ Student.create!(
   gender: "Muško",
   year_of_birth: 1991,
   school: School.first,
+  completed_survey: true,
 )
