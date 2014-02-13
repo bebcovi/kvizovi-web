@@ -5,7 +5,7 @@ require "rspec/rails"
 require "rspec/collection_matchers"
 require "pry"
 
-Dir[Rails.root.join("spec/support/*.rb")].each &method(:require)
+Dir[Rails.root.join("spec/support/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
