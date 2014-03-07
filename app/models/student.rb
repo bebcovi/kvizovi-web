@@ -2,7 +2,7 @@ require "squeel"
 
 class Student < ActiveRecord::Base
   belongs_to :school
-  has_many :playings, foreign_key: "player_id"
+  has_many :playings, foreign_key: "player_id", dependent: :destroy
   has_many :played_quizzes, through: :playings
   has_many :readings, as: :user, dependent: :destroy
   has_many :read_posts, through: :readings, source: :post
