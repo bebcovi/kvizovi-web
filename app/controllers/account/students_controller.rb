@@ -1,6 +1,6 @@
 class Account::StudentsController < InheritedResources::Base
   actions :all, except: [:show]
-  before_action :authenticate_user!
+  before_action :authenticate_school!
 
   private
 
