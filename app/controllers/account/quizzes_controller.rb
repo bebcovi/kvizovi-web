@@ -1,8 +1,7 @@
 class Account::QuizzesController < InheritedResources::Base
   actions :all, except: [:show]
   respond_to :html, :js
-  before_action :authenticate_school!
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @quiz = build_resource
@@ -11,17 +10,15 @@ class Account::QuizzesController < InheritedResources::Base
 
   private
 
+  def begin_of_association_chain
+    current_user
+  end
+
   def collection
-    @quizzes = current_user.quizzes.order{updated_at.desc}
+    @quizzes = end_of_association_chain.order{updated_at.desc}
   end
 
   def permitted_params
     params.permit!
-  end
-
-  def authorize_user!
-    if not collection.include?(resource)
-      redirect_to action: :index, error: "Nemate dozvoljen pristup ovom kvizu."
-    end
   end
 end

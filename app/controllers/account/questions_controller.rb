@@ -5,8 +5,8 @@ class Account::QuestionsController < InheritedResources::Base
   actions :all, except: [:show]
   decorates_assigned :question, :questions, with: QuestionDecorator
 
-  before_action :authenticate_school!
-  before_action :authorize_user!
+  before_action :authenticate_user!
+
 
   def edit_order
     @questions = collection
@@ -27,6 +27,10 @@ class Account::QuestionsController < InheritedResources::Base
     end
   end
 
+  def begin_of_association_chain
+    current_user
+  end
+
   def resource_class
     "#{params[:category].camelize}Question".constantize
   end
@@ -37,11 +41,5 @@ class Account::QuestionsController < InheritedResources::Base
 
   def quiz_params
     params.require(:quiz).permit!
-  end
-
-  def authorize_user!
-    if not current_user.quizzes.include?(parent)
-      redirect_to action: :index, error: "Nemate dozvoljen pristup ovom kvizu."
-    end
   end
 end

@@ -23,15 +23,9 @@ class ApplicationController < ActionController::Base
   helper_method :user_logged_in?
 
   def authenticate_user!
-    redirect_to root_path, warning: "Niste prijavljeni." if not user_logged_in?
-  end
-
-  def authenticate_school!
-    redirect_to root_path, warning: "Niste prijavljeni kao škola." if not school_signed_in?
-  end
-
-  def authenticate_student!
-    redirect_to root_path, warning: "Niste prijavljeni kao učenik." if not student_signed_in?
+    if not user_logged_in?
+      redirect_to root_path, warning: "Niste prijavljeni."
+    end
   end
 
   def after_sign_in_path_for(resource_or_scope)
