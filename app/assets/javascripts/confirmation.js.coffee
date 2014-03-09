@@ -6,6 +6,7 @@ $.rails.allowAction = ($link) ->
     $(JST["templates/confirmation"] message: $link.attr("data-confirm"))
       .modal()
       .on "click", ".confirm", => $.rails.confirmed($link)
+      .on "click", "[type='button']", -> $(@).closest(".modal").remove()
     false
   else
     true

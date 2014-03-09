@@ -8,7 +8,7 @@ specs = (category) ->
 
       @subject = new App.OptionList(@wrapper)
 
-      @addButton = @wrapper.closest(".control-group").children("a")
+      @addButton = @wrapper.closest(".form-group").children("a")
       @options   = -> @wrapper.find(".#{category}-option")
 
     describe "#constructor", ->

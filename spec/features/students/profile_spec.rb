@@ -5,7 +5,7 @@ feature "Profile" do
 
   background do
     login(student)
-    navbar.find(".dropdown-toggle").click
+    navbar.find(".dropdown").click
     click_on "Uredi profil"
   end
 

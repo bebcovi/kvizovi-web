@@ -8,7 +8,7 @@ class App.OptionList
   constructor: (wrapper, params = {}) ->
     @wrapper = $(wrapper)
     @initializeOptions()
-    @wrapper.closest(".control-group").append @addButton(params["add"])
+    @wrapper.closest(".form-group").append @addButton(params["add"])
 
     @wrapper.on "option:add",    (_, option) => @add option
     @wrapper.on "option:remove", (_, option) => @remove option
@@ -23,7 +23,7 @@ class App.OptionList
 
   newOption: ->
     @wrapper.find("[class$='option']").first().clone()
-      .find(".control-group").removeClass("success").end()
+      .find(".form-control").removeClass("success").end()
       .find("[class$='remove']").html("").end()
       .find("input").val("").end()
 
