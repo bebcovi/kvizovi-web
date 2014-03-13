@@ -25,6 +25,7 @@
     font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 2px;
+    z-index: 10;
 
     #{$interact} {
       left: 0px;
