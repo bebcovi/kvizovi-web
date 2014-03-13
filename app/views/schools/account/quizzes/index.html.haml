@@ -4,8 +4,9 @@
   = render "new"
 
 #quizzes
-  #quiz-list.list-group
-    = render @quizzes if @quizzes.any?
+  %table.table.table-striped#quiz-list
+    %tbody
+      = render @quizzes if @quizzes.any?
 
   - if @quizzes.empty?
     .no-items.well Trenutno nemate kvizova.
