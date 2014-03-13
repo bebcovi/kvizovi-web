@@ -8,7 +8,7 @@ feature "Blog" do
 
     login(school)
 
-    expect(find(".navbar-inner").find(".badge")).to have_content("1")
+    expect(find(".navbar-right .badge")).to have_content("1")
 
     click_on "Blog"
 
@@ -17,7 +17,7 @@ feature "Blog" do
 
     visit account_quizzes_path
 
-    expect(find(".navbar-inner")).not_to have_css(".badge")
+    expect(find(".navbar-right")).not_to have_css(".badge")
   end
 
   scenario "Managing" do

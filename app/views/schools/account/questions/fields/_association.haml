@@ -4,17 +4,15 @@
       - number_of_fields(question.associations).times do |n|
         %tr.association-option
           %td.association-field
-            = f.input_field :associations, label: false, error: false,
+            = f.input_field :associations,
               placeholder: "Asocijacija #{n + 1}a",
               value: question.associations.map(&:first)[n],
-              name: "question[associations][]",
-              class: "span5", style: "margin-bottom: 0"
+              name: "question[associations][]"
           %td.association-icon
             = icon("chevron-right", class: "arrow subtle")
           %td.association-field
-            = f.input_field :associations, label: false, error: false,
+            = f.input_field :associations,
               placeholder: "Asocijacija #{n + 1}b",
               value: question.associations.map(&:second)[n],
-              name: "question[associations][]",
-              class: "span5", style: "margin-bottom: 0"
+              name: "question[associations][]"
           %td.association-remove

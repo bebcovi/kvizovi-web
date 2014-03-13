@@ -15,6 +15,6 @@ class PlayedQuiz < ActiveRecord::Base
   delegate :name, to: :quiz
 
   def self.position(played_quiz)
-    all.index { |r| r.id == played_quiz.id } + 1
+    all.index(played_quiz) + 1
   end
 end

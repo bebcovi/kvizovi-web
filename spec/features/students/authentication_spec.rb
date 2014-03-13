@@ -21,7 +21,7 @@ feature "Authentication" do
   scenario "Registration" do
     school = register(:school)
     visit new_student_session_path
-    click_on "Registrirajte se"
+    first("a", text: "Registrirajte se").click
 
     fill_in      "Ime",               with: "Janko"
     fill_in      "Prezime",           with: "Marohnić"

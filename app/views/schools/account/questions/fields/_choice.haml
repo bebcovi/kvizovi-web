@@ -4,13 +4,13 @@
       - number_of_fields(question.provided_answers).times do |n|
         %tr.choice-option
           %td.choice-field
-            = f.input :provided_answers, label: false, error: false,
+            = f.input_field :provided_answers,
               placeholder: "Ponuđeni odgovor #{n + 1}",
-              input_html: {value: question.provided_answers[n],
-                           name: "question[provided_answers][]",
-                           style: "margin-bottom: 0;"},
-              wrapper_html: {class: ("success" if n.zero?)}
+              value: question.provided_answers[n],
+              name: "question[provided_answers][]",
+              class: ("success" if n.zero?)
           %td.choice-remove
             - if n.zero?
-              %span.text-success{title: "Ovo će biti točan odgovor.", data: {placement: "right"}}
+              %span.text-success{title: "Ovo će biti točan odgovor.",
+                                 data: {placement: "right"}}
                 = icon("checkmark-circle-full")

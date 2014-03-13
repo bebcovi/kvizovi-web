@@ -20,7 +20,7 @@ feature "Authentication" do
 
   scenario "Registration" do
     visit new_school_session_path
-    click_on "Registrirajte se"
+    first("a", text: "Registrirajte se").click
 
     fill_in      "Ime škole",       with: "XV. Gimnazija"
     choose_under "Tip škole",             "Srednja"

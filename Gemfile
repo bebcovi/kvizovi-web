@@ -49,6 +49,8 @@ gem "pry", ">= 0.9.12.5"
 gem "pry-rails", ">= 0.3.2"
 gem "pry-theme"
 gem "bond"
+gem "pry-debugger"
+gem "pry-stack_explorer"
 gem "dotenv"
 
 group :test do
@@ -63,7 +65,7 @@ group :test do
 end
 
 group :development do
-  gem "spring"
+  gem "spring", ">= 1.1.1"
   gem "thin"
   gem "quiet_assets", ">= 1.0.2"
   gem "better_errors", ">= 1.0.1"

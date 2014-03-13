@@ -40,10 +40,10 @@ class App.ImageUpload
 
     toggle: ->
       @fields.toggle()
-        .find("input").val("")
+        .filter("input").val("")
 
     onUpdate: (callback) ->
-      @fields.find("input").on "change", (event) =>
+      @fields.filter("input").on "change", (event) =>
         callback(event.target)
 
     toggleButton: ->
@@ -61,14 +61,14 @@ class App.ImageUpload
 
     toggle: ->
       @fields.toggle()
-        .find("input").val("")
+        .filter("input").val("")
 
     onUpdate: (callback) ->
-      @fields.find("input").on "keyup change", (event) =>
+      @fields.filter("input").on "keyup change", (event) =>
         callback(event.target)
 
     isActive: ->
-      @fields.find("input").val() != ""
+      @fields.filter("input").val() != ""
 
     toggleButton: ->
       $ "<a>",

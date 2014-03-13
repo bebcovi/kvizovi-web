@@ -1,15 +1,8 @@
-<div class="control-group string optional question_image">
-  <label class="file optional control-label" for="question_image">Slika</label>
-  <div class="controls">
-    <input class="file optional" id="question_image" name="question[image]" type="file">
-  </div>
-
-  <label class="url optional control-label" for="question_remote_image_url">URL od slike</label>
-  <div class="controls">
-    <input class="string url optional" id="question_remote_image_url" name="question[remote_image_url]" placeholder="Npr. &quot;http://www.primjer.hr/neka-slika.jpg&quot;" type="url">
-  </div>
-
-  <input id="question_image_cache" name="question[image_cache]" type="hidden">
-
-  <img class="img-polaroid image-preview">
+<div class="form-group string optional question_image image_upload">
+   <label class="file optional" for="question_image">Slika</label>
+   <input class="file optional" id="question_image" name="question[image]" type="file"/>
+   <label class="url optional" for="question_remote_image_url">URL od slike</label>
+   <input class="url optional form-control" id="question_remote_image_url" name="question[remote_image_url]" placeholder="Npr. &quot;http://www.primjer.hr/neka-slika.jpg&quot;" type="url"/>
+   <input id="question_image_cache" name="question[image_cache]" type="hidden"/>
+   <img class="img-thumbnail image-preview"/>
 </div>

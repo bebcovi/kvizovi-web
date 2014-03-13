@@ -28,7 +28,7 @@ describe "ImageUpload", ->
       expect(@url).toBeHidden()
 
     it "shows the url input if it's present", ->
-      @url.find("input").val("http://example.jpg")
+      @url.filter("input").val("http://example.jpg")
       @url.show()
       @subject.enhance()
       expect(@url).toBeVisible()
@@ -41,12 +41,12 @@ describe "ImageUpload", ->
 
     it "updates the preview on file change", ->
       spyOn(@subject.preview, "update")
-      @file.find("input").trigger("change")
+      @file.filter("input").trigger("change")
       expect(@subject.preview.update).toHaveBeenCalled()
 
     it "updates the preview on url change", ->
       spyOn(@subject.preview, "update")
-      @url.find("input").trigger($.Event("keyup"))
+      @url.filter("input").trigger($.Event("keyup"))
       expect(@subject.preview.update).toHaveBeenCalled()
 
   describe "#switchType", ->
@@ -64,7 +64,7 @@ describe "ImageUpload", ->
       expect(@url).toBeHidden()
 
     it "resets the preview", ->
-      @url.find("input").val "http://example.jpg"
+      @url.filter("input").val "http://example.jpg"
       @subject.switchType()
       expect(@preview).not.toHaveAttr("src")
 
@@ -91,14 +91,14 @@ describe "ImageUpload", ->
       it "clears the input value", ->
         # @subject.fields.find("input")[0].val("foobar")
         @subject.toggle()
-        expect(@subject.fields.find("input")).toHaveValue("")
+        expect(@subject.fields.filter("input")).toHaveValue("")
 
     describe "#update", ->
 
       it "triggers the callback on change", ->
         callback = jasmine.createSpy("callback")
         @subject.onUpdate callback
-        @subject.fields.find("input").trigger("change")
+        @subject.fields.filter("input").trigger("change")
 
         expect(callback).toHaveBeenCalled()
         expect(callback).toHaveBeenCalledWith(jasmine.any(HTMLInputElement))
@@ -122,16 +122,16 @@ describe "ImageUpload", ->
         expect(@subject.fields).toBeVisible()
 
       it "clears the input value", ->
-        @subject.fields.find("input").val("foo")
+        @subject.fields.filter("input").val("foo")
         @subject.toggle()
-        expect(@subject.fields.find("input")).toHaveValue("")
+        expect(@subject.fields.filter("input")).toHaveValue("")
 
     describe "#update", ->
 
       it "triggers the callback on keyup", ->
         callback = jasmine.createSpy("callback")
         @subject.onUpdate callback
-        @subject.fields.find("input").trigger($.Event("keyup"))
+        @subject.fields.filter("input").trigger($.Event("keyup"))
 
         expect(callback).toHaveBeenCalled()
         expect(callback).toHaveBeenCalledWith(jasmine.any(HTMLInputElement))
