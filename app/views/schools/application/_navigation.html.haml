@@ -10,7 +10,7 @@
   = active_content_tag :li, params[:controller] == "posts" do
     = link_to "Blog", blog_path
     = content_tag :span, current_user.unread_posts.count, class: "badge badge-info" if current_user.unread_posts.any?
-  - unless current_user.completed_survey?
-    = active_content_tag :li, params[:controller] == "surveys" do
-      = link_to "Anketa", new_survey_path, data: ({toggle: "tooltip", title: "Pomognite nam u testiranju :)", placement: "bottom", trigger: "manual"} unless params[:controller] == "surveys")
+  -# - unless current_user.completed_survey?
+  -#   = active_content_tag :li, params[:controller] == "surveys" do
+  -#     = link_to "Anketa", new_survey_path, data: ({toggle: "tooltip", title: "Pomognite nam u testiranju :)", placement: "bottom", trigger: "manual"} unless params[:controller] == "surveys")
   = render "log"
