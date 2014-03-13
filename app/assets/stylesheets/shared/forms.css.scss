@@ -1,5 +1,6 @@
 @import "config/bootstrap";
 @import "bootstrap/variables";
+@import "globals/variables";
 
 label {
   .required {
@@ -12,5 +13,11 @@ label {
 .check_boxes {
   ol, ul {
     padding-left: 0;
+  }
+}
+
+button[type="button"] {
+  #{$interact} {
+    outline: none;
   }
 }

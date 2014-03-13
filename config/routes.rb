@@ -43,10 +43,6 @@ Kvizovi::Application.routes.draw do
   ########################
   # Static pages
   ########################
-  controller :static_pages do
-    get "tour"
-    get "contact"
-  end
   get "blog", to: "posts#index"
 
   ########################

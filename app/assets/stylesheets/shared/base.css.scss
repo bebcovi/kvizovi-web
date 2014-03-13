@@ -1,9 +1,19 @@
 @import "globals/variables";
 
 body {
-  padding-top: $navbar-height + $sub;
   padding-bottom: $sub;
   overflow-y: scroll;
+}
+
+main {
+  $topbar-height: $suh;
+  border-top: $topbar-height solid $brand-primary;
+  padding-top: $navbar-height + $sub - $topbar-height;
+
+  .navbar ~ & {
+    border-top: none;
+    padding-top: $navbar-height + $sub;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {

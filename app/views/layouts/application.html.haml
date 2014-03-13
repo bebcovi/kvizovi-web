@@ -13,27 +13,18 @@
     = csrf_meta_tag
 
   %body{class: "#{params[:controller]} #{params[:controller]}-#{params[:action]}"}
-    .navbar.navbar-inverse.navbar-fixed-top
+    = render "navbar" if user_logged_in?
+
+    = render "contact"
+
+    %main
+      - if content_for? :jumbotron
+        .jumbotron
+          .container
+            = content_for :jumbotron
+
       .container
-        .navbar-header
-          %button.navbar-toggle{type: "button", data: {toggle: "collapse", target: ".navbar-collapse"}}
-            %span.sr-only Promijeni navigaciju
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
+        = render "flash", flash: flash
+        = render "breadcrumbs"
 
-          = link_to icon("books"), root_path, class: "navbar-brand"
-
-        .collapse.navbar-collapse
-          = render "navigation"
-
-    - if content_for? :jumbotron
-      .jumbotron
-        .container
-          = content_for :jumbotron
-
-    %main.container
-      = render "flash", flash: flash
-      = render "breadcrumbs"
-
-      = yield
+        = yield
