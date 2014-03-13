@@ -18,6 +18,8 @@
     @include font-size(13px);
     padding: 3px $suh 0px $sub * 1.5;
     border: none;
+    border-bottom-left-radius: $border-radius-large;
+    border-bottom-right-radius: $border-radius-large;
     background-color: $brand-primary;
     color: white;
     font-weight: 300;
