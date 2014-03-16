@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :save_activity, if: :user_logged_in?
   before_action :force_filling_email, if: :user_logged_in?
 
-  add_flash_types :success, :error, :warning
+  add_flash_types :warning
 
   protected
 
@@ -23,15 +23,24 @@ class ApplicationController < ActionController::Base
   helper_method :user_logged_in?
 
   def authenticate_user!
-    redirect_to root_path, error: "Niste prijavljeni." if not user_logged_in?
+    if not user_logged_in?
+      redirect_to root_path,
+        alert: "Ne možete pristupiti ovoj stranici, jer niste prijavljeni."
+    end
   end
 
   def authenticate_school!(*)
-    redirect_to root_path, error: "Niste prijavljeni kao škola." if not school_signed_in?
+    if not school_signed_in?
+      redirect_to root_path,
+        alert: "Ne možete pristupiti ovoj stranici, jer niste prijavljeni kao škola."
+    end
   end
 
   def authenticate_student!(*)
-    redirect_to root_path, error: "Niste prijavljeni kao učenik." if not student_signed_in?
+    if not student_signed_in?
+      redirect_to root_path,
+        alert: "Ne možete pristupiti ovoj stranici, jer niste prijavljeni kao učenik."
+    end
   end
 
   def after_sign_in_path_for(resource_or_scope)

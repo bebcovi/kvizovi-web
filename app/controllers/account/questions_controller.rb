@@ -1,11 +1,11 @@
 class Account::QuestionsController < InheritedResources::Base
   respond_to :html, :js
 
+  before_action :authenticate_school!
+
   belongs_to :quiz
   actions :all, except: [:show]
   decorates_assigned :question, :questions, with: QuestionDecorator
-
-  before_action :authenticate_user!
 
 
   def edit_order

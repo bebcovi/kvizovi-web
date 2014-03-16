@@ -1,7 +1,9 @@
 class Account::QuizzesController < InheritedResources::Base
-  actions :all, except: [:show]
   respond_to :html, :js
-  before_action :authenticate_user!
+
+  before_action :authenticate_school!
+
+  actions :all, except: [:show]
 
   def index
     @quiz = build_resource
