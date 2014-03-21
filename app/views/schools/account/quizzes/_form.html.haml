@@ -1,6 +1,6 @@
 .row
   .col-sm-8
-    = simple_form_for [:account, @quiz], html: {class: "l-design"} do |f|
+    = simple_form_for [:account, @quiz] do |f|
 
       = f.input :name
       = image_field(f, :image)

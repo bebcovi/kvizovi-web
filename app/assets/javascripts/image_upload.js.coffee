@@ -49,7 +49,7 @@ class App.ImageUpload
     toggleButton: ->
       $ "<a>",
         href: "#"
-        class: "btn toggle-type"
+        class: "btn btn-default toggle-type"
         title: "Na računalu"
         html: $.icon("storage")
 
@@ -73,7 +73,7 @@ class App.ImageUpload
     toggleButton: ->
       $ "<a>",
         href: "#"
-        class: "btn toggle-type"
+        class: "btn btn-default toggle-type"
         title: "Na internetu"
         html: $.icon("link")
 
