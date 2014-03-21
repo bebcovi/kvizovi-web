@@ -23,4 +23,7 @@ jQuery ->
   $(".btn-group .btn[title]").tooltip
     container: "body"
 
+  $("[data-toggle=tooltip").tooltip
+    animation: true
+
 @App = {}
