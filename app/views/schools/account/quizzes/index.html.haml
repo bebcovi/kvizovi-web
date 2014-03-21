@@ -4,9 +4,9 @@
   = add_button "Novi kviz", new_account_quiz_path
 
 #quizzes
-  %table.table.table-striped#quiz-list
-    %tbody
+  - if @quizzes.any?
+    .list-group
       = render @quizzes if @quizzes.any?
 
-  - if @quizzes.empty?
-    .no-items.well Trenutno nemate kvizova.
+  - else
+    .well Trenutno nemate kvizova.

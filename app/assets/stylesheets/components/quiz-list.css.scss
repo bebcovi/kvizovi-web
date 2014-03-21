@@ -1,8 +1,45 @@
 @import "config/bootstrap";
 @import "bootstrap/variables";
+@import "globals/variables";
 
 .quiz {
   .btn {
     font-family: "icomoon", $font-family-base;
   }
+
+  .form-inline {
+    display: inline-block;
+  }
+
+  .media {
+    margin-bottom: $suh/2;
+
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 0;
+    }
+  }
+
+    .media-body {
+      @media (min-width: $screen-sm-min) {
+        margin-top: $sub * .75;
+      }
+    }
 }
+
+  .quiz-title {
+    margin-bottom: $suh/2;
+
+    @media (min-width: $screen-sm-min) {
+      float: left;
+      margin-top: $suh/2;
+    }
+  }
+
+  .quiz-controls {
+    clear: both;
+
+    @media (min-width: $screen-sm-min) {
+      clear: none;
+      float: right;
+    }
+  }
