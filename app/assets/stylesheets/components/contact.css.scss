@@ -16,6 +16,7 @@
     @include transform(rotate(-90deg));
     @include transition(.2s);
     @include font-size(13px);
+    display: none;
     padding: 3px $suh 0px $sub * 1.5;
     border: none;
     border-bottom-left-radius: $border-radius-large;
@@ -33,6 +34,10 @@
 
     i {
       @include position(absolute, 10px 0 0 10px);
+    }
+
+    @media (min-width: $screen-sm-min) {
+      display: block;
     }
   }
 
