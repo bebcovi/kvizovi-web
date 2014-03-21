@@ -18,6 +18,7 @@ $.extend $.fn.tooltip.Constructor.DEFAULTS,
   animation: false
 
 jQuery ->
-  $(".btn[title]").tooltip()
+  $(".btn[title]").tooltip
+    container: "body"
 
 @App = {}
