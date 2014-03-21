@@ -1,7 +1,15 @@
 jQuery ->
 
   $(".additional-info").each ->
-    $(@).replaceWith $($.icon("question-circle-full"))
+    $this = $(@)
+    $icon = $($.icon("question-circle-full"))
+    text  = $this.text()
+
+    $this.replaceWith($icon)
+
+    $icon
       .addClass("additional-info help")
-      .attr("title", $(@).text())
-      .tooltip(placement: "right")
+      .attr("title", text)
+      .tooltip
+        placement: "left"
+        animation: true

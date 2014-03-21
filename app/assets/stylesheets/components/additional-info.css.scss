@@ -1,0 +1,13 @@
+@import "globals/variables";
+
+.additional-info {
+  padding: $suh/2;
+  position: absolute;
+  top: $sub * 1.35;
+  right: $suh/4;
+  color: rgba(#000, .4);
+}
+
+.question_hint {
+  position: relative;
+}
