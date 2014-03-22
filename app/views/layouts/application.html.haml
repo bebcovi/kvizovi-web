@@ -13,7 +13,7 @@
     = csrf_meta_tag
 
   %body{class: "#{params[:controller]} #{params[:controller]}-#{params[:action]}"}
-    = render "navbar" if user_logged_in?
+    = render "navbar"
 
     = render "contact"
 

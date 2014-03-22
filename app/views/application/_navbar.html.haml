@@ -10,4 +10,4 @@
       = link_to icon("books"), root_path, class: "navbar-brand"
 
     .collapse.navbar-collapse
-      = render "navigation"
+      = render "navigation" if user_logged_in?
