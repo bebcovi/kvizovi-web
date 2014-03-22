@@ -3,7 +3,7 @@
 .m-bottom
   = add_button "Novi kviz", new_account_quiz_path
 
-#quizzes
+#quiz-list
   - if @quizzes.any?
     .list-group
       = render @quizzes if @quizzes.any?
