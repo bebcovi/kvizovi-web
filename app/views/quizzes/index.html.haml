@@ -1,8 +1,13 @@
 - title "Kvizovi"
 
-= render "search_field"
+= breadcrumbs title
+
+.row.m-bottom
+  .col-sm-8
+    = render "search_field"
 
 #quizzes
-  = render @quizzes
+  .row
+    = render @quizzes
 
 = will_paginate @quizzes

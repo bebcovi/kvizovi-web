@@ -1,5 +1,4 @@
-%div.quiz{style: "height: 250px"}
-  = link_to quiz do
-    = image_tag quiz.image.url(:medium)
-  %br
-  = link_to quiz.name, quiz
+.quiz.col-sm-4.col-md-3
+  = link_to quiz, style: "background-image: url(#{quiz.image.url(:medium)});" do
+    %span.quiz-title
+      = quiz.name

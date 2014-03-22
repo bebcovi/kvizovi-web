@@ -1,4 +1,4 @@
-$("#quizzes").append("<%= j render(@quizzes) %>")
+$("#quizzes").find(".row").append("<%= j render(@quizzes) %>")
 <% if @quizzes.next_page %>
   $(".pagination").replaceWith("<%= j will_paginate(@quizzes) %>")
 <% else %>
