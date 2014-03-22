@@ -1,5 +1,6 @@
 = simple_form_for :search, url: request.path, method: :get, html: {class: "search form-search"} do |f|
 
-  .input-append
-    = f.input_field :q, as: :search, name: "q", value: params[:q], class: "input-medium search-query"
-    = submit_button "Traži", name: nil
+  .input-group
+    = f.input_field :q, as: :search, name: "q", value: params[:q], class: "search-query"
+    %span.input-group-btn
+      = f.button :button, icon("search"), name: nil, class: "btn btn-default"

@@ -1,10 +1,12 @@
 - title @quiz.name
 
-= back_button "Natrag", quizzes_path
+= breadcrumbs link_to("Kvizovi", quizzes_path), title
 
-.quiz
-  = image_tag @quiz.image.url(:medium)
-  %p= @quiz.name
-  %p= @quiz.school.name
+%p.text-muted
+  = @quiz.school.name
+
+.quiz.list-inline-block
+  .quiz-image.thumbnail
+    = image_tag @quiz.image.url(:medium)
 
 = primary_button "Započni kviz!", start_quiz_path(@quiz), method: :post
