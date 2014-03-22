@@ -1,6 +1,6 @@
 class PlayedQuizzesController < ApplicationController
   before_action :authenticate_school!
-  before_action :assing_scope
+  before_action :assign_scope
 
   decorates_assigned :played_quiz
 
