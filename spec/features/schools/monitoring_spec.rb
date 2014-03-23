@@ -25,7 +25,7 @@ feature "Monitoring" do
     login(school)
   end
 
-  scenario "Viewing a quiz" do
+  scenario "Viewing a quiz", js: true do
     played_quiz = create_played_quiz
     click_on "Kvizovi"
     click_on "Prati"
