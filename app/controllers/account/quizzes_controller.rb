@@ -3,8 +3,6 @@ class Account::QuizzesController < InheritedResources::Base
 
   before_action :authenticate_school!
 
-  actions :all, except: [:show]
-
   private
 
   def resource_url
