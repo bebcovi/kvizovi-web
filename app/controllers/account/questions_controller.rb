@@ -7,7 +7,6 @@ class Account::QuestionsController < InheritedResources::Base
   actions :all, except: [:show]
   decorates_assigned :question, :questions, with: QuestionDecorator
 
-
   def edit_order
     @questions = collection
   end

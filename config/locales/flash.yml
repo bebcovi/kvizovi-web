@@ -2,29 +2,30 @@ hr:
   flash:
     posts:
       create:
-        success: "Blog post je uspješno stvoren."
+        notice: "Blog post je uspješno stvoren."
       update:
-        success: "Blog post je uspješno izmijenjen."
+        notice: "Blog post je uspješno izmijenjen."
       destroy:
-        success: "Blog post je uspješno izbrisan."
+        notice: "Blog post je uspješno izbrisan."
     surveys:
       create:
-        success: "Anketa je uspješno poslana. Hvala na pomoći :)"
-        error: "Neka polja nisu ispravno popunjena."
-    account/profiles:
-      update:
-        success: "Vaš profil je uspješno izmijenjen."
-    account/quizzes:
-      create:
-        success: "Kviz je uspješno stvoren."
-      update:
-        success: "Kviz je uspješno izmijenjen."
-      destroy:
-        success: "Kviz je uspješno izbrisan."
-    account/questions:
-      create:
-        success: "Pitanje je uspješno stvoreno."
-      update:
-        success: "Pitanje je uspješno izmijenjeno."
-      destroy:
-        success: "Pitanje je uspješno izbrisano."
+        notice: "Anketa je uspješno poslana. Hvala na pomoći :)"
+        alert: "Neka polja nisu ispravno popunjena."
+    account:
+      profiles:
+        update:
+          notice: "Vaš profil je uspješno izmijenjen."
+      quizzes:
+        create:
+          notice: "Kviz je uspješno stvoren."
+        update:
+          notice: "Kviz je uspješno izmijenjen."
+        destroy:
+          notice: "Kviz je uspješno izbrisan."
+      questions:
+        create:
+          notice: "Pitanje je uspješno stvoreno."
+        update:
+          notice: "Pitanje je uspješno izmijenjeno."
+        destroy:
+          notice: "Pitanje je uspješno izbrisano."

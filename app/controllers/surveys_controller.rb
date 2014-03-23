@@ -5,7 +5,7 @@ class SurveysController < InheritedResources::Base
     super do |success, failure|
       success.html do
         current_user.update_column(:completed_survey, true)
-        redirect_to account_path, success: "Anketa je uspješno poslana. Hvala na pomoći :)"
+        redirect_to account_path, notice: "Anketa je uspješno poslana. Hvala na pomoći :)"
       end
     end
   end
