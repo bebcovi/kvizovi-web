@@ -11,7 +11,7 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.activated.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to quizzes_path,
-      error: if Quiz.exists?(params[:id])
+      alert: if Quiz.exists?(params[:id])
                "Traženi kviz je trenutno neaktivan. Može biti da autor radi neke izmjene."
              else
                "Traženi kviz ne postoji ili je izbrisan."
