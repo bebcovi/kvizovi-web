@@ -86,7 +86,7 @@ module Helpers
     end
 
     def submit
-      find("[type='submit']").click
+      all("[type='submit']").last.click
     end
 
     class CapybaraUser < SimpleDelegator

@@ -44,6 +44,7 @@ Kvizovi::Application.routes.draw do
   # Static pages
   ########################
   get "blog", to: "posts#index"
+  post "contact", to: "home#contact"
 
   ########################
   # Admin
