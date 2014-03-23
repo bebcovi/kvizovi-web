@@ -1,5 +1,3 @@
-require_relative "game/state"
-
 class Game
   def initialize(store)
     @store = store

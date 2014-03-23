@@ -75,6 +75,7 @@ Kvizovi::Application.configure do
   }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = {host: "kvizovi.org"}
+  config.action_mailer.default_options = {from: "Kvizovi #{ENV["SENDGRID_USERNAME"]}"}
 
   # Email exceptions
   config.middleware.use ExceptionNotification::Rack,

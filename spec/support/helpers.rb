@@ -86,7 +86,7 @@ module Helpers
     end
 
     def submit
-      find("[type='submit']").click
+      all("[type='submit']").last.click
     end
 
     class CapybaraUser < SimpleDelegator
@@ -100,7 +100,7 @@ module Helpers
       end
 
       def logged_out?
-        @context.navbar.has_no_content?(username)
+        @context.current_path == @context.root_path
       end
     end
   end

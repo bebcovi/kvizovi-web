@@ -28,6 +28,9 @@ Kvizovi::Application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  config.action_mailer.default_url_options = {host: "example.com"}
+  config.action_mailer.default_options = {from: "test@kvizovi.org"}
+
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
@@ -39,8 +42,6 @@ Kvizovi::Application.configure do
       raise exception
     end
   end
-
-  config.action_mailer.default_url_options = {host: "example.com"}
 
   # Caching configuration
   config.action_controller.perform_caching = true

@@ -1,0 +1,7 @@
+hr:
+
+  simple_form:
+    labels:
+      contact:
+        sender: "Vaš email"
+        message: "Poruka"
