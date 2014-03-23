@@ -1,4 +1,5 @@
 #= require bootstrap/tooltip
+#= require bootstrap/button
 
 jQuery ->
 
@@ -9,73 +10,68 @@ class App.ImageUpload
   constructor: (wrapper) ->
     @wrapper = $(wrapper)
 
-    $elements = @wrapper.children()
-    @file = new @FileUpload($elements.slice(0, 2))
-    @url  = new @UrlUpload($elements.slice(2, 4))
+    @tabs    = @wrapper.find(".image_upload-tabs").find("input")
+    @tabFile = @tabs.filter("[value=file]")
+    @tabUrl  = @tabs.filter("[value=url]")
+
+    @file = new @FileUpload(@wrapper.find("#question_image"), @tabFile)
+    @url  = new @UrlUpload(@wrapper.find("#question_remote_image_url"), @tabUrl)
 
   enhance: ->
     @preview = new @ImagePreview(@wrapper.find(".image-preview"))
 
-    if @url.isActive() then @file.toggle() else @url.toggle()
+    @tabs.on "change", (event) => @toggle()
 
-    $(".toggle-type")
-      .tooltip()
-      .on "click", (event) =>
-        event.preventDefault()
-        @switchType()
+    @file.tab.parent().button("toggle") # default to file input
 
     @file.onUpdate (input) => @preview.update(input)
     @url.onUpdate  (input) => @preview.update(input)
 
-  switchType: ->
-    @file.toggle()
-    @url.toggle()
-    @preview.reset()
+  toggle: ->
+    if @file.isActive()
+      @url.toggle("off")
+      @file.toggle("on")
+    else
+      @file.toggle("off")
+      @url.toggle("on")
 
   FileUpload: class
 
-    constructor: (@fields) ->
-      @fields.filter("label").before @toggleButton()
-      @fields = @fields.add @fields.filter("label").prev()
+    constructor: (@field, @tab) ->
 
-    toggle: ->
-      @fields.toggle()
-        .filter("input").val("")
+    toggle: (state) ->
+      switch state
+        when "on"
+          @field.removeClass("sr-only")
+        when "off"
+          @field.val("")
+          @field.addClass("sr-only")
 
     onUpdate: (callback) ->
-      @fields.filter("input").on "change", (event) =>
-        callback(event.target)
+      @field.on "change", (event) =>
+        callback(@field[0])
 
-    toggleButton: ->
-      $ "<a>",
-        href: "#"
-        class: "btn btn-default toggle-type"
-        title: "Na računalu"
-        html: $.icon("storage")
+    isActive: ->
+      @tab.is(":checked")
 
   UrlUpload: class
 
-    constructor: (@fields) ->
-      @fields.filter("label").before @toggleButton()
-      @fields = @fields.add @fields.filter("label").prev()
+    constructor: (@field, @tab) ->
 
-    toggle: ->
-      @fields.toggle()
-        .filter("input").val("")
+    toggle: (state) ->
+      switch state
+        when "on"
+          @field.removeClass("sr-only")
+        when "off"
+          @field.val("")
+          @field.addClass("sr-only")
 
     onUpdate: (callback) ->
-      @fields.filter("input").on "keyup change", (event) =>
-        callback(event.target)
+      @field.on "keyup change", (event) =>
+        callback(@field[0])
 
     isActive: ->
-      @fields.filter("input").val() != ""
-
-    toggleButton: ->
-      $ "<a>",
-        href: "#"
-        class: "btn btn-default toggle-type"
-        title: "Na internetu"
-        html: $.icon("link")
+      @tab.is(":checked")
 
   ImagePreview: class
 

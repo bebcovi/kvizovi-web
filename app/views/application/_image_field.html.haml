@@ -1,0 +1,21 @@
+= f.input :"#{attribute}", label: false, wrapper_html: {class: "image_upload"} do
+  %label Slika
+
+  .image_upload-tabs.m-bottom-hl
+    .btn-group{data: {toggle: "buttons"}}
+      %label.btn.btn-default
+        %input{type: "radio", name: "source", value: "file"}
+        = "Na računalu".prepend_icon("storage")
+
+      %label.btn.btn-default
+        %input{type: "radio", name: "source", value: "url"}
+        = "Na internetu".prepend_icon("link")
+
+  .row
+    .col-sm-8
+      = f.input :"#{attribute}", as: :file, label: false, wrapper: false, error: false, input_html: {class: "sr-only"}
+      = f.input :"remote_#{attribute}_url", label: false, wrapper: false, error: false, input_html: {class: "sr-only"}
+
+  = f.hidden_field(:"#{attribute}_cache")
+
+  = image_tag(f.object.send(attribute).url(:medium), class: "img-thumbnail image-preview")

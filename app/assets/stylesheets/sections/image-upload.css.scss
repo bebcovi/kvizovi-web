@@ -1,14 +1,12 @@
-@import "config/bootstrap";
 @import "globals/variables";
 
 .image_upload {
-  .toggle-type {
-    margin-right: $suh/2;
-    margin-bottom: $suh/2;
-    font-family: icomoon, $font-family-base;
+  [type="file"] {
+    height: $input-height-base;
   }
 
   .image-preview {
     margin-top: $suh/2;
+    max-width: 300px;
   }
 }
