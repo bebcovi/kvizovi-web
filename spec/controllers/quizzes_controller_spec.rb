@@ -45,14 +45,14 @@ describe QuizzesController do
       get :show, id: quiz.id
 
       expect(response).to be_a_redirect
-      expect(flash[:error]).to be_present
+      expect(flash[:alert]).to be_present
     end
 
     it "redirects with an error message on missing quiz" do
       get :show, id: "foo"
 
       expect(response).to be_a_redirect
-      expect(flash[:error]).to be_present
+      expect(flash[:alert]).to be_present
     end
   end
 

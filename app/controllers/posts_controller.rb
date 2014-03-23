@@ -15,7 +15,7 @@ class PostsController < InheritedResources::Base
 
   def authorize!
     if user_logged_in? and not current_user.admin?
-      redirect_to root_path, error: "Nemate ovlasti da izmjenjujete blog postove."
+      redirect_to root_path, alert: "Nemate ovlasti da izmjenjujete blog postove."
     end
   end
 
