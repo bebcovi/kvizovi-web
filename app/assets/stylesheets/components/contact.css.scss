@@ -10,12 +10,15 @@
 .contact {
 }
 
+  $width: 130px;
   .contact-toggle {
     @include position(fixed, 50% 0 0 -5px);
     @include transform-origin(top left);
     @include transform(rotate(-90deg));
     @include transition(.2s);
     @include font-size(13px);
+    width: $width;
+    margin-top: $width/2 + $navbar-height/2;
     padding: 3px $suh 0px $sub * 1.5;
     border: none;
     border-bottom-left-radius: $border-radius-large;
