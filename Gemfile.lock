@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/Fleurer/bootstrap-will_paginate.git
+  revision: fe5e6aec3bd6c0bd40c32efcf169536af99472a0
+  specs:
+    bootstrap-will_paginate (0.0.10)
+      will_paginate
+
+GIT
   remote: git://github.com/bradphelan/jasminerice.git
   revision: 091349c27343bfa728b8e5745675f9ddbb7d9699
   specs:
@@ -49,8 +56,6 @@ GEM
     bond (0.5.0)
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
-    bootstrap-will_paginate (0.0.10)
-      will_paginate
     bourbon (3.1.8)
       sass (>= 3.2.0)
       thor
@@ -321,7 +326,7 @@ DEPENDENCIES
   binding_of_caller (>= 0.7.2)
   bond
   bootstrap-sass
-  bootstrap-will_paginate (>= 0.0.10)
+  bootstrap-will_paginate!
   bourbon
   cache_digests (>= 0.3)
   capybara (>= 2.2.0)
