@@ -1,12 +1,13 @@
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
+  include ActionView::Helpers::AssetUrlHelper
 
   def default_url
     case model
     when Quiz
       case version_name
-      when :small  then ActionController::Base.helpers.asset_path("assets/patterns/skulls/skulls-small.png")
-      when :medium then ActionController::Base.helpers.asset_path("assets/patterns/skulls/skulls-medium.png")
+      when :small  then asset_path("assets/patterns/skulls/skulls-small.png")
+      when :medium then asset_path("assets/patterns/skulls/skulls-medium.png")
       end
     end
   end
