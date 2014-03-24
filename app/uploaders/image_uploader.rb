@@ -11,13 +11,13 @@ class ImageUploader < CarrierWave::Uploader::Base
     end
   end
 
-  resize_to_limit nil, 800
+  resize_to_fill 800, 800
 
   version :medium do
-    resize_to_limit 300, nil
+    resize_to_fill 300, 300
   end
 
   version :small do
-    resize_to_limit nil, 150
+    resize_to_fill 150, 150
   end
 end
