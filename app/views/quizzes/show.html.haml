@@ -2,11 +2,27 @@
 
 = breadcrumbs link_to("Kvizovi", quizzes_path), title
 
-%p.text-muted
-  = @quiz.school.name
+.quiz.text-center
+  %h2.quiz-name
+    = title
+    %small Osnovna škola Poreč
 
-.quiz.list-inline-block
-  .quiz-image.thumbnail
-    = image_tag @quiz.image.url(:medium)
+  .quiz-image
+    .thumbnail
+      = image_tag @quiz.image.url(:medium)
 
-= primary_button "Započni kviz!", start_quiz_path(@quiz), method: :post
+  .quiz-meta.row
+    .col-sm-2.col-sm-offset-4
+      .quiz-meta-name
+        = icon("stopwatch")
+      .quiz-meta-value
+        = @quiz.time_per_question
+
+    .col-sm-2
+      .quiz-meta-name
+        = icon("question")
+      .quiz-meta-value
+        = @quiz.questions.count
+        pitanja
+
+  = primary_button "Započni kviz!", start_quiz_path(@quiz), method: :post, class: "btn-lg"
