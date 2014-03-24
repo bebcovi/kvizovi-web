@@ -22,6 +22,6 @@
 
   .modal-footer
     - unless game.over?
-      = next_button "Sljedeće pitanje", next_question_quiz_path, method: :put
+      = next_button "Sljedeće pitanje", next_question_quiz_path(game.quiz), method: :put
     - else
-      = next_button "Rezultati", finish_quiz_path, method: :delete
+      = next_button "Rezultati", finish_quiz_path(game.quiz), method: :delete

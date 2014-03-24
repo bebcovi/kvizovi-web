@@ -15,8 +15,9 @@
     @include position(fixed, 50% 0 0 -5px);
     @include transform-origin(top left);
     @include transform(rotate(-90deg));
-    @include transition(.2s);
+    @include transition(left .2s);
     @include font-size(13px);
+    display: none;
     width: $width;
     margin-top: $width/2 + $navbar-height/2;
     padding: 3px $suh 0px $sub * 1.5;
@@ -36,6 +37,10 @@
 
     i {
       @include position(absolute, 10px 0 0 10px);
+    }
+
+    @media (min-width: $screen-sm-min) {
+      display: block;
     }
   }
 

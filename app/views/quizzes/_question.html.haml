@@ -5,7 +5,7 @@
 
 = image_tag question.image.url(:medium), class: "img-polaroid pull-left" if question.image?
 
-= render "quiz/question/#{question.category}", f: f, question: question
+= render "quizzes/question/#{question.category}", f: f, question: question
 
 - if question.hint?
   %p.question-hint Uputa: #{question.hint}

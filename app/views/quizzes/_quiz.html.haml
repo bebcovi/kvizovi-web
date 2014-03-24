@@ -1,0 +1,4 @@
+.quiz-list-item.col-sm-4.col-md-3
+  = link_to quiz, style: "background-image: url(#{image_url(quiz.image.url(:medium))});" do
+    %span.quiz-title
+      = quiz.name

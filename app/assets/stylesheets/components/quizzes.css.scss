@@ -1,0 +1,33 @@
+@import "globals/mixins";
+
+.quiz-display {
+  margin-top: $sub * 2;
+
+  .quiz-name {
+    small {
+      @include font-size(20px);
+      display: block;
+      margin-top: $suh/2;
+    }
+  }
+
+  .thumbnail {
+    display: inline-block;
+  }
+
+  .quiz-meta {
+    margin-bottom: $sub * 1.5;
+  }
+
+    .quiz-meta-name {
+      margin-bottom: $suh/2;
+      color: rgba($brand-primary, .5);
+      font-size: 32px;
+    }
+
+    .quiz-meta-value {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(#000, .5);
+    }
+}

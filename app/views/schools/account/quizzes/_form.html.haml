@@ -1,0 +1,31 @@
+.row
+  .col-sm-8
+    = simple_form_for [:account, @quiz] do |f|
+
+      = f.input :name
+      = image_field(f, :image)
+      = f.input :private, inline_label: "Privatan?", label: false
+      = f.input :time, as: :range,
+        input_html: {class: "input-medium", min: 1, max: 5, value: (@quiz.time || 5)}
+
+      = buttons do
+        = submit_button "Spremi"
+        = cancel_button "Odustani", @quiz.persisted? ? account_quiz_questions_path(@quiz) : account_quizzes_path
+
+    :coffee
+
+      $range = $("input[type='range']")
+
+      updateDescription = ($range) ->
+        switch Number($range.val())
+          when 1 then text = "15 sekundi"
+          when 2 then text = "30 sekundi"
+          when 3 then text = "45 sekundi"
+          when 4 then text = "60 sekundi"
+          when 5 then text = "Neograničeno"
+
+        $range.after $("<span>", class: "description") if not $range.next().hasClass("description")
+        $range.next().text(text)
+
+      updateDescription($range)
+      $range.on "change", => updateDescription($range)

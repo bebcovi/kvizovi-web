@@ -2,7 +2,7 @@
 
 = simple_form_for @quiz, url: order_account_quiz_questions_path(@quiz) do |f|
 
-  %ol.sort.space-bottom
+  %ol.sort.m-bottom
     = render collection: questions, partial: "question_short", as: :question, locals: {f: f}
 
   = buttons do

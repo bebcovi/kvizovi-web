@@ -1,13 +1,17 @@
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  resize_to_limit nil, 800
+  def default_url
+   "patterns/skulls/skulls-#{version_name}.png" if model.is_a?(Quiz)
+  end
+
+  resize_to_fill 800, 800
 
   version :medium do
-    resize_to_limit 300, nil
+    resize_to_fill 300, 300
   end
 
   version :small do
-    resize_to_limit nil, 150
+    resize_to_fill 150, 150
   end
 end

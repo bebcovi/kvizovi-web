@@ -1,0 +1,14 @@
+@import "globals/variables";
+
+.btn {
+  .icon-caret-down {
+    position: relative;
+    top: 3px;
+  }
+}
+
+  .btn-link {
+    #{$interact} {
+      text-decoration: none;
+    }
+  }

@@ -26,7 +26,7 @@ gem "simple_form", ">= 3.0.0"
 gem "haml-rails", ">= 0.5.1"
 gem "redcarpet", ">= 3"
 gem "will_paginate", ">= 3.0.5"
-gem "bootstrap-will_paginate", ">= 0.0.10"
+gem "bootstrap-will_paginate", github: "Fleurer/bootstrap-will_paginate"
 gem "draper", ">= 1.3"
 gem "cache_digests", ">= 0.3"
 
@@ -38,6 +38,7 @@ gem "unf"
 gem "squeel", ">= 1.1.1"
 gem "redis", ">= 3"
 gem "acts_as_list", ">= 0.3"
+gem "pg_search", ">= 0.7.2"
 
 # Other
 gem "devise", ">= 3.1.1"

@@ -6,8 +6,8 @@ hr:
       words_connector: ", "
 
   will_paginate:
-    previous_label: "← Sljedeća"
-    next_label: "Prethodna →"
+    previous_label: "← Prethodna"
+    next_label: "Sljedeća →"
 
   simple_form:
     error_notification:

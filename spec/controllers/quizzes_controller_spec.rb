@@ -1,15 +1,13 @@
 require "spec_helper"
 
-describe QuizController do
+describe QuizzesController do
+  let(:school)    { create(:school) }
+  let(:quiz)      { create(:quiz, school: school, questions: questions) }
+  let(:questions) { create_list(:question, 3) }
+
   before do
     login_as(:student)
-
-    @school    = create(:school)
-    @student   = current_user
-    @quiz      = create(:quiz, school: @school)
-    @questions = create_list(:question, 3, quiz: @quiz)
-
-    @student.update(school: @school)
+    current_user.update(school: school)
   end
 
   def game
@@ -17,7 +15,7 @@ describe QuizController do
   end
 
   def start_quiz
-    game.start!(@quiz, [@student])
+    game.start!(quiz, [current_user])
   end
 
   def finish_quiz
@@ -29,43 +27,47 @@ describe QuizController do
     game.finish!
   end
 
-  describe "#choose" do
-    before do
-      get :choose
+  describe "#index" do
+    it "renders the template" do
+      get :index
+      expect(response).to be_a_success
+    end
+  end
+
+  describe "#show" do
+    it "renders the template" do
+      get :show, id: quiz.id
+      expect(response).to be_a_success
     end
 
-    it "renders the template" do
-      expect(response).to be_a_success
+    it "redirects with an error message on inactive quiz" do
+      quiz.update(activated: false)
+      get :show, id: quiz.id
+
+      expect(response).to be_a_redirect
+      expect(flash[:alert]).to be_present
+    end
+
+    it "redirects with an error message on missing quiz" do
+      get :show, id: "foo"
+
+      expect(response).to be_a_redirect
+      expect(flash[:alert]).to be_present
     end
   end
 
   describe "#start" do
     before do
-      allow(game).to receive(:start!)
+      allow(game).to receive(:start!).and_call_original
+      post :start, id: quiz.id
     end
 
-    context "when valid" do
-      before do
-        post :start, game_specification: {quiz_id: @quiz.id, players_count: 1}
-      end
-
-      it "prepares the quiz" do
-        expect(game).to have_received(:start!)
-      end
-
-      it "redirects to quiz" do
-        expect(response).to redirect_to play_quiz_path
-      end
+    it "starts the quiz" do
+      expect(game).to have_received(:start!)
     end
 
-    context "when invalid" do
-      before do
-        post :start, game_specification: {quiz_id: nil}
-      end
-
-      it "renders the template" do
-        expect(response).to be_a_success
-      end
+    it "redirects to quiz" do
+      expect(response).to redirect_to play_quiz_path(quiz)
     end
   end
 
@@ -73,7 +75,7 @@ describe QuizController do
     before { start_quiz }
 
     before do
-      get :play
+      get :play, id: quiz.id
     end
 
     it "renders the template" do
@@ -86,7 +88,7 @@ describe QuizController do
 
     before do
       allow(game).to receive(:save_answer!)
-      put :save_answer, format: :js
+      put :save_answer, id: quiz.id, format: :js
     end
 
     it "invokes #save_answer!" do
@@ -103,7 +105,7 @@ describe QuizController do
 
     before do
       allow(game).to receive(:next_question!)
-      get :next_question
+      get :next_question, id: quiz.id
     end
 
     it "invokes #next_question!" do
@@ -111,7 +113,7 @@ describe QuizController do
     end
 
     it "redirects to quiz" do
-      expect(response).to redirect_to(play_quiz_path)
+      expect(response).to redirect_to(play_quiz_path(quiz))
     end
   end
 
@@ -120,7 +122,7 @@ describe QuizController do
     before { finish_quiz }
 
     before do
-      get :results
+      get :results, id: quiz.id
     end
 
     it "renders the template" do
@@ -134,22 +136,22 @@ describe QuizController do
     context "when the quiz was played to the end" do
       before do
         allow(game).to receive(:interrupted?).and_return(false)
-        delete :finish
+        delete :finish, id: quiz.id
       end
 
       it "redirects to results" do
-        expect(response).to redirect_to(results_quiz_path)
+        expect(response).to redirect_to(results_quiz_path(quiz))
       end
     end
 
     context "when the quiz was interrupted" do
       before do
         allow(game).to receive(:interrupted?).and_return(true)
-        delete :finish
+        delete :finish, id: quiz.id
       end
 
       it "redirects to beginning" do
-        expect(response).to redirect_to(choose_quiz_path)
+        expect(response).to redirect_to(quiz_path(quiz))
       end
     end
   end

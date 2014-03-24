@@ -29,7 +29,7 @@ FactoryGirl.define do
   end
 
   factory :quiz do
-    name "Some quiz"
+    sequence(:name) { |n| "Some quiz #{n}" }
     activated true
   end
 
@@ -61,25 +61,31 @@ FactoryGirl.define do
   factory :played_quiz do
     begin_time 1.minute.ago
     end_time Time.now
+    interrupted false
 
     before(:create) do |played_quiz|
-      categories = Hash.new(0)
-      played_quiz.question_answers = played_quiz.questions.map do |question|
-        case question
-        when BooleanQuestion
-          wrong_answer = !question.answer
-        when AssociationQuestion
-          wrong_answer = question.answer.map(&:first).zip(question.answer.map(&:last).reverse)
-        when ChoiceQuestion
-          wrong_answer = question.provided_answers[1..-1].sample
-        when TextQuestion
-          wrong_answer = question.answer.reverse
+      if played_quiz.quiz_snapshot
+        categories = Hash.new(0)
+        played_quiz.question_answers = played_quiz.questions.map do |question|
+          case question
+          when BooleanQuestion
+            wrong_answer = !question.answer
+          when AssociationQuestion
+            wrong_answer = question.answer.map(&:first).zip(question.answer.map(&:last).reverse)
+          when ChoiceQuestion
+            wrong_answer = question.provided_answers[1..-1].sample
+          when TextQuestion
+            wrong_answer = question.answer.reverse
+          end
+          answer = [wrong_answer, question.answer, question.answer, nil][categories[question.category]]
+          categories[question.category] += 1
+          answer
         end
-        answer = [wrong_answer, question.answer, question.answer, nil][categories[question.category]]
-        categories[question.category] += 1
-        answer
       end
     end
+  end
+
+  factory :playing do
   end
 
   factory :quiz_snapshot do

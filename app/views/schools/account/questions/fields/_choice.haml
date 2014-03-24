@@ -1,5 +1,5 @@
-= f.input :provided_answers, wrapper_html: {class: "space-half-bottom"} do
-  %table.table-condensed.space-half-bottom
+= f.input :provided_answers, wrapper_html: {class: "m-bottom-hl"} do
+  %table.table-condensed.m-bottom-hl
     %tbody.choice-wrapper
       - number_of_fields(question.provided_answers).times do |n|
         %tr.choice-option
@@ -12,5 +12,5 @@
           %td.choice-remove
             - if n.zero?
               %span.text-success{title: "Ovo će biti točan odgovor.",
-                                 data: {placement: "right"}}
+                                 data: {toggle: "tooltip", placement: "right"}}
                 = icon("checkmark-circle-full")

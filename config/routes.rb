@@ -25,17 +25,15 @@ Kvizovi::Application.routes.draw do
 
   resources :played_quizzes
 
-  ########################
-  # Student
-  ########################
-  resource :quiz, only: [], controller: "quiz" do
-    get    "choose"
-    post   "start"
-    get    "play"
-    put    "save_answer"
-    match  "next_question", via: [:put, :get]
-    get    "results"
-    delete "finish"
+  resources :quizzes, only: [:index, :show] do
+    member do
+      post   "start"
+      get    "play"
+      put    "save_answer"
+      put    "next_question"
+      get    "results"
+      delete "finish"
+    end
   end
 
   resources :surveys, only: [:new, :create]

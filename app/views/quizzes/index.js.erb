@@ -1,0 +1,14 @@
+<% if params[:page] %>
+  $(".quiz-list").find(".row").append("<%= j render(@quizzes) %>")
+  <% if @quizzes.next_page %>
+    $(".pagination").replaceWith("<%= j will_paginate(@quizzes) %>")
+  <% else %>
+    $(".pagination").hide()
+  <% end %>
+<% elsif params[:q] %>
+  $(".quiz-list").find(".row").html("<%= j render(@quizzes) %>")
+  if ($(".pagination").length > 0)
+    $(".pagination").replaceWith("<%= j will_paginate(@quizzes) %>")
+  else
+    $(".quiz-list").after("<%= j will_paginate(@quizzes) %>")
+<% end %>

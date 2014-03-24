@@ -1,8 +1,43 @@
-@import "config/bootstrap";
-@import "bootstrap/variables";
+@import "globals/variables";
+@import "addons/prefixer";
+@import "css3/transition";
 
-.quiz {
-  .btn {
-    font-family: "icomoon", $font-family-base;
+.quiz-list {
+
+  a {
+    display: block;
+    position: relative;
+    height: 250px;
+    padding: 2px;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-clip: content-box;
+    border: 1px solid rgba(#000, .25);
+
+    #{$interact} {
+      border-color: $brand-primary;
+
+      .quiz-title {
+        background-color: rgba($brand-primary, .75);
+      }
+    }
   }
+
+  .quiz-list-item {
+    margin-bottom: $sub;
+  }
+
+    $spacing: 2px;
+    .quiz-title {
+      display: inline-block;
+      position: absolute;
+      left: $spacing;
+      bottom: $spacing;
+      right: $spacing;
+      padding: $suh;
+      background-color: rgba(#000, .35);
+      text-align: center;
+      color: #fff;
+    }
+
 }

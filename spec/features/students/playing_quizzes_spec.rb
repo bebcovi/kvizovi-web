@@ -9,20 +9,8 @@ feature "Playing quizzes" do
   def answers(&block)
     loop do
       block.call
-
-      if find(".modal-footer .btn").text =~ /Sljedeće pitanje/
-        click_on "Sljedeće pitanje"
-      else
-        break
-      end
-    end
-  end
-
-  def connect(mappings)
-    mappings.each_with_index do |(right, left), index|
-      divs = all(".association-pair")[index].all("td")
-      divs.first.fill_in :play_answer, with: left, visible: false
-      divs.last.fill_in :play_answer, with: right, visible: false
+      break if find(".modal-footer .btn").text !~ /Sljedeće pitanje/
+      click_on "Sljedeće pitanje"
     end
   end
 
@@ -54,17 +42,16 @@ feature "Playing quizzes" do
     expect(find(".modal")).to have_css(".text-error")
   end
 
-  def begin_single_player
-    choose quiz.name
-    choose "Samo ja"
-    click_on "Započni kviz"
+  def connect(mappings)
+    mappings.each_with_index do |(right, left), index|
+      divs = all(".association-pair")[index].all("td")
+      divs.first.fill_in :play_answer, with: left, visible: false
+      divs.last.fill_in :play_answer, with: right, visible: false
+    end
   end
 
-  def begin_multi_player(other_student)
-    choose quiz.name
-    choose "Još netko"
-    fill_in "Korisničko ime", with: other_student.username
-    fill_in "Lozinka",        with: other_student.password
+  def begin_quiz(quiz)
+    click_on quiz.name
     click_on "Započni kviz"
   end
 
@@ -72,35 +59,37 @@ feature "Playing quizzes" do
     login(student)
   end
 
+  scenario "Searching quizzes" do
+    school.quizzes << quiz
+
+    click_on "Kvizovi"
+    fill_in "search_q", with: quiz.name
+    submit
+
+    expect(page).to have_content(quiz.name)
+
+    fill_in "search_q", with: "Foo"
+    submit
+
+    expect(page).not_to have_content(quiz.name)
+  end
+
   scenario "Single player", js: true do
     school.quizzes << quiz
 
     click_on "Kvizovi"
-    begin_single_player
+    begin_quiz(quiz)
     answers { answer_question_correctly }
     click_on "Rezultati"
 
     expect(first(".l-player-one")).to have_content("4 od 4")
   end
 
-  scenario "Multi player", js: true do
-    school.quizzes << quiz
-    school.students << (other_student = create(:student))
-
-    click_on "Kvizovi"
-    begin_multi_player(other_student)
-    answers { answer_question_correctly }
-    click_on "Rezultati"
-
-    expect(first(".l-player-one")).to have_content("2 od 2")
-    expect(first(".l-player-two")).to have_content("2 od 2")
-  end
-
   scenario "Not getting all points", js: true do
     school.quizzes << quiz
 
     click_on "Kvizovi"
-    begin_single_player
+    begin_quiz(quiz)
     answers { answer_question_incorrectly }
     click_on "Rezultati"
 
@@ -111,23 +100,21 @@ feature "Playing quizzes" do
     school.quizzes << quiz
 
     click_on "Kvizovi"
-    begin_single_player
+    begin_quiz(quiz)
     click_on "Prekini"
     click_on "Jesam"
 
-    expect(current_path).to eq choose_quiz_path
+    expect(current_path).to eq quiz_path(quiz)
   end
 
   scenario "Quiz gets deleted in the meanwhile", js: true do
     school.quizzes << quiz
 
     click_on "Kvizovi"
-    begin_single_player
+    begin_quiz(quiz)
     quiz.destroy
 
-    expect {
-      answers { answer_question_correctly }
-      click_on "Rezultati"
-    }.not_to raise_error
+    answers { answer_question_correctly }
+    click_on "Rezultati"
   end
 end

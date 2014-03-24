@@ -23,12 +23,12 @@ feature "Questions" do
 
     expect(page).to have_css(".boolean_question")
 
-    click_on "Izmijeni"
+    within(Question.first) { click_on "Izmijeni" }
     submit
 
     expect(page).to have_css(".boolean_question")
 
-    click_on "Izbriši"
+    within(Question.first) { click_on "Izbriši" }
     click_on "Jesam"
 
     expect(page).to have_no_css(".boolean_question")
@@ -48,14 +48,14 @@ feature "Questions" do
 
     expect(page).to have_css(".choice_question")
 
-    click_on "Izmijeni"
+    within(Question.first) { click_on "Izmijeni" }
     click_on "Dodaj ponuđeni odgovor"
     fill_in "Ponuđeni odgovor 4", with: "Ned Stark"
     submit
 
     expect(page).to have_css(".choice_question")
 
-    click_on "Izbriši"
+    within(Question.first) { click_on "Izbriši" }
     click_on "Jesam"
 
     expect(page).to have_no_css(".choice_question")
@@ -75,14 +75,14 @@ feature "Questions" do
 
     expect(page).to have_css(".association_question")
 
-    click_on "Izmijeni"
+    within(Question.first) { click_on "Izmijeni" }
     click_on "Dodaj asocijaciju"
     fill_in "Asocijacija 4a", with: "Cercei Lannister"; fill_in "Asocijacija 4b", with: %("Everyone except us is our enemy.")
     submit
 
     expect(page).to have_css(".association_question")
 
-    click_on "Izbriši"
+    within(Question.first) { click_on "Izbriši" }
     click_on "Jesam"
 
     expect(page).to have_no_css(".association_question")
@@ -99,12 +99,12 @@ feature "Questions" do
 
     expect(page).to have_css(".text_question")
 
-    click_on "Izmijeni"
+    within(Question.first) { click_on "Izmijeni" }
     submit
 
     expect(page).to have_css(".text_question")
 
-    click_on "Izbriši"
+    within(Question.first) { click_on "Izbriši" }
     click_on "Jesam"
 
     expect(page).to have_no_css(".text_question")
@@ -121,7 +121,7 @@ feature "Questions" do
 
     expect(find("img")[:src]).to match File.basename(photo_path, ".jpg")
 
-    click_on "Izmijeni"
+    within(Question.first) { click_on "Izmijeni" }
     find(".toggle-type").click
     execute_script %($("input[type='url']").val("#{photo_url}").trigger("keyup"))
     submit

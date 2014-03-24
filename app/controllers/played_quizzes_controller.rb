@@ -1,12 +1,12 @@
 class PlayedQuizzesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_school!
   before_action :assign_scope
 
   decorates_assigned :played_quiz
 
   def index
     @played_quizzes = @scope.played_quizzes
-      .not_interrupted.descending
+      .not_interrupted.relevant_to(current_user).descending
       .includes(:quiz_snapshot, :players)
       .paginate(page: params[:page], per_page: 15)
       .decorate
