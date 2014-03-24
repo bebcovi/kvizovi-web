@@ -5,8 +5,8 @@ class ImageUploader < CarrierWave::Uploader::Base
     case model
     when Quiz
       case version_name
-      when :small  then "http://placekitten.com/80/80"
-      when :medium then "http://placekitten.com/300/300"
+      when :small  then ActionController::Base.helpers.asset_path("assets/patterns/skulls/skulls-small.png")
+      when :medium then ActionController::Base.helpers.asset_path("assets/patterns/skulls/skulls-medium.png")
       end
     end
   end
