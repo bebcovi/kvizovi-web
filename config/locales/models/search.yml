@@ -1,0 +1,6 @@
+hr:
+
+  simple_form:
+    placeholders:
+      search:
+        q: "Traži..."
