@@ -4,7 +4,7 @@ class QuizzesController < ApplicationController
   def index
     @quizzes = Quiz.public.activated
     @quizzes = @quizzes.search(params[:q]) if params[:q].present?
-    @quizzes = @quizzes.paginate(page: params[:page], per_page: 10)
+    @quizzes = @quizzes.paginate(page: params[:page], per_page: 12)
   end
 
   def show
