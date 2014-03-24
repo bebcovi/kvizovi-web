@@ -8,7 +8,7 @@ class QuizzesController < ApplicationController
   end
 
   def show
-    @quiz = Quiz.activated.find(params[:id])
+    @quiz = Quiz.activated.find(params[:id]).decorate
   rescue ActiveRecord::RecordNotFound
     redirect_to quizzes_path,
       alert: if Quiz.exists?(params[:id])
