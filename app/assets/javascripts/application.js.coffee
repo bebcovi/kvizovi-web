@@ -1,7 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#
-#= require turbolinks
 #= require jquery.turbolinks
 #
 #= require bootstrap/alert
@@ -11,6 +9,8 @@
 #= require_self
 #
 #= require_directory .
+#
+#= require turbolinks
 
 $.icon = (name) -> "<i class=\"icon-#{name}\"></i>"
 
