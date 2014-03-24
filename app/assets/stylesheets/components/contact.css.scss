@@ -15,7 +15,7 @@
     @include position(fixed, 50% 0 0 -5px);
     @include transform-origin(top left);
     @include transform(rotate(-90deg));
-    @include transition(.2s);
+    @include transition(left .2s);
     @include font-size(13px);
     display: none;
     width: $width;
