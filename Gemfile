@@ -45,16 +45,16 @@ gem "active_attr", ">= 0.8.1"
 gem "inherited_resources", ">= 1.4.1"
 
 # Development
-gem "pry", ">= 0.9.12.5"
 gem "pry-rails", ">= 0.3.2"
-gem "pry-theme"
 gem "bond"
-gem "pry-debugger"
-gem "pry-stack_explorer"
 gem "dotenv"
 
 group :development, :test do
   gem "teaspoon"
+  gem "pry-theme"
+  gem "pry-byebug"
+  gem "pry-stack_explorer"
+  gem "pry-rescue"
 end
 
 group :test do
