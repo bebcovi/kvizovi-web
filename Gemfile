@@ -55,7 +55,7 @@ gem "dotenv"
 
 group :test do
   gem "jasminerice", github: "bradphelan/jasminerice"
-  gem "rspec-rails", ">= 3.0.0.beta1"
+  gem "rspec-rails", ">= 3.0.0.beta2"
   gem "rspec-collection_matchers", ">= 0.0.2"
   gem "factory_girl", ">= 4.2"
   gem "nokogiri"

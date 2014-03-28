@@ -42,7 +42,8 @@ describe HomeController do
     end
 
     it "defaults the sender email to current user's email" do
-      allow(controller).to receive(:current_user) { double(email: "foo@bar.com") }
+      login_as(:student)
+      controller.send(:current_user).update(email: "foo@bar.com")
       args[0].delete(:sender)
 
       expect(ContactMailer).to receive(:contact).with(

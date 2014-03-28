@@ -10,9 +10,9 @@ Dir[Rails.root.join("spec/support/*.rb")].each { |f| require f }
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
-  # config.mock_with :rspec do |mocks|
-  #   mocks.verify_partial_doubles = true
-  # end
+  config.mock_with :rspec do |mocks|
+    mocks.verify_partial_doubles = true
+  end
 
   config.before do
     ActionMailer::Base.deliveries.clear
