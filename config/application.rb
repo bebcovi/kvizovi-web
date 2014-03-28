@@ -21,7 +21,7 @@ require_relative "initializers/sass"
 if Rails.env.development?
   require "quiet_assets"
   require "better_errors"
-  require "jasminerice"
+  require "teaspoon"
   require "letter_opener"
 end
 

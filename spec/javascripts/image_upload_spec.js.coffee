@@ -183,7 +183,7 @@ describe "ImageUpload", ->
         expect(@subject.value).toHaveAttr("src", "jasmine")
 
       it "shows the preview if the URL is present", ->
-        @subject.set("favicon.ico")
+        @subject.set("/favicon.ico")
         expect(@subject.value).toBeVisible()
 
       it "hides the preview if the URL is blank", ->
