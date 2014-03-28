@@ -14,7 +14,7 @@ class Account::QuizzesController < InheritedResources::Base
   end
 
   def collection
-    @quizzes = end_of_association_chain.order{updated_at.desc}
+    @quizzes = end_of_association_chain.order(updated_at: :desc)
   end
 
   def permitted_params

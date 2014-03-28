@@ -1,5 +1,3 @@
-require "squeel"
-
 class School < ActiveRecord::Base
   has_many :students,  dependent: :destroy
   has_many :quizzes,   dependent: :destroy

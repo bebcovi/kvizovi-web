@@ -1,4 +1,3 @@
-require "squeel"
 require "acts_as_list"
 
 class Question < ActiveRecord::Base
@@ -9,7 +8,7 @@ class Question < ActiveRecord::Base
   acts_as_list scope: :quiz
   mount_uploader :image, ImageUploader
 
-  default_scope -> { order{position.asc} }
+  default_scope -> { order(position: :asc) }
 
   validates :content, presence: true
 end

@@ -1,4 +1,3 @@
-require "squeel"
 require "pg_search"
 
 class Quiz < ActiveRecord::Base
@@ -13,8 +12,8 @@ class Quiz < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: {scope: :school_id}
 
-  scope :activated, -> { where{activated == true} }
-  scope :public,    -> { where{private == false} }
+  scope :activated, -> { where(activated: true) }
+  scope :public,    -> { where(private: false) }
 
   pg_search_scope :search,
     against: {name: "A"},

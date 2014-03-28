@@ -1,0 +1,8 @@
+hr:
+  activerecord:
+    errors:
+      models:
+        reading:
+          attributes:
+            post_id:
+              taken: "Korisnik je već pročitao ovaj post."

@@ -1,5 +1,3 @@
-require "squeel"
-
 class Student < ActiveRecord::Base
   belongs_to :school
   has_many :playings, foreign_key: "player_id"

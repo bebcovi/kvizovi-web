@@ -1,4 +1,3 @@
-require "squeel"
 require "acts_as_list"
 
 class Playing < ActiveRecord::Base

@@ -16,4 +16,12 @@ describe Post do
       expect(subject).to have(1).error_on(:body)
     end
   end
+
+  describe ".not_in" do
+    it "returns posts w" do
+      post1 = create(:post)
+      post2 = create(:post)
+      expect(Post.not_in(Post.where(id: post1.id))).to eq [post2]
+    end
+  end
 end

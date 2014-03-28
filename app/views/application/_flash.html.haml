@@ -1,3 +1,3 @@
 - flash.each do |name, message|
-  - type = {notice: :success, alert: :danger}[name] || name
+  - type = {notice: :success, alert: :danger}[name.to_sym] || name.to_sym
   = alert_message(message, type)

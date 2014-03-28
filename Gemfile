@@ -2,7 +2,7 @@ ruby "2.1.0"
 
 source "https://rubygems.org"
 
-gem "rails", ">= 4.0.1"
+gem "rails", ">= 4.1.0.rc2"
 gem "pg"
 
 # Frontend
@@ -35,7 +35,6 @@ gem "carrierwave", ">= 0.9"
 gem "mini_magick", ">= 3.6"
 gem "fog", ">= 1.17.0"
 gem "unf"
-gem "squeel", ">= 1.1.1"
 gem "redis", ">= 3"
 gem "acts_as_list", ">= 0.3"
 gem "pg_search", ">= 0.7.2"
