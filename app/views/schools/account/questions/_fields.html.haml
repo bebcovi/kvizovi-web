@@ -1,6 +1,6 @@
 = f.input :content, input_html: {autofocus: current_page?(action: "new"), rows: 1, class: "input-block-level"}
 
-= image_field(f, :image)
+= render "image_field", f: f, attribute: :image
 
 = render "account/questions/fields/#{@question.category}", f: f, question: @question
 

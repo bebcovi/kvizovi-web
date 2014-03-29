@@ -3,7 +3,7 @@
     = simple_form_for [:account, @quiz] do |f|
 
       = f.input :name
-      = image_field(f, :image)
+      = render "image_field", f: f, attribute: :image
       = f.input :private, inline_label: "Privatan?", label: false
       = f.input :time, as: :range,
         input_html: {class: "input-medium", min: 1, max: 5, value: (@quiz.time || 5)}
