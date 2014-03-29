@@ -1,106 +1,99 @@
-#= require bootstrap/tooltip
-#= require bootstrap/button
-
 jQuery ->
 
-  new App.ImageUpload(".image_upload").enhance()
+  @upload = new App.ImageUpload(".image_upload")
 
 class App.ImageUpload
 
   constructor: (wrapper) ->
     @wrapper = $(wrapper)
 
-    @tabs    = @wrapper.find(".image_upload-tabs").find("input")
-    @tabFile = @tabs.filter("[value=file]")
-    @tabUrl  = @tabs.filter("[value=url]")
+    @tabs    = @wrapper.find(".image_upload-tabs .btn")
+    @preview = new App.ImageUpload.Preview(@wrapper.find(".image-preview"))
 
-    @file = new @FileUpload(@wrapper.find("#question_image"), @tabFile)
-    @url  = new @UrlUpload(@wrapper.find("#question_remote_image_url"), @tabUrl)
+    @file = new App.ImageUpload.File(
+      tab: @tabs.first()
+      input: @wrapper.find("[type='file']")
+      preview: @preview
+    )
+    @url = new App.ImageUpload.Url(
+      tab: @tabs.last()
+      input: @wrapper.find("[type='url']")
+      preview: @preview
+    )
 
-  enhance: ->
-    @preview = new @ImagePreview(@wrapper.find(".image-preview"))
+    @tabs.on "change", =>
+      @file.update()
+      @url.update()
 
-    @tabs.on "change", (event) => @toggle()
+class App.ImageUpload.Input
 
-    @file.tab.parent().button("toggle") # default to file input
+  constructor: (options) ->
+    $.extend(@, options)
+    @originalName = @input.attr("name")
 
-    @file.onUpdate (input) => @preview.update(input)
-    @url.onUpdate  (input) => @preview.update(input)
+    @update()
+    @input.on "change", => @updatePreview()
 
-  toggle: ->
-    if @file.isActive()
-      @url.toggle("off")
-      @file.toggle("on")
+  update: ->
+    if @tab.find("input").is(":checked")
+      @select()
     else
-      @file.toggle("off")
-      @url.toggle("on")
+      @deselect()
 
-  FileUpload: class
+  select: ->
+    @input.attr("name", @originalName)
+    @input.show()
+    @tab.addClass("active")
+    @updatePreview()
 
-    constructor: (@field, @tab) ->
+  deselect: ->
+    @input.removeAttr("name")
+    @input.hide()
+    @tab.removeClass("active")
+    @preview.reset()
 
-    toggle: (state) ->
-      switch state
-        when "on"
-          @field.removeClass("sr-only")
-        when "off"
-          @field.val("")
-          @field.addClass("sr-only")
+  updatePreview: ->
+    # overriden in subclasses
 
-    onUpdate: (callback) ->
-      @field.on "change", (event) =>
-        callback(@field[0])
+class App.ImageUpload.Url extends App.ImageUpload.Input
 
-    isActive: ->
-      @tab.is(":checked")
+  constructor: (args...) ->
+    super
+    @input.on "keyup", =>
+      lastKeyup = moment()
+      setTimeout =>
+        if moment().diff(lastKeyup, "milliseconds") >= 200
+          @updatePreview()
+      , 200
 
-  UrlUpload: class
+  updatePreview: ->
+    if @input.val()
+      @preview.set @input.val()
+    else
+      @preview.reset()
 
-    constructor: (@field, @tab) ->
+class App.ImageUpload.File extends App.ImageUpload.Input
 
-    toggle: (state) ->
-      switch state
-        when "on"
-          @field.removeClass("sr-only")
-        when "off"
-          @field.val("")
-          @field.addClass("sr-only")
-
-    onUpdate: (callback) ->
-      @field.on "keyup change", (event) =>
-        callback(@field[0])
-
-    isActive: ->
-      @tab.is(":checked")
-
-  ImagePreview: class
-
-    constructor: (value) ->
-      @value = $(value)
-      @originalUrl = @value.attr("src")
-      @value.hide() unless @originalUrl
-
-    update: (input) ->
-      @reset() if not input.value
-
-      switch input.type
-        when "file" then @updateFromFile(input)
-        when "url"  then @updateFromUrl(input)
-
-    updateFromFile: (input) ->
+  updatePreview: ->
+    if @input[0].files.length
       reader = new FileReader
       reader.onload = (event) =>
-        url = event.target.result
-        @set url
-      reader.readAsDataURL input.files[0]
+        @preview.set event.target.result
+      reader.readAsDataURL @input[0].files[0]
+    else
+      @preview.reset()
 
-    updateFromUrl: (input) ->
-      url = input.value
-      @set url
+class App.ImageUpload.Preview
 
-    reset: ->
-      @set @originalUrl
+  constructor: (img) ->
+    @img = $(img)
+    @originalSrc = @img.attr("src")
+    @img.hide() if not @img.attr("src")
 
-    set: (url) ->
-      @value.attr("src", url)
-      if url then @value.show() else @value.hide()
+  set: (value) ->
+    @img.attr("src", value)
+    @img.show()
+
+  reset: ->
+    @img.attr("src", @originalSrc)
+    @img.hide() if not @originalSrc

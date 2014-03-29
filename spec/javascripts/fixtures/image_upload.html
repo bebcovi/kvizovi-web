@@ -1,8 +1,23 @@
-<div class="form-group string optional question_image image_upload">
-   <label class="file optional" for="question_image">Slika</label>
-   <input class="file optional" id="question_image" name="question[image]" type="file"/>
-   <label class="url optional" for="question_remote_image_url">URL od slike</label>
-   <input class="url optional form-control" id="question_remote_image_url" name="question[remote_image_url]" placeholder="Npr. &quot;http://www.primjer.hr/neka-slika.jpg&quot;" type="url"/>
-   <input id="question_image_cache" name="question[image_cache]" type="hidden"/>
-   <img class="img-thumbnail image-preview"/>
+<div class="form-group string optional quiz_image image_upload">
+  <label class="string optional" for="quiz_image">Slika</label>
+  <div class="image_upload-tabs m-bottom-hl">
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-default">
+        <input name="source" type="radio" value="file">
+        <i class="icon-storage"></i> Na računalu
+      </label>
+      <label class="btn btn-default">
+        <input name="source" type="radio" value="url">
+        <i class="icon-link"></i> Na internetu
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <input class="file optional sr-only" id="quiz_image" name="quiz[image]" type="file">
+      <input class="url optional form-control sr-only" id="quiz_remote_image_url" name="quiz[remote_image_url]" type="url" autocomplete="off">
+    </div>
+  </div>
+  <input id="quiz_image_cache" name="quiz[image_cache]" type="hidden">
+  <img alt="Skulls medium" class="img-thumbnail image-preview" src="/assets/patterns/skulls/skulls-medium.png">
 </div>

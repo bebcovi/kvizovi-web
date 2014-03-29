@@ -28,5 +28,3 @@
 #
 #= require application
 #= require support/jasmine-jquery
-
-@context = describe

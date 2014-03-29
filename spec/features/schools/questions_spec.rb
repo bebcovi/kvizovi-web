@@ -116,17 +116,18 @@ feature "Questions" do
     fill_in "Tekst pitanja", with: "Stannis Baratheon won the war against King's Landing."
     choose "Točno"
 
-    attach_file "Slika", photo_path
+    find("#question_image").set(photo_path)
     submit
 
-    expect(find("img")[:src]).to match File.basename(photo_path, ".jpg")
+    expect(find("img")[:src]).to match File.basename(photo_path)
 
     within(Question.first) { click_on "Izmijeni" }
-    find(".toggle-type").click
-    execute_script %($("input[type='url']").val("#{photo_url}").trigger("keyup"))
+
+    all(".image_upload-tabs .btn").last.click
+    find("#question_remote_image_url").set(photo_url)
     submit
 
-    expect(find("img")[:src]).to match File.basename(photo_url, ".jpg")
+    expect(find("img")[:src]).to match File.basename(photo_url)
   end
 
   scenario "Changing the order", js: true do

@@ -2,191 +2,143 @@ describe "ImageUpload", ->
 
   beforeEach ->
     loadFixtures("image_upload")
-    @wrapper = $(".question_image")
+    @wrapper = $(".image_upload")
 
     @subject = new App.ImageUpload(@wrapper)
 
-    @file = @wrapper.children().slice(0, 3)
-    @url = @wrapper.children().slice(3, 6)
+    @tabs    = @wrapper.find(".image_upload-tabs .btn")
+
+    @file    = @wrapper.find("input[type='file']")
+    @url     = @wrapper.find("input[type='url']")
+
     @preview = @wrapper.find(".image-preview")
 
   describe "#constructor", ->
 
-    it "initializes the file upload", ->
-      expect(@file.first()).toBe(".toggle-type")
+    it "triggers the update of file and url on tab change", ->
+      spyOn(@subject.file, "update")
+      spyOn(@subject.url, "update")
 
-    it "initializes the url upload", ->
-      expect(@url.first()).toBe(".toggle-type")
+      @tabs.find("input").trigger("change")
 
-  describe "#enhance", ->
+      expect(@subject.file.update).toHaveBeenCalled()
+      expect(@subject.url.update).toHaveBeenCalled()
 
-    beforeEach ->
-      @subject.enhance()
-
-    it "shows the file input by default", ->
-      expect(@file).toBeVisible()
-      expect(@url).toBeHidden()
-
-    it "shows the url input if it's present", ->
-      @url.filter("input").val("http://example.jpg")
-      @url.show()
-      @subject.enhance()
-      expect(@url).toBeVisible()
-      expect(@file).toBeHidden()
-
-    it "switches the type on icon click", ->
-      spyOn(@subject, "switchType")
-      @wrapper.find(".toggle-type").first().click()
-      expect(@subject.switchType).toHaveBeenCalled()
-
-    it "updates the preview on file change", ->
-      spyOn(@subject.preview, "update")
-      @file.filter("input").trigger("change")
-      expect(@subject.preview.update).toHaveBeenCalled()
-
-    it "updates the preview on url change", ->
-      spyOn(@subject.preview, "update")
-      @url.filter("input").trigger($.Event("keyup"))
-      expect(@subject.preview.update).toHaveBeenCalled()
-
-  describe "#switchType", ->
+  describe ".Input", ->
 
     beforeEach ->
-      @subject.enhance()
-
-    it "switches the type", ->
-      @subject.switchType()
-      expect(@file).toBeHidden()
-      expect(@url).toBeVisible()
-
-      @subject.switchType()
-      expect(@file).toBeVisible()
-      expect(@url).toBeHidden()
-
-    it "resets the preview", ->
-      @url.filter("input").val "http://example.jpg"
-      @subject.switchType()
-      expect(@preview).not.toHaveAttr("src")
-
-  describe "FileUpload", ->
-
-    beforeEach ->
-      @subject = @subject.file
+      @subject = new App.ImageUpload.Input(
+        tab: @tabs.last()
+        input: @url
+        preview: new App.ImageUpload.Preview(@preview)
+      )
 
     describe "#constructor", ->
 
-      it "creates a toggle button", ->
-        expect(@subject.fields.first()).toBe(".toggle-type")
+      it "calls #update", ->
+        @tabs.last().find("input").attr("checked", true)
+        new App.ImageUpload.Input(
+          tab: @tabs.last()
+          input: @url
+          preview: new App.ImageUpload.Preview(@preview)
+        )
+        expect(@url).toBeVisible()
 
-    describe "#toggle", ->
+      it "updates the preview on input change", ->
+        spyOn(@subject, "updatePreview")
+        @url.trigger("change")
+        expect(@subject.updatePreview).toHaveBeenCalled()
 
-      it "changes the visibility", ->
-        @subject.toggle()
-        expect(@subject.fields).toBeHidden()
-        @subject.toggle()
-        expect(@subject.fields).toBeVisible()
-
-      # Assigning value to a file manually throws InvalidStateError, for
-      # security reasons. There doesn't seem to be any way around this.
-      it "clears the input value", ->
-        # @subject.fields.find("input")[0].val("foobar")
-        @subject.toggle()
-        expect(@subject.fields.filter("input")).toHaveValue("")
+      it "saves the original name", ->
+        expect(@subject.originalName).not.toBeEmpty()
 
     describe "#update", ->
 
-      it "triggers the callback on change", ->
-        callback = jasmine.createSpy("callback")
-        @subject.onUpdate callback
-        @subject.fields.filter("input").trigger("change")
+      it "calls #select when the input is checked", ->
+        @tabs.last().find("input").attr("checked", true)
+        spyOn(@subject, "select")
+        @subject.update()
+        expect(@subject.select).toHaveBeenCalled()
 
-        expect(callback).toHaveBeenCalled()
-        expect(callback).toHaveBeenCalledWith(jasmine.any(HTMLInputElement))
+      it "calls #deselect when the input is not checked", ->
+        @tabs.last().find("input").removeAttr("checked")
+        spyOn(@subject, "deselect")
+        @subject.update()
+        expect(@subject.deselect).toHaveBeenCalled()
 
-  describe "UrlUpload", ->
+    describe "#select", ->
+
+      it "assigns the name to the original name", ->
+        @subject.select()
+        expect(@url.attr("name")).not.toBeEmpty()
+
+      it "shows the input", ->
+        @subject.select()
+        expect(@url).toBeVisible()
+
+      it "makes the tab active", ->
+        @subject.select()
+        expect(@tabs.last()).toHaveClass("active")
+
+      it "updates the preview", ->
+        spyOn(@subject, "updatePreview")
+        @subject.select()
+        expect(@subject.updatePreview).toHaveBeenCalled()
+
+    describe "#deselect", ->
+
+      it "clears the name of the input", ->
+        @subject.deselect()
+        expect(@url).not.toHaveAttr("name")
+
+      it "hides the input", ->
+        @subject.deselect()
+        expect(@url).toBeHidden()
+
+      it "makes the tab inactive", ->
+        @subject.deselect()
+        expect(@tabs.last()).not.toHaveClass("active")
+
+      it "resets the preview", ->
+        spyOn(@subject.preview, "reset")
+        @subject.deselect()
+        expect(@subject.preview.reset).toHaveBeenCalled()
+
+  describe ".Preview", ->
 
     beforeEach ->
-      @subject = @subject.url
+      @subject = new App.ImageUpload.Preview(@preview)
 
     describe "#constructor", ->
 
-      it "creates a toggle button", ->
-        expect(@subject.fields.first()).toBe(".toggle-type")
+      it "hides the preview if the src is empty", ->
+        @preview.attr("src", "")
+        new App.ImageUpload.Preview(@preview)
+        expect(@preview.css("display")).toEqual("none")
 
-    describe "#toggle", ->
-
-      it "changes the visibility", ->
-        @subject.toggle()
-        expect(@subject.fields).toBeHidden()
-        @subject.toggle()
-        expect(@subject.fields).toBeVisible()
-
-      it "clears the input value", ->
-        @subject.fields.filter("input").val("foo")
-        @subject.toggle()
-        expect(@subject.fields.filter("input")).toHaveValue("")
-
-    describe "#update", ->
-
-      it "triggers the callback on keyup", ->
-        callback = jasmine.createSpy("callback")
-        @subject.onUpdate callback
-        @subject.fields.filter("input").trigger($.Event("keyup"))
-
-        expect(callback).toHaveBeenCalled()
-        expect(callback).toHaveBeenCalledWith(jasmine.any(HTMLInputElement))
-
-  describe "ImagePreview", ->
-
-    beforeEach ->
-      @subject.enhance()
-      @subject = @subject.preview
-
-    describe "#constructor", ->
-
-      it "hides the preview if the URL is empty", ->
-        expect(@subject.value).toBeHidden()
-
-    describe "#update", ->
-
-      beforeEach ->
-        spyOn(@subject, "updateFromFile")
-        spyOn(@subject, "updateFromUrl")
-
-      it "updates from file on file inputs", ->
-        input = $("<input>", type: "file")[0]
-        @subject.update(input)
-        expect(@subject.updateFromFile).toHaveBeenCalled()
-
-      it "updates from url on url inputs", ->
-        input = $("<input>", type: "url")[0]
-        @subject.update(input)
-        expect(@subject.updateFromUrl).toHaveBeenCalled()
-
-      it "resets if the user removes the attached file", ->
-        @subject.originalUrl = "jasmine"
-        input = $("<input>", type: "file")[0]
-        @subject.update(input)
-        expect(@subject.value).toHaveAttr("src", "jasmine")
-
-    describe "#reset", ->
-
-      it "shows the preview of the original URL", ->
-        @subject.originalUrl = "jasmine"
-        @subject.reset()
-        expect(@subject.value).toHaveAttr("src", "jasmine")
+      it "saves the src as original src", ->
+        @preview.attr("src", "foo")
+        @subject = new App.ImageUpload.Preview(@preview)
+        expect(@subject.originalSrc).toEqual("foo")
 
     describe "#set", ->
 
-      it "assigns the URL", ->
-        @subject.set("jasmine")
-        expect(@subject.value).toHaveAttr("src", "jasmine")
+      it "updates the src with the given value", ->
+        @subject.set("foo")
+        expect(@preview.attr("src")).toEqual("foo")
 
-      it "shows the preview if the URL is present", ->
-        @subject.set("/favicon.ico")
-        expect(@subject.value.css("display")).not.toEqual("none")
-        expect(@subject.value.css("display")).not.toEqual("hidden")
+      it "shows the preview", ->
+        @subject.set("foo")
+        expect(@preview.css("display")).not.toEqual("none")
 
-      it "hides the preview if the URL is blank", ->
-        @subject.set("")
-        expect(@subject.value).toBeHidden()
+    describe "#reset", ->
+
+      it "resets the src with the original value", ->
+        @subject.originalSrc = "foo"
+        @subject.reset()
+        expect(@preview.attr("src")).toEqual("foo")
+
+      it "hides the preview if there is no original value", ->
+        @subject.originalSrc = ""
+        @subject.reset()
+        expect(@preview.css("display")).toEqual("none")

@@ -21,6 +21,10 @@ hr:
       play:
         answer: "Odgovor"
 
+    placeholders:
+      defaults:
+        remote_image_url: "http://example.jpg"
+
   helpers:
     submit:
       create: "Stvori"
