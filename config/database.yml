@@ -12,16 +12,16 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: lektire_development<%= suffix %>
+  database: kvizovi_development<%= suffix %>
 
 test:
   <<: *defaults
-  database: lektire_test
 
 staging:
   <<: *defaults
   database: lektire_staging
+  database: kvizovi_test
 
 production:
   <<: *defaults
-  database: lektire_production
+  database: kvizovi_production
