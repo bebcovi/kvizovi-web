@@ -184,7 +184,8 @@ describe "ImageUpload", ->
 
       it "shows the preview if the URL is present", ->
         @subject.set("/favicon.ico")
-        expect(@subject.value).toBeVisible()
+        expect(@subject.value.css("display")).not.toEqual("none")
+        expect(@subject.value.css("display")).not.toEqual("hidden")
 
       it "hides the preview if the URL is blank", ->
         @subject.set("")
