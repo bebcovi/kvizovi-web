@@ -16,10 +16,6 @@ development:
 
 test:
   <<: *defaults
-
-staging:
-  <<: *defaults
-  database: lektire_staging
   database: kvizovi_test
 
 production:
