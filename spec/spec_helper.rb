@@ -5,6 +5,8 @@ require "rspec/rails"
 require "rspec/collection_matchers"
 require "pry"
 
+ActiveRecord::Migration.maintain_test_schema!
+
 Dir[Rails.root.join("spec/support/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
