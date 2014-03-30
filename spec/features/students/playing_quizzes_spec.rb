@@ -72,6 +72,8 @@ feature "Playing quizzes" do
     submit
 
     expect(page).not_to have_content(quiz.name)
+
+    click_on "Moja škola"
   end
 
   scenario "Single player", js: true do
