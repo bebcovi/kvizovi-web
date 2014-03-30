@@ -1,0 +1,9 @@
+- title "Novi kviz"
+
+= simple_form_for [:account, @quiz] do |f|
+
+  .row
+    .col-sm-6
+      = f.input :name, label: false, class: "input-large"
+    .col-sm-6
+      = f.button :button, "Napravi kviz".prepend_icon("plus"), class: "btn-primary"

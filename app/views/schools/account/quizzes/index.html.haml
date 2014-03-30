@@ -1,7 +1,7 @@
 - title "Uređivanje kvizova"
 
 .m-bottom
-  = add_button "Novi kviz", new_account_quiz_path
+  = render "new"
 
 .quiz-list-admin
   - if @quizzes.any?

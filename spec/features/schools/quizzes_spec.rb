@@ -11,9 +11,8 @@ feature "Quizzes" do
   scenario "Creating, updating and destroying", js: true do
     visit account_quizzes_path
 
-    click_on "Novi kviz"
     fill_in "Naziv", with: "Novi kviz"
-    attach_file "Slika", photo_path
+    click_on "Napravi kviz"
     submit
 
     expect(current_path).to eq account_quiz_questions_path(Quiz.last)

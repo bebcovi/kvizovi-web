@@ -3,6 +3,20 @@ class Account::QuizzesController < InheritedResources::Base
 
   before_action :authenticate_school!
 
+  def index
+    @quiz = build_resource
+    super
+  end
+
+  def create
+    super do |success, failure|
+      failure.html do
+        @quizzes = collection
+        render :index
+      end
+    end
+  end
+
   private
 
   def resource_url
