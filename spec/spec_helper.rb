@@ -4,14 +4,13 @@ require_relative "../config/environment"
 require "rspec/rails"
 require "rspec/collection_matchers"
 require "pry"
+require "database_cleaner"
 
 ActiveRecord::Migration.maintain_test_schema!
 
 Dir[Rails.root.join("spec/support/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
-  config.use_transactional_fixtures = true
-
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
@@ -25,4 +24,19 @@ RSpec.configure do |config|
   config.include Helpers::Generic
   config.include Helpers::Controller,  type: :controller
   config.include Helpers::Integration, type: :feature
+
+  config.use_transactional_fixtures = false
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with :truncation
+  end
+
+  config.before do |example|
+    DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
+    DatabaseCleaner.start
+  end
+
+  config.after do
+    DatabaseCleaner.clean
+  end
 end
