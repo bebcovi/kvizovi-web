@@ -48,7 +48,7 @@ class QuizzesController < ApplicationController
     unless game.interrupted?
       redirect_to results_quiz_path(game.quiz)
     else
-      redirect_to quiz_path(game.quiz)
+      redirect_to quizzes_path
     end
   end
 

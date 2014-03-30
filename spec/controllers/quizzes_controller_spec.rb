@@ -151,7 +151,7 @@ describe QuizzesController do
       end
 
       it "redirects to beginning" do
-        expect(response).to redirect_to(quiz_path(quiz))
+        expect(response).to redirect_to(quizzes_path)
       end
     end
   end

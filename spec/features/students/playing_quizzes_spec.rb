@@ -104,7 +104,7 @@ feature "Playing quizzes" do
     click_on "Prekini"
     click_on "Jesam"
 
-    expect(current_path).to eq quiz_path(quiz)
+    expect(current_path).to eq quizzes_path
   end
 
   scenario "Quiz gets deleted in the meanwhile", js: true do
