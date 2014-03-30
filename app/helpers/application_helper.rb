@@ -1,5 +1,3 @@
-require_relative "../../lib/markdown_rendering"
-
 module ApplicationHelper
   include MarkdownRendering
 
@@ -17,10 +15,6 @@ module ApplicationHelper
         crumbs << content_tag(:li, class: ("active" if item == items.last)) { raw(item) } + "\n"
       end
     end
-  end
-
-  def contact_link(string, options = {})
-    mail_to "matija.marohnic@gmail.com, janko.marohnic@gmail.com", string, {target: "_blank"}.merge(options)
   end
 
   def alert_message(string, type, options = {})

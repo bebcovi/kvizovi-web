@@ -18,10 +18,7 @@
     = render "contact"
 
     %main
-      - if content_for? :jumbotron
-        .jumbotron
-          .container
-            = content_for :jumbotron
+      = render "jumbotron" if content_for? :jumbotron
 
       .container
         = render "flash", flash: flash

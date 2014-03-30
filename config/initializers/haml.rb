@@ -1,5 +1,4 @@
 require "haml"
-require_relative "../../lib/markdown_rendering"
 
 module Haml
   module Filters
