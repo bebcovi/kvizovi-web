@@ -6,6 +6,7 @@ jQuery ->
   if $(".timer").length > 0
 
     timer = new App.Timer(".timer")
+    timer.update(timer.value() - 1)
 
     App.Countdown.start timer.value(),
       onChange: (timeRemaining) =>
