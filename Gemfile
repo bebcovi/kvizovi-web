@@ -87,6 +87,9 @@ group :development do
   gem "letter_opener", ">= 1.1.2"
 end
 
+# Profiling
+gem "rack-mini-profiler", group: :development
+
 # Monitoring
 gem "newrelic_rpm", group: :production
 

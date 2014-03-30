@@ -23,6 +23,7 @@ if Rails.env.development?
   require "better_errors"
   require "teaspoon"
   require "letter_opener"
+  require "rack-mini-profiler"
 end
 
 if Rails.env.production?
