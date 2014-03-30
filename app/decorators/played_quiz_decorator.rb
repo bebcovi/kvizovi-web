@@ -6,12 +6,12 @@ class PlayedQuizDecorator < Draper::Decorator
   end
 
   def scores
-    scores = Array.new(players.count, 0)
+    scores = Array.new(players.size, 0)
     question_answers.each.with_index do |answer, idx|
       if has_answers?
-        scores[idx % players.count] += 1 if QuestionAnswer.new(questions[idx]).correct_answer?(answer)
+        scores[idx % players.size] += 1 if QuestionAnswer.new(questions[idx]).correct_answer?(answer)
       else
-        scores[idx % players.count] += 1 if answer
+        scores[idx % players.size] += 1 if answer
       end
     end
     scores
@@ -28,14 +28,14 @@ class PlayedQuizDecorator < Draper::Decorator
   end
 
   def total_score
-    questions_count / players.count
+    questions_count / players.size
   end
 
   def played_questions
     Array(questions).map.with_index do |question, idx|
       answer = question_answers[idx]
       status = get_status(question, answer)
-      player = players[idx % players.count]
+      player = players[idx % players.size]
 
       [question, answer, player, status]
     end
