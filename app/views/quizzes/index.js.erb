@@ -5,7 +5,7 @@
   <% else %>
     $(".pagination").hide()
   <% end %>
-<% elsif params[:q] %>
+<% else %>
   $(".quiz-list").find(".row").html("<%= j render(@quizzes) %>")
   if ($(".pagination").length > 0)
     $(".pagination").replaceWith("<%= j will_paginate(@quizzes) %>")
