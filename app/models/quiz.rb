@@ -5,15 +5,16 @@ class Quiz < ActiveRecord::Base
 
   belongs_to :school
   has_many :questions, dependent: :destroy
-  has_many :snapshots, class_name: "QuizSnapshot"
+  has_many :snapshots, class_name: "QuizSnapshot", counter_cache: :play_count
   has_many :played_quizzes, through: :snapshots
 
   mount_uploader :image, ImageUploader
 
   validates :name, presence: true, uniqueness: {scope: :school_id}
 
-  scope :activated, -> { where(activated: true) }
-  scope :public,    -> { where(private: false) }
+  scope :activated,     -> { where(activated: true) }
+  scope :public,        -> { where(private: false) }
+  scope :by_popularity, -> { order(play_count: :desc) }
 
   pg_search_scope :search,
     against: {name: "A"},

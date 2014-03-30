@@ -253,7 +253,8 @@ CREATE TABLE quizzes (
     shuffle_questions boolean DEFAULT false,
     image character varying(255),
     private boolean DEFAULT false,
-    "time" integer DEFAULT 5
+    "time" integer DEFAULT 5,
+    play_count integer
 );
 
 
@@ -892,4 +893,6 @@ INSERT INTO schema_migrations (version) VALUES ('20131212000531');
 INSERT INTO schema_migrations (version) VALUES ('20131212221735');
 
 INSERT INTO schema_migrations (version) VALUES ('20140320103450');
+
+INSERT INTO schema_migrations (version) VALUES ('20140330002431');
 

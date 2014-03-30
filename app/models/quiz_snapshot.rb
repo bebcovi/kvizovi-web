@@ -1,5 +1,6 @@
 class QuizSnapshot < ActiveRecord::Base
   has_one :played_quiz
+  belongs_to :quiz, counter_cache: :play_count
 
   serialize :quiz_attributes
   serialize :questions_attributes
