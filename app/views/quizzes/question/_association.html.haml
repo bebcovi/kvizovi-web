@@ -1,6 +1,0 @@
-%table.table-condensed
-  - question.associations.each do |left, right|
-    %tr.association-pair
-      %td.association-pair-static= f.input_field :answer, label: false, value: left, name: "answer[]", class: "input-xlarge"
-      %td= icon("chevron-right", class: "arrow subtle")
-      %td.association-pair-dynamic= f.input_field :answer, label: false, value: right, name: "answer[]", class: "input-xlarge"

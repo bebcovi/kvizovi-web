@@ -1,0 +1,11 @@
+h2.question-title
+  span.question-number.player-color
+    = game.current_question_number
+  = smarty_pants question.content
+
+= image_tag question.image.url(:medium), class: "img-polaroid pull-left" if question.image?
+
+= render "quizzes/question/#{question.category}", f: f, question: question
+
+- if question.hint?
+  p.question-hint Uputa: #{question.hint}

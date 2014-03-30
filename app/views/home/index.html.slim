@@ -1,0 +1,15 @@
+- title "Početna"
+
+- content_for :jumbotron do
+  .text-center
+    h1
+      = icon("books")
+      Kvizovi
+
+    p Jednostavna aplikacija za igranje kvizova.
+
+    .row
+      .jumbotron-btn.student.col-xs-12.col-sm-offset-2.col-sm-4
+        = primary_button "Ja sam učenik".prepend_icon("user"), new_student_session_path, class: "btn-lg"
+      .jumbotron-btn.school.col-xs-12.col-sm-4
+        = primary_button "Ja sam škola".append_icon("home"), new_school_session_path, class: "btn-lg"

@@ -1,0 +1,14 @@
+= content_tag_for :div, question.object, class: "question list-group-item clearfix" do
+
+  .clearfix
+    .pull-left.m-top-qt
+      span.question-type-icon.text-muted.m-right-qt= question.icon
+      span.question-title= question.content
+
+    .pull-right
+      = edit_button "", edit_account_quiz_question_path(@quiz, question), class: "btn-sm btn-default", title: "Izmijeni"
+      = delete_button "", account_quiz_question_path(@quiz, question), class: "btn-sm", remote: true, title: "Izbriši", data: {confirm: "Jeste li sigurni da želite izbrisati ovo pitanje?"}
+
+.question-content.list-group-item class="l-question-#{question.category} list-pretty-item list-pretty-content"
+  = image_tag question.image.url(:small), class: "img-thumbnail m-bottom-hl" if question.image?
+  = render "questions/answer/#{question.category}", question: question, answer: question.answer

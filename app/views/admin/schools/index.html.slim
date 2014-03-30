@@ -1,0 +1,27 @@
+- title "Admin"
+
+h2
+  Škole
+  span.count= @schools.count
+
+table.table.table-striped
+  colgroup
+    col.col-25
+    col.col-25
+    col.col-25
+    col
+
+  thead
+    tr
+      th Naziv škole
+      th.text-center Broj učenika
+      th.text-center Broj kvizova
+      th Zadnja aktivnost
+
+  tbody
+    - @schools.each do |school|
+      = content_tag_for :tr, school do
+        td= link_to school.name, admin_school_path(school)
+        td.text-center= school.students.count
+        td.text-center= school.quizzes.activated.count
+        td= activity(school.last_activity)

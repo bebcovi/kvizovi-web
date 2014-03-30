@@ -1,0 +1,27 @@
+.modal.l-feedback.feedback class="l-question-#{game.current_question.category}"
+
+  - if game.correct_answer?
+
+    .modal-header
+      h1.feedback-title.text-success
+        = icon("checkmark-circle-full")
+        span Točan odgovor!
+
+    .modal-body
+      p= ["Bravo! :)", "Svaka čast! :D", "Čestitamo! :)"].sample
+
+  - else
+
+    .modal-header
+      h1.feedback-title.text-error
+        = icon("cancel-circle-full")
+        = ["Ne baš…", "Pogrešno", "Nažalost, ne…"].sample
+
+    .modal-body
+      = render "questions/correct_answer/#{game.current_question.category}", question: game.current_question
+
+  .modal-footer
+    - unless game.over?
+      = next_button "Sljedeće pitanje", next_question_quiz_path(game.quiz), method: :put
+    - else
+      = next_button "Rezultati", finish_quiz_path(game.quiz), method: :delete

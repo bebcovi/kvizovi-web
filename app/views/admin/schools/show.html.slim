@@ -1,0 +1,50 @@
+- title @school.name
+
+h1= @school.name
+
+h2
+  Učenici
+  span.count= @school.students.count
+
+table.table.table-striped
+  colgroup
+    col.col-25
+    col.col-25
+    col.col-25
+    col
+
+  thead
+    tr
+      th Ime i prezime
+      th.text-center Korisničko ime
+      th.text-center Broj odigranih kvizova
+      th Zadnja aktivnost
+
+  tbody
+    - @school.students.each do |student|
+      tr
+        td= student.full_name
+        td.text-center= student.username
+        td.text-center= student.played_quizzes.count
+        td= activity(student.last_activity)
+
+h2
+  Kvizovi
+  span.count= @school.quizzes.count
+
+table.table.table-striped
+  colgroup
+    col.col-33
+    col.col-33
+    col
+
+  thead
+    tr
+      th Naziv kviza
+      th.text-center Broj pitanja
+
+  tbody
+    - @school.quizzes.each do |quiz|
+      tr
+        td= quiz.name
+        td.text-center= quiz.questions.count
