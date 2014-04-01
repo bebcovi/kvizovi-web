@@ -1,0 +1,35 @@
+{
+  "name": "kvizovi",
+  "version": "0.0.0",
+  "description": "A quiz app.",
+  "main": "Gruntfile.coffee",
+  "directories": {
+    "doc": "doc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/twin/kvizovi.git"
+  },
+  "keywords": [
+    "quiz",
+    "school",
+    "student",
+    "learn"
+  ],
+  "author": "Matija Marohnić <matija.marohnic@gmail.com>",
+  "contributors": [
+    "Janko Marohnić <janko.marohnic@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twin/kvizovi/issues"
+  },
+  "homepage": "https://github.com/twin/kvizovi",
+  "devDependencies": {
+    "load-grunt-tasks": "^0.4.0",
+    "grunt": "^0.4.4",
+    "grunt-svgmin": "^0.4.0",
+    "grunt-latex": "^0.2.2",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}

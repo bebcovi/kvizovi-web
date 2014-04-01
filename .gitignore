@@ -12,3 +12,10 @@ doc/*.pdf
 *-backup*
 
 .env
+
+node_modules
+bower_components
+
+doc/*.aux
+doc/*.log
+doc/*.toc
