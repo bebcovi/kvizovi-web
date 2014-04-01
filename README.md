@@ -1,6 +1,8 @@
 Kvizovi
 =======
 
+A quiz app. [kvizovi.org](http://kvizovi.org)
+
 Git Hooks
 ---------
 
