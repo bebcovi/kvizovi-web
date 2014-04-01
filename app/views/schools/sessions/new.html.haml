@@ -1,0 +1,27 @@
+- title "Prijava"
+
+.page-header
+  %h1 Prijava škole
+
+.row
+  .col-sm-9
+
+    = simple_form_for resource, url: school_session_path do |f|
+
+      = f.input :username,
+        autofocus: params[:action] == "new"
+
+      = f.input :password,
+        hint: "Zaboravili ste lozinku? #{link_to "Zatražite novu", new_school_password_path}."
+
+      = f.hidden_field :remember_me, value: true
+
+      .clearfix
+        .pull-left.m-bottom-hl
+          = buttons do
+            = cancel_button "Odustani", root_url
+            = submit_button "Prijava", class: "m-right-qt"
+        %p.pull-left.hidden-xs.m-top-qt
+          Nemate korisnički račun? #{link_to "Registrirajte se", new_school_registration_path}.
+
+      %p.visible-xs Nemate korisnički račun? #{link_to "Registrirajte se", new_school_registration_path}.

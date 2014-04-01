@@ -1,0 +1,20 @@
+- title "#{game.quiz.name} · #{game.current_question_number}. pitanje"
+
+%div{class: "l-player-#{number(game.current_player_number)}"}
+
+  = render "timer" if game.quiz.time < 5
+  = render "name"
+  = render "player"
+  = render "progress_bar"
+
+  = simple_form_for :play, url: save_answer_quiz_path, method: :put, remote: true, defaults: {input_html: {name: "answer"}}, html: {class: "l-play l-question-#{game.current_question.category}"} do |f|
+
+    = render "question", question: QuestionShuffling.new(game.current_question), f: f
+
+    = buttons do
+      = cancel_button "Prekini", finish_quiz_path, method: :delete, data: {confirm: "Jeste li sigurni da želite prekinuti igranje kviza?"}
+      = submit_button "Odgovori"
+
+- if game.current_question_answer != nil
+  :coffee
+    $("#{j render("answer_feedback")}").modal(keyboard: false, backdrop: "static")

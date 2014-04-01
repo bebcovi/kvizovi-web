@@ -1,0 +1,5 @@
+%div
+  .label Nije odgovoreno
+
+.l-feedback.reveal-content.m-top-hl{class: "l-question-#{question.category}", data: {reveal: "Prikaži točan odgovor"}}
+  = render "questions/correct_answer/#{question.category}", question: question

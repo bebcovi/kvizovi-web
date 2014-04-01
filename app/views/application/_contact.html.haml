@@ -1,0 +1,23 @@
+%button{type: "button", class: "contact-toggle", data: {toggle: "modal", target: "#contact"}}
+  = "Kontakt".prepend_icon("phone")
+
+#contact.modal{tabindex: "-1", role: "dialog", aria: {labelledby: "", hidden: "true"}}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{type: "button", class: "close", data: {dismiss: "modal"}, aria: {hidden: "true"}} ⨉
+        %h3 Kontakt
+
+      = simple_form_for :contact, url: contact_path, remote: true do |f|
+
+        .modal-body
+          :markdown
+            Slobodno nas kontaktirajte ako imate bilo kakvih pitanja ili ako
+            želite prijaviti neku grešku. Stalno smo na mailu.
+
+          = f.input :sender, required: true unless user_logged_in?
+          = f.input :message, as: :text, input_html: {rows: 6}
+
+        .modal-footer
+          = submit_button "Pošalji"
+          = cancel_button "Odustani", data: {dismiss: "modal"}

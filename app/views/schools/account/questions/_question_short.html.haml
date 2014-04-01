@@ -1,0 +1,5 @@
+= content_tag_for :li, question.object, class: "sort-item" do
+  = f.simple_fields_for :questions, question do |q|
+    %span.sort-item-handle= question.icon
+    %span= q.input_field :position, class: "input-mini"
+    %span= question.content

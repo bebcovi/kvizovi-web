@@ -1,6 +1,0 @@
-= simple_form_for :search, url: request.path, method: :get, html: {class: "search form-search"}, remote: true do |f|
-
-  .input-group
-    = f.input_field :q, as: :search, name: "q", value: params[:q], class: "search-query", autocomplete: "off"
-    span.input-group-btn
-      = f.button :button, icon("search"), name: nil, class: "btn btn-default"

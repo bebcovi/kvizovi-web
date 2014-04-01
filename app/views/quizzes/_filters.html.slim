@@ -1,6 +1,0 @@
-.filters
-  ul.nav.nav-pills.pull-right
-    = active_content_tag :li, params[:school].blank? do
-      = link_to "Sve škole", quizzes_path(params.except(:school))
-    = active_content_tag :li, params[:school].present? do
-      = link_to "Moja škola", quizzes_path(params.merge(school: current_user.school.id))

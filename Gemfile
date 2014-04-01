@@ -30,8 +30,8 @@ group :assets do
 end
 
 # Views
-gem "slim-rails"
-gem "slim", ">= 2.0.2"
+gem "haml-rails", ">= 0.5.1"
+gem "haml", ">= 4"
 gem "simple_form", ">= 3.0.0"
 gem "redcarpet", ">= 3"
 gem "will_paginate", ">= 3.0.5"

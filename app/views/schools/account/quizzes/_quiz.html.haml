@@ -1,0 +1,29 @@
+= content_tag_for :div, quiz, class: "list-group-item clearfix" do
+  .media
+    .pull-left
+      = image_tag quiz.image.url(:small), class: "media-object img-rounded", size: "80x80"
+
+    .media-body
+      %h4.quiz-title.media-heading
+        = quiz.name
+        %span.text-muted (#{quiz.questions.count})
+
+      .quiz-controls.hidden-xs
+        = render "activation_button", quiz: quiz
+
+        .btn-group
+          = button icon("clipboard"), account_quiz_questions_path(quiz), class: "btn-sm btn-default", title: "Pitanja"
+          = edit_button "", edit_account_quiz_path(quiz), class: "btn-sm btn-default", title: "Izmijeni"
+          = button icon("eye"), played_quizzes_path(quiz_id: quiz.id), class: "btn-sm btn-default", title: "Prati"
+
+        = delete_button "", account_quiz_path(quiz), remote: true, class: "btn-sm", title: "Izbriši", data: {confirm: "Jeste li sigurni da želite izbrisati ovaj kviz?"}
+
+  .quiz-controls.visible-xs
+    = render "activation_button", quiz: quiz
+
+    .btn-group
+      = button icon("clipboard"), account_quiz_questions_path(quiz), class: "btn-sm btn-default", title: "Pitanja"
+      = edit_button "", edit_account_quiz_path(quiz), class: "btn-sm btn-default", title: "Izmijeni"
+      = button icon("eye"), played_quizzes_path(quiz_id: quiz.id), class: "btn-sm btn-default", title: "Prati"
+
+    = delete_button "", account_quiz_path(quiz), remote: true, class: "btn-sm", title: "Izbriši", data: {confirm: "Jeste li sigurni da želite izbrisati ovaj kviz?"}

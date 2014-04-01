@@ -1,5 +1,0 @@
-= content_tag_for :tr, played_quiz do
-  td= link_to played_quiz.name, played_quiz_path(played_quiz, params.slice(:quiz_id, :student_id))
-  td= played_quiz.players.map { |student| "#{student} (#{student.grade})" }.join(", ")
-  td= played_quiz.scores.map { |score| "#{percentage score, played_quiz.total_score}%" }.join(", ")
-  td= "prije #{time_ago_in_words(played_quiz.end_time || played_quiz.begin_time)}"

@@ -1,0 +1,11 @@
+- played_quiz.results.each_with_index do |(player, score, rank), idx|
+
+  %div{class: "l-player-#{number(idx + 1)}"}
+    %p.player-color
+      %b= player.full_name.prepend_icon("user") + ":"
+      - if params[:controller] == "played_quizzes"
+        %span #{score} od #{played_quiz.total_score} točnih odgovora.
+      - else
+        %span Točno si odgovori#{player.male? ? "o" : "la"} na #{score} od #{played_quiz.total_score} pitanja. Ti si <strong>#{rank}</strong>! :)
+    .progress.player-color
+      .bar{style: "width: #{percentage score, played_quiz.total_score}%"}

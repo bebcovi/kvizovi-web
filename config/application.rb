@@ -7,7 +7,6 @@ require "sprockets/railtie"
 
 Bundler.require(:assets)
 
-require "slim-rails"
 require "will_paginate/railtie"
 require "bootstrap-will_paginate"
 require "draper"
