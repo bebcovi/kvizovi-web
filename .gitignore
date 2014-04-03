@@ -19,3 +19,4 @@ bower_components
 doc/*.aux
 doc/*.log
 doc/*.toc
+doc/*.out
