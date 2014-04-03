@@ -1,5 +1,0 @@
-#!/bin/sh
-#
-# Executes after merge/pull
-
-exec npm install
