@@ -12,4 +12,8 @@ class Question < ActiveRecord::Base
   default_scope -> { order{position.asc} }
 
   validates :content, presence: true
+
+  def image?
+    read_attribute(:image).present?
+  end
 end

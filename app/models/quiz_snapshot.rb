@@ -19,7 +19,9 @@ class QuizSnapshot < ActiveRecord::Base
   def questions
     @questions ||= Array(questions_attributes).map do |question_attributes|
       question_class = question_attributes["type"].constantize
-      question_class.new(question_attributes)
+      question_class.new(question_attributes).tap do |question|
+        question.send(:write_attribute, :image, question_attributes["image"])
+      end
     end
   end
 end
