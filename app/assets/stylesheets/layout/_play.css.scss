@@ -1,2 +1,11 @@
 .l-play {
+  .radio input[type="radio"],
+  .checkbox input[type="checkbox"] {
+    margin-left: 0;
+    margin-right: $hsu;
+  }
+
+  img.pull-left {
+    margin-right: $hsu;
+  }
 }
