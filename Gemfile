@@ -75,6 +75,7 @@ group :test do
   gem "factory_girl", ">= 4.2"
   gem "capybara", ">= 2.2.0"
   gem "poltergeist"
+  gem "selenium-webdriver"
   gem "database_cleaner"
 end
 
