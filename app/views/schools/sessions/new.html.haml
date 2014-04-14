@@ -12,7 +12,7 @@
         autofocus: params[:action] == "new"
 
       = f.input :password,
-        hint: "Zaboravili ste lozinku? #{link_to "Zatražite novu", new_school_password_path}."
+        hint: "Zaboravili ste lozinku? #{link_to "Zatražite novu", new_school_password_path}.".html_safe
 
       = f.hidden_field :remember_me, value: true
 

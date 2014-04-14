@@ -13,7 +13,7 @@ class Quiz < ActiveRecord::Base
   validates :name, presence: true, uniqueness: {scope: :school_id}
 
   scope :activated,     -> { where(activated: true) }
-  scope :public,        -> { where(private: false) }
+  scope :not_private,   -> { where(private: false) }
   scope :by_popularity, -> { order(play_count: :desc) }
 
   pg_search_scope :search,

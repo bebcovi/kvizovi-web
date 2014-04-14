@@ -2,7 +2,7 @@ ruby "2.1.1"
 
 source "https://rubygems.org"
 
-gem "rails", ">= 4.1.0.rc2"
+gem "rails", ">= 4.1.0"
 
 # Web servers
 gem "thin", group: :development
@@ -32,11 +32,11 @@ end
 # Views
 gem "haml-rails", ">= 0.5.1"
 gem "haml", ">= 4"
-gem "simple_form", ">= 3.0.0"
+gem "simple_form", ">= 3.0.2"
 gem "redcarpet", ">= 3"
 gem "will_paginate", ">= 3.0.5"
 gem "bootstrap-will_paginate", github: "Fleurer/bootstrap-will_paginate"
-gem "active_attr", ">= 0.8.1"
+gem "active_attr", ">= 0.8.3"
 
 # Uploading
 gem "carrierwave", ">= 0.9"
