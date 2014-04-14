@@ -15,6 +15,8 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.filter_run_excluding docs: true
+
   config.before do
     ActionMailer::Base.deliveries.clear
   end

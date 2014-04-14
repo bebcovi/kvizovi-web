@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "Screenshots", driver: :selenium do
+feature "Screenshots", :docs, driver: :selenium do
   before do
     Capybara.app_host = "http://kvizovi.org"
     page.driver.browser.manage.window.resize_to 900, 900
