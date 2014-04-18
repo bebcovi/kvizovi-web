@@ -27,6 +27,7 @@ end
 
 if Rails.env.production?
   require "newrelic_rpm"
+  require "skylight"
 end
 
 module Lektire

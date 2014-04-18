@@ -74,4 +74,5 @@ group :production do
   gem "exception_notification", ">= 4.0.1"
   gem "newrelic_rpm"
   gem "rails_12factor"
+  gem "skylight"
 end
