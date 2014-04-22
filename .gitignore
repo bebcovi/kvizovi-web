@@ -6,9 +6,6 @@ public/assets/
 public/uploads/
 tmp/
 
-doc/*.lyx~
-doc/*.lyx#
-doc/*.pdf
 *-backup*
 
 .env
@@ -16,7 +13,11 @@ doc/*.pdf
 node_modules
 bower_components
 
+doc/*.lyx~
+doc/*.lyx#
+doc/*.pdf
 doc/*.aux
 doc/*.log
 doc/*.toc
 doc/*.out
+doc/*.lof
