@@ -200,6 +200,83 @@ funkcionalnost.
   \label{fig:home}
 \end{figure}
 
+\section{Vrste pitanja}
+
+Postoji 4 vrste pitanja, poredani prema najlakše do najteže za riješiti, to su:
+
+\begin{itemize}
+  \item Točno/netočno
+  \item Ponuđeni odgovori
+  \item Asocijacija
+  \item Upiši točan odgovor
+\end{itemize}
+
+\subsection{Točno/netočno}
+
+\emph{Točno/netočno} (slika \ref{fig:boolean}) je vrsta pitanja gdje se iznosi
+tvrdnja, a korisnik mora odgovoriti označiti je li točna ili netočna tako da
+označi odgovor. Ova vrsta pitanja je najlakša zato što je šansa da korisnik
+točno odgovori 50\%.
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth, clip=true, trim=0 7cm 0 0, fbox]{student/boolean_question}
+  \caption{Pitanje vrste \emph{točno/netočno}}
+  \label{fig:boolean}
+\end{figure}
+
+\subsection{Ponuđeni odgovori}
+
+\emph{Ponuđeni odgovori} (slika \ref{fig:choice}) je vrsta pitanja gdje se
+postavlja pitanje na koje treba odgovoriti \textbf{jednim} od ponuđenih odgovora
+tako da označi odgovor. Ova vrsta pitanja je teža od \emph{točno/netočno} jer se
+šansa da korisnik točno odgovori smanjuje s brojem ponuđenih odgovora.
+
+Razmišljali smo o tome da omogućimo više mogućih točnih odgovora, ali to bi
+činilo ovu vrstu pitanja težom, pa smo odlučili tu značajku ostaviti kao
+mogućnost za buduću verziju aplikacije.
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth, clip=true, trim=0 5cm 0 0, fbox]{student/choice_question}
+  \caption{Pitanje vrste \emph{ponuđeni odgovori}}
+  \label{fig:choice}
+\end{figure}
+
+\subsection{Asocijacija}
+
+\emph{Asocijacija} (slika \ref{fig:association}) je vrsta pitanja gdje korisnik
+pridružuje pojmove iz jednog s pojmovima iz drugog stupca. Ovo pitanje je teže
+od \emph{ponuđenih odgovora} jer se broj mogućih kombinacija eksponencijalno
+povećava s brojem parova pojmova.
+
+Ova vrsta pitanja bila je tehnički izazovna za dizajnirati, jer postoji mnogo
+različitih pristupa. Odlučili smo se za pristup gdje se pojmovi ``primaju'' s
+mišem i ``ispuštaju'' na drugi pojam, nakon čega ta 2 pojma zamijenjuju mjesta.
+Na taj način korisnik može preslagivati pojmove dok ne dobije željenu
+kombinaciju.
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth, clip=true, trim=0 3cm 0 0, fbox]{student/association_question}
+  \caption{Pitanje vrste \emph{asocijacija}}
+  \label{fig:association}
+\end{figure}
+
+\subsection{Upiši točan odgovor}
+
+\emph{Upiši točan odgovor} (slika \ref{fig:text}) je vrsta pitanja gdje se
+postavlja pitanje, a korisnik treba upisati točan odgovor u za to predviđeno
+tekstualno polje. Ova vrsta pitanja je najteža zato što je vrlo lako pogriješiti
+-- korisnik mora upisati odgovor točno onako kako ga je administrator napisao.
+
+Kako bismo učinili ovu vrstu pitanja malo lakšom, dizajnirali smo ju tako da
+nije bitno piše li korisnik malim ili velikim slovima, ako se slova podudaraju s
+točnim odgovorom, dani se odgovor smatra točnim.
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth, clip=true, trim=0 5cm 0 0, fbox]{student/text_question}
+  \caption{Pitanje vrste \emph{upiši točan odgovor}}
+  \label{fig:text}
+\end{figure}
+
 \section{Izrada aplikacije}
 
 \emph{Kvizovi} su web aplikacija, dakle sa strane klijenta (web preglednika)
@@ -291,20 +368,6 @@ na izmjenu pitanja kviza. Ovdje napominjemo da ćemo, zbog zaštite privatnosti
 naših korisnika, u radu prikazivati podatke kviza kojeg smo sami napravili
 (Igra prijestolja), a našim imenima ćemo zamijeniti stvarna imena korisnika
 koji su sudjelovali u istraživanju.
-
-\begin{figure}[H]
-  \includegraphics[width=\textwidth, clip=true, trim=0 53cm 0 0, fbox]{school/quiz}
-  \caption{Škole -- popis pitanja u kvizu}
-\end{figure}
-
-Postoji 4 vrsta pitanja:
-
-\begin{itemize}
-  \item Točno/netočno
-  \item Ponuđeni odgovori
-  \item Asocijacija
-  \item Upiši točan odgovor
-\end{itemize}
 
 Uz svako se pitanje može pridružiti pomoć (slikom ili tekstom), koja će se
 prikazati učenicima dok rješavaju pitanje.
