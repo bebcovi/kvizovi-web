@@ -69,13 +69,26 @@ zabavnije metode podučavanja.
 
 Profesori koji su spremni koristiti interaktivne alate za podučavanje nemaju velik
 izbor jer je većina dobrih alata na engleskome jeziku, što predstavlja problem
-mlađoj djeci koja još ne znaju dobro engleski, ili starijim profesorima koji ga
-nikada nisu trebali dobro ni znati. Potreban je jednostavan alat koji je
-namijenjen hrvatskoj populaciji.
+mlađoj djeci koja još ne znaju dobro engleski, ili profesorima koji ga nikad
+nisu učili u školi (jer su umjesto engleskog imali njemački, francuski ili pak
+ruski). Potreban je jednostavan alat koji je namijenjen hrvatskoj populaciji.
 
-Jedna od najjednostavnijih načina ispitivanja znanja je riješvanje kvizova,
-stoga smo pretraživali hrvatske i strane aplikacije koje se bave tom temom, pa
-ćemo ih navesti i opisati nekoliko.
+Mi smo odlučili kreirati jedan takav sustav posebno za učenike hrvatskih
+osnovnih i srednjih škola. Iako se sustav može proširiti i na druge predmete,
+mi smo se u prvoj testnoj fazi orijentirali na nastavnike hrvatskoga jezika s
+posebnim naglaskom na sate lektire. Program smo testirali u periodu od skoro
+dvije godine te ga za to vrijeme stalno usavršavali i nadopunjavali novim
+mogućnostima. U ostatku rada izložit ćemo naše osnovne hipoteze kojima smo se
+vodili u ovom projektu. Potom ćemo detaljno opisati program kojeg smo napravili
+iz perspektive nastavnika, studenta ali i programera. Na kraju ćemo prikazati i
+rezultate koje smo dobili uz pomoć anketa i praćenja korisnika za vrijeme
+njihovog korištenja aplikacijom.
+
+\section{Postojeći radovi}
+
+Jedan od najjednostavnijih načina ispitivanja znanja je rješavanje kvizova,
+stoga smo pretraživali hrvatske i strane aplikacije koje se bave tom temom.
+Ovdje ćemo navesti i ukratko opisati neke od njih.
 
 \begin{description}
 
@@ -97,27 +110,27 @@ stoga smo pretraživali hrvatske i strane aplikacije koje se bave tom temom, pa
     je iOS\footnote{Mobilni operacijski sustav kojeg razvija Apple.} aplikacija
     namijenjena djeci predškolske dobi, pomaže im svladati osnovne pojmove kao
     što su abeceda, životinje, brojevi, oblici, boje i vrijeme. Iako se
-    riješenje koje mi tražimo odnosi na djecu osnovnoškolske i srednjoškolske
+    rješenje koje mi tražimo odnosi na djecu osnovnoškolske i srednjoškolske
     dobi, ova aplikacija je dobar primjer hrvatske aplikacije učenja kroz igru.
     Nedostatak joj je to što je dostupna samo za iOS, nije ju još moguće
     koristiti na ostalim mobilnim operacijskim sustavima, niti na desktop ili
     laptop računalima.
 
   \item[QuizUp]\footnote{\url{https://itunes.apple.com/hr/app/quizup/id718421443?mt=8}}
-    je vrlo kvalitetna i popularna aplikacija za kvizove na engleskom jeziku. Od
-    navedenih, ova aplikacija je najviše opsežna i ažurna i ima najviše značajki
-    (eng. \emph{feature}). Osim riješavanja kvizova, korisnici \emph{QuizUp}-a
-    ih mogu i stvarati ako žele. Za razliku od ostalih navedenih aplikacija,
-    \emph{QuizUp} ima puno izraženiji socijalni aspekt i upotrebu
-    gejmifikacije\footnote{Korištenje elemenata iz igara u drugim kontekstima.},
-    koja potiče rješavanje kvizova, tako što korisnici dobivaju bodove i prema
-    njima im se dodjeljuju određeni statusi. Nedostaci ove aplikacija su
-    engleski jezik i što je dostupna samo na mobilnim uređajima, nije ju moguće
-    igrati na desktop i laptop računalima.
+    je vrlo kvalitetna i popularna aplikacija za kvizove na engleskom jeziku.
+    Od navedenih, ova aplikacija je najviše opsežna i ažurna i ima najviše
+    mogućnosti (eng. \emph{feature}). Osim rješavanja kvizova, korisnici
+    \emph{QuizUp}-a ih mogu i stvarati ako žele. Za razliku od ostalih
+    navedenih aplikacija, \emph{QuizUp} ima puno izraženiji socijalni aspekt i
+    upotrebu gejmifikacije\footnote{Korištenje elemenata iz igara u drugim
+    kontekstima.}, koja potiče rješavanje kvizova, tako što korisnici dobivaju
+    bodove i prema njima im se dodjeljuju određeni statusi. Nedostaci ove
+    aplikacija su engleski jezik i što je dostupna samo na mobilnim uređajima,
+    nije ju moguće igrati na desktop i laptop računalima.
 
 \end{description}
 
-S obzirom da nismo našli nijedno prihvatljivo riješenje za hrvatsku aplikaciju
+S obzirom da nismo našli nijedno prihvatljivo rješenje za hrvatsku aplikaciju
 za kvizove, počeli smo razvijati svoju i nazvali smo ju
 \emph{Kvizovi}\footnote{\url{http://kvizovi.org}}. To je aplikacija za
 rješavanje kvizova koja je prilagođena osnovnim i srednjim školama u Hrvatskoj.
@@ -130,15 +143,16 @@ ovom smo istraživanju testirali \emph{Kvizove} na nekoliko osnovnih i srednjih
 Cilj ovog istraživanja bio je saznati:
 
 \begin{enumerate}
-  \item pomaže li takav način učenja učenicima da bolje savladaju gradivo
-  \item čini li aplikacija profesorima podučavanje zanimljivijim
+  \item pomaže li ovakav način učenja učenicima da bolje savladaju gradivo, i
+  \item čini li aplikacija profesorima podučavanje zanimljivijim.
 \end{enumerate}
 
-Pretpostavljamo je da će se više zainteresirati za gradivo te ga bolje usvojiti
-oni učenici koji su ga učili rješavajući kvizove pomoću aplikacije od onih koji
-nisu. Učenici rješavanje kvizova mogu gledati kao neku vrstu igre, što može
-pozitivno utjecati na usvajanje znanja. Interes za gradivo može potaknuti
-mogućnost igranja u paru, odnosno natjecanja s drugim učenicima.
+Naša prva pretpostavka je bila da će oni učenici koji su učili rješavajući
+kvizove pomoću naše aplikacije biti više zainteresirati za gradivo te da će ga
+i bolje usvojiti u odnosu na učenike koji su učili klasičnim pristupom. Učenici
+rješavanje kvizova mogu gledati kao na neku vrstu igre, što može pozitivno
+utjecati na usvajanje znanja. Interes za gradivo može potaknuti i mogućnost
+igranja u paru, odnosno natjecanja s drugim učenicima.
 
 Druga pretpostavka je da će profesorima ispitivanje učenika pomoću aplikacije za
 kvizove biti jednostavnije i informativnije nego ispitivanje na tradicionalne
@@ -160,25 +174,29 @@ podražaja.
 Istraživanje smo proveli tako što smo izradili aplikaciju za kvizove i dali
 određenom uzorku osnovnih i srednjih škola na testiranje. Podatke o kvizovima
 skupljali smo 2 godine. U svakom razredu su učenici bili podijeljeni na skupinu
-koja ne riješava kvizove i na onu koja riješava, na taj način smo mogli
-provjeravati učinkovitost aplikacije kada bi učenici imali test znanja. Imamo
-puno podataka na raspolaganju, ali smo za svaki slučaj proveli još i ankete kako
-bismo dobili podatke koje pasivno ne bismo mogli dobiti.
+koja ne rješava kvizove i na onu koja rješava. Na taj način smo mogli
+provjeravati učinkovitost aplikacije kada bi učenici imali test znanja. Iako
+smo prikupili dosta podataka o korištenju aplikacije, na kraju školske godine
+smo proveli i anketu (Vidjeti prilog: Anketa) među nastavnicima ali i učenicima
+kako bi smo dobili neke dodatne informacije koje na drugi način nismo mogli
+dobiti.
 
-Imamo blog na kojemu obavještavamo korisnike o ažuriranju aplikacije. S obzirom
-da je dio ciljane publike starija populacija koja nije nužno iskusna s
-aplikacijama, dodali smo i vodič kroz aplikaciju koji je dostupan u bilo kojem
-trenutku, kako bi se korisnici lakše snašli. Također, u slučaju da ima nekih
-problema, korisnici nas uvijek mogu kontaktirati putem e-mail adresa koje se
-nalaze u kontakt sekciji koju smo stavili u glavnu navigaciju. Korisnici također
-mogu naknadno izmjenjivati svoje podatke u korisničkom računu.
+Kreirali smo im blog na kojemu obavještavamo korisnike o ažuriranju aplikacije.
+Uz blok smo kreirali i vodič kroz aplikaciju koji je dostupan u bilo kojem
+trenutku svim korisnicima (nastavnicima i učenicima) kako bi smo im olakšali
+kretanje kroz aplikaciju. Također, u slučaju bilo kakvog problema ili
+poteškoća, korisnici su nas uvijek mogli kontaktirati putem e-mail adresa koje
+se nalaze unutar kontakt sekcije u glavnoj navigaciji. Korisnici također mogu
+naknadno izmjenjivati svoje podatke u korisničkom računu.
 
-Korisnik započinje korištenje aplikacije tako da odabere svoju ulogu u školi,
-stoga ovisno o ulozi aplikacija pruža drugačiju funkcionalnost.
+Korisnik započinje korištenje aplikacije tako da odabere svoju ulogu u školi
+(vidi sliku \ref{fig:home}). Ovisno o odabranoj ulozi, aplikacija pruža drugačiju
+funkcionalnost.
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 7cm 0 0, fbox]{home}
   \caption{Početna stranica}
+  \label{fig:home}
 \end{figure}
 
 \section{Korisničko sučelje}
@@ -196,17 +214,22 @@ bismo poboljšali njihovo iskustvo i kako bismo mogli raditi istraživanja. Polj
 u formularu za registraciju na koje ćemo se osvrnuti je \emph{Tajni ključ}, koji
 je potreban za registraciju učenicima te škole.
 
-Nakon prijave profesore dočeka lista kvizova koje su napravili,
+Nakon prijave, nastavnicima se otvara stranica s popisom kvizova koje su
+kreirali (vidi sliku \ref{fig:school/quizzes}),
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 10cm 0 0, fbox]{school/quizzes}
   \caption{Škole -- popis kvizova}
+  \label{fig:school/quizzes}
 \end{figure}
 
 gdje mogu izmjenjivati postojeće kvizove i sastavljati nove. Nakon što je
 profesor zadovoljan s kvizom, može ga učiniti aktivnim, odnosno vidljivim
 učenicima. Izmjenjivanje kvizova podijeljeno je na izmjenu metapodataka kviza i
-na izmjenu pitanja kviza.
+na izmjenu pitanja kviza. Ovdje napominjemo da ćemo, zbog zaštite privatnosti
+naših korisnika, u radu prikazivati podatke kviza kojeg smo sami napravili
+(Igra prijestolja), a našim imenima ćemo zamijeniti stvarna imena korisnika
+koji su sudjelovali u istraživanju.
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 53cm 0 0, fbox]{school/quiz}
@@ -222,62 +245,69 @@ Postoji 4 vrsta pitanja:
   \item Upiši točan odgovor
 \end{itemize}
 
-Uz svako se pitanje može pridružiti pomoć, koja će se prikazati učenicima dok
-rješavaju pitanje.
+Uz svako se pitanje može pridružiti pomoć (slikom ili tekstom), koja će se
+prikazati učenicima dok rješavaju pitanje.
 
-Škole mogu pregledavati informacije o odigrane kvizove, kada su igrani, tko ih
-je igrao, koji su bili rezultati itd.
+Škole mogu pregledavati informacije o odigranim kvizovima: kada su igrani, tko
+ih je igrao, koji su bili rezultati itd. (vidi \ref{played_quizzes} i \ref{played_quiz}).
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 10cm 0 0, fbox]{school/played_quizzes}
   \caption{Škole -- popis odigranih kvizova}
+  \label{played_quizzes}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 80cm 0 0, fbox]{school/played_quiz}
   \caption{Odigrani kviz}
+  \label{played_quiz}
 \end{figure}
 
 Mogu se pregledavati i učenici, koliko su kvizova odigrali, koji su to kvizovi i
-sl.
+sl. (vidi sliku \ref{students}).
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 15cm 0 0, fbox]{school/students}
   \caption{Škole -- popis učenika}
+  \label{students}
 \end{figure}
 
 \subsection{Učenik}
 
 % S obzirom na uzrast...
 
-\emph{Učenik} je uloga koja riješava kvizove koje je napravila njihova škola.
+\emph{Učenik} je uloga koja rješava kvizove koje je napravila njihova škola.
 Kao i kod škole, učenik se može prijaviti ili registrirati, ako već nema
 korisnički račun. Pri registraciji učenik treba napisati tajni ključ koji mu je
 njegova škola dala, u protivnom se ne može registrirati. Na taj način
-spriječavamo da se bilo tko registrira kao učenik.
+sprječavamo da se bilo tko registrira kao učenik.
 
 Nakon prijave ili registracije, korisnika dočeka lista kvizova koji su dostupni
-za rješavanje. Kviz je moguće igrati sam ili u paru, u drugom slučaju se drugi
-igrač također treba prijaviti.
+za rješavanje. Kviz je moguće igrati samostalno ali i u paru (vidi sliku
+\ref{student/quizzes}). U drugom slučaju, drugi igrač također mora biti prijavljen
+u sustav.
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 8.5cm 0 0, fbox]{student/quizzes}
   \caption{Učenici -- popis kvizova}
+  \label{student/quizzes}
 \end{figure}
 
 Nakon što učenik započne kviz, prikazuje mu se jedno po jedno pitanje na koja
 treba odgovoriti. Kako bi igra bila što poštenija, pitanja su obično vremenski
 ograničena, tako da se učenik ne stigne previše konzultirati s vanjskim
-izvorima.
+izvorima. Preostalo vrijeme ispisano je iznad imena korisnika (vidi sliku
+\ref{question}).
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 7cm 0 0, fbox]{student/boolean_question}
-  \caption{Učenici -- točno/netočno}
+  \caption{Učenici -- odgovaranje na pitanje}
+  \label{question}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 7cm 0 0, fbox]{student/boolean_question_correct}
-  \caption{Učenici -- točno/netočno s povratnom informacijom}
+  \caption{Učenici -- povratna informacija nakon predanog odgovora}
 \end{figure}
 
 Nakon što učenik odgovori na sva pitanja, ispisuju se rezultati i učenik dobiva
@@ -320,7 +350,7 @@ poboljšati aplikaciju. Već radimo i na novim promjenama s namjerom poboljšanj
 projekta, a koje su proizašle iz dobivenih rezultata rješavanja kvizova i
 ispunjavanja anketa. Jedna od dramatičnijih promjena koju smo odlučili napraviti
 je učiniti aplikaciju dostupnu svima, ne samo učenicima i profesorima, gdje bi
-svi mogli izrađivati kvizove i riješavati ih. Takvo bi otvorenje zahtijevalo
+svi mogli izrađivati kvizove i rješavati ih. Takvo bi otvorenje zahtijevalo
 oprez i moglo bi promijeniti karakter aplikacije, ali mislimo da bi s tom
 promjenom bilo puno pristupačnije koristiti aplikaciju.
 
