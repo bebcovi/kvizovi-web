@@ -203,11 +203,62 @@ funkcionalnost.
 \section{Izrada aplikacije}
 
 \emph{Kvizovi} su web aplikacija, dakle sa strane klijenta (web preglednika)
-koristimo tehnologije kao što su HTML5, CSS3 i JavaScript. Sa strane
-poslužitelja koristimo programski jezik Ruby i PostgreSQL relacijsku bazu. Naš
-je cilj bio napraviti aplikaciju koja će raditi dobro na svim uređajima, na
-mobilnim uređajima\footnote{U ovom trenutku aplikacija još nema podršku za
-mobilne uređaje, ali je u planu.}, na laptopima i na desktop računalima.
+koristimo tehnologije kao što su HTML, CSS i JavaScript. Sa strane poslužitelja
+koristimo programski jezik Ruby i PostgreSQL relacijsku bazu. U narednim
+poglavljima ukratko opisujemo svaku od tehnologija.
+
+\subsection{Tehnologije na strani klijenta}
+
+Ove tehnologije izvršavaju web preglednici, te su oni jedinstveni, odnosno
+nemaju alternativa. Specifikaciju ovih tehnologija donosi internacionalna
+organizacija W3C (World Wide Web Consortium).
+
+\subsubsection{HTML}
+
+HTML je prezentacijski jezik koji se koristi za izradu sadržaja web stranica.
+
+Za našu aplikaciju koristili smo najnoviju verziju HTML-a -- HTML5.
+
+\subsubsection{CSS}
+
+CSS je stilski jezik koji se koristi za opis prezentacije HTML dokumenta. Svaka
+vrsta web preglednika ga interpretira malo drukčije, te je zato izazovno
+napisati CSS na način da isto izgleda u svim web preglednicima.
+
+Za našu aplikaciju koristili smo najnoviju verziju CSS-a -- CSS3.
+
+\subsubsection{JavaScript}
+
+JavaScript je skriptni programski jezik koji se koristi za dinamičku
+manipulaciju HTMLa i komunikaciju sa poslužiteljem. Dok su drugi jezici obično
+sintaktički funkcijski ili objektni, JavaScript se temelji na prototipima.
+
+Neka mjesta u našoj aplikaciji u kojoj smo koristili JavaScript su odbrojavanje
+štoperice i učitavanje slika za pitanja.
+
+\subsection{Tehnologije na strani poslužitelja}
+
+Ove tehnologije izvršavaju web poslužitelji. Za razliku od tehnologija na
+strani klijenta, ove tehnologije imaju puno alternativa, a odabir određene
+tehnologije je danas uglavnom subjektivan.
+
+\subsubsection{Ruby}
+
+Ruby je višeplatformski jezik opće namjene, i spada u klasu
+objektno-orijentiranih jezika. Ruby je počeo biti jako popularan 2005. dolaskom
+\textit{Rails}\footnote{\url{http://rubyonrails.org}} aplikacijskog okvira, u
+kojem je i napravljena ova aplikacija.
+
+Razlog zašto smo odabrali Ruby je zato što vrlo moćan, i ima lijepu i čistu
+sintaksu. Neke od popularnih alternativa uključuju: Python, C\#, Java itd.
+
+\subsubsection{PostgreSQL}
+
+PostgreSQL je sustav za upravljanje bazom podataka. U bazu podataka se spremaju
+sve informacije koje trebaju biti trajne, poput informacija o korisnicima.
+
+PostgreSQL je bio naš izbor zbog njegove količine funkcionalnosti i kvaliteti.
+Neke od popularnih alternativa uključuju: MySQL, Microsoft SQL Server itd.
 
 \section{Iz perspektive korisnika}
 
@@ -403,6 +454,18 @@ Križevci, Gimnazija fra Dominika Mandica, Medicinska škola Varaždin, Srednja
   \bibitem{clark11} Clark, Donald. “Visual, Auditory, and Kinesthetic Learning
     Styles (VAK).” The Performance Juxtaposition, December 7, 2011.
     \url{http://www.nwlink.com/~donclark/hrd/styles/vakt.html}.
+
+  \bibitem{html} “HTML.” Wikipedija, April 20, 2014.
+    \url{http://hr.wikipedia.org/w/index.php?title=HTML&oldid=4285227}.
+
+  \bibitem{css} “CSS.” Wikipedija, April 15, 2014.
+    \url{https://hr.wikipedia.org/w/index.php?title=CSS&oldid=4154816}.
+
+  \bibitem{javascript} “JavaScript.” Wikipedija, April 24, 2014.
+    \url{https://hr.wikipedia.org/w/index.php?title=JavaScript&oldid=3942542}.
+
+  \bibitem{w3c} “World Wide Web Consortium (W3C).” W3C, April 25, 2014.
+    \url{http://www.w3.org}.
 
 \end{thebibliography}
 
