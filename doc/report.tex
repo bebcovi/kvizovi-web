@@ -280,23 +280,27 @@ točnim odgovorom, dani se odgovor smatra točnim.
 
 \section{Izrada aplikacije}
 
-\emph{Kvizovi} su web aplikacija, dakle sa strane klijenta (web preglednika)
-koristimo tehnologije kao što su HTML, CSS i JavaScript. Sa strane poslužitelja
-koristimo programski jezik Ruby i PostgreSQL relacijsku bazu. U narednim
-poglavljima ukratko opisujemo svaku od tehnologija.
+\emph{Kvizovi} su web aplikacija, dakle koristi se pomoću web preglednika. Sa
+strane klijenta (web preglednika) koristimo tehnologije kao što su HTML, CSS i
+JavaScript, a sa strane poslužitelja koristimo programski jezik Ruby i
+PostgreSQL relacijsku bazu. U narednim poglavljima ukratko opisujemo svaku od
+tehnologija.
 
 \subsection{Tehnologije na strani klijenta}
 
-Ove tehnologije izvršavaju web preglednici, te su one jedinstvene, odnosno
-nemaju alternativa. Specifikacije ovih tehnologija razvija internacionalna
+Ove tehnologije izvršavaju web preglednici, te su one jedinstvene, odnosno za
+njih ne postoje alternative. Specifikacije ovih tehnologija razvija međunarodna
 organizacija W3C (World Wide Web Consortium).
 
 \subsubsection{HTML}
 
 HTML je jezik kojim se označava sadržaj i struktura web stranica, i sam po sebi
-ne propisuje izgled.
+ne propisuje izgled, već web preglednik ima definirana CSS pravila za izgled
+svakog HTML elementa u slučaju da web dizajner nije definirao svoja.
 
-Za našu aplikaciju koristili smo najnoviju verziju HTML-a -- HTML5.
+Za našu aplikaciju koristili smo najnoviju verziju HTML-a -- HTML5. Koristili
+smo ju zbog novih funkcionalnosti koje pruža, kao što je povezivanje računala
+što omogućuje grupno rješavanje kvizova.
 
 \subsubsection{CSS}
 
