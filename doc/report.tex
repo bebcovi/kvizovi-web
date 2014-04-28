@@ -204,20 +204,20 @@ funkcionalnost.
 
 \section{Vrste pitanja}
 
-Postoji 4 vrste pitanja, poredani prema najlakše do najteže za riješiti, to su:
+Postoje 4 vrste pitanja, poredane od najlakše do najteže za riješiti:
 
 \begin{itemize}
-  \item Točno/netočno
-  \item Ponuđeni odgovori
-  \item Asocijacija
-  \item Upiši točan odgovor
+  \item točno/netočno
+  \item ponuđeni odgovori
+  \item asocijacija
+  \item upiši točan odgovor
 \end{itemize}
 
 \subsection{Točno/netočno}
 
 \emph{Točno/netočno} (slika \ref{fig:boolean}) je vrsta pitanja gdje se iznosi
-tvrdnja, a korisnik mora odgovoriti označiti je li točna ili netočna tako da
-označi odgovor. Ova vrsta pitanja je najlakša zato što je šansa da korisnik
+tvrdnja, a korisnik mora označiti je li točna ili netočna tako da označi
+odgovor. Ova vrsta pitanja je najlakša zato što je vjerojatnost da korisnik
 točno odgovori 50\%.
 
 \begin{figure}[H]
@@ -229,13 +229,13 @@ točno odgovori 50\%.
 \subsection{Ponuđeni odgovori}
 
 \emph{Ponuđeni odgovori} (slika \ref{fig:choice}) je vrsta pitanja gdje se
-postavlja pitanje na koje treba odgovoriti \textbf{jednim} od ponuđenih odgovora
-tako da označi odgovor. Ova vrsta pitanja je teža od \emph{točno/netočno} jer se
-šansa da korisnik točno odgovori smanjuje s brojem ponuđenih odgovora.
+postavlja pitanje na koje treba odgovoriti \textbf{jednim} od ponuđenih
+odgovora. Ova vrsta pitanja je teža od \emph{točno/netočno} jer se vjerojatnost
+da korisnik točno odgovori smanjuje s brojem ponuđenih odgovora.
 
 Razmišljali smo o tome da omogućimo više mogućih točnih odgovora, ali to bi
-činilo ovu vrstu pitanja težom, pa smo odlučili tu značajku ostaviti kao
-mogućnost za buduću verziju aplikacije.
+činilo ovu vrstu pitanja težom, pa smo odlučili odgoditi implementaciju te
+značajke za jednu od budućih verzija aplikacije.
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 5cm 0 0, fbox]{student/choice_question}
@@ -288,21 +288,23 @@ poglavljima ukratko opisujemo svaku od tehnologija.
 
 \subsection{Tehnologije na strani klijenta}
 
-Ove tehnologije izvršavaju web preglednici, te su oni jedinstveni, odnosno
-nemaju alternativa. Specifikaciju ovih tehnologija donosi internacionalna
+Ove tehnologije izvršavaju web preglednici, te su one jedinstvene, odnosno
+nemaju alternativa. Specifikacije ovih tehnologija razvija internacionalna
 organizacija W3C (World Wide Web Consortium).
 
 \subsubsection{HTML}
 
-HTML je prezentacijski jezik koji se koristi za izradu sadržaja web stranica.
+HTML je jezik kojim se označava sadržaj i struktura web stranica, i sam po sebi
+ne propisuje izgled.
 
 Za našu aplikaciju koristili smo najnoviju verziju HTML-a -- HTML5.
 
 \subsubsection{CSS}
 
-CSS je stilski jezik koji se koristi za opis prezentacije HTML dokumenta. Svaka
-vrsta web preglednika ga interpretira malo drukčije, te je zato izazovno
-napisati CSS na način da isto izgleda u svim web preglednicima.
+CSS je stilski jezik koji se koristi za opis prezentacije HTML dokumenata. Svaka
+vrsta web preglednika ima drugačije implementiranu specifikaciju CSS-a, zbog
+čega ga ponekad interpretira malo drugačije od ostalih preglednika. Zato je
+izazovno napisati CSS na način da isto izgleda u svim web preglednicima.
 
 Za našu aplikaciju koristili smo najnoviju verziju CSS-a -- CSS3.
 
