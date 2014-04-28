@@ -183,10 +183,11 @@ podražaja.
 Istraživanje smo proveli tako što smo izradili aplikaciju za kvizove i dali
 određenom uzorku osnovnih i srednjih škola na testiranje (vidi poglavlje
 \ref{chap:results}). Izvorni kôd aplikacije smo učinili javno dostupnim na web
-aplikaciji GitHub\footnote{\url{https://github.com/twin/kvizovi}} pod MIT
-licencom, što znači da bilo tko može vidjeti kako aplikacija funkcionira,
-doprinijeti aplikaciji na bilo koji način, pa čak i napraviti svoju kopiju
-aplikacije i razvijati ju u svom smijeru.\cite{github,mit}
+aplikaciji GitHub (\url{https://github.com/twin/kvizovi}) pod MIT licencom, što
+znači da bilo tko može vidjeti kako aplikacija funkcionira, promatrati kako se
+razvijala kroz vrijeme, doprinijeti aplikaciji na bilo koji način, pa čak i
+napraviti svoju kopiju aplikacije i razvijati ju u svom
+smijeru.\cite{github,mit}
 
 Kreirali smo i blog na kojemu obavještavamo korisnike o ažuriranju aplikacije.
 Uz blog smo kreirali i vodič kroz aplikaciju koji je dostupan u bilo kojem
@@ -301,29 +302,35 @@ organizacija W3C (World Wide Web Consortium).
 
 HTML je jezik kojim se označava sadržaj i struktura web stranica, i sam po sebi
 ne propisuje izgled, već web preglednik ima definirana CSS pravila za izgled
-svakog HTML elementa u slučaju da web dizajner nije definirao svoja.
+svakog HTML elementa u slučaju da web dizajner nije definirao svoja.\cite{html}
 
 Za našu aplikaciju koristili smo najnoviju verziju HTML-a -- HTML5. Koristili
 smo ju zbog novih funkcionalnosti koje pruža, kao što je povezivanje računala
-što omogućuje grupno rješavanje kvizova.
+što omogućuje nove značajke u aplikaciji kao što je grupno rješavanje kvizova.
 
 \subsubsection{CSS}
 
 CSS je stilski jezik koji se koristi za opis prezentacije HTML dokumenata. Svaka
 vrsta web preglednika ima drugačije implementiranu specifikaciju CSS-a, zbog
 čega ga ponekad interpretira malo drugačije od ostalih preglednika. Zato je
-izazovno napisati CSS na način da isto izgleda u svim web preglednicima.
+izazovno napisati CSS na način da isto izgleda u svim web
+preglednicima.\cite{css}
 
-Za našu aplikaciju koristili smo najnoviju verziju CSS-a -- CSS3.
+Za našu aplikaciju koristili smo najnoviju verziju CSS-a -- CSS3. Velik dio CSS3
+specifikacije implementiran je u modernim web preglednicima, a u starijim se web
+preglednicima izgled aplikacije mjestimično elegantno degradira, što ne utječe
+negativno na njezinu funkcionalnost. Za pregledavanje podržanosti pojedinih CSS3
+stilova u web preglednicima koristimo bazu podataka \url{caniuse.com}.
 
 \subsubsection{JavaScript}
 
 JavaScript je skriptni programski jezik koji se koristi za dinamičku
-manipulaciju HTMLa i komunikaciju sa poslužiteljem. Dok su drugi jezici obično
-sintaktički funkcijski ili objektni, JavaScript se temelji na prototipima.
+manipulaciju HTML-a i komunikaciju sa poslužiteljem. Dok su drugi jezici obično
+sintaktički funkcijski ili objektni, JavaScript se temelji na
+prototipima.\cite{js}
 
-Neka mjesta u našoj aplikaciji u kojoj smo koristili JavaScript su odbrojavanje
-štoperice i učitavanje slika za pitanja.
+U našoj aplikaciji koristili smo JavaScript kod odbrojavanje štoperice,
+učitavanje slika za pitanja i drugih funkcionalnosti.
 
 \subsection{Tehnologije na strani poslužitelja}
 
@@ -333,18 +340,19 @@ tehnologije je danas uglavnom subjektivan.
 
 \subsubsection{Ruby}
 
-Ruby je višeplatformski jezik opće namjene, i spada u klasu
-objektno-orijentiranih jezika. Ruby je počeo biti jako popularan 2005. dolaskom
-\textit{Rails}\footnote{\url{http://rubyonrails.org}} aplikacijskog okvira, u
-kojem je i napravljena ova aplikacija.
+Ruby je višeplatformski jezik opće namjene i pripada klasi objektno-orjentiranih
+jezika. Ruby je počeo biti jako popularan 2005. dolaskom
+\emph{Rails}\footnote{\url{http://rubyonrails.org}} aplikacijskog okvira, u
+kojemu smo razvili ovu aplikaciju.\cite{ruby}
 
-Razlog zašto smo odabrali Ruby je zato što vrlo moćan, i ima lijepu i čistu
-sintaksu. Neke od popularnih alternativa uključuju: Python, C\#, Java itd.
+Razlog zašto smo odabrali Ruby je zato što vrlo moćan i ima lijepu i čistu
+sintaksu. Neke od popularnih alternativa uključuju: PHP, Python, C\#, Java itd.
 
 \subsubsection{PostgreSQL}
 
-PostgreSQL je sustav za upravljanje bazom podataka. U bazu podataka se spremaju
-sve informacije koje trebaju biti trajne, poput informacija o korisnicima.
+PostgreSQL je sustav za upravljanje bazama podataka. U bazu podataka se spremaju
+sve informacije koje trebaju biti trajne, poput informacija o
+korisnicima.\cite{postgresql}
 
 PostgreSQL je bio naš izbor zbog njegove količine funkcionalnosti i kvaliteti.
 Neke od popularnih alternativa uključuju: MySQL, Microsoft SQL Server itd.
@@ -577,7 +585,7 @@ Križevci, Gimnazija fra Dominika Mandica, Medicinska škola Varaždin, Srednja
 
 \renewcommand{\bibname}{Popis literature}
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 
   \raggedright
 
@@ -595,7 +603,7 @@ Križevci, Gimnazija fra Dominika Mandica, Medicinska škola Varaždin, Srednja
   \bibitem{css} “CSS.” Wikipedija, April 15, 2014.
     \url{https://hr.wikipedia.org/w/index.php?title=CSS&oldid=4154816}.
 
-  \bibitem{javascript} “JavaScript.” Wikipedija, April 24, 2014.
+  \bibitem{js} “JavaScript.” Wikipedija, April 24, 2014.
     \url{https://hr.wikipedia.org/w/index.php?title=JavaScript&oldid=3942542}.
 
   \bibitem{w3c} “World Wide Web Consortium (W3C).” W3C, April 25, 2014.
@@ -607,6 +615,15 @@ Križevci, Gimnazija fra Dominika Mandica, Medicinska škola Varaždin, Srednja
   \bibitem{mit} GitHub, Inc. “MIT License - ChooseALicense.com.”
     ChooseALicense.com, February 16, 2014.
     http://choosealicense.com/licenses/mit/.
+
+  \bibitem{ruby} “Ruby Programming Language.” Ruby, April 27, 2014.
+    \url{https://www.ruby-lang.org/en/}.
+
+  \bibitem{postgresql} “PostgreSQL: The World’s Most Advanced Open Source
+    Database.” PostgreSQL, April 28, 2014. http://www.postgresql.org/.
+
+  \bibitem{krug05} Krug, Steve. Don’t Make Me Think! : A Common Sense Approach
+    to Web Usability. 2nd edition. Berkeley, California USA: New Riders, 2005.
 
 \end{thebibliography}
 
