@@ -59,9 +59,9 @@ Postoje razni kreativni načini da se upotrijebi informacijska tehnologija u
 nastavi:
 
 \begin{itemize}
-  \item prezentacije (npr. koristeći program kao što je \emph{Microsoft
+  \item prezentacije (koristeći aplikacije kao što je npr. \emph{Microsoft
     PowerPoint})
-  \item ilustracije
+  \item digitalne ilustracije (npr. u biologiji, povijesti i sl.)
   \item digitalne simulacije (npr. u fizici i kemiji)
   \item video zapisi (npr. za nastavu povijesti) itd.
 \end{itemize}
@@ -81,7 +81,7 @@ Mi smo odlučili kreirati jedan takav sustav posebno za učenike hrvatskih
 osnovnih i srednjih škola. Iako se sustav može proširiti i na druge predmete,
 mi smo se u prvoj testnoj fazi orijentirali na nastavnike hrvatskoga jezika s
 posebnim naglaskom na sate lektire. Program smo testirali u periodu od skoro
-dvije godine te ga za to vrijeme stalno usavršavali i nadopunjavali novim
+dvije godine te ga za to vrijeme neprestano usavršavali i nadopunjavali novim
 mogućnostima. U ostatku rada izložit ćemo naše osnovne hipoteze kojima smo se
 vodili u ovom projektu. Potom ćemo detaljno opisati program kojeg smo napravili
 iz perspektive nastavnika, studenta ali i programera. Na kraju ćemo prikazati i
@@ -99,7 +99,7 @@ Ovdje ćemo navesti i ukratko opisati neke od njih.
   \item[Kvizovi.net]\footnote{\url{http://kvizovi.net}} je srpska aplikacija za
     kvizove iz mnogih područja, kao što su glazba, zemljopis, sport, povijest,
     filmovi i serije. Osim kvizova ima i igara i viceva, ali kompletan sadržaj
-    ove aplikacije je vrlo siromašan zbog toga što ju mogu izmjenjivati jedino
+    ove aplikacije je vrlo oskudan zbog toga što ju mogu izmjenjivati jedino
     autori aplikacije, nema baze korisnika koji mogu stvarati i rješavati
     kvizove, pa prema tome skupljati bodove i sl.
 
@@ -123,14 +123,14 @@ Ovdje ćemo navesti i ukratko opisati neke od njih.
   \item[QuizUp]\footnote{\url{https://itunes.apple.com/hr/app/quizup/id718421443?mt=8}}
     je vrlo kvalitetna i popularna aplikacija za kvizove na engleskom jeziku.
     Od navedenih, ova aplikacija je najviše opsežna i ažurna i ima najviše
-    mogućnosti (eng. \emph{feature}). Osim rješavanja kvizova, korisnici
-    \emph{QuizUp}-a ih mogu i stvarati ako žele. Za razliku od ostalih
-    navedenih aplikacija, \emph{QuizUp} ima puno izraženiji socijalni aspekt i
-    upotrebu gejmifikacije\footnote{Korištenje elemenata iz igara u drugim
-    kontekstima.}, koja potiče rješavanje kvizova, tako što korisnici dobivaju
-    bodove i prema njima im se dodjeljuju određeni statusi. Nedostaci ove
-    aplikacija su engleski jezik i što je dostupna samo na mobilnim uređajima,
-    nije ju moguće igrati na desktop i laptop računalima.
+    mogućnosti. Osim rješavanja kvizova, korisnici \emph{QuizUp}-a ih mogu i
+    stvarati ako žele. Za razliku od ostalih navedenih aplikacija, \emph{QuizUp}
+    ima puno izraženiji socijalni aspekt i upotrebu
+    gejmifikacije\footnote{Korištenje elemenata iz igara u drugim kontekstima.},
+    koja potiče rješavanje kvizova, tako što korisnici dobivaju bodove i prema
+    njima im se dodjeljuju određeni statusi. Nedostaci ove aplikacija su
+    engleski jezik i što je dostupna samo na mobilnim uređajima, nije ju moguće
+    igrati na desktop i laptop računalima.
 
 \end{description}
 
@@ -153,20 +153,20 @@ Cilj ovog istraživanja bio je saznati:
 
 Naša prva pretpostavka je bila da će oni učenici koji su učili rješavajući
 kvizove pomoću naše aplikacije biti više zainteresirati za gradivo te da će ga
-i bolje usvojiti u odnosu na učenike koji su učili klasičnim pristupom. Učenici
-rješavanje kvizova mogu gledati kao na neku vrstu igre, što može pozitivno
-utjecati na usvajanje znanja. Interes za gradivo može potaknuti i mogućnost
-igranja u paru, odnosno natjecanja s drugim učenicima.
+i bolje usvojiti u odnosu na učenike koji su učili klasičnim pristupom, tj.
+slušajući predavanja. Učenici rješavanje kvizova mogu gledati kao na neku vrstu
+igre, što može pozitivno utjecati na usvajanje znanja. Interes za gradivo može
+potaknuti i mogućnost igranja u paru, odnosno natjecanja s drugim učenicima.
 
 Druga pretpostavka je da će profesorima ispitivanje učenika pomoću aplikacije za
 kvizove biti jednostavnije i informativnije nego ispitivanje na tradicionalne
 načine kao što su sastavljanje testova i usmeno ispitivanje. Može biti
 jednostavnije zato što kviz trebaju sastaviti jednom i mogu koristiti alat koji
 je specijaliziran za kvizove, ne moraju ih tiskati i ne moraju ih ručno
-ispravljati kasnije, nego se to događa automatski prema točnim odgovorima koje
-su profesori unijeli. A može biti informativnije zato što profesori dobivaju
-puno podataka o tome kako njihovi učenici rješavaju kvizove, koliko im je
-trebalo za svako pitanje, kada su točno bili gotovi, s kime su igrali itd.
+ispravljati kasnije, to se događa automatski prema točnim odgovorima koje su
+profesori unijeli. A može biti informativnije zato što profesori dobivaju puno
+podataka o tome kako njihovi učenici rješavaju kvizove, koliko im je trebalo za
+svako pitanje, kada su točno bili gotovi, s kime su igrali itd.
 
 Valja uzeti u obzir da prema VAK principu postoje 3 različita tipa ljudi --
 vizualni, auditivni i kinestetički.\cite{clark11} Smatramo da će naša aplikacija
@@ -251,7 +251,7 @@ pridružuje pojmove iz jednog s pojmovima iz drugog stupca. Ovo pitanje je teže
 od \emph{ponuđenih odgovora} jer se broj mogućih kombinacija eksponencijalno
 povećava s brojem parova pojmova.
 
-Ova vrsta pitanja bila je tehnički izazovna za dizajnirati, jer postoji mnogo
+Ova vrsta pitanja bila je tehnički izazovna za dizajnirati jer postoji mnogo
 različitih pristupa. Odlučili smo se za pristup gdje se pojmovi ``primaju'' s
 mišem i ``ispuštaju'' na drugi pojam, nakon čega ta 2 pojma zamijenjuju mjesta.
 Na taj način korisnik može preslagivati pojmove dok ne dobije željenu
