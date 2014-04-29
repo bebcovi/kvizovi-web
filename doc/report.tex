@@ -21,6 +21,7 @@
 \usepackage{url}
 \usepackage[stable]{footmisc}
 \usepackage{chngcntr}
+\usepackage{wrapfig}
 
 \setlength{\parskip}{\bigskipamount}
 \setlength{\parindent}{0pt}
@@ -300,6 +301,12 @@ organizacija W3C (World Wide Web Consortium).
 
 \subsubsection{HTML}
 
+\begin{wrapfigure}{left}{2.5cm}
+  \vspace{-10pt}
+  \includegraphics[width=2.5cm]{logos/html}
+  \vspace{-30pt}
+\end{wrapfigure}
+
 HTML je jezik kojim se označava sadržaj i struktura web stranica, i sam po sebi
 ne propisuje izgled, već web preglednik ima definirana CSS pravila za izgled
 svakog HTML elementa u slučaju da web dizajner nije definirao svoja.\cite{html}
@@ -309,6 +316,12 @@ smo ju zbog novih funkcionalnosti koje pruža, kao što je povezivanje računala
 što omogućuje nove značajke u aplikaciji kao što je grupno rješavanje kvizova.
 
 \subsubsection{CSS}
+
+\begin{wrapfigure}{right}{2.5cm}
+  \vspace{-10pt}
+  \includegraphics[width=2.5cm]{logos/css}
+  \vspace{-30pt}
+\end{wrapfigure}
 
 CSS je stilski jezik koji se koristi za opis prezentacije HTML dokumenata. Svaka
 vrsta web preglednika ima drugačije implementiranu specifikaciju CSS-a, zbog
@@ -323,6 +336,12 @@ negativno na njezinu funkcionalnost. Za pregledavanje podržanosti pojedinih CSS
 stilova u web preglednicima koristimo bazu podataka \url{caniuse.com}.
 
 \subsubsection{JavaScript}
+
+\begin{wrapfigure}{left}{2.5cm}
+  \vspace{-10pt}
+  \includegraphics[width=2.5cm]{logos/javascript}
+  \vspace{-30pt}
+\end{wrapfigure}
 
 JavaScript je skriptni programski jezik koji se koristi za dinamičku
 manipulaciju HTML-a i komunikaciju sa poslužiteljem. Dok su drugi jezici obično
@@ -340,6 +359,12 @@ tehnologije je danas uglavnom subjektivan.
 
 \subsubsection{Ruby}
 
+\begin{wrapfigure}{right}{2.5cm}
+  \vspace{-10pt}
+  \includegraphics[width=2cm]{logos/ruby}
+  \vspace{-20pt}
+\end{wrapfigure}
+
 Ruby je višeplatformski jezik opće namjene i pripada klasi objektno-orjentiranih
 jezika. Ruby je počeo biti jako popularan 2005. dolaskom
 \emph{Rails}\footnote{\url{http://rubyonrails.org}} aplikacijskog okvira, u
@@ -349,6 +374,12 @@ Razlog zašto smo odabrali Ruby je zato što vrlo moćan i ima lijepu i čistu
 sintaksu. Neke od popularnih alternativa uključuju: PHP, Python, C\#, Java itd.
 
 \subsubsection{PostgreSQL}
+
+\begin{wrapfigure}{left}{2.5cm}
+  \vspace{-10pt}
+  \includegraphics[width=2.5cm]{logos/postgresql}
+  \vspace{-30pt}
+\end{wrapfigure}
 
 PostgreSQL je sustav za upravljanje bazama podataka. U bazu podataka se spremaju
 sve informacije koje trebaju biti trajne, poput informacija o
@@ -361,10 +392,22 @@ Neke od popularnih alternativa uključuju: MySQL, Microsoft SQL Server itd.
 
 \subsubsection{Git i GitHub}
 
+\begin{wrapfigure}{right}{2.5cm}
+  \vspace{-10pt}
+  \includegraphics[width=2.5cm]{logos/git}
+  \vspace{-30pt}
+\end{wrapfigure}
+
 Git je besplatan i otvoren distribuirani sustav za verzioniranje dizajniran da
 upravlja svime od malih do jako velikih projekata s brzinom i
 efikasnosti.\cite{git} Git nam je bio neizmjerno koristan u paralelnom pisanju
 koda i samog rada.
+
+\begin{wrapfigure}{left}{2.5cm}
+  \vspace{-10pt}
+  \includegraphics[width=2.5cm]{logos/github}
+  \vspace{-30pt}
+\end{wrapfigure}
 
 GitHub je web aplikacija koja omogućava učitavanje Git repozitorija (projekta)
 te tako olakšava kolaboraciju među ljudima koji rade na projektu.\cite{github}
@@ -372,6 +415,12 @@ Neke od značajki GitHub-a su pregled promjena, mogućnosti za prijavljivanje
 grešaka, listanje kôda itd.
 
 \subsubsection{Gauges}
+
+\begin{wrapfigure}{right}{2.5cm}
+  \vspace{-10pt}
+  \includegraphics[width=2.5cm]{logos/gauges}
+  \vspace{-30pt}
+\end{wrapfigure}
 
 Gauges je web aplikacija za pregled prometa web stranica u stvarnom vremenu.
 Gauges pruža informacije kao broj pogleda, broj jedinstvenih posjetitelja,
@@ -649,7 +698,7 @@ Križevci, Gimnazija fra Dominika Mandica, Medicinska škola Varaždin, Srednja
   \bibitem{postgresql} “PostgreSQL: The World’s Most Advanced Open Source
     Database.” PostgreSQL, April 28, 2014. http://www.postgresql.org/.
 
-  \bibitem{krug05} Krug, Steve. Don’t Make Me Think! : A Common Sense Approach
+  \bibitem{krug05} Krug, Steve. Don't Make Me Think! : A Common Sense Approach
     to Web Usability. 2nd edition. Berkeley, California USA: New Riders, 2005.
 
 \end{thebibliography}
