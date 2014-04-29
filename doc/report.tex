@@ -39,16 +39,18 @@
 
 \titlehead{\center{Sveučilište u Zagrebu\\Filozofski fakultet\\Odsjek za
 informacijske i komunikacijske znanosti\\Akademska godina 2013/14.}}
-\title{Upotreba web aplikacije za kvizove u nastavi osnovnih i srednjih škola}
+\title{Kvizovi kao alternativni način učenja}
+\vfill
 \author{Studenti: Janko i Matija Marohnić\\Mentor: doc. dr. sc. Kristina
-Kocijan} \date{Zagreb, 2014.}
+Kocijan}
+\date{Zagreb, 2014.}
 
 \maketitle
 
 \pagebreak
 
-Ovaj rad izrađen je na Odsijeku za informacijske i komunikacijske znanosti na
-Filozofskom fakultetu u Zagrebu pod vodstvom doc. dr. sc. Kristine Kocijan i
+Ovaj je rad izrađen na Odsjeku za informacijske i komunikacijske znanosti
+Filozofskoga fakulteta u Zagrebu pod vodstvom doc. dr. sc. Kristine Kocijan i
 predan je na natječaj za dodjelu Rektorove nagrade u akademskoj godini
 2013/2014.
 
@@ -62,9 +64,7 @@ Zbog sveprisutnosti tehnologije i interneta mnogi učenici imaju sve više
 poteškoća s učenjem, odnosno sve manje koncentracije i motivacije, i često ne
 vide smisao u učenju jer većinu informacija vrlo brzo mogu pronaći na internetu.
 To je zato što se sustav školovanja već dugo nije promijenio, a generacije
-jesu.\cite{perisic13} Zato učenici često uzimaju instrukcije kako bi imali bolje
-ocjene, jer im je potreban alternativni način podučavanja kojeg ne nalaze u
-školama.
+jesu.\cite{perisic13}
 
 Postoje razni kreativni načini da se upotrijebi informacijska tehnologija u
 nastavi:
@@ -99,7 +99,7 @@ iz perspektive nastavnika, studenta ali i programera. Na kraju ćemo prikazati i
 rezultate koje smo dobili uz pomoć anketa i praćenja korisnika za vrijeme
 njihovog korištenja aplikacijom.
 
-\section{Postojeći radovi}
+\section*{Postojeće aplikacije}
 
 Jedan od najjednostavnijih načina ispitivanja znanja je rješavanje kvizova,
 stoga smo pretraživali hrvatske i strane aplikacije koje se bave tom temom.
@@ -185,8 +185,12 @@ Uz blog smo kreirali i vodič kroz aplikaciju koji je dostupan u bilo kojem
 trenutku svim korisnicima (nastavnicima i učenicima) kako bismo im olakšali
 korištenje aplikacije. Također, u slučaju bilo kakvog problema ili poteškoća,
 korisnici su nas uvijek mogli kontaktirati putem e-mail adresa koje se nalaze
-unutar kontakt sekcije u glavnoj navigaciji.\cite{krug05} Korisnici također mogu
-naknadno izmjenjivati svoje podatke u korisničkom računu.
+unutar kontakt sekcije u glavnoj navigaciji.\cite{krug05}
+
+Korisnici također mogu naknadno izmjenjivati svoje podatke u korisničkom
+računu.
+
+\pagebreak
 
 Korisnik započinje korištenje aplikacije tako da odabere svoju ulogu u školi
 (vidi sliku \ref{fig:home}). Ovisno o odabranoj ulozi, aplikacija pruža drugačiju
@@ -196,83 +200,6 @@ funkcionalnost.
   \includegraphics[width=\textwidth, clip=true, trim=0 7cm 0 0, fbox]{home}
   \caption{Početna stranica}
   \label{fig:home}
-\end{figure}
-
-\section{Vrste pitanja}
-
-Postoje 4 vrste pitanja, poredane od najlakše do najteže za riješiti:
-
-\begin{itemize}
-  \item točno/netočno
-  \item ponuđeni odgovori
-  \item asocijacija
-  \item upiši točan odgovor
-\end{itemize}
-
-\subsection{Točno/netočno}
-
-\emph{Točno/netočno} (slika \ref{fig:boolean}) je vrsta pitanja gdje se iznosi
-tvrdnja, a korisnik mora označiti je li točna ili netočna tako da označi
-odgovor. Ova vrsta pitanja je najlakša zato što je vjerojatnost da korisnik
-točno odgovori 50\%.
-
-\begin{figure}[H]
-  \includegraphics[width=\textwidth, clip=true, trim=0 7cm 0 0, fbox]{student/boolean_question}
-  \caption{Pitanje vrste \emph{točno/netočno}}
-  \label{fig:boolean}
-\end{figure}
-
-\subsection{Ponuđeni odgovori}
-
-\emph{Ponuđeni odgovori} (slika \ref{fig:choice}) je vrsta pitanja gdje se
-postavlja pitanje na koje treba odgovoriti \textbf{jednim} od ponuđenih
-odgovora. Ova vrsta pitanja je teža od \emph{točno/netočno} jer se vjerojatnost
-da korisnik točno odgovori smanjuje s brojem ponuđenih odgovora.
-
-Razmišljali smo o tome da omogućimo više mogućih točnih odgovora, ali to bi
-činilo ovu vrstu pitanja težom, pa smo odlučili odgoditi implementaciju te
-značajke za jednu od budućih verzija aplikacije.
-
-\begin{figure}[H]
-  \includegraphics[width=\textwidth, clip=true, trim=0 5cm 0 0, fbox]{student/choice_question}
-  \caption{Pitanje vrste \emph{ponuđeni odgovori}}
-  \label{fig:choice}
-\end{figure}
-
-\subsection{Asocijacija}
-
-\emph{Asocijacija} (slika \ref{fig:association}) je vrsta pitanja gdje korisnik
-pridružuje pojmove iz jednog s pojmovima iz drugog stupca. Ovo pitanje je teže
-od \emph{ponuđenih odgovora} jer se broj mogućih kombinacija eksponencijalno
-povećava s brojem parova pojmova.
-
-Ova vrsta pitanja bila je tehnički izazovna za dizajnirati jer postoji mnogo
-različitih pristupa. Odlučili smo se za pristup gdje se pojmovi ``primaju'' s
-mišem i ``ispuštaju'' na drugi pojam, nakon čega ta 2 pojma zamijenjuju mjesta.
-Na taj način korisnik može preslagivati pojmove dok ne dobije željenu
-kombinaciju.
-
-\begin{figure}[H]
-  \includegraphics[width=\textwidth, clip=true, trim=0 3cm 0 0, fbox]{student/association_question}
-  \caption{Pitanje vrste \emph{asocijacija}}
-  \label{fig:association}
-\end{figure}
-
-\subsection{Upiši točan odgovor}
-
-\emph{Upiši točan odgovor} (slika \ref{fig:text}) je vrsta pitanja gdje se
-postavlja pitanje, a korisnik treba upisati točan odgovor u za to predviđeno
-tekstualno polje. Ova vrsta pitanja je najteža zato što je vrlo lako pogriješiti
--- korisnik mora upisati odgovor točno onako kako ga je administrator napisao.
-
-Kako bismo učinili ovu vrstu pitanja malo lakšom, dizajnirali smo ju tako da
-nije bitno piše li korisnik malim ili velikim slovima, ako se slova podudaraju s
-točnim odgovorom, dani se odgovor smatra točnim.
-
-\begin{figure}[H]
-  \includegraphics[width=\textwidth, clip=true, trim=0 5cm 0 0, fbox]{student/text_question}
-  \caption{Pitanje vrste \emph{upiši točan odgovor}}
-  \label{fig:text}
 \end{figure}
 
 \section{Izrada aplikacije}
@@ -378,6 +305,8 @@ korisnicima.\cite{postgresql}
 PostgreSQL je bio naš izbor zbog njegove količine funkcionalnosti i kvaliteti.
 Neke od popularnih alternativa uključuju: MySQL, Microsoft SQL Server itd.
 
+\pagebreak
+
 \subsection{Ostale tehnologije}
 
 \subsubsection{Git i GitHub}
@@ -431,6 +360,83 @@ dok su posjećivali Kvizove.
 Heroku je web servis koji pruža hosting web aplikacija u oblaku.\cite{heroku}
 Uz Heroku nije potrebno konfigurirati poslužitelj na kojem se nalazi web
 aplikacija, već to Heroku radi sam.
+
+\section{Vrste pitanja}
+
+Postoje 4 vrste pitanja, poredane od najlakše do najteže za riješiti:
+
+\begin{itemize}
+  \item točno/netočno
+  \item ponuđeni odgovori
+  \item asocijacija
+  \item upiši točan odgovor
+\end{itemize}
+
+\subsection{Točno/netočno}
+
+\emph{Točno/netočno} (slika \ref{fig:boolean}) je vrsta pitanja gdje se iznosi
+tvrdnja, a korisnik mora označiti je li točna ili netočna tako da označi
+odgovor. Ova vrsta pitanja je najlakša zato što je vjerojatnost da korisnik
+točno odgovori 50\%.
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth, clip=true, trim=0 7cm 0 0, fbox]{student/boolean_question}
+  \caption{Pitanje vrste \emph{točno/netočno}}
+  \label{fig:boolean}
+\end{figure}
+
+\subsection{Ponuđeni odgovori}
+
+\emph{Ponuđeni odgovori} (slika \ref{fig:choice}) je vrsta pitanja gdje se
+postavlja pitanje na koje treba odgovoriti \textbf{jednim} od ponuđenih
+odgovora. Ova vrsta pitanja je teža od \emph{točno/netočno} jer se vjerojatnost
+da korisnik točno odgovori smanjuje s brojem ponuđenih odgovora.
+
+Razmišljali smo o tome da omogućimo više mogućih točnih odgovora, ali to bi
+činilo ovu vrstu pitanja težom, pa smo odlučili odgoditi implementaciju te
+značajke za jednu od budućih verzija aplikacije.
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth, clip=true, trim=0 5cm 0 0, fbox]{student/choice_question}
+  \caption{Pitanje vrste \emph{ponuđeni odgovori}}
+  \label{fig:choice}
+\end{figure}
+
+\subsection{Asocijacija}
+
+\emph{Asocijacija} (slika \ref{fig:association}) je vrsta pitanja gdje korisnik
+pridružuje pojmove iz jednog s pojmovima iz drugog stupca. Ovo pitanje je teže
+od \emph{ponuđenih odgovora} jer se broj mogućih kombinacija eksponencijalno
+povećava s brojem parova pojmova.
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth, clip=true, trim=0 3cm 0 0, fbox]{student/association_question}
+  \caption{Pitanje vrste \emph{asocijacija}}
+  \label{fig:association}
+\end{figure}
+
+Ova vrsta pitanja bila je tehnički izazovna za dizajnirati jer postoji mnogo
+različitih pristupa. Odlučili smo se za pristup gdje se pojmovi ``primaju'' s
+mišem i ``ispuštaju'' na drugi pojam, nakon čega ta 2 pojma zamijenjuju mjesta.
+Na taj način korisnik može preslagivati pojmove dok ne dobije željenu
+kombinaciju.
+
+\subsection{Upiši točan odgovor}
+
+\emph{Upiši točan odgovor} (slika \ref{fig:text}) je vrsta pitanja gdje se
+postavlja pitanje, a korisnik treba upisati točan odgovor u za to predviđeno
+tekstualno polje. Ova vrsta pitanja je najteža zato što je vrlo lako pogriješiti
+-- korisnik mora upisati odgovor točno onako kako ga je administrator napisao.
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth, clip=true, trim=0 5cm 0 0, fbox]{student/text_question}
+  \caption{Pitanje vrste \emph{upiši točan odgovor}}
+  \label{fig:text}
+\end{figure}
+
+Kako bismo učinili ovu vrstu pitanja malo lakšom, dizajnirali smo ju tako da
+nije bitno piše li korisnik malim ili velikim slovima, ako se slova podudaraju s
+točnim odgovorom, dani se odgovor smatra točnim.
 
 \section{Iz perspektive korisnika}
 
