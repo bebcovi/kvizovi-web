@@ -20,9 +20,12 @@ class PlayedQuizDecorator < Draper::Decorator
   def ranks
     scores.map do |score|
       case h.percentage score, total_score
-      when 0...30  then "znalac-malac"
-      when 30...70 then "ekspert"
-      when 70..100 then "super-ekspert"
+      when 0..29   then "znalac-šegrt"
+      when 30..49  then "znalac-malac"
+      when 50..74  then "znalac"
+      when 75..84  then "ekspert"
+      when 85..94  then "super ekspert"
+      when 95..100 then "čarobnjak"
       end
     end
   end
