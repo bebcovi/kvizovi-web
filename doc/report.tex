@@ -30,6 +30,17 @@
 \counterwithout{footnote}{chapter}
 \setlength{\abovecaptionskip}{0pt}
 
+\makeatletter
+\renewcommand\listoffigures{
+  \section{\listfigurename}
+    \@mkboth{\MakeUppercase\listfigurename}
+            {\MakeUppercase\listfigurename}
+  \@starttoc{lof}
+}
+\makeatother
+
+\renewcommand{\bibname}{Popis literature}
+
 \begin{document}
 
 \begin{titlepage}
@@ -683,10 +694,7 @@ Srednja škola Čakovec, Tehnička škola Šibenik, Privatna srednja ekonomska �
 INOVA, Škola za umjetnost, dizajn, grafiku i odjeću Zabok, Gimnazija i
 strukovna škola Jurja Dobrile i Nadbiskupska klasična gimnazija.
 
-\renewcommand{\listoffigures}{\begingroup
-\tocchapter
-\tocfile{\listfigurename}{lof}
-\endgroup}
+\chapter{Prilozi}
 
 \listoffigures
 
