@@ -183,19 +183,17 @@ Cilj ovog istraživanja bio je saznati:
 Naša prva pretpostavka je bila da će oni učenici koji su učili rješavajući
 kvizove pomoću naše aplikacije biti više zainteresirani za gradivo te da će ga i
 bolje usvojiti u odnosu na učenike koji su učili klasičnim pristupom, tj.
-slušajući predavanja. Učenici rješavanje kvizova mogu gledati kao na neku vrstu
-igre, što može pozitivno utjecati na usvajanje znanja. Interes za gradivo može
-potaknuti i mogućnost igranja u paru, odnosno natjecanja s drugim učenicima.
+slušajući predavanja. Učenici rješavanje kvizova mogu gledati kao na igru, što
+pozitivno utječe na usvajanje znanja.
 
 Druga pretpostavka bila je da će profesorima ispitivanje učenika pomoću
-aplikacije za kvizove biti jednostavnije i informativnije nego ispitivanje na
-tradicionalne načine kao što su sastavljanje testova i usmeno ispitivanje. Može
-biti jednostavnije zato što kviz trebaju sastaviti jednom i mogu koristiti alat
-koji je specijaliziran za kvizove, ne moraju ih tiskati i ne moraju ih ručno
+aplikacije za kvizove biti jednostavnije nego ispitivanje na tradicionalne
+načine kao što su sastavljanje testova i usmeno ispitivanje. Može biti
+jednostavnije zato što kviz trebaju sastaviti jednom i mogu koristiti alat koji
+je specijaliziran za kvizove, ne moraju ih tiskati i ne moraju ih ručno
 ispravljati kasnije, to se događa automatski prema točnim odgovorima koje su
-profesori unijeli. A može biti informativnije zato što profesori dobivaju puno
-podataka o tome kako njihovi učenici rješavaju kvizove, koliko im je trebalo za
-svako pitanje, kada su točno bili gotovi, s kime su igrali itd.
+profesori unijeli. A može biti informativnije zato što profesori imaju pristup
+podacima o učenicima.
 
 Možemo uzeti u obzir da prema VAK principu dijelimo ljude prema tri različita
 tipa -- vizualni, auditivni i kinestetički.\cite{clark11} Smatramo da
@@ -570,7 +568,7 @@ aplikacije.
 
 \section{Škole}
 
-U ovoj su anketi sudjelovali svi profesori iz našeg testnog uzorka. Iako nitko
+U ovoj su anketi (vidi prilog \ref{sec:schoolsurv}) sudjelovali svi profesori iz našeg testnog uzorka. Iako nitko
 od nastavnika nije primijetio značajno poboljšanje znanja, upotreba aplikacije
 je ipak doprinijela njihovoj povećanoj zainteresiranosti za materiju koju su
 obrađivali (slika \ref{fig:school/advance}).
@@ -607,13 +605,13 @@ usvajanje istoga), odnosno opravdava samu izradu i primjenu ovakve aplikacije u
 
 \section{Učenici}
 
-Od 254 učenika iz testnog uzorka, njih 30 je sudjelovalo u završnoj anketi.
-Prema dobivenim podatcima, učenici većinom smatraju da je ovakav način učenja
-ne samo zanimljiv već i učinkovit i doprinosi boljem razumijevanju gradiva ali
-i većem interesu za gradivo (slike \ref{fig:student/interesting},
-\ref{fig:student/effective} i \ref{fig:student/help}). Čak se osjećaju i puno
-samouvjerenije na stvarnom satu prilikom ispitivanja gradiva na klasični način
-(slika \ref{fig:student/help}).
+Od 254 učenika iz testnog uzorka, njih 30 je sudjelovalo u završnoj anketi (vidi
+prilog\ref{sec:studentsurv}). Prema dobivenim podatcima, učenici većinom
+smatraju da je ovakav način učenja ne samo zanimljiv već i učinkovit i doprinosi
+boljem razumijevanju gradiva ali i većem interesu za gradivo (slike
+\ref{fig:student/interesting}, \ref{fig:student/effective} i
+\ref{fig:student/help}). Čak se osjećaju i puno samouvjerenije na stvarnom satu
+prilikom ispitivanja gradiva na klasični način (slika \ref{fig:student/help}).
 
 Čak više od 50\% učenika koji su koristili aplikaciju primijetilo je i napredak
 u ocjeni (slika \ref{fig:student/grades}).
@@ -691,6 +689,52 @@ strukovna škola Jurja Dobrile i Nadbiskupska klasična gimnazija.
 \endgroup}
 
 \listoffigures
+
+\chapter{Ankete}
+
+\section{Pitanja profesorima}
+\label{sec:schoolsurv}
+
+\begin{figure}[H]
+  \includegraphics[height=0.6\textheight, clip=true, trim=0 0 0 0, fbox]{school/survey1}
+  \caption{Škole -- anketa (prvi dio)}
+  \label{fig:schoolsurv1}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[height=0.9\textheight, clip=true, trim=0 0 0 0, fbox]{school/survey2}
+  \caption{Škole -- anketa (drugi dio)}
+  \label{fig:schoolsurv2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=0.85\textheight, clip=true, trim=0 0 0 0, fbox]{school/survey3}
+  \caption{Škole -- anketa (treći dio)}
+  \label{fig:schoolsurv3}
+\end{figure}
+
+\section{Pitanja učenicima}
+\label{sec:studentsurv}
+
+\begin{figure}[H]
+  \includegraphics[height=0.85\textheight, clip=true, trim=0 0 0 0, fbox]{student/survey1}
+  \caption{Učenici -- anketa (prvi dio)}
+  \label{fig:studentsurv1}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[height=\textheight, clip=true, trim=0 0 0 0, fbox]{student/survey2}
+  \caption{Učenici -- anketa (drugi dio)}
+  \label{fig:studentsurv2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=0.9\textheight, clip=true, trim=0 0 0 0, fbox]{student/survey3}
+  \caption{Učenici -- anketa (treći dio)}
+  \label{fig:studentsurv3}
+\end{figure}
 
 \renewcommand{\bibname}{Popis literature}
 
@@ -813,12 +857,12 @@ better and are more interested in the school matter through more interactive
 medias.
 
 We developed a web application \textit{Quizzes}, which gives the ability for
-teachers in schools to make quizzes for their students connected with the
-matter they're teaching. Students can play quizzes made by their school, and
-teachers can monitor the results of the played quizzes, the quality of
-questions and answers etc. Hypothesis of the research is that for students this
-way of learning will be more interesting and will make them more interested in
-the matter in general.
+teachers in schools to make quizzes for their students connected with the matter
+they're teaching. Students can play quizzes made by their school, and teachers
+can monitor the results of the played quizzes, the quality of questions and
+answers etc. Hypothesis of the research is that for students this way of
+learning will be more interesting and will make them more interested in the
+matter in general.
 
 After making the application available online, with the help of our mentor we
 managed to find schools which were willing to test the application. After a
@@ -827,8 +871,8 @@ useful was the application to them.
 
 The surveys have shown that students find this way of learning more effective
 and interesting, and 50\% of them felt that their grade improved. The teachers
-noticed improvement of their students, as well as a general raise in interest
-of students for the matter.
+noticed improvement of their students, as well as a general raise in interest of
+students for the matter.
 
 \textbf{Keywords}: quizzes, web application, interactive learning, alternative
 teaching, new technologies in class
