@@ -41,7 +41,7 @@
 informacijske i komunikacijske znanosti\\Akademska godina 2013/14.}}
 \title{Kvizovi kao alternativni način učenja}
 \vfill
-\author{Studenti: Janko i Matija Marohnić\\Mentor: doc. dr. sc. Kristina
+\author{Studenti: Janko Marohnić i Matija Marohnić\\Mentorica: doc. dr. sc. Kristina
 Kocijan}
 \date{Zagreb, 2014.}
 
@@ -78,26 +78,27 @@ nastavi:
 \end{itemize}
 
 Međutim, to je obično prilično jednostrano, u smislu da samo profesori koriste
-tehnologiju dok ih učenici gledaju. Ljudi bolje uče i više se interesiraju za
+tehnologiju dok ih učenici gledaju. Ljudi bolje uče i više se zanimaju za
 gradivo kroz interakciju. Smatramo da se trebaju razvijati puno interaktivnije i
 zabavnije metode podučavanja.
 
 Profesori koji su spremni koristiti interaktivne alate za podučavanje nemaju velik
-izbor jer je većina dobrih alata na engleskome jeziku, što predstavlja problem
-mlađoj djeci koja još ne znaju dobro engleski, ili profesorima koji ga nikad
-nisu učili u školi (jer su umjesto engleskog imali njemački, francuski ili pak
-ruski). Potreban je jednostavan alat koji je namijenjen hrvatskoj populaciji.
+izbor, jer je većina dobrih alata na engleskome jeziku, što predstavlja problem
+mlađim generacijama učenika koja još ne znaju dobro engleski ili profesorima
+koji ga nikad nisu učili u školi (jer su umjesto engleskog imali njemački,
+francuski ili pak ruski). Potreban je jednostavan alat koji je namijenjen
+hrvatskoj populaciji.
 
-Mi smo odlučili kreirati jedan takav sustav posebno za učenike hrvatskih
-osnovnih i srednjih škola. Iako se sustav može proširiti i na druge predmete,
-mi smo se u prvoj testnoj fazi orijentirali na nastavnike hrvatskoga jezika s
-posebnim naglaskom na sate lektire. Program smo testirali u periodu od skoro
-dvije godine te ga za to vrijeme neprestano usavršavali i nadopunjavali novim
+Odlučili smo kreirati jedan takav sustav posebno za učenike hrvatskih osnovnih
+i srednjih škola. Iako se sustav može proširiti i na druge predmete, mi smo se
+u prvoj testnoj fazi orijentirali na nastavnike hrvatskoga jezika s posebnim
+naglaskom na sate lektire. Program smo testirali u periodu od skoro dvije
+godine te ga za to vrijeme neprestano usavršavali i nadopunjavali novim
 mogućnostima. U ostatku rada izložit ćemo naše osnovne hipoteze kojima smo se
-vodili u ovom projektu. Potom ćemo detaljno opisati program kojeg smo napravili
-iz perspektive nastavnika, studenta ali i programera. Na kraju ćemo prikazati i
-rezultate koje smo dobili uz pomoć anketa i praćenja korisnika za vrijeme
-njihovog korištenja aplikacijom.
+vodili u ovom projektu. Potom ćemo detaljno opisati program koji smo napravili
+iz perspektive nastavnika, studenta, ali i programera. Na kraju ćemo prikazati
+i rezultate koje smo dobili uz pomoć anketa i praćenja korisnika za vrijeme
+njihova korištenja aplikacijom.
 
 \section*{Postojeće aplikacije}
 
@@ -107,12 +108,12 @@ Ovdje ćemo navesti i ukratko opisati neke od njih.
 
 \begin{description}
 
-  \item[Kvizovi.net] je srpska aplikacija za kvizove iz mnogih područja, kao što
-    su glazba, zemljopis, sport, povijest, filmovi i serije. Osim kvizova ima i
-    igara i viceva, ali kompletan sadržaj ove aplikacije je vrlo oskudan zbog
-    toga što ju mogu izmjenjivati jedino autori aplikacije, nema baze korisnika
-    koji mogu stvarati i rješavati kvizove, pa prema tome skupljati bodove i
-    sl.\cite{kvizovinet}
+  \item[Kvizovi.net] je srpska aplikacija za kvizove iz mnogih područja kao što
+    su glazba, zemljopis, sport, povijest, filmovi i serije. Osim kvizova, u
+    aplikaciji se nalaze i igre te vicevi, ali kompletan sadržaj ove aplikacije
+    je vrlo oskudan zbog toga što je mogu izmjenjivati jedino autori
+    aplikacije, nema baze korisnika koji mogu stvarati i rješavati kvizove pa
+    prema tome skupljati bodove i sl.\cite{kvizovinet}
 
   \item[Kvizoteka] je, kao i \emph{Kvizovi.net}, kolekcija besplatnih kvizova iz
     svih područja kao što su filmovi, povijest, opće znanje, sport, glazba itd.
@@ -120,14 +121,14 @@ Ovdje ćemo navesti i ukratko opisati neke od njih.
     itd. Za razliku od \emph{Kvizovi.net}, \emph{Kvizoteka} ima bazu korisnika i
     neke statističke informacije o kvizovima.\cite{kvizoteka}
 
-  \item[Učionica] je iOS\footnote{Mobilni operacijski sustav kojeg razvija
+  \item[Učionica] je iOS\footnote{Mobilni operacijski sustav koji razvija
     Apple.} aplikacija namijenjena djeci predškolske dobi, pomaže im svladati
     osnovne pojmove kao što su abeceda, životinje, brojevi, oblici, boje i
-    vrijeme. Ipak, rješenje koje mi tražimo odnosi na djecu osnovnoškolske i
+    vrijeme. Ipak, rješenje koje mi tražimo odnosi se na djecu osnovnoškolske i
     srednjoškolske dobi. Nedostatak joj je to što je dostupna samo za iOS, nije
-    ju još moguće koristiti na ostalim mobilnim operacijskim sustavima, niti na
-    desktop ili laptop računalima. Također, prilično je loše dizajnirana, ima
-    loše ocijene i košta \$3.\cite{ucionica}
+    je još moguće koristiti na ostalim mobilnim operacijskim sustavima niti na
+    desktop ili laptop računalima. Također, slabijega je dizajna, ima loše
+    ocjene korisnika i naplaćuje se 3 USD.\cite{ucionica}
 
   \item[QuizUp] je vrlo kvalitetna i popularna aplikacija za kvizove na
     engleskom jeziku. Od navedenih, ova aplikacija je najviše opsežna i ažurna i
@@ -136,18 +137,18 @@ Ovdje ćemo navesti i ukratko opisati neke od njih.
     \emph{QuizUp} ima puno izraženiji socijalni aspekt i upotrebu
     gejmifikacije\footnote{Korištenje elemenata iz igara u drugim kontekstima.},
     koja potiče rješavanje kvizova, tako što korisnici dobivaju bodove i prema
-    njima im se dodjeljuju određeni statusi. Nedostaci ove aplikacija su
-    engleski jezik i što je dostupna samo na mobilnim uređajima, nije ju moguće
-    igrati na desktop i laptop računalima.\cite{quizup}
+    njima im se dodjeljuju određeni statusi. Nedostatak je ove aplikacije što
+    je dostupna na engleskome jeziku i samo na mobilnim uređajima, nije je
+    moguće igrati na desktop i laptop računalima.\cite{quizup}
 
 \end{description}
 
-S obzirom da nismo našli nijedno prihvatljivo rješenje za hrvatsku aplikaciju
-za kvizove, počeli smo razvijati svoju i nazvali smo ju \emph{Kvizovi}
-(\url{http://kvizovi.org}). To je aplikacija za rješavanje kvizova koja je
-prilagođena osnovnim i srednjim školama u Hrvatskoj. Prepoznaje 2 osnovna tipa
-korisnika -- \textbf{učenike} i \textbf{profesore}. U ovom smo istraživanju
-testirali \emph{Kvizove} na nekoliko osnovnih i srednjih škola.
+S obzirom na to da nismo našli nijedno prihvatljivo rješenje za hrvatsku
+aplikaciju za kvizove, počeli smo razvijati svoju i nazvali smo ju
+\emph{Kvizovi} (\url{http://kvizovi.org}). To je aplikacija za rješavanje
+kvizova koja je prilagođena za osnovne i srednje škole u Hrvatskoj. Prepoznaje
+2 osnovna tipa korisnika -- \textbf{učenike} i \textbf{profesore}. U ovom smo
+istraživanju testirali \emph{Kvizove} na nekoliko osnovnih i srednjih škola.
 
 \chapter{Hipoteza}
 
@@ -159,16 +160,16 @@ Cilj ovog istraživanja bio je saznati:
 \end{enumerate}
 
 Naša pretpostavka je bila da će oni učenici koji su učili rješavajući kvizove
-pomoću naše aplikacije biti više zainteresirati za gradivo te da će ga i bolje
+pomoću naše aplikacije biti više zainteresirani za gradivo te da će ga i bolje
 usvojiti u odnosu na učenike koji su učili klasičnim pristupom, tj. slušajući
 predavanja. Učenici rješavanje kvizova mogu gledati kao na neku vrstu igre, što
 može pozitivno utjecati na usvajanje znanja. Interes za gradivo može potaknuti
 i mogućnost igranja u paru, odnosno natjecanja s drugim učenicima.
 
-Valja uzeti u obzir da prema VAK principu postoje 3 različita tipa ljudi --
-vizualni, auditivni i kinestetički.\cite{clark11} Smatramo da će naša aplikacija
-najviše pomoći onima koji najbolje uče preko vizualnih i kinestetičkih
-podražaja.
+Možemo uzeti u obzir da prema VAK principu dijelimo ljude prema tri različita
+tipa -- vizualni, auditivni i kinestetički.\cite{clark11} Smatramo da
+ćedijelimo ljude prema tri različita tipa naša aplikacija najviše pomoći onima
+koji najbolje uče preko vizualnih i kinestetičkih podražaja.
 
 \chapter{Aplikacija}
 
@@ -178,14 +179,14 @@ određenom uzorku osnovnih i srednjih škola na testiranje (vidi poglavlje
 aplikaciji GitHub (\url{https://github.com/twin/kvizovi}) pod MIT licencom, što
 znači da bilo tko može vidjeti kako aplikacija funkcionira, promatrati kako se
 razvijala kroz vrijeme, doprinijeti aplikaciji na bilo koji način, pa čak i
-napraviti svoju kopiju aplikacije i razvijati ju u svom smjeru.\cite{mit}
+napraviti svoju kopiju aplikacije i razvijati je na svoj način.\cite{mit}
 
 Kreirali smo i blog na kojemu obavještavamo korisnike o ažuriranju aplikacije.
 Uz blog smo kreirali i vodič kroz aplikaciju koji je dostupan u bilo kojem
 trenutku svim korisnicima (nastavnicima i učenicima) kako bismo im olakšali
 korištenje aplikacije. Također, u slučaju bilo kakvog problema ili poteškoća,
-korisnici su nas uvijek mogli kontaktirati putem e-mail adresa koje se nalaze
-unutar kontakt sekcije u glavnoj navigaciji.\cite{krug05}
+korisnici su nas uvijek mogli kontaktirati na e-adresama koje se nalaze unutar
+kontakt sekcije u glavnoj navigaciji.\cite{krug05}
 
 Korisnici također mogu naknadno izmjenjivati svoje podatke u korisničkom
 računu.
@@ -193,7 +194,7 @@ računu.
 \pagebreak
 
 Korisnik započinje korištenje aplikacije tako da odabere svoju ulogu u školi
-(vidi sliku \ref{fig:home}). Ovisno o odabranoj ulozi, aplikacija pruža drugačiju
+(sliku \ref{fig:home}). Ovisno o odabranoj ulozi, aplikacija pruža drugačiju
 funkcionalnost.
 
 \begin{figure}[H]
@@ -212,7 +213,7 @@ tehnologija.
 
 \subsection{Tehnologije na strani klijenta}
 
-Ove tehnologije izvršavaju web preglednici, te su one jedinstvene, odnosno za
+Ove tehnologije izvršavaju web preglednici te su one jedinstvene, odnosno za
 njih ne postoje alternative. Specifikacije ovih tehnologija razvija međunarodna
 organizacija W3C (World Wide Web Consortium).\cite{w3c}
 
@@ -224,13 +225,14 @@ organizacija W3C (World Wide Web Consortium).\cite{w3c}
   \vspace{-30pt}
 \end{wrapfigure}
 
-HTML je jezik kojim se označava sadržaj i struktura web stranica, i sam po sebi
-ne propisuje izgled, već web preglednik ima definirana CSS pravila za izgled
-svakog HTML elementa u slučaju da web dizajner nije definirao svoja.\cite{html}
+HTML je jezik kojim se označava sadržaj i struktura web stranica, te sam po
+sebi ne propisuje izgled, već web preglednik ima unaprijed definirana CSS
+pravila za izgled svakog HTML elementa u slučaju da web dizajner nije definirao
+svoja.\cite{html}
 
 Za našu aplikaciju koristili smo najnoviju verziju HTML-a -- HTML5. Koristili
-smo ju zbog novih funkcionalnosti koje pruža, kao što je povezivanje računala
-što omogućuje nove značajke u aplikaciji kao što je grupno rješavanje kvizova.
+smo je zbog novih funkcionalnosti koje pruža, kao što je povezivanje računala
+što omogućuje nove značajke u aplikaciji, na primjer grupno rješavanje kvizova.
 
 \subsubsection{CSS}
 
@@ -240,10 +242,10 @@ smo ju zbog novih funkcionalnosti koje pruža, kao što je povezivanje računala
   \vspace{-30pt}
 \end{wrapfigure}
 
-CSS je stilski jezik koji se koristi za opis prezentacije HTML dokumenata. Svaka
-vrsta web preglednika ima drugačije implementiranu specifikaciju CSS-a, zbog
-čega ga ponekad interpretira malo drugačije od ostalih preglednika. Zato je
-izazovno napisati CSS na način da isto izgleda u svim web
+CSS je stilski jezik koji se koristi za opis prezentacije HTML dokumenata.
+Svaka vrsta web preglednika ima drugačije implementiranu specifikaciju CSS-a
+zbog čega ga ponekad interpretira malo drugačije od ostalih preglednika. Zato
+je složeno napisati CSS na način da isto izgleda u svim web
 preglednicima.\cite{css}
 
 Za našu aplikaciju koristili smo najnoviju verziju CSS-a -- CSS3. Velik dio CSS3
@@ -261,12 +263,12 @@ stilova u web preglednicima koristimo bazu podataka \url{caniuse.com}.
 \end{wrapfigure}
 
 JavaScript je skriptni programski jezik koji se koristi za dinamičku
-manipulaciju HTML-a i komunikaciju sa poslužiteljem. Dok su drugi jezici obično
+manipulaciju HTML-a i komunikaciju s poslužiteljem. Dok su drugi jezici obično
 sintaktički funkcijski ili objektni, JavaScript se temelji na
 prototipima.\cite{js}
 
-U našoj aplikaciji koristili smo JavaScript kod odbrojavanje štoperice,
-učitavanje slika za pitanja i drugih funkcionalnosti.
+U našoj aplikaciji koristili smo JavaScript kod odbrojavanja štoperice,
+učitavanja slika za pitanja i drugih funkcionalnosti.
 
 \subsection{Tehnologije na strani poslužitelja}
 
@@ -283,12 +285,12 @@ tehnologije je danas uglavnom subjektivan.
 \end{wrapfigure}
 
 Ruby je višeplatformski jezik opće namjene i pripada klasi
-objektno-orijentiranih jezika. Ruby je počeo biti jako popularan 2005. dolaskom
-\emph{Rails}\footnote{\url{http://rubyonrails.org}} aplikacijskog okvira, u
-kojemu smo razvili ovu aplikaciju.\cite{ruby}
+objektno-orijentiranih jezika. Popularnost Rubyja je porasla nakon 2005.
+dolaskom \emph{Rails}\footnote{\url{http://rubyonrails.org}} aplikacijskog
+okvira, u kojemu smo razvili ovu aplikaciju.\cite{ruby}
 
-Razlog zašto smo odabrali Ruby je zato što vrlo moćan i ima lijepu i čistu
-sintaksu. Neke od popularnih alternativa uključuju: PHP, Python, C\#, Java itd.
+Odabrali smo Ruby zato što je vrlo moćan i ima lijepu i jasnu sintaksu. Neke od
+popularnih alternativa uključuju PHP, Python, C\#, Java itd.
 
 \subsubsection{PostgreSQL}
 
@@ -303,7 +305,7 @@ sve informacije koje trebaju biti trajne, poput informacija o
 korisnicima.\cite{postgresql}
 
 PostgreSQL je bio naš izbor zbog njegove količine funkcionalnosti i kvaliteti.
-Neke od popularnih alternativa uključuju: MySQL, Microsoft SQL Server itd.
+Neke od popularnih alternativa uključuju MySQL, Microsoft SQL Server itd.
 
 \pagebreak
 
@@ -318,7 +320,7 @@ Neke od popularnih alternativa uključuju: MySQL, Microsoft SQL Server itd.
 \end{wrapfigure}
 
 Git je besplatan i otvoren distribuirani sustav za verzioniranje dizajniran da
-upravlja svime od malih do jako velikih projekata s brzinom i
+upravlja svime: od malih do jako velikih projekata s brzinom i
 efikasnosti.\cite{git} Git nam je bio neizmjerno koristan u paralelnom pisanju
 koda i samog rada.
 
@@ -329,9 +331,9 @@ koda i samog rada.
 \end{wrapfigure}
 
 GitHub je web aplikacija koja omogućava učitavanje Git repozitorija (projekta)
-te tako olakšava kolaboraciju među ljudima koji rade na projektu.\cite{github}
-Neke od značajki GitHub-a su pregled promjena, mogućnosti za prijavljivanje
-grešaka, listanje kôda itd.
+te tako olakšava suradnju među ljudima koji rade na projektu.\cite{github} Neke
+od značajki GitHub-a su pregled promjena, mogućnosti za prijavljivanje grešaka,
+listanje kôda itd.
 
 \subsubsection{Gauges}
 
@@ -342,12 +344,12 @@ grešaka, listanje kôda itd.
 \end{wrapfigure}
 
 Gauges je web aplikacija za pregled prometa web stranica u stvarnom vremenu.
-Gauges pruža informacije kao broj pogleda, broj jedinstvenih posjetitelja,
-države posjetitelja itd.\cite{gauges}
+Gauges pruža informacije kao što su broj pogleda, broj jedinstvenih
+posjetitelja, države posjetitelja itd.\cite{gauges}
 
-Gauges nam je vrlo pomogao u analizi posjetitelja, ponajviše zbog mogućnosti
-uvida u to kakve web preglednike i koje uređaje su naši posjetitelji koristili
-dok su posjećivali Kvizove.
+Gauges je bio veoma učinkovit u analizi posjetitelja, ponajviše zbog mogućnosti
+uvida u to kakve web preglednike i koje uređaje su posjetitelji koristili dok
+su posjećivali Kvizove.
 
 \subsubsection{Heroku}
 
@@ -359,11 +361,12 @@ dok su posjećivali Kvizove.
 
 Heroku je web servis koji pruža hosting web aplikacija u oblaku.\cite{heroku}
 Uz Heroku nije potrebno konfigurirati poslužitelj na kojem se nalazi web
-aplikacija, već to Heroku radi sam.
+aplikacija, već to Heroku obavlja samostalno.
 
 \section{Vrste pitanja}
 
-Postoje 4 vrste pitanja, poredane od najlakše do najteže za riješiti:
+U kvizu je moguće odgovarati na 4 vrste pitanja koje su navedene prema težini
+(od najlakše do najteže):
 
 \begin{itemize}
   \item točno/netočno
@@ -392,9 +395,9 @@ postavlja pitanje na koje treba odgovoriti \textbf{jednim} od ponuđenih
 odgovora. Ova vrsta pitanja je teža od \emph{točno/netočno} jer se vjerojatnost
 da korisnik točno odgovori smanjuje s brojem ponuđenih odgovora.
 
-Razmišljali smo o tome da omogućimo više mogućih točnih odgovora, ali to bi
-činilo ovu vrstu pitanja težom, pa smo odlučili odgoditi implementaciju te
-značajke za jednu od budućih verzija aplikacije.
+Premda je postojala mogućnost da se ponudi više točnih odgovora, to bi ipak
+uvelike otežalo ovu vrstu pitanja pa je odlučeno da će se odgoditi
+implementacija te značajke za jednu od budućih verzija aplikacije.
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 5cm 0 0, fbox]{student/choice_question}
@@ -415,9 +418,9 @@ povećava s brojem parova pojmova.
   \label{fig:association}
 \end{figure}
 
-Ova vrsta pitanja bila je tehnički izazovna za dizajnirati jer postoji mnogo
+Ova vrsta pitanja bila je tehnički složenija za oblikovanje jer postoji mnogo
 različitih pristupa. Odlučili smo se za pristup gdje se pojmovi ``primaju'' s
-mišem i ``ispuštaju'' na drugi pojam, nakon čega ta 2 pojma zamijenjuju mjesta.
+mišem i ``ispuštaju'' na drugi pojam nakon čega ta 2 pojma zamjenjuju mjesta.
 Na taj način korisnik može preslagivati pojmove dok ne dobije željenu
 kombinaciju.
 
@@ -425,7 +428,7 @@ kombinaciju.
 
 \emph{Upiši točan odgovor} (slika \ref{fig:text}) je vrsta pitanja gdje se
 postavlja pitanje, a korisnik treba upisati točan odgovor u za to predviđeno
-tekstualno polje. Ova vrsta pitanja je najteža zato što je vrlo lako pogriješiti
+tekstno polje. Ova vrsta pitanja je najteža zato što je vrlo lako pogriješiti
 -- korisnik mora upisati odgovor točno onako kako ga je administrator napisao.
 
 \begin{figure}[H]
@@ -434,9 +437,9 @@ tekstualno polje. Ova vrsta pitanja je najteža zato što je vrlo lako pogriješ
   \label{fig:text}
 \end{figure}
 
-Kako bismo učinili ovu vrstu pitanja malo lakšom, dizajnirali smo ju tako da
-nije bitno piše li korisnik malim ili velikim slovima, ako se slova podudaraju s
-točnim odgovorom, dani se odgovor smatra točnim.
+Kako bismo učinili ovu vrstu pitanja malo lakšom, dizajnirali smo je tako da
+nije bitno piše li korisnik malim ili velikim slovima; ako se slova podudaraju
+s točnim odgovorom, ponuđeni se odgovor smatra točnim.
 
 \section{Iz perspektive korisnika}
 
@@ -445,13 +448,13 @@ točnim odgovorom, dani se odgovor smatra točnim.
 \emph{Škola} je uloga koja predstavlja profesora i ona je administrator kvizova.
 
 Nakon odabira te uloge korisnik se može prijaviti ili registrirati ako još nema
-korisnički račun. Registracija se sastoji od ispunjavanja jednostavnog formulara
-pomoću kojega skupljamo informacije o korisnicima koje možemo iskoristiti kako
-bismo poboljšali njihovo iskustvo i kako bismo mogli raditi istraživanja. Polje
-u formularu za registraciju na koje ćemo se osvrnuti je \emph{Tajni ključ}, koji
-je potreban za registraciju učenicima te škole.
+korisnički račun. Registracija se sastoji od ispunjavanja jednostavnog
+formulara pomoću kojega prikupljamo informacije o korisnicima koje možemo
+iskoristiti kako bismo poboljšali njihovo iskustvo i kako bismo mogli raditi
+istraživanja. Polje u formularu za registraciju na koje ćemo se osvrnuti je
+\emph{Tajni ključ}, koji je potreban za registraciju učenicima te škole.
 
-Nakon prijave, nastavnicima se otvara stranica s popisom kvizova koje su
+Nakon prijave nastavnicima se otvara stranica s popisom kvizova koje su
 kreirali (vidi sliku \ref{fig:school/quizzes}),
 
 \begin{figure}[H]
@@ -461,18 +464,19 @@ kreirali (vidi sliku \ref{fig:school/quizzes}),
 \end{figure}
 
 gdje mogu izmjenjivati postojeće kvizove i sastavljati nove. Nakon što je
-profesor zadovoljan s kvizom, može ga učiniti aktivnim, odnosno vidljivim
+profesor dovršio izradu kviza, može ga učiniti aktivnim, odnosno vidljivim
 učenicima. Izmjenjivanje kvizova podijeljeno je na izmjenu metapodataka kviza i
 na izmjenu pitanja kviza. Ovdje napominjemo da ćemo, zbog zaštite privatnosti
-naših korisnika, u radu prikazivati podatke kviza kojeg smo sami napravili
-(Igra prijestolja), a našim imenima ćemo zamijeniti stvarna imena korisnika
-koji su sudjelovali u istraživanju.
+naših korisnika, u radu prikazivati podatke kviza koji smo sami napravili (Igra
+prijestolja), a našim imenima ćemo zamijeniti stvarna imena korisnika koji su
+sudjelovali u istraživanju.
 
-Uz svako se pitanje može pridružiti pomoć (slikom ili tekstom), koja će se
+Uz svako se pitanje može pridružiti pomoć (slikom ili tekstom) koja će se
 prikazati učenicima dok rješavaju pitanje.
 
-Škole mogu pregledavati informacije o odigranim kvizovima: kada su igrani, tko
-ih je igrao, koji su bili rezultati itd. (vidi \ref{played_quizzes} i \ref{played_quiz}).
+Škole mogu pregledavati informacije o odigranim kvizovima: kada su odigrani,
+tko ih je igrao, koji su bili rezultati itd. (vidi \ref{played_quizzes} i
+\ref{played_quiz}).
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 10cm 0 0, fbox]{school/played_quizzes}
@@ -486,8 +490,8 @@ ih je igrao, koji su bili rezultati itd. (vidi \ref{played_quizzes} i \ref{playe
   \label{played_quiz}
 \end{figure}
 
-Mogu se pregledavati i učenici, koliko su kvizova odigrali, koji su to kvizovi i
-sl. (vidi sliku \ref{students}).
+Mogu se pregledavati i profili učenika, koliko su kvizova odigrali, koji su to
+kvizovi i sl. (vidi sliku \ref{students}).
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 15cm 0 0, fbox]{school/students}
@@ -497,16 +501,16 @@ sl. (vidi sliku \ref{students}).
 
 \subsection{Učenici}
 
-\emph{Učenik} je uloga koja rješava kvizove koje je napravila njihova škola. Kao
-i kod škole, učenik se može prijaviti ili registrirati, ako već nema korisnički
-račun. Pri registraciji učenik treba napisati tajni ključ koji mu je njegova
-škola dala, u protivnom se ne može registrirati. Na taj način sprječavamo da se
-bilo tko registrira kao učenik.
+\emph{Učenik} je uloga koja rješava kvizove koje je napravila njihova škola.
+Kao i kod škole, učenik se može prijaviti ili registrirati ako već nema
+korisnički račun. Pri registraciji učenik treba napisati tajni ključ koji mu je
+njegova škola dala, u protivnom se ne može registrirati. Na taj način
+sprječavamo da se bilo tko registrira kao učenik.
 
 Nakon prijave ili registracije, korisnika dočeka lista kvizova koji su dostupni
-za rješavanje. Kviz je moguće igrati samostalno ali i u paru (vidi sliku
-\ref{student/quizzes}). U drugom slučaju, drugi igrač također mora biti prijavljen
-u sustav.
+za rješavanje. Kviz je moguće igrati samostalno, ali i u paru (vidi sliku
+\ref{student/quizzes}). U drugom slučaju drugi igrač također mora biti
+prijavljen u sustav.
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 8.5cm 0 0, fbox]{student/quizzes}
@@ -514,10 +518,10 @@ u sustav.
   \label{student/quizzes}
 \end{figure}
 
-Nakon što učenik započne kviz, prikazuje mu se jedno po jedno pitanje na koja
-treba odgovoriti. Kako bi igra bila što poštenija, pitanja su obično vremenski
-ograničena, tako da se učenik ne stigne previše konzultirati s vanjskim
-izvorima. Preostalo vrijeme ispisano je iznad imena korisnika (vidi sliku
+Nakon što učenik započne kviz, prikazuje mu se jedno po jedno pitanje na koje
+treba odgovoriti. Kako bi igra bila što pravilnija, pitanja su obično vremenski
+ograničena, tako da učenik ne može koristiti druge izvore informacija.
+Preostalo vrijeme ispisano je iznad imena korisnika (vidi sliku
 \ref{question}).
 
 \begin{figure}[H]
@@ -528,7 +532,7 @@ izvorima. Preostalo vrijeme ispisano je iznad imena korisnika (vidi sliku
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 7cm 0 0, fbox]{student/boolean_question_correct}
-  \caption{Učenici -- povratna informacija nakon predanog odgovora}
+  \caption{Učenici -- povratna informacija nakon točnog odgovora na pitanje}
 \end{figure}
 
 Nakon što učenik odgovori na sva pitanja, ispisuju se rezultati i učenik dobiva
@@ -540,24 +544,24 @@ određenu ``titulu'' s obzirom na njegov rezultat:
   \item[Super-ekspert] 70\%-100\% točnih odgovora
 \end{description}
 
-Titule su osmišljene zato da se učenika uvijek pohvaljuje, čak i ako je imao loš
+Titule su osmišljene zato da se učenika uvijek pohvaljuje čak i ako je imao loš
 rezultat, tako da se učenik dobro osjeća i da ga se potiče da igra i dalje.
 
 \chapter{Rezultati}
 \label{chap:results}
 
 Istraživanje smo proveli tako što smo izradili aplikaciju za kvizove (vremenski
-period od početka izrade do završetka prve verzije: 9.7-22.8.2012.) i dali
+period od početka izrade do završetka prve verzije: 9.7.2012.--22.8.2012.) i dali
 određenom uzorku osnovnih i srednjih škola na testiranje. Do danas je
 registrirano 20 škola i 401 učenik.
 
-U svakom razredu su učenici bili podijeljeni na skupinu koja ne rješava kvizove
-i na onu koja rješava. Na taj način smo mogli provjeravati učinkovitost
+U svakom razredu su učenici bili podijeljeni u skupinu koja ne rješava kvizove
+i u onu koja rješava. Na taj način smo mogli provjeravati učinkovitost
 aplikacije kada bi učenici imali test znanja. Iako smo prikupili dosta podataka
-o korištenju aplikacije, na 16.03.2013. smo proveli i anketu među nastavnicima
+o korištenju aplikacije, dana 16.03.2013. proveli smo i anketu među nastavnicima
 ali i učenicima kako bismo dobili neke dodatne informacije koje na drugi način
 nismo mogli dobiti. Na anketu je odgovorilo sveukupno 5 škola i 30 učenika.
-Budući da je anketa prevelika, ne možemo je uključiti u prilog, ali u sljedećim
+Zbog opsežnosti ankete ona nije priložena u ovome radu, ali u sljedećim
 slikama prikazujemo rezultate najvažnijih pitanja.
 
 \section{Škole}
@@ -591,8 +595,8 @@ Kod učenika su ankete pokazale da učenici smatraju ovakav način učenja
 učinkovitim (vidi slike \ref{fig:student/interesting},
 \ref{fig:student/effective} i \ref{fig:student/help}).
 
-S druge strane, pokazalo je tek pola učenika osjetilo poboljšanje u ocjeni
-(vidi sliku \ref{fig:student/grades}).
+S druge strane, anketa je pokazala da je tek pola učenika osjetilo napredak u
+ocjeni (vidi sliku \ref{fig:student/grades}).
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 2.5cm 0 0]{student/interesting}
@@ -620,50 +624,50 @@ S druge strane, pokazalo je tek pola učenika osjetilo poboljšanje u ocjeni
 
 \chapter{Zaključak}
 
-Profesori su primjetili napredak kod učenika koji su koristili aplikaciju u
+Profesori su primijetili napredak kod učenika koji su koristili aplikaciju u
 odnosu na one koji nisu i sami su učenici osjetili poboljšanje na više razina,
-ali samo su se polovici učenika koji su koristili aplikaciju poboljšale ocijene
-iz lektire. S obzirom da aplikacija još nije gotova, možda će se taj omjer
-promijeniti na bolje s vremenom.
+ali samo su se polovici učenika koji su koristili aplikaciju poboljšale ocjene
+iz lektire. S obzirom na to da aplikacija još nije dovršena, možda će se taj
+omjer promijeniti na bolje s vremenom.
 
 Osim zbog interaktivnosti, ovakav način podučavanja dobro funkcionira zato što
 možemo na licu mjesta ispravljati greške i ažurirati aplikaciju prema povratnim
-informacijama dok ju učenici i profesori koriste. Ovakav se način podučavanja
+informacijama dok je učenici i profesori koriste. Ovakav se način podučavanja
 može puno brže mijenjati od mnogih tradicionalnih načina podučavanja kao što su
 testovi, profesori mogu prepraviti kvizove u aplikaciji čim uoče grešku i te će
-promjene odmah stupiti na snagu, a da ih učenici neće ni primjetiti.
+promjene odmah stupiti na snagu, a da ih učenici neće ni primijetiti.
 
-Radimo na tome da sučelje aplikacije bude dovoljno jednostavno da vodič za
-aplikaciju više neće biti potreban, već da je jasno samo po sebi kako postići
+I dalje se nastoji pojednostavniti sučelje aplikacije tako da vodič za
+aplikaciju više neće biti potreban te da bude jasno samo po sebi kako postići
 određeni cilj. Iako aplikaciju koriste stariji profesori koji nisu vješti u
 korištenju aplikacije, vjerujemo da korisnici više vole učiti kako koristiti
-aplikaciju iz prakse, a ne čitajući upute i da aplikaciju možemo učinit dovoljno
-jednostavnom da je pristupačna za svaki uzrast i stupanj informatičke
+aplikaciju iz prakse, a ne čitajući upute i da aplikaciju možemo učinit
+dovoljno jednostavnom da je pristupačna za svaki uzrast i stupanj informatičke
 obrazovanosti.
 
-Aplikacija \emph{Kvizovi} je inicijalno nastala kao pomoćno sredstvo za učenje
-lektira, ali s obzirom na pozitivan utjecaj na učenike i profesore i rezultatima
+Aplikacija \emph{Kvizovi} je prvotno nastala kao pomoćno sredstvo za učenje
+lektira, ali s obzirom na pozitivan utjecaj na učenike i profesore i rezultate
 iz anketa više ne vidimo razlog zašto se aplikacija ne bi koristila i za ostale
 školske predmete kao što su zemljopis, biologija, kemija itd.
 
 \chapter{Zahvale}
 
-Htjeli bismo zahvaliti našoj mentorici, doc. dr. sc. Kristini Kocijan na ideji
-aplikacije \emph{Kvizovi}, strukturiranju ovoga rada, na prikupljanju uzorka
-škola koje su bile voljne koristiti našu aplikaciju i velikom strpljenju tijekom
-ove 2 godine. Također, zahvaljujemo se kolegici Marti Mihaljević na lektoriranju
-ovoga rada. Nadalje, htjeli bismo zahvaliti profesorima i učenicima iz ispitanog
+Zahvaljujemo našoj mentorici, doc. dr. sc. Kristini Kocijan na ideji aplikacije
+\emph{Kvizovi}, strukturiranju ovoga rada, na prikupljanju uzorka škola koje su
+bile voljne koristiti našu aplikaciju i velikom strpljenju tijekom dviju godina
+rada na projektu. Također zahvaljujemo kolegici Marti Mihaljević na jezičnim
+savjetima. Nadalje, htjeli bismo zahvaliti profesorima i učenicima iz ispitanog
 uzorka na sudjelovanju u ovom istraživanju i na slanju prijedloga i prijavu
-grešaka, što nam je puno pomoglo u razvijanju aplikacije.
+grešaka što nam je puno pomoglo u razvijanju aplikacije.
 
-Sortirane prema broju aktivnih kvizova, škole koje su sudjelovale u istraživanju
-su: I. gimnazija, Osnovna škola Bogumila Tonija, Osnovna škola Stjepana Radića,
-Srednja škola Metković, Osnovna škola Poreč, Osnovna škola Stubičke Toplice,
-Gimnazija Sesvete, Poljoprivredna škola, Srednja škola ``Ivan Seljanec''
-Križevci, Gimnazija fra Dominika Mandica, Medicinska škola Varaždin, Srednja
-škola Čakovec, Tehnička škola Šibenik, Privatna srednja ekonomska škola INOVA,
-Škola za umjetnost, dizajn, grafiku i odjeću, Zabok, Gimnazija i strukovna
-škola Jurja Dobrile, Nadbiskupska klasična gimnazija.
+Poredane prema broju aktivnih kvizova, škole koje su sudjelovale u istraživanju
+su: Prva gimnazija, Osnovna škola Bogumila Tonija, Osnovna škola Stjepana
+Radića, Srednja škola Metković, Osnovna škola Poreč, Osnovna škola Stubičke
+Toplice, Gimnazija Sesvete, Poljoprivredna škola, Srednja škola ``Ivan
+Seljanec'' Križevci, Gimnazija fra Dominika Mandica, Medicinska škola Varaždin,
+Srednja škola Čakovec, Tehnička škola Šibenik, Privatna srednja ekonomska škola
+INOVA, Škola za umjetnost, dizajn, grafiku i odjeću Zabok, Gimnazija i
+strukovna škola Jurja Dobrile i Nadbiskupska klasična gimnazija.
 
 \renewcommand{\listoffigures}{\begingroup
 \tocchapter
@@ -755,27 +759,27 @@ Upotreba web aplikacije za kvizove u nastavi osnovnih i srednjih škola
 
 Matija Marohnić, Janko Marohnić
 
-Zbog sveprisutnosti tehnologije, učenici u školama ne osjećaju više istu
-učinkovitost tradicionalnih načina učenja. Učenici bolje uče i više se
-interesiraju za gradivo kroz medije koji su više interaktivni.
+Zbog sveprisutnosti tehnologije učenici u školama ne osjećaju više istu
+učinkovitost tradicionalnih načina učenja. Učenici bolje uče i više se zanimaju
+za gradivo kroz medije koji su interaktivniji.
 
-Mi smo napravili web aplikaciju \textit{Kvizovi}, koja pruža mogućnost
-profesorima u školama da svojim učenicima sastavljaju kvizove vezane uz gradivo
-koje podučavaju. Učenici mogu igrati kvizove svojih škola, a profesori mogu
-gledati rezultate tih odigranih kvizova, koja pitanja su bolje odgovorena, koja
-lošije itd. Hipoteza istraživanja je da će učenicima ovakav način učenja biti
+Izradili smo web aplikaciju \textit{Kvizovi} koja pruža mogućnost profesorima u
+školama da svojim učenicima sastavljaju kvizove vezane uz gradivo koje
+podučavaju. Učenici mogu igrati kvizove svojih škola, a profesori mogu
+promatrati rezultate tih odigranih kvizova, promatrati kvalitetu pitanja i
+odgovora itd. Hipoteza istraživanja je da će učenicima ovakav način učenja biti
 zanimljiviji i da će se više zainteresirati za gradivo.
 
-Nakon stavljanja aplikacije na Internet, uz pomoć naše mentorice smo našli
+Nakon postavljanja aplikacije na Internet, uz pomoć naše mentorice smo našli
 škole i učenike koji su pristali testirati aplikaciju. Nakon nekog vremena smo
-dali školama i učenicima ankete, s ciljem da saznamo koliko je aplikacija bila
+anketom ispitali škole i učenike da bismo saznali koliko je aplikacija bila
 korisna.
 
-Ankete su pokazale da je učenicima takav način učenja bio učinkovit i
+Anketa je pokazala da je učenicima takav način učenja bio učinkovit i
 zanimljiv, ali tek pola učenika osjetilo je promjenu u ocjeni. Profesori su
-primjetili napredak svojih učenika, kao i veću zainteresiranost za gradivo.
+primijetili napredak svojih učenika kao i veću zainteresiranost za gradivo.
 
-\textbf{Ključne riječi}: kvizovi, aplikacija, interaktivno
+\textbf{Ključne riječi}: kvizovi, aplikacija, interaktivnost, učenik, učenje
 
 \chapter{Summary}
 
@@ -785,27 +789,27 @@ Matija Marohnić, Janko Marohnić
 
 Because of omnipresence of technology, students in schools don't feel the
 traditional ways of learning is having the same effectiveness. Students learn
-better and are more interested in the school matter through more interaktive
+better and are more interested in the school matter through more interactive
 medias.
 
-We developed a web application \textit{Quizzes}, which gives the ability to
+We developed a web application \textit{Quizzes}, which gives the ability for
 teachers in schools to make quizzes for their students connected with the
 matter they're teaching. Students can play quizzes made by their school, and
-teachers can monitor the results of the played quizzes, which questions are
-asnwered better, which worse etc. Hypothesis of the research is that to
-students this way of learning will be more interesting and will make them more
-interested in the matter in general.
+teachers can monitor the results of the played quizzes, the quality of
+questions and answers etc. Hypothesis of the research is that for students this
+way of learning will be more interesting and will make them more interested in
+the matter in general.
 
-After putting the application online, with the help of our mentor we managed to
-find schools which will be willing to test the application. After a certain
-period of time we gave them surveys with the goal of finding out how useful is
-the application to them.
+After making the application available online, with the help of our mentor we
+managed to find schools which were willing to test the application. After a
+certain period of time we gave them surveys with the goal of finding out how
+useful was the application to them.
 
 The surveys have shown that students find this way of learning more effective
 and interesting, although only half of the students felt a change in their
 grade. The teachers noticed improvement of their students, as well as a general
 raise in interest of students for the matter.
 
-\textbf{Keywords}: quizzes, application, interactive
+\textbf{Keywords}: quizzes, application, interactivity, students, studying
 
 \end{document}
