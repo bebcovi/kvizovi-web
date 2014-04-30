@@ -480,18 +480,20 @@ Uz svako se pitanje može pridružiti pomoć (slikom ili tekstom) koja će se
 prikazati učenicima dok rješavaju pitanje.
 
 Škole mogu pregledavati informacije o odigranim kvizovima: kada su odigrani,
-tko ih je igrao, koji su bili rezultati itd. (vidi \ref{played_quizzes} i
-\ref{played_quiz}).
+tko ih je igrao, koji su ukupni rezultati itd. (vidi sliku \ref{played_quizzes}).
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 10cm 0 0, fbox]{school/played_quizzes}
-  \caption{Škole -- popis odigranih kvizova}
+  \caption{Škole -- sažeti podaci o odigranim kvizovima}
   \label{played_quizzes}
 \end{figure}
 
+Ali isto tako može se pristupiti svakom odigranom kvizu i detaljno pregledati
+svi odgovori (vidi sliku \ref{played_quiz}).
+
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 80cm 0 0, fbox]{school/played_quiz}
-  \caption{Odigrani kviz}
+  \caption{Detaljan pregled rezultata kviza}
   \label{played_quiz}
 \end{figure}
 
@@ -535,9 +537,14 @@ Preostalo vrijeme ispisano je iznad imena korisnika (vidi sliku
   \label{question}
 \end{figure}
 
+Nakon što učenik potvrdi odgovor pritoskom na gumb \emph{Odgovori}, prikaže mu
+se i poruka o točnosti odgovora s gumbima za prelazak na sljedeće pitanje (vidi
+sliku \ref{fig:feedback}).
+
 \begin{figure}[H]
   \includegraphics[width=\textwidth, clip=true, trim=0 7cm 0 0, fbox]{student/boolean_question_correct}
   \caption{Učenici -- povratna informacija nakon točnog odgovora na pitanje}
+  \label{fig:feedback}
 \end{figure}
 
 Nakon što učenik odgovori na sva pitanja, ispisuju se rezultati i učenik dobiva
