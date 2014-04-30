@@ -21,7 +21,19 @@ feature "Screenshots", :docs, driver: :selenium do
 
     click_on "Anketa"
     page.has_css?("h1", text: "Anketa")
-    save_screenshot("survey")
+    save_screenshot("school/survey")
+
+    click_on "admin"
+    click_on "Odjava"
+
+    visit new_student_session_path
+    fill_in "Korisničko ime", with: "matija"
+    fill_in "Lozinka",        with: "matija"
+    submit
+
+    visit new_survey_path
+    page.has_css?("h1", text: "Anketa")
+    save_screenshot("student/survey")
   end
 
   scenario "School" do
