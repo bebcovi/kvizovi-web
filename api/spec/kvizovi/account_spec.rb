@@ -1,0 +1,269 @@
+require "spec_helper"
+require "timecop"
+
+RSpec.describe Kvizovi::Account do
+  subject { Kvizovi::Account.new(@user) }
+  let(:attributes) { attributes_for(:user) }
+
+  def register(additional_attributes = {})
+    attributes = attributes_for(:user, additional_attributes)
+    Kvizovi::Account.register!(attributes)
+  end
+
+  describe ".register!" do
+    it "controls mass assignment" do
+      expect { Kvizovi::Account.register!(created_at: Time.now) }
+        .to raise_error(Sequel::Error)
+    end
+
+    it "validates presence of attributes" do
+      expect { Kvizovi::Account.register!({}) }
+        .to raise_error(Kvizovi::Error) do |error|
+          expect(error.errors).to eq(
+            user: {
+              nickname: ["is not present"],
+              email:    ["is not present"],
+              password: ["is not present"],
+            }
+          )
+        end
+    end
+
+    it "validates uniqueness of attributes" do
+      Kvizovi::Account.register!(attributes)
+
+      expect { Kvizovi::Account.register!(attributes) }
+        .to raise_error(Kvizovi::Error) do |error|
+          expect(error.errors).to eq(
+            user: {
+              email: ["is already taken"],
+            }
+          )
+        end
+    end
+
+    it "encrypts the password" do
+      user = Kvizovi::Account.register!(attributes)
+
+      expect(user.encrypted_password).to be_a_nonempty(String)
+      expect(user.encrypted_password).not_to eq user.password
+    end
+
+    it "assigns the confirmation token" do
+      user = Kvizovi::Account.register!(attributes)
+
+      expect(user.confirmation_token).to be_a_nonempty(String)
+    end
+
+    it "assigns the authentication token" do
+      user = Kvizovi::Account.register!(attributes)
+
+      expect(user.token).to be_a_nonempty(String)
+    end
+
+    it "saves the user" do
+      user = Kvizovi::Account.register!(attributes)
+
+      expect(user.new?).to eq false
+    end
+
+    it "sends the confirmation email" do
+      user = Kvizovi::Account.register!(attributes)
+
+      expect(sent_emails).not_to be_empty
+    end
+  end
+
+  describe ".authenticate" do
+    before { @user = register }
+
+    it "returns the authenticated user" do
+      credentials = {email: @user.email, password: @user.password}
+
+      user = Kvizovi::Account.authenticate(credentials)
+
+      expect(user).to be_a(Kvizovi::Models::User)
+    end
+
+    it "returns errors if password was invalid" do
+      credentials = {email: @user.email, password: "incorrect password"}
+
+      expect { Kvizovi::Account.authenticate(credentials) }
+        .to raise_error(Kvizovi::Error)
+    end
+
+    it "returns errors if email was invalid" do
+      credentials = {email: "incorrect@email.com", password: @user.password}
+
+      expect { Kvizovi::Account.authenticate(credentials) }
+        .to raise_error(Kvizovi::Error)
+    end
+
+    it "raises an error if account has expired" do
+      credentials = {email: @user.email, password: @user.password}
+
+      Timecop.travel(4*24*60*60) do
+        expect { Kvizovi::Account.authenticate(credentials) }
+          .to raise_error(Kvizovi::Error)
+      end
+    end
+  end
+
+  describe ".confirm!" do
+    before { @user = register }
+
+    it "sets the time of the confirmation" do
+      user = Kvizovi::Account.confirm!(@user.confirmation_token)
+
+      expect(user.confirmed_at).to be_a(Time)
+    end
+
+    it "deassigns the confirmation token" do
+      user = Kvizovi::Account.confirm!(@user.confirmation_token)
+
+      expect(user.confirmation_token).to eq nil
+    end
+  end
+
+  describe ".reset_password!" do
+    before { @user = register }
+
+    it "assigns the password reset token" do
+      user = Kvizovi::Account.reset_password!(email: @user.email)
+
+      expect(user.password_reset_token).to be_a_nonempty(String)
+    end
+
+    it "sends the password reset instructions email" do
+      user = Kvizovi::Account.reset_password!(email: @user.email)
+
+      expect(sent_emails).not_to be_empty
+    end
+
+    it "raises error when email is nonexisting" do
+      expect { described_class.reset_password!(email: "nonexisting@email.com") }
+        .to raise_error(Kvizovi::Error)
+    end
+  end
+
+  describe ".set_password!" do
+    before { @user = register }
+    before { @user = Kvizovi::Account.reset_password!(email: @user.email) }
+    let(:token) { @user.password_reset_token }
+
+    it "controls mass assignment" do
+      expect { Kvizovi::Account.set_password!(token, created_at: nil) }
+        .to raise_error(Sequel::Error)
+    end
+
+    it "validates presence of password" do
+      expect { Kvizovi::Account.set_password!(token, password: nil) }
+        .to raise_error(Kvizovi::Error) do |error|
+          expect(error.errors).to eq(
+            user: {
+              password: ["is not present"],
+            }
+          )
+        end
+    end
+
+    it "encrypts the password" do
+      old_password = @user.encrypted_password
+
+      user = Kvizovi::Account.set_password!(token, password: "new secret")
+
+      expect(user.encrypted_password).to be_a_nonempty(String)
+      expect(user.encrypted_password).not_to eq old_password
+    end
+
+    it "deassigns the password reset token" do
+      user = Kvizovi::Account.set_password!(token, password: "new secret")
+
+      expect(user.password_reset_token).to eq nil
+    end
+
+    it "saves the user" do
+      old_password = @user.encrypted_password
+
+      user = Kvizovi::Account.set_password!(token, password: "new secret")
+
+      expect(user.encrypted_password).not_to eq old_password
+    end
+  end
+
+  describe "#update!" do
+    before { @user = register }
+    before { @user.password = nil }
+
+    it "controls mass assignment" do
+      expect { subject.update!(created_at: nil) }
+        .to raise_error(Sequel::Error)
+    end
+
+    it "validates presence of attributes" do
+      nil_attributes = {
+        nickname: nil,
+        email: nil,
+      }
+
+      expect { subject.update!(nil_attributes) }
+        .to raise_error(Kvizovi::Error) do |error|
+          expect(error.errors).to eq(
+            user: {
+              nickname: ["is not present"],
+              email:    ["is not present"],
+            }
+          )
+        end
+
+      expect(@user.reload.email).to be_a_nonempty(String)
+    end
+
+    it "validates uniqueness of attributes" do
+      register(email: "matija.marohnic@gmail.com")
+
+      expect { subject.update!(email: "matija.marohnic@gmail.com") }
+        .to raise_error(Kvizovi::Error) do |error|
+          expect(error.errors).to eq(
+            user: {
+              email: ["is already taken"],
+            }
+          )
+        end
+    end
+
+    it "requires old password for changing to new password" do
+      expect { subject.update!(password: "new secret") }
+        .to raise_error(Kvizovi::Error) do |error|
+          expect(error.errors).to eq(
+            user: {
+              old_password: ["doesn't match current"],
+            }
+          )
+        end
+    end
+
+    it "encrypts the password if present" do
+      old_password = @user.encrypted_password
+
+      subject.update!({})
+
+      expect(@user.encrypted_password).to eq old_password
+
+      subject.update!(password: "new secret", old_password: attributes_for(:user)[:password])
+
+      expect(@user.encrypted_password).to be_a_nonempty(String)
+      expect(@user.encrypted_password).not_to eq old_password
+    end
+  end
+
+  describe "#destroy!" do
+    before { @user = register }
+
+    it "destroys the user" do
+      subject.destroy!
+
+      expect(@user).not_to exist
+    end
+  end
+end
