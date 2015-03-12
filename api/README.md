@@ -143,3 +143,97 @@ Content-Type: application/json
 DELETE /account HTTP/1.1
 Authorization: Token token="abc123"
 ```
+
+# Quizzes & Questions
+
+## Viewing
+
+```http
+GET /quizzes HTTP/1.1
+Authorization: Token token="abc123"
+```
+
+This returns all quizzes of the authorized user, without questions included.
+
+```http
+GET /quizzes/1 HTTP/1.1
+Authorization: Token token="abc123"
+```
+
+This returns a single quiz, with questions included.
+
+## Creating
+
+```http
+POST /quizzes HTTP/1.1
+Authorization: Token token="abc123"
+Content-Type: application/json
+
+{
+  "quiz": {
+    "name": "Game of Thrones",
+    "questions": [
+      {
+        "type": "boolean",
+        "category": "movies",
+        "title": "Stannis won the battle at Blackwater Bay",
+        "content": {"answer": false},
+        "hint": "...",
+        "position": 1
+      }
+    ]
+  }
+}
+```
+
+| Attribute  | Constraint | Description                                  |
+| ---------  | ---------- | -----------                                  |
+| `type`     | required   | Should be boolean/choice/association/text    |
+| `category` | required   | What field is the question from              |
+| `title`    | required   | The text of the question                     |
+| `content`  | required   | This can be anything you want                |
+| `hint`     | optional   |                                              |
+| `position` | required   | The position of the question inside the quiz |
+
+## Updating
+
+```http
+PUT /quizzes/1 HTTP/1.1
+Authorization: Token token="abc123"
+Content-Type: application/json
+
+{
+  "quiz": {
+    "name": "Game of Thrones",
+    "questions": [
+      {
+        "id": 1,
+        "type": "boolean",
+        "category": "movies",
+        "title": "Stannis won the battle at Blackwater Bay",
+        "content": {"answer": false},
+        "hint": "...",
+        "position": 1
+      }
+    ]
+  }
+}
+```
+
+Updating works the same way as creating. When you include `"questions"`, you
+are effectively assigning them to the quiz:
+
+* If you include the ID of the question, then the existing question will be
+  updated (this is preferred in order to avoid recreating all questions on each
+  quiz save).
+* If the ID is missing, that question is created.
+* Any existing question that is missing from the array will be deleted.
+
+## Deleting
+
+```http
+DELETE /quizzes/1 HTTP/1.1
+Authorization: Token token="abc123"
+```
+
+This will delete the quiz and its associated questions.

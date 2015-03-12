@@ -92,4 +92,41 @@ RSpec.describe Kvizovi::Api do
 
     expect(status).to eq 400
   end
+
+
+  specify "proper unauthorized response" do
+    post "/account", user: attributes_for(:user)
+    token = body["user"]["token"]
+
+    get "/quizzes"
+    expect(status).to eq 401
+
+    get "/quizzes", {}, {"HTTP_AUTHORIZATION" => "foo"}
+    expect(status).to eq 401
+  end
+
+
+  specify "managing quizzes" do
+    post "/account", user: attributes_for(:user)
+    authorization = {"HTTP_AUTHORIZATION" => %(Token token="#{body["user"]["token"]}")}
+
+    post "/quizzes", {quiz: {name: "Game of Thrones", questions: [{}]}}, authorization
+    expect(body["quiz"]).not_to be_empty
+    expect(body["quiz"]).to have_key("questions")
+
+    quiz_id = body["quiz"]["id"]
+
+    get "/quizzes/#{quiz_id}", {quiz: {name: "Game of thrones"}}, authorization
+    expect(body["quiz"]).not_to be_empty
+    expect(body["quiz"]).to have_key("questions")
+
+    put "/quizzes/#{quiz_id}", {quiz: {name: "New name"}}, authorization
+    expect(body["quiz"]).not_to be_empty
+    expect(body["quiz"]["name"]).to eq "New name"
+
+    get "/quizzes", {}, authorization
+    expect(body["quizzes"]).not_to be_empty
+    expect(body["quizzes"].first).not_to have_key("quiz")
+    expect(body["quizzes"].first).not_to have_key("questions")
+  end
 end
