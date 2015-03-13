@@ -1,7 +1,3 @@
-require "kvizovi/mailer"
-
-require "bcrypt"
-
 module Kvizovi
   class Account
     class Password
@@ -24,11 +20,11 @@ module Kvizovi
       end
 
       def matches?(password)
-        ::BCrypt::Password.new(@user.encrypted_password) == password
+        Kvizovi.password(@user.encrypted_password) == password
       end
 
       def encrypt!
-        @user.encrypted_password = ::BCrypt::Password.create(@user.password)
+        @user.encrypted_password = Kvizovi.hash(@user.password)
       end
 
       private
@@ -43,7 +39,7 @@ module Kvizovi
       end
 
       def send_reset_instructions_email!
-        Kvizovi::Mailer.new(@user).send(:password_reset_instructions)
+        Kvizovi.mailer.send(:password_reset_instructions, @user)
       end
     end
   end

@@ -1,8 +1,14 @@
 require "spec_helper"
+require "kvizovi"
 require "uri"
 require "timecop"
 
+Mail.defaults { delivery_method :test }
+BCrypt::Engine.cost = 1
+
 RSpec.describe Kvizovi::Api do
+  include TestHelpers::Integration
+
   specify "registration" do
     post "/account", user: attributes_for(:user)
 

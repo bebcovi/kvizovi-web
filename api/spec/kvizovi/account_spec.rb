@@ -1,13 +1,20 @@
 require "spec_helper"
+require "kvizovi/account"
 require "timecop"
 
 RSpec.describe Kvizovi::Account do
   subject { Kvizovi::Account.new(@user) }
   let(:attributes) { attributes_for(:user) }
 
+  before do
+    allow(Kvizovi).to receive(:mailer).and_return(spy)
+    allow(Kvizovi).to receive(:generate_token).and_return("token")
+    allow(Kvizovi).to receive(:hash) { |string| string.to_s.reverse }
+    allow(Kvizovi).to receive(:password) { |string| string.to_s.reverse }
+  end
+
   def register(additional_attributes = {})
-    attributes = attributes_for(:user, additional_attributes)
-    Kvizovi::Account.register!(attributes)
+    Kvizovi::Account.register!(attributes.merge(additional_attributes))
   end
 
   describe ".register!" do
@@ -70,7 +77,7 @@ RSpec.describe Kvizovi::Account do
     it "sends the confirmation email" do
       user = Kvizovi::Account.register!(attributes)
 
-      expect(sent_emails).not_to be_empty
+      expect(Kvizovi.mailer).to have_received(:registration_confirmation)
     end
   end
 
@@ -137,7 +144,7 @@ RSpec.describe Kvizovi::Account do
     it "sends the password reset instructions email" do
       user = Kvizovi::Account.reset_password!(email: @user.email)
 
-      expect(sent_emails).not_to be_empty
+      expect(Kvizovi.mailer).to have_received(:password_reset_instructions)
     end
 
     it "raises error when email is nonexisting" do

@@ -1,5 +1,4 @@
 require "kvizovi/account/password"
-require "kvizovi/mailer"
 
 module Kvizovi
   class Account
@@ -89,7 +88,7 @@ module Kvizovi
       end
 
       def send_confirmation_email!
-        Kvizovi::Mailer.new(@user).send(:registration_confirmation)
+        Kvizovi.mailer.send(:registration_confirmation, @user)
       end
     end
   end

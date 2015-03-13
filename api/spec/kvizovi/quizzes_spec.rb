@@ -1,4 +1,5 @@
 require "spec_helper"
+require "kvizovi/quizzes"
 
 RSpec.describe Kvizovi::Quizzes do
   subject { Kvizovi::Quizzes.new(user) }

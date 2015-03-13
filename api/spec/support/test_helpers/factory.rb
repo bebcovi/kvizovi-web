@@ -1,50 +1,53 @@
 module TestHelpers
   module Factory
     def create(name, additional_attributes = {})
-      model_class, attributes = FACTORIES.fetch(name)
-      model_class.create(attributes.merge(additional_attributes))
+      model_for(name).create(attributes_for(name, additional_attributes))
     end
 
     def build(name, additional_attributes = {})
-      model_class, attributes = FACTORIES.fetch(name)
-      model_class.new(attributes.merge(additional_attributes))
+      model_for(name).new(attributes_for(name, additional_attributes))
     end
 
     def attributes_for(name, additional_attributes = {})
-      _, attributes = FACTORIES.fetch(name)
+      attributes = FACTORIES.fetch(name)[1]
       attributes.merge(additional_attributes)
     end
 
+    def model_for(name)
+      model_name = FACTORIES.fetch(name)[0]
+      Kvizovi::Models.const_get(model_name)
+    end
+
     FACTORIES = {
-      user: [Kvizovi::Models::User, {
+      user: [:User, {
         nickname: "Junky",
         email:    "janko.marohnic@gmail.com",
         password: "secret",
       }],
-      quiz: [Kvizovi::Models::Quiz, {
+      quiz: [:Quiz, {
         name: "Game of Thrones",
       }],
-      question: [Kvizovi::Models::Question, {
+      question: [:Question, {
         type: "choice",
         title: "Who won the battle in Blackwater Bay?",
         content: {choices: ["Stannis Baratheon", "Tywin Lannister"], answer: "Tywin Lannister"},
       }],
-      boolean_question: [Kvizovi::Models::Question, {
+      boolean_question: [:Question, {
         type: "boolean",
         title: "Stannis Baratheon won the battle in Blackwater Bay.",
         content: {answer: false},
       }],
-      choice_question: [Kvizovi::Models::Question, {
+      choice_question: [:Question, {
         type: "choice",
         title: "Who won the battle in Blackwater Bay?",
         content: {choices: ["Stannis Baratheon", "Tywin Lannister"], answer: "Tywin Lannister"},
       }],
-      association_question: [Kvizovi::Models::Question, {
+      association_question: [:Question, {
         type: "association",
         title: "Connect characters with families:",
         content: {associations: {"Lannister" => "Cercei", "Stark" => "Robb"}},
       }],
-      text_question: [Kvizovi::Models::Question, {
+      text_question: [:Question, {
         type: "text",
         title: "What's the name of King Baratheon's bastard son?",
         content: {answer: "Gendry"},

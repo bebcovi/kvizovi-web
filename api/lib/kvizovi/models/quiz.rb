@@ -1,4 +1,4 @@
-require "sequel"
+require "kvizovi/configuration/sequel"
 
 module Kvizovi
   module Models

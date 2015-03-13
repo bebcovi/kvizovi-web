@@ -1,7 +1,3 @@
-##########
-# SEQUEL #
-##########
-
 require "sequel"
 require "yaml"
 
@@ -16,14 +12,3 @@ Sequel::Model.plugin :timestamps
 Sequel::Model.plugin :json_serializer
 
 DB.extension :pg_json
-
-########
-# MAIL #
-########
-
-require "mail"
-
-Mail.defaults do
-  delivery_method :smtp
-end
-
