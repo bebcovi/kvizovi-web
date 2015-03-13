@@ -4,7 +4,7 @@ require "timecop"
 
 RSpec.describe Kvizovi::Account do
   subject { Kvizovi::Account.new(@user) }
-  let(:attributes) { attributes_for(:user) }
+  let(:attributes) { attributes_for(:janko) }
 
   before do
     allow(Kvizovi).to receive(:mailer).and_return(spy)
@@ -21,32 +21,6 @@ RSpec.describe Kvizovi::Account do
     it "controls mass assignment" do
       expect { Kvizovi::Account.register!(created_at: Time.now) }
         .to raise_error(Sequel::Error)
-    end
-
-    it "validates presence of attributes" do
-      expect { Kvizovi::Account.register!({}) }
-        .to raise_error(Kvizovi::Error) do |error|
-          expect(error.errors).to eq(
-            user: {
-              nickname: ["is not present"],
-              email:    ["is not present"],
-              password: ["is not present"],
-            }
-          )
-        end
-    end
-
-    it "validates uniqueness of attributes" do
-      Kvizovi::Account.register!(attributes)
-
-      expect { Kvizovi::Account.register!(attributes) }
-        .to raise_error(Kvizovi::Error) do |error|
-          expect(error.errors).to eq(
-            user: {
-              email: ["is already taken"],
-            }
-          )
-        end
     end
 
     it "encrypts the password" do
@@ -163,17 +137,6 @@ RSpec.describe Kvizovi::Account do
         .to raise_error(Sequel::Error)
     end
 
-    it "validates presence of password" do
-      expect { Kvizovi::Account.set_password!(token, password: nil) }
-        .to raise_error(Kvizovi::Error) do |error|
-          expect(error.errors).to eq(
-            user: {
-              password: ["is not present"],
-            }
-          )
-        end
-    end
-
     it "encrypts the password" do
       old_password = @user.encrypted_password
 
@@ -207,47 +170,9 @@ RSpec.describe Kvizovi::Account do
         .to raise_error(Sequel::Error)
     end
 
-    it "validates presence of attributes" do
-      nil_attributes = {
-        nickname: nil,
-        email: nil,
-      }
-
-      expect { subject.update!(nil_attributes) }
-        .to raise_error(Kvizovi::Error) do |error|
-          expect(error.errors).to eq(
-            user: {
-              nickname: ["is not present"],
-              email:    ["is not present"],
-            }
-          )
-        end
-
-      expect(@user.reload.email).to be_a_nonempty(String)
-    end
-
-    it "validates uniqueness of attributes" do
-      register(email: "matija.marohnic@gmail.com")
-
-      expect { subject.update!(email: "matija.marohnic@gmail.com") }
-        .to raise_error(Kvizovi::Error) do |error|
-          expect(error.errors).to eq(
-            user: {
-              email: ["is already taken"],
-            }
-          )
-        end
-    end
-
     it "requires old password for changing to new password" do
       expect { subject.update!(password: "new secret") }
-        .to raise_error(Kvizovi::Error) do |error|
-          expect(error.errors).to eq(
-            user: {
-              old_password: ["doesn't match current"],
-            }
-          )
-        end
+        .to raise_error(StandardError, /doesn't match/)
     end
 
     it "encrypts the password if present" do
@@ -257,7 +182,7 @@ RSpec.describe Kvizovi::Account do
 
       expect(@user.encrypted_password).to eq old_password
 
-      subject.update!(password: "new secret", old_password: attributes_for(:user)[:password])
+      subject.update!(password: "new secret", old_password: attributes_for(:janko)[:password])
 
       expect(@user.encrypted_password).to be_a_nonempty(String)
       expect(@user.encrypted_password).not_to eq old_password

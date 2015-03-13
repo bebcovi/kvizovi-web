@@ -4,8 +4,8 @@ require "kvizovi/models/user"
 
 RSpec.describe Kvizovi::Quizzes do
   subject { Kvizovi::Quizzes.new(user) }
-  let(:user) { create(:user) }
-  let(:another_user) { create(:user) }
+  let(:user) { create(:janko) }
+  let(:another_user) { create(:matija) }
 
   describe "#all" do
     it "returns all quizzes sorted by most recently updated" do

@@ -5,7 +5,7 @@ module Kvizovi
     class User < Sequel::Model
       one_to_many :quizzes, key: :creator_id
 
-      attr_accessor :password, :old_password
+      attr_accessor :password
 
       def to_json(**options)
         super(

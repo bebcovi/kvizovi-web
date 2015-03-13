@@ -19,9 +19,14 @@ module TestHelpers
     end
 
     FACTORIES = {
-      user: [:User, {
+      janko: [:User, {
         nickname: "Junky",
-        email:    "janko.marohnic@gmail.com",
+        email: "janko.marohnic@gmail.com",
+        password: "secret",
+      }],
+      matija: [:User, {
+        nickname: "Silvenon",
+        email: "matija.marohnic@gmail.com",
         password: "secret",
       }],
       quiz: [:Quiz, {
@@ -29,26 +34,31 @@ module TestHelpers
       }],
       question: [:Question, {
         type: "choice",
+        category: "movies",
         title: "Who won the battle in Blackwater Bay?",
         content: {choices: ["Stannis Baratheon", "Tywin Lannister"], answer: "Tywin Lannister"},
       }],
       boolean_question: [:Question, {
         type: "boolean",
+        category: "movies",
         title: "Stannis Baratheon won the battle in Blackwater Bay.",
         content: {answer: false},
       }],
       choice_question: [:Question, {
         type: "choice",
+        category: "movies",
         title: "Who won the battle in Blackwater Bay?",
         content: {choices: ["Stannis Baratheon", "Tywin Lannister"], answer: "Tywin Lannister"},
       }],
       association_question: [:Question, {
         type: "association",
+        category: "movies",
         title: "Connect characters with families:",
         content: {associations: {"Lannister" => "Cercei", "Stark" => "Robb"}},
       }],
       text_question: [:Question, {
         type: "text",
+        category: "movies",
         title: "What's the name of King Baratheon's bastard son?",
         content: {answer: "Gendry"},
       }],

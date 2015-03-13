@@ -12,8 +12,6 @@ module Kvizovi
 
       def set!(attributes)
         @user.set_only(attributes, :password)
-        raise Kvizovi::Error, {user: @user.errors} if not valid?
-
         encrypt!
         @user.password_reset_token = nil
         @user.save
@@ -28,15 +26,6 @@ module Kvizovi
       end
 
       private
-
-      def valid?
-        validate!
-        @user.errors.empty?
-      end
-
-      def validate!
-        @user.validates_presence [:password]
-      end
 
       def send_reset_instructions_email!
         Kvizovi.mailer.send(:password_reset_instructions, @user)

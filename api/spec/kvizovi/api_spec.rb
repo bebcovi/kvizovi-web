@@ -10,13 +10,13 @@ RSpec.describe Kvizovi::Api do
   include TestHelpers::Integration
 
   specify "registration" do
-    post "/account", user: attributes_for(:user)
+    post "/account", user: attributes_for(:janko)
 
     expect(body["user"]["id"]).not_to eq nil
   end
 
   specify "account confirmation" do
-    post "/account", user: attributes_for(:user)
+    post "/account", user: attributes_for(:janko)
 
     url = URI(sent_emails.last.body.to_s[%r{^http://.+$}])
     put url.request_uri
@@ -25,12 +25,12 @@ RSpec.describe Kvizovi::Api do
   end
 
   specify "account expiration" do
-    post "/account", user: attributes_for(:user)
+    post "/account", user: attributes_for(:janko)
 
     Timecop.travel(4*24*60*60) do
       get "/account", user: {
-        email: attributes_for(:user)[:email],
-        password: attributes_for(:user)[:password],
+        email: attributes_for(:janko)[:email],
+        password: attributes_for(:janko)[:password],
       }
     end
 
@@ -38,11 +38,11 @@ RSpec.describe Kvizovi::Api do
   end
 
   specify "authentication" do
-    post "/account", user: attributes_for(:user)
+    post "/account", user: attributes_for(:janko)
 
     get "/account", user: {
-      email: attributes_for(:user)[:email],
-      password: attributes_for(:user)[:password],
+      email: attributes_for(:janko)[:email],
+      password: attributes_for(:janko)[:password],
     }
 
     expect(body["user"]).not_to be_empty
@@ -55,16 +55,16 @@ RSpec.describe Kvizovi::Api do
   end
 
   specify "password reset" do
-    post "/account", user: attributes_for(:user)
+    post "/account", user: attributes_for(:janko)
 
-    post "/account/password", user: {email: attributes_for(:user)[:email]}
+    post "/account/password", user: {email: attributes_for(:janko)[:email]}
     url = URI(sent_emails.last.body.to_s[%r{^http://.+$}])
     put url.request_uri, user: {password: "another secret"}
 
     expect(body["user"]).not_to be_empty
 
     get "/account", user: {
-      email: attributes_for(:user)[:email],
+      email: attributes_for(:janko)[:email],
       password: "another secret",
     }
 
@@ -72,14 +72,14 @@ RSpec.describe Kvizovi::Api do
   end
 
   specify "password update" do
-    post "/account", user: attributes_for(:user)
+    post "/account", user: attributes_for(:janko)
 
     put "/account",
-      {user: {old_password: attributes_for(:user)[:password], password: "new secret"}},
+      {user: {old_password: attributes_for(:janko)[:password], password: "new secret"}},
       {"HTTP_AUTHORIZATION" => %(Token token="#{body["user"]["token"]}")}
 
     get "/account", user: {
-      email: attributes_for(:user)[:email],
+      email: attributes_for(:janko)[:email],
       password: "new secret",
     }
 
@@ -87,13 +87,13 @@ RSpec.describe Kvizovi::Api do
   end
 
   specify "deleting account" do
-    post "/account", user: attributes_for(:user)
+    post "/account", user: attributes_for(:janko)
 
     delete "/account", {}, {"HTTP_AUTHORIZATION" => %(Token token="#{body["user"]["token"]}")}
 
     get "/account", user: {
-      email:    attributes_for(:user)[:email],
-      password: attributes_for(:user)[:password],
+      email:    attributes_for(:janko)[:email],
+      password: attributes_for(:janko)[:password],
     }
 
     expect(status).to eq 400
@@ -101,7 +101,7 @@ RSpec.describe Kvizovi::Api do
 
 
   specify "proper unauthorized response" do
-    post "/account", user: attributes_for(:user)
+    post "/account", user: attributes_for(:janko)
     token = body["user"]["token"]
 
     get "/quizzes"
@@ -113,7 +113,7 @@ RSpec.describe Kvizovi::Api do
 
 
   specify "managing quizzes" do
-    post "/account", user: attributes_for(:user)
+    post "/account", user: attributes_for(:janko)
     authorization = {"HTTP_AUTHORIZATION" => %(Token token="#{body["user"]["token"]}")}
 
     post "/quizzes", {quiz: {name: "Game of Thrones", questions: [{}]}}, authorization
