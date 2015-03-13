@@ -2,10 +2,10 @@ Sequel.migration do
   change do
     create_table :users do
       primary_key :id
-      foreign_key :teacher_id, :users
+      column :teacher_id, :integer
 
-      column :nickname,           :varchar, null: false
-      column :email,              :varchar, null: false, unique: true
+      column :nickname,           :varchar
+      column :email,              :varchar
       column :encrypted_password, :varchar
       column :token,              :varchar
 

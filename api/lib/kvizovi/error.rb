@@ -1,31 +1,27 @@
 module Kvizovi
   class Error < ArgumentError
-    def initialize(payload)
-      super(payload)
-      @payload = payload
+    class << self
+      attr_accessor :translations
     end
 
-    def errors
-      case @payload
-      when Hash
-        @payload
-      when Array
-        @payload.map do |message|
-          String === message ? message : translate(message)
-        end
-      end
+    def initialize(symbol)
+      super translate(symbol)
     end
 
     private
 
     def translate(name)
-      TRANSLATIONS.fetch(name)
+      self.class.translations.fetch(name)
     end
+  end
 
-    TRANSLATIONS = {
-      email_authentication:       "Ne postoji korisnik s tom email adresom",
-      credentials_authentication: "Pogrešan email ili lozinka",
-      account_expired:            "Morate potvrditi svoj korisnički račun",
+  class Unauthorized < Error
+    self.translations = {
+      email:         "Ne postoji korisnik s tom email adresom",
+      credentials:   "Pogrešan email ili lozinka",
+      expired:       "Morate potvrditi svoj korisnički račun",
+      token_missing: "No authorization token given",
+      token:         "No user with that token",
     }
   end
 end

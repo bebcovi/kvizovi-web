@@ -5,7 +5,7 @@ module Kvizovi
     class Authenticator
       def self.authenticate(user_class, type, object)
         user = new(user_class).send(:authenticate, type, object)
-        raise Kvizovi::Error, [:"#{type}_authentication"] if user.nil?
+        raise Kvizovi::Unauthorized, type if user.nil?
         user
       end
 
@@ -15,7 +15,7 @@ module Kvizovi
 
       def authenticate(type, object)
         user = send("authenticate_from_#{type}", object)
-        raise Kvizovi::Error, [:account_expired] if user && registration_expired?(user)
+        raise Kvizovi::Unauthorized, :expired if user && registration_expired?(user)
         user
       end
 
@@ -26,12 +26,12 @@ module Kvizovi
       end
 
       def authenticate_from_credentials(credentials)
-        if credentials[:email]
-          user = @user_class.find(email: credentials[:email])
-          user if user && password_matches?(user, credentials[:password])
-        else
-          @user_class.first!(token: credentials[:token])
-        end
+        user = @user_class.find(email: credentials[:email])
+        user if user && password_matches?(user, credentials[:password])
+      end
+
+      def authenticate_from_token(token)
+        @user_class.find(token: token)
       end
 
       def authenticate_from_confirmation_token(token)

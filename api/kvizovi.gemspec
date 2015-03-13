@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_path  = "lib"
 
 
-  gem.add_dependency "sinatra", "~> 1.4"
+  gem.add_dependency "grape", "~> 0.11"
 
   gem.add_dependency "sequel", "~> 4.20"
   gem.add_dependency "pg"
@@ -25,11 +25,12 @@ Gem::Specification.new do |gem|
   # Utility
   gem.add_dependency "bcrypt", "~> 3.1"
   gem.add_dependency "unindent"
-  gem.add_dependency "symbolize_keys_recursively", "~> 1.1"
 
-  gem.add_development_dependency "rake"
   gem.add_development_dependency "pry"
   gem.add_development_dependency "rspec", "~> 3.1"
-  gem.add_development_dependency "rack-test"
   gem.add_development_dependency "timecop"
+
+  gem.add_development_dependency "thin"
+  gem.add_development_dependency "faraday"
+  gem.add_development_dependency "faraday_middleware"
 end

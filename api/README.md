@@ -9,8 +9,8 @@ Content-Type: application/json
 {"user": {"email": "janko.marohnic@gmail.com", "password": "secret"}}
 ```
 
-When a request is not successful, the appropriate response status will be
-returned, often following up with an error message.
+If a request fails, the appropriate response status will be returned, often
+following up with an error message.
 
 ```http
 HTTP/1.1 400 Bad Request
@@ -18,11 +18,6 @@ Content-Type: application/json
 
 {"errors": ["Invalid email or password"]}
 ```
-
-The errors will be either
-
-* generic: `{"errors": ["Invalid email or password"]}`, or
-* specific: `{"errors": {"user": {"email": ["is already taken"]}}`.
 
 To make authorized requests, include user's token in the "Authorization"
 header.
@@ -81,12 +76,6 @@ GET /account HTTP/1.1
 Content-Type: application/json
 
 {"user": {"email": "janko.marohnic@gmail.com", "password": "secret"}}
-```
-```http
-GET /account HTTP/1.1
-Content-Type: application/json
-
-{"user": {"token": "abc123"}}
 ```
 ```http
 HTTP/1.1 200 OK

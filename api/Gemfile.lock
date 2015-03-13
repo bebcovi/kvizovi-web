@@ -3,34 +3,72 @@ PATH
   specs:
     kvizovi (0.0.1)
       bcrypt (~> 3.1)
+      grape (~> 0.11)
       mail
       pg
       sequel (~> 4.20)
-      sinatra (~> 1.4)
-      symbolize_keys_recursively (~> 1.1)
       unindent
 
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (4.2.0)
+      i18n (~> 0.7)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.10)
+    builder (3.2.2)
     coderay (1.1.0)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
+    daemons (1.1.9)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
+    equalizer (0.0.9)
+    eventmachine (1.0.7)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
+    grape (0.11.0)
+      activesupport
+      builder
+      hashie (>= 2.1.0)
+      multi_json (>= 1.3.2)
+      multi_xml (>= 0.5.2)
+      rack (>= 1.3.0)
+      rack-accept
+      rack-mount
+      virtus (>= 1.0.0)
+    hashie (3.4.0)
+    i18n (0.7.0)
+    ice_nine (0.11.1)
+    json (1.8.2)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.4.3)
+    minitest (5.5.1)
+    multi_json (1.11.0)
+    multi_xml (0.5.5)
+    multipart-post (2.0.0)
     pg (0.18.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.6.0)
-    rack-protection (1.5.3)
-      rack
-    rack-test (0.6.3)
-      rack (>= 1.0)
-    rake (10.4.2)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
+    rack-mount (0.8.3)
+      rack (>= 1.0.0)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -45,23 +83,30 @@ GEM
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
     sequel (4.20.0)
-    sinatra (1.4.5)
-      rack (~> 1.4)
-      rack-protection (~> 1.4)
-      tilt (~> 1.3, >= 1.3.4)
     slop (3.6.0)
-    symbolize_keys_recursively (1.1)
-    tilt (1.4.1)
+    thin (1.6.3)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0)
+      rack (~> 1.0)
+    thread_safe (0.3.5)
     timecop (0.7.3)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
     unindent (1.0)
+    virtus (1.0.4)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  faraday
+  faraday_middleware
   kvizovi!
   pry
-  rack-test
-  rake
   rspec (~> 3.1)
+  thin
   timecop

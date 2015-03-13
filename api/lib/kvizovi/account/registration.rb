@@ -39,7 +39,9 @@ module Kvizovi
         old_password = attributes.delete(:old_password)
         @user.set_only(attributes, *VALID_FIELDS)
         if @user.password
-          raise "password doesn't match current" if !password_matches?(old_password)
+          if !password_matches?(old_password)
+            raise ArgumentError, "password doesn't match current"
+          end
           encrypt_password!
         end
         @user.save

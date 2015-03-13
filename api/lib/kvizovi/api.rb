@@ -1,93 +1,88 @@
-require "sinatra/base"
-require "symbolize_keys_recursively"
+require "grape"
 
 require "kvizovi/account"
 require "kvizovi/quizzes"
 require "kvizovi/serializer"
 
-require "json"
-
 module Kvizovi
-  class Api < Sinatra::Base
+  class Api < Grape::API
 
-    before do
-      content_type "application/json"
-      params.symbolize_keys_recursively!
+    format :json
+    default_format :json
+    formatter :json, Kvizovi::Serializer
+    default_error_status 400
+    do_not_route_head!
+
+    resource :account do
+      get do
+        Kvizovi::Account.authenticate(params[:user])
+      end
+
+      post do
+        Kvizovi::Account.register!(params[:user])
+      end
+
+      put do
+        Kvizovi::Account.new(current_user).update!(params[:user])
+      end
+
+      delete do
+        Kvizovi::Account.new(current_user).destroy!
+      end
+
+      put "/confirm" do
+        Kvizovi::Account.confirm!(params[:token])
+      end
+
+      post "/password" do
+        Kvizovi::Account.reset_password!(params[:user])
+      end
+
+      put "/password" do
+        Kvizovi::Account.set_password!(params[:token], params[:user])
+      end
     end
 
+    resources :quizzes do
+      get do
+        Kvizovi::Quizzes.new(current_user).all
+      end
 
-    get "/account" do
-      json Kvizovi::Account.authenticate(params[:user])
+      post do
+        Kvizovi::Quizzes.new(current_user).create(params[:quiz])
+      end
+
+      route_param :id do
+        get do
+          Kvizovi::Quizzes.new(current_user).find(params[:id])
+        end
+
+        put do
+          Kvizovi::Quizzes.new(current_user).update(params[:id], params[:quiz])
+        end
+
+        delete do
+          Kvizovi::Quizzes.new(current_user).destroy(params[:id])
+        end
+      end
     end
 
-    post "/account" do
-      json Kvizovi::Account.register!(params[:user])
+    helpers do
+      def current_user
+        Kvizovi::Account.authenticate(:token, authorization_token!)
+      end
+
+      def authorization_token!
+        authorization_token or raise Kvizovi::Unauthorized, :token_missing
+      end
+
+      def authorization_token
+        headers["Authorization"].to_s[/Token token="(\w+)"/, 1]
+      end
     end
 
-    put "/account" do
-      json Kvizovi::Account.new(current_user).update!(params[:user])
-    end
-
-    delete "/account" do
-      json Kvizovi::Account.new(current_user).destroy!
-    end
-
-    put "/account/confirm" do
-      json Kvizovi::Account.confirm!(params[:token])
-    end
-
-    post "/account/password" do
-      json Kvizovi::Account.reset_password!(params[:user])
-    end
-
-    put "/account/password" do
-      json Kvizovi::Account.set_password!(params[:token], params[:user])
-    end
-
-
-    get "/quizzes" do
-      json Kvizovi::Quizzes.new(current_user).all
-    end
-
-    get "/quizzes/:id" do
-      json Kvizovi::Quizzes.new(current_user).find(params[:id])
-    end
-
-    post "/quizzes" do
-      json Kvizovi::Quizzes.new(current_user).create(params[:quiz])
-    end
-
-    put "/quizzes/:id" do
-      json Kvizovi::Quizzes.new(current_user).update(params[:id], params[:quiz])
-    end
-
-    delete "/quizzes/:id" do
-      json Kvizovi::Quizzes.new(current_user).destroy(params[:id])
-    end
-
-
-    error Kvizovi::Error do
-      error 400, {errors: env["sinatra.error"].errors}.to_json
-    end
-
-    private
-
-    def json(object, **options)
-      Kvizovi::Serializer.new(object).serialize(**options)
-    end
-
-    def current_user
-      Kvizovi::Account.authenticate(token: authorization_token!)
-    end
-
-    def authorization_token!
-      authorization_token or
-        error(401, {errors: ["No authorization token specified"]}.to_json)
-    end
-
-    def authorization_token
-      header = request.env["HTTP_AUTHORIZATION"]
-      header && header[/Token token="(\w+)"/, 1]
+    rescue_from Kvizovi::Unauthorized do |error|
+      rack_response({errors: [error.message]}.to_json, 401)
     end
 
   end

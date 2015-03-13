@@ -172,7 +172,7 @@ RSpec.describe Kvizovi::Account do
 
     it "requires old password for changing to new password" do
       expect { subject.update!(password: "new secret") }
-        .to raise_error(StandardError, /doesn't match/)
+        .to raise_error(ArgumentError, /doesn't match/)
     end
 
     it "encrypts the password if present" do
