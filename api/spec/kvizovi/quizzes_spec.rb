@@ -1,5 +1,6 @@
 require "spec_helper"
 require "kvizovi/quizzes"
+require "kvizovi/models/user"
 
 RSpec.describe Kvizovi::Quizzes do
   subject { Kvizovi::Quizzes.new(user) }
@@ -8,13 +9,18 @@ RSpec.describe Kvizovi::Quizzes do
 
   describe "#all" do
     it "returns all quizzes sorted by most recently updated" do
-      # assertions
+      quiz_after = subject.create(attributes_for(:quiz))
+      quiz_before = subject.create(attributes_for(:quiz))
+      quiz_before.update(updated_at: Time.now - 60)
+      another_quiz = create(:quiz)
+
+      expect(subject.all.to_a).to eq [quiz_before, quiz_after]
     end
   end
 
   describe "#create" do
     it "creates a quiz with questions" do
-      quiz = subject.create(attributes_for(:quiz, questions: [
+      quiz = subject.create(attributes_for(:quiz, questions_attributes: [
         attributes_for(:boolean_question),
         attributes_for(:choice_question),
         attributes_for(:association_question),
@@ -23,6 +29,11 @@ RSpec.describe Kvizovi::Quizzes do
 
       expect(quiz.questions.count).to eq 4
       expect(quiz.creator).to eq user
+    end
+
+    it "controls mass assignment" do
+      expect { subject.create(created_at: Time.now) }
+        .to raise_error(Sequel::Error)
     end
   end
 
@@ -50,51 +61,10 @@ RSpec.describe Kvizovi::Quizzes do
       expect(quiz.name).to eq "New name"
     end
 
-    it "updates existing questions" do
-      quiz = subject.create(attributes_for(:quiz, questions: [
-        attributes_for(:question),
-      ]))
-
-      quiz = subject.update(quiz.id, questions: [
-        {id: quiz.questions.first.id, title: "New title"},
-      ])
-
-      expect(quiz.questions.count).to eq 1
-      expect(quiz.questions.first.title).to eq "New title"
-    end
-
-    it "creates new questions" do
-      quiz = subject.create(attributes_for(:quiz, questions: [
-        attributes_for(:question),
-      ]))
-
-      quiz = subject.update(quiz.id, questions: [
-        {id: quiz.questions.first.id},
-        {title: "New question"},
-      ])
-
-      expect(quiz.questions.count).to eq 2
-      expect(quiz.questions.last.title).to eq "New question"
-    end
-
-    it "deletes existing questions" do
-      quiz = subject.create(attributes_for(:quiz, questions: [
-        attributes_for(:question),
-      ]))
-
-      quiz = subject.update(quiz.id, questions: [])
-
-      expect(quiz.questions.count).to eq 0
-    end
-
-    it "doesn't touch questions if they're not passed in" do
-      quiz = subject.create(attributes_for(:quiz, questions: [
-        attributes_for(:question),
-      ]))
-
-      quiz = subject.update(quiz.id, {})
-
-      expect(quiz.questions.count).to eq 1
+    it "controls mass assignment" do
+      quiz = subject.create(attributes_for(:quiz))
+      expect { subject.update(quiz.id, created_at: Time.now) }
+        .to raise_error(Sequel::Error)
     end
 
     it "doesn't find quizzes from another user" do
@@ -115,7 +85,7 @@ RSpec.describe Kvizovi::Quizzes do
     end
 
     it "destroys the associated questions" do
-      quiz = subject.create(attributes_for(:quiz, questions: [
+      quiz = subject.create(attributes_for(:quiz, questions_attributes: [
         attributes_for(:question),
       ]))
 

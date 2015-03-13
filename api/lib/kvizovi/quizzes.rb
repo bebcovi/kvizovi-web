@@ -1,9 +1,12 @@
-require "kvizovi/models/user"
 require "kvizovi/models/quiz"
 require "kvizovi/models/question"
 
+require "kvizovi/error"
+
 module Kvizovi
   class Quizzes
+    VALID_FIELDS = [:name, :image, :questions_attributes]
+
     def initialize(user)
       @user = user
     end
@@ -13,46 +16,32 @@ module Kvizovi
     end
 
     def find(id)
-      all.first!(id: id)
+      all.with_pk!(id)
     end
 
-    def create(quiz_attrs)
-      questions_attrs = quiz_attrs.delete(:questions)
-
-      quiz = @user.add_quiz(quiz_attrs)
-      update(quiz.id, questions: questions_attrs)
-
-      quiz
+    def create(attrs)
+      quiz = Models::Quiz.new
+      quiz.set_only(attrs, *VALID_FIELDS)
+      validate!(quiz)
+      @user.add_quiz(quiz)
     end
 
-    def update(id, quiz_attrs)
-      questions_attrs = quiz_attrs.delete(:questions)
-
+    def update(id, attrs)
       quiz = find(id)
-      quiz.update(quiz_attrs)
-
-      return quiz if questions_attrs.nil?
-
-      quiz.questions_dataset
-        .exclude(id: questions_attrs.map { |h| h[:id] })
-        .delete
-
-      questions_attrs.each do |question_attrs|
-        if question_id = question_attrs.delete(:id)
-          question = quiz.questions_dataset.first(id: question_id)
-          question.update(question_attrs)
-        else
-          quiz.add_question(question_attrs)
-        end
-      end
-
-      quiz
+      quiz.set_only(attrs, *VALID_FIELDS)
+      validate!(quiz)
+      quiz.save
     end
 
     def destroy(id)
-      quiz = find(id)
-      quiz.questions_dataset.delete
-      quiz.destroy
+      find(id).destroy
+    end
+
+    private
+
+    def validate!(quiz)
+      quiz.validates_presence [:name]
+      raise Kvizovi::Errors, {errors: quiz.errors} if quiz.errors.any?
     end
   end
 end

@@ -18,8 +18,7 @@ module Kvizovi
       end
 
       def save!
-        raise Kvizovi::Error, {user: @user.errors} if not valid?(:create)
-
+        validate!(:create)
         encrypt_password!
         assign_confirmation_token!
         assign_auth_token!
@@ -39,8 +38,7 @@ module Kvizovi
 
       def update!(attributes)
         @user.set_only(attributes, *VALID_FIELDS)
-        raise Kvizovi::Error, {user: @user.errors} if not valid?(:update)
-
+        validate!(:update)
         encrypt_password! if @user.password
         @user.save
 
@@ -53,17 +51,17 @@ module Kvizovi
 
       private
 
-      def valid?(context)
-        send("validate_#{context}!")
-        @user.errors.empty?
+      def validate!(context)
+        send("validate_#{context}")
+        raise Kvizovi::Error, {user: @user.errors} if @user.errors.any?
       end
 
-      def validate_create!
+      def validate_create
         @user.validates_presence [:nickname, :email, :password]
         @user.validates_unique :email
       end
 
-      def validate_update!
+      def validate_update
         @user.validates_presence [:nickname, :email]
         @user.validates_unique :email
         if @user.password && !password_matches?(@user.old_password)

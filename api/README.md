@@ -172,7 +172,7 @@ Content-Type: application/json
 {
   "quiz": {
     "name": "Game of Thrones",
-    "questions": [
+    "questions_attributes": [
       {
         "type": "boolean",
         "category": "movies",
@@ -205,29 +205,20 @@ Content-Type: application/json
 {
   "quiz": {
     "name": "Game of Thrones",
-    "questions": [
-      {
-        "id": 1,
-        "type": "boolean",
-        "category": "movies",
-        "title": "Stannis won the battle at Blackwater Bay",
-        "content": {"answer": false},
-        "hint": "...",
-        "position": 1
-      }
+    "questions_attributes": [
+      {"title": "..."},
+      {"id": 1, "title": "..."},
+      {"id": 2, "_delete": true}
     ]
   }
 }
 ```
 
-Updating works the same way as creating. When you include `"questions"`, you
-are effectively assigning them to the quiz:
+Updating works the same way as creating. Updating questions works in the following way:
 
-* If you include the ID of the question, then the existing question will be
-  updated (this is preferred in order to avoid recreating all questions on each
-  quiz save).
-* If the ID is missing, that question is created.
-* Any existing question that is missing from the array will be deleted.
+* If a question doesn't have an ID, it will be created.
+* If a question does have an ID, it will be updated.
+* If a question has an ID and `"_delete": true`, it will be deleted.
 
 ## Deleting
 
