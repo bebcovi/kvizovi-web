@@ -26,8 +26,12 @@ module Kvizovi
       end
 
       def authenticate_from_credentials(credentials)
-        user = @user_class.find(email: credentials[:email])
-        user if user && password_matches?(user, credentials[:password])
+        if credentials[:email]
+          user = @user_class.find(email: credentials[:email])
+          user if user && password_matches?(user, credentials[:password])
+        elsif credentials[:token]
+          authenticate_from_token(credentials[:token])
+        end
       end
 
       def authenticate_from_token(token)

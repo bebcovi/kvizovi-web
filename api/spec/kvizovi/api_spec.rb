@@ -32,7 +32,9 @@ RSpec.describe Kvizovi::Api do
       email: attributes_for(:janko)[:email],
       password: attributes_for(:janko)[:password],
     }
+    expect(body["user"]).not_to be_empty
 
+    get "/account", user: {token: body["user"]["token"]}
     expect(body["user"]).not_to be_empty
   end
 
@@ -118,5 +120,28 @@ RSpec.describe Kvizovi::Api do
     expect(body["quizzes"]).not_to be_empty
     expect(body["quizzes"].first).not_to have_key("quiz")
     expect(body["quizzes"].first).not_to have_key("questions")
+  end
+
+  specify "searching quizzes for playing" do
+    post "/account", user: attributes_for(:janko)
+    authorization = {"HTTP_AUTHORIZATION" => %(Token token="#{body["user"]["token"]}")}
+
+    post "/quizzes", {quiz: attributes_for(:quiz,
+      name: "Game of Thrones", category: "movies")}, authorization
+    post "/quizzes", {quiz: attributes_for(:quiz,
+      name: "Game of Life", category: "programming")}, authorization
+
+    get "/quizzes", q: "Game"
+    expect(body["quizzes"].count).to eq 2
+
+    get "/quizzes", category: "movies"
+    expect(body["quizzes"].count).to eq 1
+
+    get "/quizzes", page: 1, per_page: 1
+    expect(body["quizzes"].count).to eq 1
+
+    get "/quizzes/#{body["quizzes"][0]["id"]}"
+    expect(body["quiz"]).not_to be_empty
+    expect(body["quiz"]["questions"]).to be_a(Array)
   end
 end

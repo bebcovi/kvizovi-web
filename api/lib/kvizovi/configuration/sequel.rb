@@ -14,3 +14,5 @@ Sequel::Model.plugin :nested_attributes
 Sequel::Model.plugin :association_dependencies
 
 DB.extension :pg_json
+
+Sequel.extension :core_extensions

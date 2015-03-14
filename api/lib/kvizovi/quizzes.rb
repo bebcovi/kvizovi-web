@@ -5,7 +5,22 @@ require "kvizovi/error"
 
 module Kvizovi
   class Quizzes
-    VALID_FIELDS = [:name, :image, :questions_attributes]
+    VALID_FIELDS = [:name, :category, :image, :questions_attributes]
+
+    def self.search(q: nil, category: nil, page: 1, per_page: nil)
+      quizzes = Models::Quiz.dataset
+      quizzes = quizzes.search(q) if q
+      quizzes = quizzes.where(category: category) if category
+      if per_page
+        page, per_page = Integer(page), Integer(per_page)
+        quizzes = quizzes.limit(per_page, (page - 1) * per_page)
+      end
+      quizzes
+    end
+
+    def self.find(id)
+      Models::Quiz.with_pk!(id)
+    end
 
     def initialize(user)
       @user = user

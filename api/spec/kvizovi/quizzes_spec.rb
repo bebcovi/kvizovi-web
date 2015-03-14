@@ -7,6 +7,44 @@ RSpec.describe Kvizovi::Quizzes do
   let(:user) { create(:janko) }
   let(:another_user) { create(:matija) }
 
+  describe ".search" do
+    it "finds quizzes by their name" do
+      quiz = Kvizovi::Models::Quiz.create(name: "Game of Thrones")
+
+      expect(described_class.search(q: "game").to_a).to eq [quiz]
+    end
+
+    it "finds quizzes by questions" do
+      quiz = Kvizovi::Models::Quiz.create(questions_attributes: [
+        {title: "Stannis Baratheon won Blackwater Bay"},
+      ])
+
+      expect(described_class.search(q: "blackwater").to_a).to eq [quiz]
+    end
+
+    it "finds by category" do
+      quiz = Kvizovi::Models::Quiz.create(category: "movies")
+
+      expect(described_class.search(category: "movies").to_a).to eq [quiz]
+    end
+
+    it "applies pagination parameters" do
+      quiz1 = Kvizovi::Models::Quiz.create(name: "Game of Thrones")
+      quiz2 = Kvizovi::Models::Quiz.create(name: "Game of Thrones")
+
+      expect(described_class.search(per_page: 1).to_a).to eq [quiz1]
+      expect(described_class.search(per_page: 1, page: 2).to_a).to eq [quiz2]
+    end
+  end
+
+  describe ".find" do
+    it "finds quizzes by id" do
+      quiz = Kvizovi::Models::Quiz.create
+
+      expect(described_class.find(quiz.id)).to eq quiz
+    end
+  end
+
   describe "#all" do
     it "returns all quizzes sorted by most recently updated" do
       quiz_after = subject.create(attributes_for(:quiz))

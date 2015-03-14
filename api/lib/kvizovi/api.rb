@@ -45,7 +45,11 @@ module Kvizovi
 
     resources :quizzes do
       get do
-        Kvizovi::Quizzes.new(current_user).all
+        if authorization_token
+          Kvizovi::Quizzes.new(current_user).all
+        else
+          Kvizovi::Quizzes.search(params)
+        end
       end
 
       post do
@@ -54,7 +58,11 @@ module Kvizovi
 
       route_param :id do
         get do
-          Kvizovi::Quizzes.new(current_user).find(params[:id])
+          if authorization_token
+            Kvizovi::Quizzes.new(current_user).find(params[:id])
+          else
+            Kvizovi::Quizzes.find(params[:id])
+          end
         end
 
         put do
@@ -78,6 +86,10 @@ module Kvizovi
 
       def authorization_token
         headers["Authorization"].to_s[/Token token="(\w+)"/, 1]
+      end
+
+      def params
+        super.to_h.deep_symbolize_keys! # 💣  Hashie::Mash
       end
     end
 

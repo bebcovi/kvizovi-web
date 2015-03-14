@@ -4,12 +4,11 @@ Sequel.migration do
       primary_key :id
       column :quiz_id, :integer
 
-      column :type,     :varchar
-      column :category, :varchar
-      column :title,    :varchar
-      column :content,  :jsonb
-      column :image,    :varchar
-      column :hint,     :varchar
+      column :type,    :varchar
+      column :title,   :varchar
+      column :content, :jsonb
+      column :image,   :varchar
+      column :hint,    :varchar
 
       column :position, :integer
 

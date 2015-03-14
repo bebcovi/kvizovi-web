@@ -27,7 +27,14 @@ GET /quizzes HTTP/1.1
 Authorization: Token token="abc123"
 ```
 
-# Account
+# Users
+
+| Attribute  | Type    |
+| ---------  | ----    |
+| `id`       | integer |
+| `nickname` | string  |
+| `email`    | string  |
+| `token`    | string  |
 
 ## Registration
 
@@ -40,19 +47,6 @@ Content-Type: application/json
     "nickname": "Junky",
     "email": "janko.marohnic@gmail.com",
     "password": "secret"
-  }
-}
-```
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "user": {
-    "id": 32,
-    "nickname": "Junky",
-    "email": "janko.marohnic@gmail.com",
-    "token": "abc123"
   }
 }
 ```
@@ -78,17 +72,10 @@ Content-Type: application/json
 {"user": {"email": "janko.marohnic@gmail.com", "password": "secret"}}
 ```
 ```http
-HTTP/1.1 200 OK
+GET /account HTTP/1.1
 Content-Type: application/json
 
-{
-  "user": {
-    "id": 32,
-    "nickname": "Junky",
-    "email": "janko.marohnic@gmail.com",
-    "token": "abc123"
-  }
-}
+{"user": {"token": "abc123"}}
 ```
 
 ## Password reset
@@ -133,23 +120,37 @@ DELETE /account HTTP/1.1
 Authorization: Token token="abc123"
 ```
 
-# Quizzes & Questions
+# Quizzes
 
-## Viewing
+| Attribute         | Type    |
+| ---------         | ----    |
+| `id`              | integer |
+| `name`            | string  |
+| `category`        | string  |
+| `questions_count` | integer |
+| `created_at`      | time    |
+| `updated_at`      | time    |
+
+## Retrieving
+
+To return quizzes from a user, include the authorization token:
 
 ```http
 GET /quizzes HTTP/1.1
 Authorization: Token token="abc123"
 ```
 
-This returns all quizzes of the authorized user, without questions included.
+Without an authorization token you're searching all quizzes:
 
 ```http
-GET /quizzes/1 HTTP/1.1
-Authorization: Token token="abc123"
+GET /quizzes?q=matrix HTTP/1.1
 ```
-
-This returns a single quiz, with questions included.
+```http
+GET /quizzes?category=movies HTTP/1.1
+```
+```http
+GET /quizzes?page=1&per_page=10 HTTP/1.1
+```
 
 ## Creating
 
@@ -161,28 +162,10 @@ Content-Type: application/json
 {
   "quiz": {
     "name": "Game of Thrones",
-    "questions_attributes": [
-      {
-        "type": "boolean",
-        "category": "movies",
-        "title": "Stannis won the battle at Blackwater Bay",
-        "content": {"answer": false},
-        "hint": "...",
-        "position": 1
-      }
-    ]
+    "category": "movies"
   }
 }
 ```
-
-| Attribute  | Constraint | Description                                  |
-| ---------  | ---------- | -----------                                  |
-| `type`     | required   | Should be boolean/choice/association/text    |
-| `category` | required   | What field is the question from              |
-| `title`    | required   | The text of the question                     |
-| `content`  | required   | This can be anything you want                |
-| `hint`     | optional   |                                              |
-| `position` | required   | The position of the question inside the quiz |
 
 ## Updating
 
@@ -193,21 +176,10 @@ Content-Type: application/json
 
 {
   "quiz": {
-    "name": "Game of Thrones",
-    "questions_attributes": [
-      {"title": "..."},
-      {"id": 1, "title": "..."},
-      {"id": 2, "_delete": true}
-    ]
+    "name": "Matrix"
   }
 }
 ```
-
-Updating works the same way as creating. Updating questions works in the following way:
-
-* If a question doesn't have an ID, it will be created.
-* If a question does have an ID, it will be updated.
-* If a question has an ID and `"_delete": true`, it will be deleted.
 
 ## Deleting
 
@@ -217,3 +189,86 @@ Authorization: Token token="abc123"
 ```
 
 This will delete the quiz and its associated questions.
+
+# Questions
+
+| Attribute  | Type    |
+| ---------  | ------  |
+| `type`     | string  |
+| `title`    | string  |
+| `content`  | JSON    |
+| `hint`     | string  |
+| `position` | integer |
+
+## Retrieving
+
+When you retrieve a single quiz, questions will be automatically included.
+Include the authorization token if you want to search only authorized user's
+quizzes.
+
+```http
+GET /quizzes/12 HTTP/1.1
+Authorization: Token token="abc123"
+```
+```http
+GET /quizzes/12 HTTP/1.1
+```
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "quiz": {
+    "name": "Game of Thrones",
+    "category": "movies",
+    "questions": [
+      {"id": 31, "type": "boolean", "title": "..."},
+      {"id": 32, "type": "choice", "title": "..."}
+    ]
+  }
+}
+```
+
+## Creating
+
+When creating a quiz, you can also include `questions_attributes` in quiz' data.
+
+```http
+POST /quizzes HTTP/1.1
+Content-Type: application/json
+
+{
+  "quiz": {
+    "name": "Game of Thrones",
+    "category": "movies",
+    "questions_attributes": [
+      {"type": "boolean", "title": "..."},
+      {"type": "choice", "title": "..."}
+    ]
+  }
+}
+```
+
+## Updating
+
+When updating a quiz, you can also include `questions_attributes` in quiz' data
+to update its questions.
+
+```http
+PUT /quizzes/23 HTTP/1.1
+Content-Type: application/json
+
+{
+  "quiz": {
+    "questions_attributes": [
+      {"title": "..."},
+      {"id": 1, "title": "..."},
+      {"id": 2, "_delete": true}
+    ]
+  }
+}
+```
+
+* If a question doesn't have an ID, it will be **created**.
+* If a question does have an ID, it will be **updated**.
+* If a question has an ID and `"_delete": true`, it will be **deleted**.

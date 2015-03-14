@@ -1,5 +1,6 @@
 require "kvizovi/configuration/sequel"
 require "kvizovi/models/user"
+require "kvizovi/models/question"
 
 module Kvizovi
   module Models
@@ -13,6 +14,11 @@ module Kvizovi
         def newest
           order(Sequel.desc(:updated_at))
         end
+
+        def search(query)
+          where(name: /#{query}/i)
+            .or(id: Question.search(query).select(:quiz_id))
+        end
       end
 
       nested_attributes :questions
@@ -23,7 +29,7 @@ module Kvizovi
 
       def to_json(**options)
         super(
-          only: [:id, :name, :image, :questions_count, :created_at, :updated_at],
+          only: [:id, :name, :category, :image, :questions_count, :created_at, :updated_at],
           include: [:creator, *(:questions if options[:root])],
           **options,
         )
