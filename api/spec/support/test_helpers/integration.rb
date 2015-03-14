@@ -1,30 +1,27 @@
+require "rack/test"
+require "json"
+
 module TestHelpers
   module Integration
-    def self.included(base)
-      require "thin"
-      require "logger"
+    include Rack::Test::Methods
 
-      app = Rack::Builder.parse_file("config.ru").first
-      server = Thin::Server.new(app, "localhost", 8080)
-      Thin::Logging.logger = Logger.new(nil)
-      Thread.new { server.start } and (:wait until server.running?)
+    def app
+      Rack::Builder.parse_file("config.ru").first
     end
 
-    require "forwardable"
-    extend Forwardable
-    delegate [:get, :post, :put, :delete, :head] => :connection
+    [:post, :put, :delete].each do |http_method|
+      define_method(http_method) do |uri, params = {}, env = {}, &block|
+        env["CONTENT_TYPE"] = "application/json"
+        super(uri, params.to_json, env, &block)
+      end
+    end
 
-    def connection
-      @connection ||= (
-        require "faraday"
-        require "faraday_middleware"
+    def body
+      JSON.parse(last_response.body)
+    end
 
-        Faraday.new("http://127.0.0.1:8080") do |builder|
-          builder.request  :json
-          builder.response :json
-          builder.adapter  :net_http
-        end
-      )
+    def status
+      last_response.status
     end
 
     def sent_emails

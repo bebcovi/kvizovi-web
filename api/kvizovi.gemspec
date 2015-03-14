@@ -29,8 +29,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "pry"
   gem.add_development_dependency "rspec", "~> 3.1"
   gem.add_development_dependency "timecop"
-
-  gem.add_development_dependency "thin"
-  gem.add_development_dependency "faraday"
-  gem.add_development_dependency "faraday_middleware"
+  gem.add_development_dependency "rack-test"
 end
