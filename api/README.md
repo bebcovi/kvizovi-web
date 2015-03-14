@@ -1,4 +1,24 @@
-# Introduction
+# Kvizovi API
+
+## Table of contents
+
+* [**Introduction**](#introduction)
+* [**Users**](#users)
+  - [Creating users](#creating-users)
+  - [Retrieving users](#retrieving-users)
+  - [Updating users](#updating-users)
+  - [Deleting users](#deleting-users)
+* [**Quizzes**](#quizzes)
+  - [Creating quizzes](#creating-quizzes)
+  - [Retrieving quizzes](#retrieving-quizzes)
+  - [Updating quizzes](#updating-quizzes)
+  - [Deleting quizzes](#deleting-quizzes)
+* [**Questions**](#questions)
+  - [Creating questions](#creating-questions)
+  - [Retrieving questions](#retrieving-questions)
+  - [Updating questions](#updating-questions)
+
+## Introduction
 
 All requests should be sent and all responses are returned as JSON.
 
@@ -27,7 +47,7 @@ GET /quizzes HTTP/1.1
 Authorization: Token token="abc123"
 ```
 
-# Users
+## Users
 
 | Attribute  | Type    |
 | ---------  | ----    |
@@ -36,7 +56,22 @@ Authorization: Token token="abc123"
 | `email`    | string  |
 | `token`    | string  |
 
-## Registration
+### Retrieving users
+
+```http
+GET /account HTTP/1.1
+Content-Type: application/json
+
+{"user": {"email": "janko.marohnic@gmail.com", "password": "secret"}}
+```
+```http
+GET /account HTTP/1.1
+Content-Type: application/json
+
+{"user": {"token": "abc123"}}
+```
+
+### Creating users
 
 ```http
 POST /account HTTP/1.1
@@ -63,22 +98,17 @@ Content-Type: application/json
 {"token": "abc123"}
 ```
 
-## Authentication
+### Updating users
 
 ```http
-GET /account HTTP/1.1
+PUT /account HTTP/1.1
+Authorization: Token token="abc123"
 Content-Type: application/json
 
-{"user": {"email": "janko.marohnic@gmail.com", "password": "secret"}}
-```
-```http
-GET /account HTTP/1.1
-Content-Type: application/json
-
-{"user": {"token": "abc123"}}
+{"user": {"old_password": "secret", "password": "new secret"}}
 ```
 
-## Password reset
+#### Password reset
 
 ```http
 POST /account/password HTTP/1.1
@@ -103,24 +133,14 @@ Content-Type: application/json
 }
 ```
 
-## Updating account
-
-```http
-PUT /account HTTP/1.1
-Authorization: Token token="abc123"
-Content-Type: application/json
-
-{"user": {"old_password": "secret", "password": "new secret"}}
-```
-
-## Deleting account
+### Deleting users
 
 ```http
 DELETE /account HTTP/1.1
 Authorization: Token token="abc123"
 ```
 
-# Quizzes
+## Quizzes
 
 | Attribute         | Type    |
 | ---------         | ----    |
@@ -131,7 +151,7 @@ Authorization: Token token="abc123"
 | `created_at`      | time    |
 | `updated_at`      | time    |
 
-## Retrieving
+## Retrieving quizzes
 
 To return quizzes from a user, include the authorization token:
 
@@ -152,7 +172,7 @@ GET /quizzes?category=movies HTTP/1.1
 GET /quizzes?page=1&per_page=10 HTTP/1.1
 ```
 
-## Creating
+### Creating quizzes
 
 ```http
 POST /quizzes HTTP/1.1
@@ -167,7 +187,7 @@ Content-Type: application/json
 }
 ```
 
-## Updating
+### Updating quizzes
 
 ```http
 PUT /quizzes/1 HTTP/1.1
@@ -181,7 +201,7 @@ Content-Type: application/json
 }
 ```
 
-## Deleting
+### Deleting quizzes
 
 ```http
 DELETE /quizzes/1 HTTP/1.1
@@ -190,7 +210,7 @@ Authorization: Token token="abc123"
 
 This will delete the quiz and its associated questions.
 
-# Questions
+## Questions
 
 | Attribute  | Type    |
 | ---------  | ------  |
@@ -200,7 +220,7 @@ This will delete the quiz and its associated questions.
 | `hint`     | string  |
 | `position` | integer |
 
-## Retrieving
+### Retrieving questions
 
 When you retrieve a single quiz, questions will be automatically included.
 Include the authorization token if you want to search only authorized user's
@@ -229,7 +249,7 @@ Content-Type: application/json
 }
 ```
 
-## Creating
+### Creating questions
 
 When creating a quiz, you can also include `questions_attributes` in quiz' data.
 
@@ -249,7 +269,7 @@ Content-Type: application/json
 }
 ```
 
-## Updating
+### Updating questions
 
 When updating a quiz, you can also include `questions_attributes` in quiz' data
 to update its questions.
