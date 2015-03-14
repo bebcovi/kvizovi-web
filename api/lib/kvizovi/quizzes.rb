@@ -5,8 +5,6 @@ require "kvizovi/error"
 
 module Kvizovi
   class Quizzes
-    VALID_FIELDS = [:name, :category, :image, :questions_attributes]
-
     def self.search(q: nil, category: nil, page: 1, per_page: nil)
       quizzes = Models::Quiz.dataset
       quizzes = quizzes.search(q) if q
@@ -35,19 +33,19 @@ module Kvizovi
     end
 
     def create(attrs)
-      quiz = Models::Quiz.new
-      quiz.set_only(attrs, *VALID_FIELDS)
-      @user.add_quiz(quiz)
+      @user.add_quiz(attrs)
     end
 
     def update(id, attrs)
       quiz = find(id)
-      quiz.set_only(attrs, *VALID_FIELDS)
-      quiz.save
+      quiz.update(attrs)
+      quiz
     end
 
     def destroy(id)
       find(id).destroy
     end
+
+    private
   end
 end

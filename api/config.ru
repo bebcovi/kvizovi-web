@@ -1,3 +1,3 @@
 require "kvizovi"
 
-run Kvizovi::Api
+run Kvizovi::API

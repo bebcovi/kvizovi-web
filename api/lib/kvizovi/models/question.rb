@@ -1,4 +1,5 @@
 require "kvizovi/configuration/sequel"
+require "kvizovi/configuration/refile"
 
 module Kvizovi
   module Models
@@ -10,6 +11,9 @@ module Kvizovi
           where(title: /#{query}/i).or(:content.cast(String) => /#{query}/i)
         end
       end
+
+      extend Refile::Sequel::Attachment
+      attachment :image
 
       def to_json(**options)
         super(

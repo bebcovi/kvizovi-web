@@ -1,5 +1,7 @@
 ENV["RACK_ENV"] = "test"
 
+require "benchmark"
+
 require_relative "support/test_helpers"
 
 RSpec.configure do |config|

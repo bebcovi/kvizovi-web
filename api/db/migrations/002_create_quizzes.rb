@@ -6,7 +6,7 @@ Sequel.migration do
 
       column :name,     :varchar
       column :category, :varchar
-      column :image,    :varchar
+      column :image_id, :varchar
 
       column :created_at, :timestamp
       column :updated_at, :timestamp

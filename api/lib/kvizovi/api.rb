@@ -1,17 +1,21 @@
 require "grape"
+require "refile"
+require "refile/image_processing"
 
 require "kvizovi/account"
 require "kvizovi/quizzes"
 require "kvizovi/serializer"
 
 module Kvizovi
-  class Api < Grape::API
+  class API < Grape::API
 
     format :json
     default_format :json
     formatter :json, Kvizovi::Serializer
     default_error_status 400
     do_not_route_head!
+
+    mount Refile::App => Refile.mount_point
 
     resource :account do
       get do
@@ -89,7 +93,7 @@ module Kvizovi
       end
 
       def params
-        super.to_h.deep_symbolize_keys! # 💣  Hashie::Mash
+        super.to_hash.deep_symbolize_keys! # 💣  Hashie::Mash
       end
     end
 

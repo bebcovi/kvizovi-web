@@ -1,13 +1,19 @@
 require "spec_helper"
+
 require "kvizovi"
-require "uri"
+
 require "timecop"
 require "pry"
+require "mini_magick"
+
+require "logger"
+require "uri"
 
 Mail.defaults { delivery_method :test }
 BCrypt::Engine.cost = 1
+Refile.logger = Logger.new(nil)
 
-RSpec.describe Kvizovi::Api do
+RSpec.describe Kvizovi::API do
   include TestHelpers::Integration
 
   specify "registration" do
@@ -143,5 +149,19 @@ RSpec.describe Kvizovi::Api do
     get "/quizzes/#{body["quizzes"][0]["id"]}"
     expect(body["quiz"]).not_to be_empty
     expect(body["quiz"]["questions"]).to be_a(Array)
+  end
+
+  specify "attachments" do
+    post_original "/account", user: attributes_for(:janko, avatar: image)
+    avatar_url = body["user"].fetch("avatar_url")
+    avatar_url.gsub!(/\{\w+\}/, "{width}"=>"50", "{height}"=>"50")
+    avatar_path = URI(avatar_url).path
+
+    get avatar_path
+
+    expect(last_response.status).to eq 200
+    avatar = MiniMagick::Image.read(last_response.body)
+    expect(avatar.width).to be <= 50
+    expect(avatar.height).to be <= 50
   end
 end

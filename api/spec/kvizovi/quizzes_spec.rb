@@ -68,11 +68,6 @@ RSpec.describe Kvizovi::Quizzes do
       expect(quiz.questions.count).to eq 4
       expect(quiz.creator).to eq user
     end
-
-    it "controls mass assignment" do
-      expect { subject.create(created_at: Time.now) }
-        .to raise_error(Sequel::Error)
-    end
   end
 
   describe "#find" do
@@ -97,12 +92,6 @@ RSpec.describe Kvizovi::Quizzes do
       quiz = subject.update(quiz.id, {name: "New name"})
 
       expect(quiz.name).to eq "New name"
-    end
-
-    it "controls mass assignment" do
-      quiz = subject.create(attributes_for(:quiz))
-      expect { subject.update(quiz.id, created_at: Time.now) }
-        .to raise_error(Sequel::Error)
     end
 
     it "doesn't find quizzes from another user" do

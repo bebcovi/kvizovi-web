@@ -17,6 +17,8 @@
   - [Creating questions](#creating-questions)
   - [Retrieving questions](#retrieving-questions)
   - [Updating questions](#updating-questions)
+* [**Images**](#images)
+  - [Direct upload](#direct-upload)
 
 ## Introduction
 
@@ -55,6 +57,7 @@ Authorization: Token token="abc123"
 | `nickname` | string  |
 | `email`    | string  |
 | `token`    | string  |
+| `avatar`   | image   |
 
 ### Retrieving users
 
@@ -147,6 +150,7 @@ Authorization: Token token="abc123"
 | `id`              | integer |
 | `name`            | string  |
 | `category`        | string  |
+| `image`           | image   |
 | `questions_count` | integer |
 | `created_at`      | time    |
 | `updated_at`      | time    |
@@ -214,7 +218,9 @@ This will delete the quiz and its associated questions.
 
 | Attribute  | Type    |
 | ---------  | ------  |
+| `id`       | integer |
 | `type`     | string  |
+| `image`    | image   |
 | `title`    | string  |
 | `content`  | JSON    |
 | `hint`     | string  |
@@ -292,3 +298,84 @@ Content-Type: application/json
 * If a question doesn't have an ID, it will be **created**.
 * If a question does have an ID, it will be **updated**.
 * If a question has an ID and `"_delete": true`, it will be **deleted**.
+
+## Images
+
+Users, quizzes and questions can all have images attached. When you send an
+attached image (e.g. as `avatar`), the response will include a URL template:
+
+```json
+{
+  "user": {
+    "id": 32,
+    "avatar_url": "http://example.org/attachments/store/fit/{width}/{height}/more-stuff"
+  }
+}
+```
+
+You only need to take that string and replace `{width}` and `{height}` with
+the dimensions you want.
+
+*__Note__: First time you request an image URL, it will take some time to
+process the request. So, to hide slow loading from the user, you could prefetch
+the URLs (dimensions) you need in the background.*
+
+You can also pass an image as a URL, just send `{"avatar_remote_url": "http://example.com/image.jpg"}`.
+
+To delete an image, send `{"avatar_remove": true}`.
+
+### Direct upload
+
+While the above scenario works, users will have to wait for the image to upload
+after submitting the form. If you want to improve the user experience, you can
+add "direct uploading". Direct uploading means that the image starts uploading
+in the background the moment user selects it.
+
+For direct uploading, send a file as `file` to the endpoint:
+
+```http
+POST /attachments/cache HTTP/1.1
+Content-Type: multipart/form-data
+```
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{"id": "045m8u1tfjortr1peichiguhouc"}
+```
+
+Then, when the user submits the form, instead of the file simply send `{"id":
+"..."}` as the `avatar`.
+
+```http
+POST /account HTTP/1.1
+Content-Type: application/json
+
+{
+  "user" {
+    "avatar": "{\"id\": \"045m8u1tfjortr1peichiguhouc\"}"
+  }
+}
+```
+
+You can also choose an existing solution –
+[refile.js](https://github.com/refile/refile/blob/master/app/assets/javascripts/refile.js).
+This requires that you have the following HTML:
+
+```html
+<form action="/account" enctype="multipart/form-data" method="post">
+  <input name="user[avatar]" type="hidden">
+  <input name="user[avatar]" type="file" data-direct="true" data-as="file" data-url="http://api.kvizovi.org/attachments/cache">
+</form>
+```
+
+One benefit of this existing solution is that it's pure JavaScript (no jQuery),
+with good cross-browser compatibility. Another one is that the file input will
+automatically receive an `uploading` class during uploading. Third, and most
+important, you have the following events automatically dispatched:
+
+* `upload:start`
+* `upload:progress`
+* `upload:complete`
+  * `upload:success`
+  * `upload:failure`

@@ -1,4 +1,6 @@
 require "kvizovi/configuration/sequel"
+require "kvizovi/configuration/refile"
+
 require "kvizovi/models/user"
 require "kvizovi/models/question"
 
@@ -22,6 +24,9 @@ module Kvizovi
       end
 
       nested_attributes :questions
+
+      extend Refile::Sequel::Attachment
+      attachment :image
 
       def questions_count
         questions_dataset.count

@@ -6,10 +6,11 @@ module TestHelpers
     include Rack::Test::Methods
 
     def app
-      Rack::Builder.parse_file("config.ru").first
+      Kvizovi::API
     end
 
     [:post, :put, :delete].each do |http_method|
+      alias_method :"#{http_method}_original", http_method
       define_method(http_method) do |uri, params = {}, env = {}, &block|
         env["CONTENT_TYPE"] = "application/json"
         super(uri, params.to_json, env, &block)
@@ -26,6 +27,10 @@ module TestHelpers
 
     def sent_emails
       Mail::TestMailer.deliveries
+    end
+
+    def image
+      Rack::Test::UploadedFile.new("spec/fixtures/image.jpg")
     end
   end
 end

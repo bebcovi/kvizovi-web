@@ -5,7 +5,10 @@ module Kvizovi
     class Registration
       attr_reader :user
 
-      VALID_FIELDS = [:nickname, :email, :password, :old_password]
+      VALID_FIELDS = [
+        :nickname, :email, :password,
+        :avatar, :remove_avatar, :remote_avatar_url,
+      ]
 
       def self.create(user_class, attributes)
         user = user_class.new

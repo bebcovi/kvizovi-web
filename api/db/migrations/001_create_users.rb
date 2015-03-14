@@ -5,6 +5,7 @@ Sequel.migration do
       column :teacher_id, :integer
 
       column :nickname,           :varchar
+      column :avatar_id,          :varchar
       column :email,              :varchar
       column :encrypted_password, :varchar
       column :token,              :varchar
