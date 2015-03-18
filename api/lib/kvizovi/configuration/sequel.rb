@@ -12,7 +12,9 @@ Sequel::Model.plugin :timestamps, update_on_create: true
 Sequel::Model.plugin :json_serializer
 Sequel::Model.plugin :nested_attributes
 Sequel::Model.plugin :association_dependencies
+Sequel::Model.plugin :pg_array_associations
 
+DB.extension :pg_array
 DB.extension :pg_json
 DB.extension :pagination
 

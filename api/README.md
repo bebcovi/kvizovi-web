@@ -17,6 +17,9 @@
   - [Creating questions](#creating-questions)
   - [Retrieving questions](#retrieving-questions)
   - [Updating questions](#updating-questions)
+* [**Played quizzes**](#played-quizzes)
+  - [Saving played quizzes](#saving-played-quizzes)
+  - [Retrieving played quizzes](#retrieving-played-quizzes)
 * [**Images**](#images)
   - [Direct upload](#direct-upload)
 
@@ -295,6 +298,58 @@ Content-Type: application/json
 * If a question doesn't have an ID, it will be **created**.
 * If a question does have an ID, it will be **updated**.
 * If a question has an ID and `"_delete": true`, it will be **deleted**.
+
+## Played quizzes
+
+| Attribute       | Type      |
+| ---------       | ----      |
+| `id`            | integer   |
+| `quiz_id`       | integer   |
+| `quiz_snapshot` | json      |
+| `player_ids`    | integer[] |
+| `answers`       | json      |
+| `start`         | time      |
+| `finish`        | time      |
+
+### Saving played quizzes
+
+```http
+POST /played_quizzes HTTP/1.1
+Content-Type: application/json
+
+{
+  "players": ["fg0d9sl", "a02hl39b"],
+  "played_quiz": {
+    "quiz_id": 32,
+    "quiz_snapshot": {"name": "Game of Thrones", "questions": []},
+    "answers": {},
+    "start": "2015-03-15 01:54:19 +0100",
+    "finish": "2015-03-15 01:56:19 +0100"
+  }
+}
+```
+
+The `"players"` key should contain an array of players' authorization tokens.
+
+### Retrieving played quizzes
+
+You can retrieve played quizzes as a creator (returns played quizzes that
+the user created) or as a player (returns played quizzes that user played).
+
+```http
+GET /played_quizzes?as=player&quiz_id=44
+Authorization: Token token="abc123"
+```
+
+```http
+GET /played_quizzes?as=creator&quiz_id=44
+Authorization: Token token="abc123"
+```
+
+```http
+GET /played_quizzes?as=creator&page=1&per_page=10
+Authorization: Token token="abc123"
+```
 
 ## Images
 

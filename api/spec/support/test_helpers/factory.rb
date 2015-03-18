@@ -58,6 +58,12 @@ module TestHelpers
         title: "What's the name of King Baratheon's bastard son?",
         content: {answer: "Gendry"},
       }],
+      played_quiz: [:PlayedQuiz, {
+        quiz_snapshot: {},
+        answers: {},
+        start: Time.now,
+        finish: Time.now,
+      }],
     }
   end
 end

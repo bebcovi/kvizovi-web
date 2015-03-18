@@ -6,6 +6,7 @@ require "refile/image_processing"
 require "kvizovi/authorization"
 require "kvizovi/account"
 require "kvizovi/quizzes"
+require "kvizovi/played_quizzes"
 require "kvizovi/serializer"
 
 module Kvizovi
@@ -78,6 +79,16 @@ module Kvizovi
         delete do
           Quizzes.new(current_user).destroy(params[:id])
         end
+      end
+    end
+
+    resources :played_quizzes do
+      post do
+        PlayedQuizzes.create(params[:played_quiz], params[:players])
+      end
+
+      get do
+        PlayedQuizzes.new(current_user).search(params)
       end
     end
 

@@ -141,6 +141,28 @@ RSpec.describe Kvizovi::API do
     expect(body["quiz"]["questions"]).to be_a(Array)
   end
 
+  specify "played quizzes" do
+    post "/account", user: attributes_for(:janko)
+    authorization = token_auth(body["user"]["token"])
+    token = body["user"]["token"]
+
+    post "/quizzes", {quiz: attributes_for(:quiz)}, authorization
+    quiz_id = body["quiz"]["id"]
+
+    post "/played_quizzes", {
+      players: [token],
+      played_quiz: attributes_for(:played_quiz, quiz_id: quiz_id)
+    }
+    expect(body["played_quiz"]).not_to be_empty
+    expect(body["played_quiz"]["players"]).not_to be_empty
+
+    get "/played_quizzes", {as: "player"}, authorization
+    expect(body["played_quizzes"]).not_to be_empty
+
+    get "/played_quizzes", {as: "player", page: 1, per_page: 1}, authorization
+    expect(body["played_quizzes"]).not_to be_empty
+  end
+
   specify "image upload" do
     post_original "/account", user: attributes_for(:janko, avatar: image)
     avatar_url = body["user"].fetch("avatar_url")

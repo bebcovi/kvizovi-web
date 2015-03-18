@@ -42,7 +42,5 @@ module Kvizovi
     def destroy(id)
       find(id).destroy
     end
-
-    private
   end
 end
