@@ -1,7 +1,9 @@
 require "grape"
+
 require "refile"
 require "refile/image_processing"
 
+require "kvizovi/authorization"
 require "kvizovi/account"
 require "kvizovi/quizzes"
 require "kvizovi/serializer"
@@ -19,81 +21,77 @@ module Kvizovi
 
     resource :account do
       get do
-        Kvizovi::Account.authenticate(params[:user])
+        Account.authenticate(authorization.value)
       end
 
       post do
-        Kvizovi::Account.register!(params[:user])
+        Account.register!(params[:user])
       end
 
       put do
-        Kvizovi::Account.new(current_user).update!(params[:user])
+        Account.new(current_user).update!(params[:user])
       end
 
       delete do
-        Kvizovi::Account.new(current_user).destroy!
+        Account.new(current_user).destroy!
       end
 
       put "/confirm" do
-        Kvizovi::Account.confirm!(params[:token])
+        Account.confirm!(params[:token])
       end
 
       post "/password" do
-        Kvizovi::Account.reset_password!(params[:user])
+        Account.reset_password!(params[:user])
       end
 
       put "/password" do
-        Kvizovi::Account.set_password!(params[:token], params[:user])
+        Account.set_password!(params[:token], params[:user])
       end
     end
 
     resources :quizzes do
       get do
-        if authorization_token
-          Kvizovi::Quizzes.new(current_user).all
+        if authorization.present?
+          Quizzes.new(current_user).all
         else
-          Kvizovi::Quizzes.search(params)
+          Quizzes.search(params)
         end
       end
 
       post do
-        Kvizovi::Quizzes.new(current_user).create(params[:quiz])
+        Quizzes.new(current_user).create(params[:quiz])
       end
 
       route_param :id do
         get do
-          if authorization_token
-            Kvizovi::Quizzes.new(current_user).find(params[:id])
+          if authorization.present?
+            Quizzes.new(current_user).find(params[:id])
           else
-            Kvizovi::Quizzes.find(params[:id])
+            Quizzes.find(params[:id])
           end
         end
 
         put do
-          Kvizovi::Quizzes.new(current_user).update(params[:id], params[:quiz])
+          Quizzes.new(current_user).update(params[:id], params[:quiz])
         end
 
         delete do
-          Kvizovi::Quizzes.new(current_user).destroy(params[:id])
+          Quizzes.new(current_user).destroy(params[:id])
         end
       end
     end
 
     helpers do
       def current_user
-        Kvizovi::Account.authenticate(:token, authorization_token!)
+        Account.authenticate(:token, authorization.token)
       end
 
-      def authorization_token!
-        authorization_token or raise Kvizovi::Unauthorized, :token_missing
-      end
-
-      def authorization_token
-        headers["Authorization"].to_s[/Token token="(\w+)"/, 1]
+      def authorization
+        Authorization.new(headers["Authorization"])
       end
 
       def params
-        super.to_hash.deep_symbolize_keys! # 💣  Hashie::Mash
+        super.to_hash.deep_symbolize_keys! # Die, Hashie::Mash
       end
     end
 

@@ -2,6 +2,7 @@ Sequel.migration do
   change do
     create_table :questions do
       primary_key :id
+
       column :quiz_id, :integer
 
       column :type,     :varchar

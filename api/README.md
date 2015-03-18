@@ -63,15 +63,11 @@ Authorization: Token token="abc123"
 
 ```http
 GET /account HTTP/1.1
-Content-Type: application/json
-
-{"user": {"email": "janko.marohnic@gmail.com", "password": "secret"}}
+Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ
 ```
 ```http
 GET /account HTTP/1.1
-Content-Type: application/json
-
-{"user": {"token": "abc123"}}
+Authorization: Token token="abc123"
 ```
 
 ### Creating users
@@ -151,6 +147,7 @@ Authorization: Token token="abc123"
 | `name`            | string  |
 | `category`        | string  |
 | `image`           | image   |
+| `active`          | boolean |
 | `questions_count` | integer |
 | `created_at`      | time    |
 | `updated_at`      | time    |
@@ -222,7 +219,7 @@ This will delete the quiz and its associated questions.
 | `type`     | string  |
 | `image`    | image   |
 | `title`    | string  |
-| `content`  | JSON    |
+| `content`  | json    |
 | `hint`     | string  |
 | `position` | integer |
 
@@ -352,7 +349,7 @@ POST /account HTTP/1.1
 Content-Type: application/json
 
 {
-  "user" {
+  "user": {
     "avatar": "{\"id\": \"045m8u1tfjortr1peichiguhouc\"}"
   }
 }

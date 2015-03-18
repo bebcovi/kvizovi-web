@@ -17,11 +17,12 @@ module Kvizovi
 
   class Unauthorized < Error
     self.translations = {
-      email:         "Ne postoji korisnik s tom email adresom",
-      credentials:   "Pogrešan email ili lozinka",
-      expired:       "Morate potvrditi svoj korisnički račun",
-      token_missing: "No authorization token given",
-      token:         "No user with that token",
+      token_missing:         "No authorization token given",
+      authorization_missing: "No authorization credentials given",
+      email_invalid:         "Ne postoji korisnik s tom email adresom",
+      credentials_invalid:   "Pogrešan email ili lozinka",
+      token_invalid:         "No user with that token",
+      account_expired:       "Morate potvrditi svoj korisnički račun",
     }
   end
 end

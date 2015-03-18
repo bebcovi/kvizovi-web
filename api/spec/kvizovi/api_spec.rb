@@ -8,6 +8,7 @@ require "mini_magick"
 
 require "logger"
 require "uri"
+require "base64"
 
 Mail.defaults { delivery_method :test }
 BCrypt::Engine.cost = 1
@@ -15,6 +16,15 @@ Refile.logger = Logger.new(nil)
 
 RSpec.describe Kvizovi::API do
   include TestHelpers::Integration
+
+  def token_auth(token)
+    {"HTTP_AUTHORIZATION" => "Token token=\"#{token}\""}
+  end
+
+  def basic_auth(username, password)
+    encoded_login = ["#{username}:#{password}"].pack("m*")
+    {"HTTP_AUTHORIZATION" => "Basic #{encoded_login}"}
+  end
 
   specify "registration" do
     post "/account", user: attributes_for(:janko)
@@ -34,13 +44,10 @@ RSpec.describe Kvizovi::API do
   specify "authentication" do
     post "/account", user: attributes_for(:janko)
 
-    get "/account", user: {
-      email: attributes_for(:janko)[:email],
-      password: attributes_for(:janko)[:password],
-    }
+    get "/account", {}, basic_auth(attributes_for(:janko)[:email], attributes_for(:janko)[:password])
     expect(body["user"]).not_to be_empty
 
-    get "/account", user: {token: body["user"]["token"]}
+    get "/account", {}, token_auth(body["user"]["token"])
     expect(body["user"]).not_to be_empty
   end
 
@@ -50,14 +57,9 @@ RSpec.describe Kvizovi::API do
     post "/account/password", user: {email: attributes_for(:janko)[:email]}
     url = URI(sent_emails.last.body.to_s[%r{^http://.+$}])
     put url.request_uri, user: {password: "another secret"}
-
     expect(body["user"]).not_to be_empty
 
-    get "/account", user: {
-      email: attributes_for(:janko)[:email],
-      password: "another secret",
-    }
-
+    get "/account", {}, basic_auth(attributes_for(:janko)[:email], "another secret")
     expect(status).to eq 200
   end
 
@@ -66,27 +68,18 @@ RSpec.describe Kvizovi::API do
 
     resp = put "/account",
       {user: {old_password: attributes_for(:janko)[:password], password: "new secret"}},
-      {"HTTP_AUTHORIZATION" => %(Token token="#{body["user"]["token"]}")}
+      token_auth(body["user"]["token"])
 
-    get "/account", user: {
-      email: attributes_for(:janko)[:email],
-      password: "new secret",
-    }
-
+    get "/account", {}, basic_auth(attributes_for(:janko)[:email], "new secret")
     expect(status).to eq 200
   end
 
   specify "deleting account" do
     post "/account", user: attributes_for(:janko)
 
-    delete "/account", {},
-      {"HTTP_AUTHORIZATION" => %(Token token="#{body["user"]["token"]}")}
+    delete "/account", {}, token_auth(body["user"]["token"])
 
-    get "/account", user: {
-      email: attributes_for(:janko)[:email],
-      password: attributes_for(:janko)[:password],
-    }
-
+    get "/account", {}, basic_auth(attributes_for(:janko)[:email], attributes_for(:janko)[:password])
     expect(status).to eq 401
   end
 
@@ -101,10 +94,9 @@ RSpec.describe Kvizovi::API do
     expect(status).to eq 401
   end
 
-
   specify "managing quizzes" do
     post "/account", user: attributes_for(:janko)
-    authorization = {"HTTP_AUTHORIZATION" => %(Token token="#{body["user"]["token"]}")}
+    authorization = token_auth(body["user"]["token"])
 
     post "/quizzes",
       {quiz: attributes_for(:quiz,
@@ -130,15 +122,13 @@ RSpec.describe Kvizovi::API do
 
   specify "searching quizzes for playing" do
     post "/account", user: attributes_for(:janko)
-    authorization = {"HTTP_AUTHORIZATION" => %(Token token="#{body["user"]["token"]}")}
+    authorization = token_auth(body["user"]["token"])
 
-    post "/quizzes", {quiz: attributes_for(:quiz,
-      name: "Game of Thrones", category: "movies")}, authorization
-    post "/quizzes", {quiz: attributes_for(:quiz,
-      name: "Game of Life", category: "programming")}, authorization
+    post "/quizzes", {quiz: attributes_for(:quiz, name: "Game of Thrones", category: "movies")}, authorization
+    post "/quizzes", {quiz: attributes_for(:quiz, name: "Tulips", category: "flowers")}, authorization
 
     get "/quizzes", q: "Game"
-    expect(body["quizzes"].count).to eq 2
+    expect(body["quizzes"].count).to eq 1
 
     get "/quizzes", category: "movies"
     expect(body["quizzes"].count).to eq 1
@@ -151,7 +141,7 @@ RSpec.describe Kvizovi::API do
     expect(body["quiz"]["questions"]).to be_a(Array)
   end
 
-  specify "attachments" do
+  specify "image upload" do
     post_original "/account", user: attributes_for(:janko, avatar: image)
     avatar_url = body["user"].fetch("avatar_url")
     avatar_url.gsub!(/\{\w+\}/, "{width}"=>"50", "{height}"=>"50")

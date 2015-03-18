@@ -1,6 +1,9 @@
 require "spec_helper"
+
 require "kvizovi/quizzes"
 require "kvizovi/models/user"
+
+require "timecop"
 
 RSpec.describe Kvizovi::Quizzes do
   subject { Kvizovi::Quizzes.new(user) }
@@ -92,6 +95,15 @@ RSpec.describe Kvizovi::Quizzes do
       quiz = subject.update(quiz.id, {name: "New name"})
 
       expect(quiz.name).to eq "New name"
+    end
+
+    it "updates the updated_at column when updating questions" do
+      quiz = subject.create(attributes_for(:quiz))
+      last_updated = quiz.updated_at
+
+      quiz = subject.update(quiz.id, {questions_attributes: [attributes_for(:question)]})
+
+      expect(quiz.updated_at).to be > last_updated
     end
 
     it "doesn't find quizzes from another user" do

@@ -59,7 +59,7 @@ RSpec.describe Kvizovi::Account do
     before { @user = register }
 
     it "returns the authenticated user" do
-      credentials = {email: @user.email, password: @user.password}
+      credentials = [@user.email, @user.password]
 
       user = Kvizovi::Account.authenticate(credentials)
 
@@ -67,21 +67,21 @@ RSpec.describe Kvizovi::Account do
     end
 
     it "returns errors if password was invalid" do
-      credentials = {email: @user.email, password: "incorrect password"}
+      credentials = [@user.email, "incorrect password"]
 
       expect { Kvizovi::Account.authenticate(credentials) }
         .to raise_error(Kvizovi::Error)
     end
 
     it "returns errors if email was invalid" do
-      credentials = {email: "incorrect@email.com", password: @user.password}
+      credentials = ["incorrect@email.com", @user.password]
 
       expect { Kvizovi::Account.authenticate(credentials) }
         .to raise_error(Kvizovi::Error)
     end
 
     it "raises an error if account has expired" do
-      credentials = {email: @user.email, password: @user.password}
+      credentials = [@user.email, @user.password]
 
       Timecop.travel(4*24*60*60) do
         expect { Kvizovi::Account.authenticate(credentials) }

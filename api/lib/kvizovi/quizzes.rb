@@ -9,10 +9,7 @@ module Kvizovi
       quizzes = Models::Quiz.dataset
       quizzes = quizzes.search(q) if q
       quizzes = quizzes.where(category: category) if category
-      if per_page
-        page, per_page = Integer(page), Integer(per_page)
-        quizzes = quizzes.limit(per_page, (page - 1) * per_page)
-      end
+      quizzes = quizzes.paginate(Integer(page), Integer(per_page)) if per_page
       quizzes
     end
 

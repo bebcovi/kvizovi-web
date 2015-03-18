@@ -24,6 +24,7 @@ Gem::Specification.new do |gem|
 
   # Images
   gem.add_dependency "refile", "~> 0.5"
+  gem.add_dependency "refile-sequel"
   gem.add_dependency "mini_magick", "~> 4.1"
 
   # Email

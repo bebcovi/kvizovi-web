@@ -8,6 +8,7 @@ PATH
       mini_magick (~> 4.1)
       pg
       refile (~> 0.5)
+      refile-sequel
       sequel (~> 4.20)
       unindent
 
@@ -72,6 +73,9 @@ GEM
     refile (0.5.3)
       mime-types
       sinatra (~> 1.4.5)
+    refile-sequel (0.0.1)
+      refile (~> 0.5)
+      sequel (~> 4.0)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -97,7 +101,7 @@ GEM
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unindent (1.0)
-    virtus (1.0.4)
+    virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
