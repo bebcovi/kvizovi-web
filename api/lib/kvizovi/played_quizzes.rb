@@ -2,8 +2,7 @@ require "kvizovi/models/played_quiz"
 
 module Kvizovi
   class PlayedQuizzes
-    def self.create(attributes, tokens)
-      players = tokens.map { |token| Account.authenticate(:token, token) }
+    def self.create(attributes, players)
       Models::PlayedQuiz.create attributes.merge(
         player_ids: players.map(&:id),
       )
@@ -17,7 +16,7 @@ module Kvizovi
       played_quizzes = send("search_as_#{as}")
       played_quizzes = played_quizzes.where(quiz_id: quiz_id) if quiz_id
       played_quizzes = played_quizzes.paginate(Integer(page), Integer(per_page)) if per_page
-      played_quizzes
+      played_quizzes.eager(:players)
     end
 
     private

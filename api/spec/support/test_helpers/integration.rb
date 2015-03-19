@@ -6,7 +6,7 @@ module TestHelpers
     include Rack::Test::Methods
 
     def app
-      Kvizovi::API
+      Rack::Builder.parse_file("config.ru").first
     end
 
     [:post, :put, :delete].each do |http_method|

@@ -6,6 +6,15 @@ RSpec.describe Kvizovi::PlayedQuizzes do
   let!(:user) { create(:janko) }
   let!(:quiz) { create(:quiz, creator_id: user.id) }
 
+  describe ".create" do
+    it "creates the played quiz" do
+      played_quiz = described_class.create(
+        attributes_for(:played_quiz, quiz_id: quiz.id), [user])
+
+      expect(played_quiz).to exist
+    end
+  end
+
   describe "#search" do
     let!(:played_quiz) { create(:played_quiz, quiz_id: quiz.id, player_ids: [user.id]) }
 

@@ -1,8 +1,5 @@
 require "grape"
 
-require "refile"
-require "refile/image_processing"
-
 require "kvizovi/authorization"
 require "kvizovi/account"
 require "kvizovi/quizzes"
@@ -17,8 +14,6 @@ module Kvizovi
     formatter :json, Kvizovi::Serializer
     default_error_status 400
     do_not_route_head!
-
-    mount Refile::App => Refile.mount_point
 
     resource :account do
       get do
@@ -84,7 +79,8 @@ module Kvizovi
 
     resources :played_quizzes do
       post do
-        PlayedQuizzes.create(params[:played_quiz], params[:players])
+        players = params[:players].map { |token| Account.authenticate(:token, token) }
+        PlayedQuizzes.create(params[:played_quiz], players)
       end
 
       get do
