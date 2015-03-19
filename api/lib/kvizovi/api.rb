@@ -1,10 +1,12 @@
 require "grape"
 
 require "kvizovi/authorization"
-require "kvizovi/account"
-require "kvizovi/quizzes"
-require "kvizovi/played_quizzes"
 require "kvizovi/serializer"
+require "kvizovi/error"
+
+require "kvizovi/services/account"
+require "kvizovi/services/quizzes"
+require "kvizovi/services/played_quizzes"
 
 module Kvizovi
   class API < Grape::API
@@ -17,80 +19,81 @@ module Kvizovi
 
     resource :account do
       get do
-        Account.authenticate(authorization.value)
+        Services::Account.authenticate(authorization.value)
       end
 
       post do
-        Account.register!(params[:user])
+        Services::Account.register!(params[:user])
       end
 
       put do
-        Account.new(current_user).update!(params[:user])
+        Services::Account.new(current_user).update!(params[:user])
       end
 
       delete do
-        Account.new(current_user).destroy!
+        Services::Account.new(current_user).destroy!
       end
 
       put "/confirm" do
-        Account.confirm!(params[:token])
+        Services::Account.confirm!(params[:token])
       end
 
       post "/password" do
-        Account.reset_password!(params[:user])
+        Services::Account.reset_password!(params[:user])
       end
 
       put "/password" do
-        Account.set_password!(params[:token], params[:user])
+        Services::Account.set_password!(params[:token], params[:user])
       end
     end
 
     resources :quizzes do
       get do
         if authorization.present?
-          Quizzes.new(current_user).all
+          Services::Quizzes.new(current_user).all
         else
-          Quizzes.search(params)
+          Services::Quizzes.search(params)
         end
       end
 
       post do
-        Quizzes.new(current_user).create(params[:quiz])
+        Services::Quizzes.new(current_user).create(params[:quiz])
       end
 
       route_param :id do
         get do
           if authorization.present?
-            Quizzes.new(current_user).find(params[:id])
+            Services::Quizzes.new(current_user).find(params[:id])
           else
-            Quizzes.find(params[:id])
+            Services::Quizzes.find(params[:id])
           end
         end
 
         put do
-          Quizzes.new(current_user).update(params[:id], params[:quiz])
+          Services::Quizzes.new(current_user).update(params[:id], params[:quiz])
         end
 
         delete do
-          Quizzes.new(current_user).destroy(params[:id])
+          Services::Quizzes.new(current_user).destroy(params[:id])
         end
       end
     end
 
     resources :played_quizzes do
       post do
-        players = params[:players].map { |token| Account.authenticate(:token, token) }
-        PlayedQuizzes.create(params[:played_quiz], players)
+        players = params[:players]
+          .map { |token| Services::Account.authenticate(:token, token) }
+        Services::PlayedQuizzes.create(params[:played_quiz], players)
       end
 
       get do
-        PlayedQuizzes.new(current_user).search(params)
+        Services::PlayedQuizzes.new(current_user).search(params)
       end
     end
 
     helpers do
       def current_user
-        Account.authenticate(:token, authorization.token)
+        Services::Account.authenticate(:token, authorization.token)
       end
 
       def authorization

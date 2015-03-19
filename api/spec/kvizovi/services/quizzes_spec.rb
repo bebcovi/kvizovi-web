@@ -1,12 +1,12 @@
 require "spec_helper"
 
-require "kvizovi/quizzes"
+require "kvizovi/services/quizzes"
 require "kvizovi/models/user"
 
 require "timecop"
 
-RSpec.describe Kvizovi::Quizzes do
-  subject { Kvizovi::Quizzes.new(user) }
+RSpec.describe Kvizovi::Services::Quizzes do
+  subject { described_class.new(user) }
   let(:user) { create(:janko) }
   let(:another_user) { create(:matija) }
 
@@ -81,7 +81,7 @@ RSpec.describe Kvizovi::Quizzes do
     end
 
     it "doesn't find quizzes from another user" do
-      quizzes = Kvizovi::Quizzes.new(another_user)
+      quizzes = described_class.new(another_user)
       quiz = quizzes.create(attributes_for(:quiz))
 
       expect { subject.find(quiz.id) }.to raise_error
@@ -107,7 +107,7 @@ RSpec.describe Kvizovi::Quizzes do
     end
 
     it "doesn't find quizzes from another user" do
-      quizzes = Kvizovi::Quizzes.new(another_user)
+      quizzes = described_class.new(another_user)
       quiz = quizzes.create(attributes_for(:quiz))
 
       expect { subject.update(quiz.id, {}) }.to raise_error
@@ -134,7 +134,7 @@ RSpec.describe Kvizovi::Quizzes do
     end
 
     it "doesn't find quizzes from another user" do
-      quizzes = Kvizovi::Quizzes.new(another_user)
+      quizzes = described_class.new(another_user)
       quiz = quizzes.create(attributes_for(:quiz))
 
       expect { subject.destroy(quiz.id) }.to raise_error

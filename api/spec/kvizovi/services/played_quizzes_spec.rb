@@ -1,8 +1,9 @@
 require "spec_helper"
-require "kvizovi/played_quizzes"
 
-RSpec.describe Kvizovi::PlayedQuizzes do
-  subject { Kvizovi::PlayedQuizzes.new(user) }
+require "kvizovi/services/played_quizzes"
+
+RSpec.describe Kvizovi::Services::PlayedQuizzes do
+  subject { described_class.new(user) }
   let!(:user) { create(:janko) }
   let!(:quiz) { create(:quiz, creator_id: user.id) }
 

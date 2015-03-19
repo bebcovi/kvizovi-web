@@ -1,9 +1,11 @@
 require "spec_helper"
-require "kvizovi/account"
+
+require "kvizovi/services/account"
+
 require "timecop"
 
-RSpec.describe Kvizovi::Account do
-  subject { Kvizovi::Account.new(@user) }
+RSpec.describe Kvizovi::Services::Account do
+  subject { described_class.new(@user) }
   let(:attributes) { attributes_for(:janko) }
 
   before do
@@ -14,42 +16,42 @@ RSpec.describe Kvizovi::Account do
   end
 
   def register(additional_attributes = {})
-    Kvizovi::Account.register!(attributes.merge(additional_attributes))
+    described_class.register!(attributes.merge(additional_attributes))
   end
 
   describe ".register!" do
     it "controls mass assignment" do
-      expect { Kvizovi::Account.register!(created_at: Time.now) }
+      expect { described_class.register!(created_at: Time.now) }
         .to raise_error(Sequel::Error)
     end
 
     it "encrypts the password" do
-      user = Kvizovi::Account.register!(attributes)
+      user = described_class.register!(attributes)
 
       expect(user.encrypted_password).to be_a_nonempty(String)
       expect(user.encrypted_password).not_to eq user.password
     end
 
     it "assigns the confirmation token" do
-      user = Kvizovi::Account.register!(attributes)
+      user = described_class.register!(attributes)
 
       expect(user.confirmation_token).to be_a_nonempty(String)
     end
 
     it "assigns the authentication token" do
-      user = Kvizovi::Account.register!(attributes)
+      user = described_class.register!(attributes)
 
       expect(user.token).to be_a_nonempty(String)
     end
 
     it "saves the user" do
-      user = Kvizovi::Account.register!(attributes)
+      user = described_class.register!(attributes)
 
       expect(user.new?).to eq false
     end
 
     it "sends the confirmation email" do
-      user = Kvizovi::Account.register!(attributes)
+      user = described_class.register!(attributes)
 
       expect(Kvizovi.mailer).to have_received(:registration_confirmation)
     end
@@ -61,7 +63,7 @@ RSpec.describe Kvizovi::Account do
     it "returns the authenticated user" do
       credentials = [@user.email, @user.password]
 
-      user = Kvizovi::Account.authenticate(credentials)
+      user = described_class.authenticate(credentials)
 
       expect(user).to be_a(Kvizovi::Models::User)
     end
@@ -69,14 +71,14 @@ RSpec.describe Kvizovi::Account do
     it "returns errors if password was invalid" do
       credentials = [@user.email, "incorrect password"]
 
-      expect { Kvizovi::Account.authenticate(credentials) }
+      expect { described_class.authenticate(credentials) }
         .to raise_error(Kvizovi::Error)
     end
 
     it "returns errors if email was invalid" do
       credentials = ["incorrect@email.com", @user.password]
 
-      expect { Kvizovi::Account.authenticate(credentials) }
+      expect { described_class.authenticate(credentials) }
         .to raise_error(Kvizovi::Error)
     end
 
@@ -84,7 +86,7 @@ RSpec.describe Kvizovi::Account do
       credentials = [@user.email, @user.password]
 
       Timecop.travel(4*24*60*60) do
-        expect { Kvizovi::Account.authenticate(credentials) }
+        expect { described_class.authenticate(credentials) }
           .to raise_error(Kvizovi::Error)
       end
     end
@@ -94,13 +96,13 @@ RSpec.describe Kvizovi::Account do
     before { @user = register }
 
     it "sets the time of the confirmation" do
-      user = Kvizovi::Account.confirm!(@user.confirmation_token)
+      user = described_class.confirm!(@user.confirmation_token)
 
       expect(user.confirmed_at).to be_a(Time)
     end
 
     it "deassigns the confirmation token" do
-      user = Kvizovi::Account.confirm!(@user.confirmation_token)
+      user = described_class.confirm!(@user.confirmation_token)
 
       expect(user.confirmation_token).to eq nil
     end
@@ -110,13 +112,13 @@ RSpec.describe Kvizovi::Account do
     before { @user = register }
 
     it "assigns the password reset token" do
-      user = Kvizovi::Account.reset_password!(email: @user.email)
+      user = described_class.reset_password!(email: @user.email)
 
       expect(user.password_reset_token).to be_a_nonempty(String)
     end
 
     it "sends the password reset instructions email" do
-      user = Kvizovi::Account.reset_password!(email: @user.email)
+      user = described_class.reset_password!(email: @user.email)
 
       expect(Kvizovi.mailer).to have_received(:password_reset_instructions)
     end
@@ -129,25 +131,25 @@ RSpec.describe Kvizovi::Account do
 
   describe ".set_password!" do
     before { @user = register }
-    before { @user = Kvizovi::Account.reset_password!(email: @user.email) }
+    before { @user = described_class.reset_password!(email: @user.email) }
     let(:token) { @user.password_reset_token }
 
     it "controls mass assignment" do
-      expect { Kvizovi::Account.set_password!(token, created_at: nil) }
+      expect { described_class.set_password!(token, created_at: nil) }
         .to raise_error(Sequel::Error)
     end
 
     it "encrypts the password" do
       old_password = @user.encrypted_password
 
-      user = Kvizovi::Account.set_password!(token, password: "new secret")
+      user = described_class.set_password!(token, password: "new secret")
 
       expect(user.encrypted_password).to be_a_nonempty(String)
       expect(user.encrypted_password).not_to eq old_password
     end
 
     it "deassigns the password reset token" do
-      user = Kvizovi::Account.set_password!(token, password: "new secret")
+      user = described_class.set_password!(token, password: "new secret")
 
       expect(user.password_reset_token).to eq nil
     end
@@ -155,7 +157,7 @@ RSpec.describe Kvizovi::Account do
     it "saves the user" do
       old_password = @user.encrypted_password
 
-      user = Kvizovi::Account.set_password!(token, password: "new secret")
+      user = described_class.set_password!(token, password: "new secret")
 
       expect(user.encrypted_password).not_to eq old_password
     end
