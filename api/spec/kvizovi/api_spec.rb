@@ -176,4 +176,11 @@ RSpec.describe Kvizovi::API do
     expect(avatar.width).to be <= 50
     expect(avatar.height).to be <= 50
   end
+
+  specify "contact" do
+    post "/contact", email: "foo@bar.com", body: "Hello"
+
+    expect(sent_emails.last.reply_to).to include "foo@bar.com"
+    expect(sent_emails.last.body).to eq "Hello"
+  end
 end

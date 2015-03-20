@@ -22,6 +22,7 @@
   - [Retrieving played quizzes](#retrieving-played-quizzes)
 * [**Images**](#images)
   - [Direct upload](#direct-upload)
+* [**Contact**](#contact)
 
 ## Introduction
 
@@ -431,3 +432,15 @@ important, you have the following events automatically dispatched:
 * `upload:complete`
   * `upload:success`
   * `upload:failure`
+
+## Contact
+
+```http
+POST /contact HTTP/1.1
+Content-Type application/json
+
+{"email": "foo@bar.com", body: "Hello, I have a problem..."}
+```
+
+The `email` field should be the email of the user, and it will be used in the
+"Reply-To" header of the outgoing email.

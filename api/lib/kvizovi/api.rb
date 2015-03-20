@@ -91,6 +91,10 @@ module Kvizovi
       end
     end
 
+    post "/contact" do
+      Kvizovi.mailer.send(:contact, params)
+    end
+
     helpers do
       def current_user
         Services::Account.authenticate(:token, authorization.token)
