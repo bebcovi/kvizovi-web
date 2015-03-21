@@ -98,7 +98,7 @@ RSpec.describe Kvizovi::API do
     post "/account", user: attributes_for(:janko)
     authorization = token_auth(body["user"]["token"])
 
-    post "/quizzes",
+    post "/account/quizzes",
       {quiz: attributes_for(:quiz,
         questions_attributes: [attributes_for(:question)])}, authorization
     expect(body["quiz"]).not_to be_empty
@@ -106,15 +106,15 @@ RSpec.describe Kvizovi::API do
 
     quiz_id = body["quiz"]["id"]
 
-    get "/quizzes/#{quiz_id}", {}, authorization
+    get "/account/quizzes/#{quiz_id}", {}, authorization
     expect(body["quiz"]).not_to be_empty
     expect(body["quiz"]["questions"]).to be_a(Array)
 
-    put "/quizzes/#{quiz_id}", {quiz: {name: "New name"}}, authorization
+    put "/account/quizzes/#{quiz_id}", {quiz: {name: "New name"}}, authorization
     expect(body["quiz"]).not_to be_empty
     expect(body["quiz"]["name"]).to eq "New name"
 
-    get "/quizzes", {}, authorization
+    get "/account/quizzes", {}, authorization
     expect(body["quizzes"]).not_to be_empty
     expect(body["quizzes"].first).not_to have_key("quiz")
     expect(body["quizzes"].first).not_to have_key("questions")
@@ -124,8 +124,8 @@ RSpec.describe Kvizovi::API do
     post "/account", user: attributes_for(:janko)
     authorization = token_auth(body["user"]["token"])
 
-    post "/quizzes", {quiz: attributes_for(:quiz, name: "Game of Thrones", category: "movies")}, authorization
-    post "/quizzes", {quiz: attributes_for(:quiz, name: "Tulips", category: "flowers")}, authorization
+    post "/account/quizzes", {quiz: attributes_for(:quiz, name: "Game of Thrones", category: "movies")}, authorization
+    post "/account/quizzes", {quiz: attributes_for(:quiz, name: "Tulips", category: "flowers")}, authorization
 
     get "/quizzes", q: "Game"
     expect(body["quizzes"].count).to eq 1
@@ -146,7 +146,7 @@ RSpec.describe Kvizovi::API do
     authorization = token_auth(body["user"]["token"])
     token = body["user"]["token"]
 
-    post "/quizzes", {quiz: attributes_for(:quiz)}, authorization
+    post "/account/quizzes", {quiz: attributes_for(:quiz)}, authorization
     quiz_id = body["quiz"]["id"]
 
     post "/played_quizzes", {

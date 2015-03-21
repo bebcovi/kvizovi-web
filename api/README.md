@@ -156,16 +156,16 @@ Authorization: Token token="abc123"
 | `created_at`      | time    |
 | `updated_at`      | time    |
 
-## Retrieving quizzes
+### Retrieving quizzes
 
-To return quizzes from a user, include the authorization token:
+To return quizzes from a user, make a request under `/account`:
 
 ```http
-GET /quizzes HTTP/1.1
+GET /account/quizzes HTTP/1.1
 Authorization: Token token="abc123"
 ```
 
-Without an authorization token you're searching all quizzes:
+On the top-level you're searching all quizzes:
 
 ```http
 GET /quizzes?q=matrix HTTP/1.1
@@ -180,7 +180,7 @@ GET /quizzes?page=1&per_page=10 HTTP/1.1
 ### Creating quizzes
 
 ```http
-POST /quizzes HTTP/1.1
+POST /account/quizzes HTTP/1.1
 Authorization: Token token="abc123"
 Content-Type: application/json
 
@@ -195,7 +195,7 @@ Content-Type: application/json
 ### Updating quizzes
 
 ```http
-PUT /quizzes/1 HTTP/1.1
+PUT /account/quizzes/1 HTTP/1.1
 Authorization: Token token="abc123"
 Content-Type: application/json
 
@@ -209,7 +209,7 @@ Content-Type: application/json
 ### Deleting quizzes
 
 ```http
-DELETE /quizzes/1 HTTP/1.1
+DELETE /account/quizzes/1 HTTP/1.1
 Authorization: Token token="abc123"
 ```
 
@@ -261,7 +261,8 @@ Content-Type: application/json
 When creating a quiz, you can also include `questions_attributes` in quiz' data.
 
 ```http
-POST /quizzes HTTP/1.1
+POST /account/quizzes HTTP/1.1
+Authorization: Token token="abc123"
 Content-Type: application/json
 
 {
@@ -282,7 +283,8 @@ When updating a quiz, you can also include `questions_attributes` in quiz' data
 to update its questions.
 
 ```http
-PUT /quizzes/23 HTTP/1.1
+PUT /account/quizzes/23 HTTP/1.1
+Authorization: Token token="abc123"
 Content-Type: application/json
 
 {

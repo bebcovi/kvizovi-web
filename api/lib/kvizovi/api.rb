@@ -45,36 +45,40 @@ module Kvizovi
       put "/password" do
         Services::Account.set_password!(params[:token], params[:user])
       end
+
+      resources :quizzes do
+        get do
+          Services::Quizzes.new(current_user).all
+        end
+
+        post do
+          Services::Quizzes.new(current_user).create(params[:quiz])
+        end
+
+        route_param :id do
+          get do
+            Services::Quizzes.new(current_user).find(params[:id])
+          end
+
+          put do
+            Services::Quizzes.new(current_user).update(params[:id], params[:quiz])
+          end
+
+          delete do
+            Services::Quizzes.new(current_user).destroy(params[:id])
+          end
+        end
+      end
     end
 
     resources :quizzes do
       get do
-        if authorization.present?
-          Services::Quizzes.new(current_user).all
-        else
-          Services::Quizzes.search(params)
-        end
-      end
-
-      post do
-        Services::Quizzes.new(current_user).create(params[:quiz])
+        Services::Quizzes.search(params)
       end
 
       route_param :id do
         get do
-          if authorization.present?
-            Services::Quizzes.new(current_user).find(params[:id])
-          else
-            Services::Quizzes.find(params[:id])
-          end
-        end
-
-        put do
-          Services::Quizzes.new(current_user).update(params[:id], params[:quiz])
-        end
-
-        delete do
-          Services::Quizzes.new(current_user).destroy(params[:id])
+          Services::Quizzes.find(params[:id])
         end
       end
     end
