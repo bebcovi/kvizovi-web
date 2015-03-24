@@ -14,19 +14,24 @@ module Kvizovi
 
       dataset_module do
         def newest
-          order(Sequel.desc(:updated_at))
+          order{updated_at.desc}
         end
 
         def search(query)
-          where(name: /#{query}/i)
-            .or(id: Question.search(query).select(:quiz_id))
+          where {
+            (name =~ /#{query}/i) |
+            (id =~ Question.select(:quiz_id).where {
+              (title =~ /#{query}/i) |
+              (content.cast(:text) =~ /#{query}/i)
+            })
+          }
         end
       end
 
-      nested_attributes :questions
-
       extend Refile::Sequel::Attachment
       attachment :image
+
+      nested_attributes :questions
 
       def questions_count
         questions_dataset.count

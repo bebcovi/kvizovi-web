@@ -19,13 +19,13 @@ Gem::Specification.new do |gem|
   gem.add_dependency "grape", "~> 0.11"
 
   # Database
-  gem.add_dependency "sequel", "~> 4.20"
+  gem.add_dependency "sequel", "~> 4.21"
   gem.add_dependency "pg"
 
   # Images
   gem.add_dependency "refile", "~> 0.5"
   gem.add_dependency "refile-sequel"
-  gem.add_dependency "mini_magick", "~> 4.1"
+  gem.add_dependency "mini_magick", "~> 4.2"
 
   # Email
   gem.add_dependency "mail"

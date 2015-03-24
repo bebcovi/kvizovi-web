@@ -5,11 +5,11 @@ PATH
       bcrypt (~> 3.1)
       grape (~> 0.11)
       mail
-      mini_magick (~> 4.1)
+      mini_magick (~> 4.2)
       pg
       refile (~> 0.5)
       refile-sequel
-      sequel (~> 4.20)
+      sequel (~> 4.21)
       unindent
 
 GEM
@@ -52,7 +52,7 @@ GEM
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.4.3)
-    mini_magick (4.1.0)
+    mini_magick (4.2.1)
     minitest (5.5.1)
     multi_json (1.11.0)
     multi_xml (0.5.5)
@@ -89,14 +89,14 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
-    sequel (4.20.0)
-    sinatra (1.4.5)
+    sequel (4.21.0)
+    sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
-      tilt (~> 1.3, >= 1.3.4)
+      tilt (>= 1.3, < 3)
     slop (3.6.0)
     thread_safe (0.3.5)
-    tilt (1.4.1)
+    tilt (2.0.1)
     timecop (0.7.3)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)

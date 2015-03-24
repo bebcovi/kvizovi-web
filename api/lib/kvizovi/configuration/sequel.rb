@@ -17,5 +17,3 @@ Sequel::Model.plugin :pg_array_associations
 DB.extension :pg_array
 DB.extension :pg_json
 DB.extension :pagination
-
-Sequel.extension :core_extensions

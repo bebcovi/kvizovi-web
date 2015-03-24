@@ -12,28 +12,29 @@ RSpec.describe Kvizovi::Services::Quizzes do
 
   describe ".search" do
     it "finds quizzes by their name" do
-      quiz = Kvizovi::Models::Quiz.create(name: "Game of Thrones")
+      quiz = create(:quiz, name: "Game of Thrones")
 
       expect(described_class.search(q: "game").to_a).to eq [quiz]
     end
 
     it "finds quizzes by questions" do
-      quiz = Kvizovi::Models::Quiz.create(questions_attributes: [
-        {title: "Stannis Baratheon won Blackwater Bay"},
+      quiz = create(:quiz, questions_attributes: [
+        attributes_for(:question, title: "Stannis Baratheon won Blackwater Bay"),
+        attributes_for(:question, title: "Lannisters won Blackwater Bay"),
       ])
 
       expect(described_class.search(q: "blackwater").to_a).to eq [quiz]
     end
 
     it "finds by category" do
-      quiz = Kvizovi::Models::Quiz.create(category: "movies")
+      quiz = create(:quiz, category: "movies")
 
       expect(described_class.search(category: "movies").to_a).to eq [quiz]
     end
 
     it "applies pagination parameters" do
-      quiz1 = Kvizovi::Models::Quiz.create(name: "Game of Thrones")
-      quiz2 = Kvizovi::Models::Quiz.create(name: "Game of Thrones")
+      quiz1 = create(:quiz, name: "Game of Thrones")
+      quiz2 = create(:quiz, name: "Game of Thrones")
 
       expect(described_class.search(per_page: 1).to_a).to eq [quiz1]
       expect(described_class.search(per_page: 1, page: 2).to_a).to eq [quiz2]

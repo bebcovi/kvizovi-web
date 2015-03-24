@@ -8,7 +8,6 @@ require "mini_magick"
 
 require "logger"
 require "uri"
-require "base64"
 
 Mail.defaults { delivery_method :test }
 BCrypt::Engine.cost = 1
@@ -22,8 +21,7 @@ RSpec.describe Kvizovi::API do
   end
 
   def basic_auth(username, password)
-    encoded_login = ["#{username}:#{password}"].pack("m*")
-    {"HTTP_AUTHORIZATION" => "Basic #{encoded_login}"}
+    {"HTTP_AUTHORIZATION" => "Basic #{["#{username}:#{password}"].pack("m*")}"}
   end
 
   specify "registration" do
@@ -44,7 +42,7 @@ RSpec.describe Kvizovi::API do
   specify "authentication" do
     post "/account", user: attributes_for(:janko)
 
-    get "/account", {}, basic_auth(attributes_for(:janko)[:email], attributes_for(:janko)[:password])
+    get "/account", {}, basic_auth(*attributes_for(:janko).values_at(:email, :password))
     expect(body["user"]).not_to be_empty
 
     get "/account", {}, token_auth(body["user"]["token"])
@@ -79,7 +77,7 @@ RSpec.describe Kvizovi::API do
 
     delete "/account", {}, token_auth(body["user"]["token"])
 
-    get "/account", {}, basic_auth(attributes_for(:janko)[:email], attributes_for(:janko)[:password])
+    get "/account", {}, basic_auth(*attributes_for(:janko).values_at(:email, :password))
     expect(status).to eq 401
   end
 
@@ -89,9 +87,11 @@ RSpec.describe Kvizovi::API do
 
     put "/account"
     expect(status).to eq 401
+    expect(body).to have_key("errors")
 
     put "/account", {}, {"HTTP_AUTHORIZATION" => "foo"}
     expect(status).to eq 401
+    expect(body).to have_key("errors")
   end
 
   specify "managing quizzes" do
