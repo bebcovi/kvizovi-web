@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
 
 
   # API
-  gem.add_dependency "grape", "~> 0.11"
+  gem.add_dependency "roda", "~> 2.2"
 
   # Database
   gem.add_dependency "sequel", "~> 4.21"
@@ -35,7 +35,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "unindent"
 
   # Testing
-  gem.add_development_dependency "pry"
   gem.add_development_dependency "rspec", "~> 3.1"
   gem.add_development_dependency "timecop"
   gem.add_development_dependency "rack-test"

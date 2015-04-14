@@ -2,3 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "roda", github: "jeremyevans/roda"
+
+gem "pry"
+gem "byebug"

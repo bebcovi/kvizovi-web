@@ -1,9 +1,7 @@
 module Kvizovi
   class Serializer
-    def self.call(object, env)
-      json = object.to_json(root: true)
-      json.sub!("kvizovi/models/", "")
-      json
+    def self.serialize(object)
+      object.to_json(root: true)
     end
   end
 end

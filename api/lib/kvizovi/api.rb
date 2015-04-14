@@ -1,7 +1,6 @@
-require "grape"
+require "kvizovi/configuration/roda"
 
 require "kvizovi/authorization"
-require "kvizovi/serializer"
 require "kvizovi/error"
 
 require "kvizovi/services/account"
@@ -9,112 +8,116 @@ require "kvizovi/services/quizzes"
 require "kvizovi/services/played_quizzes"
 
 module Kvizovi
-  class API < Grape::API
+  class API < Roda
 
-    format :json
-    default_format :json
-    formatter :json, Kvizovi::Serializer
-    default_error_status 400
-    do_not_route_head!
-
-    resource :account do
-      get do
-        Services::Account.authenticate(authorization.value)
-      end
-
-      post do
-        Services::Account.register!(params[:user])
-      end
-
-      put do
-        Services::Account.new(current_user).update!(params[:user])
-      end
-
-      delete do
-        Services::Account.new(current_user).destroy!
-      end
-
-      put "/confirm" do
-        Services::Account.confirm!(params[:token])
-      end
-
-      post "/password" do
-        Services::Account.reset_password!(params[:user])
-      end
-
-      put "/password" do
-        Services::Account.set_password!(params[:token], params[:user])
-      end
-
-      resources :quizzes do
-        get do
-          Services::Quizzes.new(current_user).all
-        end
-
-        post do
-          Services::Quizzes.new(current_user).create(params[:quiz])
-        end
-
-        route_param :id do
-          get do
-            Services::Quizzes.new(current_user).find(params[:id])
+    route do |r|
+      r.on "account" do
+        r.is do
+          r.get do
+            Services::Account.authenticate(authorization.value)
           end
 
-          put do
-            Services::Quizzes.new(current_user).update(params[:id], params[:quiz])
+          r.post do
+            Services::Account.register!(params[:user])
           end
 
-          delete do
-            Services::Quizzes.new(current_user).destroy(params[:id])
+          r.put do
+            Services::Account.new(current_user).update!(params[:user])
+          end
+
+          r.delete do
+            Services::Account.new(current_user).destroy!
+          end
+        end
+
+        r.put "confirm" do
+          Services::Account.confirm!(params[:token])
+        end
+
+        r.post "password" do
+          Services::Account.reset_password!(params[:user])
+        end
+
+        r.put "password" do
+          Services::Account.set_password!(params[:token], params[:user])
+        end
+
+        r.on "quizzes" do
+          r.is do
+            r.get do
+              Services::Quizzes.new(current_user).all
+            end
+
+            r.post do
+              Services::Quizzes.new(current_user).create(params[:quiz])
+            end
+          end
+
+          r.is ":id" do |id|
+            r.get do
+              Services::Quizzes.new(current_user).find(id)
+            end
+
+            r.put do
+              Services::Quizzes.new(current_user).update(id, params[:quiz])
+            end
+
+            r.delete do
+              Services::Quizzes.new(current_user).destroy(id)
+            end
           end
         end
       end
-    end
 
-    resources :quizzes do
-      get do
-        Services::Quizzes.search(params)
-      end
+      r.on "quizzes" do
+        r.is do
+          r.get do
+            Services::Quizzes.search(params)
+          end
+        end
 
-      route_param :id do
-        get do
-          Services::Quizzes.find(params[:id])
+        r.is ":id" do |id|
+          r.get do
+            Services::Quizzes.find(id)
+          end
         end
       end
-    end
 
-    resources :played_quizzes do
-      post do
-        players = params[:players]
-          .map { |token| Services::Account.authenticate(:token, token) }
-        Services::PlayedQuizzes.create(params[:played_quiz], players)
+      r.on "played_quizzes" do
+        r.is do
+          r.post do
+            players = params[:players]
+              .map { |token| Services::Account.authenticate(:token, token) }
+            Services::PlayedQuizzes.create(params[:played_quiz], players)
+          end
+
+          r.get do
+            Services::PlayedQuizzes.new(current_user).search(params)
+          end
+        end
       end
 
-      get do
-        Services::PlayedQuizzes.new(current_user).search(params)
-      end
-    end
-
-    post "/contact" do
-      Kvizovi.mailer.send(:contact, params)
-    end
-
-    helpers do
-      def current_user
-        Services::Account.authenticate(:token, authorization.token)
-      end
-
-      def authorization
-        Authorization.new(headers["Authorization"])
-      end
-
-      def params
-        super.to_hash.deep_symbolize_keys! # Die, Hashie::Mash
+      r.post "contact" do
+        Kvizovi.mailer.send(:contact, params)
       end
     end
 
-    rescue_from Kvizovi::Unauthorized do |error|
-      rack_response({errors: [error.message]}.to_json, 401)
+    def current_user
+      Services::Account.authenticate(:token, authorization.token)
+    end
+
+    def authorization
+      Authorization.new(env["HTTP_AUTHORIZATION"])
+    end
+
+    error do |exception|
+      case exception
+      when Kvizovi::Unauthorized
+        response.status = 401
+        {errors: [exception.message]}
+      else
+        raise exception
+      end
     end
 
   end
