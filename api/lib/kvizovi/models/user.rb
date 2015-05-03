@@ -1,23 +1,16 @@
-require "kvizovi/configuration/sequel"
+require "kvizovi/models/base"
 require "kvizovi/configuration/refile"
 
 module Kvizovi
   module Models
-    class User < Sequel::Model
+    class User < Base
       one_to_many :quizzes, key: :creator_id
-      many_to_pg_array :played_quizzes
+      many_to_pg_array :gameplays
 
       extend Refile::Sequel::Attachment
       attachment :avatar
 
       attr_accessor :password
-
-      def to_json(**options)
-        super(
-          only: [:id, :nickname, :avatar_url, :email, :token],
-          **options
-        )
-      end
     end
   end
 end

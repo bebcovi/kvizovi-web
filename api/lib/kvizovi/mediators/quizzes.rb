@@ -1,14 +1,15 @@
 require "kvizovi/models/quiz"
 require "kvizovi/models/question"
+require "kvizovi/utils"
 
 module Kvizovi
-  module Services
+  module Mediators
     class Quizzes
-      def self.search(q: nil, category: nil, page: 1, per_page: nil)
+      def self.search(q: nil, category: nil, page: nil)
         quizzes = Models::Quiz.dataset
         quizzes = quizzes.search(q) if q
         quizzes = quizzes.where(category: category) if category
-        quizzes = quizzes.paginate(Integer(page), Integer(per_page)) if per_page
+        quizzes = Utils.paginate(quizzes, page) if page
         quizzes
       end
 
@@ -25,7 +26,7 @@ module Kvizovi
       end
 
       def find(id)
-        all.with_pk!(id)
+        @user.quizzes_dataset.with_pk!(id)
       end
 
       def create(attrs)

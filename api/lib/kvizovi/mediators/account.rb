@@ -1,13 +1,13 @@
-require "kvizovi/services/account/authenticator"
-require "kvizovi/services/account/registration"
-require "kvizovi/services/account/password"
+require "kvizovi/mediators/account/authenticator"
+require "kvizovi/mediators/account/registration"
+require "kvizovi/mediators/account/password"
 
 require "kvizovi/models/user"
 
 require "kvizovi/error"
 
 module Kvizovi
-  module Services
+  module Mediators
     class Account
       def self.register!(attributes)
         Registration.create(Models::User, attributes)
@@ -23,8 +23,8 @@ module Kvizovi
         user
       end
 
-      def self.reset_password!(attributes)
-        user = authenticate(:email, attributes[:email])
+      def self.reset_password!(email)
+        user = authenticate(:email, email)
         new(user).reset_password!
         user
       end

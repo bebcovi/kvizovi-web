@@ -34,31 +34,31 @@ module TestHelpers
         category: "movies",
       }],
       question: [:Question, {
-        type: "choice",
+        kind: "choice",
         title: "Who won the battle in Blackwater Bay?",
         content: {choices: ["Stannis Baratheon", "Tywin Lannister"], answer: "Tywin Lannister"},
       }],
       boolean_question: [:Question, {
-        type: "boolean",
+        kind: "boolean",
         title: "Stannis Baratheon won the battle in Blackwater Bay.",
         content: {answer: false},
       }],
       choice_question: [:Question, {
-        type: "choice",
+        kind: "choice",
         title: "Who won the battle in Blackwater Bay?",
         content: {choices: ["Stannis Baratheon", "Tywin Lannister"], answer: "Tywin Lannister"},
       }],
       association_question: [:Question, {
-        type: "association",
+        kind: "association",
         title: "Connect characters with families:",
         content: {associations: {"Lannister" => "Cercei", "Stark" => "Robb"}},
       }],
       text_question: [:Question, {
-        type: "text",
+        kind: "text",
         title: "What's the name of King Baratheon's bastard son?",
         content: {answer: "Gendry"},
       }],
-      played_quiz: [:PlayedQuiz, {
+      gameplay: [:Gameplay, {
         quiz_snapshot: {},
         answers: {},
         start: Time.now,

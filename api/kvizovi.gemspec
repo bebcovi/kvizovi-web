@@ -15,24 +15,31 @@ Gem::Specification.new do |gem|
   gem.require_path  = "lib"
 
 
-  # API
+  # App
   gem.add_dependency "roda", "~> 2.2"
+  gem.add_dependency "roda-symbolized_params"
+
+  # JSON
+  gem.add_dependency "yaks"
 
   # Database
-  gem.add_dependency "sequel", "~> 4.21"
+  gem.add_dependency "sequel", "~> 4.22"
   gem.add_dependency "pg"
+  gem.add_dependency "sequel_postgresql_triggers", "~> 1.0.8"
 
   # Images
-  gem.add_dependency "refile", "~> 0.5"
+  gem.add_dependency "refile", "= 0.5.3"
   gem.add_dependency "refile-sequel"
+  gem.add_dependency "mime-types", ">= 2.5"
   gem.add_dependency "mini_magick", "~> 4.2"
 
   # Email
-  gem.add_dependency "mail"
+  gem.add_dependency "simple_mailer", "~> 1.3"
 
   # Utility
   gem.add_dependency "bcrypt", "~> 3.1"
   gem.add_dependency "unindent"
+  gem.add_dependency "as-duration", "~> 0.1"
 
   # Testing
   gem.add_development_dependency "rspec", "~> 3.1"

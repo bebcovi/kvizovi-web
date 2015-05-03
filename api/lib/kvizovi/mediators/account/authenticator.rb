@@ -1,7 +1,7 @@
-require "kvizovi/services/account/password"
+require "kvizovi/mediators/account/password"
 
 module Kvizovi
-  module Services
+  module Mediators
     class Account
       class Authenticator
         def self.authenticate(user_class, type, object)

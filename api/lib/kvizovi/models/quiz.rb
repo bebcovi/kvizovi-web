@@ -1,12 +1,12 @@
-require "kvizovi/configuration/sequel"
-require "kvizovi/configuration/refile"
-
+require "kvizovi/models/base"
 require "kvizovi/models/user"
 require "kvizovi/models/question"
 
+require "kvizovi/configuration/refile"
+
 module Kvizovi
   module Models
-    class Quiz < Sequel::Model
+    class Quiz < Base
       many_to_one :creator, class: User
       one_to_many :questions, order: :position
 
@@ -20,10 +20,7 @@ module Kvizovi
         def search(query)
           where {
             (name =~ /#{query}/i) |
-            (id =~ Question.select(:quiz_id).where {
-              (title =~ /#{query}/i) |
-              (content.cast(:text) =~ /#{query}/i)
-            })
+            (id =~ Question.search(query).select(:quiz_id))
           }
         end
       end
@@ -32,18 +29,6 @@ module Kvizovi
       attachment :image
 
       nested_attributes :questions
-
-      def questions_count
-        questions_dataset.count
-      end
-
-      def to_json(**options)
-        super(
-          only: [:id, :name, :category, :image, :questions_count, :created_at, :updated_at],
-          include: [:creator, *(:questions if options[:root])],
-          **options,
-        )
-      end
     end
   end
 end

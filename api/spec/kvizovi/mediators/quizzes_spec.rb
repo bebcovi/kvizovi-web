@@ -1,11 +1,9 @@
 require "spec_helper"
-
-require "kvizovi/services/quizzes"
+require "kvizovi/mediators/quizzes"
 require "kvizovi/models/user"
-
 require "timecop"
 
-RSpec.describe Kvizovi::Services::Quizzes do
+RSpec.describe Kvizovi::Mediators::Quizzes do
   subject { described_class.new(user) }
   let(:user) { create(:janko) }
   let(:another_user) { create(:matija) }
@@ -36,8 +34,8 @@ RSpec.describe Kvizovi::Services::Quizzes do
       quiz1 = create(:quiz, name: "Game of Thrones")
       quiz2 = create(:quiz, name: "Game of Thrones")
 
-      expect(described_class.search(per_page: 1).to_a).to eq [quiz1]
-      expect(described_class.search(per_page: 1, page: 2).to_a).to eq [quiz2]
+      expect(described_class.search(page: {number: 1, size: 1}).to_a).to eq [quiz1]
+      expect(described_class.search(page: {number: 2, size: 1}).to_a).to eq [quiz2]
     end
   end
 

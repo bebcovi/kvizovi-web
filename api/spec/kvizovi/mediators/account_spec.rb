@@ -1,19 +1,14 @@
 require "spec_helper"
-
-require "kvizovi/services/account"
-
+require "kvizovi/mediators/account"
 require "timecop"
+require "as-duration"
 
-RSpec.describe Kvizovi::Services::Account do
+BCrypt::Engine.cost = 1
+SimpleMailer.test_mode!
+
+RSpec.describe Kvizovi::Mediators::Account do
   subject { described_class.new(@user) }
   let(:attributes) { attributes_for(:janko) }
-
-  before do
-    allow(Kvizovi).to receive(:mailer).and_return(spy)
-    allow(Kvizovi).to receive(:generate_token).and_return("token")
-    allow(Kvizovi).to receive(:hash) { |string| string.to_s.reverse }
-    allow(Kvizovi).to receive(:password) { |string| string.to_s.reverse }
-  end
 
   def register(additional_attributes = {})
     described_class.register!(attributes.merge(additional_attributes))
@@ -53,7 +48,7 @@ RSpec.describe Kvizovi::Services::Account do
     it "sends the confirmation email" do
       user = described_class.register!(attributes)
 
-      expect(Kvizovi.mailer).to have_received(:registration_confirmation)
+      expect(sent_emails).not_to be_empty
     end
   end
 
@@ -85,7 +80,7 @@ RSpec.describe Kvizovi::Services::Account do
     it "raises an error if account has expired" do
       credentials = [@user.email, @user.password]
 
-      Timecop.travel(4*24*60*60) do
+      Timecop.travel(4.days.from_now) do
         expect { described_class.authenticate(credentials) }
           .to raise_error(Kvizovi::Error)
       end
@@ -112,26 +107,26 @@ RSpec.describe Kvizovi::Services::Account do
     before { @user = register }
 
     it "assigns the password reset token" do
-      user = described_class.reset_password!(email: @user.email)
+      user = described_class.reset_password!(@user.email)
 
       expect(user.password_reset_token).to be_a_nonempty(String)
     end
 
     it "sends the password reset instructions email" do
-      user = described_class.reset_password!(email: @user.email)
+      user = described_class.reset_password!(@user.email)
 
-      expect(Kvizovi.mailer).to have_received(:password_reset_instructions)
+      expect(sent_emails).not_to be_empty
     end
 
     it "raises error when email is nonexisting" do
-      expect { described_class.reset_password!(email: "nonexisting@email.com") }
+      expect { described_class.reset_password!("nonexisting@email.com") }
         .to raise_error(Kvizovi::Error)
     end
   end
 
   describe ".set_password!" do
     before { @user = register }
-    before { @user = described_class.reset_password!(email: @user.email) }
+    before { @user = described_class.reset_password!(@user.email) }
     let(:token) { @user.password_reset_token }
 
     it "controls mass assignment" do

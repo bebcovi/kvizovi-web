@@ -1,7 +1,11 @@
-require "kvizovi/services/account/password"
+require "kvizovi/mediators/account/password"
+require "kvizovi/mailer"
+
+require "as-duration"
+require "securerandom"
 
 module Kvizovi
-  module Services
+  module Mediators
     class Account
       class Registration
         attr_reader :user
@@ -26,7 +30,7 @@ module Kvizovi
           assign_confirmation_token!
           assign_auth_token!
           @user.save
-          send_confirmation_email!
+          email_confirmation!
 
           @user
         end
@@ -35,17 +39,19 @@ module Kvizovi
           @user.update(confirmed_at: Time.now, confirmation_token: nil)
         end
 
+        def confirmed?
+          !!@user.confirmed_at
+        end
+
         def expired?
-          !@user.confirmed_at && Time.now - @user.created_at > 3*24*60*60
+          !confirmed? && Time.now > 3.days.since(@user.created_at)
         end
 
         def update!(attributes)
           old_password = attributes.delete(:old_password)
           @user.set_only(attributes, *VALID_FIELDS)
           if @user.password
-            if !password_matches?(old_password)
-              raise ArgumentError, "password doesn't match current"
-            end
+            raise ArgumentError, "password doesn't match current" if !password_matches?(old_password)
             encrypt_password!
           end
           @user.save
@@ -68,15 +74,15 @@ module Kvizovi
         end
 
         def assign_confirmation_token!
-          @user.confirmation_token = Kvizovi.generate_token
+          @user.confirmation_token = ::SecureRandom.hex
         end
 
         def assign_auth_token!
-          @user.token = Kvizovi.generate_token
+          @user.token = ::SecureRandom.hex
         end
 
-        def send_confirmation_email!
-          Kvizovi.mailer.send(:registration_confirmation, @user)
+        def email_confirmation!
+          Mailer.send(:registration_confirmation, @user)
         end
       end
     end

@@ -1,6 +1,6 @@
 Sequel.migration do
   change do
-    create_table :played_quizzes do
+    create_table :gameplays do
       primary_key :id
 
       column :quiz_id,       :integer

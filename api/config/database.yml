@@ -1,9 +1,0 @@
-development:
-  adapter: "postgres"
-  host: "localhost"
-  dbname: "kvizovi"
-
-test:
-  adapter: "postgres"
-  host: "localhost"
-  dbname: "kvizovi"

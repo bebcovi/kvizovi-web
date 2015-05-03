@@ -1,8 +1,7 @@
 require "refile"
+require "refile/image_processing"
 require "refile/sequel"
-require "sequel"
 
-require "uri"
 require "tmpdir"
 
 Refile.cache = Refile::Backend::FileSystem.new(Dir.tmpdir)
