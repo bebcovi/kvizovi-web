@@ -1,3 +1,5 @@
+require "json"
+
 module Kvizovi
   module Utils
     module_function
@@ -18,6 +20,14 @@ module Kvizovi
       page_size   = Integer(page[:size])
 
       dataset.paginate(page_number, page_size)
+    end
+
+    def dump_json(data, env)
+      if ENV["RACK_ENV"] == "production"
+        JSON.generate(data)
+      else
+        JSON.pretty_generate(data)
+      end
     end
   end
 end

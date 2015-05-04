@@ -1,9 +1,9 @@
 require "sequel"
 require "yaks"
-require "json"
 require "time"
 
 require "kvizovi/error"
+require "kvizovi/utils"
 
 require "kvizovi/mappers/user_mapper"
 require "kvizovi/mappers/quiz_mapper"
@@ -27,7 +27,7 @@ module Kvizovi
     def serialize(object)
       case object
       when Hash, Array
-        object.to_json
+        Utils.dump_json(object)
       when Sequel::Dataset
         object = object.eager(*inclusion)
         yaks.call(object, env: @request.env)
@@ -44,6 +44,7 @@ module Kvizovi
         mapper_namespace Kvizovi::Mappers
         map_to_primitive Date, Time, &:iso8601
         map_to_primitive Sequel::Postgres::JSONBHash, &:to_hash
+        json_serializer { |data, env| Utils.dump_json(data, env) }
       end
     end
 
