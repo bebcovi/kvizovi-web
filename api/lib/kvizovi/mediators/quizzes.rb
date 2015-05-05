@@ -1,5 +1,4 @@
-require "kvizovi/models/quiz"
-require "kvizovi/models/question"
+require "kvizovi/models"
 require "kvizovi/utils"
 
 module Kvizovi

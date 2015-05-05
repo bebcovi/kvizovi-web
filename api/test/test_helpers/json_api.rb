@@ -1,41 +1,7 @@
-require "rack/test"
-require "json"
 require "inflection"
 
-Kvizovi::App.plugin(:not_found) { raise "404 not found" }
-APP = Rack::Builder.parse_file("config.ru").first
-SimpleMailer.test_mode!
-BCrypt::Engine.cost = 1
-Refile.logger = Logger.new(nil)
-
 module TestHelpers
-  module Integration
-    include Rack::Test::Methods
-
-    def token_auth(token)
-      {"HTTP_AUTHORIZATION" => "Token token=\"#{token}\""}
-    end
-
-    def basic_auth(username, password)
-      {"HTTP_AUTHORIZATION" => "Basic #{["#{username}:#{password}"].pack("m*")}"}
-    end
-
-    def app
-      APP
-    end
-
-    [:post, :put, :patch, :delete].each do |http_method|
-      alias_method :"#{http_method}_original", http_method
-      define_method(http_method) do |uri, params = {}, env = {}, &block|
-        env["CONTENT_TYPE"] = "application/json"
-        super(uri, params.to_json, env, &block)
-      end
-    end
-
-    def body
-      JSON.parse(last_response.body)
-    end
-
+  module JsonApi
     def data
       body.fetch("data")
     end
@@ -71,8 +37,7 @@ module TestHelpers
     end
 
     def associations(name, association_name)
-      list = resource_links(name).fetch(association_name).fetch("linkage")
-      Array(list)
+      Array resource_links(name).fetch(association_name).fetch("linkage")
     end
 
     def included_resource(type, id)
@@ -93,10 +58,6 @@ module TestHelpers
 
     def errors
       body.fetch("errors")
-    end
-
-    def status
-      last_response.status
     end
 
     private

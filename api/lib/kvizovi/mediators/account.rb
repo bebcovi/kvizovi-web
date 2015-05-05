@@ -2,8 +2,7 @@ require "kvizovi/mediators/account/authenticator"
 require "kvizovi/mediators/account/registration"
 require "kvizovi/mediators/account/password"
 
-require "kvizovi/models/user"
-
+require "kvizovi/models"
 require "kvizovi/error"
 
 module Kvizovi

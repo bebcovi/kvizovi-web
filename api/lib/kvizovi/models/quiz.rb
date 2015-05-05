@@ -1,7 +1,4 @@
 require "kvizovi/models/base"
-require "kvizovi/models/user"
-require "kvizovi/models/question"
-
 require "kvizovi/configuration/refile"
 
 module Kvizovi
@@ -9,8 +6,6 @@ module Kvizovi
     class Quiz < Base
       many_to_one :creator, class: User
       one_to_many :questions, order: :position
-
-      add_association_dependencies questions: :delete
 
       dataset_module do
         def newest
@@ -25,10 +20,15 @@ module Kvizovi
         end
       end
 
+      nested_attributes :questions
+
       extend Refile::Sequel::Attachment
       attachment :image
 
-      nested_attributes :questions
+      def before_destroy
+        questions_dataset.destroy
+        super
+      end
     end
   end
 end

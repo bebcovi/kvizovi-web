@@ -42,7 +42,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency "as-duration", "~> 0.1"
 
   # Testing
-  gem.add_development_dependency "rspec", "~> 3.1"
+  gem.add_development_dependency "minitest", "~> 5.6"
+  gem.add_development_dependency "minitest-hooks", "~> 1.0"
   gem.add_development_dependency "timecop"
   gem.add_development_dependency "rack-test"
 end

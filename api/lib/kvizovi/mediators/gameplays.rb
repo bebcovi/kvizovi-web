@@ -1,4 +1,4 @@
-require "kvizovi/models/gameplay"
+require "kvizovi/models"
 require "kvizovi/utils"
 
 module Kvizovi

@@ -1,6 +1,4 @@
 require "kvizovi/models/base"
-require "kvizovi/models/quiz"
-require "kvizovi/models/user"
 
 module Kvizovi
   module Models

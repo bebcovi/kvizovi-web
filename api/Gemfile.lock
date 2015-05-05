@@ -63,7 +63,6 @@ GEM
       adamantium (~> 0.2.0)
       equalizer (~> 0.0.9)
     debugger-linecache (1.2.0)
-    diff-lcs (1.2.5)
     equalizer (0.0.11)
     ice_nine (0.11.1)
     inflection (1.0.0)
@@ -72,6 +71,8 @@ GEM
     method_source (0.8.2)
     mime-types (2.5)
     mini_magick (4.2.3)
+    minitest (5.6.1)
+    minitest-hooks (1.0.1)
     pg (0.18.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -94,19 +95,6 @@ GEM
       refile (~> 0.5)
       sequel (~> 4.0)
     roda-symbolized_params (0.0.2)
-    rspec (3.2.0)
-      rspec-core (~> 3.2.0)
-      rspec-expectations (~> 3.2.0)
-      rspec-mocks (~> 3.2.0)
-    rspec-core (3.2.3)
-      rspec-support (~> 3.2.0)
-    rspec-expectations (3.2.1)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.2.0)
-    rspec-mocks (3.2.1)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.2.0)
-    rspec-support (3.2.2)
     ruby-prof (0.15.6)
     sequel (4.22.0)
     sequel_postgresql_triggers (1.0.8)
@@ -128,10 +116,11 @@ PLATFORMS
 
 DEPENDENCIES
   kvizovi!
+  minitest (~> 5.6)
+  minitest-hooks (~> 1.0)
   pry-byebug
   rack-test
   roda!
-  rspec (~> 3.1)
   ruby-prof
   timecop
   yaks!
