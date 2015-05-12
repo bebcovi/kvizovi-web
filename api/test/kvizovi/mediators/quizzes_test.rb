@@ -52,12 +52,24 @@ class QuizzesTest < UnitTest
     assert_raises(Sequel::NoMatchingRow) { @quizzes.find(quiz.id) }
   end
 
+  def test_not_found
+    assert_raises(Sequel::NoMatchingRow) { Quizzes.find(-1) }
+    assert_raises(Sequel::NoMatchingRow) { @quizzes.find(-1) }
+  end
+
+  def test_create
+    quiz = @quizzes.create(attributes_for(:quiz))
+
+    refute quiz.new?
+  end
+
   def test_updating_quiz
     quiz = @quizzes.create(attributes_for(:quiz))
 
     quiz = @quizzes.update(quiz.id, {name: "New name"})
 
     assert_equal "New name", quiz.name
+    refute quiz.modified?
   end
 
   def test_updating_questions_touches_quiz

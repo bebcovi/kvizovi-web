@@ -11,20 +11,14 @@ class GameplaysTest < UnitTest
   end
 
   def create_gameplay
-    Gameplays.create(
-      attributes_for(:gameplay,
-        links: {
-          quiz: {linkage: {type: :quizzes, id: @quiz.id}},
-          players: {linkage: [{type: :users, id: @user.id}]},
-        }
-      )
-    )
+    Gameplays.create(attributes_for(:gameplay,
+      associations: {quiz: @quiz.id, players: [@user.id]}))
   end
 
   def test_creating
     gameplay = create_gameplay
 
-    assert gameplay.exists?
+    refute gameplay.new?
     assert_equal @quiz, gameplay.quiz
     assert_equal [@user], gameplay.players
   end
@@ -59,5 +53,9 @@ class GameplaysTest < UnitTest
     gameplay = create_gameplay
 
     assert_equal gameplay, @gameplays.find(gameplay.id)
+  end
+
+  def test_not_found
+    assert_raises(Sequel::NoMatchingRow) { @gameplays.find(-1) }
   end
 end

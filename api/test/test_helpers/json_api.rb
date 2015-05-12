@@ -19,7 +19,9 @@ module TestHelpers
     end
 
     def resources(name)
-      Array(data).select { |hash| hash["type"] == name }
+      Array(data)
+        .select { |hash| hash["type"] == name }
+        .map    { |hash| hash.update(hash.delete("attributes")) }
     end
 
     def associated_resources(name, linked_name)
@@ -58,6 +60,10 @@ module TestHelpers
 
     def errors
       body.fetch("errors")
+    end
+
+    def json_attributes_for(name, **options)
+      {type: plural(name.to_s), attributes: attributes_for(name, **options)}
     end
 
     private

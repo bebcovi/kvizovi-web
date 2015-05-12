@@ -67,22 +67,40 @@ class AuthenticationTest < UnitTest
   end
 
   def test_invalid_password
-    assert_raises(Kvizovi::Unauthorized) do
+    assert_raises(Kvizovi::Error::Unauthorized) do
       Account.authenticate([@user.email, "incorrect password"])
     end
   end
 
   def test_invalid_email
-    assert_raises(Kvizovi::Unauthorized) do
+    assert_raises(Kvizovi::Error::Unauthorized) do
       Account.authenticate(["incorrect@email.com", @user.password])
+    end
+  end
+
+  def test_invalid_token
+    assert_raises(Kvizovi::Error::Unauthorized) do
+      Account.authenticate(:token, "incorrect")
     end
   end
 
   def test_account_expiration
     Timecop.travel(4.days.from_now) do
-      assert_raises(Kvizovi::Unauthorized) do
+      assert_raises(Kvizovi::Error::Unauthorized) do
         Account.authenticate([@user.email, @user.password])
       end
+    end
+  end
+
+  def test_invalid_confirmation_token
+    assert_raises(Kvizovi::Error::Unauthorized) do
+      Account.authenticate(:confirmation_token, "incorrect")
+    end
+  end
+
+  def test_invalid_password_reset_token
+    assert_raises(Kvizovi::Error::Unauthorized) do
+      Account.authenticate(:password_reset_token, "incorrect")
     end
   end
 end
@@ -105,7 +123,7 @@ class PasswordResetTest < UnitTest
   end
 
   def test_nonexisting_email
-    assert_raises(Kvizovi::Unauthorized) do
+    assert_raises(Kvizovi::Error::Unauthorized) do
       Account.reset_password!("nonexisting@email.com")
     end
   end

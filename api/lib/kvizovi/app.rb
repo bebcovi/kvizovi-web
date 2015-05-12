@@ -6,6 +6,7 @@ require "kvizovi/serializer"
 require "kvizovi/mailer"
 require "kvizovi/mediators/account"
 require "kvizovi/error"
+require "kvizovi/utils"
 
 module Kvizovi
   class App < Roda
@@ -32,27 +33,29 @@ module Kvizovi
     end
 
     def current_user
-      authenticate(:token, authorization.token)
+      Mediators::Account.authenticate(:token, authorization.token)
     end
 
     def authorization
       Authorization.new(env["HTTP_AUTHORIZATION"])
     end
 
-    def authenticate(*args)
-      Mediators::Account.authenticate(*args)
+    def resource(name)
+      Utils.resource(params, name)
     end
 
-    def resource(name)
-      params.fetch(:data).tap do |attributes|
-        [:type, :id].each { |field| attributes.delete(field) }
-      end
+    def required(name)
+      Utils.require_param(params, name)
     end
 
     error do |error|
-      if Kvizovi::Error === error
+      case error
+      when Kvizovi::Error
         response.status = error.status
         error
+      when Sequel::NoMatchingRow
+        response.status = 404
+        Kvizovi::Error::NotFound.new(:record_not_found)
       else
         raise error
       end

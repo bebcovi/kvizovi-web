@@ -12,10 +12,6 @@ module Kvizovi
         super name, **options, if: -> { include_association?(name) }
       end
 
-      def id
-        object.id.to_s
-      end
-
       private
 
       def include_association?(name)

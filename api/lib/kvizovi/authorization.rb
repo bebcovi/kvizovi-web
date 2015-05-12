@@ -16,7 +16,7 @@ module Kvizovi
 
     strategies.each do |name|
       define_method(name) do
-        strategy(name).get or raise Kvizovi::Unauthorized, :"#{name}_missing"
+        strategy(name).get or raise Kvizovi::Error::Unauthorized, :"#{name}_missing"
       end
 
       define_method("#{name}?") do
@@ -26,7 +26,7 @@ module Kvizovi
 
     def value
       strategies.each { |strategy| return strategy.get if strategy.present? }
-      raise Kvizovi::Unauthorized, :authorization_missing
+      raise Kvizovi::Error::Unauthorized, :authorization_missing
     end
 
     private

@@ -25,7 +25,7 @@ module Kvizovi
       end
 
       def find(id)
-        @user.quizzes_dataset.with_pk!(id)
+        all.with_pk!(id)
       end
 
       def create(attrs)
@@ -33,9 +33,7 @@ module Kvizovi
       end
 
       def update(id, attrs)
-        quiz = find(id)
-        quiz.update(attrs)
-        quiz
+        find(id).update(attrs)
       end
 
       def destroy(id)

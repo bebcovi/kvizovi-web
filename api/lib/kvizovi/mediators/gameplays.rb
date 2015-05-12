@@ -5,7 +5,7 @@ module Kvizovi
   module Mediators
     class Gameplays
       def self.create(attributes)
-        ids = Utils.extract_relationship_links(attributes)
+        ids = attributes.delete(:associations)
         attributes.update(quiz_id: ids[:quiz], player_ids: ids[:players])
         Models::Gameplay.create attributes
       end

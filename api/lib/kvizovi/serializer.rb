@@ -9,7 +9,6 @@ require "kvizovi/mappers/user_mapper"
 require "kvizovi/mappers/quiz_mapper"
 require "kvizovi/mappers/question_mapper"
 require "kvizovi/mappers/gameplay_mapper"
-require "kvizovi/mappers/dataset_mapper"
 require "kvizovi/mappers/error_mapper"
 
 module Kvizovi
@@ -30,7 +29,7 @@ module Kvizovi
         Utils.dump_json(object)
       when Sequel::Dataset
         object = object.eager(*inclusion)
-        yaks.call(object, env: @request.env)
+        yaks.call(object.to_a, env: @request.env)
       when Sequel::Model, Kvizovi::Error
         yaks.call(object, env: @request.env)
       end
@@ -68,11 +67,7 @@ module Yaks
         if resource.type == "error"
           {errors: resource.seq.map(&method(:serialize_error))}
         else
-          output = super
-          if resource.collection? && resource.links.any?
-            output[:links] = resource.links.inject({}) { |h, l| h.update(l.rel => l.uri) }
-          end
-          output
+          super
         end
       end
 

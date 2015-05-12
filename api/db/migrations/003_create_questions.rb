@@ -7,7 +7,7 @@ Sequel.migration do
 
       column :quiz_id, :integer
 
-      column :kind,     :varchar
+      column :type,     :varchar
       column :title,    :varchar
       column :content,  :jsonb
       column :image_id, :varchar

@@ -3,16 +3,21 @@ require "kvizovi/mediators/gameplays"
 module Kvizovi
   class App
     route "gameplays" do |r|
-      r.post true do
-        Mediators::Gameplays.create(resource(:gameplay))
+      r.is do
+        r.post do
+          Mediators::Gameplays.create(resource(:gameplay))
+        end
+
+        r.get do
+          required(:as)
+          Mediators::Gameplays.new(current_user).search(params)
+        end
       end
 
-      r.get true do
-        Mediators::Gameplays.new(current_user).search(params)
-      end
-
-      r.get ":id" do |id|
-        Mediators::Gameplays.new(current_user).find(id)
+      r.is ":id" do |gameplay_id|
+        r.get do
+          Mediators::Gameplays.new(current_user).find(gameplay_id)
+        end
       end
     end
   end

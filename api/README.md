@@ -37,14 +37,24 @@ Content-Type: application/json
   "data": {
     "type": "quizzes",
     "id": "47",
-    "name": "Game of Thrones",
-    "category": "movies"
+    "attributes": {
+      "name": "Game of Thrones",
+      "category": "movies"
+    }
   }
 }
 ```
 
+To make authorized requests, include user's token in the "Authorization"
+header.
+
+```http
+GET /quizzes
+Authorization: Token token="abc123"
+```
+
 If a request fails, the appropriate response status will be returned, often
-following up with an error message.
+following up with an error message:
 
 ```http
 HTTP/1.1 401 Unauthorized
@@ -59,14 +69,6 @@ Content-Type: application/json
     }
   ]
 }
-```
-
-To make authorized requests, include user's token in the "Authorization"
-header.
-
-```http
-GET /quizzes
-Authorization: Token token="abc123"
 ```
 
 There is also a URL available for checking the connection to the server (e.g.
@@ -100,6 +102,7 @@ GET /account
 Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ
 ```
 
+(This raises a `credentials_invalid` error if email or password were incorrect.)
 You can also use token authentication:
 
 ```http
@@ -116,9 +119,11 @@ Content-Type: application/json
 {
   "data": {
     "type": "users",
-    "nickname": "Junky",
-    "email": "janko.marohnic@gmail.com",
-    "password": "secret"
+    "attributes": {
+      "nickname": "Junky",
+      "email": "janko.marohnic@gmail.com",
+      "password": "secret"
+    }
   }
 }
 ```
@@ -142,9 +147,11 @@ Content-Type: application/json
 {
   "data": {
     "type": "users",
-    "id": 3,
-    "old_password": "secret",
-    "password": "new secret"
+    "id": "3",
+    "attributes": {
+      "old_password": "secret",
+      "password": "new secret"
+    }
   }
 }
 ```
@@ -155,6 +162,7 @@ Content-Type: application/json
 POST /account/password?email=janko.marohnic@gmail.com
 ```
 
+(An `email_invalid` error will be raised if user with that email doesn't exist.)
 This will send the password reset instructions to the user's email address.
 The email will include a link to
 `http://kvizovi.org/account/password?token=abc123`. When the user visits the
@@ -168,8 +176,10 @@ Content-Type: application/json
 {
   "data": {
     "type": "users",
-    "id": 3,
-    "password": "new secret"
+    "id": "3",
+    "attributes": {
+      "password": "new secret"
+    }
   }
 }
 ```
@@ -207,6 +217,10 @@ To return quizzes from a user, include users's token:
 GET /quizzes
 Authorization: Token token="abc123"
 ```
+```http
+GET /quizzes/23
+Authorization: Token token="abc123"
+```
 
 To search all quizzes (e.g. for playing), just omit the authorization token:
 
@@ -225,8 +239,8 @@ Content-Type: application/json
 
 {
   "data": [
-    {"type": "quizzes", "title": "Game of Thrones"},
-    {"type": "quizzes", "title": "Sherlock"}
+    {"type": "quizzes", "id": "17", "attributes": {"title": "Game of Thrones"}},
+    {"type": "quizzes", "id": "56", "attributes": {"title": "Sherlock"}}
   ]
 }
 ```
@@ -241,8 +255,10 @@ Content-Type: application/json
 {
   "data": {
     "type": "quizzes",
-    "name": "Game of Thrones",
-    "category": "movies"
+    "attributes": {
+      "name": "Game of Thrones",
+      "category": "movies"
+    }
   }
 }
 ```
@@ -258,7 +274,9 @@ Content-Type: application/json
   "data": {
     "type": "quizzes",
     "id": "1",
-    "name": "Matrix"
+    "attributes": {
+      "name": "Matrix"
+    }
   }
 }
 ```
@@ -277,7 +295,7 @@ This will delete the quiz and its associated questions.
 | Attribute  | Type    |
 | ---------  | ------  |
 | `id`       | integer |
-| `kind`     | string  |
+| `type`     | string  |
 | `image`    | image   |
 | `title`    | string  |
 | `content`  | json    |
@@ -297,8 +315,10 @@ Content-Type: application/json
   "data": {
     "type": "quizzes",
     "id": "12",
-    "name": "Game of Thrones",
-    "category": "movies",
+    "attributes": {
+      "name": "Game of Thrones",
+      "category": "movies"
+    },
     "links": {
       "questions": {
         "linkage": [
@@ -312,17 +332,32 @@ Content-Type: application/json
     {
       "type": "questions",
       "id": "9",
-      "kind": "choice",
-      "title": "What is Ramsay Snow's family name?"
+      "attributes": {
+        "type": "choice",
+        "title": "What is Ramsay Snow's family name?"
+      }
     },
     {
       "type": "questions",
       "id": "17",
-      "kind": "boolean",
-      "title": "Dranaerys locked all of her 3 dragons in the dungeon."
+      "attributes": {
+        "type": "boolean",
+        "title": "Dranaerys locked all of her 3 dragons in the dungeon."
+      }
     }
   ]
 }
+```
+
+You can also retrieve questions directly:
+
+```http
+GET /quizzes/1/questions
+Authorization: Token token="abc123"
+```
+```http
+GET /quizzes/1/questions/54
+Authorization: Token token="abc123"
 ```
 
 ### Creating questions
@@ -335,12 +370,32 @@ Content-Type: application/json
 {
   "data": {
     "type": "quizzes",
-    "name": "Game of Thrones",
-    "category": "movies",
-    "questions_attributes": [
-      {"kind": "boolean", "title": "..."},
-      {"kind": "choice", "title": "..."}
-    ]
+    "attributes": {
+      "name": "Game of Thrones",
+      "category": "movies",
+      "questions_attributes": [
+        {"type": "boolean", "title": "..."},
+        {"type": "choice", "title": "..."}
+      ]
+    }
+  }
+}
+```
+
+You can also create questions directly:
+
+```http
+POST /quizzes/1/questions
+Authorization: Token token="abc123"
+Content-Type: application/json
+
+{
+  "data": {
+    "type": "questions",
+    "attributes": {
+      "type": "choice"
+      "title": "Stannis won the battle at Blackwater Bay.",
+    }
   }
 }
 ```
@@ -356,11 +411,13 @@ Content-Type: application/json
   "data": {
     "type": "quizzes",
     "id": "23",
-    "questions_attributes": [
-      {"title": "..."},
-      {"id": "1", "title": "..."},
-      {"id": "2", "_delete": true}
-    ]
+    "attributes": {
+      "questions_attributes": [
+        {"title": "..."},
+        {"id": "1", "title": "..."},
+        {"id": "2", "_delete": true}
+      ]
+    }
   }
 }
 ```
@@ -368,6 +425,28 @@ Content-Type: application/json
 * If a question doesn't have an ID, it will be **created**.
 * If a question does have an ID, it will be **updated**.
 * If a question has an ID and `"_delete": true`, it will be **deleted**.
+
+You can also update and delete questions directly:
+
+```http
+PATCH /quizzes/23/questions/11
+Authorization: Token token="abc123"
+Content-Type: application/json
+
+{
+  "data": {
+    "type": "questions",
+    "id": "11",
+    "attributes": {
+      "title": "..."
+    }
+  }
+}
+```
+```http
+DELETE /quizzes/23/questions/11
+Authorization: Token token="abc123"
+```
 
 ## Gameplays
 
@@ -394,11 +473,13 @@ Authorization: Token token="fg0d9sl"
 
 {
   "data": {
-    "type": "gameplay",
-    "quiz_snapshot": {"name": "Game of Thrones", "questions": []},
-    "answers": {},
-    "start": "2015-05-03T21:17:30+02:00",
-    "finish": "2015-05-03T21:20:30+02:00",
+    "type": "gameplays",
+    "attributes": {
+      "quiz_snapshot": {"name": "Game of Thrones", "questions": []},
+      "answers": {},
+      "start": "2015-05-03T21:17:30+02:00",
+      "finish": "2015-05-03T21:20:30+02:00",
+    }
     "links": {
       "quiz": {
         "linkage": {"type": "quizzes", "id": "32"}
@@ -448,14 +529,16 @@ attached image (e.g. as `avatar`), the response will include the image URL
 template:
 
 ```http
-POST /quizzes
+PATCH /quizzes/34
 Authorization: Token token="abc123"
 Content-Type: application/json
 
 {
-  "quiz": {
-    "name": "Game of Thrones",
-    "category": "movies"
+  "data": {
+    "type": "quizzes",
+    "attributes": {
+      "image": "..."
+    }
   }
 }
 ```
@@ -464,10 +547,11 @@ Content-Type: application/json
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
-  "user": {
+  "data": {
+    "type": "quizzes",
     "id": "32",
-    "avatar": {
-      "http://example.org/attachments/store/fit/{width}/{height}"
+    "attributes": {
+      "image": "http://example.org/attachments/store/fit/{width}/{height}"
     }
   }
 }
@@ -514,7 +598,9 @@ Content-Type: application/json
 {
   "data": {
     "type": "users",
-    "avatar": "{\"id\": \"045m8u1tfjortr1peichiguhouc\"}"
+    "attributes": {
+      "avatar": "{\"id\": \"045m8u1tfjortr1peichiguhouc\"}"
+    }
   }
 }
 ```
@@ -550,8 +636,10 @@ Content-Type: application/json
 {
   "data": {
     "type": "emails",
-    "from": "foo@bar.com",
-    "body": "Hello, I have a problem..."
+    "attributes": {
+      "from": "foo@bar.com",
+      "body": "Hello, I have a problem..."
+    }
   }
 }
 ```

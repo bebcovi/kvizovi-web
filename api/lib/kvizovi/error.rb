@@ -1,8 +1,13 @@
 module Kvizovi
   class Error < ArgumentError
     def initialize(id)
-      @id = id
-      super translations.fetch(id)
+      case id
+      when Symbol
+        @id = id
+        super translations.fetch(id)
+      when String
+        super id
+      end
     end
 
     attr_reader :id
@@ -18,24 +23,47 @@ module Kvizovi
     def translations
       {}
     end
-  end
 
-  class Unauthorized < Error
-    def status
-      401
+    class MissingParam < Error
+      def initialize(key)
+        @id = "param_missing"
+        super "Missing param \"#{key}\""
+      end
     end
 
-    private
+    class Unauthorized < Error
+      def status
+        401
+      end
 
-    def translations
-      {
-        token_missing:         "No authorization token given",
-        authorization_missing: "No authorization credentials given",
-        email_invalid:         "Ne postoji korisnik s tom email adresom",
-        credentials_invalid:   "Pogrešan email ili lozinka",
-        token_invalid:         "No user with that token",
-        account_expired:       "Morate potvrditi svoj korisnički račun",
-      }
+      private
+
+      def translations
+        {
+          authorization_missing:        "No authorization credentials given",
+          token_missing:                "No authorization token given",
+          token_invalid:                "No user with that token",
+          credentials_invalid:          "Incorrect email or password",
+          confirmation_token_invalid:   "Confirmation token doesn't exist",
+          password_reset_token_invalid: "Password reset token doesn't exist",
+          email_invalid:                "No user with that email address",
+          account_expired:              "Account hasn't been confirmed by email",
+        }
+      end
+    end
+
+    class NotFound < Error
+      def status
+        404
+      end
+
+      private
+
+      def translations
+        {
+          record_not_found: "Record not found",
+        }
+      end
     end
   end
 end
