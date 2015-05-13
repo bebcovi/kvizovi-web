@@ -13,6 +13,7 @@ Sequel::Model.plugin :validation_helpers
 Sequel::Model.plugin :timestamps, update_on_create: true
 Sequel::Model.plugin :nested_attributes
 Sequel::Model.plugin :pg_array_associations
+Sequel::Model.plugin :jsonapi_eager
 
 module Kvizovi
   module Models

@@ -16,6 +16,8 @@ module TestHelpers
 
     def resource(name)
       resources(plural(name)).fetch(0)
+    rescue IndexError
+      raise "no resource \"#{name}\" in #{body.inspect}"
     end
 
     def resources(name)
@@ -32,10 +34,14 @@ module TestHelpers
 
     def associated_resource(name, linked_name)
       associated_resources(name, linked_name).fetch(0)
+    rescue IndexError
+      raise "no included resource \"#{name}\" => \"#{linked_name}\" in #{body.inspect}"
     end
 
     def association(name, association_name)
       associations(name, association_name).fetch(0)
+    rescue IndexError
+      raise "no association \"#{name}\" => \"#{association_name}\" in #{body.inspect}"
     end
 
     def associations(name, association_name)

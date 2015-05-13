@@ -34,10 +34,13 @@ end
 
 task :console do
   ARGV.clear
+
   require "bundler/setup"
   require "kvizovi"
   require "pry"
-  DB.transaction(rollback: :always) do
-    Pry.start
-  end
+  require "logger"
+
+  include Kvizovi::Models
+  DB.logger = Logger.new(STDOUT)
+  DB.transaction(rollback: :always) { Pry.start }
 end

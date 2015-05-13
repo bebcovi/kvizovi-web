@@ -1,8 +1,8 @@
-require "kvizovi/mappers/base"
+require "kvizovi/mappers/base_mapper"
 
 module Kvizovi
   module Mappers
-    class UserMapper < Base
+    class UserMapper < BaseMapper
       attributes :id, :nickname, :avatar_url, :email, :token
 
       has_many :quizzes

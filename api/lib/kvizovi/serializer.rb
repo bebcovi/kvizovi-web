@@ -27,10 +27,11 @@ module Kvizovi
       case object
       when Hash, Array
         Utils.dump_json(object)
+      when Sequel::Model
+        yaks.call(eager(object), env: @request.env)
       when Sequel::Dataset
-        object = object.eager(*inclusion)
-        yaks.call(object.to_a, env: @request.env)
-      when Sequel::Model, Kvizovi::Error
+        yaks.call(eager(object).to_a, env: @request.env)
+      when Kvizovi::Error
         yaks.call(object, env: @request.env)
       end
     end
@@ -47,13 +48,8 @@ module Kvizovi
       end
     end
 
-    def inclusion
-      includes = @request.params["include"].to_s.split(",")
-      associations = includes.map do |relationship|
-        levels = relationship.split(".")
-        next levels.first if levels.size == 1
-        levels.reverse.inject { |hash, rel| {rel => hash} }
-      end
+    def eager(object)
+      object.jsonapi_eager(@request.params["include"].to_s)
     end
   end
 end

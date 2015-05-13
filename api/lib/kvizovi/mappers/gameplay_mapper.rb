@@ -1,8 +1,8 @@
-require "kvizovi/mappers/base"
+require "kvizovi/mappers/base_mapper"
 
 module Kvizovi
   module Mappers
-    class GameplayMapper < Base
+    class GameplayMapper < BaseMapper
       attributes :id, :quiz_snapshot, :players_count, :answers, :start, :finish
 
       has_many :players, mapper: UserMapper

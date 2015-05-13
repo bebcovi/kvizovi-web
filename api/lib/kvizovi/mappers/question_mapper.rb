@@ -1,8 +1,8 @@
-require "kvizovi/mappers/base"
+require "kvizovi/mappers/base_mapper"
 
 module Kvizovi
   module Mappers
-    class QuestionMapper < Base
+    class QuestionMapper < BaseMapper
       attributes :id, :type, :title, :content, :image, :hint, :position
     end
   end

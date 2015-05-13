@@ -1,8 +1,8 @@
-require "kvizovi/mappers/base"
+require "kvizovi/mappers/base_mapper"
 
 module Kvizovi
   module Mappers
-    class QuizMapper < Base
+    class QuizMapper < BaseMapper
       attributes :id, :name, :category, :image, :questions_count,
         :created_at, :updated_at
 
