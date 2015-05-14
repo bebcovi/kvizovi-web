@@ -6,6 +6,7 @@ module Kvizovi
     class Quiz < Base
       many_to_one :creator, class: User
       one_to_many :questions, order: :position
+      one_to_many :gameplays
 
       dataset_module do
         def newest

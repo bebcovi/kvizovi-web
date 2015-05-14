@@ -27,11 +27,9 @@ module Kvizovi
       case object
       when Hash, Array
         Utils.dump_json(object)
-      when Sequel::Model
-        yaks.call(eager(object), env: @request.env)
       when Sequel::Dataset
-        yaks.call(eager(object).to_a, env: @request.env)
-      when Kvizovi::Error
+        yaks.call(object.all, env: @request.env)
+      when Sequel::Model, Kvizovi::Error
         yaks.call(object, env: @request.env)
       end
     end
@@ -46,10 +44,6 @@ module Kvizovi
         map_to_primitive Sequel::Postgres::JSONBHash, &:to_hash
         json_serializer { |data, env| Utils.dump_json(data, env) }
       end
-    end
-
-    def eager(object)
-      object.jsonapi_eager(@request.params["include"].to_s)
     end
   end
 end

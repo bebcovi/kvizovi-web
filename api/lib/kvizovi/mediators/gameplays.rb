@@ -14,7 +14,7 @@ module Kvizovi
         @user = user
       end
 
-      def search(as:, quiz_id: nil, page: nil)
+      def search(as:, quiz_id: nil, page: nil, **)
         gameplays = send("all_for_#{as}")
         gameplays = gameplays.where(quiz_id: quiz_id) if quiz_id
         gameplays = Utils.paginate(gameplays, page) if page

@@ -26,7 +26,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "sequel", "~> 4.22"
   gem.add_dependency "pg"
   gem.add_dependency "sequel_postgresql_triggers", "~> 1.0.8"
-  gem.add_dependency "sequel-jsonapi_eager", ">= 0.0.2"
 
   # Images
   gem.add_dependency "refile", "= 0.5.3"

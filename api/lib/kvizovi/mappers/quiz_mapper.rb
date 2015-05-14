@@ -8,6 +8,7 @@ module Kvizovi
 
       has_one  :creator, mapper: UserMapper
       has_many :questions
+      has_many :gameplays
     end
   end
 end

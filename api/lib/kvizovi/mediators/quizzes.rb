@@ -4,7 +4,7 @@ require "kvizovi/utils"
 module Kvizovi
   module Mediators
     class Quizzes
-      def self.search(q: nil, category: nil, page: nil)
+      def self.search(q: nil, category: nil, page: nil, **)
         quizzes = Models::Quiz.dataset
         quizzes = quizzes.search(q) if q
         quizzes = quizzes.where(category: category) if category

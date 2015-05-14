@@ -91,6 +91,7 @@ HEAD /heartbeat
 Users can have the following associations included:
 
 * `quizzes`
+* `gameplays`
 
 ### Retrieving users
 
@@ -208,6 +209,7 @@ Quizzes can have the following associations included:
 
 * `questions`
 * `creator`
+* `gameplays`
 
 ### Retrieving quizzes
 
