@@ -80,13 +80,15 @@ HEAD /heartbeat
 
 ## Users
 
-| Attribute  | Type    |
-| ---------  | ----    |
-| `id`       | integer |
-| `nickname` | string  |
-| `email`    | string  |
-| `token`    | string  |
-| `avatar`   | image   |
+| Attribute    | Type    |
+| ---------    | ----    |
+| `id`         | integer |
+| `nickname`   | string  |
+| `email`      | string  |
+| `token`      | string  |
+| `avatar`     | image   |
+| `created_at` | time    |
+| `updated_at` | time    |
 
 Users can have the following associations included:
 
@@ -294,15 +296,17 @@ This will delete the quiz and its associated questions.
 
 ## Questions
 
-| Attribute  | Type    |
-| ---------  | ------  |
-| `id`       | integer |
-| `type`     | string  |
-| `image`    | image   |
-| `title`    | string  |
-| `content`  | json    |
-| `hint`     | string  |
-| `position` | integer |
+| Attribute    | Type    |
+| ---------    | ------  |
+| `id`         | integer |
+| `type`       | string  |
+| `image`      | image   |
+| `title`      | string  |
+| `content`    | json    |
+| `hint`       | string  |
+| `position`   | integer |
+| `created_at` | time    |
+| `updated_at` | time    |
 
 ### Retrieving questions
 
@@ -458,8 +462,8 @@ Authorization: Token token="abc123"
 | `quiz_snapshot` | json      |
 | `answers`       | json      |
 | `players_count` | integer   |
-| `start`         | time      |
-| `finish`        | time      |
+| `started_at`    | time      |
+| `finished_at`   | time      |
 
 Gameplays can have the following associations included:
 

@@ -67,13 +67,22 @@ class AppTest < IntegrationTest
     authorization = token_auth(resource("user")["token"])
 
     post "/quizzes?include=questions,creator",
-      {data: json_attributes_for(:quiz,
+      {data: json_attributes_for(:quiz, name: "Game of Thrones", category: "movies",
         questions_attributes: [attributes_for(:question)])}, authorization
     refute_empty resource("quiz")
     refute_empty associated_resource("quiz", "questions")
     refute_empty associated_resource("quiz", "creator")
 
     quiz_id = resource("quiz")["id"]
+
+    get "/quizzes", {q: "game"}
+    refute_empty resource("quiz")
+
+    get "/quizzes", {category: "movies"}
+    refute_empty resource("quiz")
+
+    get "/quizzes", {page: {number: 1, size: 1}}
+    refute_empty resource("quiz")
 
     get "/quizzes", {}, authorization
     refute_empty resource("quiz")
@@ -185,7 +194,7 @@ class AppTest < IntegrationTest
     assert_equal 401, status
     assert_equal "token_invalid", error["id"]
 
-    get "/quizzes/1"
+    get "/quizzes/-1"
     assert_equal 404, status
     assert_equal "record_not_found", error["id"]
 

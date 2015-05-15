@@ -10,8 +10,8 @@ Sequel.migration do
 
       column :answers, :jsonb
 
-      column :start,  :time
-      column :finish, :time
+      column :started_at,  :timestamp
+      column :finished_at, :timestamp
     end
   end
 end

@@ -24,7 +24,7 @@ module Kvizovi
       r.multi_route
 
       r.post "contact" do
-        Mailer.send(:contact, resource(:email)) and ""
+        Mailer.send(:contact, resource(:email)); ""
       end
 
       r.on Refile.mount_point do

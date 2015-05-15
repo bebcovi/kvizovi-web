@@ -8,7 +8,7 @@ module Kvizovi
 
       dataset_module do
         def newest
-          order{finish.desc}
+          order{finished_at.desc}
         end
       end
     end

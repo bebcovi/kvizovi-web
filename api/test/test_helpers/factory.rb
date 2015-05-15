@@ -61,8 +61,8 @@ module TestHelpers
       gameplay: [:Gameplay, {
         quiz_snapshot: {},
         answers: {},
-        start: Time.now,
-        finish: Time.now,
+        started_at: Time.now,
+        finished_at: Time.now,
       }],
     }
   end

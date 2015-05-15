@@ -10,9 +10,9 @@ class GameplaysTest < UnitTest
     @gameplays = Gameplays.new(@user)
   end
 
-  def create_gameplay
+  def create_gameplay(**options)
     Gameplays.create(attributes_for(:gameplay,
-      associations: {quiz: @quiz.id, players: [@user.id]}))
+      associations: {quiz: @quiz.id, players: [@user.id]}).merge(options))
   end
 
   def test_creating
