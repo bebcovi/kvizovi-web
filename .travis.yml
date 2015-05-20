@@ -1,0 +1,17 @@
+language: node_js
+
+node_js:
+  - node
+
+# PhantomJS 2 needed for React
+before_install:
+  - cd web
+  - mkdir travis-phantomjs
+  - wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
+  - tar -xvf $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -C $PWD/travis-phantomjs
+  - export PATH=$PWD/travis-phantomjs:$PATH
+
+notifications:
+  email: false
+  slack:
+    secure: Mo9p1sBTjlyZkD7U3eHT1vHeK2VbsbTpXgKYj+kj/kjTQJIT/wYLjJZ2yty8A9XMjZNG+MKaJIj66YcjrJ0jrW/n7c1ExAhMdC+D3bC8bNSovREH4gS2WGSBc/ALor4B6MCh2BUC17zgkmOTwttaJqjWL89ytmv4M3DHliYdojE=

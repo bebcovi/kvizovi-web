@@ -46,7 +46,7 @@ gulp.task('jshint', function () {
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/*.scss')
-    .pipe($.sass())
+    .pipe($.sass()).on('error', $.sass.logError)
     .pipe($.postcss(processors))
     .pipe(gulp.dest('.tmp/styles'))
     .pipe(browserSync.reload({stream: true}));

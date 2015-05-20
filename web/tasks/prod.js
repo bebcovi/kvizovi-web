@@ -9,7 +9,7 @@ var history = require('connect-history-api-fallback');
 var b = require('./assets');
 
 gulp.task('html', ['scripts', 'styles'], function () {
-  b.close(); // close watchify
+  b.close();
 
   gulp.src('app/index.html')
     .pipe(gulp.dest('dist'));

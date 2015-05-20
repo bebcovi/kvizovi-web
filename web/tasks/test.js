@@ -23,12 +23,19 @@ gulp.task('connect:test', ['scripts', 'styles'], function (done) {
 
 gulp.task('selenium', function (done) {
   selenium.install({
+    drivers: {},
     logger: function () { }
   }, function (err) {
     if (err) return done(err);
-
-    selenium.start(function (err, child) {
+    selenium.start({
+      drivers: {}
+    }, function (err, child) {
       if (err) return done(err);
+      if (process.env.TRAVIS) {
+        child.stderr.on('data', function(data){
+          console.log(data.toString());
+        });
+      }
       selenium.child = child;
       done();
     });
@@ -36,11 +43,20 @@ gulp.task('selenium', function (done) {
 });
 
 gulp.task('integration', ['connect:test', 'selenium'], function () {
-  return gulp.src('test/*.js', {read: false})
-    .pipe($.mocha({timeout: 5000}));
+  return gulp.src('test/spec/**/*.js', {read: false})
+    .pipe($.mocha({timeout: 5000}))
+    .once('error', function () {
+      process.env.MOCHA_ERR = 1;
+    })
+    .once('end', function () {
+      if (process.env.MOCHA_ERR) {
+        process.exit(1);
+      }
+    });
 });
 
 gulp.task('test', ['integration'], function () {
+  require('../test/client').end();
   selenium.child.kill();
   browserSync.exit();
 });
