@@ -44,7 +44,7 @@ gulp.task('selenium', function (done) {
 
 gulp.task('integration', ['connect:test', 'selenium'], function () {
   return gulp.src('test/spec/**/*.js', {read: false})
-    .pipe($.mocha({timeout: 5000}))
+    .pipe($.mocha({timeout: 10000}))
     .once('error', function () {
       process.env.MOCHA_ERR = 1;
     })
