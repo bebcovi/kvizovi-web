@@ -3,6 +3,10 @@ language: node_js
 node_js:
   - node
 
+cache:
+  directories:
+    - node_modules
+
 # PhantomJS 2 needed for React
 before_install:
   - cd web
