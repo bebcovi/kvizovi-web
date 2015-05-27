@@ -1,1 +1,1 @@
-# Kvizovi Web [![travis](https://travis-ci.org/twin/kvizovi.svg)](https://travis-ci.org/twin/kvizovi)
+# Kvizovi Web [![travis](https://travis-ci.org/twin/kvizovi-web.svg)](https://travis-ci.org/twin/kvizovi-web)
