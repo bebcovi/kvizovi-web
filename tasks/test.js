@@ -37,7 +37,7 @@ gulp.task('selenium', function (done) {
         });
       }
       selenium.child = child;
-      done();
+      setTimeout(done, 1000);
     });
   });
 });
