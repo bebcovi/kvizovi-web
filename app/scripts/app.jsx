@@ -1,36 +1,31 @@
-import React    from 'react';
-import Router   from 'react-router';
-
-// views
-
-import Home     from './views/home';
+import React from 'react/addons';
+import Router from 'react-router';
+import Home from './views/home';
 import NotFound from './views/not-found';
-
-// polyfills
 
 import './fonts';
 import 'svg4everybody';
 
-var {
+const {
   Route,
   DefaultRoute,
   NotFoundRoute,
   RouteHandler
 } = Router;
 
-var App = React.createClass({
+const App = React.createClass({
   render() {
     return <RouteHandler />;
   }
 });
 
-var routes = (
+const routes = (
   <Route name="app" path="/" handler={App}>
     <DefaultRoute handler={Home} />
     <NotFoundRoute handler={NotFound} />
   </Route>
 );
 
-Router.run(routes, Router.HistoryLocation, function (Handler) {
-  React.render(<Handler />, document.body);
+Router.run(routes, Router.HistoryLocation, Handler => {
+  React.render(<Handler />, document.getElementById('content'));
 });

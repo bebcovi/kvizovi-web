@@ -1,4 +1,4 @@
-import './promise';
+import 'es6-promise';
 import 'fetch';
 
 function status(response) {

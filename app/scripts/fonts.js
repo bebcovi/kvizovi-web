@@ -1,3 +1,5 @@
+/*global FontFaceObserver*/
+
 import 'fontfaceobserver';
 
 new FontFaceObserver('Open Sans')

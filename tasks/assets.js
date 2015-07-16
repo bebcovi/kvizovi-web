@@ -1,62 +1,67 @@
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
+import gulp from 'gulp';
+import $ from './helpers/plugins';
+import {dev as server} from './helpers/server';
+import autoprefixer from 'autoprefixer-core';
 
-var browserSync = require('browser-sync');
+// https://github.com/gulpjs/gulp/blob/master/docs/recipes/fast-browserify-builds-with-watchify.md
+import browserify from 'browserify';
+import watchify from 'watchify';
+import source from 'vinyl-source-stream';
 
-var processors = [
-  require('autoprefixer-core')
-];
-
-var browserify = require('browserify');
-var watchify = require('watchify');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var assign = require('lodash.assign');
-
-var customOpts = {
+let b = browserify({
   entries: ['./app/scripts/app.jsx'],
   extensions: ['.jsx'],
   debug: true
-};
-var opts = assign({}, watchify.args, customOpts);
-var b = watchify(browserify(opts));
-var bundle = function () {
+}, watchify.args);
+
+// only watch for changes in development mode
+if (process.env.ENV !== 'production') {
+  b = watchify(b);
+}
+
+function bundle() {
   return b.bundle()
-    .on('error', $.util.log.bind($.util, 'Browserify Error'))
+    .on('error', msg => {
+      delete msg.stream;
+      $.util.log(msg);
+    })
     .pipe(source('bundle.js'))
-    .pipe(buffer())
-    .pipe($.sourcemaps.init({loadMaps: true}))
-    .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest('.tmp/scripts'))
-    .pipe(browserSync.reload({stream: true, once: true}));
-};
+    .pipe(server.stream({once: true}));
+}
 
 gulp.task('scripts', bundle);
 b.on('update', bundle);
-b.on('log', $.util.log);
 
-module.exports = b;
-
-gulp.task('jshint', function () {
-  return gulp.src('app/scripts/**/*.js')
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.jshint.reporter('fail'));
+gulp.task('lint', () => {
+  return gulp.src([
+    'app/scripts/**/*.{js,jsx}',
+    'test/**/*.{js,jsx}',
+    'tasks/**/*.js'
+  ])
+    .pipe($.eslint())
+    .pipe($.eslint.format())
+    .pipe($.eslint.failAfterError());
 });
 
-gulp.task('styles', function () {
-  return gulp.src('app/styles/*.scss')
-    .pipe($.sass()).on('error', $.sass.logError)
-    .pipe($.postcss(processors))
+gulp.task('styles', () => {
+  return gulp.src('app/styles/**/*.scss')
+    .pipe($.plumber())
+    .pipe($.sourcemaps.init())
+    .pipe($.sass.sync()).on('error', $.sass.logError)
+    .pipe($.postcss([autoprefixer]))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
-    .pipe(browserSync.reload({stream: true}));
+    .pipe(server.stream());
 });
 
-gulp.task('images', function () {
+gulp.task('images', () => {
   return gulp.src('app/images/**/*')
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true,
+      // don't remove IDs from SVGs, they are often used
+      // as hooks for embedding and styling
       svgoPlugins: [{cleanupIDs: false}]
     })))
     .pipe(gulp.dest('dist/images'));

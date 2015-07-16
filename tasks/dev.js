@@ -1,12 +1,9 @@
-/* global -history */
+import gulp from 'gulp';
+import {dev as server} from './helpers/server';
+import history from 'connect-history-api-fallback';
 
-var gulp = require('gulp');
-
-var browserSync = require('browser-sync');
-var history = require('connect-history-api-fallback');
-
-gulp.task('connect', ['scripts', 'styles'], function (done) {
-  browserSync({
+gulp.task('connect', ['scripts', 'styles'], done => {
+  server.init({
     notify: false,
     port: 9000,
     open: false,
@@ -21,7 +18,7 @@ gulp.task('watch', ['connect'], function () {
   gulp.watch([
     'app/**/*.html',
     'app/images/**/*'
-  ]).on('change', browserSync.reload);
+  ]).on('change', server.reload);
 
   gulp.watch('app/styles/**/*.scss', ['styles']);
 });

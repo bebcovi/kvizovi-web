@@ -1,16 +1,9 @@
-/* global -history */
+import gulp from 'gulp';
+import $ from './helpers/plugins';
+import {prod as server} from './helpers/server';
+import history from 'connect-history-api-fallback';
 
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
-
-var browserSync = require('browser-sync');
-var history = require('connect-history-api-fallback');
-
-var b = require('./assets');
-
-gulp.task('html', ['scripts', 'styles'], function () {
-  b.close();
-
+gulp.task('html', ['scripts', 'styles'], () => {
   gulp.src('app/index.html')
     .pipe(gulp.dest('dist'));
 
@@ -19,11 +12,11 @@ gulp.task('html', ['scripts', 'styles'], function () {
     '.tmp/styles/*.css'
   ], {base: '.tmp'})
     .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.csso()))
+    .pipe($.if('*.css', $.minifyCss()))
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('extras', function () {
+gulp.task('extras', () => {
   return gulp.src([
     'app/*.*',
     '!app/*.html'
@@ -31,8 +24,8 @@ gulp.task('extras', function () {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('connect:dist', function (done) {
-  browserSync({
+gulp.task('connect:dist', done => {
+  server.init({
     notify: false,
     port: 9000,
     open: false,
@@ -46,7 +39,7 @@ gulp.task('connect:dist', function (done) {
 
 gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
 
-gulp.task('build', ['jshint', 'html', 'images', 'extras'], function () {
+gulp.task('build', ['lint', 'html', 'images', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
