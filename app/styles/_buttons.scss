@@ -16,6 +16,10 @@
     outline: none;
   }
 
+  &-group {
+    margin-bottom: 1em;
+  }
+
   &[disabled],
   fieldset[disabled] & {
     cursor: not-allowed;

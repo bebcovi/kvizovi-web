@@ -33,18 +33,20 @@ export default React.createClass({
 
   render () {
     return (
-      <div className="container">
-        <Loader loaded={this.state.loaded}>
-          <div className="quiz">
-            <h1 className="quiz-name">{this.state.name}</h1>
-            <ol className="quiz-questions">
-              {this.state.questions.map((question, i) => (
-                <li key={i} className="quiz-question">{question.attributes.title}</li>
-              ))}
-            </ol>
-          </div>
-        </Loader>
-      </div>
+      <main className="main">
+        <div className="container">
+          <Loader loaded={this.state.loaded}>
+            <div className="quiz">
+              <h1 className="quiz-name">{this.state.name}</h1>
+              <ol className="quiz-questions">
+                {this.state.questions.map((question, i) => (
+                  <li key={i} className="quiz-question">{question.attributes.title}</li>
+                ))}
+              </ol>
+            </div>
+          </Loader>
+        </div>
+      </main>
     );
   }
 });
