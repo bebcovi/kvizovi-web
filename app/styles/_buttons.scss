@@ -1,0 +1,42 @@
+.btn {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 1rem 2rem;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: 1px solid transparent;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  touch-action: manipulation;
+
+  &:focus {
+    outline: none;
+  }
+
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  @each $type, $color in $colors {
+    &-#{$type} {
+      background: $color;
+      color: #fff;
+
+      &:hover,
+      &:focus {
+        background: shade($color, 15%);
+        color: #fff;
+      }
+
+      &[disabled],
+      fieldset[disabled] & {
+        background: $color;
+      }
+    }
+  }
+}
