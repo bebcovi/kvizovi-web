@@ -1,5 +1,5 @@
 import 'es6-promise';
-import 'fetch';
+import 'whatwg-fetch';
 
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -14,7 +14,7 @@ function json(response) {
 }
 
 export default function (url, options) {
-  return fetch(`${url}`, options)
+  return fetch(`http://localhost:9292${url}`, options)
     .then(status)
     .then(json);
 }
