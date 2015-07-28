@@ -9,10 +9,6 @@
     "build": "ENV=production gulp",
     "preview": "gulp connect:dist"
   },
-  "browser": {
-    "fetch": "./app/scripts/helpers/fetch.js",
-    "loader": "./app/scripts/components/loader.jsx"
-  },
   "browserify": {
     "transform": [
       "babelify"

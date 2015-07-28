@@ -14,7 +14,7 @@ function json(response) {
 }
 
 export default function (url, options) {
-  return fetch(`http://localhost:9292${url}`, options)
+  return fetch(`http://localhost:3000${url}`, options)
     .then(status)
     .then(json);
 }

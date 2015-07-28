@@ -1,6 +1,6 @@
 import React from 'react/addons';
-import fetch from 'fetch';
-import Loader from 'loader';
+import fetch from '../helpers/fetch-json';
+import Loader from '../components/loader';
 
 export default React.createClass({
   propTypes: {
