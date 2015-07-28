@@ -1,9 +1,7 @@
 .loader {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: white;
-  z-index: 9999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, 50%, 0);
+  color: #ee6e73;
 }

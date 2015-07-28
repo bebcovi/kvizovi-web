@@ -1,15 +1,16 @@
 import React from 'react/addons';
 import Router from 'react-router';
+
+import Navigation from './components/navigation';
 import Quizzes from './views/quizzes';
 import Quiz from './views/quiz';
 import Register from './views/register';
-import Styleguide from './views/styleguide';
-import StyleguideButtons from './views/styleguide/buttons';
-import StyleguideForms from './views/styleguide/forms';
+import Profile from './views/profile';
 import NotFound from './views/not-found';
 
+import './vendor/materialize';
 import './fonts';
-import 'svg4everybody';
+import './tap';
 
 const {
   Route,
@@ -20,7 +21,12 @@ const {
 
 const App = React.createClass({
   render() {
-    return <RouteHandler />;
+    return (
+      <div>
+        <Navigation />
+        <RouteHandler />
+      </div>
+    );
   }
 });
 
@@ -30,10 +36,7 @@ const routes = (
     <Route path="quizzes" handler={Quizzes} />
     <Route path="quizzes/:id" handler={Quiz} />
     <Route path="register" handler={Register} />
-    <Route path="styleguide" handler={Styleguide}>
-      <Route path="buttons" handler={StyleguideButtons} />
-      <Route path="forms" handler={StyleguideForms} />
-    </Route>
+    <Route path="profile" handler={Profile} />
     <NotFoundRoute handler={NotFound} />
   </Route>
 );

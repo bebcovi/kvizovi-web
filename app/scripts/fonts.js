@@ -2,7 +2,7 @@
 
 import 'fontfaceobserver';
 
-new FontFaceObserver('Open Sans')
+new FontFaceObserver('Roboto')
   .check()
   .then(function () {
     document.documentElement.classList.add('wf-actually-active');

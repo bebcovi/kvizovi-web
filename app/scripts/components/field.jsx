@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 export default React.createClass({
   propTypes: {
+    className: React.PropTypes.string,
     label: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
     type: React.PropTypes.string
@@ -17,26 +18,20 @@ export default React.createClass({
 
   render() {
     return (
-      <div className={classNames('form-group', {
-        'is-required': this.showRequired(),
-        'has-error': this.showError()
-      })}>
+      <div className={classNames('input-field', this.props.className)}>
+        <input
+          id={this.props.name}
+          className={classNames('form-control', {
+            'invalid': this.showError()
+          })}
+          type={this.props.type}
+          onChange={this.changeValue}
+          value={this.getValue()} />
         <label
-          className="form-label"
-          htmlFor={this.props.name}>
+          htmlFor={this.props.name}
+          data-error={this.getErrorMessage()}>
           {this.props.label}
         </label>
-        <div className="form-control-outer">
-          <input
-            id={this.props.name}
-            className="form-control"
-            type={this.props.type}
-            onChange={this.changeValue}
-            value={this.getValue()} />
-            <div className="form-feedback">
-              {this.getErrorMessage()}
-            </div>
-        </div>
       </div>
     );
   }

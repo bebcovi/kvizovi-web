@@ -19,7 +19,7 @@ export default React.createClass({
       .then(res => {
         this.setState({
           name: res.data.attributes.name,
-          questions: res.included,
+          questions: res.included || [],
           loaded: true
         });
       })
@@ -32,19 +32,37 @@ export default React.createClass({
   },
 
   render () {
+    let content, questions;
+
+    if (this.state.loaded) {
+      if (this.state.questions.length) {
+        questions = (
+          <ul className="collection">
+            {this.state.questions.map((question, i) => (
+              <li key={i} className="collection-item">
+                {question.attributes.title}
+              </li>
+            ))}
+          </ul>
+        );
+      } else {
+        questions = <p>Ovaj kviz nema pitanja.</p>;
+      }
+
+      content = (
+        <div>
+          <h1>{this.state.name}</h1>
+          {questions}
+        </div>
+      );
+    } else {
+      content = <Loader />;
+    }
+
     return (
       <main className="main">
         <div className="container">
-          <Loader loaded={this.state.loaded}>
-            <div className="quiz">
-              <h1 className="quiz-name">{this.state.name}</h1>
-              <ol className="quiz-questions">
-                {this.state.questions.map((question, i) => (
-                  <li key={i} className="quiz-question">{question.attributes.title}</li>
-                ))}
-              </ol>
-            </div>
-          </Loader>
+          {content}
         </div>
       </main>
     );

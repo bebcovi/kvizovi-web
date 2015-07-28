@@ -1,0 +1,7 @@
+html {
+  font-family: 'helvetica neue', helvetica, arial, sans-serif;
+
+  &.wf-actually-active {
+    font-family: roboto, 'helvetica neue', helvetica, arial, sans-serif;
+  }
+}
