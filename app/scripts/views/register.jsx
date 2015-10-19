@@ -33,33 +33,24 @@ export default React.createClass({
             onValidSubmit={this.submit}
             onValid={this.enableSubmit}
             onInvalid={this.disableSubmit}>
-
             <h1>Registracija</h1>
-
-            <div className="row">
-              <Field
-                className="col s6"
-                name="name"
-                label="Nadimak"
-                type="text"
-                required />
-              <Field
-                className="col s6"
-                name="email"
-                type="email"
-                label="E-mail"
-                validations="isEmail"
-                validationError="E-mail adresa nije validna."
-                required />
-            </div>
-
+            <Field
+              name="name"
+              label="Nadimak"
+              required />
+            <Field
+              name="email"
+              type="email"
+              label="E-mail"
+              validations="isEmail"
+              validationError="E-mail adresa nije validna"
+              required />
             <button
-              className="btn-large"
+              className="btn btn-primary"
               type="submit"
               disabled={!this.state.canSubmit}>
               Submit
             </button>
-
           </Form>
         </div>
       </main>

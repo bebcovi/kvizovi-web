@@ -1,13 +1,19 @@
 import React from 'react/addons';
+import Loader from 'react-loader';
 
 export default React.createClass({
+  propTypes: {
+    children: React.PropTypes.node.isRequired,
+    loaded: React.PropTypes.bool.isRequired
+  },
+
   render() {
     return (
-      <div className="loader">
-        <div className="loader-inner line-scale-pulse-out-rapid">
-          {[1, 2, 3, 4, 5].map(n => <div key={n} />)}
-        </div>
-      </div>
+      <Loader
+        loaded={this.props.loaded}
+        color="gray">
+        {this.props.children}
+      </Loader>
     );
   }
 });

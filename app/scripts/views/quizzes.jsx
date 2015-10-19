@@ -28,30 +28,22 @@ export default React.createClass({
   },
 
   render() {
-    let content;
-
-    if (this.state.loaded) {
-      content = (
-        <div className="collection">
-          {this.state.quizzes.map((quiz, i) => (
-            <Link
-              key={i}
-              to={`/quizzes/${quiz.id}`}
-              className="collection-item">
-              {quiz.attributes.name}
-            </Link>
-          ))}
-        </div>
-      );
-    } else {
-      content = <Loader />;
-    }
-
     return (
       <main className="main">
         <div className="container">
           <h1>Kvizovi</h1>
-          {content}
+
+          <Loader loaded={this.state.loaded}>
+            <ol className="quiz-list">
+              {this.state.quizzes.map((quiz, i) => (
+                <li key={i} className="quiz-item">
+                  <Link to={`/quizzes/${quiz.id}`}>
+                    {quiz.attributes.name}
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </Loader>
         </div>
       </main>
     );
