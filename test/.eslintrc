@@ -1,0 +1,12 @@
+env:
+  mocha: true
+globals:
+  React: false
+  expect: false
+  enzyme: false
+  shallow: false
+  mount: false
+  render: false
+rules:
+  func-names: 0
+  prefer-arrow-callback: 0

@@ -1,4 +1,4 @@
 node_modules
-.tmp
-dist
 *.log
+dist
+.tmp
