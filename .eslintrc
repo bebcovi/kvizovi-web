@@ -1,9 +1,12 @@
 root: true
 extends: airbnb
+parserOptions:
+  ecmaFeatures:
+    experimentalObjectRestSpread: true
 globals:
   __API_URL__: false
   __DEV__: false
-  __TEST__: false
-  __PROD__: false
 rules:
+  no-warning-comments: 1
+  react/no-multi-comp: 0
   react/jsx-no-literals: 2
