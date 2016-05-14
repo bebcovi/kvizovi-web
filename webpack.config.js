@@ -5,37 +5,8 @@ const autoprefixer = require('autoprefixer');
 const resolve = require('path').resolve;
 
 const env = process.env.NODE_ENV || 'development';
-
-const ENTRY = {
-  development: [
-    'babel-polyfill',
-    'webpack-hot-middleware/client',
-    './src',
-  ],
-  test: './test',
-  production: [
-    'babel-polyfill',
-    './src',
-  ],
-};
-
-const OUTPUT = {
-  development: {
-    path: resolve('./dist'),
-    filename: 'bundle.js',
-    publicPath: '/',
-  },
-  test: {
-    path: resolve('./.tmp'),
-    filename: 'test.js',
-    publicPath: '/',
-  },
-  production: {
-    path: resolve('./dist'),
-    filename: '[hash].js',
-    publicPath: '/',
-  },
-};
+const IS_PROD = env === 'production';
+const IS_DEV = env === 'development';
 
 const PLUGINS = {
   development: [
@@ -61,38 +32,24 @@ const PLUGINS = {
   ],
 };
 
-const MODULE = {
-  test: {
-    // isomorphic-fetch fix
-    // https://github.com/webpack/webpack/issues/198#issuecomment-37306725
-    // require(expr)
-    exprContextRegExp: /$^/,
-    exprContextCritical: false,
-  },
-};
-
 const LOCAL_IDENT_NAME = '[name]__[local]___[hash:base64:5]';
 const STYLES_MODULES_LOADER = {
   development: `style!css?modules&localIdentName=${LOCAL_IDENT_NAME}&importLoaders=1!postcss!sass`,
-  test: 'null',
   production: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1!postcss!sass'),
 };
 
 const STYLES_GLOBAL_LOADER = {
   development: 'style!css?importLoaders=1!postcss!sass',
-  test: 'null',
   production: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss!sass'),
 };
 
 const LESS_LOADER = {
   development: 'style!css?importLoaders=1!postcss!less',
-  test: 'null',
   production: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss!less'),
 };
 
 const IMAGE_LOADER = {
   development: 'url?limit=10000',
-  test: 'null',
   production: 'url?limit=10000!image-webpack',
 };
 
@@ -100,17 +57,21 @@ module.exports = {
   resolve: {
     extensions: ['', '.webpack.js', '.web.js', '.js', '.json', '.scss'],
   },
-  devtool: env !== 'production' ? 'cheap-module-eval-source-map' : undefined,
-  target: env === 'test' ? 'node' : 'web',
-  entry: ENTRY[env],
-  output: OUTPUT[env],
+  devtool: IS_DEV ? 'cheap-module-eval-source-map' : null,
+  entry: [
+    'babel-polyfill',
+    './src',
+  ],
+  output: {
+    path: resolve('./dist'),
+    filename: IS_PROD ? '[hash].js' : 'bundle.js',
+    publicPath: '/',
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      __API_URL__: JSON.stringify(env === 'development' ?
-        'http://localhost:3000' :
-        'http://api.kvizovi.org'),
-      __DEV__: JSON.stringify(env === 'development'),
+      __API_URL__: JSON.stringify(IS_PROD ? 'http://api.kvizovi.org' : 'http://localhost:3000'),
+      __DEV__: JSON.stringify(IS_DEV),
     }),
     // https://github.com/webpack/webpack/issues/59#issuecomment-12923514
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /hr$/),
@@ -118,16 +79,11 @@ module.exports = {
   postcss: () => [
     autoprefixer,
   ],
-  externals: env === 'test' ? {
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': true,
-    'react/addons': true,
-  } : undefined,
-  module: Object.assign({
+  module: {
     loaders: [
       {
         test: /\.js$/,
-        include: [resolve('./src'), resolve('./test')],
+        include: resolve('./src'),
         loader: 'babel',
       },
       {
@@ -158,5 +114,5 @@ module.exports = {
         loader: IMAGE_LOADER[env],
       },
     ],
-  }, MODULE[env]),
+  },
 };

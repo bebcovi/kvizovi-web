@@ -1,2 +1,7 @@
 env:
   mocha: true
+settings:
+  import/resolver:
+    node:
+      paths:
+        - src

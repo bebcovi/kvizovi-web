@@ -2,31 +2,30 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 import rootSaga from '../sagas';
-import createLogger from 'redux-logger';
+
+let logger;
+
+if (__DEV__) {
+  logger = require('redux-logger')();
+}
 
 export default function configureStore(initialState) {
-  const sagaMiddleware = createSagaMiddleware(rootSaga);
-  let enhancer = applyMiddleware(
-    sagaMiddleware
-  );
-
-  if (__DEV__) {
-    enhancer = applyMiddleware(
-      sagaMiddleware,
-      createLogger()
-    );
-  }
-
+  const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     rootReducer,
     initialState,
-    enhancer
+    applyMiddleware(
+      sagaMiddleware,
+      logger
+    )
   );
+
+  sagaMiddleware.run(rootSaga);
 
   if (__DEV__ && module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers').default; // eslint-disable-line global-require
+      const nextRootReducer = require('../reducers').default;
       store.replaceReducer(nextRootReducer);
     });
   }
