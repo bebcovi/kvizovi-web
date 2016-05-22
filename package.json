@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --content-base dist --no-info --port 9000 --inline --hot --history-api-fallback",
-    "lint:js": "eslint ./ --fix",
+    "lint:js": "eslint ./",
     "lint:css": "stylelint src/styles/**/*.scss --syntax scss",
     "lint": "npm run lint:js && npm run lint:css",
     "test": "cross-env NODE_ENV=test NODE_PATH=src mocha test/specs",
