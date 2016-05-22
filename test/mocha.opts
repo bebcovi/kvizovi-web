@@ -1,4 +1,0 @@
---require babel-polyfill ./test/setup
---compilers js:babel-register,scss:null-register
---recursive
---bail
