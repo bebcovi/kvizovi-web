@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import style from '../styles/App.scss';
+import style from '../styles/Dashboard.scss';
 import { loadDashboard } from '../actions';
 
-const App = props => (
+const Dashboard = props => (
   <div className={style.container}>
     <h1>{'Hello World!'}</h1>
     <button
@@ -23,7 +23,7 @@ const App = props => (
   </div>
 );
 
-App.propTypes = {
+Dashboard.propTypes = {
   actions: PropTypes.object.isRequired,
   quizzes: PropTypes.array.isRequired,
 };
@@ -45,4 +45,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(Dashboard);
