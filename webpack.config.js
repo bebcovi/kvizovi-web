@@ -58,7 +58,13 @@ module.exports = {
     extensions: ['', '.webpack.js', '.web.js', '.js', '.json', '.scss'],
   },
   devtool: IS_DEV ? 'cheap-module-eval-source-map' : null,
-  entry: [
+  entry: IS_DEV ? [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://0.0.0.0:9000',
+    'webpack/hot/only-dev-server',
+    'babel-polyfill',
+    './src',
+  ] : [
     'babel-polyfill',
     './src',
   ],
