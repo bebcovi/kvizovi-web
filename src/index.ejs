@@ -9,6 +9,7 @@
   </head>
   <body>
     <div id="root"></div>
+    <% if (htmlWebpackPlugin.options.IS_PROD) { %>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script>
       // Initialize Firebase
@@ -20,5 +21,6 @@
       };
       firebase.initializeApp(config);
     </script>
+    <% } %>
   </body>
 </html>

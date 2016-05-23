@@ -12,23 +12,12 @@ const PLUGINS = {
   development: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new HtmlPlugin({
-      template: './src/index.html',
-      inject: true,
-      favicon: './src/favicon.ico',
-      hash: true,
-    }),
   ],
   production: [
     new webpack.optimize.UglifyJsPlugin({
       compressor: { warnings: false },
     }),
     new ExtractTextPlugin('[hash].css', { allChunks: true }),
-    new HtmlPlugin({
-      template: './src/index.html',
-      inject: true,
-      favicon: './src/favicon.ico',
-    }),
   ],
 };
 
@@ -81,6 +70,12 @@ module.exports = {
     }),
     // https://github.com/webpack/webpack/issues/59#issuecomment-12923514
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /hr$/),
+    new HtmlPlugin({
+      template: './src/index.ejs',
+      inject: true,
+      favicon: './src/favicon.ico',
+      IS_PROD,
+    }),
   ].concat(PLUGINS[env] || []),
   postcss: () => [
     autoprefixer,
