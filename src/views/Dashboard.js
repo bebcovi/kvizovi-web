@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import style from '../styles/Dashboard.scss';
 import { loadDashboard } from '../actions';
 
-const Dashboard = props => (
+export const Dashboard = props => (
   <div className={style.container}>
     <h1>{'Hello World!'}</h1>
     <button

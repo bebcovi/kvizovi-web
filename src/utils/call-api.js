@@ -19,7 +19,11 @@ export default function callApi(endpoint, schema, method = 'get') {
         return Promise.reject(camelizedJson.errors);
       }
 
-      return normalize(camelizedJson, schema);
+      if (schema) {
+        return normalize(camelizedJson, schema);
+      }
+
+      return camelizedJson;
     })
     .then(
       response => ({ response }),

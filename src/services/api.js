@@ -1,5 +1,5 @@
 import { Schema, arrayOf } from 'normalizr';
-import callApi from '../helpers/call-api';
+import callApi from '../utils/call-api';
 
 // We use this Normalizr schemas to transform API responses from a nested form
 // to a flat form where repos and users are placed in `entities`, and nested
