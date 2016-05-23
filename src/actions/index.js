@@ -10,14 +10,29 @@ function createRequestTypes(base) {
   return res;
 }
 
-export const FETCH_QUIZZES = createRequestTypes('FETCH_QUIZZES');
-
 function action(type, payload) {
-  return Object.assign({ type }, payload);
+  return (
+    payload &&
+    payload.constructor.name !== 'SyntheticMouseEvent'
+  ) ? { type, payload } : { type };
 }
 
-export const quizzes = {
-  request: () => action(FETCH_QUIZZES.REQUEST),
-  success: response => action(FETCH_QUIZZES.SUCCESS, { response }),
-  failure: errors => action(FETCH_QUIZZES.FAILURE, { errors }),
-};
+function createAction(type) {
+  return payload => action(type, payload);
+}
+
+function createActionsFromTypes(types) {
+  const res = {};
+  Reflect.ownKeys(types).forEach(type => {
+    res[type.toLowerCase()] = createAction(types[type]);
+  });
+  return res;
+}
+
+export const LOAD_DASHBOARD = 'LOAD_DASHBOARD';
+
+export const FETCH_QUIZZES = createRequestTypes('FETCH_QUIZZES');
+
+export const loadDashboard = createAction(LOAD_DASHBOARD);
+
+export const fetchQuizzes = createActionsFromTypes(FETCH_QUIZZES);
