@@ -8,6 +8,5 @@ globals:
   __DEV__: false
 rules:
   global-require: 0
-  no-warning-comments: 1
   react/no-multi-comp: 0
   react/jsx-no-literals: 2
