@@ -15,3 +15,4 @@ const QUIZ_ARRAY = arrayOf(QUIZ);
 
 // api services
 export const fetchQuizzes = () => callApi('quizzes', { data: QUIZ_ARRAY });
+export const updateQuiz = data => callApi(`quizzes/${data.id}`, null, 'PATCH', { data });

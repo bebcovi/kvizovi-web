@@ -62,6 +62,7 @@
   "dependencies": {
     "babel-polyfill": "^6.9.0",
     "classnames": "^2.2.5",
+    "flexboxgrid": "^6.3.0",
     "humps": "^1.1.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.13.0",
@@ -71,11 +72,13 @@
     "react-addons-css-transition-group": "^15.1.0",
     "react-addons-shallow-compare": "^15.1.0",
     "react-dom": "^15.1.0",
+    "react-flexbox-grid": "^0.9.6",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.4",
     "recompose": "^0.19.0",
     "redux": "^3.5.2",
+    "redux-form": "^6.0.0-alpha.13",
     "redux-saga": "^0.10.4",
     "reselect": "^2.5.1"
   }

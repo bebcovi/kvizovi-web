@@ -30,9 +30,15 @@ function createActionsFromTypes(types) {
 }
 
 export const LOAD_DASHBOARD = 'LOAD_DASHBOARD';
+export const OPEN_QUIZ_FORM = 'OPEN_QUIZ_FORM';
+export const EDIT_QUIZ = 'EDIT_QUIZ';
 
 export const FETCH_QUIZZES = createRequestTypes('FETCH_QUIZZES');
+export const UPDATE_QUIZ = createRequestTypes('UPDATE_QUIZ');
 
 export const loadDashboard = createAction(LOAD_DASHBOARD);
+export const openQuizForm = createAction(OPEN_QUIZ_FORM);
+export const editQuiz = createAction(EDIT_QUIZ);
 
 export const fetchQuizzes = createActionsFromTypes(FETCH_QUIZZES);
+export const updateQuiz = createActionsFromTypes(UPDATE_QUIZ);

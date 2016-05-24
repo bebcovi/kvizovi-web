@@ -12,6 +12,15 @@ test('camelizes response', t => {
   });
 });
 
+test.skip('handles response-less requests', t => {
+  nock(__API_URL__)
+    .get('/foo')
+    .reply(200);
+  return callApi('foo').then(({ errors }) => {
+    t.ifError(errors);
+  });
+});
+
 test('returns errors', t => {
   nock(__API_URL__)
     .get('/foo')
@@ -26,6 +35,15 @@ test('uses the HTTP method', t => {
     .post('/foo')
     .reply(200, { foo: 'bar' });
   return callApi('foo', null, 'post').then(({ response }) => {
+    t.deepEqual(response, { foo: 'bar' });
+  });
+});
+
+test('decamelizes body', t => {
+  nock(__API_URL__)
+    .patch('/foo', { foo_bar: 'foo bar' })
+    .reply(200, { foo: 'bar' });
+  return callApi('foo', null, 'patch', { fooBar: 'foo bar' }).then(({ response }) => {
     t.deepEqual(response, { foo: 'bar' });
   });
 });

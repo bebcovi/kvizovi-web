@@ -1,12 +1,13 @@
 import { normalize } from 'normalizr';
-import { camelizeKeys } from 'humps';
-import 'isomorphic-fetch';
+import { camelizeKeys, decamelizeKeys } from 'humps';
+import fetch from 'isomorphic-fetch';
 
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
-export default function callApi(endpoint, schema, method = 'get') {
+export default function callApi(endpoint, schema, method = 'GET', body) {
   return fetch(`${__API_URL__}/${endpoint}`, {
     method,
+    body: JSON.stringify(decamelizeKeys(body)),
     headers: {
       'content-type': 'application/json',
     },

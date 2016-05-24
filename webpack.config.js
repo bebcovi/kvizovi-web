@@ -98,13 +98,14 @@ module.exports = {
       {
         test: /\.s?css$/,
         loader: STYLES_MODULES_LOADER[env],
-        include: resolve('./src/styles'),
+        include: [resolve('./src/styles'), /flexboxgrid/],
         exclude: resolve('./src/styles/global'),
       },
       {
         test: /\.s?css$/,
         loader: STYLES_GLOBAL_LOADER[env],
         include: [resolve('./node_modules'), resolve('./src/styles/global')],
+        exclude: [/flexboxgrid/],
       },
       {
         test: /\.less$/,

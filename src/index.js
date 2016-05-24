@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import Root from './containers/Root';
 import configureStore from './configureStore';
+import './styles/global/base.scss';
 
 const store = configureStore();
 const rootEl = document.getElementById('root');

@@ -10,3 +10,4 @@ rules:
   global-require: 0
   react/no-multi-comp: 0
   react/jsx-no-literals: 2
+  no-underscore-dangle: 0
