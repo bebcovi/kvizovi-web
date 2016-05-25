@@ -1,13 +1,10 @@
 language: node_js
-
 node_js:
-  - stable
-
+- stable
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 notifications:
   email: false
   slack:
-    secure: Mo9p1sBTjlyZkD7U3eHT1vHeK2VbsbTpXgKYj+kj/kjTQJIT/wYLjJZ2yty8A9XMjZNG+MKaJIj66YcjrJ0jrW/n7c1ExAhMdC+D3bC8bNSovREH4gS2WGSBc/ALor4B6MCh2BUC17zgkmOTwttaJqjWL89ytmv4M3DHliYdojE=
+    secure: SueBQDJp6PW3ta+RLF2+cWOpGhUzl/GLjhKuClFPA7qRsxWj8W6Sv9M6BdJdhykD/Q8PKO+fE+2+osVu9d3TaJb98+ImndWNsP0/MioDZZhnzh0/2UWyG66zHneHusdlYCd6cIs9C88Cvbu1J/9T/6rGWfgIi3JpalalO7e8dNw=
