@@ -12,7 +12,15 @@ import callApi from '../utils/call-api';
 // Schemas for Github API responses.
 const QUIZ = new Schema('quizzes');
 const QUIZ_ARRAY = arrayOf(QUIZ);
+const QUESTION = new Schema('questions');
+const QUESTION_ARRAY = arrayOf(QUESTION);
 
 // api services
+/* eslint-disable max-len */
 export const fetchQuizzes = () => callApi('quizzes', { data: QUIZ_ARRAY });
-export const updateQuiz = data => callApi(`quizzes/${data.id}`, null, 'PATCH', { data });
+export const fetchQuiz = id => callApi(`quizzes/${id}`, { data: QUIZ });
+export const fetchQuizWithQuestions = id => callApi(`quizzes/${id}?include=questions`, { data: QUIZ, included: QUESTION_ARRAY });
+export const updateQuiz = data => callApi(`quizzes/${data.id}`, null, 'patch', { data });
+export const fetchQuestions = quizId => callApi(`quizzes/${quizId}/questions`, { data: QUESTION_ARRAY });
+export const fetchQuestion = ({ quizId, questionId }) => callApi(`quizzes/${quizId}/questions/${questionId}`, { data: QUESTION });
+/* eslint-enable */

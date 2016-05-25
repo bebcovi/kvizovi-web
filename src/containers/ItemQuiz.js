@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import shallowCompare from 'react-addons-shallow-compare';
+import { Link } from 'react-router';
 import { Row, Col } from 'react-flexbox-grid';
 import { IconEdit } from '../components/Icon';
 
@@ -8,6 +10,10 @@ export class ItemQuiz extends React.Component {
     this._handleEdit = this._handleEdit.bind(this);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return shallowCompare(this, nextProps);
+  }
+
   _handleEdit() {
     this.props.onEdit(this.props.id);
   }
@@ -15,13 +21,19 @@ export class ItemQuiz extends React.Component {
   render() {
     return (
       <Row>
-        <Col xs>{this.props.attributes.name}</Col>
-        <button
-          type="button"
-          onClick={this._handleEdit}
-        >
-          <IconEdit />
-        </button>
+        <Col xs>
+          <Link to={`/quizzes/${this.props.id}`}>
+            {this.props.name}
+          </Link>
+        </Col>
+        {this.props.onEdit && (
+          <button
+            type="button"
+            onClick={this._handleEdit}
+          >
+            <IconEdit />
+          </button>
+        )}
       </Row>
     );
   }
@@ -29,8 +41,8 @@ export class ItemQuiz extends React.Component {
 
 ItemQuiz.propTypes = {
   id: PropTypes.string.isRequired,
-  attributes: PropTypes.object.isRequired,
-  onEdit: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  onEdit: PropTypes.func,
 };
 
 export default ItemQuiz;

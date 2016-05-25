@@ -8,12 +8,12 @@ import { loadDashboard, openQuizForm, editQuiz } from '../actions';
 
 export const Dashboard = props => (
   <div className={style.container}>
-    <h1>{'Hello World!'}</h1>
+    <h1>{'Kvizovi'}</h1>
     <button
       type="button"
       onClick={props.actions.loadDashboard}
     >
-      {'Load dashboard'}
+      {'Učitaj kvizove'}
     </button>
     <ul>
       {props.quizzes.map(quiz => (
@@ -25,7 +25,8 @@ export const Dashboard = props => (
             />
           ) : (
             <ItemQuiz
-              {...quiz}
+              id={quiz.id}
+              {...quiz.attributes}
               onEdit={props.actions.openQuizForm}
             />
           )}

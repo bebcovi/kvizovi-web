@@ -5,11 +5,6 @@ import { shallow } from 'enzyme';
 import { Dashboard } from 'views/Dashboard';
 import ItemQuizForm from 'containers/ItemQuizForm';
 
-test('greets the world', t => {
-  const wrapper = shallow(<Dashboard actions={{}} quizzes={[]} />);
-  t.regex(wrapper.render().text(), /hello world/i);
-});
-
 test('loads quizzes', t => {
   const actions = { loadDashboard: sinon.spy() };
   const wrapper = shallow(<Dashboard actions={actions} quizzes={[]} />);
@@ -19,13 +14,9 @@ test('loads quizzes', t => {
 
 test('displays quizzes', t => {
   const actions = { openQuizForm: () => {} };
-  const quizzes = [
-    { id: '1', attributes: { name: 'foo' } },
-    { id: '2', attributes: { name: 'bar' } },
-  ];
+  const quizzes = [{ id: '1', attributes: { name: 'foo' } }];
   const wrapper = shallow(<Dashboard actions={actions} quizzes={quizzes} />);
   t.regex(wrapper.render().text(), /foo/);
-  t.regex(wrapper.render().text(), /bar/);
 });
 
 test('displays quiz form', t => {

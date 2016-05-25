@@ -2,6 +2,7 @@ import merge from 'lodash/merge';
 
 const initialState = {
   quizzes: {},
+  questions: {},
 };
 
 export default function reducer(state = initialState, action) {

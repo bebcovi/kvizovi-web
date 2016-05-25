@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { NotFound } from 'views/NotFound';
 
-test('renders the warning', t => {
+test('outputs the warning', t => {
   const wrapper = shallow(<NotFound />);
   t.regex(wrapper.render().text(), /404/);
 });
